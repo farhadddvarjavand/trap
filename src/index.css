@@ -1,0 +1,279 @@
+.main{
+  margin-right: 15px;
+}
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled){
+  margin-right: auto;
+}
+.fv-searchMainPage.row {
+  margin-top: 1%;
+  margin-right: 68%;
+  border-radius: 20px;
+  padding-right: 12px;
+  padding-left: 12px;
+  padding-top: 7px;
+  padding-bottom: 9px;
+}
+.fv-footerMenu{
+  direction: rtl;
+  /*text-align: -webkit-left;*/
+}
+.fv-footerMenuImage img{
+  width: 100%;
+  height: 584px;
+  margin-bottom: -40%;
+  z-index: -1;
+}
+.fv-footerMenu .fv-footerMenuLogo image{
+  width: 20px;
+  height: 23px;
+}
+.fv-searchMainPage{
+  color: black;
+  background-color: white;
+  width: 25%;
+}
+.fv-searchMainPage button, .fv-searchMainPage input {
+  width: 100%;
+  line-height: 46px;
+  margin-top: 3%;
+  padding-right: 9px;
+  border: 1px solid #8888881f;
+  border-radius: 15px;
+  box-shadow: 0px 1px 1px #88888830;
+}
+.fv-searchMainPageDateOut, .fv-searchMainPageDateReturn{
+  margin-top: 1.5%;
+}
+.fv-searchMainPage.fv-searchMainPageDateReturn input,.fv-searchMainPage.fv-searchMainPageDateOut input{
+  width: 150%;
+  margin-right: -13%;
+}
+.fv-searchMainPage p {
+  padding-top: 2%;
+}
+.fv-searchMainPage .fv-searchMainPageSearchButton {
+  width: 50%;
+  float: left;
+  background: #15BE29;
+  color: white;
+  margin-top: 7%;
+}
+.fv-topicFirstMainPage{
+padding-top: 10%;
+}
+.fv-searchMainPageTopic{
+  color: white;
+  /* width: 84%; */
+  padding-top: 4%;
+  font-size: 32px;
+  margin-bottom: -6%;
+  text-align: initial;
+  font-weight: 400;
+  padding-right: 16%;
+}
+.fv-footerMenuRibbon{
+  box-shadow: inset -125em -3em 3em rgb(255 255 255 / 45%), 0 0 24px 2px rgb(255 255 255), 0.3em 0.3em 1em rgb(37 13 13 / 0%);
+  padding-top: 2%;
+  padding-bottom: 2%;
+  margin-top: 0%;
+  font-size: 20px;
+  padding-right: 5%;
+  padding-left: 3%;
+  color: white;
+}
+.fv-footerMenuRibbonButton input, .fv-footerMenuRibbonButton button{
+  /* width: 63%; */
+  /* float: left; */
+  background: #919191;
+  color: white;
+  margin-top: -4%;
+  padding: 13px;
+  border: none;
+  margin-left: 25%;
+  /* padding-bottom: 8%; */
+  text-align: center;
+  border-radius: 15px;
+}
+.fv-footerMenuRibbon img{
+  width: 152px;
+  height: 152px;
+  /* padding: 0; */
+  /* margin: 0; */
+  /* margin: -34px; */
+  margin-top: -41px;
+  margin-bottom: -70px;
+}
+.fv-footerMenuImage{
+  height: 0;
+}
+
+
+
+
+.fv-aboutUs , .fv-commentsTitle{
+  text-align: end;
+  padding-top: 7%;
+}
+.fv-aboutUsFirstImage {
+  /*margin-left: 1%;*/
+  /* margin-top: 1%; */
+  border-radius: 15px;
+  width: 250px;
+  height: 261px;
+}
+.fv-aboutUsSecondImage {
+  /* padding-left: 1%; */
+  /* padding-top: 1%; */
+  margin-left: 1%;
+  border-radius: 15px;
+  width: 264px;
+  height: 261px;
+}
+.fv-aboutUsThirdImage {
+  margin-top: -4%;
+  border-radius: 15px;
+  width: 193px;
+  height: 277px;
+}
+.fv-aboutUsFourthImage {
+  /* padding-left: 1%; */
+  /* padding-top: 1%; */
+  margin-top: 1%;
+  margin-left: 1%;
+  border-radius: 15px;
+  width: 318px;
+  height: 304px;
+}
+.fv-aboutUs h1 , .fv-aboutUs p{
+  padding-top: 14%;
+}
+.fv-aboutUs .col-md-12{
+  text-align: initial;
+  padding-left: 0;
+}
+
+
+
+
+
+.fv-comment .col-md-5{
+  padding-top: 3%;
+  margin-right: 20px;
+  background: antiquewhite;
+  text-align: end;
+  padding-bottom: 3%;
+  padding-left: 1%;
+  padding-right: 1%;
+  margin-top: 2%;
+  border-radius: 9px;
+  border: 1px solid #6bb927;
+  /* position: relative; */
+  /* width: 100%; */
+  /* height: 60px; */
+  /* top: 0; */
+  /* right: -68px; */
+  left: 6%;
+
+}
+.fv-commentLeft .col-md-5{
+  margin-right: 10%;
+}
+
+
+.fv-commentSvgLeft , .fv-commentSvgRight{
+  content: "";
+  margin-left: 24%;
+  right: -46px;
+  top: calc(50% - 7.5px);
+  transform: rotate(
+          45deg
+  );
+  border-top: -1px solid #ffffff;
+  /* border-right: 20px solid #6bb927; */
+  /* border-radius: 0 4px 0 0; */
+  width: 22px;
+  height: 22px;
+  background-color: antiquewhite;
+  z-index: 200;
+  /* border: 1px solid #6bb927; */
+  margin-top: -1%;
+  border-bottom: 1px solid #6bb927;
+  border-right: 1px solid #6bb927;
+}
+.fv-commentSvgRight{
+  margin-left: 70%;
+  margin-top: -2%;
+}
+
+
+.fv-gustComment .col-md-6{
+  text-align: center;
+  margin-right: -3%;
+  margin-left: -2%;
+}
+.fv-gustComment{
+  margin-top: 1%;
+}
+
+
+.fv-svgPagination .col-md-12 {
+  text-align: center;
+  padding-right: 4%;
+  padding-top: 4%;
+}
+.fv-svgPagination img{
+  margin-right: 0.2%;
+}
+
+.fv-footerMenu .col-md-6{
+  padding: 0;
+}
+
+
+
+
+.fv-topicMainPageTopic{
+  text-align: end;
+}
+.fv-topicMainPage{
+  padding-top: 1%;
+}
+.fv-topicMainPageSeeAll{
+  margin: auto;
+  margin-left: -5.5%;
+  margin-bottom: 1%;
+}
+.fv-topicFirstMainPage i ,.fv-topicMainPage i{
+  font-size: 22px;
+}
+
+
+
+.fv-footerMainPage .fv-footerMainPageBigger{
+  margin-right: 4vw;
+}
+.fv-footerMainPage .fv-footerMainPageSmaller{
+  margin-right: 1.5vw;
+  border-radius: 23px;
+  width: 37px;
+  height: 37px;
+}
+.fv-footerMainPage a {
+  margin-left: 13%;
+  float: right;
+}
+.fv-footerMainPage{
+  padding-top: 20%;
+  padding-right: 6%;
+  padding-left: 6%;
+}
+.fv-footerMenu .test{
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .fv-mainProduct{
+
+  }
+}
+

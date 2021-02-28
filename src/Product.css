@@ -1,0 +1,201 @@
+
+html .col-md-3{
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.fv-product{
+    background-color: white;
+    width: 100%;
+    padding-right: -15%;
+    padding-bottom: 0%;
+    padding-top: 7%;
+    border: 1px solid #88888817;
+    border-radius: 15px;
+    box-shadow: 1px 1px 11px #88888830;
+}
+.fv-productImage{
+    width: 90%;
+    margin-bottom: -8%;
+    margin-right: auto;
+    margin-left: 5%;
+    border-radius: 15px;
+}
+.fv-productRateBox{
+    background-color: white;
+    width: fit-content;
+    margin-inline: auto;
+    text-align: center;
+    border-radius: 12px;
+}
+.fv-productTopic{
+    text-align: end;
+}
+.fv-product .fv-productTopic{
+    padding-right: 12.5%;
+    font-size: 19px;
+    color: #15BE29;
+}
+.fv-product .row{
+    width: -webkit-fill-available;
+    padding-top: 4%;
+}
+.fv-productLocation .col-md-9{
+    border-bottom: 1px solid #400a0a;
+    text-align: end;
+    padding-right: 0;
+    margin: auto;
+    font-size: 14px;
+}
+.fv-productCapacityBox{
+    font-size: 14px;
+}
+.fv-product .col-md-5 {
+    text-align: end;
+    margin-right: -44px;
+}
+.fv-product .row .col-md-2 {
+    margin-left: 22px;
+}
+.fv-productPriceBox{
+    font-size: 20px;
+    margin-bottom: 2vw;
+    margin-top: -1.9vw;
+    padding-left: 53px;
+    color: #15BE29;
+}
+.fv-productPriceBoxToman{
+    padding-left: 22px;
+    color: #15BE29;
+}
+.fv-productPreventPrice{
+    margin-bottom: -1vw;
+    margin-top: -0.5vw;
+    padding-left: 22px;
+    color: #aaaaaa;
+    text-decoration: line-through;
+}
+.fv-productPriceBox a:not([href]):not([tabindex]), .fv-productPriceBox a:not([href]):not([tabindex]):focus, .fv-productPriceBox a:not([href]):not([tabindex]):hover{
+    color: green;
+}
+.fv-productRateBox i{
+    color: #FEA801;
+}
+
+
+
+.fv-productImage.fv-popularVillageImage{
+    margin-bottom: 0%;
+    width: 100%;
+    margin-left: 0;
+}
+.fv-popularVillageTitle{
+    text-align: end;
+}
+.fv-popularVillageTitle h1{
+    font-size: 15px;
+}
+.fv-popularVillageTitle h6{
+    font-size: 10px;
+}
+.fv-product.fv-popularVillage{
+    background-color: white;
+    border: none;
+    box-shadow: none;
+}
+.fv-popularVillageImage{
+    height: 280px;
+}
+
+
+
+
+.fv-typesAccommodationTopic{
+    /* background-color: burlywood; */
+    margin-left: 4.12%;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    /* line-height: 220%; */
+    text-align: center;
+    /* text-shadow: 1px 2px 52px black, 81px 43px 44px blue, 63px 1px 28px darkblue; */
+    /* padding: 7px; */
+    padding: 5px;
+    box-shadow: inset -125em -3em 3em rgb(0 0 0 / 49%), 0 0 24px 2px rgb(255 255 255), 0.3em 0.3em 1em rgb(37 13 13 / 0%);
+    color: white;
+/* font-size: 22px;*/
+}
+.fv-productImage.fv-popularVillageImage.fv-typesAccommodationImage{
+    margin-bottom: -11%;
+    height: 100%;
+}
+
+
+
+.fv-discountedProductAmount{
+    background-color: #A31700;
+    color: white;
+    z-index: 1;
+    margin-left: 9%;
+    border-bottom-right-radius: 16px;
+    border-top-left-radius: 12px;
+}
+.fv-discountedProductBody{
+    margin-top: -16%;
+}
+.fv-discountedProductAmount h1{
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 7px;
+    /* margin-top: 0%; */
+    margin-left: -4px;
+}
+.fv-product .fv-discountedProductAmount.col-md-2 {
+    margin-left: 14px;
+}
+
+
+
+.slider_pagination_btn {
+    display: inline-block;
+    padding: 6px;
+    margin: 5px;
+    background-color: #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+
+    /* override default button styles */
+    border: none;
+    outline: none;
+}
+.slider_pagination_btn:hover {
+    background-color: #aaa;
+}
+.slider_pagination_btn:focus {
+    background-color: #777;
+}
+.slider_pagination_btn.slider_pagination_btn--sel {
+    background-color: black
+}
+
+
+
+
+.fv-productImage.fv-popularVillageImage.fv-trapMagazineImage{
+    height: 100%;
+}
+.fv-trapMagazine{
+    text-align: end;
+}
+.fv-trapMagazineImageTitle p{
+    width: 100%;
+    margin: auto;
+}
+.fv-trapMagazineImageReadMore{
+    text-align: start;
+    color: #15BE29;
+}
+.fv-trapMagazineImageReadMore a{
+    font-size: 18px;
+    font-weight: 450;
+}
+
