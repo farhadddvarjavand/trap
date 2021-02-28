@@ -14,7 +14,7 @@ class typesAccommodation extends React.Component{
                 <img src="https://www.w3schools.com/html/pic_trulli.jpg" className={'fv-productImage fv-popularVillageImage fv-typesAccommodationImage'}/>
                 <MDBRow>
                     <MDBCol md={11} className={'fv-popularVillageTitle fv-typesAccommodationTopic'}>
-                        <div>
+                        <div className={'test'}>
                         <a>{this.props.topic}</a>
                         </div>
                     </MDBCol>
