@@ -1,5 +1,5 @@
 import React from "react";
-import {MDBCol, MDBRow} from "mdbreact";
+import {MDBCol, MDBContainer, MDBRow} from "mdbreact";
 
 class typesAccommodation extends React.Component{
     constructor(props) {
@@ -9,6 +9,7 @@ class typesAccommodation extends React.Component{
 
     render() {
         return (
+            <MDBContainer>
             <MDBRow className={'fv-typesAccommodation '}>
                 <img src="https://www.w3schools.com/html/pic_trulli.jpg" className={'fv-productImage fv-popularVillageImage fv-typesAccommodationImage'}/>
                 <MDBRow>
@@ -19,6 +20,7 @@ class typesAccommodation extends React.Component{
                     </MDBCol>
                 </MDBRow>
             </MDBRow>
+            </MDBContainer>
         );
     }
 }

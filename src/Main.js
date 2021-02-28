@@ -140,6 +140,7 @@ class Main extends Component {
             </MDBRow>
             <MDBRow md={3} sm={6}>
                 <MDBCol >
+
                     <TypesAccommodation topic="استخردار"/>
                 </MDBCol>
                 <MDBCol >
