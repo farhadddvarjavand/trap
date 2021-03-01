@@ -8,7 +8,7 @@ class discountedProduct extends React.Component{
     }
     render() {
         return(
-            <MDBRow className={'fv-product fv-popularVillage fv-discountedProduct'}>
+            <MDBRow className={'fv-product fv-popularVillage fv-discountedProduct fv-mobileProduct'}>
 
                     <MDBCol md={2} className={'fv-discountedProductAmount'}>
                         <h1>{this.props.discountedAmount}</h1>

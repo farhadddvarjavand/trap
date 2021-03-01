@@ -7,12 +7,16 @@ import Product from "./Product";
 import PopularVillage from "./PopularVillage";
 import TypesAccommodation from "./typesAccommodation";
 import DiscountedProduct from "./DiscountedProduct";
+import TrapMagazine from "./trapMagazine"
+import TopicsMainPage from "./topicsMainPage";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
-import TopicsMainPage from "./topicsMainPage";
 import FotterpageImage from "./images/footerMainImage.png"
 import FotterpageLogo from "./images/Logo.png"
-import TrapMagazine from "./trapMagazine"
+import LogoName from "./images/LogoName.png"
+import MobileLogo from "./images/MobileLogo.png"
+import MobileMenu from "./images/MobileMenu.png"
+
 
 class Main extends Component {
     constructor(props) {
@@ -40,6 +44,18 @@ class Main extends Component {
                         </MDBCol>
                     </MDBRow>
 
+            <MDBRow className={'fv-footerMenuRibbonMobile'}>
+                <MDBCol sm={8}>
+                    <img src={MobileMenu} />
+                </MDBCol>
+                <MDBCol sm={2} className={"fv-footerMenuRibbonButton"}>
+                    <img src={LogoName} />
+                </MDBCol>
+                <MDBCol sm={2}>
+                    <img src={MobileLogo} />
+                </MDBCol>
+            </MDBRow>
+
             <MDBRow className={'fv-searchMainPageTopic'}>
                 <MDBCol md={12}>
                     <p>اجاره خانه های روستایی</p>
@@ -53,13 +69,13 @@ class Main extends Component {
                     <MDBRow className={'fv-searchMainPage'}>
                     <p>اقامتگاه رویایی خود را جست و جو کنید</p>
                     <input type='text' value='شهر یا روستا را وارد کنید'/>
-                        <MDBCol md={5} className={'fv-searchMainPage fv-searchMainPageDateOut'}>
+                        <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateOut'}>
                             <input type='text' value='تاریخ رفت'/>
                         </MDBCol>
-                        <MDBCol md={1} className={'fv-searchMainPageBetweenDate'}>
+                        <MDBCol md={1} sm={1} className={'fv-searchMainPageBetweenDate'}>
 
                         </MDBCol>
-                        <MDBCol md={5} className={'fv-searchMainPage fv-searchMainPageDateReturn'}>
+                        <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateReturn'}>
                             <input type='text' value='تاریخ برگشت'/>
                         </MDBCol>
                     <input type='text' value='تعداد نفرات'/>
@@ -68,12 +84,12 @@ class Main extends Component {
                 </MDBRow>
         </div>
 
-        <MDBContainer>
+        <MDBContainer className={"fv-MainBody"}>
             <MDBRow className={"fv-topicFirstMainPage"}>
                 <TopicsMainPage topic="اقامتگاه های پر بازدید"/>
             </MDBRow>
-            <MDBRow className={"fv-mainProduct"} md={3} sm={6}>
-                <MDBCol>
+            <MDBRow className={"fv-mainProduct fv-mainMobile"} >
+                <MDBCol md={3} sm={7} >
                     <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
                     rate="5.5/5"
                     topic="کوچه باغ سبز"
@@ -82,7 +98,7 @@ class Main extends Component {
                     capacity="2"
                     price="20000"/>
                 </MDBCol>
-                <MDBCol>
+                <MDBCol md={3} sm={7} >
                     <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
                              rate="5.5/5"
                              topic="کوچه باغ سبز"
@@ -91,7 +107,7 @@ class Main extends Component {
                              capacity="20"
                              price="20000"/>
                 </MDBCol>
-                <MDBCol>
+                <MDBCol md={3} sm={7} >
                     <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
                              rate="5.5/5"
                              topic="کوچه باغ سبز"
@@ -100,7 +116,7 @@ class Main extends Component {
                              capacity="2"
                              price="20000"/>
                 </MDBCol>
-                <MDBCol>
+                <MDBCol md={3} sm={7} >
                     <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
                              rate="5.5/5"
                              topic="کوچه باغ سبز"
@@ -113,23 +129,23 @@ class Main extends Component {
             <MDBRow className={"fv-topicMainPage"}>
                 <TopicsMainPage topic="روستاهای پر بازدید"/>
             </MDBRow>
-            <MDBRow md={3} sm={6}>
-                <MDBCol >
+            <MDBRow className={"fv-mainMobile"}>
+                <MDBCol md={3} sm={7}>
                     <PopularVillage srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
                                     location="مازندران"
                                     capacity="2"/>
                 </MDBCol>
-                <MDBCol >
+                <MDBCol md={3} sm={7}>
                     <PopularVillage srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
                                     location="مازندران"
                                     capacity="2"/>
                 </MDBCol>
-                <MDBCol >
+                <MDBCol md={3} sm={7}>
                     <PopularVillage srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
                                     location="مازندران"
                                     capacity="2"/>
                 </MDBCol>
-                <MDBCol >
+                <MDBCol md={3} sm={7}>
                     <PopularVillage srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
                                     location="مازندران"
                                     capacity="2"/>
@@ -138,18 +154,17 @@ class Main extends Component {
             <MDBRow className={"fv-topicMainPage"}>
                 <TopicsMainPage topic="انواع اقامتگاه ها"/>
             </MDBRow>
-            <MDBRow md={3} sm={6}>
-                <MDBCol >
-
+            <MDBRow className={'fv-mainMobile'} >
+                <MDBCol md={3} sm={7} >
+                   <TypesAccommodation topic="استخردار"/>
+                </MDBCol>
+                <MDBCol  md={3} sm={7}>
                     <TypesAccommodation topic="استخردار"/>
                 </MDBCol>
-                <MDBCol >
+                <MDBCol  md={3} sm={7}>
                     <TypesAccommodation topic="استخردار"/>
                 </MDBCol>
-                <MDBCol >
-                    <TypesAccommodation topic="استخردار"/>
-                </MDBCol>
-                <MDBCol >
+                <MDBCol md={3} sm={7}>
                     <TypesAccommodation topic="استخردار"/>
                 </MDBCol>
             </MDBRow>
@@ -157,8 +172,8 @@ class Main extends Component {
                 <TopicsMainPage topic="انواع اقامتگاه ها"/>
             </MDBRow>
 
-            <MDBRow md={3} sm={6}>
-                <MDBCol >
+            <MDBRow className={'fv-mainMobile'}>
+                <MDBCol md={3} sm={7}>
                     <DiscountedProduct discountedAmount="20%"
                         srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
                         rate="5.5/5"
@@ -169,7 +184,7 @@ class Main extends Component {
                         price="20000"
                         PreventPrice="22000"/>
                 </MDBCol>
-                <MDBCol >
+                <MDBCol md={3} sm={7}>
                     <DiscountedProduct discountedAmount="20%"
                                        srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
                                        rate="5.5/5"
@@ -180,7 +195,7 @@ class Main extends Component {
                                        price="20000"
                                        PreventPrice="22000"/>
                 </MDBCol>
-                <MDBCol >
+                <MDBCol md={3} sm={7}>
                     <DiscountedProduct discountedAmount="20%"
                                        srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
                                        rate="5.5/5"
@@ -191,7 +206,7 @@ class Main extends Component {
                                        price="20000"
                                        PreventPrice="22000"/>
                 </MDBCol>
-                <MDBCol >
+                <MDBCol md={3} sm={7}>
                     <DiscountedProduct discountedAmount="20%"
                                        srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
                                        rate="5.5/5"
@@ -201,13 +216,21 @@ class Main extends Component {
                                        capacity="2"
                                        price="20000"
                                        PreventPrice="22000"/>
+                </MDBCol>
+            </MDBRow>
+            <MDBRow className={'fv-centerImage'}>
+                <MDBCol md={6} sm={12}>
+                <img src="https://www.w3schools.com/html/pic_trulli.jpg" />
+                </MDBCol>
+                <MDBCol md={6} sm={12}>
+                <img src="https://www.w3schools.com/html/pic_trulli.jpg" />
                 </MDBCol>
             </MDBRow>
             <MDBRow className={"fv-topicMainPage"}>
                 <TopicsMainPage topic="اقامتگاه های اقتصادی"/>
             </MDBRow>
-            <MDBRow md={3} sm={6}>
-                <MDBCol>
+            <MDBRow className={'fv-mainMobile'}>
+                <MDBCol md={3} sm={6}>
                     <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
                              rate="5.5/5"
                              topic="کوچه باغ سبز"
@@ -216,7 +239,7 @@ class Main extends Component {
                              capacity="2"
                              price="20000"/>
                 </MDBCol>
-                <MDBCol >
+                <MDBCol md={3} sm={6}>
                     <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
                              rate="5.5/5"
                              topic="کوچه باغ سبز"
@@ -225,7 +248,7 @@ class Main extends Component {
                              capacity="2"
                              price="20000"/>
                 </MDBCol>
-                <MDBCol >
+                <MDBCol md={3} sm={6}>
                     <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
                              rate="5.5/5"
                              topic="کوچه باغ سبز"
@@ -234,7 +257,7 @@ class Main extends Component {
                              capacity="2"
                              price="20000"/>
                 </MDBCol>
-                <MDBCol >
+                <MDBCol md={3} sm={6}>
                     <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
                              rate="5.5/5"
                              topic="کوچه باغ سبز"
@@ -311,29 +334,29 @@ class Main extends Component {
                 <MDBRow className={"fv-topicMainPage"}>
                     <TopicsMainPage topic="مجله ترپ"/>
                 </MDBRow>
-                <MDBRow>
-                    <MDBCol md={3}>
+                <MDBRow className={'fv-mainMobile'}>
+                    <MDBCol md={3} sm={6}>
                     <TrapMagazine
                     srcimmage="https://www.w3schools.com/html/pic_trulli.jpg"
                     topic="مجله ترپ"
                     comment="مجله ترپمجله ترپمجله ترپمجله ترپمجله ترپمجله ترپ. مجله ترپمج
                     له ترپمجله ترپمجله ترپممجله ترپمجله ترپمجله ترپجله ترپ"/>
                     </MDBCol>
-                    <MDBCol md={3}>
+                    <MDBCol md={3} sm={6}>
                         <TrapMagazine
                             srcimmage="https://www.w3schools.com/html/pic_trulli.jpg"
                             topic="مجله ترپ"
                             comment="مجله ترپمجله ترپمجله ترپمجله ترپمجله ترپمجله ترپ. مجله ترپمجله تر
                             پمجله ترپمجله ترپممجله ترپمجله ترپمجله ترپجله ترپ"/>
                     </MDBCol>
-                    <MDBCol md={3}>
+                    <MDBCol md={3} sm={6}>
                         <TrapMagazine
                             srcimmage="https://www.w3schools.com/html/pic_trulli.jpg"
                             topic="مجله ترپ"
                             comment="مجله ترپمجله ترپمجله ترپمجله ترپمجله ترپمجله ترپ. م
                             جله ترپمجله ترپمجله ترپمجله ترپممجله ترپمجله ترپمجله ترپجله ترپ"/>
                     </MDBCol>
-                    <MDBCol md={3}>
+                    <MDBCol md={3} sm={6}>
                         <TrapMagazine
                             srcimmage="https://www.w3schools.com/html/pic_trulli.jpg"
                             topic="مجله ترپ"

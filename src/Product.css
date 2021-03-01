@@ -75,7 +75,7 @@ html .col-md-3{
     text-decoration: line-through;
 }
 .fv-productPriceBox a:not([href]):not([tabindex]), .fv-productPriceBox a:not([href]):not([tabindex]):focus, .fv-productPriceBox a:not([href]):not([tabindex]):hover{
-    color: green;
+    color: #15BE29;
 }
 .fv-productRateBox i{
     color: #FEA801;
@@ -101,6 +101,9 @@ html .col-md-3{
     background-color: white;
     border: none;
     box-shadow: none;
+    margin-left: -10px;
+    padding-left: 0px;
+    padding-right: 4px;
 }
 .fv-popularVillageImage{
     height: 280px;
@@ -137,6 +140,7 @@ html .col-md-3{
     margin-left: 9%;
     border-bottom-right-radius: 16px;
     border-top-left-radius: 12px;
+    margin-bottom: 1%;
 }
 .fv-discountedProductBody{
     margin-top: -16%;
@@ -199,3 +203,116 @@ html .col-md-3{
     font-weight: 450;
 }
 
+
+
+
+.fv-typesAccommodation{
+    margin-right: 5%;
+    margin-left: -5%;
+}
+
+
+.fv-product.fv-popularVillage h6 , .fv-product.fv-popularVillage h3{
+    text-align: end;
+}
+
+
+
+
+
+@media (max-width: 767px){
+    .main {
+        width: 96%;
+    }
+    .fv-centerImage img {
+        display: none;
+    }
+    .fv-mainMobile {
+        width: 100%;
+        direction: rtl;
+        /* float: right; */
+        /* text-align: center; */
+        padding: 1vw 0vw 10vw 0vw;
+        overflow-x: auto;
+        /* overflow: auto; */
+        display: inline-block !important;
+        /* overflow: auto; */
+        white-space: nowrap;
+    }
+    .fv-mobileProduct {
+        width: 100%;
+        direction: ltr;
+    }
+    .fv-mainMobile .col-sm-3{
+     /*  display: inline-block;*/
+    }
+    .fv-mainMobile .col-sm-7,.fv-mainMobile .col-sm-6 {
+        /* padding-right: 5px; */
+        /* padding-left: 11px; */
+        display: inline-block;
+        margin-right: 4vw;
+    }
+    .fv-footerMenu .fv-footerMenuRibbonMobile {
+        display: flex;
+        margin-top: 7vw;
+    }
+    .fv-footerMenu .fv-footerMenuRibbon ,.fv-footerMenu .fv-searchMainPageTopic{
+        display: none;
+    }
+    .fv-productPriceBoxPriceText {
+        /* background-color: #aaaaaa; */
+        float: right;
+        margin-top: -5vw;
+        margin-right: 1vw;
+    }
+    .fv-footerMenuRibbonMobile .col-sm-8 {
+        flex: 0 0 58.333333%;
+        width: 66.666667% !important;
+        text-align: initial;
+        margin-right: 5vw;
+    }
+    .fv-footerMenuRibbonMobile .col-sm-2 {
+        flex: 0 0 16.666667%;
+        width: 16.666667% !important;
+        margin: auto;
+        margin-right: -10vw;
+        margin-top: 12px;
+    }
+    .fv-footerMenuImage img {
+        width: 520px;
+        height: 398px;
+        margin-bottom: -40%;
+        z-index: -1;
+    }
+    .fv-searchMainPage.row {
+        margin-top: 56%;
+        /* margin-right: 68%; */
+        border-radius: 26px;
+        padding-right: 12px;
+        box-shadow: 1px 1px 11px #88888830;
+        padding-left: 16px;
+        padding-top: 14px;
+        padding-bottom: 9px;
+        width: 75%;
+        margin-inline: auto;
+    }
+    .fv-searchMainPageBetweenDate.col-sm-1 {
+        margin-right: 9%;
+    }
+    .fv-searchMainPageDateOut, .fv-searchMainPageDateReturn {
+        margin-top: 1.5%;
+        margin-right: -1vw;
+    }
+    .fv-searchMainPage.fv-searchMainPageDateReturn input, .fv-searchMainPage.fv-searchMainPageDateOut input {
+        width: 217%;
+        margin-right: -18%;
+    }
+    .fv-topicFirstMainPage .col-sm-1 , .fv-topicMainPage .col-sm-1{
+        margin-top: auto;
+        margin-right: 11px;
+    }
+    .fv-topicMainPageTopic h4 {
+        font-size: 21px;
+        font-weight: 450;
+    }
+}

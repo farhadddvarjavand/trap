@@ -1,5 +1,5 @@
 import React from "react";
-import {MDBCol, MDBRow} from "mdbreact";
+import {MDBCol, MDBContainer, MDBRow} from "mdbreact";
 
 class PopularVillage extends React.Component{
     constructor(props) {
@@ -7,13 +7,13 @@ class PopularVillage extends React.Component{
     }
     render() {
         return(
-            <MDBRow className={'fv-product fv-popularVillage'}>
+            <MDBContainer className={'fv-product fv-popularVillage fv-mobileProduct'}>
                 <img src={this.props.srcImage} className={'fv-productImage fv-popularVillageImage fv-popularVillageTitle'}/>
 
-                        <h1>{this.props.location}</h1>
+                        <h3>{this.props.location}</h3>
                         <h6>{this.props.capacity}خانه</h6>
 
-            </MDBRow>
+            </MDBContainer>
         )
     }
 }

@@ -9,18 +9,17 @@ class typesAccommodation extends React.Component{
 
     render() {
         return (
-            <MDBContainer>
-            <MDBRow className={'fv-typesAccommodation '}>
+            <div className={'fv-typesAccommodation fv-mobileProduct'}>
                 <img src="https://www.w3schools.com/html/pic_trulli.jpg" className={'fv-productImage fv-popularVillageImage fv-typesAccommodationImage'}/>
                 <MDBRow>
-                    <MDBCol md={11} className={'fv-popularVillageTitle fv-typesAccommodationTopic'}>
+                    <MDBCol size={11} className={'fv-popularVillageTitle fv-typesAccommodationTopic'}>
                         <div className={'test'}>
                         <a>{this.props.topic}</a>
                         </div>
                     </MDBCol>
                 </MDBRow>
-            </MDBRow>
-            </MDBContainer>
+            </div>
+
         );
     }
 }

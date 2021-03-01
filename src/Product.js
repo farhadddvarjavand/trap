@@ -6,7 +6,7 @@ class Product extends React.Component{
     }
     render() {
         return(
-           <MDBRow className={'fv-product'}>
+           <MDBRow className={'fv-product fv-mobileProduct'}>
                 <img src={this.props.srcImage} className={'fv-productImage'}/>
                 <MDBRow  >
                     <MDBCol md={4} className={'fv-productRateBox'}>
@@ -50,10 +50,9 @@ class Product extends React.Component{
                    <a>تومان</a>
                    </MDBCol>
                </MDBRow>
-
                 <MDBRow className={'fv-productPriceBox'}>
                     <MDBCol md={10}>
-                        قیمت از شبی
+                        <a className={'fv-productPriceBoxPriceText'}>قیمت از شبی</a>
                         {this.props.price}
                     </MDBCol>
                 </MDBRow>
