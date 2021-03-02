@@ -10,7 +10,7 @@ class discountedProduct extends React.Component{
         return(
             <MDBRow className={'fv-product fv-popularVillage fv-discountedProduct fv-mobileProduct'}>
 
-                    <MDBCol md={2} className={'fv-discountedProductAmount'}>
+                    <MDBCol md={2} sm={3} className={'fv-discountedProductAmount'}>
                         <h1>{this.props.discountedAmount}</h1>
                     </MDBCol>
                     <MDBCol md={10}>

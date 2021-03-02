@@ -129,7 +129,7 @@ class Main extends Component {
             <MDBRow className={"fv-topicMainPage"}>
                 <TopicsMainPage topic="روستاهای پر بازدید"/>
             </MDBRow>
-            <MDBRow className={"fv-mainMobile"}>
+            <MDBRow className={"fv-mainMobileVillage"}>
                 <MDBCol md={3} sm={7}>
                     <PopularVillage srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
                                     location="مازندران"
@@ -154,7 +154,7 @@ class Main extends Component {
             <MDBRow className={"fv-topicMainPage"}>
                 <TopicsMainPage topic="انواع اقامتگاه ها"/>
             </MDBRow>
-            <MDBRow className={'fv-mainMobile'} >
+            <MDBRow className={'fv-mainMobileAccommodation'} >
                 <MDBCol md={3} sm={7} >
                    <TypesAccommodation topic="استخردار"/>
                 </MDBCol>
@@ -269,25 +269,66 @@ class Main extends Component {
             </MDBRow>
             <MDBRow className={"fv-aboutUs"}>
                 <MDBCol md={6}>
-                    <MDBRow>
-                        <MDBCol md={12}>
+                    <MDBRow className={'fv-aboutUsImage'}>
+                        <MDBCol md={6} sm={1}>
                             <img className={"fv-aboutUsFirstImage"} src="https://www.w3schools.com/html/pic_trulli.jpg" />
+                        </MDBCol>
+                        <MDBCol md={6} sm={1}>
                             <img className={"fv-aboutUsSecondImage"} src="https://www.w3schools.com/html/pic_trulli.jpg" />
                         </MDBCol>
-                        <MDBCol md={12}>
-                            <img className={"fv-aboutUsThirdImage"} src="https://www.w3schools.com/html/pic_trulli.jpg"  />
-                            <img className={"fv-aboutUsFourthImage"} src="https://www.w3schools.com/html/pic_trulli.jpg"  />
+                        <MDBCol md={6} sm={1}>
+                            <img className={"fv-aboutUsThirdImage"} src="https://www.w3schools.com/html/pic_trulli.jpg" />
+                        </MDBCol>
+                        <MDBCol md={6} sm={1}>
+                            <img className={"fv-aboutUsFourthImage"} src="https://www.w3schools.com/html/pic_trulli.jpg" />
                         </MDBCol>
                     </MDBRow>
                 </MDBCol>
-                <MDBCol md={6}>
+                <MDBCol md={6} sm={4}>
                     <h1>درباره ما</h1>
                    <p>
-                       ناﺮﮕﯾد ﺮﻈﻧ رﺎﮐ ﻪﯾارا زا ﺲﭘ ﻪﮐ ﺖﺳا ﻦﯾا لﺎﺒﻧد ﻪﺑ حاﺮﻃ ﻦﯿﻨﭽﻤﻫ .دﻮﺑ ﺪﻫاﻮﺧ ﺮ نﺎﻣز رﺎﮑﻨﯾا و دﻮﺸﯿﻣ ﻪﺘﺷادﺮﺑ ﯽﻠﺻا رﺎﮐ یور زا شﺰﮐﺮﻤﺗ ددﺮﮕﺑ ﻂﺒﺗﺮﻣ یﺎﻫ ﻦﺘﻣ لﺎﺒﻧد ﺪﻫاﻮﺨﺑ حاﺮﻃ ﺮﮔا .ﺪﻫﺪﯿﻤﻧ ﺎﻣﺮﻓ رﺎﮐ ﻪﺑ ﯽﺘﺳرد ﺪﯾد ﯽﻠﮐ حﺮﻃ ﻪﺠﯿﺘﻧ رد .ﺖﺴﯿﻧ هدﺎﻣآ تﺎﺤﻔﺻ ﯽﻠﺻا یاﻮﺘﺤﻣ ﻪﮐ ﺪﻨﺘﺴﻫ وﺮﺑ ور عﻮﺿﻮﻣ ﻦﯾا ﺎﺑ ﺎﻟﻮﻤﻌﻣ ﺖﯾﺎﺳ ﺐﻟﺎﻗ ﯽﺣاﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ.
-                       ﻦﺘﻣ یور داﺮﻓا ﺪﻫاﻮﺧ‌ﯽﻤﻧ و دﻮﺷ ﺎﯾﻮﺟ ﯽﺣاﺮﻃ درﻮﻣ رد ار ناﺮﮕﯾد ﺮﻈﻧ رﺎﮐ ﻪﯾارا زا ﺲﭘ ﻪﮐ ﺖﺳا ﻦﯾا لﺎﺒﻧد ﻪﺑ حاﺮﻃ ﻦﯿﻨﭽﻤﻫ .دﻮﺑ ﺪﻫاﻮﺧ ﺮ نﺎﻣز رﺎﮑﻨﯾا و دﻮﺸﯿﻣ ﻪﺘﺷادﺮﺑ ﯽﻠﺻا رﺎﮐ یور زا شﺰﮐﺮﻤﺗ ددﺮﮕﺑ ﻂﺒﺗﺮﻣ یﺎﻫ ﻦﺘﻣ لﺎﺒﻧد ﺪﻫاﻮﺨﺑ حاﺮﻃ ﺮﮔا .ﺪﻫﺪﯿﻤﻧ ﺎﻣﺮﻓ رﺎﮐ ﻪﺑ ﯽﺘﺳرد ﺪﯾد ﯽﻠﮐ حﺮﻃ ﻪﺠﯿﺘﻧ رد .ﺖﺴﯿﻧ هدﺎﻣآ تﺎﺤﻔﺻ ﯽﻠﺻا یاﻮﺘﺤﻣ ﻪﮐ ﺪﻨﺘﺴﻫ وﺮﺑ ور عﻮﺿﻮﻣ ﻦﯾا ﺎﺑ ﺎﻟﻮﻤﻌﻣ ﺖﯾﺎﺳ ﺐﻟﺎﻗ ﯽﺣاﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ
+                       ناﺮﮕﯾد ﺮﻈﻧ رﺎﮐ ﻪﯾارا زا ﺲﭘ ﻪﮐ ﺖﺳا ﻦﯾا لﺪﻫاﻮﺨﺑ حاﻟﺎﻗ ﯽﺣاﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ.
+                       ﻦﺘﻣ یور داﺮﻓا ﺪﻫاﻮﺧ‌ﯽﻤﻧ و دﻮﺷ ﺎﺴﻫﯾﺎﺳ ﺐﻟﺎﻗ ﯽﺣاﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ
+                       ناﺮﮕﯾد ﺮﻈﻧ رﺎﮐ ﻪﯾارا زا ﺲﭘ ﻪﮐ ﺖﺳا ﻦﯾا لﺪﻫاﻮﺨﺑ حاﻟﺎﻗ ﯽﺣاﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ.
+                       ﻦﺘﻣ یور داﺮﻓا ﺪﻫاﻮﺧ‌ﯽﻤﻧ و دﻮﺷ ﺎﺴﻫﯾﺎﺳ ﺐﻟﺎﻗ ﯽﺣاﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ
+                       ﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ
+                       ﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮ
                    </p>
                 </MDBCol>
             </MDBRow>
+
+            <MDBRow className={"fv-aboutUsMobile"}>
+                <MDBCol sm={3} className={'fv-aboutUsImage'}>
+                    <img className={"fv-aboutUsFirstImage"} src="https://www.w3schools.com/html/pic_trulli.jpg" />
+                    <MDBRow>
+                        <MDBCol>
+                            <img className={"fv-aboutUsSecondImage"} src="https://www.w3schools.com/html/pic_trulli.jpg" />
+                        </MDBCol>
+                    </MDBRow>
+                    <MDBRow>
+                        <MDBCol>
+                            <img className={"fv-aboutUsThirdImage"} src="https://www.w3schools.com/html/pic_trulli.jpg" />
+                        </MDBCol>
+                    </MDBRow>
+                </MDBCol>
+                <MDBCol sm={9}>
+                    <h1>درباره ما</h1>
+                    <p>
+                        ناﺮﮕﯾد ﺮﻈﻧ رﺎﮐ ﻪﯾارا زا ﺲﭘ ﻪﮐ ﺖﺳا ﻦﯾا لﺪﻫاﻮﺨﺑ حاﻟﺎﻗ ﯽﺣاﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ.
+                        ﻦﺘﻣ یور داﺮﻓا ﺪﻫاﻮﺧ‌ﯽﻤﻧ و دﻮﺷ ﺎﺴﻫﯾﺎﺳ ﺐﻟﺎﻗ ﯽﺣاﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ
+                        ناﺮﮕﯾد ﺮﻈﻧ رﺎﮐ ﻪﯾارا زا ﺲﭘ ﻪﮐ ﺖﺳا ﻦﯾا لﺪﻫاﻮﺨﺑ حاﻟﺎﻗ ﯽﺣاﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ.
+                        ﻦﺘﻣ یور داﺮﻓا ﺪﻫاﻮﺧ‌ﯽﻤﻧ و دﻮﺷ ﺎﺴﻫﯾﺎﺳ ﺐﻟﺎﻗ ﯽﺣاﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ
+                        ﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ
+                        ﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮ
+                    </p>
+                    <MDBRow>
+                        <MDBCol sm={8}  className={"fv-aboutUsFourthImage"}>
+                        <img className={"fv-aboutUsFourthImage"} src="https://www.w3schools.com/html/pic_trulli.jpg" />
+                        </MDBCol>
+                    </MDBRow>
+                </MDBCol>
+            </MDBRow>
+
             <MDBRow className={"fv-commentsTitle"}>
                 <MDBCol>
                     <h1>نظرات مهمان ها</h1>

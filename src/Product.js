@@ -9,7 +9,7 @@ class Product extends React.Component{
            <MDBRow className={'fv-product fv-mobileProduct'}>
                 <img src={this.props.srcImage} className={'fv-productImage'}/>
                 <MDBRow  >
-                    <MDBCol md={4} className={'fv-productRateBox'}>
+                    <MDBCol md={4} sm={5} className={'fv-productRateBox'}>
                         <i className="fa fa-star" aria-hidden="true" />
                         {this.props.rate}
                     </MDBCol>
@@ -20,21 +20,21 @@ class Product extends React.Component{
                </MDBCol>
                </MDBRow>
                 <MDBRow className={'fv-productLocation'}>
-                    <MDBCol md={9}>
+                    <MDBCol md={9} sm={10}>
                         <a>{this.props.location} </a>
                         <i className="fa fa-map-marker-alt" />
                     </MDBCol>
                 </MDBRow>
 
                 <MDBRow className={'fv-productCapacityBox'}>
-                    <MDBCol md={2}>
+                    <MDBCol md={2} sm={2}>
                       نفر{this.props.capacity}
                     </MDBCol>
-                    <MDBCol md={5}>
+                    <MDBCol md={5} sm={9}>
                        <a>حداکثر نفرات </a>
                         <i className="fa fa-user-friends" />
                     </MDBCol>
-                    <MDBCol md={5}>
+                    <MDBCol md={5} sm={11}>
                        <a>{this.props.numberOfRoom}خوابه </a>
                         <i className="fas fa-bed" />
                     </MDBCol>

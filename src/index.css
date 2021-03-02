@@ -59,6 +59,7 @@
   padding-left: 12px;
   padding-top: 7px;
   padding-bottom: 9px;
+  box-shadow: 1px 1px 11px #88888836;
 }
 .fv-footerMenu{
   direction: rtl;
@@ -84,9 +85,9 @@
   line-height: 46px;
   margin-top: 3%;
   padding-right: 9px;
-  border: 1px solid #8888881f;
+  border: 1px solid #88888836;
   border-radius: 15px;
-  box-shadow: 0px 1px 1px #88888830;
+  box-shadow: 0px 1px 1px #88888836;
 }
 .fv-searchMainPageDateOut, .fv-searchMainPageDateReturn{
   margin-top: 1.5%;
@@ -162,11 +163,12 @@ padding-top: 10%;
   padding-top: 7%;
 }
 .fv-aboutUsFirstImage {
-  /*margin-left: 1%;*/
+  /* margin-left: 1%; */
   /* margin-top: 1%; */
   border-radius: 15px;
   width: 250px;
   height: 261px;
+  margin-right: -13px;
 }
 .fv-aboutUsSecondImage {
   /* padding-left: 1%; */
@@ -175,18 +177,24 @@ padding-top: 10%;
   border-radius: 15px;
   width: 264px;
   height: 261px;
+  margin-left: -7px;
 }
 .fv-aboutUsThirdImage {
   margin-top: -4%;
   border-radius: 15px;
   width: 193px;
   height: 277px;
+  margin-top: 3%;
+  border-radius: 15px;
+  width: 193px;
+  height: 277px;
+  margin-right: 43px;
 }
 .fv-aboutUsFourthImage {
   /* padding-left: 1%; */
   /* padding-top: 1%; */
-  margin-top: 1%;
-  margin-left: 1%;
+  margin-top: 3%;
+  margin-left: -26%;
   border-radius: 15px;
   width: 318px;
   height: 304px;
@@ -206,14 +214,15 @@ padding-top: 10%;
 .fv-comment .col-md-5{
   padding-top: 3%;
   margin-right: 20px;
-  background: antiquewhite;
+  background: white;
   text-align: end;
   padding-bottom: 3%;
   padding-left: 1%;
   padding-right: 1%;
   margin-top: 2%;
   border-radius: 9px;
-  border: 1px solid #6bb927;
+  border: 1px solid #88888826;
+  box-shadow: 1px 1px 11px #88888847;
   /* position: relative; */
   /* width: 100%; */
   /* height: 60px; */
@@ -240,12 +249,12 @@ padding-top: 10%;
   /* border-radius: 0 4px 0 0; */
   width: 22px;
   height: 22px;
-  background-color: antiquewhite;
+  background-color: white;
   z-index: 200;
   /* border: 1px solid #6bb927; */
   margin-top: -1%;
-  border-bottom: 1px solid #6bb927;
-  border-right: 1px solid #6bb927;
+  border-bottom: 3px solid #88888826;
+  border-right: 4px solid #88888826;
 }
 .fv-commentSvgRight{
   margin-left: 70%;
@@ -337,14 +346,58 @@ padding-top: 10%;
   display: none;
 }
 
-@media (max-width: 768px) {
-  .fv-mainProduct{
-
-  }
+.fv-aboutUsImage{
+  margin-right: 10%;
+}
+.fv-aboutUsMobile.row{
+  display: none;
 }
 
-@media (min-width: 576px){
-  .col-sm-6 {
-    flex: 0 0 50%;
-    max-width: 50% !important;
-  }}
+
+@media (max-width: 767px){
+  .fv-aboutUs.row{
+    display: none;
+  }
+  .fv-aboutUsMobile.row{
+    display: flex;
+  }
+  .fv-aboutUsFirstImage {
+    /* margin-left: 1%; */
+    /* margin-top: 1%; */
+    border-radius: 15px;
+    width: 100px;
+    height: 160px;
+    margin-right: -13px;
+    margin-bottom: 9%;
+  }
+  .fv-aboutUsSecondImage {
+    /* padding-left: 1%; */
+    /* padding-top: 1%; */
+    margin-left: 1%;
+    border-radius: 15px;
+    width: 100px;
+    height: 148px;
+    /* margin-left: -7px; */
+    margin-bottom: 8%;
+  }
+  .fv-aboutUsThirdImage {
+    margin-top: -4%;
+    border-radius: 15px;
+    width: 193px;
+    height: 277px;
+    margin-top: 3%;
+    border-radius: 15px;
+    width: 101px;
+    height: 171px;
+    margin-right: 43px;
+  }
+  .fv-aboutUsFourthImage {
+    /* padding-left: 1%; */
+    /* padding-top: 1%; */
+    margin-left: 2%;
+    border-radius: 15px;
+    width: 92px;
+    height: 108px;
+    margin-top: 7%;
+  }
+}
