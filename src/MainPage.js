@@ -1,7 +1,4 @@
 import React, {Component} from "react";
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import 'bootstrap-css-only/css/bootstrap.min.css';
-import 'mdbreact/dist/css/mdb.css';
 import {MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import Product from "./Product";
 import PopularVillage from "./PopularVillage";
@@ -18,7 +15,7 @@ import MobileLogo from "./images/MobileLogo.png"
 import MobileMenu from "./images/MobileMenu.png"
 
 
-class Main extends Component {
+class MainPage extends Component {
     constructor(props) {
         super(props);
 
@@ -375,7 +372,7 @@ class Main extends Component {
                 <MDBRow className={"fv-topicMainPage"}>
                     <TopicsMainPage topic="مجله ترپ"/>
                 </MDBRow>
-                <MDBRow className={'fv-mainMobile'}>
+                <MDBRow className={'fv-mainMobile fv-trapMagazine'}>
                     <MDBCol md={3} sm={6}>
                     <TrapMagazine
                     srcimmage="https://www.w3schools.com/html/pic_trulli.jpg"
@@ -387,8 +384,8 @@ class Main extends Component {
                         <TrapMagazine
                             srcimmage="https://www.w3schools.com/html/pic_trulli.jpg"
                             topic="مجله ترپ"
-                            comment="مجله ترپمجله ترپمجله ترپمجله ترپمجله ترپمجله ترپ. مجله ترپمجله تر
-                            پمجله ترپمجله ترپممجله ترپمجله ترپمجله ترپجله ترپ"/>
+                            comment="مجله ترپمجله ترپمجله ترپمجله ترپمجله. ترپمجله ترپ. مجله ترپمجله تر
+                            پمجله ترپمجله ترپممجله ترپمجله ترپمجله. ترپجله ترپ"/>
                     </MDBCol>
                     <MDBCol md={3} sm={6}>
                         <TrapMagazine
@@ -431,4 +428,4 @@ class Main extends Component {
 
 }
 
-export default Main
+export default MainPage

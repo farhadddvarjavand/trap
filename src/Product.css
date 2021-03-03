@@ -454,6 +454,10 @@ html .col-md-3{
         /* margin-right: 3%; */
         margin-left: 5%;
     }
+    .fv-trapMagazine .col-sm-6 {
+        margin-inline-start: auto;
+        margin-left: 25px;
+    }
 }
 @media (max-width: 1193px) and (min-width: 991px){
     .fv-product .fv-discountedProductAmount.col-md-2 {
@@ -515,14 +519,14 @@ html .col-md-3{
     }
     .fv-mobileProduct .fv-trapMagazineImageTitle {
         /* width: 109%; */
-        direction: rtl;
+        /*direction: rtl;*/
     }
 }
 
 @media (max-width: 415px){
     .fv-mobileProduct .fv-trapMagazineImageTitle {
         /* width: 109%; */
-        direction: rtl;
+        /*direction: rtl;*/
     }
     .fv-aboutUsFourthImage {
         margin-left: -6%;
@@ -539,5 +543,9 @@ html .col-md-3{
     }
     .fv-product .fv-discountedProductAmount.col-md-2 {
         margin-bottom: -9px;
+    }
+    .fv-topicMainPageSeeAll {
+        font-size: 12px;
+        margin-bottom: 1.5%;
     }
 }
