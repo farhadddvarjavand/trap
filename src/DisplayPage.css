@@ -79,10 +79,11 @@
     background-color: white;
     margin-left: 35%;
 }
-.fv-DisplayPageDetailsLeftBody{
+.fv-DisplayPageDetailsLeftBody {
     width: 50%;
-    border:1px solid #15BE29;
-
+    border: 1px solid #88888817;
+    border-radius: 15px;
+    box-shadow: 1px 1px 11px #88888830;
 }
 .fv-DisplayPageDetailsLeftBodyDate input{
     width: 46%;
@@ -92,22 +93,211 @@
 }
 .fv-DisplayPageDetails .fv-DisplayPageDetailsLeftBody {
     padding-right: 30px;
+    height: 250%;
 }
 .fv-DisplayPageDetailsLeftBodyDateOnText{
     border: 1px solid gray;
     border-bottom: none;
     border-left: none;
+    border-top-right-radius: 15px;
+    padding-top: 2%;
+    padding-right: 3%;
 }
 .fv-DisplayPageDetailsLeftBodyDateOutText{
     border: 1px solid gray;
     border-bottom: none;
+    border-top-left-radius: 15px;
+    padding-top: 2%;
+    padding-right: 3%;
 }
 .fv-DisplayPageDetailsLeftBodyDateOnInput{
     border: 1px solid gray;
     border-top: none;
     border-left: none;
+    font-size: 10px;
 }
 .fv-DisplayPageDetailsLeftBodyDateOutInput{
     border: 1px solid gray;
     border-top: none;
+    font-size: 10px;
+    padding-bottom: 4%;
+    padding-right: 4%;
+    padding-top: 2%;
+}
+.fv-DisplayPageDetailsLeftBodyDate .fv-DisplayPageDetailsLeftBodyDateOnInput {
+    width: 50%;
+    padding-bottom: 4%;
+    padding-right: 4%;
+    padding-top: 2%;
+}
+.fv-DisplayPageDetailsLeftSelectedDate{
+    width: 107.5%
+}
+.fv-DisplayPageDetailsLeftTextDate{
+    width: 99%;
+}
+.fv-DisplayPageDetailsLeftTextDate .fv-DisplayPageDetailsLeftBodyDateOutInput{
+    width: 50%
+}
+.fv-DisplayPageDetailsLeftBodyCapacityText input , .fv-DisplayPageDetailsLeftBodyCapacityOption select{
+    width: 95%;
+}
+.fv-DisplayPageDetailsLeftBodyCapacityText input{
+    border: 1px solid gray;
+    border-bottom: none;
+    border-top: none;
+    padding-top: 2%;
+    padding-right: 3%;
+}
+.fv-DisplayPageDetailsLeftBodyCapacityOption select {
+    margin-bottom: 4%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border-top: none;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    font-size: 9px;
+    padding-right: 10px;
+}
+.fv-DisplayPageDetailsLeftButton input{
+    width: 103%;
+    margin-bottom: 5%;
+    background-color: #15BE29;
+    border: none;
+    border-radius: 15px;
+    line-height: 266%;
+    color: white;
+}
+.fv-DisplayPageDetailsLeftButton .col{
+    margin-right: -3.9%
+}
+.fv-DisplayPageDetails .fv-DisplayPageDetailsRightBody.col-md-8 {
+    text-align: initial;
+    margin-top: 4%;
+}
+.fv-DisplayPageDetailsRightBody img{
+    width: 64px;
+    height: 64px;
+    border-radius: 40px;
+}
+.fv-DisplayPageDetailsCode .col-md-10{
+    margin-right: -6.7%;
+}
+.fv-DisplayPageDetailsRightHomeImage{
+    margin-top: 4%;
+}
+.fv-DisplayPageDetailsPersonInformation{
+    margin-right: -5%;
+}
+.fv-DisplayPageDetailsRightParagraph{
+    width: 80%;
+}
+.fv-DisplayPageDetailsRightStayInHome .col {
+    max-width: 100%;
+    padding-right: 0;
+}
+.fv-DisplayPageDetailsRightBody h4 {
+    font-size: 21px;
+}
+.fv-DisplayPageDetailsRightBody h5 {
+    font-size: 18px;
+}
+.fv-DisplayPageDetailsRightStayInHome{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+.fv-DisplayPageDetailsّFacilities .col{
+    padding-right: 0;
+}
+.fv-DisplayPageDetailsّSpacialFacilities {
+   margin-right: -44%;
+}
+.fv-DisplayPageDetailsّFacilities .col-md-1{
+    max-width: 4.333333%;
+}
+.fv-DisplayPageDetailsّFacilities  .col-md-4 {
+    margin-right: -4%;
+    color: #909090;
+}
+.fv-DisplayPageRent.fv-DisplayPageMenu .col-md-1 {
+    max-width: 1.333333%;
+}
+.fv-DisplayPageRent.fv-DisplayPageMenu.row .slider_pagination_btn{
+
+    margin-left: 60%
+}
+.fv-DisplayPageMenu.fv-DisplayPageRent .col-md-11{
+    margin-right: -3%;
+}
+.fv-DisplayPageMenu.fv-DisplayPageRent{
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+.fv-DisplayPageDetailsّFacilitiesRow{
+    width: 55%;
+    margin-bottom: 20%;
+}
+.fv-DisplayPageDetailsRate{
+    margin-right: -56%;
+}
+.fv-DisplayPageDetailsRating{
+    font-size: 12px;
+    margin-top: 12%;
+    color: #909090;
+}
+.fv-DisplayPageDetailsRateNumberPerson p{
+    margin-right: -123%;
+}
+.fv-DisplayPageDetailsScore [type=button]:not(:disabled),.fv-DisplayPageDetailsScore [type=reset]:not(:disabled),.fv-DisplayPageDetailsScore [type=submit]:not(:disabled),.fv-DisplayPageDetailsScore button:not(:disabled) {
+    width: 100%;
+    line-height: 3px;
+}
+.fv-DisplayPageDetailsScoreRateText{
+    margin-right: 2%;
+}
+.fv-DisplayPageDetailsScore .col-md-5 {
+    flex: 0 0 49.666667%;
+    max-width: 48.666667%;
+}
+.fv-DisplayPageDetailsScoreButtonSecond {
+    position: absolute;
+    width: 50% !important;
+    background-color: #15BE29;
+}
+.fv-DisplayPageDetailsScoreButtonFirst {
+    position: absolute;
+    width: 100% !important;
+    background-color: #919191;
+}
+.fv-DisplayPageDetailsScoreBody .fv-DisplayPageDetailsScoreButton{
+    margin-left: -48%;
+}
+.fv-DisplayPageDetailsScoreBody .col-md-4 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    margin-top: 2%;
+    margin-right: -2%;
+}
+.fv-displayPageComments .fv-displayPageCommentsDate.row{
+    place-content: flex-end;
+    font-size: 14px;
+}
+.fv-displayPageComments{
+    border:1px solid rgba(102, 212, 72, 0.13);
+    background-color: rgba(102, 212, 72, 0.13);
+    border-radius: 15px;
+    padding-right: 2%;
+    padding-left: 2%;
+    padding-top: 2%;
+    width: 91%;
+}
+.fv-displayPageCommentsTitle {
+    margin-top: -5%;
+    margin-bottom: -2%;
+}
+.fv-displayPageCommentPerson{
+    margin-top: 4%;
+}
+.fv-displayPageTopicMainPage{
+    direction: ltr;
 }
