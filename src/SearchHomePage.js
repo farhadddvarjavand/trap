@@ -2,14 +2,7 @@ import React, {Component} from "react";
 import {MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import "./SearchHomePage.css"
 import Product from "./Product";
-import PopularVillage from "./PopularVillage";
-import TypesAccommodation from "./typesAccommodation";
-import DiscountedProduct from "./DiscountedProduct";
-import TrapMagazine from "./trapMagazine"
-import TopicsMainPage from "./topicsMainPage";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome } from '@fortawesome/free-solid-svg-icons'
-import FotterpageImage from "./images/footerMainImage.png"
+import Footer from "./footer"
 import FotterpageLogo from "./images/Logo.png"
 import LogoName from "./images/LogoName.png"
 import MobileLogo from "./images/MobileLogo.png"
@@ -40,12 +33,12 @@ class SearchHomePage extends Component {
                     <MDBRow>
                         <MDBCol>
                             <MDBRow className={'fv-searchMainPage'}>
-                                <button> <i className="fa fa-user-alt" /> جست و جو پیشرفته</button>
+                                <button><i className="fas fa-exchange-alt" /> جست و جو پیشرفته</button>
                             </MDBRow>
                         </MDBCol>
                         <MDBCol>
-                            <MDBRow className={'fv-searchMainPage'}>
-                                <button> <i className="fa fa-user-alt" /> مرتب سازی</button>
+                            <MDBRow className={'fv-searchMainPage fv-searchMainPageLeft'}>
+                                <button><i className="fa fa-arrows-alt-v" /> مرتب سازی</button>
                             </MDBRow>
                         </MDBCol>
                     </MDBRow>
@@ -258,7 +251,13 @@ class SearchHomePage extends Component {
                                 </MDBRow>
                             </MDBCol>
                     </MDBRow>
+
                 </MDBContainer>
+
+<MDBRow>
+  <Footer />
+</MDBRow>
+
             </MDBContainer>
         )}
 }
