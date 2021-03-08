@@ -1,8 +1,9 @@
-.fv-footerMenuRibbon .col-md-2 {
-    flex: 0 0 14.666667%;
-    max-width: 17.666667%;
+.fv-footerDisplayPageBody .col-md-2 {
+    flex: 0 0 13.666667%;
+    max-width: 18.666667%;
     text-align: center;
     margin-top: auto;
+    padding-right: 0%;
 }
 .fv-DisplayPageSearchIcon i {
     padding-bottom: 4px;
@@ -10,23 +11,17 @@
     margin-bottom: 3px;
     margin-right: 23px;
 }
-.fv-DisplayPage .fv-footerMenuRibbon button, .fv-DisplayPage .fv-footerMenuRibbon input {
+.fv-DisplayPage .fv-footerDisplayPageBody button, .fv-DisplayPage .fv-footerDisplayPageBody input {
     overflow: visible;
-    width: 312px;
-    border:1px solid #E5E5E5;
+    width: 324px;
+    border: 1px solid #E5E5E5;
     color: darkgray;
 }
 .fv-DisplayPageSearchIcon i{
     width: 20px;
     color: darkgray;
 }
-.fv-footerMenuRibbon img {
-    width: 48px;
-    margin-right: 9px;
-    height: 48px;
-    margin-bottom: -51px;
-}
-.fv-footerMenuRibbon .fv-DisplayPageSearchName {
+.fv-footerDisplayPageBody .fv-DisplayPageSearchName {
     padding-top: 6px;
 }
 .fv-DisplayPageSearchIcon [searchBbox]{
@@ -35,8 +30,10 @@
 .fv-DisplayPageTitle{
     direction: rtl;
 }
-.fv-DisplayPageTitle .col-md-1 {
+.fv-DisplayPageTitle .fv-DisplayPageTitleTopic .col-md-2 {
     text-align: initial;
+    color: #3EC886;
+    font-size: 25px;
 }
 .fv-DisplayPageTitle .col-md-2 {
     text-align: initial;
@@ -202,6 +199,10 @@
 .fv-DisplayPageDetailsRightBody h5 {
     font-size: 18px;
 }
+.fv-DisplayPageDetailsCode p {
+   /* font-size: 18px; */
+   /* margin-right: 5%; */
+}
 .fv-DisplayPageDetailsRightStayInHome{
     margin-top: 2%;
     margin-bottom: 2%;
@@ -228,6 +229,11 @@
 }
 .fv-DisplayPageMenu.fv-DisplayPageRent .col-md-11{
     margin-right: -3%;
+    display: inherit;
+}
+.fv-DisplayPageDetailsRightBody .fv-DisplayPageMenu.fv-DisplayPageRent h5 {
+    font-size: 18px;
+    font-weight: 500;
 }
 .fv-DisplayPageMenu.fv-DisplayPageRent{
     margin-top: 1%;
@@ -281,6 +287,11 @@
 .fv-displayPageComments .fv-displayPageCommentsDate.row{
     place-content: flex-end;
     font-size: 14px;
+    color: #3EC886;
+}
+.fv-DisplayPageDetailsRightBody .col-md-2 h4 {
+    font-size: 21px;
+    color: #3EC886;
 }
 .fv-displayPageComments{
     border:1px solid rgba(102, 212, 72, 0.13);
@@ -289,15 +300,198 @@
     padding-right: 2%;
     padding-left: 2%;
     padding-top: 2%;
-    width: 91%;
+    width: 100%;
 }
 .fv-displayPageCommentsTitle {
-    margin-top: -5%;
+    margin-top: -7%;
     margin-bottom: -2%;
+    color: #3EC886;
 }
 .fv-displayPageCommentPerson{
     margin-top: 4%;
 }
 .fv-displayPageTopicMainPage{
     direction: ltr;
+}
+.fv-displayPageCommentOne{
+    border-bottom: 1px solid #909090;
+    padding-bottom: 3%;
+    width: 78%;
+    padding-right: 3%;
+}
+.fv-DisplayPageCalender{
+    padding-top: 4%;
+    margin-bottom: -1%;
+}
+.fv-displayPageCommentTwo{
+    padding-bottom: 3%;
+    width: 78%;
+    padding-right: 3%;
+}
+.fv-DisplayPageDetailsRightBody .fv-DisplayPageDetailsPersonInformation h5 ,.fv-DisplayPageDetailsRightBody .fv-DisplayPageDetailsPersonInformation p {
+    margin-right: 5%;
+}
+.fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo h5{
+    margin-right: 0;
+}
+.fv-DisplayPageDetailsRateTop {
+    margin-right: -16px;
+    font-size: 12px;
+}
+.fv-DisplayPageDetailsRatingTop.fv-DisplayPageDetailsRating {
+    font-size: 8px;
+    margin-top: 5%;
+    color: #909090;
+    margin-bottom: -11%;
+    margin-right: -14%;
+}
+.fv-DisplayPageDetailsRateTop .fa,.fv-DisplayPageDetailsRateTop .fas , .fv-DisplayPageDetailsRate .fa ,.fv-DisplayPageDetailsRate .fas{
+    color: #FEA801;
+}
+.fv-footerDisplayPageBody{
+    box-shadow: inset -125em -3em 3em rgb(255 255 255 / 45%), 0 0 24px 2px rgb(255 255 255), 0.3em 0.3em 1em rgb(37 13 13 / 0%);
+    padding-top: 2%;
+    padding-bottom: 2%;
+    margin-top: 0%;
+    padding-right: 5%;
+    padding-left: 3%;
+}
+.fv-footerDisplayPageBodyButton input, .fv-footerDisplayPageBodyButton button{
+    /* width: 63%; */
+    /* float: left; */
+    background: #919191;
+    color: white;
+    margin-top: -4%;
+    padding: 13px;
+    border: none;
+    margin-left: 25%;
+    /* padding-bottom: 8%; */
+    text-align: center;
+    border-radius: 15px;
+}
+
+.fv-SearchHomePage .fv-footerDisplayPageBody {
+    margin-left: -9%;
+    margin-right: -9%;
+}
+.fv-footerDisplayPageBody .col-md-1 {
+    margin: auto;
+}
+.fv-footerDisplayPageBody{
+    box-shadow: none;
+}
+.fv-SearchHomePage .fv-footerDisplayPageBody{
+    color: black;
+    /* margin-right: -9%;
+     margin-left: -9%;*/
+}
+
+@media (max-width: 1200px) {
+    .fv-DisplayPage .fv-footerDisplayPageBody button, .fv-DisplayPage .fv-footerDisplayPageBody input {
+        width: 272px;
+    }
+}
+
+@media (max-width: 989px) and (min-width: 760px){
+    .fv-DisplayPageDetailsLeftEmptyMobile{
+        font-size: 1.5vw;
+    }
+    .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo .col-md-10 {
+        flex: 0 0 77.333333%;
+        max-width: 61.333333%;
+    }
+    .fv-footerDisplayPageBody .col-md-2 {
+        font-size: 1.5vw;
+    }
+    .fv-DisplayPage .fv-footerDisplayPageBody button, .fv-DisplayPage .fv-footerDisplayPageBody input {
+        width: 204px;
+    }
+    .fv-footerDisplayPageBody img {
+        width: 26px;
+        height: 26px;
+    }
+    .fv-DisplayPageTitle .col-md-2 {
+        text-align: initial;
+        font-size: 1.4vw;
+    }
+    .fv-DisplayPageDetailsRateTop {
+        margin-right: -5px;
+        font-size: 13px;
+    }
+    .fv-DisplayPageDetailsRatingTop.fv-DisplayPageDetailsRating {
+        font-size: 1.2vw;
+        margin-top: 6%;
+        color: #909090;
+        margin-bottom: -21%;
+        margin-right: -14%;
+    }
+    .fv-DisplayPageMenu.row .col-md-2 {
+        flex: 0 0 16.666667%;
+        max-width: 15.666667%;
+    }
+
+    .fv-DisplayPageDetails .fv-DisplayPageDetailsLeftBody {
+        padding-right: 10px;
+        height: 262%;
+        padding-left: 3px;
+    }
+    .fv-DisplayPageDetailsLeftBody{
+        border: none;
+        border-radius: none;
+        box-shadow:none;
+    }
+    .fv-DisplayPageDetailsLeftBodyDate.row {
+        margin-right: 0px;
+        margin-left: -9%;
+    }
+    .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo .col-md-10 {
+        flex: 0 0 77.333333%;
+        max-width: 61.333333%;
+    }
+    .fv-DisplayPageDetailsRightBody .fv-DisplayPageDetailsPersonInformation h5, .fv-DisplayPageDetailsRightBody .fv-DisplayPageDetailsPersonInformation p {
+        margin-right: 11%;
+    }
+    .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo div {
+        margin-right: 2%;
+    }
+    .fv-DisplayPageCalender .col-md-6{
+        flex: 0 0 63%;
+        max-width: 69%;
+    }
+    .calenderBody .week-days {
+        font-size: 1.5vw !important;
+    }
+    .calenderBody .container {
+        width: 127% !important;
+    }
+    .fv-DisplayPageDetailsّFacilities .col-md-4 {
+        margin-right: 1%;
+        color: #909090;
+    }
+    .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo .col-md-2 {
+        flex: 0 0 19.666667%;
+        max-width: 21.666667%;
+    }
+    .fv-DisplayPageDetailsScore .col-md-3 {
+        flex: 0 0 34%;
+        max-width: 32%;
+        padding-right: -17px;
+        padding-right: 2px;
+        padding-left: 0px;
+    }
+    .fv-DisplayPageDetailsRightingComment .col-md-2 {
+        flex: 0 0 38.666667%;
+        max-width: 26.666667%;
+        padding-left: -46px;
+        margin-left: -56px;
+        /* font-size: 16px; */
+    }
+    .fv-DisplayPageDetailsRightBody .col-md-2 h4 {
+        font-size: 17px;
+    }
+}
+@media (max-width: 766px) {
+    .fv-footerDisplayPageBody .col-md-2{
+        display: none;
+    }
 }

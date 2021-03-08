@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {MDBCol, MDBContainer, MDBRow} from "mdbreact";
+import {MDBAlert, MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import "./SearchHomePage.css"
 import "./DisplayPage.css"
 import Footer from "./footer"
@@ -9,7 +9,7 @@ import MobileLogo from "./images/MobileLogo.png"
 import MobileMenu from "./images/MobileMenu.png"
 import Product from "./Product";
 import TopicsMainPage from "./topicsMainPage";
-
+import Calender from "./calender";
 
 class SearchHomePage extends Component {
     constructor(props) {
@@ -21,8 +21,8 @@ class SearchHomePage extends Component {
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage"}>
 
-                <MDBContainer className={'fv-footerMenu fv-SearchHomePageBody'}>
-                    <MDBRow className={'fv-footerMenuRibbon'}>
+                <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
+                    <MDBRow className={' fv-footerDisplayPageBody'}>
                         <MDBCol md={2}>
                             <i className="fa fa-user-alt" />
                             <a> حساب کاربری</a>
@@ -33,30 +33,31 @@ class SearchHomePage extends Component {
                         <MDBCol  md={2} className={"fv-DisplayPageSearchIcon"} >
                             <a><i className="fa fa-search" /></a>
                         </MDBCol>
-                        <MDBCol md={6}>
+                        <MDBCol md={6} className={"menuMobile"}>
                             <img src={LogoName} className={"fv-DisplayPageSearchName"}/>
                             <img src={MobileLogo} className={"fv-DisplayPageSearchLogo"}/>
                         </MDBCol>
                     </MDBRow>
                 </MDBContainer>
                 <div className={"fv-DisplayPageTitle"}>
-                    <MDBRow >
-                        <MDBCol md={1}>
+                    <MDBRow className={"fv-DisplayPageTitleTopic"}>
+                        <MDBCol md={2}>
                         <p>باغ سبز</p>
                         </MDBCol>
                     </MDBRow>
                     <MDBRow className={"fv-DisplayPageSearchName"}>
                         <MDBCol md={2}>
-                            <p><i className="fa fa-user-alt" /> باغ سبز باغ سبز</p>
+                            <p><i className="fa fa-map-marker-alt" /> باغ سبز باغ سبز</p>
                         </MDBCol>
                         <MDBCol md={2}>
-                            <p><i className="fa fa-user-alt" /> باغ سبز</p>
+                                <p className={"fv-DisplayPageDetailsRating  fv-DisplayPageDetailsRatingTop"}> 5 </p>
+                                <p className={"fv-DisplayPageDetailsRate fv-DisplayPageDetailsRateTop"}>  /4.5 <i className="fa fa-star" /> </p>
                         </MDBCol>
                         <MDBCol md={6}>
-                            <p> اضافه به علاقه مندی ها <i className="fa fa-user-alt" /></p>
+                            <p> اضافه به علاقه مندی ها <i className="fas fa-heart" /></p>
                         </MDBCol>
                         <MDBCol md={2} className={"fv-DisplayPageTitleShare"}>
-                            <p> به اشتراک گذاری <i className="fa fa-user-alt" /></p>
+                            <p> به اشتراک گذاری <i className="fa fa-share-alt" aria-hidden="true" /></p>
                         </MDBCol>
                     </MDBRow>
                     <MDBRow className={"fv-DisplayPageSearchProductImage"}>
@@ -116,7 +117,7 @@ class SearchHomePage extends Component {
                             <MDBCol md={2}>
                                <img src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg"/>
                             </MDBCol>
-                            <MDBCol className={"fv-DisplayPageDetailsPersonInformation"}>
+                            <MDBCol className={"fv-DisplayPageDetailsPersonInformation fv-DisplayPageDetailsPersonInfo"}>
                                 <MDBRow>
                                     <MDBCol md={1}>
                                          <p>میزبان</p>
@@ -130,22 +131,22 @@ class SearchHomePage extends Component {
                                         <p>کد آگهی</p>
                                     </MDBCol>
                                     <MDBCol  md={10}>
-                                        <p> 22344</p>
+                                        <h5>22344</h5>
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsRightHomeImage"}>
-                            <p>  <i className="fa fa-user-alt" /> خانه دربست </p>
+                            <p><i className="fas fa-home" /> خانه دربست </p>
                         </MDBRow>
                         <MDBRow>
-                            <p>  <i className="fa fa-user-alt" />  ظرفیت استاندار 4 نفر+4 نفر اضافه </p>
+                            <p> <i className="fa fa-users" />  ظرفیت استاندار 4 نفر+4 نفر اضافه </p>
                         </MDBRow>
                         <MDBRow>
-                            <p>  <i className="fa fa-user-alt" /> 2 اتاق خواب+یک حمام+یک دست شویی </p>
+                            <p><i className="fa fa-building" /> 2 اتاق خواب+یک حمام+یک دست شویی </p>
                         </MDBRow>
                         <MDBRow>
-                            <p>  <i className="fa fa-user-alt" /> 1 تخت یک نفره+8 تشک معمولی </p>
+                            <p><i className="fa fa-bed" aria-hidden="true" /> 1 تخت یک نفره+8 تشک معمولی </p>
                         </MDBRow>
                         <MDBRow>
                             <h4>درباره اقامت گاه</h4>
@@ -158,10 +159,10 @@ class SearchHomePage extends Component {
                                 سرویس بهداشتی ( توالت ایرانی و فرنگی ) و حمام اختصاصی، رخت و خواب نو و سنتی می باشند</p>
                         </MDBRow>
                         <MDBRow>
-                            <p>  <i className="fa fa-user-alt" /> مناسب برای معلولین </p>
+                            <p> <i className="fas fa-check-square" /> مناسب برای معلولین </p>
                         </MDBRow>
                         <MDBRow>
-                            <p>  <i className="fa fa-user-alt" /> ویوی رو به دریا </p>
+                            <p>  <i className="fas fa-check-square" /> ویوی رو به دریا </p>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsRightStayInHome"}>
                             <MDBCol>
@@ -176,34 +177,34 @@ class SearchHomePage extends Component {
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
                             <MDBCol>
-                                <p>  <i className="fa fa-user-alt" /> جارو برقی </p>
+                                <p> <i className="fa fa-broom" /> جارو برقی </p>
                             </MDBCol>
                             <MDBCol>
-                                <p>  <i className="fa fa-user-alt" /> اینترنت رایگان </p>
-                            </MDBCol>
-                        </MDBRow>
-                        <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
-                            <MDBCol>
-                                <p>  <i className="fa fa-user-alt" /> تلفن </p>
-                            </MDBCol>
-                            <MDBCol>
-                                <p>  <i className="fa fa-user-alt" />  جعبه کمک های اولیه </p>
+                                <p> <i className="fas fa-wifi" /> اینترنت رایگان </p>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
                             <MDBCol>
-                                <p>  <i className="fa fa-user-alt" /> مهر و جانماز </p>
+                                <p> <i className="fas fa-phone" /> تلفن </p>
                             </MDBCol>
                             <MDBCol>
-                                <p>  <i className="fa fa-user-alt" /> تلوزیون </p>
+                                <p><i className="fas fa-box" />  جعبه کمک های اولیه </p>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
                             <MDBCol>
-                                <p>  <i className="fa fa-user-alt" /> یخچال </p>
+                                <p> <i className="fas fa-pray" /> مهر و جانماز </p>
                             </MDBCol>
                             <MDBCol>
-                                <p>  <i className="fa fa-user-alt" /> اجاق گاز </p>
+                                <p><i className="fas fa-tv" /> تلوزیون </p>
+                            </MDBCol>
+                        </MDBRow>
+                        <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
+                            <MDBCol>
+                                <p><i className="fa fa-door-closed" /> یخچال </p>
+                            </MDBCol>
+                            <MDBCol>
+                                <p><i className="fa fa-calendar-minus" /> اجاق گاز </p>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow  className={"fv-DisplayPageّMoreFacilities"}>
@@ -287,7 +288,7 @@ class SearchHomePage extends Component {
                                 </MDBRow>
                             </MDBCol>
                             <MDBCol md={11}>
-                                <div>زینه هر نفر اضافه به ازای هر شب: 50000 </div>
+                                <p>زینه هر نفر اضافه به ازای هر شب:  </p> <h5>50000</h5>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
@@ -297,7 +298,7 @@ class SearchHomePage extends Component {
                                 </MDBRow>
                             </MDBCol>
                             <MDBCol md={11}>
-                                <div>ومان تخفیف هفتگی </div>
+                                <p>ومان تخفیف هفتگی   </p> <h5></h5>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
@@ -307,7 +308,7 @@ class SearchHomePage extends Component {
                                 </MDBRow>
                             </MDBCol>
                             <MDBCol md={11}>
-                                <div>تخفیف برای اقامت‌های بالای 7 شب تخفیف ماهانه:</div>
+                                <p>تخفیف برای اقامت‌های بالای  </p> <h5> 7 شب تخفیف ماهانه:</h5>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
@@ -317,32 +318,43 @@ class SearchHomePage extends Component {
                                 </MDBRow>
                             </MDBCol>
                             <MDBCol md={11}>
-                                <div>تخفیف برای اقامت‌های بالای 30 شب</div>
+                                <p>تخفیف برای اقامت‌های بالای </p> <h5>30 شب</h5>
+                            </MDBCol>
+                        </MDBRow>
+
+                        <MDBRow className={"fv-DisplayPageCalender"}>
+                            <MDBCol md={6}>
+                                <Calender />
+                            </MDBCol>
+                            <MDBCol md={6}>
+                                <Calender />
                             </MDBCol>
                         </MDBRow>
 
                         <MDBRow>
-                            <h1> calender </h1>
-                        </MDBRow>
-
-                        <MDBRow>
-                            <h4> اجاره بها </h4>
+                            <h4> اجاره ها </h4>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
                             <MDBCol>
-                                <p>  <i className="fa fa-user-alt" /> ساعت ورود </p>
+                                <p> <i className="fas fa-clock" /> ساعت ورود </p>
                             </MDBCol>
-                            <MDBCol>
-                                <p>  <i className="fa fa-user-alt" /> ساعت خروج </p>
+                            <MDBCol md={8}>
+                                <p>  <i className="fas fa-clock" /> ساعت خروج </p>
                             </MDBCol>
                         </MDBRow>
+
                         <MDBRow className={"fv-DisplayPageDetailsّFacilitiesRow"}>
-                            <p>
-                                امکان ورود حیوان خانگی: فقط
-                                بیرون ساختمان ورود حیوانات به داخل اقامتگاه کاملا ممنوع است امکان بر
-                                گزاری مراسم: مجاز است، نیازمند هماهنگی قبلی تعداد افراد بیشتر از حد مجاز نباشد موجب
-                                آزار و اذیت خانه های اطراف نگردد صدای موزیک و ... تا ۱۲ شب بیشتر نباشد
-                            </p>
+
+                            <MDBRow>
+                                <h5>امکان ورود حیوان خانگی: </h5><p>بیرون ساختمان ورود </p>
+                            </MDBRow>
+                            <MDBRow>
+                                <p>حیوانات به داخل اقامتگاه کاملا ممنوع است</p>
+                            </MDBRow>
+                            <MDBRow>
+                                <h5>امکان برگزاری مراسم:</h5><p>مجاز است، نیازمند هماهنگی قبلی تعداد</p>
+                            </MDBRow>
+
                         </MDBRow>
                         <MDBRow>
                             <h4> آدرس </h4>
@@ -355,7 +367,7 @@ class SearchHomePage extends Component {
                             <h1> Map</h1>
                         </MDBRow>
 
-                        <MDBRow>
+                        <MDBRow className={"fv-DisplayPageDetailsRightingComment"}>
                             <MDBCol md={10}>
                                 <h4> نظرات </h4>
                             </MDBCol>
@@ -440,6 +452,7 @@ class SearchHomePage extends Component {
                                 </MDBRow>
                             </MDBCol>
                         </MDBRow>
+                     <div className={"fv-displayPageCommentOne"}>
                         <MDBRow className={"fv-displayPageCommentPerson"}>
                             <MDBCol md={2}>
                                 <img src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg"/>
@@ -473,6 +486,8 @@ class SearchHomePage extends Component {
                                 </MDBRow>
                             </MDBCol>
                         </MDBRow>
+                     </div>
+                     <div className={"fv-displayPageCommentTwo"}>
                         <MDBRow className={"fv-displayPageCommentPerson"}>
                             <MDBCol md={2}>
                                 <img src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg"/>
@@ -506,14 +521,15 @@ class SearchHomePage extends Component {
                                 </MDBRow>
                             </MDBCol>
                         </MDBRow>
+                     </div>
 
                     </MDBCol>
                     <MDBCol md={4} className={"fv-DisplayPageDetailsLeftBody"}>
                         <MDBRow>
                             <p>قیمت از شبی ۲۰۰۰۰ تومان</p>
                         </MDBRow>
-                        <MDBRow>
-                            <p>  <i className="fa fa-user-alt" /> اولین تاریخ خالی این اقامت گاه ۱۸ اردیبهشت میباشد </p>
+                        <MDBRow className={"fv-DisplayPageDetailsLeftEmptyMobile"}>
+                            <p><i className="fa fa-calendar" aria-hidden="true" /> اولین تاریخ خالی این اقامت گاه ۱۸ اردیبهشت میباشد </p>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftBodyDate"}>
                             <MDBRow className={"fv-DisplayPageDetailsLeftSelectedDate"}>
