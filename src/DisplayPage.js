@@ -247,7 +247,7 @@ class SearchHomePage extends Component {
                         <MDBRow className={"fv-DisplayPageDetailsRightParagraph"}>
                             <h5>هر کدام از امکانات زیر که دوست دارید انتخاب کنید تا به شما در سفر حس بهتری بدهد </h5>
                         </MDBRow>
-                        <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
+                        <MDBRow className={"fv-DisplayPageDetailsّFacilities fv-DisplayPageTomanTitle"}>
                             <MDBCol>
                                 <MDBRow>
                                     <MDBCol md={1} sm={1}>
@@ -400,7 +400,7 @@ class SearchHomePage extends Component {
                                 <h4> نظرات </h4>
                             </MDBCol>
                             <MDBCol md={2}>
-                                <h4> نوشتن نظر<i className="fa fa-user-alt" /> </h4>
+                                <h4> نوشتن نظر<i className="fas fa-chevron-left" /> </h4>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow>
@@ -482,17 +482,17 @@ class SearchHomePage extends Component {
                         </MDBRow>
                      <div className={"fv-displayPageCommentOne"}>
                         <MDBRow className={"fv-displayPageCommentPerson"}>
-                            <MDBCol md={2}>
+                            <MDBCol md={2} sm={2}>
                                 <img src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg"/>
                             </MDBCol>
                             <MDBCol className={"fv-DisplayPageDetailsPersonInformation"}>
                                 <MDBRow>
-                                    <MDBCol>
+                                    <MDBCol sm={10}>
                                         <h5> بهار</h5>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow className={"fv-DisplayPageDetailsCode"}>
-                                    <MDBCol>
+                                    <MDBCol sm={10}>
                                         <p> مهر ماه ۹۸ ۸ ۱۲</p>
                                     </MDBCol>
                                 </MDBRow>
@@ -517,17 +517,17 @@ class SearchHomePage extends Component {
                      </div>
                      <div className={"fv-displayPageCommentTwo"}>
                         <MDBRow className={"fv-displayPageCommentPerson"}>
-                            <MDBCol md={2}>
+                            <MDBCol md={2} sm={2}>
                                 <img src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg"/>
                             </MDBCol>
                             <MDBCol className={"fv-DisplayPageDetailsPersonInformation"}>
                                 <MDBRow>
-                                    <MDBCol>
+                                    <MDBCol sm={10}>
                                         <h5> بهار</h5>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow className={"fv-DisplayPageDetailsCode"}>
-                                    <MDBCol>
+                                    <MDBCol sm={10}>
                                         <p> مهر ماه ۹۸ ۸ ۱۲</p>
                                     </MDBCol>
                                 </MDBRow>
@@ -550,6 +550,10 @@ class SearchHomePage extends Component {
                             </MDBCol>
                         </MDBRow>
                      </div>
+                        <MDBRow className={"fv-SearchHomePagePagination fv-displayPageCommentPagination"}>
+                            <input type='button' value='1'/>
+                            <input type='button' value='2'/>
+                        </MDBRow>
 
                     </MDBCol>
                     <MDBCol md={4} className={"fv-DisplayPageDetailsLeftBody"}>
