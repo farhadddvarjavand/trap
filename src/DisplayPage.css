@@ -1,3 +1,49 @@
+.col-sm-6 {
+    width: 50% !important;
+}
+.col-sm-5 {
+    flex: 0 0 41.666667%;
+    max-width: 41.666667% !important;
+}
+.col-sm-4 {
+    flex: 0 0 33.333333%;
+    width: 33.333333% !important;
+}
+.col-sm-3 {
+    flex: 0 0 25%;
+    width: 25% !important;
+}
+.col-sm-2 {
+    flex: 0 0 16.666667%;
+    width: 16.666667% !important;
+}
+.col-sm-1 {
+    flex: 0 0 8.333333%;
+    width: 8.333333% !important;
+}
+.col-sm-7 {
+    flex: 0 0 58.333333%;
+    width: 58.333333% !important;
+}
+.col-sm-8{
+    flex: 0 0 58.333333%;
+    width: 66.666667% !important;
+}
+.col-sm-9{
+    flex: 0 0 58.333333%;
+    width: 75% !important;
+}
+.col-sm-10 {
+    flex: 0 0 83.333333%;
+    width: 83.333333% !important;
+}
+.col-sm-11 {
+    flex: 0 0 91.666667%;
+    width: 91.666667% !important;
+}
+
+
+
 .fv-footerDisplayPageBody .col-md-2 {
     flex: 0 0 13.666667%;
     max-width: 18.666667%;
@@ -385,6 +431,25 @@
     /* margin-right: -9%;
      margin-left: -9%;*/
 }
+.fv-DisplayPageLoginImageMobile , .fv-svgPagination.fv-displayPageImagePaginationMobile .col-md-12{
+    display: none;
+}
+.fv-DisplayPageLoginSignMobile{
+    display: none;
+}
+.fv-DisplayPageRotePathMobile .col , .fv-DisplayPageMenuRowsMobile{
+display: none;
+}
+.fv-DisplayPageDetailsّFacilities .col-md-4 {
+    margin-right: -2%;
+    color: black;
+}
+.fv-DisplayPageDetailsRightStayInHome .col-md-4 {
+    margin-right: -2%;
+}
+.fv-DisplayPageDetailsّFacilitiesRow .col-md-12 {
+    display: contents;
+}
 
 @media (max-width: 1200px) {
     .fv-DisplayPage .fv-footerDisplayPageBody button, .fv-DisplayPage .fv-footerDisplayPageBody input {
@@ -491,7 +556,194 @@
     }
 }
 @media (max-width: 766px) {
-    .fv-footerDisplayPageBody .col-md-2{
+    .fv-footerDisplayPageBody .col-md-2,.fv-DisplayPageSearchProductImage .fv-aboutUsThirdImageLeftFirst , .fv-DisplayPageSearchProductImage .fv-aboutUsThirdImageLeftSecond, .fv-DisplayPageMenuRows , .fv-DisplayPageDisplayMoreImage .col , .fv-DisplayPageDetailsRightBody .col-md-2 h4{
         display: none;
+    }
+    .fv-DisplayPageSearchName .fv-DisplayPageDetailsRate, .fv-DisplayPageDetailsRatingTop.fv-DisplayPageDetailsRating ,.fv-DisplayPageSearchName .fv-DisplayPageLike,.fv-DisplayPageSearchName .fv-DisplayPageTitleShare ,.fv-DisplayPageDetailsLeftBody {
+        display: none;
+    }
+    .fv-footerMenu .col-md-6 {
+        padding: 0;
+        margin-top: 4%;
+        /* margin-left: -21%; */
+        margin-right: 14%;
+    }
+    .fv-DisplayPageDetailsRate {
+        margin-right: -20px;
+    }
+    .fv-DisplayPageDetailsRateNumberPerson p {
+        margin-right: -37px;
+    }
+    .fv-DisplayPageDetailsّFacilities .col-md-4 {
+        margin-right: 0%
+    }
+    .fv-DisplayPageLoginImageMobile{
+        display: flex;
+    }
+    .fv-DisplayPageLoginImageMobile img {
+        width: 50px;
+        height: 50px;
+        margin-top: 52%;
+        border-radius: 15px;
+        margin-right: -96%;
+    }
+    .fv-DisplayPageLoginSignMobile{
+        margin-top: 9%;
+        margin-right: -1%;
+        display: flex;
+    }
+    .fv-SearchHomePage.fv-DisplayPage .row {
+        margin-right: -3px;
+        margin-left: -10px;
+    }
+    .fv-DisplayPageRotePathMobile{
+        margin-top: 3%;
+        display: flex;
+        padding-right: 5%;
+    }
+    .fv-DisplayPageRotePathMobile .col{
+        display: contents;
+        font-size: 18px;
+    }
+    .fv-DisplayPageRotePathMobile .fa-chevron-left{
+        margin-top: 2%;
+        margin-right: 2%;
+        margin-left: 2%;
+        font-size: 13px;
+    }
+    .fv-DisplayPagePathNow{
+        color: #3EC886;
+    }
+    .fv-DisplayPageTitle .col-md-2 {
+        text-align: initial;
+        font-size: 18px;
+        font-weight: 490;
+        margin-right: 4%;
+    }
+    .fv-aboutUsThirdImageRight {
+        width: 280px;
+        height: 177px;
+        border-radius: 15px;
+    }
+    .fv-footerDisplayPageBody {
+        padding-top: 5%;
+    }
+    .fv-DisplayPageTitle {
+        text-align: center;
+    }
+    .fv-DisplayPageTitle img {
+         margin-left: 4%;
+     }
+    .fv-svgPagination.fv-displayPageImagePaginationMobile .slider_pagination_btn.slider_pagination_btn--sel {
+        background-color: #15BE29;
+    }
+    .fv-svgPagination.fv-displayPageImagePaginationMobile .slider_pagination_btn {
+        padding: 5px;
+    }
+    .fv-svgPagination.fv-displayPageImagePaginationMobile .col-md-12{
+        display: flex;
+        place-content: center;
+    }
+    .fv-DisplayPageMenu .row .slider_pagination_btn {
+        padding: 4px;
+        margin: 13px;
+        margin-top: 4px;
+    }
+    .fv-DisplayPageMenu {
+        margin-top: 8%;
+    }
+    .fv-DisplayPageMenu.row .col-sm-2 {
+        margin-right: 2%;
+        font-size: 4.5vw;
+    }
+    .fv-DisplayPageMenuRowsMobile{
+        display: block;
+    }
+    .fv-svgPagination.fv-displayPageImagePaginationMobile .slider_pagination_btn {
+        padding: 3px;
+        margin: 3px;
+    }
+    .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo .col-sm-4 {
+        text-align: end;
+    }
+    .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo .col-sm-5 {
+        text-align: center;
+    }
+    .fv-DisplayPageDetailsPersonInformation {
+        margin-right: -1%;
+    }
+    .fv-DisplayPageDetailsRightBody h5 {
+        font-size: 22px;
+    }
+
+    .fv-DisplayPageDetails .fv-DisplayPageDetailsRightBody.col-md-8 {
+        margin-top: 12%;
+    }
+    .fv-DisplayPageDetails .pMobile{
+        font-size: 20px;
+    }
+    .fv-DisplayPageDetails .h4Mobile h4 {
+        font-size: 29px;
+        font-weight: 499;
+    }
+    .fv-DisplayPageDetailsRightParagraph {
+        width: 100%;
+    }
+    .fv-DisplayPageDetailsRightStayInHome .col-sm-11 {
+        margin-right: -4%;
+        margin-bottom: 3%;
+    }
+    .fv-DisplayPageّMoreFacilities p{
+        color: #3EC886;
+        font-size: 21px;
+        font-weight: 450;
+    }
+    .fv-DisplayPageDetailsRightParagraph h5{
+        font-size: 19px;
+    }
+    .fv-DisplayPageDetailsRightParagraph{
+        margin-bottom: 6%;
+    }
+    .fv-DisplayPageDetailsّFacilities .col-sm-2 {
+        font-size: 19px;
+        margin-right: -3%;
+        margin-left: 3%;
+    }
+    .fv-DisplayPageMenu.fv-DisplayPageRent .row .slider_pagination_btn {
+        padding: 4px;
+        margin: -4px;
+        margin-top: 9px;
+    }
+    .fv-DisplayPageMenu.fv-DisplayPageRent .col-md-11 {
+        margin-right: -7%;
+    }
+    .calenderBody .week-days {
+        padding: 11px 4px !important;
+        font-size: 2.8vw !important;
+    }
+    .calenderBody .container {
+        width: 125% !important;
+    }
+    .fv-calenderDisplayNonMobile{
+        display: none;
+    }
+    .fv-DisplayPageDetailsّFacilities .col-sm-12 {
+        padding-right: 4%;
+    }
+    .fv-DisplayPageDetailsّFacilitiesRow {
+        width: 100%;
+        margin-bottom: 7%;
+    }
+    .fv-DisplayPageDetailsRating {
+        font-size: 14px;
+        padding-top: 2px;
+    }
+    .fv-DisplayPageDetailsScore .col-sm-12 {
+        flex: 0 0 100.666667%;
+        max-width: 100.666667%;
+    }
+    .fv-DisplayPageDetailsScore .col-sm-3 {
+        flex: 0 0 31%;
+        width: 30% !important;
     }
 }
