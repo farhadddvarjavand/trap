@@ -1,0 +1,118 @@
+$backgroundColorFooter:#C9FFBA;
+$colorText:#3EC886;
+$selectedColor:#919191;
+$unselectedBackground: #F4F4F4;
+$unselectedColor:rgba(145, 145, 145, 0.11);
+$unselectedTextColor:rgba(145, 145, 145, 0.5);
+.hostStepPage{ 
+  direction: rtl; 
+  .footerHostStep1Page{ 
+    .col-md-3{ 
+      margin-bottom: auto; 
+      margin-top: 3%;
+      text-align: initial; 
+
+      img{ 
+        margin-left: 3%; 
+        width: 50px; 
+        height: 50px; 
+        border-radius: 31px; 
+      } 
+    } 
+    .col-md-9{ 
+      margin-top: auto; 
+      margin-bottom: auto; 
+      text-align: end; 
+    }
+  }
+  .fv-HostStep1Path{
+    display: flex;
+    margin-right: -1%;
+
+    .fa-chevron-left{
+      margin-right: 2%;
+      margin-left: 2%;
+      margin-top: 0.5%;
+    }
+  }
+
+  .fv-headerHomeImage.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1%;
+    margin-left: -80px;
+    place-content: inherit;
+  }
+  .fv-headerHomeImage {
+    /*margin-right: 15%;*/
+
+    .selectedIcon i{
+      color: $colorText;
+      background-color: $backgroundColorFooter;
+    }
+    .selectedIcon p{
+      color: black;
+    }
+    .unselectedIcon i{
+      color: $unselectedColor;
+      background-color: $unselectedBackground;
+      border: 2px solid $unselectedColor;
+    }
+    .unselectedIcon p{
+      color: $unselectedTextColor;
+    }
+    i {
+      font-size: 27px;
+      /* margin: 0%; */
+      display: flex;
+      color: $colorText;
+      background-color: $backgroundColorFooter;
+      width: 69px;
+      height: 68px;
+      border-radius: 44px;
+      place-items: center;
+      justify-content: center;
+    }
+
+    .slider_pagination_btn {
+      padding: 3px;
+      margin: 2.5px;
+      border-radius: 76px;
+    }
+
+    .col-md-1 {
+      flex: 0 0 16.333333%;
+      max-width: 9.333333%;
+      margin-right: -2%;
+      padding: 0;
+      margin-top: auto;
+      margin-bottom: auto;
+      text-align: -webkit-center;
+
+    }
+
+    .hostStepPage .fv-headerHomeImage i {
+      margin-top: auto;
+      font-size: 27px;
+      /* margin: 0%; */
+      display: flex;
+      color: $colorText;
+      background-color: $backgroundColorFooter;
+      width: 69px;
+      height: 68px;
+      border-radius: 44px;
+      place-items: center;
+      justify-content: center;
+    }
+    .slider_pagination_btn.slider_pagination_btn--sel {
+      background-color: #919191;
+      border-radius: 22px;
+    }
+    .slider_pagination{
+      margin-bottom: 45%;
+    }
+  }
+  .fv-HostStepNow{
+    color:$colorText;
+  }
+}

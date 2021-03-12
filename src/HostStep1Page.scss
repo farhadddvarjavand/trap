@@ -1,44 +1,4 @@
-$backgroundColorFooter:#C9FFBA;
-.fv-HostStep1Page{ // f //
-  direction: rtl; // f //
-      .fv-footerHostStep1Page{ // f //
-            .col-md-3{ // f //
-              margin-bottom: auto; // f //
-              margin-top: 3%;
-              text-align: initial; // f //
 
-              img{ // f //
-                margin-left: 3%; // f //
-                width: 50px; //  f //
-                height: 50px; // f //
-                border-radius: 31px; // f //
-              } // f //
-            } // f //
-            .col-md-9{ // f //
-              margin-top: auto; // f //
-              margin-bottom: auto; // f //
-              text-align: end; // f //
-            }
-      }
-      .fv-HostStep1Path{
-        display: flex;
-        margin-right: -1%;
+.fv-HostStep1Page{
 
-            .fa-chevron-left{
-              margin-right: 2%;
-              margin-left: 2%;
-              margin-top: 0.5%;
-            }
-      }
-      .fv-headerHomeImage {
-        background-color: $backgroundColorFooter;
-        width: 39px;
-        height: 37px;
-        border-radius: 15px;
-
-            .fa-home:before {
-              margin: 57%;
-              display: flex;
-            }
-        }
 }
