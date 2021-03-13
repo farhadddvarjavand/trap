@@ -1,10 +1,12 @@
 import React, {Component} from "react";
 import {MDBAlert, MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import FotterpageLogo from "./images/Logo.png"
-import "./FooterSteps.scss"
+import "./HeaderSteps.scss"
+import LogoName from "./images/LogoName.png"
+import MobileLogo from "./images/MobileLogo.png"
 
 
-class FooterSteps extends Component {
+class HeaderSteps extends Component {
     constructor(props) {
         super(props);
 
@@ -14,34 +16,44 @@ class FooterSteps extends Component {
         return (
             <MDBContainer className={"hostStepPage"}>
                 <MDBRow className={'footerHostStep1Page'}>
-                    <MDBCol md={3}>
+                    <MDBCol md={3} sm={6}>
                         <img src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg"/>
-                        <a>نام و نامخانوادگی</a>
+                        <i className="fas fa-chevron-down name_mobile" />
+                        <a className={"name_desktop"}>نام و نامخانوادگی</a>
                     </MDBCol>
-                    <MDBCol md={9} sm={9} className={""}>
-                        <img src={FotterpageLogo} className={""}/>
+                    <MDBCol md={9} sm={6} className={""}>
+                        <img src={LogoName} className={"hide_mobile"}/>
+                        <img src={MobileLogo} className={"hide_mobile"}/>
+
+                        <img src={LogoName} className={"hide_desktop"}/>
+                        <img src={MobileLogo} className={"hide_desktop"}/>
                     </MDBCol>
                 </MDBRow>
-                <MDBCol className={"fv-HostStep1Path"}>
+                <MDBRow>
+                <MDBCol sm={10} className={"fv-HostStep1Path"}>
                     <p> صفحه اصلی </p>
                     <i className="fas fa-chevron-left" />
                     <p> پنل کاربری </p>
                     <i className="fas fa-chevron-left" />
                     <p className={"fv-HostStepNow"}> ثبت اقامت گاه </p>
                 </MDBCol>
+                <MDBCol sm={2} className={"fv-HostStep1Path"}>
+                    <i className="fa fa-question-circle" aria-hidden="true" />
+                </MDBCol>
+                </MDBRow>
 
                 <MDBRow className={"fv-headerHomeImage"}>
                     <MDBCol md={1} className={"selectedIcon"}>
                         <i className="fas fa-home" />
-                       <p>اطلاعات اولیه</p>
+                       <p className={"text_mobile"}>اطلاعات اولیه</p>
                     </MDBCol>
                     <MDBCol md={1}>
                         <div className="slider_pagination">
-                            <button className="slider_pagination_btn slider_pagination_btn--sel" />
-                            <button className="slider_pagination_btn slider_pagination_btn--sel" />
-                            <button className="slider_pagination_btn slider_pagination_btn--sel" />
-                            <button className="slider_pagination_btn slider_pagination_btn--sel" />
-                            <button className="slider_pagination_btn slider_pagination_btn--sel" />
+                            <button className="btn_mobile slider_pagination_btn slider_pagination_btn--sel" />
+                            <button className="btn_mobile slider_pagination_btn slider_pagination_btn--sel" />
+                            <button className="btn_mobile slider_pagination_btn slider_pagination_btn--sel" />
+                            <button className="btn_mobile slider_pagination_btn slider_pagination_btn--sel" />
+                            <button className="btn_mobile slider_pagination_btn slider_pagination_btn--sel" />
                             <button className="slider_pagination_btn slider_pagination_btn--sel"  />
                             <button className="slider_pagination_btn slider_pagination_btn--sel" />
                             <button className="slider_pagination_btn slider_pagination_btn--sel" />
@@ -50,15 +62,15 @@ class FooterSteps extends Component {
                     </MDBCol>
                     <MDBCol md={1} className={"unselectedIcon"}>
                         <i className="fas fa-map-marker-alt" />
-                        <p>آدرس</p>
+                        <p className={"text_mobile"}>آدرس</p>
                     </MDBCol>
                     <MDBCol md={1}>
                         <div className="slider_pagination">
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn" />
                             <button className="slider_pagination_btn" />
                             <button className="slider_pagination_btn" />
                             <button className="slider_pagination_btn" />
@@ -67,15 +79,15 @@ class FooterSteps extends Component {
                     </MDBCol>
                     <MDBCol md={1} className={"unselectedIcon"}>
                         <i className="fa fa-align-left" />
-                        <p>مشخصات اقامت گاه</p>
+                        <p className={"text_mobile"}>مشخصات اقامت گاه</p>
                     </MDBCol>
                     <MDBCol md={1}>
                         <div className="slider_pagination">
-                            <button className="slider_pagination_btn " />
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn " />
+                            <button className="btn_mobile slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn" />
                             <button className="slider_pagination_btn" />
                             <button className="slider_pagination_btn" />
                             <button className="slider_pagination_btn" />
@@ -84,15 +96,15 @@ class FooterSteps extends Component {
                     </MDBCol>
                     <MDBCol md={1} className={"unselectedIcon"}>
                         <i className="fa fa-gopuram" />
-                        <p>امکانات اقامت گاه</p>
+                        <p className={"text_mobile"}>امکانات اقامت گاه</p>
                     </MDBCol>
                     <MDBCol md={1}>
                         <div className="slider_pagination">
-                            <button className="slider_pagination_btn " />
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn " />
+                            <button className="btn_mobile slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn" />
                             <button className="slider_pagination_btn" />
                             <button className="slider_pagination_btn" />
                             <button className="slider_pagination_btn" />
@@ -101,15 +113,15 @@ class FooterSteps extends Component {
                     </MDBCol>
                     <MDBCol md={1} className={"unselectedIcon"}>
                         <i className="fas fa-dollar-sign" />
-                        <p>قیمت گذاری</p>
+                        <p className={"text_mobile"}>قیمت گذاری</p>
                     </MDBCol>
                     <MDBCol md={1}>
                         <div className="slider_pagination">
-                            <button className="slider_pagination_btn " />
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn " />
+                            <button className="btn_mobile slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn" />
                             <button className="slider_pagination_btn" />
                             <button className="slider_pagination_btn" />
                             <button className="slider_pagination_btn" />
@@ -118,15 +130,15 @@ class FooterSteps extends Component {
                     </MDBCol>
                     <MDBCol md={1} className={"unselectedIcon"}>
                         <i className="fas fa-exclamation-triangle" />
-                        <p>قوانین</p>
+                        <p className={"text_mobile"}>قوانین</p>
                     </MDBCol>
                     <MDBCol md={1}>
                         <div className="slider_pagination">
-                            <button className="slider_pagination_btn " />
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn " />
+                            <button className="btn_mobile slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn" />
                             <button className="slider_pagination_btn" />
                             <button className="slider_pagination_btn" />
                             <button className="slider_pagination_btn" />
@@ -135,7 +147,7 @@ class FooterSteps extends Component {
                     </MDBCol>
                     <MDBCol md={1} className={"unselectedIcon"}>
                         <i className="fa fa-file-image" />
-                        <p>تصاویر</p>
+                        <p className={"text_mobile"}>تصاویر</p>
                     </MDBCol>
 
                 </MDBRow>
@@ -143,4 +155,4 @@ class FooterSteps extends Component {
         )
     }
 }
-export default FooterSteps
+export default HeaderSteps
