@@ -8,10 +8,10 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
   direction: rtl; 
   .footerHostStep1Page{
 
-    .col-md-3{ 
-      margin-bottom: auto; 
+    .col-md-3{
       margin-top: 3%;
-      text-align: initial; 
+      text-align: initial;
+      margin-bottom: 3%;
 
       img{ 
         margin-left: 3%; 
@@ -24,7 +24,7 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
       margin-bottom: auto;
       text-align: end;
       padding: 0;
-      margin-top: 3%;
+      margin-top: 4%;
       margin-right: -1%;
     }
   }

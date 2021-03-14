@@ -22,30 +22,28 @@ class HeaderSteps extends Component {
                         <a className={"name_desktop"}>نام و نامخانوادگی</a>
                     </MDBCol>
                     <MDBCol md={9} sm={6} className={""}>
-                        <img src={LogoName} className={"hide_mobile"}/>
-                        <img src={MobileLogo} className={"hide_mobile"}/>
-
+                        <img src={FotterpageLogo} className={"hide_mobile"}/>
                         <img src={LogoName} className={"hide_desktop"}/>
                         <img src={MobileLogo} className={"hide_desktop"}/>
                     </MDBCol>
                 </MDBRow>
                 <MDBRow>
-                <MDBCol sm={10} className={"fv-HostStep1Path"}>
-                    <p> صفحه اصلی </p>
-                    <i className="fas fa-chevron-left" />
-                    <p> پنل کاربری </p>
-                    <i className="fas fa-chevron-left" />
-                    <p className={"fv-HostStepNow"}> ثبت اقامت گاه </p>
-                </MDBCol>
-                <MDBCol sm={2} className={"fv-HostStep1Path"}>
-                    <i className="fa fa-question-circle" aria-hidden="true" />
-                </MDBCol>
+                    <MDBCol sm={10} className={"fv-HostStep1Path"}>
+                        <p> صفحه اصلی </p>
+                        <i className="fas fa-chevron-left" />
+                        <p> پنل کاربری </p>
+                        <i className="fas fa-chevron-left" />
+                        <p className={"fv-HostStepNow"}> ثبت اقامت گاه </p>
+                    </MDBCol>
+                    <MDBCol sm={2} className={"fv-HostStep1Path"}>
+                        <i className="fa fa-question-circle" aria-hidden="true" />
+                    </MDBCol>
                 </MDBRow>
 
                 <MDBRow className={"fv-headerHomeImage"}>
                     <MDBCol md={1} className={"selectedIcon"}>
                         <i className="fas fa-home" />
-                       <p className={"text_mobile"}>اطلاعات اولیه</p>
+                        <p className={"text_mobile"}>اطلاعات اولیه</p>
                     </MDBCol>
                     <MDBCol md={1}>
                         <div className="slider_pagination">
@@ -60,21 +58,21 @@ class HeaderSteps extends Component {
                             <button className="slider_pagination_btn slider_pagination_btn--sel" />
                         </div>
                     </MDBCol>
-                    <MDBCol md={1} className={"unselectedIcon"}>
+                    <MDBCol md={1} className={"unselectedIcon fv-hostStep2PageSelectIcon"}>
                         <i className="fas fa-map-marker-alt" />
                         <p className={"text_mobile"}>آدرس</p>
                     </MDBCol>
                     <MDBCol md={1}>
                         <div className="slider_pagination">
-                            <button className="btn_mobile slider_pagination_btn" />
-                            <button className="btn_mobile slider_pagination_btn" />
-                            <button className="btn_mobile slider_pagination_btn" />
-                            <button className="btn_mobile slider_pagination_btn" />
-                            <button className="btn_mobile slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn fv-hostStep2PageSelect" />
+                            <button className="btn_mobile slider_pagination_btn fv-hostStep2PageSelect" />
+                            <button className="btn_mobile slider_pagination_btn fv-hostStep2PageSelect" />
+                            <button className="btn_mobile slider_pagination_btn fv-hostStep2PageSelect" />
+                            <button className="btn_mobile slider_pagination_btn fv-hostStep2PageSelect" />
+                            <button className="slider_pagination_btn fv-hostStep2PageSelect" />
+                            <button className="slider_pagination_btn fv-hostStep2PageSelect" />
+                            <button className="slider_pagination_btn fv-hostStep2PageSelect" />
+                            <button className="slider_pagination_btn fv-hostStep2PageSelect" />
                         </div>
                     </MDBCol>
                     <MDBCol md={1} className={"unselectedIcon"}>

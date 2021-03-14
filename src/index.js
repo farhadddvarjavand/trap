@@ -9,8 +9,10 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import SearchHomePage from './SearchHomePage';
 import HostStep1Page from "./HostStep1Page";
+import HostStep2Page from "./HostStep2Page";
+import HostStep2Page2 from "./HostStep2Page2";
 
 ReactDOM.render(
-    <HostStep1Page />,
+   <HostStep2Page2 />,
   document.getElementById('root')
 );

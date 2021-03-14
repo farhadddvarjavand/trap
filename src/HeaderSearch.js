@@ -3,7 +3,7 @@ import {MDBCol, MDBRow} from "mdbreact";
 import LogoName from "./images/LogoName.png";
 import MobileLogo from "./images/MobileLogo.png";
 
-class FooterSearch extends Component {
+class HeaderSearch extends Component {
     constructor(props) {
         super(props);
 
@@ -40,4 +40,4 @@ class FooterSearch extends Component {
         )
     }
 }
-export default FooterSearch
+export default HeaderSearch

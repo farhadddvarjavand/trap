@@ -1,0 +1,72 @@
+$backgroundColorFooter:#C9FFBA;
+$colorText:#3EC886;
+$selectedColor:#919191;
+$unselectedBackground: #F4F4F4;
+$unselectedColor:rgba(145, 145, 145, 0.11);
+$unselectedTextColor:rgba(145, 145, 145, 0.5);
+.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton{
+  display: flex;
+  float: left;
+  margin-left: -31%;
+  padding: 3.5% 10.8% 3.5% 10.8%;
+  border: none;
+  color: #15BE29;
+  font-size: 13px;
+  margin-top: 7%;
+  background: #FBFBFB;
+  box-shadow: 0px 4px 14px rgba(14, 15, 15, 0.08);
+  border-radius: 16px;
+}
+.fv-HostStep2Page .fv-HostStep1Page .hostStepPage .footerHostStep1Page .hide_desktop{
+  display: initial;
+}
+.fv-HostStep2Page .fv-HostStep1Page .hostStepPage .footerHostStep1Page .hide_mobile{
+  display: none;
+}
+.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButtonBody{
+  direction: ltr;
+}
+.fv-HostStep2Page .fv-hostStep2PageSelect{
+  background-color: #919191;
+  border-radius: 22px;
+}
+.fv-HostStep2Page .hostStepPage .fv-headerHomeImage .fv-hostStep2PageSelectIcon i {
+  color: #3EC886;
+  background-color: #C9FFBA;
+}
+.fv-HostStep2Page .hostStepPage .fv-headerHomeImage .fv-hostStep2PageSelectIcon p {
+  color: black;
+}
+
+
+@media (max-width: 1200px) {
+  .fv-HostStep2Page.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
+    margin-left: 4%;
+    padding: 5% 15% 5% 15%;
+  }
+}
+@media (max-width: 767px) {
+  .fv-HostStep2Page.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
+    margin-top: 23%;
+    border-radius: 8px;
+    margin-left: 7%;
+    padding: 5.4% 13.4% 5.4% 13.4%;
+  }
+}
+@media (max-width: 500px) {
+  .fv-HostStep2Page.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
+    margin-left: -3%;
+  }
+}
+@media (max-width: 320px) {
+  .fv-HostStep2Page.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
+    margin-left: -7%;
+  }
+}
+@media (max-width: 280px) {
+  .fv-HostStep2Page.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
+    margin-left: 7%;
+  }
+}
+
+

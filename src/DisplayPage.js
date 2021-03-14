@@ -10,7 +10,7 @@ import MobileMenu from "./images/MobileMenu.png"
 import Product from "./Product";
 import TopicsMainPage from "./topicsMainPage";
 import Calender from "./calender";
-import FooterSearch from "./FooterSearch";
+import HeaderSearch from "./HeaderSearch";
 
 class SearchHomePage extends Component {
     constructor(props) {
@@ -23,7 +23,7 @@ class SearchHomePage extends Component {
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
 
-                    <FooterSearch />
+                    <HeaderSearch />
 
                     <MDBRow className={"fv-DisplayPageRotePathMobile"}>
                         <MDBCol>

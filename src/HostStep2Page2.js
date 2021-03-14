@@ -1,20 +1,14 @@
 import React, {Component} from "react";
 import {MDBAlert, MDBCol, MDBContainer, MDBRow} from "mdbreact";
+import "./HeaderSteps.scss"
+import "./HostStep2Page2.scss"
 import "./HostStep1Page.scss"
-import Footer from "./footer"
-import MobileLogo from "./images/MobileLogo.png"
+import HostStep1Page from "./HostStep1Page";
 import HeaderSteps from "./HeaderSteps";
+import MobileLogo from "./images/MobileLogo.png";
+import Footer from "./footer";
 
-import MobileMenu from "./images/MobileMenu.png"
-import Product from "./Product";
-import TopicsMainPage from "./topicsMainPage";
-import Calender from "./calender";
-import HeaderSearch from "./HeaderSearch";
-import FotterpageLogo from "./images/Logo.png"
-import LogoName from "./images/LogoName.png"
-
-
-class HostStep1Page extends Component {
+class HostStep2Page2 extends Component {
     constructor(props) {
         super(props);
 
@@ -22,19 +16,20 @@ class HostStep1Page extends Component {
 
     render() {
         return (
+            <div className={" fv-HostStep2Page fv-hostStep2Page2"}>
             <MDBContainer className={"fv-HostStep1Page"}>
-                <HeaderSteps />
+                <MDBRow>
+                    <HeaderSteps />
+                </MDBRow>
 
                 <MDBRow className={"fv-HostStep1PageBody"}>
                     <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
-                            <p  className={"fv-hostStep2Page2Hidden"}>عنوان اقامت گاه</p>
-                            <input type="text" value=" " className={"fv-hostStep2Page2Hidden"}/>
-                            <p className={"fv-hostStep2Page2Hidden"}> نوع اقامت گاه</p>
-                            <select type=" " value=" " className={"fv-hostStep2Page2Hidden"}/>
-                            <p className={"fv-hostStep2Page2Hidden"}>شماره ضروری</p>
-                            <input type="text" value=" " className={"fv-hostStep2Page2Hidden"}/>
-                            <p className={"fv-hostStep2Page2Hidden"}> داستان اقامت گاه شما</p>
-                            <textarea value=" " className={"fv-hostStep2Page2Hidden"}/>
+                        <p className={"fv-hostStep2Page2P"}> لطفا از روی نقشه آدرس دقیق خود را پیدا کنید</p>
+                        <textarea className={"fv-hostStep2Page2Textarea"} value=" "/>
+                        <MDBRow className={"fv-hostStep2Page2Map"}>
+                            <img src={MobileLogo} />
+                        </MDBRow>
+
                     </MDBCol>
 
                     <MDBCol className={"fv-hostStepPage1Left"} sm={12} md={6}>
@@ -47,18 +42,18 @@ class HostStep1Page extends Component {
                                 در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند</p>
                             <img src={MobileLogo} className={"fv-hostStepPage1LeftImage"}/>
                         </MDBRow>
-                       <MDBRow className={"fv-hostStepPage2LeftButtonBody"}>
-                               <input type="button" value="مرحله بعد"  className={"fv-hostStepPage1LeftButton"}/>
-                               <input type="button" value="مرحله قبل"  className={"fv-hostStepPage2LeftButton"}/>
-                       </MDBRow>
+                        <MDBRow className={"fv-hostStepPage2LeftButtonBody"}>
+                            <input type="button" value="مرحله بعد"  className={"fv-hostStepPage1LeftButton"}/>
+                            <input type="button" value="مرحله قبل"  className={"fv-hostStepPage2LeftButton"}/>
+                        </MDBRow>
                     </MDBCol>
                 </MDBRow>
-
                 <MDBRow>
                     <Footer />
                 </MDBRow>
             </MDBContainer>
+            </div>
         )
     }
 }
-export default HostStep1Page
+export default HostStep2Page2
