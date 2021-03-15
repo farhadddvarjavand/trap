@@ -11,8 +11,9 @@ import SearchHomePage from './SearchHomePage';
 import HostStep1Page from "./HostStep1Page";
 import HostStep2Page from "./HostStep2Page";
 import HostStep2Page2 from "./HostStep2Page2";
+import HostStep3Page from "./HostStep3Page";
 
 ReactDOM.render(
-   <HostStep2Page2 />,
+   <HostStep3Page />,
   document.getElementById('root')
 );

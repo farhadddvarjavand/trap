@@ -75,21 +75,21 @@ class HeaderSteps extends Component {
                             <button className="slider_pagination_btn fv-hostStep2PageSelect" />
                         </div>
                     </MDBCol>
-                    <MDBCol md={1} className={"unselectedIcon"}>
+                    <MDBCol md={1} className={"unselectedIcon fv-hostStep3PageSelectIcon"}>
                         <i className="fa fa-align-left" />
                         <p className={"text_mobile"}>مشخصات اقامت گاه</p>
                     </MDBCol>
                     <MDBCol md={1}>
                         <div className="slider_pagination">
-                            <button className="btn_mobile slider_pagination_btn " />
-                            <button className="btn_mobile slider_pagination_btn" />
-                            <button className="btn_mobile slider_pagination_btn" />
-                            <button className="btn_mobile slider_pagination_btn" />
-                            <button className="btn_mobile slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
-                            <button className="slider_pagination_btn" />
+                            <button className="btn_mobile slider_pagination_btn fv-hostStep3PageSelect" />
+                            <button className="btn_mobile slider_pagination_btn fv-hostStep3PageSelect" />
+                            <button className="btn_mobile slider_pagination_btn fv-hostStep3PageSelect" />
+                            <button className="btn_mobile slider_pagination_btn fv-hostStep3PageSelect" />
+                            <button className="btn_mobile slider_pagination_btn fv-hostStep3PageSelect" />
+                            <button className="slider_pagination_btn fv-hostStep3PageSelect" />
+                            <button className="slider_pagination_btn fv-hostStep3PageSelect" />
+                            <button className="slider_pagination_btn fv-hostStep3PageSelect" />
+                            <button className="slider_pagination_btn fv-hostStep3PageSelect" />
                         </div>
                     </MDBCol>
                     <MDBCol md={1} className={"unselectedIcon"}>

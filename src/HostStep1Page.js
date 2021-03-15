@@ -4,7 +4,7 @@ import "./HostStep1Page.scss"
 import Footer from "./footer"
 import MobileLogo from "./images/MobileLogo.png"
 import HeaderSteps from "./HeaderSteps";
-
+import HostStepLeftBodyContent from "./hostStepLeftBodyContetnt"
 import MobileMenu from "./images/MobileMenu.png"
 import Product from "./Product";
 import TopicsMainPage from "./topicsMainPage";
@@ -21,6 +21,7 @@ class HostStep1Page extends Component {
     }
 
     render() {
+
         return (
             <MDBContainer className={"fv-HostStep1Page"}>
                 <HeaderSteps />
@@ -37,21 +38,14 @@ class HostStep1Page extends Component {
                             <textarea value=" " className={"fv-hostStep2Page2Hidden"}/>
                     </MDBCol>
 
-                    <MDBCol className={"fv-hostStepPage1Left"} sm={12} md={6}>
-                        <MDBRow className={"fv-hostStepPage1LeftContentBody"}>
-                            <p> طراحان سایت هنگام طراحی قالب سایت معمولا ب
-                                ا این موضوع رو برو هستند که محتوای اصلی صفحات آماده نیست. در نتیجه طرح
-                                کلی دید درستی به کار فرما نمیدهد. اگر طراح بخواهد دنبال متن های مرتبط
-                                بگردد تمرکزش از روی کار اصلی برداشته میشود و اینکار زمان بر خواهد بو
-                                د. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگران را
-                                در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند</p>
-                            <img src={MobileLogo} className={"fv-hostStepPage1LeftImage"}/>
-                        </MDBRow>
-                       <MDBRow className={"fv-hostStepPage2LeftButtonBody"}>
-                               <input type="button" value="مرحله بعد"  className={"fv-hostStepPage1LeftButton"}/>
-                               <input type="button" value="مرحله قبل"  className={"fv-hostStepPage2LeftButton"}/>
-                       </MDBRow>
-                    </MDBCol>
+                    <HostStepLeftBodyContent
+                    text=" طراحان سایت هنگام طراحی قالب سایت معمولا ب
+                    ا این موضوع رو برو هستند که محتوای اصلی صفحات آماده نیست. در نتیجه طرح
+                    کلی دید درستی به کار فرما نمیدهد. اگر طراح بخواهد دنبال متن های مرتبط
+                    بگردد تمرکزش از روی کار اصلی برداشته میشود و اینکار زمان بر خواهد بو
+                    د. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگران را
+                    در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند"
+                    image={MobileLogo}/>
                 </MDBRow>
 
                 <MDBRow>

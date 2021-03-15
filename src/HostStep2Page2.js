@@ -7,6 +7,7 @@ import HostStep1Page from "./HostStep1Page";
 import HeaderSteps from "./HeaderSteps";
 import MobileLogo from "./images/MobileLogo.png";
 import Footer from "./footer";
+import HostStepLeftBodyContent from "./hostStepLeftBodyContetnt"
 
 class HostStep2Page2 extends Component {
     constructor(props) {
@@ -32,21 +33,14 @@ class HostStep2Page2 extends Component {
 
                     </MDBCol>
 
-                    <MDBCol className={"fv-hostStepPage1Left"} sm={12} md={6}>
-                        <MDBRow className={"fv-hostStepPage1LeftContentBody"}>
-                            <p> طراحان سایت هنگام طراحی قالب سایت معمولا ب
-                                ا این موضوع رو برو هستند که محتوای اصلی صفحات آماده نیست. در نتیجه طرح
-                                کلی دید درستی به کار فرما نمیدهد. اگر طراح بخواهد دنبال متن های مرتبط
-                                بگردد تمرکزش از روی کار اصلی برداشته میشود و اینکار زمان بر خواهد بو
-                                د. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگران را
-                                در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند</p>
-                            <img src={MobileLogo} className={"fv-hostStepPage1LeftImage"}/>
-                        </MDBRow>
-                        <MDBRow className={"fv-hostStepPage2LeftButtonBody"}>
-                            <input type="button" value="مرحله بعد"  className={"fv-hostStepPage1LeftButton"}/>
-                            <input type="button" value="مرحله قبل"  className={"fv-hostStepPage2LeftButton"}/>
-                        </MDBRow>
-                    </MDBCol>
+                    <HostStepLeftBodyContent
+                        text=" طراحان سایت هنگام طراحی قالب سایت معمولا ب
+                    ا این موضوع رو برو هستند که محتوای اصلی صفحات آماده نیست. در نتیجه طرح
+                    کلی دید درستی به کار فرما نمیدهد. اگر طراح بخواهد دنبال متن های مرتبط
+                    بگردد تمرکزش از روی کار اصلی برداشته میشود و اینکار زمان بر خواهد بو
+                    د. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگران را
+                    در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند"
+                        image={MobileLogo}/>
                 </MDBRow>
                 <MDBRow>
                     <Footer />
