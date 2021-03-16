@@ -4,6 +4,7 @@ import "./HeaderSteps.scss"
 import "./HostStep2Page2.scss"
 import "./HostStep1Page.scss"
 import "./HostStep3Page.scss"
+import HostStepIncreaseAndDecreaseButton from "./hostStepIncreaseAndDecreaseButton"
 import HostStep1Page from "./HostStep1Page";
 import HeaderSteps from "./HeaderSteps";
 import Logo from "./images/Logo.png";
@@ -28,22 +29,34 @@ class HostStep3Page extends Component {
 
                         <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
 
-                                 <p>ظرفیت اقامت گاه</p>
+                                 <h5>ظرفیت اقامت گاه</h5>
 
-                                <MDBRow>
-                                    <MDBCol>
-                                        <p>ظرفیت استاندارد</p>
-                                    </MDBCol>
-                                    <MDBCol>
-                                        <input type="button" value="+"/>
-                                    </MDBCol>
-                                    <MDBCol>
-                                        <p>1</p>
-                                    </MDBCol>
-                                    <MDBCol>
-                                        <input type="button" value="+"/>
-                                    </MDBCol>
-                                </MDBRow>
+                            <HostStepIncreaseAndDecreaseButton
+                            text="ظرفیت استاندارد"
+                            number="1"/>
+                            <HostStepIncreaseAndDecreaseButton
+                                text="حداکثر ظرفیت"
+                                number="1"/>
+                            <h5>نوع اجاره</h5>
+                            <select>
+                                <option>
+                                    test
+                                </option>
+                            </select>
+                            <h5>اتاق خواب</h5>
+                            <HostStepIncreaseAndDecreaseButton
+                                text="تعداد اتاق خواب را مشخص کنید"
+                                number="1"/>
+                            <h5>حمام/سرویس بهداشتی</h5>
+                            <HostStepIncreaseAndDecreaseButton
+                                text="توالت ایرانی"
+                                number="1"/>
+                            <HostStepIncreaseAndDecreaseButton
+                                text="توالت فرنگی"
+                                number="1"/>
+                            <HostStepIncreaseAndDecreaseButton
+                                text="دوش آب"
+                                number="1"/>
 
                         </MDBCol>
 
