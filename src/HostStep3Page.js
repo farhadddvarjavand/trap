@@ -29,7 +29,7 @@ class HostStep3Page extends Component {
 
                         <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
 
-                                 <h5>ظرفیت اقامت گاه</h5>
+                                 <h5 className={"fv-hostStep3NumberOfCapacityMobile"}>ظرفیت اقامت گاه</h5>
 
                             <HostStepIncreaseAndDecreaseButton
                             text="ظرفیت استاندارد"
@@ -43,7 +43,7 @@ class HostStep3Page extends Component {
                                     test
                                 </option>
                             </select>
-                            <h5>اتاق خواب</h5>
+                            <h5 className={"fv-hostStep3BedRoom"}>اتاق خواب</h5>
                             <div  className={"fv-hostStep3CapacityOfRom"}>
                                 <HostStepIncreaseAndDecreaseButton
                                     text="تعداد اتاق خواب را مشخص کنید"
@@ -65,7 +65,7 @@ class HostStep3Page extends Component {
                                     <MDBCol md={1} sm={2}>
                                         <input type="checkBox"/>
                                     </MDBCol>
-                                    <MDBCol md={5} sm={8}>
+                                    <MDBCol md={5} sm={10}>
                                         <p>سرویس بهداشتی مشترک است</p>
                                     </MDBCol>
                                 </MDBRow>
@@ -82,7 +82,7 @@ class HostStep3Page extends Component {
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCol>
-                                <MDBCol  md={2} sm={3} className={"fv-hostStep3CheckBoxGroupInLineOne"}>
+                                <MDBCol  md={2} sm={6} className={"fv-hostStep3CheckBoxGroupInLineOne test"}>
                                     <MDBRow>
                                         <MDBCol md={4} sm={4}>
                                             <input type="checkBox"/>
@@ -92,7 +92,7 @@ class HostStep3Page extends Component {
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCol>
-                                <MDBCol md={2} sm={6} className={"fv-hostStep3CheckBoxGroupInLineTwo"}>
+                                <MDBCol md={2} sm={6} className={"fv-hostStep3CheckBoxGroupInLineTwo test"}>
                                     <MDBRow>
                                         <MDBCol md={4} sm={4}>
                                             <input type="checkBox"/>
@@ -102,7 +102,7 @@ class HostStep3Page extends Component {
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCol>
-                                <MDBCol md={2} sm={3}  className={"fv-hostStep3CheckBoxGroupInLineOneThree"}>
+                                <MDBCol md={2} sm={6}  className={"fv-hostStep3CheckBoxGroupInLineOneThree test"}>
                                     <MDBRow>
                                         <MDBCol md={4} sm={4}>
                                             <input type="checkBox"/>
@@ -112,12 +112,12 @@ class HostStep3Page extends Component {
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCol>
-                                <MDBCol md={2} sm={6} className={"fv-hostStep3CheckBoxGroupInLineFour"}>
+                                <MDBCol md={2} sm={6} className={"fv-hostStep3CheckBoxGroupInLineFour test"}>
                                     <MDBRow>
-                                        <MDBCol md={4}>
+                                        <MDBCol md={4} sm={4}>
                                             <input type="checkBox"/>
                                         </MDBCol>
-                                        <MDBCol md={8}>
+                                        <MDBCol md={8} sm={8}>
                                             <p>پارکینگ</p>
                                         </MDBCol>
                                     </MDBRow>
@@ -139,30 +139,30 @@ class HostStep3Page extends Component {
                             <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLine fv-hostStep3CheckBoxGroupInLineSecond"}>
                                 <MDBCol md={3} sm={6} className={""} >
                                     <MDBRow>
-                                        <MDBCol md={4}>
+                                        <MDBCol md={4} sm={4}>
                                             <input type="checkBox"/>
                                         </MDBCol>
-                                        <MDBCol md={8}>
+                                        <MDBCol md={8} sm={8}>
                                             <p>رو به دریا</p>
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCol>
-                                <MDBCol md={3} sm={6} className={"fv-hostStep3CheckBoxGroupInLineSecondTwo"}>
+                                <MDBCol md={3} sm={6} className={"fv-hostStep3CheckBoxGroupInLineSecondTwo test"}>
                                     <MDBRow>
-                                        <MDBCol md={4}>
+                                        <MDBCol md={4} sm={4}>
                                             <input type="checkBox"/>
                                         </MDBCol>
-                                        <MDBCol md={8}>
+                                        <MDBCol md={8} sm={8}>
                                             <p>روبه جنگلا</p>
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCol>
-                                <MDBCol md={3} sm={6} className={"fv-hostStep3CheckBoxGroupInLineSecondThree"}>
+                                <MDBCol md={3} sm={6} className={"fv-hostStep3CheckBoxGroupInLineSecondThree test"}>
                                     <MDBRow>
-                                        <MDBCol md={4}>
+                                        <MDBCol md={4} sm={4}>
                                             <input type="checkBox"/>
                                         </MDBCol>
-                                        <MDBCol md={8}>
+                                        <MDBCol md={8} sm={8}>
                                             <p>روبه جنگل</p>
                                         </MDBCol>
                                     </MDBRow>
