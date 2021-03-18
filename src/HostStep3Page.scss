@@ -1,18 +1,289 @@
-.fv-hostStep3Page .fv-hostStep3PageSelect{
-  background-color: #919191;
-  border-radius: 22px;
-}
-.fv-hostStep3Page .hostStepPage .fv-headerHomeImage .fv-hostStep3PageSelectIcon i {
-  color: #3EC886;
-  background-color: #C9FFBA;
-}
-.fv-hostStep3Page .hostStepPage .fv-headerHomeImage .fv-hostStep3PageSelectIcon p {
-  color: black;
-}
-.fv-hostStep3Page .fv-HostStep1PageBody{
-  display: flex;
-}
-.fv-hostStep3Page .fv-hostStepPage1Right h5{
+$colorText:#3EC886;
+$backgroundColorButton:#15BE29;
+.fv-hostStep3Page{
+  h5{
+
+  }
+  .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right {
+    margin-top: 3%;
+  /*  margin-right: -0.5%;
+    margin-left: 0.5%;*/
+  }
+  .fv-hostStep3PageSelect{
+    background-color: #919191;
+    border-radius: 22px;
+  }
+  .hostStepPage .fv-headerHomeImage .fv-hostStep3PageSelectIcon{
+    i {
+      color: #3EC886;
+      background-color: #C9FFBA;
+    }
+    p {
+      color: black;
+    }
+  }
+  .fv-hostStepPage1Right h5{
+    padding-top: 2%;
     margin-right: -3%;
-  padding-bottom: 3%;
+    padding-bottom: 0%;
+  }
+  .fv-HostStep1PageBody{
+    display: flex;
+  }
+  .fv-hostStep3CapacityOfRom  .hostStepIncreaseAndDecreaseBody .hostStepIncreaseAndDecreaseText {
+    flex: 0 0 36%;
+    max-width: 42%;
+  }
+  .fv-hostStepPage1Right .fv-hostStep3CheckBox input {
+    width: 100%;
+    border: none;
+    border-radius: 0px;
+    height: auto;
+  }
+  .fv-hostStepPage1Right .fv-hostStep3InputText input{
+    width: 106%;
+    border-radius: 14px;
+    height: 45px;
+  }
+  .fv-hostStepPage1Right .fv-hostStep3InputButton{
+    margin-right: -2%;
+  }
+  .fv-hostStepPage1Right .fv-hostStep3InputButton input{
+    border-radius: 6px;
+    color:$colorText ;
+    background-color: white;
+    border: 1px solid $colorText;
+    height: 45px;
+  }
+  .fv-hostStepPage1Right .fv-hostStep3CheckBox {
+    margin-right: -6.5%;
+    .col-md-1 {
+      margin-top: auto;
+    }
+    .col-md-5 {
+      margin-right: -4%;
+      margin-top: 1%;
+    }
+  }
+  .fv-hostStepPage1Right .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine{
+    .col-md-4 {
+      flex: 0 0 46.333333%;
+      max-width: 43.333333%;
+    }
+    .col-md-8 {
+      flex: 0 0 44.666667%;
+      max-width: 42.666667%;
+      margin-right: -23%;
+    }
+    .fv-hostStep3CheckBoxGroupInLineOne{
+      margin-right: -7%;
+    }
+    .fv-hostStep3CheckBoxGroupInLineTwo{
+      margin-right: -6%;
+    }
+    .fv-hostStep3CheckBoxGroupInLineOneThree{
+      margin-right: -5%;
+    }
+    .fv-hostStep3CheckBoxGroupInLineFour{
+      margin-right: -3%;
+    }
+  }
+  .fv-hostStepPage1Right .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine.fv-hostStep3CheckBoxGroupInLineSecond{
+     .col-md-8 {
+      flex: 0 0 61.666667%;
+      max-width: 57.666667%;
+    }
+    .fv-hostStep3CheckBoxGroupInLineSecondTwo{
+      margin-right: -10%;
+    }
+    .fv-hostStep3CheckBoxGroupInLineSecondThree{
+      margin-right: -9%;
+    }
+  }
+  .fv-marginRight ,  .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right select{
+    margin-right: -3.5%;
+    height: 45px;
+    margin-bottom: 3%;
+  }
+  .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .fv-marginRight{
+    width: 50%;
+    height: 45px;
+  }
+  .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .fv-marginRight.fv-hostStep3AddNewPlace{
+    margin-bottom: -2%;
+    margin-top: 3%;
+  }
+  .fv-hostStep3AnyPlace{
+    margin-top: 1%;
+  }
+  .fv-hostStep3Measure{
+    margin-top: 2%;
+  }
+  .fv-hostStep3View{
+    margin-bottom: 1%;
+  }
+  .fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButtonBody {
+    margin-top: 100%;
+  }
+  .fv-hostStepPage2LeftButtonBody  {
+    margin-top: 100%;
+  }
+  .hostStepIncreaseAndDecreaseBody .col-md-1 {
+    flex: 0 0 8.333333%;
+    max-width: 8.333333%;
+    margin-right: -10%;
+    margin-left: -2%;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .fv-hostStep3InputButtonMobile{
+    display: none;
+  }
+  .fv-hostStepPage1Right .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine .col-md-4 {
+    flex: 0 0 64.333333%;
+    max-width: 51.333333%;
+  }
+  .fv-hostStepPage1Right .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine .col-md-8{
+    padding-right: 9%;
+  }
+   .fv-hostStepPage1Right .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine.fv-hostStep3CheckBoxGroupInLineSecond .col-md-8 {
+    flex: 0 0 61.666667%;
+    max-width: 57.666667%;
+    padding-right: 5%;
+  }
 }
+
+@media (max-width: 1200px) and (min-width: 991px){}
+@media (max-width: 991px) and  (min-width: 768px) {}
+@media (max-width: 767px){}
+@media (max-width: 415px){
+  .fv-hostStep3Page{
+    .hostStepIncreaseAndDecreaseBody{
+      .col-sm-3 {
+        flex: 0 0 31%;
+        width: 25% !important;
+        font-size: 15px;
+      }
+    }
+    .hostStepIncreaseAndDecreaseBody .col-md-2 {
+      flex: 0 0 35.666667%;
+      max-width: 28.666667%;
+      margin-right: 4%;
+    }
+    .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .hostStepIncreaseAndDecreaseBody .button, .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .hostStepIncreaseAndDecreaseBody input, .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .hostStepIncreaseAndDecreaseBody textarea, .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .hostStepIncreaseAndDecreaseBody select {
+      width: 55%;
+      height: 100%;
+      font-size: 22px;
+    }
+    .hostStepIncreaseAndDecreaseBody {
+      margin-bottom: 9%;
+    }
+    .fv-hostStep3CapacityOfRom  {
+      .hostStepIncreaseAndDecreaseBody .hostStepIncreaseAndDecreaseText {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+      .col-md-1 {
+        flex: 0 0 8.333333%;
+        max-width: 8.333333%;
+        margin-right: -10%;
+        margin-left: 6%;
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+      .col-md-2 {
+        flex: 0 0 35.666667%;
+        max-width: 29.666667%;
+        margin-right: -4%;
+      }
+    }
+    .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right p {
+      margin-bottom: 4%;
+      margin-top: 0.5%;
+    }
+    .fv-marginRight ,  .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right select {
+      height: 58px;
+      border-radius: 8px;
+      margin-bottom: 0;
+    }
+    .fv-hostStepPage1Right h5 {
+      padding-bottom: 1%;
+    }
+    .fv-hostStepPage1Right .fv-hostStep3CheckBox .col-md-1 {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+    .fv-hostStepPage1Right .fv-hostStep3CheckBox {
+      margin-right: -9.5%;
+    }
+    .fv-hostStepPage1Right .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine .col-md-4 {
+      margin-right: 0px;
+      padding-right: 0%;
+    }
+    .fv-hostStepPage1Right .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine .fv-hostStep3CheckBoxGroupInLineTwo ,
+    .fv-hostStepPage1Right .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine .fv-hostStep3CheckBoxGroupInLineFour,
+    .fv-hostStepPage1Right .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine.fv-hostStep3CheckBoxGroupInLineSecond .fv-hostStep3CheckBoxGroupInLineSecondThree{
+      margin-right: 0%;
+    }
+    .fv-hostStep3CheckBoxGroupInLineSecond.row {
+      margin-right: -6%;
+    }
+    .fv-hostStep3InputButtonMobile input{
+      padding-right: 10%;
+      padding-left: 10%;
+    }
+     .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .fv-hostStep3InputButtonMobile .button,
+     .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .fv-hostStep3InputButtonMobile input,
+    .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .fv-hostStep3InputButtonMobile  select {
+       width: 159%;
+       height: 40px;
+       margin: auto;
+       background-color: $backgroundColorButton;
+       color: white;
+       border-radius: 9px;
+    }
+    .fv-hostStepPage1Right .fv-hostStep3InputText input {
+      width: 106%;
+      border-radius: 8px;
+      height: 58px;
+    }
+    .fv-hostStep3InputButtonMobile.col-sm-2 {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+    .fv-hostStepPage2LeftButtonBody {
+      margin-top: -22%;
+    }
+    .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .fv-marginRight {
+      width: 90%;
+      height: 58px;
+      border-radius: 8px;
+    }
+    .fv-hostStep3InputButtonMobile{
+      display:block ;
+    }
+    .fv-hostStep3InputButton{
+      display: none;
+    }
+    .fv-hostStepPage1Right .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine .col-md-4 {
+     margin-right: 0px;
+      /*  padding-right: 10%;
+       margin-inline-start: inherit;*/
+    }
+    .fv-hostStepPage1Right .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine .col-md-8 {
+      margin-right: -29%;
+      padding-right: 6%;
+    }
+    .fv-hostStepPage1Right .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine .fv-hostStep3CheckBoxGroupInLineOne {
+      margin-right: -24%;
+    }
+    .fv-hostStepPage1Right .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine .fv-hostStep3CheckBoxGroupInLineOneThree {
+      margin-right: -24%;
+    }
+    .fv-hostStepPage1Right .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine.fv-hostStep3CheckBoxGroupInLineSecond .fv-hostStep3CheckBoxGroupInLineSecondTwo {
+      margin-right: -23%;
+    }
+  }
+}
+@media (max-width: 380px){}
+@media (max-width: 320px) {}

@@ -44,9 +44,12 @@ class HostStep3Page extends Component {
                                 </option>
                             </select>
                             <h5>اتاق خواب</h5>
-                            <HostStepIncreaseAndDecreaseButton
-                                text="تعداد اتاق خواب را مشخص کنید"
-                                number="1"/>
+                            <div  className={"fv-hostStep3CapacityOfRom"}>
+                                <HostStepIncreaseAndDecreaseButton
+                                    text="تعداد اتاق خواب را مشخص کنید"
+                                    number="1"/>
+                            </div>
+
                             <h5>حمام/سرویس بهداشتی</h5>
                             <HostStepIncreaseAndDecreaseButton
                                 text="توالت ایرانی"
@@ -58,6 +61,115 @@ class HostStep3Page extends Component {
                                 text="دوش آب"
                                 number="1"/>
 
+                                <MDBRow className={"fv-hostStep3CheckBox"}>
+                                    <MDBCol md={1} sm={2}>
+                                        <input type="checkBox"/>
+                                    </MDBCol>
+                                    <MDBCol md={5} sm={8}>
+                                        <p>سرویس بهداشتی مشترک است</p>
+                                    </MDBCol>
+                                </MDBRow>
+                            <h5 className={"fv-hostStep3AnyPlace"}>سایر فضاها</h5>
+
+                            <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLine"}>
+                                <MDBCol md={2} sm={6}>
+                                    <MDBRow>
+                                        <MDBCol md={4} sm={4}>
+                                            <input type="checkBox"/>
+                                        </MDBCol>
+                                        <MDBCol md={8}  sm={8}>
+                                            <p>سونا</p>
+                                        </MDBCol>
+                                    </MDBRow>
+                                </MDBCol>
+                                <MDBCol  md={2} sm={3} className={"fv-hostStep3CheckBoxGroupInLineOne"}>
+                                    <MDBRow>
+                                        <MDBCol md={4} sm={4}>
+                                            <input type="checkBox"/>
+                                        </MDBCol>
+                                        <MDBCol md={8} sm={8}>
+                                            <p>استخر</p>
+                                        </MDBCol>
+                                    </MDBRow>
+                                </MDBCol>
+                                <MDBCol md={2} sm={6} className={"fv-hostStep3CheckBoxGroupInLineTwo"}>
+                                    <MDBRow>
+                                        <MDBCol md={4} sm={4}>
+                                            <input type="checkBox"/>
+                                        </MDBCol>
+                                        <MDBCol  md={8} sm={8}>
+                                            <p>آلاچیق</p>
+                                        </MDBCol>
+                                    </MDBRow>
+                                </MDBCol>
+                                <MDBCol md={2} sm={3}  className={"fv-hostStep3CheckBoxGroupInLineOneThree"}>
+                                    <MDBRow>
+                                        <MDBCol md={4} sm={4}>
+                                            <input type="checkBox"/>
+                                        </MDBCol>
+                                        <MDBCol md={8} sm={8}>
+                                            <p>باربیکیو</p>
+                                        </MDBCol>
+                                    </MDBRow>
+                                </MDBCol>
+                                <MDBCol md={2} sm={6} className={"fv-hostStep3CheckBoxGroupInLineFour"}>
+                                    <MDBRow>
+                                        <MDBCol md={4}>
+                                            <input type="checkBox"/>
+                                        </MDBCol>
+                                        <MDBCol md={8}>
+                                            <p>پارکینگ</p>
+                                        </MDBCol>
+                                    </MDBRow>
+                                </MDBCol>
+                            </MDBRow>
+                            <p className={"fv-marginRight fv-hostStep3AddNewPlace"}>اضافه کردن فضای جدید</p>
+                            <MDBRow className={"fv-hostStep3AddPlace"}>
+                                <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
+                                    <input type="text" value=" فضا خود را بنویسید "/>
+                                </MDBCol>
+                                <MDBCol sm={2}  className={"fv-hostStep3InputButtonMobile"}>
+                                    <input type="button" value=" + "/>
+                                </MDBCol>
+                                <MDBCol md={5} sm={2}  className={"fv-hostStep3InputButton"}>
+                                    <input type="button" value="+ افزودن فضا "/>
+                                </MDBCol>
+                            </MDBRow>
+                            <h5 className={"fv-hostStep3View"}>ویوی اقامت گاه</h5>
+                            <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLine fv-hostStep3CheckBoxGroupInLineSecond"}>
+                                <MDBCol md={3} sm={6} className={""} >
+                                    <MDBRow>
+                                        <MDBCol md={4}>
+                                            <input type="checkBox"/>
+                                        </MDBCol>
+                                        <MDBCol md={8}>
+                                            <p>رو به دریا</p>
+                                        </MDBCol>
+                                    </MDBRow>
+                                </MDBCol>
+                                <MDBCol md={3} sm={6} className={"fv-hostStep3CheckBoxGroupInLineSecondTwo"}>
+                                    <MDBRow>
+                                        <MDBCol md={4}>
+                                            <input type="checkBox"/>
+                                        </MDBCol>
+                                        <MDBCol md={8}>
+                                            <p>روبه جنگلا</p>
+                                        </MDBCol>
+                                    </MDBRow>
+                                </MDBCol>
+                                <MDBCol md={3} sm={6} className={"fv-hostStep3CheckBoxGroupInLineSecondThree"}>
+                                    <MDBRow>
+                                        <MDBCol md={4}>
+                                            <input type="checkBox"/>
+                                        </MDBCol>
+                                        <MDBCol md={8}>
+                                            <p>روبه جنگل</p>
+                                        </MDBCol>
+                                    </MDBRow>
+                                </MDBCol>
+                            </MDBRow>
+                            <h5 className={"fv-hostStep3Measure"}> متراژ اقامت گاه </h5>
+                            <input className={"fv-marginRight"} type="text" value="   "/>
                         </MDBCol>
 
                         <HostStepLeftBodyContent
