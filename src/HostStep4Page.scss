@@ -1,0 +1,65 @@
+.fv-hostStep4Page{
+
+  .fv-hostStep4PageSelect{
+    background-color: #919191;
+    border-radius: 22px;
+  }
+  .hostStepPage .fv-headerHomeImage .fv-hostStep4PageSelectIcon{
+    i {
+      color: #3EC886;
+      background-color: #C9FFBA;
+    }
+    p {
+      color: black;
+    }
+  }
+  .fv-hostStep4CheckBoxGroupInColumnOne{
+    margin-right: -20%;
+  }
+  .fv-hostStep4PaddingTop{
+    padding-bottom: 7%;
+  }
+  .fv-hostStep3CheckBoxGroupInLine{
+    padding-top: 1%;
+  }
+   .fv-hostStepPage1Right .fv-hostStep3InputText input {
+    width: 445px;
+    border-radius: 14px;
+    height: 54px;
+     background: rgba(145, 145, 145, 0.2);
+     direction: ltr;
+     padding-left: 7%;
+     margin-top: -2%;
+  }
+   .fv-hostStepPage2LeftButtonBody {
+    margin-top: 220%;
+  }
+
+}
+
+
+@media (max-width: 767px){}
+@media (max-width: 540px) {
+  .fv-hostStep4Page {
+
+    .fv-hostStep4CheckBoxGroupInColumnOne {
+      margin-right: 0;
+    }
+    .fv-hostStepPage1Right h5 {
+      padding-bottom: 3%;
+    }
+    .fv-hostStepPage1Right .fv-hostStep3InputText input {
+      width: 280px;
+      height: 58px;
+    }
+    .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine{
+      .col-sm-9 {
+        flex: 0 0 75%;
+        width: 75% !important;
+      }
+    }
+    .fv-hostStepPage2LeftButtonBody {
+      margin-top: 0%;
+    }
+  }
+}

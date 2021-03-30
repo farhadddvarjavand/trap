@@ -43,7 +43,7 @@ $backgroundColorButton:#15BE29;
   .fv-hostStepPage1Right .fv-hostStep3InputText input{
     width: 106%;
     border-radius: 14px;
-    height: 45px;
+    height: 54px;
   }
   .fv-hostStepPage1Right .fv-hostStep3InputButton{
     margin-right: -2%;
@@ -53,7 +53,8 @@ $backgroundColorButton:#15BE29;
     color:$colorText ;
     background-color: white;
     border: 1px solid $colorText;
-    height: 45px;
+    height: 54px;
+    width: 138px;
   }
   .fv-hostStepPage1Right .fv-hostStep3CheckBox {
     margin-right: -6.5%;
@@ -107,12 +108,12 @@ $backgroundColorButton:#15BE29;
   }
   .fv-marginRight ,  .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right select{
     margin-right: -3.5%;
-    height: 45px;
+    height: 54px;
     margin-bottom: 3%;
   }
   .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .fv-marginRight{
     width: 50%;
-    height: 45px;
+    height: 54px;
   }
   .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .fv-marginRight.fv-hostStep3AddNewPlace{
     margin-bottom: -2%;
@@ -223,8 +224,8 @@ $backgroundColorButton:#15BE29;
     max-width: 35%;
   }
   .fv-hostStep3Page .fv-hostStepPage1Right .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine.fv-hostStep3CheckBoxGroupInLineSecond .col-md-8 {
-    flex: 0 0 62.666667%;
-    max-width: 56.666667%;
+    flex: 0 0 69.666667%;
+    max-width: 64.666667%;
     padding-right: -8%;
     margin-right: -7%;
   }
@@ -336,7 +337,7 @@ $backgroundColorButton:#15BE29;
       margin-top: -22%;
     }
     .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .fv-marginRight {
-      width: 90%;
+      width: 86%;
       height: 58px;
       border-radius: 8px;
     }
@@ -385,7 +386,7 @@ $backgroundColorButton:#15BE29;
       padding-right: 5%;
     }
     .fv-hostStepPage1Right .fv-hostStep3CheckBox .col-md-5 {
-      margin-right: -7%;
+      margin-right: -8vw;
       margin-top: 1%;
     }
     .fv-hostStep3NumberOfCapacityMobile{
@@ -433,5 +434,8 @@ $backgroundColorButton:#15BE29;
   }
   .fv-hostStep3Page .fv-hostStepPage1Right .fv-hostStep3CheckBox .col-md-1 {
     margin-right: 0%;
+  }
+  .fv-hostStep3Page .fv-hostStepPage1Right .fv-hostStep3CheckBox .col-md-5 {
+    margin-right: -6vw;
   }
 }

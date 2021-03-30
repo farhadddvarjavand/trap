@@ -10,6 +10,7 @@ import HeaderSteps from "./HeaderSteps";
 import Logo from "./images/Logo.png";
 import Footer from "./footer";
 import HostStepLeftBodyContent from "./hostStepLeftBodyContetnt"
+import HostStepCheckbox from "./hostStepCheckbox"
 
 class HostStep3Page extends Component {
     constructor(props) {
@@ -40,7 +41,10 @@ class HostStep3Page extends Component {
                             <h5>نوع اجاره</h5>
                             <select>
                                 <option>
-                                    test
+                                    خانه دربست
+                                </option>
+                                <option>
+                                    خانه اشتراکی
                                 </option>
                             </select>
                             <h5 className={"fv-hostStep3BedRoom"}>اتاق خواب</h5>
@@ -61,66 +65,61 @@ class HostStep3Page extends Component {
                                 text="دوش آب"
                                 number="1"/>
 
-                                <MDBRow className={"fv-hostStep3CheckBox"}>
-                                    <MDBCol md={1} sm={2}>
-                                        <input type="checkBox"/>
-                                    </MDBCol>
-                                    <MDBCol md={5} sm={10}>
-                                        <p>سرویس بهداشتی مشترک است</p>
-                                    </MDBCol>
-                                </MDBRow>
+                                <HostStepCheckbox
+                                    className="fv-hostStep3CheckBox"
+                                    mdCheckbox = "1"
+                                    smCheckbox="2"
+                                    mdCheckboxText="5"
+                                    smCheckboxText="10"
+                                    text="سرویس بهداشتی مشترک است"/>
+
                             <h5 className={"fv-hostStep3AnyPlace"}>سایر فضاها</h5>
 
                             <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLine"}>
                                 <MDBCol md={2} sm={6}>
-                                    <MDBRow>
-                                        <MDBCol md={4} sm={4}>
-                                            <input type="checkBox"/>
-                                        </MDBCol>
-                                        <MDBCol md={8}  sm={8}>
-                                            <p>سونا</p>
-                                        </MDBCol>
-                                    </MDBRow>
+                                    <HostStepCheckbox
+                                        className=""
+                                        mdCheckbox = "4"
+                                        smCheckbox="4"
+                                        mdCheckboxText="8"
+                                        smCheckboxText="8"
+                                        text="سونا"/>
                                 </MDBCol>
                                 <MDBCol  md={2} sm={6} className={"fv-hostStep3CheckBoxGroupInLineOne test"}>
-                                    <MDBRow>
-                                        <MDBCol md={4} sm={4}>
-                                            <input type="checkBox"/>
-                                        </MDBCol>
-                                        <MDBCol md={8} sm={8}>
-                                            <p>استخر</p>
-                                        </MDBCol>
-                                    </MDBRow>
+                                    <HostStepCheckbox
+                                        className=""
+                                        mdCheckbox = "4"
+                                        smCheckbox="4"
+                                        mdCheckboxText="8"
+                                        smCheckboxText="8"
+                                        text="استخر"/>
                                 </MDBCol>
                                 <MDBCol md={2} sm={6} className={"fv-hostStep3CheckBoxGroupInLineTwo test"}>
-                                    <MDBRow>
-                                        <MDBCol md={4} sm={4}>
-                                            <input type="checkBox"/>
-                                        </MDBCol>
-                                        <MDBCol  md={8} sm={8}>
-                                            <p>آلاچیق</p>
-                                        </MDBCol>
-                                    </MDBRow>
+                                    <HostStepCheckbox
+                                        className=""
+                                        mdCheckbox = "4"
+                                        smCheckbox="4"
+                                        mdCheckboxText="8"
+                                        smCheckboxText="8"
+                                        text="آلاچیق"/>
                                 </MDBCol>
                                 <MDBCol md={2} sm={6}  className={"fv-hostStep3CheckBoxGroupInLineOneThree test"}>
-                                    <MDBRow>
-                                        <MDBCol md={4} sm={4}>
-                                            <input type="checkBox"/>
-                                        </MDBCol>
-                                        <MDBCol md={8} sm={8}>
-                                            <p>باربیکیو</p>
-                                        </MDBCol>
-                                    </MDBRow>
+                                    <HostStepCheckbox
+                                        className=""
+                                        mdCheckbox = "4"
+                                        smCheckbox="4"
+                                        mdCheckboxText="8"
+                                        smCheckboxText="8"
+                                        text="باربیکیو"/>
                                 </MDBCol>
                                 <MDBCol md={2} sm={6} className={"fv-hostStep3CheckBoxGroupInLineFour test"}>
-                                    <MDBRow>
-                                        <MDBCol md={4} sm={4}>
-                                            <input type="checkBox"/>
-                                        </MDBCol>
-                                        <MDBCol md={8} sm={8}>
-                                            <p>پارکینگ</p>
-                                        </MDBCol>
-                                    </MDBRow>
+                                    <HostStepCheckbox
+                                        className=""
+                                        mdCheckbox = "4"
+                                        smCheckbox="4"
+                                        mdCheckboxText="8"
+                                        smCheckboxText="8"
+                                        text="پارکینگ"/>
                                 </MDBCol>
                             </MDBRow>
                             <p className={"fv-marginRight fv-hostStep3AddNewPlace"}>اضافه کردن فضای جدید</p>
@@ -138,34 +137,31 @@ class HostStep3Page extends Component {
                             <h5 className={"fv-hostStep3View"}>ویوی اقامت گاه</h5>
                             <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLine fv-hostStep3CheckBoxGroupInLineSecond"}>
                                 <MDBCol md={3} sm={6} className={""} >
-                                    <MDBRow>
-                                        <MDBCol md={4} sm={4}>
-                                            <input type="checkBox"/>
-                                        </MDBCol>
-                                        <MDBCol md={8} sm={8}>
-                                            <p>رو به دریا</p>
-                                        </MDBCol>
-                                    </MDBRow>
+                                    <HostStepCheckbox
+                                        className=""
+                                        mdCheckbox = "4"
+                                        smCheckbox="4"
+                                        mdCheckboxText="8"
+                                        smCheckboxText="8"
+                                        text="رو به دریا"/>
                                 </MDBCol>
                                 <MDBCol md={3} sm={6} className={"fv-hostStep3CheckBoxGroupInLineSecondTwo test"}>
-                                    <MDBRow>
-                                        <MDBCol md={4} sm={4}>
-                                            <input type="checkBox"/>
-                                        </MDBCol>
-                                        <MDBCol md={8} sm={8}>
-                                            <p>روبه جنگلا</p>
-                                        </MDBCol>
-                                    </MDBRow>
+                                    <HostStepCheckbox
+                                        className=""
+                                        mdCheckbox = "4"
+                                        smCheckbox="4"
+                                        mdCheckboxText="8"
+                                        smCheckboxText="8"
+                                        text="روبه جنگل"/>
                                 </MDBCol>
-                                <MDBCol md={3} sm={6} className={"fv-hostStep3CheckBoxGroupInLineSecondThree test"}>
-                                    <MDBRow>
-                                        <MDBCol md={4} sm={4}>
-                                            <input type="checkBox"/>
-                                        </MDBCol>
-                                        <MDBCol md={8} sm={8}>
-                                            <p>روبه جنگل</p>
-                                        </MDBCol>
-                                    </MDBRow>
+                                <MDBCol md={3} sm={8} className={"fv-hostStep3CheckBoxGroupInLineSecondThree test"}>
+                                    <HostStepCheckbox
+                                        className=""
+                                        mdCheckbox = "4"
+                                        smCheckbox="4"
+                                        mdCheckboxText="8"
+                                        smCheckboxText="8"
+                                        text="روبه کوهستان"/>
                                 </MDBCol>
                             </MDBRow>
                             <h5 className={"fv-hostStep3Measure"}> متراژ اقامت گاه </h5>
