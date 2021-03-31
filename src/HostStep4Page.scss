@@ -38,7 +38,11 @@
 }
 
 
-@media (max-width: 767px){}
+@media (max-width: 967px) and  (min-width: 539px) {
+  .fv-hostStep4Page  .fv-hostStepPage2LeftButtonBody {
+    margin-top: 350%;
+  }
+}
 @media (max-width: 540px) {
   .fv-hostStep4Page {
 
@@ -49,8 +53,9 @@
       padding-bottom: 3%;
     }
     .fv-hostStepPage1Right .fv-hostStep3InputText input {
-      width: 280px;
+      width: 135%;
       height: 58px;
+      margin-right: -2%;
     }
     .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine{
       .col-sm-9 {
@@ -60,6 +65,32 @@
     }
     .fv-hostStepPage2LeftButtonBody {
       margin-top: 0%;
+    }
+    .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .fv-marginRight {
+      margin-bottom: 5%;
+    }
+  }
+}
+@media (max-width: 320px) {
+  .fv-hostStep4Page .fv-hostStepPage1Right .fv-hostStep3CheckBox {
+    font-size: 15px;
+  }
+}
+@media (max-width: 280px) {
+  .fv-hostStep4Page{
+    .col-sm-7 {
+      flex: 0 0 53.333333%;
+      width: 48.333333% !important;
+    }
+    .col-sm-5 {
+      flex: 0 0 45.666667%;
+      max-width: 49.666667% !important;
+    }
+    .fv-hostStepPage1Right .fv-hostStep3CheckBox {
+      font-size: 13px;
+    }
+    .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine .col-sm-9 {
+      padding-left: 0;
     }
   }
 }

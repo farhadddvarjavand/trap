@@ -13,9 +13,9 @@ import HostStep2Page from "./HostStep2Page";
 import HostStep2Page2 from "./HostStep2Page2";
 import HostStep3Page from "./HostStep3Page";
 import HostStep4Page from "./HostStep4Page";
-
+import HostStep5Page from "./HostStep5Page";
 
 ReactDOM.render(
-   <HostStep4Page />,
+   <HostStep5Page />,
   document.getElementById('root')
 );
