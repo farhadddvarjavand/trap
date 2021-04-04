@@ -1,0 +1,41 @@
+.fv-ProfilePageReservation{
+
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageUserSetInfoButton {
+    margin-top: 0%;
+  }
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo {
+    border: none;
+  }
+  .fv-ProfilePageReservationImage{
+    text-align: center;
+    img{
+      width: 35%;
+    }
+  }
+
+}
+
+
+
+
+@media (max-width: 763px) {
+  .fv-ProfilePageReservation{
+
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoBody{
+      display: none;
+    }
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo {
+      margin-top: 0%;
+    }
+    .fv-ProfilePageReservationImage img {
+      width: 100%;
+    }
+  }
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageUserSetInfoButton input {
+    width: 50%;
+  }
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageUserSetInfoButton {
+    margin-top: 0%;
+    padding: 0;
+  }
+}

@@ -67,7 +67,7 @@
 }
 
 
-@media (max-width: 986px) and (min-width: 541px){
+@media (max-width: 986px) and (min-width: 768px){
   .fv-hostStep5Page3 .fv-hostStepPage2LeftButtonBody {
     margin-top: 122%;
   }
@@ -80,7 +80,7 @@
     height: 29%;
   }
 }
-@media (max-width: 540px) {
+@media (max-width: 768px) and (min-width: 460px){
   .fv-hostStep5Page3{
 
     .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage1LeftButton {
@@ -109,7 +109,59 @@
     }
     .fv-hostStep5Page3MultiImages .fv-hostStep5Page3ImagesComment p {
       float: right;
-      margin-right: 5%;
+      margin-right: 0%;
+      margin-top: 5%;
+      margin-bottom: 3%;
+    }
+    .fv-hostStep5Page3MultiImages .fv-hostStep5Page3ImagesComment input {
+      width: 103%;
+      margin-left: 8%;
+    }
+    .fv-hostStep5Page3MultiImagesMobileAnotherPicP{
+      margin-right: 3%;
+    }
+    .fv-footerMenuMobileTitle {
+      margin-top: 66%;
+    }
+    .fv-hostStep5Page3MultiImages {
+      direction: rtl;
+      margin-top: -362%;
+    }
+     .fv-hostStepPage2LeftButtonBody {
+      margin-top: 399%;
+    }
+  }
+}
+@media (max-width: 460px) {
+  .fv-hostStep5Page3{
+
+    .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage1LeftButton {
+      z-index: 2;
+    }
+    .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
+      z-index: 2;
+    }
+    .fv-hostStep5Page3TopPicImage {
+      width: 109%;
+      height: 100%;
+    }
+    .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left {
+      text-align: initial;
+      margin-top: -47%;
+    }
+    .fv-hostStep5Page3MultiImages .fv-hostStep5Page3Images {
+      margin-right: -6px;
+      margin-left: -2px;
+    }
+    .fv-hostStep5Page3MultiImages .fv-hostStep5Page3Images {
+      height: 275px;
+    }
+    .fv-hostStep5Page3MultiImages .fv-hostStep5Page3ImagesComment input {
+      margin-bottom: 4%;
+    }
+    .fv-hostStep5Page3MultiImages .fv-hostStep5Page3ImagesComment p {
+      float: right;
+      margin-right: 0%;
       margin-top: 5%;
       margin-bottom: 3%;
     }
@@ -133,7 +185,16 @@
 
   }
  }
-@media (max-width: 380px) {
+@media (max-width: 375px) {
+  .fv-hostStep5Page3 .fv-hostStep5Page3MultiImages {
+    direction: rtl;
+    margin-top: -490%;
+  }
+  .fv-hostStep5Page3 .fv-hostStepPage2LeftButtonBody {
+    margin-top: 535%;
+  }
+}
+@media (max-width: 370px) {
   .fv-hostStep5Page3 .fv-hostStepPage2LeftButtonBody {
     margin-top: 565%;
   }

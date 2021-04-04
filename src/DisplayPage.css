@@ -50,6 +50,7 @@
     text-align: center;
     margin-top: auto;
     padding-right: 0%;
+    margin-bottom: auto;
 }
 .fv-DisplayPageSearchIcon i {
     padding-bottom: 4px;
@@ -62,10 +63,13 @@
     width: 324px;
     border: 1px solid #E5E5E5;
     color: darkgray;
+    height: 43px;
 }
 .fv-DisplayPageSearchIcon i{
     width: 20px;
     color: darkgray;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 .fv-footerDisplayPageBody .fv-DisplayPageSearchName {
     padding-top: 6px;

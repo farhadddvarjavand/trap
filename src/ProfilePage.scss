@@ -1,0 +1,160 @@
+.fv-ProfilePage{
+  direction: rtl;
+  .container .fv-footerMainPage {
+    direction: ltr;
+  }
+  .fv-ProfilePageLeftBody{
+    margin-top: 2%;
+    .col-md-8 {
+      flex: 0 0 72.666667%;
+      max-width: 72.666667%
+       }
+    .fv-ProfilePageUserSetInfo{
+      text-align: initial;
+      padding-right: 11px;
+      background: #FFFFFF;
+      /*box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.08);*/
+      border-right: 8px groove #ffb8b80a;
+      border-left: 8px ridge  #ffb8b80a;
+      border-radius: 15px;
+      border-top: none;;
+      padding-bottom: 3%;
+      h5{
+        margin-top: 2%;
+        font-size: 18px;
+      }
+      p{
+        margin-top: 2%;
+        margin-bottom: 1%;
+      }
+      input{
+        width: 50%;
+        height: 54px;
+        background: #FFFFFF;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        border-radius: 14px;
+      }
+      .fv-ProfilePageUserSetInfoButton{
+        text-align: end;
+        margin-top: -10%;
+        input{
+          width: 20%;
+          background: #15BE29;
+          border-radius: 16px;
+          color: white;
+        }
+      }
+
+    }
+    .fv-ProfilePageUserInfoBody{
+      background: rgba(145, 145, 145, 0.1);
+      border-radius: 30px;
+      margin-left: 1.5%;
+      margin-bottom: 17%;
+      text-align: center;
+      height: 100%;
+      img{
+       margin-top: 15%;
+      }
+      .fv-ProfilePageUserHoldingInfo{
+        width: 90%;
+        /*height: 11%;*/
+        background: rgba(145, 145, 145, 0.2);
+        border-radius: 30px;
+        margin: auto;
+        align-items: center;
+        height: 87px;
+        p,h5{
+          margin: 0;
+        }
+      }
+
+    }
+    .fv-ProfilePageUserInfoDetailsBody{
+      margin-right: 3%;
+      margin-top: 10%;
+      .fv-ProfilePageUserInfoDetailsBodyColumn{
+        text-align: initial;
+        .fa, .fas {
+          margin-left: 4%;
+        }
+        .col-md-4 {
+          flex: 0 0 31.333333%;
+          max-width: 24.333333%;
+          text-align: center;
+        }
+        p{
+          font-size: 17px;
+        }
+      }
+
+      .fv-ProfilePageUserInfoDetailsOption{
+        margin-right: 8%;
+      }
+
+    }
+  }
+
+}
+@media (max-width: 763px) {
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoBody .fv-ProfilePageUserHoldingInfo {
+    height: 12%;
+  }
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoBody {
+    margin-left: 5.5%;
+    margin-right: 3%;
+  }
+
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-ProfilePageFacilitiesMobile .fa, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-ProfilePageFacilitiesMobile .fas{
+    margin-left: 8%;
+    margin-right: -2%;
+  }
+
+  .fv-testMobile{
+    margin-right: -0.5%;
+  }
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo {
+    box-shadow: none;
+    border: none;
+  }
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo input {
+    width: 100%;
+  }
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageUserSetInfoButton {
+    margin-top: 8%;
+  }
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageUserSetInfoButton input {
+    width: 100%;
+  }
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo h5 {
+    margin-bottom: 8%;
+  }
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo {
+    flex: 0 0 92.666667%;
+    max-width: 88.666667%;
+    margin-right: 4%;
+    margin-top: -11%;
+  }
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoBody {
+    height: 836px;
+  }
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoBody .col-md-8 {
+    margin-right: -1%;
+  }
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsOption {
+    margin-right: 8%;
+  }
+}
+
+@media (max-width: 450px) {
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoBody {
+    height: 800px;
+  }
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsOption {
+    margin-right: 11%;
+  }
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoBody .col-md-8 {
+    margin-right: -3%;
+  }
+}
