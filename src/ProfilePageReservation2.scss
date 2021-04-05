@@ -200,7 +200,7 @@
 
 
 
-@media (max-width: 991px) {
+@media (max-width: 991px) and (min-width: 764px){
   .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ProductLocaton a, .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ProductDate a {
     font-size: 11px;
   }
@@ -274,5 +274,41 @@
     .fv-ProfilePageUserSetInfoButton{
       display: none;
     }
+  }
+}
+
+@media (max-width: 411px) {
+  .fv-ProfilePageReservation2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo {
+    padding-bottom: 39%;
+  }
+}
+@media (max-width: 380px) {
+  .fv-ProfilePageReservation2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo {
+    padding-bottom: 43%;
+  }
+}
+@media (max-width: 360px) {
+  .fv-ProfilePageReservation2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo {
+    padding-bottom: 46%;
+  }
+}
+@media (max-width: 320px) {
+  .fv-ProfilePageReservation2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo {
+    padding-bottom: 51%;
+  }
+}
+@media (max-width: 280px) {
+  .fv-ProfilePageReservation2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo {
+    padding-bottom: 58%;
+  }
+  .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ImageProductContentTopOne .col-md-7, .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ImageProductContentTopOne .col-md-5, .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ImageProductContentTopOne .col-md-4 {
+    font-size: 11.5px;
+  }
+  .fv-ProfilePageReservation2 .fv-productCapacityBox {
+    margin-top: 4%;
+    font-size: 12px;
+  }
+  .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ProductLocaton .fa, .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ProductLocaton .fas {
+    font-size: 14px;
   }
 }
