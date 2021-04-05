@@ -30,7 +30,9 @@ class ProfilePageReservation extends Component {
                         <MDBCol>
                             <p> صفحه اصلی </p>
                             <i className="fas fa-chevron-left" />
-                            <p className={"fv-DisplayPagePathNow"}> پنل کاربری </p>
+                            <p> پنل کاربری </p>
+                            <i className="fas fa-chevron-left" />
+                            <p className={"fv-DisplayPagePathNow"}> رزروهای من </p>
                         </MDBCol>
                     </MDBRow>
                 </MDBContainer>

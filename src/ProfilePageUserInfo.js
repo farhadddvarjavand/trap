@@ -16,7 +16,7 @@ const ProfilePageUserInfo = () =>{
             </MDBRow>
             <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
                 <MDBCol className={"fv-ProfilePageUserInfoDetailsBodyColumn"}>
-                    <p><i className="fas fa-book" />رزرو های من</p>
+                    <p className={"fv-reservation"}><i className="fas fa-book" />رزرو های من</p>
                     <p><i className="fas fa-chart-bar" />تراکنش های من</p>
                     <MDBRow className={"fv-ProfilePageFacilitiesMobile"}>
                         <MDBCol md={8} sm={8}>
