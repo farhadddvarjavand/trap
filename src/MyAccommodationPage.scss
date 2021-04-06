@@ -1,0 +1,38 @@
+.fv-MyAccommodationPage{
+
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-profilePaeReservation2PayButton .fv-myAccommodationPageActiveButton{
+    background-color: #15BE29;
+    box-shadow: none;
+  }
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-myAccommodationPageCol6Button{
+    input {
+      width: 108%;
+      margin-left: -3%;
+    }
+    .fv-myAccommodationPagePaddingRightButton{
+      padding-right: 3%;
+    }
+    .fv-myAccommodationPagePaddingLeftButton{
+      padding-left: 3%;
+    }
+  }
+   .fv-ProfilePageReservation2ImageProductContentTopOne{
+     .col-md-7 {
+       flex: 0 0 30.9%;
+     }
+     .col-md-5 {
+       color: #E88F0A;
+       max-width: 23.666667%;
+       input {
+         background: #E88F0A;
+       }
+     }
+     .col-md-4 {
+       max-width: 21.666667%;
+     }
+   }
+   .fv-ProfilePageReservation2ProductLocaton a, .fv-ProfilePageReservation2ProductDate a {
+    margin-right: 0%;
+  }
+
+}

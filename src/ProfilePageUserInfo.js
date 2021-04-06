@@ -17,7 +17,7 @@ const ProfilePageUserInfo = () =>{
             <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
                 <MDBCol className={"fv-ProfilePageUserInfoDetailsBodyColumn"}>
                     <p className={"fv-reservation"}><i className="fas fa-book" />رزرو های من</p>
-                    <p><i className="fas fa-chart-bar" />تراکنش های من</p>
+                    <p className={"fv-transaction"}><i className="fas fa-chart-bar" />تراکنش های من</p>
                     <MDBRow className={"fv-ProfilePageFacilitiesMobile"}>
                         <MDBCol md={8} sm={8}>
                             <p><i className="fa fa-file-invoice" />امکانات میزبان</p>
@@ -26,7 +26,7 @@ const ProfilePageUserInfo = () =>{
                             <i className="fas fa-chevron-down" />
                         </MDBCol>
                     </MDBRow>
-                    <p className={"fv-ProfilePageUserInfoDetailsOption"}>اقامت گاه های من</p>
+                    <p className={"fv-ProfilePageUserInfoDetailsOption fv-Accomoddation"}>اقامت گاه های من</p>
                     <p className={"fv-ProfilePageUserInfoDetailsOption"}>رزرو های درخواستی</p>
                     <p className={"fv-ProfilePageUserInfoDetailsOption"}>رزرو های درخواستی</p>
                     <p className={"fv-ProfilePageUserInfoDetailsOption"}>تقویم من</p>

@@ -19,8 +19,12 @@ import HostStep5Page3 from "./HostStep5Page3";
 import ProfilePage from "./ProfilePage";
 import ProfilePageReservation from "./ProfilePageReservation";
 import ProfilePageReservation2 from "./ProfilePageReservation2";
+import ProfilePageTransaction from "./ProfilePageTransaction";
+import ProfilePageTransaction2 from "./ProfilePageTransaction2";
+import ProfilePageTransaction3 from "./ProfilePageTransaction3";
+import MyAccommodationPage from "./MyAccommodationPage"
 
 ReactDOM.render(
-   <ProfilePageReservation2 />,
+   <MyAccommodationPage />,
   document.getElementById('root')
 );
