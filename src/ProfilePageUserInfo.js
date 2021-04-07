@@ -30,7 +30,7 @@ const ProfilePageUserInfo = () =>{
                     <p className={"fv-ProfilePageUserInfoDetailsOption"}>رزرو های درخواستی</p>
                     <p className={"fv-ProfilePageUserInfoDetailsOption"}>رزرو های درخواستی</p>
                     <p className={"fv-ProfilePageUserInfoDetailsOption"}>تقویم من</p>
-                    <p><i className="fas fa-wallet" />کیف پول</p>
+                    <p className={"fv-wallet"}><i className="fas fa-wallet"/>کیف پول</p>
                     <p><i className="fas fa-user" />ویرایش پروفایل</p>
                     <p className={"fv-testMobile"}><i className="fa fa-heart" />علاقه مندی ها</p>
                 </MDBCol>

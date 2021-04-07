@@ -29,23 +29,23 @@ const AccommmodationProduct =(props) =>{
                         </MDBRow>
 
                         <MDBRow className={"fv-profilePaeReservation2PayButton fv-myAccommodationPageCol6Button"}>
-                            <MDBCol md={6} className={"fv-myAccommodationPagePaddingRightButton"}>
-                                <input type="button" value="پاسخ به نظرات" className={props.classNameActiveTopRight}/>
+                            <MDBCol md={6} sm={6} className={"fv-myAccommodationPagePaddingRightButton"}>
+                                <input type="button" value="تقویم اقامت گاه" className={props.classNameActiveTopRight}/>
                             </MDBCol>
-                            <MDBCol md={6} className={"fv-myAccommodationPagePaddingLeftButton"}>
-                                <input type="button" value="تقویم اقامت گاه" className={props.classNameActiveTopLeft} />
+                            <MDBCol md={6} sm={6} className={"fv-myAccommodationPagePaddingLeftButton"}>
+                                <input type="button" value="پاسخ به نظرات" className={props.classNameActiveTopLeft} />
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-profilePaeReservation2PayButton fv-myAccommodationPageCol6Button"}>
-                            <MDBCol md={6} className={"fv-myAccommodationPagePaddingRightButton"}>
-                                <input type="button" value="پرداخت" className={props.classNameActiveBottonRight}/>
+                            <MDBCol md={6} sm={6} className={"fv-myAccommodationPagePaddingRightButton"}>
+                                <input type="button" value="ویرایش اقامت گاه" className={props.classNameActiveBottonRight}/>
                             </MDBCol>
-                            <MDBCol md={6} className={"fv-myAccommodationPagePaddingLeftButton"}>
-                                <input type="button" value="پرداخت" className={props.classNameActiveBottonLeft}/>
+                            <MDBCol md={6} sm={6} className={"fv-myAccommodationPagePaddingLeftButton"}>
+                                <input type="button" value="مشاهده رزروها" className={props.classNameActiveBottonLeft}/>
                             </MDBCol>
                         </MDBRow>
-                        <MDBRow className={"fv-profilePaeReservation2PayButton"}>
-                            <input type="button" value="پرداخت" className={props.classNameActiveButton}/>
+                        <MDBRow className={"fv-profilePaeReservation2PayButton fv-myAccommodationPageFinanceButton"}>
+                            <input type="button" value="گزارشات مالی ویلا" className={props.classNameActiveButton}/>
                         </MDBRow>
                     </MDBRow>
                 </MDBCol>

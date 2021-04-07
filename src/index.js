@@ -23,8 +23,10 @@ import ProfilePageTransaction from "./ProfilePageTransaction";
 import ProfilePageTransaction2 from "./ProfilePageTransaction2";
 import ProfilePageTransaction3 from "./ProfilePageTransaction3";
 import MyAccommodationPage from "./MyAccommodationPage"
+import ProfilePageWallet from "./ProfilePageWallet";
+import ProfilePageWallet2 from "./ProfilePageWallet2";
 
 ReactDOM.render(
-   <MyAccommodationPage />,
+   <ProfilePageWallet2 />,
   document.getElementById('root')
 );
