@@ -25,8 +25,10 @@ import ProfilePageTransaction3 from "./ProfilePageTransaction3";
 import MyAccommodationPage from "./MyAccommodationPage"
 import ProfilePageWallet from "./ProfilePageWallet";
 import ProfilePageWallet2 from "./ProfilePageWallet2";
+import PrfilePageGustComments from "./PrfilePageGustComments";
+import PrfilePageGustComments2 from "./PrfilePageGustComments2";
 
 ReactDOM.render(
-   <ProfilePageWallet2 />,
+   <PrfilePageGustComments2 />,
   document.getElementById('root')
 );
