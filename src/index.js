@@ -25,10 +25,22 @@ import ProfilePageTransaction3 from "./ProfilePageTransaction3";
 import MyAccommodationPage from "./MyAccommodationPage"
 import ProfilePageWallet from "./ProfilePageWallet";
 import ProfilePageWallet2 from "./ProfilePageWallet2";
+import ProfilePageWallet3 from "./ProfilePageWallet3";
 import PrfilePageGustComments from "./PrfilePageGustComments";
 import PrfilePageGustComments2 from "./PrfilePageGustComments2";
+import ProfilePageCalender from "./ProfilePageCalender"
+import ProfilePageReservationsRequested from "./ProfilePageReservationsRequested";
+import FactorPage from "./FactorPage";
+import LoginPage from "./LoginPage";
+import LoginPage2 from "./LoginPage2";
+import LoginPage3 from "./LoginPage3";
+import GetApi from "./Components/GetApi";
+import Api from "./Components/Api";
+
+
 
 ReactDOM.render(
-   <PrfilePageGustComments2 />,
+        <Api />
+  ,
   document.getElementById('root')
 );

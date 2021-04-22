@@ -1,0 +1,132 @@
+.fv-loginPage{
+  direction: rtl;
+  text-align: initial;
+  margin: 0;
+  .col-md-6 {
+    padding-left: 0%;
+    padding-right: -1%;
+  }
+  .fv-LoginPageHeader{
+    text-align: initial;
+    margin-top: 2%;
+
+    .col{
+      display: flex;
+      margin-right: 5%;
+    }
+    .fas,.fa{
+      margin-top: 3%;
+      margin-left: 2%;
+      margin-right: 3%;
+    }
+    p{
+      margin-top: 2%;
+    }
+  }
+  .fv-loginPageBodyOne {
+    margin-top: 20%;
+    margin-right: 7%;
+    input {
+      width: 75%;
+      height: 54px;
+      background: #FFFFFF;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      border-radius: 14px;
+      padding-right: 5%;
+      color: rgba(78, 78, 78, 0.43);
+    }
+    .fv-loginPageButton{
+      width: 22%;
+      background: #15BE29;
+      border-radius: 16px;
+      color: white;
+      height: 54px;
+      border: 1px solid #15BE29;
+      margin-left: 26%;
+      margin-top: 3%;
+      padding: 0;
+    }
+  }
+
+  .fv-loginPageImageLeftBody{
+    img{
+      width: 100%;
+      height: 109.3%;
+    }
+  }
+  .fv-loginPageBody{
+    z-index: 200;
+  }
+}
+@media (max-width: 540px) {
+  .fv-loginPage{
+    .col-md-6 {
+      padding-left: -1%;
+      padding-right: -1%;
+    }
+    .fv-loginPageImageLeftBody {
+      margin-top: -100%;
+      img {
+        width: 105%;
+        height: 191.3%;
+        margin-right: -3.5%
+      }
+    }
+     .fv-LoginPageHeader {
+      text-align: initial;
+      margin-top: 7%;
+    }
+    .fv-loginPageBodyOne {
+      margin-top: 11%;
+      margin-right: 4%;
+      margin-left: 8%;
+      padding-top: 8%;
+      color: white;
+      background: #38353540;
+      backdrop-filter: blur(16px);
+        .fv-loginPageButton {
+        width: 45%;
+        background: #15BE29;
+        border-radius: 16px;
+        color: white;
+        height: 54px;
+        /* border: 1px solid white; */
+        margin-left: 4%;
+        margin-top: 5%;
+        padding: 0;
+        margin-bottom: 5%;
+        }
+        input {
+          width: 100%;
+          height: 54px;
+        }
+      }
+   .fv-LoginPageHeader .col {
+      display: flex;
+      margin-right: 5%;
+      color: white;
+    }
+  }
+}
+@media (max-width: 375px) {
+  .fv-loginPage .fv-loginPageImageLeftBody img {
+    margin-right: -4%;
+  }
+}
+@media (max-width: 320px) {
+  .fv-loginPage .fv-loginPageImageLeftBody {
+    margin-top: -110%;
+  }
+  .fv-loginPage .fv-loginPageImageLeftBody img {
+    margin-right: -5%;
+  }
+}
+@media (max-width: 320px) {
+  .fv-loginPage .fv-loginPageImageLeftBody img {
+    margin-right: -5.5%;
+  }
+  .fv-loginPage .fv-loginPageImageLeftBody {
+    margin-top: -130%;
+  }
+}

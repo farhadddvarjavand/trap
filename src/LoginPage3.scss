@@ -1,0 +1,21 @@
+.fv-loginPage3{
+  h4{
+    margin-bottom: 2%;
+  }
+  .fv-loginPage3MobileNumber{
+    margin-top: 2%;
+  }
+}
+@media (max-width: 540px) {
+  .fv-loginPage3 .fv-loginPage3MobileNumber {
+    margin-top: 5%;
+  }
+  .fv-loginPage3 h4 {
+    margin-bottom: 5%;
+  }
+}
+@media (max-width: 375px) and (min-width: 375px){
+  .fv-loginPage .fv-loginPageImageLeftBody {
+    margin-top: -104%;
+  }
+}

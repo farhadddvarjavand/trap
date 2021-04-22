@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "IRANSans";
+  src: url("./font/font.woff");
+  src: url("./font/font2.woff");
+  src: url("./font/Iranian Sans.ttf");
+}
+body{
+  font-family: "IRANSans" !important;
+}
+
 .col-sm-6 {
   width: 50% !important;
 }

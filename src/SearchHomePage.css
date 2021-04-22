@@ -89,7 +89,7 @@
     padding-right: 1%;
     padding-top: 2%;
     padding-bottom: 2%;
-    width: 98%;
+    width: 102%;
     margin-right: 1%;
     border-radius: 15px;
 }
@@ -103,8 +103,20 @@
   margin-bottom: 6%;
   width: 105%;
 }
-.fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox{
-    font-size: 1vw;
+.fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox{
+    font-size: 12px;
+}
+.fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox .col-md-5 {
+    padding-left: 0;
+}
+.fv-SearchHomePage .fv-productRateBox {
+    font-size: 14px;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+.fv-SearchHomePage .fv-product .fv-productPriceBoxToman {
+    color: #15BE29;
+    padding-left: 3%;
 }
 .fv-SearchHomePagePagination{
     place-content: center;
@@ -154,9 +166,12 @@
     color: #15BE29;
     font-size: 1.5vw;
 }
+
 .fv-SearchHomePage .fv-product .fv-productPriceBox .col-md-10 {
-    flex: 0 0 98.333333%;
-    max-width: 100.333333%;
+    flex: 0 0 110.333333%;
+    max-width: 118.333333%;
+    margin-left: -10%;
+    margin-top: 4%;
 }
 .fv-SearchHomePage .fv-footerMenuRibbon {
     margin-left: -7%;
@@ -181,6 +196,7 @@
     .fv-SearchHomePageMobileProduct .fv-product .fv-productCapacityBox .col-sm-9 {
         flex: 0 0 41.666667%;
         max-width: 41.666667% !important;
+        padding-left: 0;
     }
     .fv-SearchHomePageMobileProduct .fv-product .fv-productCapacityBox .col-sm-11 {
         flex: 0 0 41.666667%;
@@ -209,7 +225,7 @@
         padding-top: 0%;
         margin-top: 20%;
         padding-left: 0%;
-        font-size: 4vw;
+        font-size: 3vw;
         width: 95%;
     }
     .fv-productPriceBox a:not([href]):not([tabindex]), .fv-productPriceBox a:not([href]):not([tabindex]):focus, .fv-productPriceBox a:not([href]):not([tabindex]):hover {
@@ -245,6 +261,29 @@
     .fv-SearchHomePage .fv-searchMainPageLeft.fv-searchMainPage.row {
         padding-left: 23%;
     }
+    .fv-SearchHomePage .fv-productRateBox {
+        font-size: 16px;
+    }
+    .fv-searchMainPage.fv-searchMainPageDateReturn input, .fv-searchMainPage.fv-searchMainPageDateOut input {
+        width: 203%;
+        margin-right: -25%;
+    }
+    .fv-searchMainPage.fv-searchMainPageDateOut input {
+        margin-right: -16%;
+    }
+    .fv-searchMainPage.fv-searchMainPageDateReturn input {
+        margin-right: -33%;
+    }
+    .fv-searchMainPage .fv-searchMainPageBetweenDate.col-sm-1 {
+        margin-right: 14%;
+    }
 
-
+}
+@media (max-width: 320px) {
+    .fv-searchMainPage.fv-searchMainPageDateReturn input {
+        margin-right: -59%;
+    }
+    .fv-searchMainPage.fv-searchMainPageDateReturn input, .fv-searchMainPage.fv-searchMainPageDateOut input {
+        width: 232%;
+    }
 }

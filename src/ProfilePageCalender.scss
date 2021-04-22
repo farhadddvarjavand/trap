@@ -1,0 +1,361 @@
+.fv-ProfilePageCalender{
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo {
+    .fv-ProfilePageCalenderDayReserve input {
+      width: 100%;
+      color: #919191;
+      padding-right: 8%;
+      text-align-last: end;
+      padding-left: 8%;
+    }
+    .fv-ProfilePageCalenderChoseCommentsText{
+      color: #EB5757;
+    }
+    .fv-ProfilePageUserSetInfoButton {
+      margin-top: 0%;
+      margin-left: -2%;
+    }
+    .fv-ProfilePageCalenderImageAndContent {
+      img {
+        width: 86px;
+        height: 65px;
+        border-radius: 10px;
+        margin-top: 8%;
+      }
+
+      p {
+        margin-top: 0%;
+      }
+
+      h5 {
+        margin-top: 4%;
+      }
+    }
+    .fv-ProfilePageCalenderMonthName{
+      margin-top: 5%;
+      margin-right: 2%;
+      margin-left: -9%;
+      margin-bottom: 1%;
+      align-items: center;
+      .col-md-8 , .col-md-1 {
+        text-align: center;
+      }
+    }
+    .fv-ProfilePageCalenderDayName {
+      place-content: center;
+      .col-md-1 {
+        padding: 0;
+        flex: 0 0 20.333333%;
+        max-width: 12.333333%;
+        text-align: center;
+      }
+    }
+    .fv-ProfilePageCalenderDayPart{
+      place-content: center;
+      margin-top: 1.5%;
+      .col-md-1 {
+        padding: 0;
+        flex: 0 0 20.333333%;
+        max-width: 11.333333%;
+        text-align: center;
+        background: rgba(145, 145, 145, 0.2);
+        border-radius: 10px;
+        margin-left: 0.5%;
+        margin-right: 0.5%;
+        padding-bottom: 1.5%;
+      }
+      input{
+        width: 23%;
+        margin-left: 64%;
+        margin-top: -12%;
+      }
+      .fv-ProfilePageCalenderDay{
+        margin-top: -36%;
+        margin-bottom: 7%;
+      }
+      .fv-ProfilePageCalenderHoliday{
+        background: rgba(235, 87, 87, 0.3);
+      }
+    }
+    .fv-ProfilePageCalenderDayPartEnd{
+      place-content: end;
+      margin-right: 5%;
+      margin-left: -9%;
+    }
+    .fv-ProfilePageCalenderDayReserve{
+      margin-top: 3%;
+      align-items: center;
+      .col-md-7 {
+        flex: 0 0 53.333333%;
+        max-width: 58.333333%;
+        margin-right: auto;
+      }
+    }
+    .fv-ProfilePageCalenderMobile{
+      display: none;
+    }
+    .fv-ProfilePageCalenderImageAndContent .col-md-7 {
+      margin-right: -3%;
+      margin-top: -0.5%;
+    }
+  }
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo.fv-ProfilePageReservationUserInfo{
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.08);
+    border-radius: 15px;
+    height:100%;
+    padding-right: 1.5%;
+  }
+  .week-days {
+    width: 127%;
+    margin-right: -13%;
+  }
+
+}
+@media (max-width: 540px) {
+  .fv-ProfilePageCalender {
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo {
+      .fv-ProfilePageCalenderMobile{
+        display: block;
+        padding: 0;
+        margin-right: 1%;
+       .fv-ProfilePageCalenderImageAndContentMobile{
+         img{
+           width: 80px;
+           height: 56px;
+           margin-right: -14px;
+           border-radius: 10px;
+         }
+         .col-sm-7 {
+           margin-right: 7%;
+         }
+       }
+      }
+       .fv-ProfilePageReservationSetInfo {
+        padding-bottom: 6%;
+        margin-bottom: 6%;
+      }
+      .fv-ProfilePageCalenderImageAndContent .col-sm-7 {
+        flex: 0 0 58.333333%;
+        width: 58.333333% !important;
+        margin-right: 7%;
+      }
+      .fv-DisplayPageCalender .col-md-6 {
+        flex: 0 0 144%;
+        max-width: 138%;
+      }
+      .nextPage {
+        /* padding-right: 14%; */
+        position: absolute;
+        margin-top: 2%;
+        font-size: 20px;
+        margin-right: -10%;
+      }
+      .previewPage {
+        position: absolute;
+        margin-right: 93%;
+        margin-top: 2%;
+        font-size: 20px;
+      }
+      .fv-profilePageCalenderInnerMobile , .fv-ProfilePageCalenderImageAndContent , .fv-ProfilePageCalenderSelectContentMobile{
+        display: none;
+      }
+      .fv-ProfilePageCalenderTextMobile{
+        margin-bottom: 5%;
+      }
+    }
+
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo.fv-ProfilePageReservationUserInfo {
+      box-shadow: none;
+      padding: 0;
+    }
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderDayReserve p {
+      margin-top: 2%;
+      margin-bottom: 1%;
+      margin-right: -8%;
+    }
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderDayReserve select {
+      margin-right: -10%;
+      width: 117%;
+    }
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderDayReserve input {
+      width: 117%;
+    }
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-profilePageCalenderTextareaMobile input{
+      height: 133px;
+    }
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo p {
+      margin-top: 2%;
+      margin-bottom: 1%;
+      margin-right: -2%;
+    }
+    .fv-footerMenuMobileTitle {
+      margin-top: 44%;
+    }
+  }
+}
+@media (max-width: 540px) {
+  .fv-ProfilePageCalender {
+    .calenderBody .weeks {
+      color: black;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      margin-right: -12%;
+      margin-left: -5%;
+    }
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .nextPage {
+      /* padding-right: 14%; */
+      position: absolute;
+      margin-top: 2%;
+      font-size: 20px;
+      margin-right: -4%;
+    }
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-DisplayPageCalender .col-md-6 {
+      flex: 0 0 145%;
+      max-width: 145%;
+    }
+    .week-days {
+      width: 105%;
+      margin-right: -5%;
+    }
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .previewPage {
+      position: absolute;
+      margin-right: 93%;
+      margin-top: 2%;
+      font-size: 20px;
+    }
+    .calenderBody .current-date {
+      margin-right: -7%;
+    }
+    .week-days div {
+      padding-right: 3%;
+      padding-left: 3%;
+    }
+  }
+}
+@media (max-width: 375px) {
+  .fv-ProfilePageCalender {
+    .week-days {
+      width: 115%;
+      margin-right: -11%;
+    }
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .nextPage {
+      margin-right: -10%;
+    }
+   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .previewPage {
+      margin-right: 96%;
+    }
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderDayReserve select {
+      margin-right: -12%;
+      width: 117%;
+    }
+     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderDayReserve p {
+      margin-top: 2%;
+      margin-bottom: 1%;
+      margin-right: -10%;
+    }
+     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderDayReserve input {
+      width: 117%;
+      margin-right: -12%;
+    }
+  }
+}
+@media (max-width: 360px) {
+  .fv-ProfilePageCalender {
+    .calenderBody .weeks {
+      color: black;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      margin-right: -12%;
+      margin-left: -5%;
+    }
+     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .nextPage {
+      /* padding-right: 14%; */
+      position: absolute;
+      margin-top: 2%;
+      font-size: 20px;
+      margin-right: -8%;
+    }
+   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-DisplayPageCalender .col-md-6 {
+     flex: 0 0 145%;
+     max-width: 145%;
+    }
+   .week-days {
+      width: 114%;
+      margin-right: -10%;
+    }
+   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .previewPage {
+     position: absolute;
+     margin-right: 96%;
+     margin-top: 2%;
+     font-size: 20px;
+    }
+    .calenderBody .current-date {
+      margin-right: -7%;
+    }
+     .week-days div {
+      padding-right: 3%;
+      padding-left: 3%;
+    }
+  }
+}
+@media (max-width: 320px) {
+  .fv-ProfilePageCalender .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-DisplayPageCalender .col-md-6 {
+    flex: 0 0 123%;
+    max-width: 133%;
+  }
+  .fv-ProfilePageCalender .calenderBody .container {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 600px;
+    width: 109%;
+    place-content: end;
+    margin-right: -2%;
+  }
+  .fv-ProfilePageCalender .week-days {
+    width: 157%;
+    margin-right: -32%;
+  }
+  .fv-ProfilePageCalender .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .nextPage {
+    margin-right: -30%;
+  }
+  .fv-ProfilePageCalender .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .previewPage {
+    margin-right: 113%;
+  }
+  .fv-ProfilePageCalender .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderMobile .fv-ProfilePageCalenderImageAndContentMobile .col-sm-7 {
+    margin-right: 10%;
+  }
+}
+@media (max-width: 280px) {
+  .fv-ProfilePageCalender .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-DisplayPageCalender .col-md-6 {
+    flex: 0 0 109%;
+    max-width: 121%;
+  }
+  .fv-ProfilePageCalender .week-days {
+    width: 203%;
+    margin-right: -54.5%;
+  }
+  .fv-ProfilePageCalender .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .nextPage {
+    margin-right: -53%;
+  }
+  .fv-ProfilePageCalender .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .previewPage {
+    margin-right: 130%;
+  }
+  .fv-ProfilePageCalender .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo p {
+    margin-right: 11%;
+  }
+  .fv-ProfilePageCalender .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderDayReserve p {
+    margin-right: -12%;
+  }
+  .fv-ProfilePageCalender .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderDayReserve select {
+    margin-right: -16%;
+    width: 117%;
+  }
+  .fv-ProfilePageCalender .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderDayReserve input {
+    width: 117%;
+    margin-right: -16%;
+  }
+}

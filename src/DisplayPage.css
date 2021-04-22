@@ -308,6 +308,12 @@
     width: 100%;
     line-height: 3px;
 }
+.fv-DisplayPageDetailsScore .fv-DisplayPageDetailsScoreBody .col-md-3 {
+    flex: 0 0 29%;
+    max-width: 29%;
+    font-size: 15px;
+}
+
 .fv-DisplayPageDetailsScoreRateText{
     margin-right: 2%;
 }
@@ -340,8 +346,12 @@
     color: #3EC886;
 }
 .fv-DisplayPageDetailsRightBody .col-md-2 h4 {
-    font-size: 21px;
+    font-size: 17px;
     color: #3EC886;
+}
+.fv-DisplayPageDetailsRightBody .col-md-2 .fa,.fv-DisplayPageDetailsRightBody .col-md-2 .fas {
+    font-weight: 900;
+    padding-right: 10px;
 }
 .fv-displayPageComments{
     border:1px solid rgba(102, 212, 72, 0.13);
@@ -836,8 +846,8 @@ display: none;
         max-width: 100.666667%;
     }
     .fv-DisplayPageDetailsScore .col-sm-3 {
-        flex: 0 0 31%;
-        width: 30% !important;
+        flex: 0 0 34%;
+        width: 35% !important;
     }
     .fv-DisplayPageDetailsPersonInformation .col-sm-10 {
         margin-right: -4%;
@@ -891,7 +901,9 @@ display: none;
     .fv-DisplayPageDetailsRightStayInHome h4 {
         margin-right: 0%;
     }
-    .fv-DisplayPageDetailsScore {
+    .fv-DisplayPageDetailsScore .fv-DisplayPageDetailsScoreBody .col-md-3 {
+        flex: 0 0 34%;
+        max-width: 35%;
         font-size: 4.2vw;
     }
 }

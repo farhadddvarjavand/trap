@@ -27,9 +27,9 @@ const ProfilePageUserInfo = () =>{
                         </MDBCol>
                     </MDBRow>
                     <p className={"fv-ProfilePageUserInfoDetailsOption fv-Accomoddation"}>اقامت گاه های من</p>
-                    <p className={"fv-ProfilePageUserInfoDetailsOption"}>رزرو های درخواستی</p>
+                    <p className={"fv-ProfilePageUserInfoDetailsOption fv-RequestedReservation"}>رزرو های درخواستی</p>
                     <p className={"fv-ProfilePageUserInfoDetailsOption fv-gustComments"}>نظرات مهمان ها</p>
-                    <p className={"fv-ProfilePageUserInfoDetailsOption"}>تقویم من</p>
+                    <p className={"fv-ProfilePageUserInfoDetailsOption fv-myCalender"}>تقویم من</p>
                     <p className={"fv-wallet"}><i className="fas fa-wallet"/>کیف پول</p>
                     <p><i className="fas fa-user" />ویرایش پروفایل</p>
                     <p className={"fv-testMobile"}><i className="fa fa-heart" />علاقه مندی ها</p>
