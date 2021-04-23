@@ -1,0 +1,595 @@
+
+html .col-md-3{
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.fv-product{
+    background-color: white;
+    width: 100%;
+    padding-right: -15%;
+    padding-bottom: 0%;
+    padding-top: 7%;
+    border: 1px solid #88888817;
+    border-radius: 15px;
+    box-shadow: 1px 1px 11px #88888830;
+}
+.fv-productImage{
+    width: 90%;
+    margin-bottom: -8%;
+    margin-right: auto;
+    margin-left: 5%;
+    border-radius: 15px;
+}
+.fv-productRateBox{
+    background-color: white;
+    width: fit-content;
+    margin-inline: auto;
+    text-align: center;
+    border-radius: 12px;
+}
+.fv-productTopic{
+    text-align: end;
+}
+.fv-product .fv-productTopic{
+    padding-right: 12.5%;
+    font-size: 19px;
+    color: #15BE29;
+}
+.fv-product .row{
+    width: -webkit-fill-available;
+    padding-top: 4%;
+}
+.fv-productLocation .col-md-9{
+    border-bottom: 1px solid #400a0a;
+    text-align: end;
+    padding-right: 0;
+    margin: auto;
+    font-size: 14px;
+}
+.fv-productCapacityBox{
+    font-size: 14px;
+}
+.fv-product .col-md-5 {
+    text-align: end;
+    margin-right: -44px;
+}
+.fv-product .row .col-md-2 {
+    margin-left: 22px;
+}
+.fv-productPriceBox{
+    font-size: 20px;
+    margin-bottom: 2vw;
+    margin-top: -1.9vw;
+    padding-left: 63px;
+    color: #15BE29;
+}
+
+.fv-productPriceBoxToman{
+    padding-left: 22px;
+    color: #15BE29;
+}
+.fv-productPreventPrice{
+    margin-bottom: -1vw;
+    margin-top: -0.5vw;
+    padding-left: 22px;
+    color: #aaaaaa;
+    text-decoration: line-through;
+}
+.fv-productPriceBox a:not([href]):not([tabindex]), .fv-productPriceBox a:not([href]):not([tabindex]):focus, .fv-productPriceBox a:not([href]):not([tabindex]):hover{
+    color: #15BE29;
+}
+.fv-productRateBox i{
+    color: #FEA801;
+}
+
+
+
+.fv-productImage.fv-popularVillageImage{
+    margin-bottom: 0%;
+    width: 100%;
+    margin-left: 0;
+}
+.fv-popularVillageTitle{
+    text-align: end;
+}
+.fv-popularVillageTitle h1{
+    font-size: 15px;
+}
+.fv-popularVillageTitle h6{
+    font-size: 10px;
+}
+.fv-product.fv-popularVillage{
+    background-color: white;
+    border: none;
+    box-shadow: none;
+    margin-left: -10px;
+    padding-left: 0px;
+    padding-right: 4px;
+}
+.fv-popularVillageImage{
+    height: 280px;
+}
+
+
+
+
+.fv-typesAccommodationTopic{
+    /* background-color: burlywood; */
+    margin-left: 4.12%;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    /* line-height: 220%; */
+    text-align: center;
+    /* text-shadow: 1px 2px 52px black, 81px 43px 44px blue, 63px 1px 28px darkblue; */
+    /* padding: 7px; */
+    padding: 5px;
+    box-shadow: inset -125em -3em 3em rgb(0 0 0 / 49%), 0 0 24px 2px rgb(255 255 255), 0.3em 0.3em 1em rgb(37 13 13 / 0%);
+    color: white;
+/* font-size: 22px;*/
+}
+.fv-productImage.fv-popularVillageImage.fv-typesAccommodationImage{
+    margin-bottom: -11%;
+    height: 100%;
+}
+
+
+
+.fv-discountedProductAmount{
+    background-color: #A31700;
+    color: white;
+    z-index: 1;
+    margin-left: 9%;
+    border-bottom-right-radius: 16px;
+    border-top-left-radius: 12px;
+    margin-bottom: 1%;
+}
+.fv-discountedProductBody{
+    margin-top: -16%;
+}
+.fv-discountedProductAmount h1{
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 7px;
+    /* margin-top: 0%; */
+    margin-left: -4px;
+}
+.fv-product .fv-discountedProductAmount.col-md-2 {
+    margin-left: 14px;
+}
+
+
+
+.slider_pagination_btn {
+    display: inline-block;
+    padding: 6px;
+    margin: 5px;
+    background-color: #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+
+    /* override default button styles */
+    border: none;
+    outline: none;
+}
+.slider_pagination_btn:hover {
+    background-color: #aaa;
+}
+.slider_pagination_btn:focus {
+    background-color: #777;
+}
+.slider_pagination_btn.slider_pagination_btn--sel {
+    background-color: black
+}
+
+
+
+
+.fv-productImage.fv-popularVillageImage.fv-trapMagazineImage{
+    height: 100%;
+}
+.fv-trapMagazine{
+    text-align: end;
+}
+.fv-trapMagazineImageTitle p{
+    width: 100%;
+    margin: auto;
+}
+.fv-trapMagazineImageReadMore{
+    text-align: start;
+    color: #15BE29;
+}
+.fv-trapMagazineImageReadMore a{
+    font-size: 18px;
+    font-weight: 450;
+}
+
+
+
+
+.fv-typesAccommodation{
+    margin-right: 5%;
+    margin-left: -5%;
+}
+
+
+.fv-product.fv-popularVillage h6 , .fv-product.fv-popularVillage h3{
+    text-align: end;
+}
+
+
+
+
+
+@media (max-width: 767px){
+    .main {
+        width: 96%;
+    }
+    .fv-centerImage img {
+        display: none;
+    }
+    .fv-mainMobile ,.fv-mainMobileVillage ,.fv-mainMobileAccommodation{
+        width: 103%;
+        direction: rtl;
+        /* float: right; */
+        /* text-align: center; */
+        padding: 1vw 0vw 10vw 0vw;
+        overflow-x: auto;
+        /* overflow: auto; */
+        display: inline-block !important;
+        /* overflow: auto; */
+        white-space: nowrap;
+    }
+    .fv-mobileProduct {
+        width: 109%;
+        direction: ltr;
+    }
+    .fv-mainMobile .col-sm-3{
+     /*  display: inline-block;*/
+    }
+    .fv-mainMobile .col-sm-7,.fv-mainMobile .col-sm-6 {
+        /* padding-right: 5px; */
+        /* padding-left: 11px; */
+        display: inline-block;
+         margin-right: 6vw;
+       /* margin-left: 9%;*/
+    }
+    .fv-mainMobileAccommodation .col-sm-7,.fv-mainMobileAccommodation .col-sm-6{
+        /* padding-right: 5px; */
+        /* padding-left: 11px; */
+        display: inline-block;
+         margin-left: 9%;
+    }
+    .fv-mainMobileVillage .col-sm-7,.fv-mainMobileVillage .col-sm-6{
+        /* padding-right: 5px; */
+        /* padding-left: 11px; */
+        display: inline-block;
+        margin-left: 2%;
+    }
+
+    .fv-footerMenu .fv-footerMenuRibbonMobile {
+        display: flex;
+        margin-top: 7vw;
+    }
+    .fv-footerMenu .fv-footerMenuRibbon ,.fv-footerMenu .fv-searchMainPageTopic{
+        display: none;
+    }
+    .fv-productPriceBoxPriceText {
+        /* background-color: #aaaaaa; */
+        float: right;
+        margin-top: -6vw;
+        font-size: 14px;
+        margin-right: 3vw;
+    }
+    .fv-footerMenuRibbonMobile .col-sm-8 {
+        flex: 0 0 58.333333%;
+        width: 66.666667% !important;
+        text-align: initial;
+        margin-right: 5vw;
+    }
+    .fv-footerMenuRibbonMobile .col-sm-2 {
+        flex: 0 0 16.666667%;
+        width: 16.666667% !important;
+        margin: auto;
+        margin-right: -10vw;
+        margin-top: 12px;
+    }
+    .fv-footerMenuImage img {
+        width: 520px;
+        height: 398px;
+        margin-bottom: -40%;
+        z-index: -1;
+    }
+    .fv-searchMainPage.row {
+        margin-top: 56%;
+        /* margin-right: 68%; */
+        border-radius: 26px;
+        padding-right: 12px;
+        box-shadow: 1px 1px 11px #88888830;
+        padding-left: 16px;
+        padding-top: 14px;
+        padding-bottom: 9px;
+        width: 75%;
+        margin-inline: auto;
+    }
+    .fv-searchMainPageBetweenDate.col-sm-1 {
+        margin-right: 9%;
+    }
+    .fv-searchMainPageDateOut, .fv-searchMainPageDateReturn {
+        margin-top: 1.5%;
+        margin-right: -1vw;
+    }
+    .fv-searchMainPage.fv-searchMainPageDateReturn input, .fv-searchMainPage.fv-searchMainPageDateOut input {
+        width: 217%;
+        margin-right: -18%;
+    }
+    .fv-topicFirstMainPage .col-sm-1 , .fv-topicMainPage .col-sm-1{
+        margin-top: auto;
+        margin-right: 11px;
+    }
+    .fv-topicMainPageTopic h4 {
+        font-size: 17px;
+        font-weight: 450;
+        margin: auto;
+    }
+    .fv-productCapacityBox .col-sm-4 {
+        flex: 0 0 33.333333%;
+        width: 33.333333% !important;
+        text-align: inherit;
+    }
+    .fv-productCapacityBox .col-sm-8 {
+        flex: 0 0 58.333333%;
+        width: 66.666667% !important;
+        text-align: end;
+    }
+    .fv-productCapacityBox .col-sm-11 {
+        text-align: end;
+        margin-right: -48px;
+        margin-top: -27%;
+        margin-left: 11px;
+    }
+        .fv-productCapacityBox{
+            margin-top:19%;
+            font-size: 16px;
+        }
+    .fv-productCapacityBox .col-sm-9 {
+        flex: 0 0 71.333333%;
+    }
+    .fv-productImage {
+        width: 94%;
+        margin-bottom: -8%;
+        margin-right: auto;
+        margin-left: 3%;
+        /* width: 156px; */
+        border-radius: 15px;
+    }
+
+    .fv-productPriceBox {
+        font-size: 16px;
+        margin-bottom: 2vw;
+        padding-left: 42px;
+        color: #15BE29;
+        margin-top: -20px;
+    }
+    .fv-productPriceBoxToman {
+        padding-left: 9px;
+    }
+    .fv-mainMobile .col-sm-6 {
+        width: 59% !important;
+    }
+    .fv-product .row .col-md-2 {
+        margin-left: 12px;
+    }
+    .fv-product .col-md-5 {
+        margin-left: 8px;
+    }
+    .fv-productImage.fv-popularVillageImage {
+        margin-bottom: 0%;
+        width: 108%;
+        margin-left: -8px;
+    }
+    .fv-productImage.fv-popularVillageImage.fv-typesAccommodationImage {
+        margin-bottom: -15%;
+        height: 100%;
+    }
+    .fv-typesAccommodationTopic {
+        /* background-color: burlywood; */
+        margin-left: 3.12%;
+    }
+   /* .fv-mainMobile.row, .fv-mainMobileVillage.row, .fv-mainMobileAccommodation.row{
+        margin-left: 23px;
+    }*/
+    .fv-topicMainPageTopic {
+        text-align: end;
+        margin-right: 25px;
+    }
+    .fv-popularVillageTitle.fv-typesAccommodationTopic.col-11 {
+        flex: 0 0 146.666667%;
+        max-width: 93.666667%;
+    }
+    .fv-productLocation .col-sm-10 {
+        flex: 0 0 76.333333%;
+        /* width: 83.333333%; */
+    }
+    .fv-productLocation .col-md-9 {
+        border-bottom: 1px solid #909090;
+        margin-top: -7px;
+        padding-bottom: 21px;
+    }
+    .fv-productRateBox {
+        background-color: white;
+        width: -moz-fit-content;
+        width: fit-content;
+        margin-inline: auto;
+        text-align: center;
+        border-radius: 21px;
+        padding-top: 5px;
+        padding-bottom: 6px;
+        margin-top: -10px;
+    }
+    .fv-product .fv-discountedProductAmount.col-md-2 {
+        margin-left: 5px;
+    }
+    .fv-discountedProductAmount {
+        margin-bottom: -3%;
+    }
+    .fv-productPreventPrice {
+        padding-left: 10px;
+    }
+
+    .fv-aboutUsMobile .col-sm-9 {
+        flex: 0 0 58.333333%;
+        width: 66.666667% !important;
+        text-align: right;
+        /* margin: 0; */
+        /* padding: 0; */
+        margin-left: -6%;
+    }
+
+    .fv-aboutUsMobile .col-sm-2 {
+        flex: 0 0 16.666667%;
+        width: 16.666667% !important;
+        margin-left: 4%;
+    }
+    .fv-aboutUsImage {
+        /* margin-right: 3%; */
+        margin-left: 5%;
+    }
+    .fv-trapMagazine .col-sm-6 {
+        margin-inline-start: auto;
+        margin-left: 25px;
+    }
+
+
+}
+@media (max-width: 1193px) and (min-width: 991px){
+    .fv-product .fv-discountedProductAmount.col-md-2 {
+        margin-left: 12px;
+    }
+    .fv-discountedProductAmount {
+        margin-bottom: -1%;
+    }
+}
+@media (max-width: 991px) and  (min-width: 768px) {
+    .fv-product .fv-discountedProductAmount.col-md-2 {
+        margin-left: 9px;
+    }
+    .fv-discountedProductAmount {
+        margin-bottom: -6%;
+    }
+    .fv-discountedProductAmount h1 {
+        margin-left: -10px;
+    }
+    .fv-productCapacityBox {
+        font-size: 8px;
+    }
+    .fv-typesAccommodationTopic {
+        padding: 0px;
+        margin-left: 6.12%
+    }
+    .fv-popularVillageTitle.fv-typesAccommodationTopic.col-11 {
+        flex: 0 0 160.666667%;
+        max-width: 86.666667%;
+    }
+}
+@media (max-width: 766px) and  (min-width: 508px){
+    .fv-aboutUsFourthImage {
+        margin-left: -30%;
+    }
+    .fv-discountedProductAmount {
+        margin-bottom: 2%;
+    }
+    .fv-product .fv-discountedProductAmount.col-md-2 {
+        margin-left: 10px;
+    }
+    .fv-popularVillageTitle.fv-typesAccommodationTopic.col-11 {
+        flex: 0 0 160.666667%;
+        max-width: 99.666667%;
+    }
+    .fv-typesAccommodationTopic {
+        margin-left: 2.12%;
+        margin-top: 10px;
+    }
+    .fv-searchMainPage.row {
+        margin-top: 38%;
+    }
+    .fv-footerMenuImage img {
+        width: 679px;
+    }
+    .fv-searchMainPage.fv-searchMainPageDateReturn input, .fv-searchMainPage.fv-searchMainPageDateOut input {
+        width: 173%;
+        margin-right: 1%;
+    }
+    .fv-mobileProduct .fv-trapMagazineImageTitle {
+        /* width: 109%; */
+        /*direction: rtl;*/
+    }
+}
+
+@media (max-width: 415px){
+    .fv-mobileProduct .fv-trapMagazineImageTitle {
+        /* width: 109%; */
+        /*direction: rtl;*/
+    }
+    .fv-aboutUsFourthImage {
+        margin-left: -6%;
+    }
+    .fv-product .fv-discountedProductAmount.col-md-2 {
+        margin-left: 7px;
+        margin-bottom: -2px;
+    }
+}
+
+@media (max-width: 380px){
+    .fv-aboutUsFourthImage {
+        margin-left: 3%;
+    }
+    .fv-product .fv-discountedProductAmount.col-md-2 {
+        margin-bottom: -9px;
+    }
+    .fv-topicMainPageSeeAll {
+        font-size: 9px;
+        margin-bottom: 2.5vw;
+    }
+}
+@media (max-width: 280px) {
+    .fv-topicMainPageTopic h4 {
+        font-size: 13px;
+        font-weight: 450;
+        margin: auto;
+    }
+
+    .fv-topicMainPageTopic {
+        text-align: end;
+        margin-right: 13px;
+    }
+
+    .fv-topicMainPageSeeAll {
+        font-size: 7px;
+        margin-bottom: 3.5vw;
+        padding: 0;
+    }
+
+    .fv-productCapacityBox {
+        margin-top: 21%;
+        font-size: 13px;
+    }
+
+    .fv-product .col-md-5 {
+        margin-left: 0px;
+    }
+
+    .fv-searchMainPage p {
+        padding-top: 2%;
+        font-size: 12px;
+    }
+
+    .fv-searchMainPage.fv-searchMainPageDateReturn input, .fv-searchMainPage.fv-searchMainPageDateOut input {
+        width: 257%;
+        font-size: 14px;
+    }
+
+    .fv-searchMainPage .fv-searchMainPageBetweenDate.col-sm-1 {
+        margin-right: 9%;
+    }
+}
