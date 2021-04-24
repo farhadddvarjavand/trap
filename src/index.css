@@ -128,6 +128,10 @@ body{
 .fv-topicFirstMainPage{
 padding-top: 10%;
 }
+.fv-topicFirstMainPage a  , .fv-topicMainPage a{
+  padding-top: 10%;
+  color: black;
+}
 .fv-searchMainPageTopic{
   color: white;
   /* width: 84%; */
@@ -138,7 +142,7 @@ padding-top: 10%;
   font-weight: 400;
   padding-right: 16%;
 }
-.fv-footerMenuRibbon{
+.fv-footerMenu .fv-footerMenuRibbon{
   box-shadow: inset -125em -3em 3em rgb(255 255 255 / 45%), 0 0 24px 2px rgb(255 255 255), 0.3em 0.3em 1em rgb(37 13 13 / 0%);
   padding-top: 2%;
   padding-bottom: 2%;
@@ -153,7 +157,7 @@ padding-top: 10%;
   /* float: left; */
   background: #919191;
   color: white;
-  margin-top: -4%;
+  margin-top: 2%;
   padding: 13px;
   border: none;
   margin-left: 25%;
@@ -162,12 +166,12 @@ padding-top: 10%;
   border-radius: 15px;
 }
 .fv-footerMenuRibbon img{
-  width: 152px;
-  height: 152px;
+ /* width: 152px; */
+ /* height: 152px; */
   /* padding: 0; */
   /* margin: 0; */
   /* margin: -34px; */
-  margin-top: -41px;
+  margin-top: -24px;
   margin-bottom: -70px;
 }
 .fv-footerMenuImage{

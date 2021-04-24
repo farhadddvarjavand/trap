@@ -11,15 +11,62 @@ import FotterpageLogo from "../images/Logo.png"
 import LogoName from "../images/LogoName.png"
 import MobileLogo from "../images/MobileLogo.png"
 import MobileMenu from "../images/MobileMenu.png"
+import {Link} from "react-router-dom";
+import {productData} from "../data/testData"
+import Datas from "../data/Datas";
 
 
-class MainPage extends Component {
+
+class MainPage extends Datas {
     constructor(props) {
         super(props);
+        this.state={
+            ...this.props,
+            ...this.state,
+            enterTheVillage:'',
+            dateToGo:'',
+            dateToReturn:'',
+            numberOfPeople:'',
+            productData:[
+                {numberOfRoomProduct:'3',
+                    NumberOfCapacityProduct:'3',
+                    rateProduct:'3.5',
+                    topicProduct:'باغ',
+                    locationProduct:'مازندران',
+                    priceProduct:'25000',},
 
+                {numberOfRoomProduct:'2',
+                    NumberOfCapacityProduct:'3',
+                    rateProduct:'3.5',
+                    topicProduct:'باغ',
+                    locationProduct:'مازندران',
+                    priceProduct:'25000',},
+
+                {numberOfRoomProduct:'1',
+                    NumberOfCapacityProduct:'3',
+                    rateProduct:'3.5',
+                    topicProduct:'باغ',
+                    locationProduct:'مازندران',
+                    priceProduct:'25000',},
+
+                {numberOfRoomProduct:'4',
+                    NumberOfCapacityProduct:'3',
+                    rateProduct:'3.5',
+                    topicProduct:'باغ',
+                    locationProduct:'مازندران',
+                    priceProduct:'25000',}
+            ],
+        }
     }
 
+
     render() {
+        const setdata = this.state.data.url
+        console.log(setdata)
+
+        const data = this.state.productData;
+
+       const {enterTheVillage,dateToGo,dateToReturn,numberOfPeople} = this.state
         return(
             <div className={"main"}>
         <div className={'fv-footerMenu'}>
@@ -29,10 +76,10 @@ class MainPage extends Component {
                     <MDBRow className={'fv-footerMenuRibbon'}>
                         <MDBCol md={1}>
                             <i className="fa fa-user-alt" />
-                            <a> ورود</a>
+                            <a> <Link to={'/login'}>ورود</Link></a>
                         </MDBCol>
                         <MDBCol md={2} className={"fv-footerMenuRibbonButton"}>
-                            <input type='button' value=' میزبان شوید'/>
+                            <input type='button' value=' میزبان شوید' onClick={()=> this.props.history.push('/login')}/>
                         </MDBCol>
                         <MDBCol md={9}>
                             <img src={FotterpageLogo} />
@@ -63,66 +110,60 @@ class MainPage extends Component {
                 <MDBRow>
                     <MDBRow className={'fv-searchMainPage'}>
                     <p>اقامتگاه رویایی خود را جست و جو کنید</p>
-                    <input type='text' value='شهر یا روستا را وارد کنید'/>
+                    <input type='text' placeholder={'شهر یا روستا را وارد کنید'} value={enterTheVillage} onChange={(event)=>this.setState({enterTheVillage:event.target.value})}/>
                         <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateOut'}>
-                            <input type='text' value='تاریخ رفت'/>
+                            <input type='text' placeholder={'تاریخ رفت'} value={dateToGo} onChange={(event)=>this.setState({dateToGo:event.target.value})}/>
                         </MDBCol>
                         <MDBCol md={1} sm={1} className={'fv-searchMainPageBetweenDate'}>
 
                         </MDBCol>
                         <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateReturn'}>
-                            <input type='text' value='تاریخ برگشت'/>
+                            <input type='text' placeholder={'تاریخ برگشت'} value={dateToReturn} onChange={(event)=>this.setState({dateToReturn:event.target.value})}/>
                         </MDBCol>
-                    <input type='text' value='تعداد نفرات'/>
-                    <input type='button' value='جستجو اقامتگاه' className={'fv-searchMainPageSearchButton'}/>
+                    <input type='text'  placeholder={'تعداد نفرات'} value={numberOfPeople} onChange={(event)=>this.setState({numberOfPeople:event.target.value})}/>
+                    <input type='button' value='جستجو اقامتگاه' className={'fv-searchMainPageSearchButton'} onClick={()=>{
+                        fetch('https://reqres.in/api/posts', {                     /* POST */
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({enterTheVillage,dateToGo,dateToReturn,numberOfPeople})
+                        })
+                            .then(response => response.json())
+                            .then(data =>{
+                                if(data){
+                                    console.log(enterTheVillage,dateToGo)
+                                    this.props.history.push('./searchHomePage')
+                                }
+                            }) ;
+
+                    }}/>
                     </MDBRow>
                 </MDBRow>
         </div>
 
         <MDBContainer className={"fv-MainBody"}>
             <MDBRow className={"fv-topicFirstMainPage"}>
-                <TopicsMainPage topic="اقامتگاه های پر بازدید"/>
+                <TopicsMainPage topic="اقامتگاه های پر بازدید"
+                                linkToPage={"./searchHomePage"}/>
             </MDBRow>
             <MDBRow className={"fv-mainProduct fv-mainMobile"} >
-                <MDBCol md={3} sm={7} >
-                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                    rate="5.5/5"
-                    topic="کوچه باغ سبز"
-                    location="مازندران"
-                    numberOfRoom="2"
-                    capacity="2"
-                    price="20000"/>
-                </MDBCol>
-                <MDBCol md={3} sm={7} >
-                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                             rate="5.5/5"
-                             topic="کوچه باغ سبز"
-                             location="مازندران"
-                             numberOfRoom="2"
-                             capacity="20"
-                             price="20000"/>
-                </MDBCol>
-                <MDBCol md={3} sm={7} >
-                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                             rate="5.5/5"
-                             topic="کوچه باغ سبز"
-                             location="مازندران"
-                             numberOfRoom="2"
-                             capacity="2"
-                             price="20000"/>
-                </MDBCol>
-                <MDBCol md={3} sm={7} >
-                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                             rate="5.5/5"
-                             topic="کوچه باغ سبز"
-                             location="مازندران"
-                             numberOfRoom="2"
-                             capacity="2"
-                             price="20000"/>
-                </MDBCol>
+                {data.map(productDetails=>{
+                  return(
+                      <MDBCol md={3} sm={7}>
+                          <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                   rate={productDetails.rateProduct}
+                                   topic={productDetails.topicProduct}
+                                   location={productDetails.locationProduct}
+                                   numberOfRoom={productDetails.numberOfRoomProduct}
+                                   capacity={productDetails.NumberOfCapacityProduct}
+                                   price={productDetails.priceProduct}/>
+                      </MDBCol>
+                  )
+                })}
+
             </MDBRow>
             <MDBRow className={"fv-topicMainPage"}>
-                <TopicsMainPage topic="روستاهای پر بازدید"/>
+                <TopicsMainPage topic="روستاهای پر بازدید"
+                                linkToPage={"./searchHomePage"}/>
             </MDBRow>
             <MDBRow className={"fv-mainMobileVillage"}>
                 <MDBCol md={3} sm={7}>
@@ -147,7 +188,8 @@ class MainPage extends Component {
                 </MDBCol>
             </MDBRow>
             <MDBRow className={"fv-topicMainPage"}>
-                <TopicsMainPage topic="انواع اقامتگاه ها"/>
+                <TopicsMainPage topic="انواع اقامتگاه ها"
+                                linkToPage={"./searchHomePage"}/>
             </MDBRow>
             <MDBRow className={'fv-mainMobileAccommodation'} >
                 <MDBCol md={3} sm={7} >
@@ -164,7 +206,8 @@ class MainPage extends Component {
                 </MDBCol>
             </MDBRow>
             <MDBRow className={"fv-topicMainPage"}>
-                <TopicsMainPage topic="انواع اقامتگاه ها"/>
+                <TopicsMainPage topic="انواع اقامتگاه ها"
+                                linkToPage={"./searchHomePage"}/>
             </MDBRow>
 
             <MDBRow className={'fv-mainMobile'}>
@@ -222,7 +265,8 @@ class MainPage extends Component {
                 </MDBCol>
             </MDBRow>
             <MDBRow className={"fv-topicMainPage"}>
-                <TopicsMainPage topic="اقامتگاه های اقتصادی"/>
+                <TopicsMainPage topic="اقامتگاه های اقتصادی"
+                                linkToPage={"./searchHomePage"}/>
             </MDBRow>
             <MDBRow className={'fv-mainMobile'}>
                 <MDBCol md={3} sm={6}>
@@ -368,7 +412,8 @@ class MainPage extends Component {
                 </MDBCol>
             </MDBRow>
                 <MDBRow className={"fv-topicMainPage"}>
-                    <TopicsMainPage topic="مجله ترپ"/>
+                    <TopicsMainPage topic="مجله ترپ"
+                                    linkToPage={"./searchHomePage"}/>
                 </MDBRow>
                 <MDBRow className={'fv-mainMobile fv-trapMagazine'}>
                     <MDBCol md={3} sm={6}>

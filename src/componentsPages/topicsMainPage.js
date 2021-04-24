@@ -1,5 +1,6 @@
 import React from "react";
 import {MDBCol, MDBRow} from "mdbreact";
+import {Link} from "react-router-dom";
 
 class topicsMainPage extends React.Component{
     constructor(props) {
@@ -10,10 +11,10 @@ class topicsMainPage extends React.Component{
                 <React.Fragment>
 
                     <MDBCol md={1} sm={1} >
-                       <a> <i className="fas fa-angle-left" /> </a>
+                       <a><Link to={this.props.linkToPage}><i className="fas fa-angle-left" /> </Link> </a>
                     </MDBCol>
                     <MDBCol md={7}  sm={3} className={"fv-topicMainPageSeeAll"}>
-                        <h8>مشاهده همه</h8>
+                        <h8><Link to={this.props.linkToPage}>مشاهده همه</Link></h8>
                     </MDBCol>
                     <MDBCol md={4} sm={9} className={"fv-topicMainPageTopic"}>
                         <h4>{this.props.topic}</h4>

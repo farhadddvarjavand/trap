@@ -26,6 +26,8 @@ html .col-md-3{
     margin-inline: auto;
     text-align: center;
     border-radius: 12px;
+    padding-top: 2%;
+    padding-bottom: 2%;
 }
 .fv-productTopic{
     text-align: end;
@@ -239,6 +241,7 @@ html .col-md-3{
         display: inline-block !important;
         /* overflow: auto; */
         white-space: nowrap;
+        height: 387px;
     }
     .fv-mobileProduct {
         width: 109%;
@@ -530,6 +533,10 @@ html .col-md-3{
     .fv-mobileProduct .fv-trapMagazineImageTitle {
         /* width: 109%; */
         /*direction: rtl;*/
+        width: 104%;
+        /* direction: rtl; */
+        height: 165px;
+        white-space: break-spaces;
     }
     .fv-aboutUsFourthImage {
         margin-left: -6%;

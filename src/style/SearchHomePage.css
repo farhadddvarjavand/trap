@@ -187,6 +187,10 @@
 .fv-footerMenuRibbon .col-md-1 {
     margin: auto;
 }
+.fv-footerMenuRibbon .col-md-1 a {
+    color: white;
+}
+
 
 
 .fv-footerMainPage.fv-footerMenuMobile{

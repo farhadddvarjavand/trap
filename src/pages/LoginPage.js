@@ -18,18 +18,19 @@ class LoginPage extends Component {
     constructor(props) {
         super(props);
         this.state={
-            mobileNumber:'',
+            mobileNumber:''
         }
     }
 
     render() {
+        const PostData = this.state.mobileNumber
         return (
             <div>
                 <MDBRow className={"fv-loginPage"} >
                     <MDBCol md={6} sm={12} className={"fv-loginPageBody"}>
                         <MDBRow className={"fv-LoginPageHeader"}>
                             <MDBCol>
-                                <i className="fas fa-chevron-right" /><p>صفحه اصلی</p>
+                                <i className="fas fa-chevron-right" /><p><Link to={'/mainPage'}>صفحه اصلی</Link></p>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-loginPageBodyOne"}>
@@ -39,15 +40,29 @@ class LoginPage extends Component {
                                 <input type="text" placeholder={'شماره موبایل'} value={this.state.mobileNumber} onChange={((e)=>this.setState({mobileNumber : e.target.value}))}/>
                                 <MDBRow>
                                     <input className={"fv-loginPageButton"} type="button" value={"ادامه"} onClick={()=>{
-                                        fetch('https://reqres.in/api/get/1')
+                                        fetch('https://reqres.in/api/get/1')                            /* GET */
                                             .then(response => response.json())
                                             .then(json => {
                                                 this.setState({mobileNumber:json.support.text});
-                                                this.props.history.push('/MyAccommodation');
+                                                this.props.history.push('/login2');
                                             });
+
+                                        fetch('https://reqres.in/api/posts', {                     /* POST */
+                                            method: 'POST',
+                                            headers: { 'Content-Type': 'application/json' },
+                                            body: JSON.stringify({PostData})
+                                        })
+                                            .then(response => response.json())
+                                            .then(data =>{
+                                                if(data){
+                                                    console.log(PostData)
+                                                    this.setState({PostData:"Successful" })
+                                                    this.props.history.push('/login2');
+                                                } else this.setState({PostData:"UnSuccessful"})
+                                            }) ;
                                     }}/>
                                 </MDBRow>
-                                <Link to={'/MyAccommodation'}>API</Link>
+
                             </MDBCol>
                         </MDBRow>
                     </MDBCol>

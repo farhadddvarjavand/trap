@@ -57,21 +57,21 @@ ReactDOM.render(
                         <Link to={'/ProfileWallet3'}>ProfilePageWallet3</Link>
                         <Link to={'/ProfileWallet2'}>ProfilePageWallet2</Link>
                         <Link to={'/ProfileWallet'}>ProfilePageWallet</Link>
-                        <Link to={'/MyAccommodation'}>MyAccommodationPage</Link>
+                        <Link to={'/myAccommodation'}>MyAccommodationPage</Link>
                         <Link to={'/ProfileTransaction3'}>ProfilePageTransaction3</Link>
                         <Link to={'/ProfileTransaction2'}>ProfilePageTransaction2</Link>
                         <Link to={'/ProfileTransaction'}>ProfilePageTransaction</Link>
-                        <Link to={'/HostStep5-3'}>HostStep5Page3</Link>
+                        <Link to={'/hostStep5-3'}>HostStep5Page3</Link>
                         <Link to={'/Profile'}>ProfilePage</Link>
-                        <Link to={'/HostStep5-2'}>HostStep5Page2</Link>
-                        <Link to={'/HostStep5'}>HostStep5Page</Link>
-                        <Link to={'/HostStep4'}>HostStep4Page</Link>
-                        <Link to={'/HostStep3'}>HostStep3Page</Link>
-                        <Link to={'/HostStep2'}>HostStep2Page</Link>
-                        <Link to={'/HostStep2-2'}>HostStep2Page2</Link>
-                        <Link to={'/HostStep1'}>HostStep1Page</Link>
-                        <Link to={'/SearchHomePage'}>SearchHomePage</Link>
-                        <Link to={'/MainPage'}>MainPage</Link>
+                        <Link to={'/hostStep5-2'}>HostStep5Page2</Link>
+                        <Link to={'/hostStep5'}>HostStep5Page</Link>
+                        <Link to={'/hostStep4'}>HostStep4Page</Link>
+                        <Link to={'/hostStep3'}>HostStep3Page</Link>
+                        <Link to={'/hostStep2'}>HostStep2Page</Link>
+                        <Link to={'/hostStep2-2'}>HostStep2Page2</Link>
+                        <Link to={'/hostStep1'}>HostStep1Page</Link>
+                        <Link to={'/searchHomePage'}>SearchHomePage</Link>
+                        <Link to={'/mainPage'}>MainPage</Link>
 
                     </div>
 
@@ -86,26 +86,26 @@ ReactDOM.render(
                             <Route exact path={'/profileGustComments2'} component={ProfilePageGustComments2}/>
                             <Route exact path={'/profileGustComments'} component={PrfilePageGustComments}/>
                             <Route exact path={'/displayPage'} component={DisplayPage}/>
-                            <Route exact path={'/ProfileWallet3'} component={ProfilePageWallet3}/>
+                            <Route exact path={'/profileWallet3'} component={ProfilePageWallet3}/>
                             <Route exact path={'/ProfileWallet2'} component={ProfilePageWallet2}/>
                             <Route exact path={'/ProfileWallet'} component={ProfilePageWallet}/>
-                            <Route exact path={'/MyAccommodation'} component={MyAccommodationPage}/>
-                            <Route exact path={'/ProfileTransaction3'} component={ProfilePageTransaction3}/>
+                            <Route exact path={'/myAccommodation'} component={MyAccommodationPage}/>
+                            <Route exact path={'/profileTransaction3'} component={ProfilePageTransaction3}/>
                             <Route exact path={'/ProfileTransaction2'} component={ProfilePageTransaction2}/>
                             <Route exact path={'/ProfileTransaction'} component={ProfilePageTransaction}/>
                             <Route exact path={'/ProfileReservation2'} component={ProfilePageReservation2}/>
-                            <Route exact path={'/ProfileReservation'} component={ProfilePageReservation}/>
-                            <Route exact path={'/HostStep5-3'} component={HostStep5Page3}/>
-                            <Route exact path={'/Profile'} component={ProfilePage}/>
-                            <Route exact path={'/HostStep5-2'} component={HostStep5Page2}/>
-                            <Route exact path={'/HostStep5'} component={HostStep5Page}/>
-                            <Route exact path={'/HostStep4'} component={HostStep4Page}/>
-                            <Route exact path={'/HostStep3'} component={HostStep3Page}/>
-                            <Route exact path={'/HostStep2-2'} component={HostStep2Page2}/>
-                            <Route exact path={'/HostStep2'} component={HostStep2Page}/>
-                            <Route exact path={'/HostStep1'} component={HostStep1Page}/>
-                            <Route exact path={'/SearchHomePage'} component={SearchHomePage}/>
-                            <Route exact path={'/MainPage'} component={MainPage}/>
+                            <Route exact path={'/profileReservation'} component={ProfilePageReservation}/>
+                            <Route exact path={'/hostStep5-3'} component={HostStep5Page3}/>
+                            <Route exact path={'/profile'} component={ProfilePage}/>
+                            <Route exact path={'/hostStep5-2'} component={HostStep5Page2}/>
+                            <Route exact path={'/hostStep5'} component={HostStep5Page}/>
+                            <Route exact path={'/hostStep4'} component={HostStep4Page}/>
+                            <Route exact path={'/hostStep3'} component={HostStep3Page}/>
+                            <Route exact path={'/hostStep2-2'} component={HostStep2Page2}/>
+                            <Route exact path={'/hostStep2'} component={HostStep2Page}/>
+                            <Route exact path={'/hostStep1'} component={HostStep1Page}/>
+                            <Route exact path={'/searchHomePage'} component={SearchHomePage}/>
+                            <Route exact path={'/mainPage'} component={MainPage}/>
 
 
                         </div>
