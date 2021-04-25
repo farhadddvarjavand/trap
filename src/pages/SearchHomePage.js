@@ -17,11 +17,44 @@ class SearchHomePage extends Component {
         this.state={
             sortedBy:'',
             pageNumber:'',
+            setVillage:'',
+            dateToGo:'',
+            dateToReturn:'',
+            numberOfPeople:'',
+            numberOfBedroom:'',
+            dateIn:'',
+            dateOut:'',
+            accommodationGroup:[],
+
         }
 
     }
 
+    setAccommodationGroup =(event) =>{
+        let repeat = false
+        const setData= this.state.accommodationGroup
+        if(event.target.checked === false){
+            const index = setData.indexOf(event.target.name)
+            if (index !== -1) {
+                setData.splice(index, 1);
+                this.setState({accommodationGroup:setData})
+            }
+        } else {
+            setData.map(checked=>{
+                if(checked === event.target.name){
+                    repeat=true
+                }
+            })
+            if(repeat === false){
+                setData.push(event.target.name)
+                this.setState({accommodationGroup:setData})
+            }
+        }
+    }
+
     render() {
+        console.log(this.state.accommodationGroup)
+
         return(
             <MDBContainer className={"fv-SearchHomePage"}>
                 <MDBContainer className={'fv-SearchHomePageBodyMobile fv-footerMenu main'}>
@@ -96,6 +129,68 @@ class SearchHomePage extends Component {
                         </MDBCol>
                     </MDBRow>
                     <MDBRow className={"fv-searchMainPageBody"}>
+
+                        <MDBCol md={4}>
+                            <MDBRow>
+                                <MDBRow className={'fv-searchMainPage'}>
+                                    <MDBRow className={'fv-searchMainPagePrice'}>
+                                        <input type='text' placeholder={'شهر یا روستا را وارد کنید'} value={this.state.setVillage} onChange={(event)=>{this.setState({setVillage:event.target.value})}}/>
+                                        <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateOut'}>
+                                            <input type='text' placeholder='تاریخ رفت' value={this.state.dateToGo} onChange={(event)=>{this.setState({dateToGo:event.target.value})}}/>
+                                        </MDBCol>
+                                        <MDBCol md={1} sm={1} className={'fv-searchMainPageBetweenDate'}>
+
+                                        </MDBCol>
+                                        <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateReturn'}>
+                                            <input type='text' placeholder='تاریخ برگشت' value={this.state.dateToReturn} onChange={(event)=>{this.setState({dateToReturn:event.target.value})}}/>
+                                        </MDBCol>
+                                        <input type='text' placeholder='تعداد نفرات' value={this.state.numberOfPeople} onChange={(event)=>{this.setState({numberOfPeople:event.target.value})}}/>
+                                        <input type='text' placeholder='تعداد خواب' value={this.state.numberOfBedroom} onChange={(event)=>{this.setState({numberOfBedroom:event.target.value})}}/>
+                                    </MDBRow>
+                                    <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
+                                        <p>قیمت</p>
+                                        <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateOut'}>
+                                            <input type='text' placeholder='از' value={this.state.dateIn} onChange={(event)=>{this.setState({dateIn:event.target.value})}}/>
+                                        </MDBCol>
+                                        <MDBCol md={1} sm={1} className={'fv-searchMainPageBetweenDate'}>
+
+                                        </MDBCol>
+                                        <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateReturn'}>
+                                            <input type='text' placeholder='تا' value={this.state.dateOut} onChange={(event)=>{this.setState({dateOut:event.target.value})}}/>
+                                        </MDBCol>
+                                    </MDBRow>
+                                    <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
+                                        <p>دسته بندی اقامتگاه</p>
+                                        <MDBCol md={12}>
+                                            <input type="checkbox" name="استخردار" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>استخردار</p>
+                                        </MDBCol>
+                                        <MDBCol md={12}>
+                                            <input type="checkbox" name="ساحلی" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>ساحلی</p>
+                                        </MDBCol>
+                                        <MDBCol md={12}>
+                                            <input type="checkbox" name="ییلاقی" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p>ییلاقی</p>
+                                        </MDBCol>
+                                        <MDBCol md={12}>
+                                            <input type="checkbox" name=" کلبه جنگلی" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p> کلبه جنگلی</p>
+                                        </MDBCol>
+                                        <MDBCol md={12}>
+                                            <input type="checkbox" name="خانه قدیمی" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p>خانه قدیمی</p>
+                                        </MDBCol>
+                                    </MDBRow>
+                                    <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
+                                        <MDBCol md={12}>
+                                            <input type="checkbox" name="اقامت گاه های دارای تخفیف" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>اقامت گاه های دارای تخفیف</p>
+                                        </MDBCol>
+                                        <MDBCol md={12}>
+                                            <input type="checkbox" name="اقامت گاه های ضدعفونی شده" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>اقامت گاه های ضدعفونی شده</p>
+                                        </MDBCol>
+                                    </MDBRow>
+                                    <input type='button' value='جستجو اقامتگاه' className={'fv-searchMainPagesSearchButton'}/>
+
+                                </MDBRow>
+                            </MDBRow>
+                        </MDBCol>
+
                         <MDBCol md={8} className={"fv-searchMainPageBodyLeft"}>
                             <p>20 اقامتگاه یافت شد</p>
                             <MDBRow className={"fv-SortMenu"}>
@@ -232,66 +327,6 @@ class SearchHomePage extends Component {
                             </MDBRow>
                         </MDBCol>
 
-                            <MDBCol md={4}>
-                                <MDBRow>
-                                    <MDBRow className={'fv-searchMainPage'}>
-                                        <MDBRow className={'fv-searchMainPagePrice'}>
-                                                <input type='text' value='شهر یا روستا را وارد کنید'/>
-                                                    <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateOut'}>
-                                                        <input type='text' value='تاریخ رفت'/>
-                                                    </MDBCol>
-                                                    <MDBCol md={1} sm={1} className={'fv-searchMainPageBetweenDate'}>
-
-                                                    </MDBCol>
-                                                    <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateReturn'}>
-                                                        <input type='text' value='تاریخ برگشت'/>
-                                                    </MDBCol>
-                                                <input type='text' value='تعداد نفرات'/>
-                                                <input type='text' value='شهر یا روستا را وارد کنید'/>
-                                        </MDBRow>
-                                        <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
-                                                <p>قیمت</p>
-                                                    <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateOut'}>
-                                                        <input type='text' value='تاریخ رفت'/>
-                                                    </MDBCol>
-                                                    <MDBCol md={1} sm={1} className={'fv-searchMainPageBetweenDate'}>
-
-                                                    </MDBCol>
-                                                    <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateReturn'}>
-                                                        <input type='text' value='تاریخ برگشت'/>
-                                                    </MDBCol>
-                                        </MDBRow>
-                                        <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
-                                            <p>دسته بندی اقامتگاه</p>
-                                                <MDBCol md={12}>
-                                                    <input type="checkbox" value="استخردار"/> استخردار
-                                                </MDBCol>
-                                                <MDBCol md={12}>
-                                                    <input type="checkbox" value="ساحلی"/> ساحلی
-                                                </MDBCol>
-                                                <MDBCol md={12}>
-                                                    <input type="checkbox" value="ییلاقی"/> ییلاقی
-                                                </MDBCol>
-                                                <MDBCol md={12}>
-                                                    <input type="checkbox" value=" کلبه جنگلی"/>  کلبه جنگلی
-                                                </MDBCol>
-                                                <MDBCol md={12}>
-                                                    <input type="checkbox" value="خانه قدیمی"/> خانه قدیمی
-                                                </MDBCol>
-                                        </MDBRow>
-                                        <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
-                                            <MDBCol md={12}>
-                                                <input type="checkbox" value="اقامت گاه های دارای تخفیف"/> اقامت گاه های دارای تخفیف
-                                            </MDBCol>
-                                            <MDBCol md={12}>
-                                                <input type="checkbox" value="اقامت گاه های ضدعفونی شده"/> اقامت گاه های ضدعفونی شده
-                                            </MDBCol>
-                                        </MDBRow>
-                                        <input type='button' value='جستجو اقامتگاه' className={'fv-searchMainPagesSearchButton'}/>
-
-                                    </MDBRow>
-                                </MDBRow>
-                            </MDBCol>
 
 
                     </MDBRow>
