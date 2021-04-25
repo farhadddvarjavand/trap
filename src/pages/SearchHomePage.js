@@ -7,11 +7,17 @@ import FotterpageLogo from "../images/Logo.png"
 import LogoName from "../images/LogoName.png"
 import MobileLogo from "../images/MobileLogo.png"
 import MobileMenu from "../images/MobileMenu.png"
+import {Link, Route, Switch,NavLink,BrowserRouter} from "react-router-dom"
+
 
 
 class SearchHomePage extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            sortedBy:'',
+            pageNumber:'',
+        }
 
     }
 
@@ -90,6 +96,142 @@ class SearchHomePage extends Component {
                         </MDBCol>
                     </MDBRow>
                     <MDBRow className={"fv-searchMainPageBody"}>
+                        <MDBCol md={8} className={"fv-searchMainPageBodyLeft"}>
+                            <p>20 اقامتگاه یافت شد</p>
+                            <MDBRow className={"fv-SortMenu"}>
+                                <p>مرتب سازی بر اساس:</p>
+
+                                <NavLink to={`/searchHomePage/newest/${this.props.match.params.id}`}  exact name={'newest'} className={'fv-unSelected'} activeClassName="fv-selected"  onClick={(event)=>{
+                                    this.setState({sortedBy:event.target.name})
+                                }}>
+                                    جدیدترین
+                                </NavLink>
+                                <NavLink  to={`/searchHomePage/expensive/${this.props.match.params.id}`}  name={'expensive'} exact className={'fv-unSelected'} activeClassName="fv-selected" onClick={(event)=>{
+                                    this.setState({sortedBy:event.target.name})
+                                }}>
+                                    گران‌ترین
+                                </NavLink>
+                                <NavLink  to={`/searchHomePage/cheapest/${this.props.match.params.id}`}  name={'cheapest'} exact className={'fv-unSelected'} activeClassName="fv-selected" onClick={(event)=>{
+                                    this.setState({sortedBy:event.target.name})
+                                }}>
+                                    ارزان‌ترین
+                                </NavLink>
+                                <NavLink  to={`/searchHomePage/popular/${this.props.match.params.id}`}  name={'popular'} exact className={'fv-unSelected'} activeClassName="fv-selected" onClick={(event)=>{
+                                    this.setState({sortedBy:event.target.name})
+                                }}>
+                                    محبوب‌ترین
+                                </NavLink>
+                                <NavLink to={`/searchHomePage/closest/${this.props.match.params.id}`} name={'closest'} exact className={'fv-unSelected'} activeClassName="fv-selected" onClick={(event)=>{
+                                    this.setState({sortedBy:event.target.name})
+                                }}>
+                                    نزدیکترین
+                                </NavLink>
+
+                            </MDBRow>
+                            <MDBRow className={"fv-mainProduct fv-mainMobile"} >
+                                <MDBCol md={4} sm={7} >
+                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                             rate="5.5/5"
+                                             topic="کوچه باغ سبز"
+                                             location="مازندران"
+                                             numberOfRoom="2"
+                                             capacity="2"
+                                             price="20000"/>
+                                </MDBCol>
+                                <MDBCol md={4} sm={7} >
+                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                             rate="5.5/5"
+                                             topic="کوچه باغ سبز"
+                                             location="مازندران"
+                                             numberOfRoom="2"
+                                             capacity="2"
+                                             price="20000"/>
+                                </MDBCol>
+                                <MDBCol md={4} sm={7} >
+                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                             rate="5.5/5"
+                                             topic="کوچه باغ سبز"
+                                             location="مازندران"
+                                             numberOfRoom="2"
+                                             capacity="2"
+                                             price="20000"/>
+                                </MDBCol>
+
+                                <MDBCol md={4} sm={7} >
+                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                             rate="5.5/5"
+                                             topic="کوچه باغ سبز"
+                                             location="مازندران"
+                                             numberOfRoom="2"
+                                             capacity="2"
+                                             price="20000"/>
+                                </MDBCol>
+                                <MDBCol md={4} sm={7} >
+                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                             rate="5.5/5"
+                                             topic="کوچه باغ سبز"
+                                             location="مازندران"
+                                             numberOfRoom="2"
+                                             capacity="2"
+                                             price="20000"/>
+                                </MDBCol>
+                                <MDBCol md={4} sm={7} >
+                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                             rate="5.5/5"
+                                             topic="کوچه باغ سبز"
+                                             location="مازندران"
+                                             numberOfRoom="2"
+                                             capacity="2"
+                                             price="20000"/>
+                                </MDBCol>
+                                <MDBCol md={4} sm={7} >
+                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                             rate="5.5/5"
+                                             topic="کوچه باغ سبز"
+                                             location="مازندران"
+                                             numberOfRoom="2"
+                                             capacity="2"
+                                             price="20000"/>
+                                </MDBCol>
+                                <MDBCol md={4} sm={7} >
+                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                             rate="5.5/5"
+                                             topic="کوچه باغ سبز"
+                                             location="مازندران"
+                                             numberOfRoom="2"
+                                             capacity="2"
+                                             price="20000"/>
+                                </MDBCol>
+                                <MDBCol md={4} sm={7} >
+                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                             rate="5.5/5"
+                                             topic="کوچه باغ سبز"
+                                             location="مازندران"
+                                             numberOfRoom="2"
+                                             capacity="2"
+                                             price="20000"/>
+                                </MDBCol>
+                            </MDBRow>
+                            <MDBRow className={"fv-SearchHomePagePagination"}>
+                                <NavLink to={`/searchHomePage/${this.props.match.params.sort}/1`} exact name={1} className={'fv-SearchHomePagePaginationDefault'} activeClassName="fv-SearchHomePagePaginationSelected" onClick={(event)=>{
+                                    this.setState({pageNumber:event.target.name})
+                                }}>
+                                    1
+                                </NavLink>
+                                <NavLink to={`/searchHomePage/${this.props.match.params.sort}/2`} exact name={2} className={'fv-SearchHomePagePaginationDefault'} activeClassName="fv-SearchHomePagePaginationSelected" onClick={(event)=>{
+                                    this.setState({pageNumber:event.target.name})
+                                }}>
+                                    2
+                                </NavLink>
+
+                                <NavLink to={`/searchHomePage/${this.props.match.params.sort}/3`} exact name={3} className={'fv-SearchHomePagePaginationDefault'} activeClassName="fv-SearchHomePagePaginationSelected" onClick={(event)=>{
+                                    this.setState({pageNumber:event.target.name})
+                                }}>
+                                    3
+                                </NavLink>
+                            </MDBRow>
+                        </MDBCol>
+
                             <MDBCol md={4}>
                                 <MDBRow>
                                     <MDBRow className={'fv-searchMainPage'}>
@@ -151,105 +293,7 @@ class SearchHomePage extends Component {
                                 </MDBRow>
                             </MDBCol>
 
-                            <MDBCol md={8} className={"fv-searchMainPageBodyLeft"}>
-                                <p>20 اقامتگاه یافت شد</p>
-                                <MDBRow className={"fv-SortMenu"}>
-                                    <p>مرتب سازی بر اساس:</p>
-                                    <input type='button' value='جدیدترین'/>
-                                    <input type='button' value='گران‌ترین'/>
-                                    <input type='button' value='ارزان‌ترین'/>
-                                    <input type='button' value='محبوب‌ترین'/>
-                                    <input type='button' value='نزدیکترین'/>
-                                </MDBRow>
-                                <MDBRow className={"fv-mainProduct fv-mainMobile"} >
-                                    <MDBCol md={4} sm={7} >
-                                        <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                                 rate="5.5/5"
-                                                 topic="کوچه باغ سبز"
-                                                 location="مازندران"
-                                                 numberOfRoom="2"
-                                                 capacity="2"
-                                                 price="20000"/>
-                                    </MDBCol>
-                                    <MDBCol md={4} sm={7} >
-                                        <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                                 rate="5.5/5"
-                                                 topic="کوچه باغ سبز"
-                                                 location="مازندران"
-                                                 numberOfRoom="2"
-                                                 capacity="2"
-                                                 price="20000"/>
-                                    </MDBCol>
-                                    <MDBCol md={4} sm={7} >
-                                        <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                                 rate="5.5/5"
-                                                 topic="کوچه باغ سبز"
-                                                 location="مازندران"
-                                                 numberOfRoom="2"
-                                                 capacity="2"
-                                                 price="20000"/>
-                                    </MDBCol>
 
-                                    <MDBCol md={4} sm={7} >
-                                        <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                                 rate="5.5/5"
-                                                 topic="کوچه باغ سبز"
-                                                 location="مازندران"
-                                                 numberOfRoom="2"
-                                                 capacity="2"
-                                                 price="20000"/>
-                                    </MDBCol>
-                                    <MDBCol md={4} sm={7} >
-                                        <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                                 rate="5.5/5"
-                                                 topic="کوچه باغ سبز"
-                                                 location="مازندران"
-                                                 numberOfRoom="2"
-                                                 capacity="2"
-                                                 price="20000"/>
-                                    </MDBCol>
-                                    <MDBCol md={4} sm={7} >
-                                        <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                                 rate="5.5/5"
-                                                 topic="کوچه باغ سبز"
-                                                 location="مازندران"
-                                                 numberOfRoom="2"
-                                                 capacity="2"
-                                                 price="20000"/>
-                                    </MDBCol>
-                                    <MDBCol md={4} sm={7} >
-                                        <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                                 rate="5.5/5"
-                                                 topic="کوچه باغ سبز"
-                                                 location="مازندران"
-                                                 numberOfRoom="2"
-                                                 capacity="2"
-                                                 price="20000"/>
-                                    </MDBCol>
-                                    <MDBCol md={4} sm={7} >
-                                        <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                                 rate="5.5/5"
-                                                 topic="کوچه باغ سبز"
-                                                 location="مازندران"
-                                                 numberOfRoom="2"
-                                                 capacity="2"
-                                                 price="20000"/>
-                                    </MDBCol>
-                                    <MDBCol md={4} sm={7} >
-                                        <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                                 rate="5.5/5"
-                                                 topic="کوچه باغ سبز"
-                                                 location="مازندران"
-                                                 numberOfRoom="2"
-                                                 capacity="2"
-                                                 price="20000"/>
-                                    </MDBCol>
-                                </MDBRow>
-                                <MDBRow className={"fv-SearchHomePagePagination"}>
-                                    <input type='button' value='1'/>
-                                    <input type='button' value='2'/>
-                                </MDBRow>
-                            </MDBCol>
                     </MDBRow>
 
                 </MDBContainer>

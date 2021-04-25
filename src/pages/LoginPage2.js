@@ -61,7 +61,10 @@ class LoginPage2 extends Component {
                     <MDBCol md={6} sm={12} className={"fv-loginPageBody"}>
                         <MDBRow className={"fv-LoginPageHeader"}>
                             <MDBCol>
-                                <i className="fas fa-chevron-right" /><p><Link to={'/mainPage'}>صفحه اصلی</Link></p>
+                                <i className="fas fa-chevron-right" /><p><Link to={{
+                                pathname: '/mainPage',
+                                test:''  /* use : this.props.location.test */
+                            }}>صفحه اصلی</Link></p>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-loginPageBodyOne"}>

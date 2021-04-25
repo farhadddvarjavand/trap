@@ -1,3 +1,20 @@
+.fv-SearchHomePagePaginationSelected , .fv-SearchHomePagePaginationDefault{
+    margin-top: 0%;
+    margin-left: 1%;
+    margin-right: 0;
+    border: 1px solid #15BE29;
+    text-align: start;
+    border-radius: 15px;
+    padding: 1%;
+    padding-left: 2%;
+    padding-right: 2%;
+    font-size: 18px;
+}
+.fv-SearchHomePagePaginationSelected , .fv-SortMenu .fv-selected
+{
+    background-color: #15BE29;
+    color: white;
+}
 .container, .container-lg, .container-md, .container-sm, .container-xl {
     max-width: 1294px;
 }
@@ -19,6 +36,7 @@
 }
 .fv-searchMainPageBody{
     width: 100%;
+    direction: ltr;
 }
 .fv-searchMainPageBody .fv-searchMainPage.row {
     margin-right: 0%;
@@ -41,6 +59,7 @@
     border-radius: 15px;
     margin-top: 2%;
     padding-bottom: 5%;
+    direction: rtl;
 }
 
 .fv-searchMainPageBorder{
@@ -65,11 +84,10 @@
 .fv-searchMainPagesSearchButton{
     background-color: #15BE29;
     color: white;
+    margin: -3%;
 }
-.fv-SortMenu input[type=button]{
-    background-color: #15BE29;
-    color: #3EC886;
-    color: white;
+.fv-SortMenu .fv-selected , .fv-SortMenu .fv-unSelected {
+
     margin-top: 0%;
     padding: 13px;
     padding-right: 3%;
@@ -79,6 +97,13 @@
     border: none;
     text-align: start;
     border-radius: 15px;
+}
+.fv-SortMenu .fv-selected{
+    background-color: #15BE29;
+    color: white;
+}
+.fv-SortMenu a {
+    color: #979797;
 }
 .fv-SortMenu p {
     margin-top: auto;
@@ -92,6 +117,10 @@
     width: 102%;
     margin-right: 1%;
     border-radius: 15px;
+    direction: rtl;
+}
+.fv-searchMainPageBodyLeft{
+    margin-top: 5%;
 }
 .fv-searchMainPageBodyLeft .fv-mainProduct{
     direction: ltr;
@@ -120,6 +149,7 @@
 }
 .fv-SearchHomePagePagination{
     place-content: center;
+    direction: rtl;
 }
 .fv-SearchHomePagePagination input[type=button]{
     color: #15BE29;
@@ -142,7 +172,9 @@
 .fv-SearchHomePage .fv-searchMainPage.row{
     box-shadow: none;
     padding-top: 0%;
-    margin-top: 20%;
+    margin-top: 17%;
+    margin-left: 6%;
+    margin-right: -8%;
 }
 .fv-searchMainPage{
     margin-bottom: 10%;
@@ -281,7 +313,21 @@
     .fv-searchMainPage .fv-searchMainPageBetweenDate.col-sm-1 {
         margin-right: 14%;
     }
-
+    .fv-SearchHomePage .fv-product .fv-productPriceBox .col-md-10 {
+        margin-left: 0%;
+        margin-top: 2%;
+    }
+    .fv-SearchHomePage .fv-searchMainPage.row {
+        margin-left: 6%;
+        margin-right: 8%;
+    }
+    .fv-SearchHomePageMobileProduct .col-sm-7 {
+        margin-left: 18%;
+    }
+    .fv-SearchHomePage .fv-SearchHomePageMobileProduct .fv-mobileProduct {
+        width: 146%;
+        direction: ltr;
+    }
 }
 @media (max-width: 320px) {
     .fv-searchMainPage.fv-searchMainPageDateReturn input {

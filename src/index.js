@@ -104,7 +104,7 @@ ReactDOM.render(
                             <Route exact path={'/hostStep2-2'} component={HostStep2Page2}/>
                             <Route exact path={'/hostStep2'} component={HostStep2Page}/>
                             <Route exact path={'/hostStep1'} component={HostStep1Page}/>
-                            <Route exact path={'/searchHomePage'} component={SearchHomePage}/>
+                            <Route exact path={'/searchHomePage/:sort/:id'} component={SearchHomePage}/>
                             <Route exact path={'/mainPage'} component={MainPage}/>
 
 

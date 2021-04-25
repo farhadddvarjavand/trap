@@ -23,6 +23,7 @@ class MainPage extends Datas {
         this.state={
             ...this.props,
             ...this.state,
+            buttonCommentActiveName:'',
             enterTheVillage:'',
             dateToGo:'',
             dateToReturn:'',
@@ -61,6 +62,17 @@ class MainPage extends Datas {
 
 
     render() {
+        const pagination =[]
+        const numbetOfComments = 20
+        let NumberOfButtonComment = numbetOfComments/3
+        if ((NumberOfButtonComment%3) > 0)
+            NumberOfButtonComment++
+        for (let i = 0 ; i < NumberOfButtonComment-1 ; i ++){
+            pagination.push(i+1)
+        }
+
+        console.log(this.state.buttonCommentActiveName)
+        console.log(this.state.buttonCommentActive)
         const setdata = this.state.data.url
         console.log(setdata)
 
@@ -131,7 +143,7 @@ class MainPage extends Datas {
                             .then(data =>{
                                 if(data){
                                     console.log(enterTheVillage,dateToGo)
-                                    this.props.history.push('./searchHomePage')
+                                    this.props.history.push('/searchHomePage/cheapest/1')
                                 }
                             }) ;
 
@@ -143,7 +155,7 @@ class MainPage extends Datas {
         <MDBContainer className={"fv-MainBody"}>
             <MDBRow className={"fv-topicFirstMainPage"}>
                 <TopicsMainPage topic="اقامتگاه های پر بازدید"
-                                linkToPage={"./searchHomePage"}/>
+                                linkToPage={"./searchHomePage/1"}/>
             </MDBRow>
             <MDBRow className={"fv-mainProduct fv-mainMobile"} >
                 {data.map(productDetails=>{
@@ -163,9 +175,10 @@ class MainPage extends Datas {
             </MDBRow>
             <MDBRow className={"fv-topicMainPage"}>
                 <TopicsMainPage topic="روستاهای پر بازدید"
-                                linkToPage={"./searchHomePage"}/>
+                                linkToPage={"/searchHomePage/cheapest/1"}/>
             </MDBRow>
             <MDBRow className={"fv-mainMobileVillage"}>
+                {data.map(productData=>{})}
                 <MDBCol md={3} sm={7}>
                     <PopularVillage srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
                                     location="مازندران"
@@ -189,9 +202,10 @@ class MainPage extends Datas {
             </MDBRow>
             <MDBRow className={"fv-topicMainPage"}>
                 <TopicsMainPage topic="انواع اقامتگاه ها"
-                                linkToPage={"./searchHomePage"}/>
+                                linkToPage={"/searchHomePage/cheapest/1"}/>
             </MDBRow>
             <MDBRow className={'fv-mainMobileAccommodation'} >
+                {data.map(productData=>{})}
                 <MDBCol md={3} sm={7} >
                    <TypesAccommodation topic="استخردار"/>
                 </MDBCol>
@@ -207,10 +221,11 @@ class MainPage extends Datas {
             </MDBRow>
             <MDBRow className={"fv-topicMainPage"}>
                 <TopicsMainPage topic="انواع اقامتگاه ها"
-                                linkToPage={"./searchHomePage"}/>
+                                linkToPage={"./searchHomePage/1"}/>
             </MDBRow>
 
             <MDBRow className={'fv-mainMobile'}>
+                {data.map(productData=>{})}
                 <MDBCol md={3} sm={7}>
                     <DiscountedProduct discountedAmount="20%"
                         srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
@@ -266,9 +281,10 @@ class MainPage extends Datas {
             </MDBRow>
             <MDBRow className={"fv-topicMainPage"}>
                 <TopicsMainPage topic="اقامتگاه های اقتصادی"
-                                linkToPage={"./searchHomePage"}/>
+                                linkToPage={"./searchHomePage/1"}/>
             </MDBRow>
             <MDBRow className={'fv-mainMobile'}>
+                {data.map(productData=>{})}
                 <MDBCol md={3} sm={6}>
                     <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
                              rate="5.5/5"
@@ -393,6 +409,7 @@ class MainPage extends Datas {
             <div className={"fv-commentSvgRight"}>
             </div>
             <MDBRow className={"fv-gustComment"}>
+                {pagination.slice(1,1)}
                 <MDBCol md={6}>
                     <img src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg" width="50" height="50" />
                    نظرات مهمان ها
@@ -404,16 +421,16 @@ class MainPage extends Datas {
             </MDBRow>
             <MDBRow className={"fv-svgPagination"}>
                 <MDBCol md={12}>
-                    <div className="slider_pagination">
-                        <button className="slider_pagination_btn slider_pagination_btn--sel" />
-                        <button className="slider_pagination_btn" />
-                        <button className="slider_pagination_btn" />
+                    <div className="slider_pagination"> {/* ButtonComments */}
+                        {pagination.map(pagination => {
+                           return <button name={`btn${pagination}`} className={this.state.buttonCommentActiveName===`btn${pagination}` ? 'slider_pagination_btn active' :'slider_pagination_btn'} onClick={(event)=>this.setState({buttonCommentActiveName:event.target.name})}/>
+                        })}
                     </div>
                 </MDBCol>
             </MDBRow>
                 <MDBRow className={"fv-topicMainPage"}>
                     <TopicsMainPage topic="مجله ترپ"
-                                    linkToPage={"./searchHomePage"}/>
+                                    linkToPage={"./searchHomePage/1"}/>
                 </MDBRow>
                 <MDBRow className={'fv-mainMobile fv-trapMagazine'}>
                     <MDBCol md={3} sm={6}>
