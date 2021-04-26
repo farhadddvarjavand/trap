@@ -39,6 +39,7 @@ import Api from "./components/Api";
 import {withCookies, Cookies, CookiesProvider} from 'react-cookie';
 import {Link, Route, Switch,NavLink,BrowserRouter} from "react-router-dom"
 
+
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
@@ -70,7 +71,7 @@ ReactDOM.render(
                         <Link to={'/hostStep2'}>HostStep2Page</Link>
                         <Link to={'/hostStep2-2'}>HostStep2Page2</Link>
                         <Link to={'/hostStep1'}>HostStep1Page</Link>
-                        <Link to={'/searchHomePage'}>SearchHomePage</Link>
+                        <Link to={'/searchHomePage/cheapest/1'}>SearchHomePage</Link>
                         <Link to={'/mainPage'}>MainPage</Link>
 
                     </div>

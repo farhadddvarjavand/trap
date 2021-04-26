@@ -62,6 +62,9 @@ class MainPage extends Datas {
 
 
     render() {
+       /* const a =this.getData('https://reqres.in/api/get/1')
+        console.log(a.text)  */
+
         const pagination =[]
         const numbetOfComments = 20
         let NumberOfButtonComment = numbetOfComments/3
@@ -72,7 +75,6 @@ class MainPage extends Datas {
         }
 
         console.log(this.state.buttonCommentActiveName)
-        console.log(this.state.buttonCommentActive)
         const setdata = this.state.data.url
         console.log(setdata)
 
@@ -474,7 +476,10 @@ class MainPage extends Datas {
                     <img className={"fv-footerMainPageSmaller"} src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg" width="15" height="15" />
                 </MDBCol>
                 <MDBCol md={7}>
-                    <a>قوق کاربران</a>
+                    <a onClick={()=>{
+                        const a = 'test'
+                     this.postDataAndPush('https://reqres.in/api/posts',a,'/login2')
+                    }}>قوق کاربران</a>
                     <a>قوانین ترپ</a>
                     <a>تماس با پشتیبانی</a>
                     <a>درباره ترپ</a>

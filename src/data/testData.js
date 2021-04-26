@@ -1,64 +1,20 @@
+import React, { useState } from "react";
+import "react-modern-calendar-datepicker/lib/DatePicker.css";
+import { Calendar } from "react-modern-calendar-datepicker";
 
-export const getData  ={
+const testData = () => {
+    const defaultValue = {
+        year: 2019,
+        month: 3,
+        day: 1,
+    };
 
-     a :() =>{
-         alert('1')
-         let a =''
-         fetch('https://reqres.in/api/get/1')                            /* GET */
-        .then(response => response.json())
-        .then(a=json => {
-            return  json.support;
-        });
+    return (
+        <Calendar
+            shouldHighlightWeekends
+            locale={'fa'}
+        />
+    );
+};
 
-        console.log(a +'1')
-        return a
-    }
-}
-
-export const  productData=[
-    {numberOfRoomProduct:'3',
-        NumberOfCapacityProduct:'3',
-        rateProduct:'3.5',
-        topicProduct:'باغ',
-        locationProduct:'مازندران',
-        priceProduct:'25000',},
-
-    {numberOfRoomProduct:'2',
-        NumberOfCapacityProduct:'3',
-        rateProduct:'3.5',
-        topicProduct:'باغ',
-        locationProduct:'مازندران',
-        priceProduct:'25000',},
-
-    {numberOfRoomProduct:'1',
-        NumberOfCapacityProduct:'3',
-        rateProduct:'3.5',
-        topicProduct:'باغ',
-        locationProduct:'مازندران',
-        priceProduct:'25000',},
-
-    {numberOfRoomProduct:'4',
-        NumberOfCapacityProduct:'3',
-        rateProduct:'3.5',
-        topicProduct:'باغ',
-        locationProduct:'مازندران',
-        priceProduct:'25000',}
-];
-export const specifcation = [
-    {
-        name:' hamid ',
-        address:' tehran ',
-        code:100
-    },
-    {
-        name: ' hadi ',
-        address:'tehran',
-        code:200
-    },
-    {
-        name:' farhad ',
-        address:' tehran ',
-        code:300
-    }
-];
-export const name="farhad";
+export default testData;

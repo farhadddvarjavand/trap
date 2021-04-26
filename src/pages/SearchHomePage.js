@@ -8,10 +8,11 @@ import LogoName from "../images/LogoName.png"
 import MobileLogo from "../images/MobileLogo.png"
 import MobileMenu from "../images/MobileMenu.png"
 import {Link, Route, Switch,NavLink,BrowserRouter} from "react-router-dom"
+import Datas from "../data/Datas";
 
 
 
-class SearchHomePage extends Component {
+class SearchHomePage extends Datas {
     constructor(props) {
         super(props);
         this.state={
@@ -185,7 +186,9 @@ class SearchHomePage extends Component {
                                             <input type="checkbox" name="اقامت گاه های ضدعفونی شده" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>اقامت گاه های ضدعفونی شده</p>
                                         </MDBCol>
                                     </MDBRow>
-                                    <input type='button' value='جستجو اقامتگاه' className={'fv-searchMainPagesSearchButton'}/>
+                                    <input type='button' value='جستجو اقامتگاه' className={'fv-searchMainPagesSearchButton'} onClick={()=>{
+                                        this.postDataAndPush('https://reqres.in/api/posts','data','../../displayPage')
+                                    }}/>
 
                                 </MDBRow>
                             </MDBRow>

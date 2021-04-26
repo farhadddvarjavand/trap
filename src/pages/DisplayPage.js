@@ -11,17 +11,76 @@ import Product from "../componentsPages/Product";
 import TopicsMainPage from "../componentsPages/topicsMainPage";
 import Calender from "../componentsPages/calender";
 import HeaderSearch from "../componentsPages/HeaderSearch";
+import SearchHomePage from "./SearchHomePage";
+import Datas from "../data/Datas";
+import TestData from "../data/CalendarTest";
+import Calendar from 'react-calendar'
+import moment from 'moment'; // new
+import 'moment/locale/fa';   // new
 
-class SearchHomePage extends Component {
+import 'react-modern-calendar-datepicker/lib/DatePicker.css';
+import DatePicker from "react-modern-calendar-datepicker";
+
+
+class DisplayPage extends Datas {
     constructor(props) {
         super(props);
-
+        this.state = {
+            ...this.props,
+            ...this.state,
+            dateToGo:'',
+            dateToReturn:'',
+            numberOfPeople:'title',
+            date: new Date()
+        }
     }
+    weekdayshort = moment.weekdaysShort();
+    weekmonthshort = moment.monthsShort();
+     weekdayshortname = this.weekdayshort.map(day => {
+        return (
+            <th key={day} className="week-day">
+                {day}
+            </th>
+        );
+    });
+    weekdayshortnamemonth = this.weekmonthshort.map(month => {
+        return (
+            <th key={month} className="week-day">
+                {month}
+            </th>
+        );
+    });
+    onChange = date => this.setState({ date });
 
+
+
+    onDayClick = (e, day) => {
+        alert(day);
+    }
     render() {
+
+        console.log(this.weekdayshortname)
+        console.log(this.weekdayshortnamemonth)
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
+
+                    <DatePicker
+                        shouldHighlightWeekends
+                        locale="fa" // add this
+                    />
+                    <div className="App">
+                        <TestData  />
+                    </div>
+                    <Calendar
+                        view={this.state.date}
+                        returnValue={this.state.date}
+                        locale={'fa'}
+                        onChange={this.onChange}
+                        value={this.state.date}
+                        tileClassName="content"
+                    />
+
 
                     <HeaderSearch />
 
@@ -48,10 +107,14 @@ class SearchHomePage extends Component {
                                 <p className={"fv-DisplayPageDetailsRate fv-DisplayPageDetailsRateTop"}>  /4.5 <i className="fa fa-star" /> </p>
                         </MDBCol>
                         <MDBCol md={6} className={"fv-DisplayPageLike"}>
-                            <p> اضافه به علاقه مندی ها <i className="fas fa-heart" /></p>
+                            <a onClick={()=>this.postData('rl','data')}>
+                                <p> اضافه به علاقه مندی ها <i className="fas fa-heart"/></p>
+                            </a>
                         </MDBCol>
                         <MDBCol md={2} className={"fv-DisplayPageTitleShare"}>
+                            <a onClick={()=>this.postData('rl','data')}>
                             <p> به اشتراک گذاری <i className="fa fa-share-alt" aria-hidden="true" /></p>
+                            </a>
                         </MDBCol>
                     </MDBRow>
                     <MDBRow className={"fv-DisplayPageSearchProductImage"}>
@@ -67,7 +130,7 @@ class SearchHomePage extends Component {
                             </MDBRow>
                         </MDBCol>
                     </MDBRow>
-                    <MDBRow className={"fv-svgPagination fv-displayPageImagePaginationMobile"}>
+                    <MDBRow className={"efv-svgPagination fv-displayPageImagePaginationMobil"}>
                         <MDBCol md={12}>
                             <div className="slider_pagination">
                                 <button className="slider_pagination_btn slider_pagination_btn--sel" />
@@ -549,23 +612,24 @@ class SearchHomePage extends Component {
                                 <input type='text' value=' تاریخ خروج' className={"fv-DisplayPageDetailsLeftBodyDateOutText"} />
                             </MDBRow>
                             <MDBRow className={"fv-DisplayPageDetailsLeftTextDate"}>
-                                <input type='searchBbox' value=' انتخاب تاریخ' className={"fv-DisplayPageDetailsLeftBodyDateOnInput"} />
-                                <input type='searchBbox' value='انتخاب تاریخ' className={"fv-DisplayPageDetailsLeftBodyDateOutInput"} />
+                                <input type='searchBbox' placeholder=' انتخاب تاریخ' className={"fv-DisplayPageDetailsLeftBodyDateOnInput"} value={this.state.dateToGo} onChange={(event)=>this.setState({dateToGo:event.target.value})}  />
+                                <input type='searchBbox' placeholder='انتخاب تاریخ' className={"fv-DisplayPageDetailsLeftBodyDateOutInput"} value={this.state.dateToReturn} onChange={(event)=>this.setState({dateToReturn:event.target.value})}  />
                             </MDBRow>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftBodyCapacityText"}>
                             <input type='text' value=' تعداد نفرات'/>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftBodyCapacityOption"}>
-                            <select value={"Apple"}>
-                                <option value="A">Apple</option>
-                                <option value="B">Banana</option>
-                                <option value="C">Cranberry</option>
+                            <select value={this.state.numberOfPeople} onChange={(event)=>this.setState({numberOfPeople:event.target.value})}>
+                                <option value='title' disabled>تعداد نررات</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
                             </select>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftButton"}>
                             <MDBCol>
-                                <input type="button" value="درخواست رزرو"/>
+                                <input type="button" value="درخواست رزرو" onClick={()=>this.postData('','')}/>
                             </MDBCol>
                         </MDBRow>
                     </MDBCol>
@@ -622,4 +686,4 @@ class SearchHomePage extends Component {
             </MDBContainer>
         )}
 }
-export default SearchHomePage
+export default DisplayPage
