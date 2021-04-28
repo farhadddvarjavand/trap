@@ -263,7 +263,7 @@ class DisplayPage extends Datas {
                                 </MDBRow>
                             </MDBCol>
                         </MDBRow>
-                        <MDBRow className={'facilities'}>
+                        <div className={'facilities'}>
                             <MDBRow className={"fv-DisplayPageDetailsRightHomeImage pMobile"}>
                                 <p><i className="fas fa-home" /> خانه دربست </p>
                             </MDBRow>
@@ -276,7 +276,7 @@ class DisplayPage extends Datas {
                             <MDBRow className={"pMobile"}>
                                 <p><i className="fa fa-bed" aria-hidden="true" /> 1 تخت یک نفره+8 تشک معمولی </p>
                             </MDBRow>
-                        </MDBRow>
+                        </div>
 
                         <MDBRow className={"h4Mobile"}>
                             <h4>درباره اقامت گاه</h4>
