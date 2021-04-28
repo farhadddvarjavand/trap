@@ -12,25 +12,27 @@ import handleKeyboardNavigation from '../shared/keyboardNavigation';
 import { useLocaleUtils, useLocaleLanguage } from '../shared/hooks';
 
 const DaysList = ({
-  activeDate,
-  value,
-  monthChangeDirection,
-  onSlideChange,
-  disabledDays,
-  onDisabledDayError,
-  minimumDate,
-  maximumDate,
-  onChange,
-  locale,
-  calendarTodayClassName,
-  calendarSelectedDayClassName,
-  calendarRangeStartClassName,
-  calendarRangeEndClassName,
-  calendarRangeBetweenClassName,
-  shouldHighlightWeekends,
-  isQuickSelectorOpen,
-  customDaysClassName,
-}) => {
+                    activeDate,
+                    value,
+                    monthChangeDirection,
+                    onSlideChange,
+                    disabledDays,
+                    onDisabledDayError,
+                    minimumDate,
+                    maximumDate,
+                    onChange,
+                    locale,
+                    calendarTodayClassName,
+                    calendarSelectedDayClassName,
+                    calendarRangeStartClassName,
+                    calendarRangeEndClassName,
+                    calendarRangeBetweenClassName,
+                    shouldHighlightWeekends,
+                    isQuickSelectorOpen,
+                    customDaysClassName,
+    priceday,
+    testDay
+                  }) => {
   const calendarSectionWrapper = useRef(null);
   const { isRtl, weekDays: weekDaysList } = useLocaleLanguage(locale);
   const {
@@ -44,6 +46,8 @@ const DaysList = ({
   } = useLocaleUtils(locale);
   const today = getToday();
 
+  console.log(today.month)
+
   useEffect(() => {
     if (!monthChangeDirection) return;
     animateContent({
@@ -55,7 +59,7 @@ const DaysList = ({
   const getDayRangeValue = day => {
     const clonedDayRange = deepCloneObject(value);
     const dayRangeValue =
-      clonedDayRange.from && clonedDayRange.to ? { from: null, to: null } : clonedDayRange;
+        clonedDayRange.from && clonedDayRange.to ? { from: null, to: null } : clonedDayRange;
     const dayRangeProp = !dayRangeValue.from ? 'from' : 'to';
     dayRangeValue[dayRangeProp] = day;
     const { from, to } = dayRangeValue;
@@ -131,15 +135,15 @@ const DaysList = ({
     } = getDayStatus(dayItem);
     const customDayItemClassName = customDaysClassName.find(day => isSameDay(dayItem, day));
     const classNames = ''
-      .concat(isToday && !isSelected ? ` -today ${calendarTodayClassName}` : '')
-      .concat(!dayItem.isStandard ? ' -blank' : '')
-      .concat(dayItem.isWeekend && shouldHighlightWeekends ? ' -weekend' : '')
-      .concat(customDayItemClassName ? ` ${customDayItemClassName.className}` : '')
-      .concat(isSelected ? ` -selected ${calendarSelectedDayClassName}` : '')
-      .concat(isStartingDayRange ? ` -selectedStart ${calendarRangeStartClassName}` : '')
-      .concat(isEndingDayRange ? ` -selectedEnd ${calendarRangeEndClassName}` : '')
-      .concat(isWithinRange ? ` -selectedBetween ${calendarRangeBetweenClassName}` : '')
-      .concat(dayItem.isDisabled ? ' -disabled' : '');
+        .concat(isToday && !isSelected ? ` -today ${calendarTodayClassName}` : '')
+        .concat(!dayItem.isStandard ? ' -blank' : '')
+        .concat(dayItem.isWeekend && shouldHighlightWeekends ? ' -weekend' : '')
+        .concat(customDayItemClassName ? ` ${customDayItemClassName.className}` : '')
+        .concat(isSelected ? ` -selected ${calendarSelectedDayClassName}` : '')
+        .concat(isStartingDayRange ? ` -selectedStart ${calendarRangeStartClassName}` : '')
+        .concat(isEndingDayRange ? ` -selectedEnd ${calendarRangeEndClassName}` : '')
+        .concat(isWithinRange ? ` -selectedBetween ${calendarRangeBetweenClassName}` : '')
+        .concat(dayItem.isDisabled ? ' -disabled' : '');
     return classNames;
   };
 
@@ -163,13 +167,13 @@ const DaysList = ({
   };
 
   const isDayReachableByKeyboard = ({
-    isOnActiveSlide,
-    isStandard,
-    isSelected,
-    isStartingDayRange,
-    isToday,
-    day,
-  }) => {
+                                      isOnActiveSlide,
+                                      isStandard,
+                                      isSelected,
+                                      isStartingDayRange,
+                                      isToday,
+                                      day,
+                                    }) => {
     if (isQuickSelectorOpen || !isOnActiveSlide || !isStandard) return false;
     if (isSelected || isStartingDayRange || isToday || day === 1) return true;
   };
@@ -182,7 +186,7 @@ const DaysList = ({
     const isNotInValidRange = isStandard && (isBeforeMinimumDate || isAfterMaximumDate);
     const isDisabled = isInDisabledDaysRange || isNotInValidRange;
     const isWeekend = weekDaysList.some(
-      (weekDayItem, weekDayItemIndex) => weekDayItem.isWeekend && weekDayItemIndex === index,
+        (weekDayItem, weekDayItemIndex) => weekDayItem.isWeekend && weekDayItemIndex === index,
     );
     const additionalClass = getDayClassNames({ ...dayItem, isWeekend, isStandard, isDisabled });
     const dayLabel = `${weekDaysList[index].name}, ${day} ${getMonthName(month)} ${year}`;
@@ -197,43 +201,48 @@ const DaysList = ({
     });
 
 
-     const SetResults=(props)=> {
+    const SetResults=(props)=> {
       const [data, setData] = useState( [] );
-       if(isStandard){
-         setData([...data, props.days])
-       }
+      if(isStandard){
+        setData([...data, props.days])
+      }
 
-       {console.log(setData)}
-       return <p>a</p>
+      {console.log(setData)}
+      return <p>a</p>
     }
+
+
     const DaysClass='fv-DaysClass'
-    const test2 =[1,200000,3,4,5,6]
     return (
-      <div
-        tabIndex={shouldEnableKeyboardNavigation ? '0' : '-1'}
-        key={id}
-        className={`Calendar__day -${isRtl ? 'rtl' : 'ltr'} ${additionalClass}  ${DaysClass} `}
-        onClick={() => {
-          handleDayPress({ ...dayItem, isDisabled });
-        }}
-        onKeyDown={({ key }) => {
-          /* istanbul ignore else */
-          if (key === 'Enter') handleDayPress({ ...dayItem, isDisabled });
-        }}
-        aria-disabled={isDisabled}
-        aria-label={dayLabel}
-        aria-selected={isSelected || isStartingDayRange || isEndingDayRange || isWithinRange}
-        {...(!isStandard || !isOnActiveSlide || isQuickSelectorOpen ? { 'aria-hidden': true } : {})}
-        role="gridcell"
-        data-is-default-selectable={shouldEnableKeyboardNavigation}
-      >
+        <>
+        <div
+            tabIndex={shouldEnableKeyboardNavigation ? '0' : '-1'}
+            key={id}
+            className={`Calendar__day -${isRtl ? 'rtl' : 'ltr'} ${additionalClass}  ${DaysClass} `}
+            onClick={() => {
+              handleDayPress({ ...dayItem, isDisabled });
+            }}
+            onKeyDown={({ key }) => {
+              /* istanbul ignore else */
+              if (key === 'Enter') handleDayPress({ ...dayItem, isDisabled });
+            }}
+            aria-disabled={isDisabled}
+            aria-label={dayLabel}
+            aria-selected={isSelected || isStartingDayRange || isEndingDayRange || isWithinRange}
+            {...(!isStandard || !isOnActiveSlide || isQuickSelectorOpen ? { 'aria-hidden': true } : {})}
+            role="gridcell"
+            data-is-default-selectable={shouldEnableKeyboardNavigation}
+        >
 
 
-       <div className={'fv-test2'}>{!isStandard ? '' : getLanguageDigits(day) }</div>
-     <div className={'fv-test'}>{!isStandard ? '' : test2[day-1] }</div>
+          <div className={'fv-test2'}>{!isStandard ? '' : getLanguageDigits(day) }</div>
 
-      </div>
+          {dayItem.month ===  2 ? <div className={'fv-test'}>{!isStandard ? '' : priceday[day-1] }</div> :''}
+          { /*dayItem.month ===  3 ? !isStandard ? '' : getLanguageDigits(day)  : '' */}
 
+        </div>
+
+          </>
     );
   };
 
@@ -247,12 +256,12 @@ const DaysList = ({
     const allDays = getViewMonthDays(date);
     const renderSingleWeekRow = weekRowIndex => {
       const eachWeekDays = allDays
-        .slice(weekRowIndex * 7, weekRowIndex * 7 + 7)
-        .map(renderEachWeekDays);
+          .slice(weekRowIndex * 7, weekRowIndex * 7 + 7)
+          .map(renderEachWeekDays);
       return (
-        <div key={String(weekRowIndex)} className="Calendar__weekRow" role="row">
-          {eachWeekDays}
-        </div>
+          <div key={String(weekRowIndex)} className="Calendar__weekRow" role="row">
+            {eachWeekDays}
+          </div>
       );
     };
     return Array.from(Array(6).keys()).map(renderSingleWeekRow);
@@ -263,34 +272,34 @@ const DaysList = ({
   };
 
   return (
-    <div
-      ref={calendarSectionWrapper}
-      className="Calendar__sectionWrapper"
-      role="presentation"
-      data-testid="days-section-wrapper"
-      onKeyDown={handleKeyDown}
-    >
       <div
-        onAnimationEnd={e => {
-          handleSlideAnimationEnd(e);
-          onSlideChange();
-        }}
-        className="Calendar__section -shown"
-        role="rowgroup"
+          ref={calendarSectionWrapper}
+          className="Calendar__sectionWrapper"
+          role="presentation"
+          data-testid="days-section-wrapper"
+          onKeyDown={handleKeyDown}
       >
-        {renderMonthDays(true)}
+        <div
+            onAnimationEnd={e => {
+              handleSlideAnimationEnd(e);
+              onSlideChange();
+            }}
+            className="Calendar__section -shown"
+            role="rowgroup"
+        >
+          {renderMonthDays(true)}
+        </div>
+        <div
+            onAnimationEnd={e => {
+              handleSlideAnimationEnd(e);
+              onSlideChange();
+            }}
+            className="Calendar__section -hiddenNext"
+            role="rowgroup"
+        >
+          {renderMonthDays(false)}
+        </div>
       </div>
-      <div
-        onAnimationEnd={e => {
-          handleSlideAnimationEnd(e);
-          onSlideChange();
-        }}
-        className="Calendar__section -hiddenNext"
-        role="rowgroup"
-      >
-        {renderMonthDays(false)}
-      </div>
-    </div>
   );
 };
 

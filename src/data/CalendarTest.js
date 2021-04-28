@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import "react-modern-calendar-datepicker/lib/DatePicker.css";
+import "./Calendar/DatePicker.css";
 import { Calendar2 } from "react-modern-calendar-datepicker";
 import {Calendar} from "./Calendar";
 import  './style/CalendarTest.scss'
+import SetPrice from './Calendar/components/DaysList'
 
 const CalendarTest = () => {
     const defaultDay =[
@@ -34,9 +35,13 @@ const CalendarTest = () => {
         defaultRange
     );
     const [selectedDay, setSelectedDay] = useState(null);
-
+    const  test2 = [1,2,3,4,5]
+    const testname = () =>{
+      /* return ({const [theArray, setTheArray] = useState([]); })*/
+    }
 
     const test = () =>{
+        console.log('hi')
         console.log(selectedDayRange)
         console.log(setSelectedDayRange)
     }
@@ -48,9 +53,13 @@ const CalendarTest = () => {
                 onChange={setSelectedDayRange}
                 customDaysClassName={defaultDay}
                 shouldHighlightWeekends
+                priceDays={[1,2000000,3,4]}
+                test = {testname}
 
 
             />
+
+
             {test()}
         </>
     );
