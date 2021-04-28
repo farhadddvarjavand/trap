@@ -13,13 +13,17 @@ import Calender from "../componentsPages/calender";
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import SearchHomePage from "./SearchHomePage";
 import Datas from "../data/Datas";
-import TestData from "../data/CalendarTest";
+
+import CalendarTest from "../data/CalendarTest";
 import Calendar from 'react-calendar'
 import moment from 'moment'; // new
 import 'moment/locale/fa';   // new
-
+import GoogleMapReact from 'google-map-react';
+import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 import DatePicker from "react-modern-calendar-datepicker";
+import {MapTest} from "../data/MapTest";
 
 
 class DisplayPage extends Datas {
@@ -31,7 +35,8 @@ class DisplayPage extends Datas {
             dateToGo:'',
             dateToReturn:'',
             numberOfPeople:'title',
-            date: new Date()
+            date: new Date(),
+            selectedPlace: ''
         }
     }
     weekdayshort = moment.weekdaysShort();
@@ -52,11 +57,25 @@ class DisplayPage extends Datas {
     });
     onChange = date => this.setState({ date });
 
-
+    static defaultProps = {
+        center: {
+            lat: 41.5,
+            lng: 54.6
+        },
+        zoom: 30
+    };
+    static mapStyles = {
+        width: '100%',
+        height: '100%'
+    };
 
     onDayClick = (e, day) => {
         alert(day);
     }
+    onMarkerClick = (e) => {
+        this.setState({selectedPlace: e.Name});
+    }
+
     render() {
 
         console.log(this.weekdayshortname)
@@ -65,14 +84,48 @@ class DisplayPage extends Datas {
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
 
-                    <DatePicker
+                    <DatePicker        /* calendar 1 => delete*/
                         shouldHighlightWeekends
                         locale="fa" // add this
                     />
-                    <div className="App">
-                        <TestData  />
+
+                    <div style={{ height: '50vh', width: '40%' }}>
+                        {/* <GoogleMapReact
+                            defaultCenter={this.props.center}
+                            defaultZoom={this.props.zoom}>
+
+                        </GoogleMapReact> */}
+
+                         <Map
+                            google={this.props.google}
+                            style={{width: '20vw', height: '45vh', 'top': '1.5rem'}}
+                            containerStyle={{width: '20vw', height: '30vh'}}
+                            initialCenter={{
+                                lat: this.props.lat,
+                                lng: this.props.lng
+                            }}
+                            zoom={15}>
+
+
+                            {this.props.markers && // Rendering single marker for supplier details map
+                            <Marker onClick={this.onMarkerClick}
+                                    name={this.state.selectedPlace} />
+                            }
+
+                            <InfoWindow onClose={this.onInfoWindowClose}>
+                                <h4>{this.state.selectedPlace}</h4>
+                            </InfoWindow>
+                        </Map>
+
+                        <MapTest
+                            lat='35.728270'
+                            lng='51.548488'/>
                     </div>
-                    <Calendar
+
+                    <div className="App">  {/* Main Calendar */}
+                        <CalendarTest  />
+                    </div>
+                    <Calendar      /* calendar 2 => delete  */
                         view={this.state.date}
                         returnValue={this.state.date}
                         locale={'fa'}
@@ -210,18 +263,21 @@ class DisplayPage extends Datas {
                                 </MDBRow>
                             </MDBCol>
                         </MDBRow>
-                        <MDBRow className={"fv-DisplayPageDetailsRightHomeImage pMobile"}>
-                            <p><i className="fas fa-home" /> خانه دربست </p>
+                        <MDBRow className={'facilities'}>
+                            <MDBRow className={"fv-DisplayPageDetailsRightHomeImage pMobile"}>
+                                <p><i className="fas fa-home" /> خانه دربست </p>
+                            </MDBRow>
+                            <MDBRow className={"pMobile"}>
+                                <p> <i className="fa fa-users" />  ظرفیت استاندار 4 نفر+4 نفر اضافه </p>
+                            </MDBRow>
+                            <MDBRow className={"pMobile"}>
+                                <p><i className="fa fa-building" /> 2 اتاق خواب+یک حمام+یک دست شویی </p>
+                            </MDBRow>
+                            <MDBRow className={"pMobile"}>
+                                <p><i className="fa fa-bed" aria-hidden="true" /> 1 تخت یک نفره+8 تشک معمولی </p>
+                            </MDBRow>
                         </MDBRow>
-                        <MDBRow className={"pMobile"}>
-                            <p> <i className="fa fa-users" />  ظرفیت استاندار 4 نفر+4 نفر اضافه </p>
-                        </MDBRow>
-                        <MDBRow className={"pMobile"}>
-                            <p><i className="fa fa-building" /> 2 اتاق خواب+یک حمام+یک دست شویی </p>
-                        </MDBRow>
-                        <MDBRow className={"pMobile"}>
-                            <p><i className="fa fa-bed" aria-hidden="true" /> 1 تخت یک نفره+8 تشک معمولی </p>
-                        </MDBRow>
+
                         <MDBRow className={"h4Mobile"}>
                             <h4>درباره اقامت گاه</h4>
                         </MDBRow>
@@ -467,7 +523,10 @@ class DisplayPage extends Datas {
                                         <input type="button" className={"fv-DisplayPageDetailsScoreButtonFirst"}/>
                                     </MDBCol >
                                     <MDBCol  md={4} sm={4}>
-                                       <input type="button" className={"fv-DisplayPageDetailsScoreButtonSecond"}/>
+                                       <input type="button" style={{
+                                           position: "absolute" ,
+                                           width: `${4.5*20}%` ,
+                                           background: "#15BE29"}}/>
                                     </MDBCol >
                                     <MDBCol md={1} sm={1}  className={"fv-DisplayPageDetailsScoreRateText"}>
                                         <p> 4.5 </p>
