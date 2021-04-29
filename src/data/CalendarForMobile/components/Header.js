@@ -37,9 +37,7 @@ const Header = ({
       parent: monthYearWrapperElement.current,
     });
   }, [monthChangeDirection]);
-  if(activeDate.month >12 ){                                    /* ezafe shod */
-  activeDate.month= 1
-  }
+
   useEffect(() => {
     const isOpen = isMonthSelectorOpen || isYearSelectorOpen;
     const monthText = headerElement.current.querySelector(
@@ -92,7 +90,6 @@ const Header = ({
       activeDate,
       parent: monthYearWrapperElement.current,
     });
-
     const year = getLanguageDigits(date.year);
     const month = getMonthName(date.month);
     return { month, year };
@@ -138,7 +135,6 @@ const Header = ({
           {...hiddenStatus}
         >
           {month}
-
         </button>
         <button
           onClick={onYearSelect}

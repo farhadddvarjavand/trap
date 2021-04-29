@@ -1,12 +1,13 @@
+
 import React, { useState } from "react";
+
 import "./Calendar/DatePicker.css";
-import { Calendar2 } from "react-modern-calendar-datepicker";
-import {Calendar} from "./Calendar";
 
 import  './style/CalendarTest.scss'
-import SetPrice from './Calendar/components/DaysList'
+import {Calendar} from "./CalendarForMobile"
 
-const CalendarTest = () => {
+const CalendarForMobilejs = () => {
+
     const defaultDay =[
         // here we add some CSS classes
         { year: 1400, month: 2, day: 12, className: 'orangeDay' },
@@ -16,13 +17,13 @@ const CalendarTest = () => {
     ];
 
     const defaultFrom = {
-        year: 1300,
+        year: 1400,
         month: 2,
         day: 4,
     };
 
     const defaultTo = {
-        year: 1300,
+        year: 1400,
         month: 2,
         day: 4,
     };
@@ -32,14 +33,13 @@ const CalendarTest = () => {
         to: defaultTo,
     };
 
-    console.log('aaaa')
     const [selectedDayRange, setSelectedDayRange] = useState(
         defaultRange
     );
     const [selectedDay, setSelectedDay] = useState(null);
     const  test2 = [1,2,3,4,5]
     const testname = () =>{
-      /* return ({const [theArray, setTheArray] = useState([]); })*/
+        /* return ({const [theArray, setTheArray] = useState([]); })*/
     }
 
     const test = () =>{
@@ -59,7 +59,6 @@ const CalendarTest = () => {
                 test = {testname}
 
 
-
             />
 
 
@@ -68,4 +67,4 @@ const CalendarTest = () => {
     );
 };
 
-export default CalendarTest;
+export default CalendarForMobilejs;

@@ -151,4 +151,11 @@ abbr[data-original-title], abbr[title] {
   text-decoration-skip-ink: none;
 }
 
-
+.Calendar.-rtl .Calendar__section.-hiddenPrevious {
+  transform: translateX(100%);
+  opacity: -1;
+}
+.Calendar.-rtl .Calendar__section.-hiddenNext {
+  transform: translateX(100%);
+  opacity: -1;
+}

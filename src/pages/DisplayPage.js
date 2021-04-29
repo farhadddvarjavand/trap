@@ -24,6 +24,7 @@ import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 import DatePicker from "react-modern-calendar-datepicker";
 import {MapTest} from "../data/MapTest";
+import CalendarForMobile from "../data/CalendarForMobilejs";
 
 
 class DisplayPage extends Datas {
@@ -78,25 +79,23 @@ class DisplayPage extends Datas {
 
     render() {
 
-        console.log(this.weekdayshortname)
-        console.log(this.weekdayshortnamemonth)
+      /*  console.log(this.weekdayshortname)
+        console.log(this.weekdayshortnamemonth) */
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-
-                    <DatePicker        /* calendar 1 => delete*/
+                    {/*  <DatePicker
                         shouldHighlightWeekends
                         locale="fa" // add this
                     />
-
                     <div style={{ height: '50vh', width: '40%' }}>
-                        {/* <GoogleMapReact
+                         <GoogleMapReact
                             defaultCenter={this.props.center}
                             defaultZoom={this.props.zoom}>
 
                         </GoogleMapReact> */}
 
-                         <Map
+                        {/*  <Map
                             google={this.props.google}
                             style={{width: '20vw', height: '45vh', 'top': '1.5rem'}}
                             containerStyle={{width: '20vw', height: '30vh'}}
@@ -105,34 +104,33 @@ class DisplayPage extends Datas {
                                 lng: this.props.lng
                             }}
                             zoom={15}>
-
-
                             {this.props.markers && // Rendering single marker for supplier details map
                             <Marker onClick={this.onMarkerClick}
                                     name={this.state.selectedPlace} />
                             }
-
                             <InfoWindow onClose={this.onInfoWindowClose}>
                                 <h4>{this.state.selectedPlace}</h4>
                             </InfoWindow>
                         </Map>
-
-                        <MapTest
-                            lat='35.728270'
-                            lng='51.548488'/>
-                    </div>
-
-                    <div className="App">  {/* Main Calendar */}
-                        <CalendarTest  />
-                    </div>
-                    <Calendar      /* calendar 2 => delete  */
+                         */}
+                    {/* <Calendar
                         view={this.state.date}
                         returnValue={this.state.date}
                         locale={'fa'}
                         onChange={this.onChange}
                         value={this.state.date}
                         tileClassName="content"
-                    />
+                    /> */}
+                        <MapTest
+                            lat='35.728270'
+                            lng='51.548488'/>
+
+
+                    <div className="App">  {/* Main Calendar */}
+                        <CalendarTest  />
+                    </div>
+                    <CalendarForMobile />
+
 
 
                     <HeaderSearch />

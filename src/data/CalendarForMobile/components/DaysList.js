@@ -30,8 +30,8 @@ const DaysList = ({
                     shouldHighlightWeekends,
                     isQuickSelectorOpen,
                     customDaysClassName,
-    priceday,
-    testDay
+                    priceday,
+                    testDay
                   }) => {
   const calendarSectionWrapper = useRef(null);
   const { isRtl, weekDays: weekDaysList } = useLocaleLanguage(locale);
@@ -46,7 +46,7 @@ const DaysList = ({
   } = useLocaleUtils(locale);
   const today = getToday();
 
-   /* console.log(today.month) */
+  /* console.log(today.month) */
 
   useEffect(() => {
     if (!monthChangeDirection) return;
@@ -217,34 +217,34 @@ const DaysList = ({
     const DaysClass='fv-DaysClass'
     return (
         <>
-        <div
-            tabIndex={shouldEnableKeyboardNavigation ? '0' : '-1'}
-            key={id}
-            className={`Calendar__day -${isRtl ? 'rtl' : 'ltr'} ${additionalClass}  ${DaysClass} `}
-            onClick={() => {
-              handleDayPress({ ...dayItem, isDisabled });
-            }}
-            onKeyDown={({ key }) => {
-              /* istanbul ignore else */
-              if (key === 'Enter') handleDayPress({ ...dayItem, isDisabled });
-            }}
-            aria-disabled={isDisabled}
-            aria-label={dayLabel}
-            aria-selected={isSelected || isStartingDayRange || isEndingDayRange || isWithinRange}
-            {...(!isStandard || !isOnActiveSlide || isQuickSelectorOpen ? { 'aria-hidden': true } : {})}
-            role="gridcell"
-            data-is-default-selectable={shouldEnableKeyboardNavigation}
-        >
+          <div
+              tabIndex={shouldEnableKeyboardNavigation ? '0' : '-1'}
+              key={id}
+              className={`Calendar__day -${isRtl ? 'rtl' : 'ltr'} ${additionalClass}  ${DaysClass} `}
+              onClick={() => {
+                handleDayPress({ ...dayItem, isDisabled });
+              }}
+              onKeyDown={({ key }) => {
+                /* istanbul ignore else */
+                if (key === 'Enter') handleDayPress({ ...dayItem, isDisabled });
+              }}
+              aria-disabled={isDisabled}
+              aria-label={dayLabel}
+              aria-selected={isSelected || isStartingDayRange || isEndingDayRange || isWithinRange}
+              {...(!isStandard || !isOnActiveSlide || isQuickSelectorOpen ? { 'aria-hidden': true } : {})}
+              role="gridcell"
+              data-is-default-selectable={shouldEnableKeyboardNavigation}
+          >
 
 
-          <div className={'fv-test2'}>{!isStandard ? '' : getLanguageDigits(day) }</div>
+            <div className={'fv-test2'}>{!isStandard ? '' : getLanguageDigits(day) }</div>
 
-          {dayItem.month ===  2 && dayItem.year===1400? <div className={'fv-test'}>{!isStandard ? '' : priceday[day-1] }</div> :''}
-          { /*dayItem.month ===  3 ? !isStandard ? '' : getLanguageDigits(day)  : '' */}
+            {dayItem.month ===  2 && dayItem.year===1400? <div className={'fv-test'}>{!isStandard ? '' : priceday[day-1] }</div> :''}
+            { /*dayItem.month ===  3 ? !isStandard ? '' : getLanguageDigits(day)  : '' */}
 
-        </div>
+          </div>
 
-          </>
+        </>
     );
   };
 
