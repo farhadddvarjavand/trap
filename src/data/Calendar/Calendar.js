@@ -45,11 +45,16 @@ const Calendar = ({
       /* istanbul ignore else */
       if (key === 'Tab') calendarElement.current.classList.remove('-noFocusOutline');
     };
-    calendarElement.current.addEventListener('keyup', handleKeyUp, false);
-    return () => {
-      calendarElement.current.removeEventListener('keyup', handleKeyUp, false);
-    };
+    if(calendarElement.current.removeEventListener('keyup', handleKeyUp, false)){
+      calendarElement.current.addEventListener('keyup', handleKeyUp, false);
+
+      return () => {
+        calendarElement.current.removeEventListener('keyup', handleKeyUp, false);
+      };
+    }
+
   });
+
 
   const { getToday } = useLocaleUtils(locale);
   const { weekDays: weekDaysList, isRtl } = useLocaleLanguage(locale);
@@ -178,6 +183,10 @@ const Calendar = ({
    /* console.log( mainState.activeDate.monthChangeDirection)
     console.log(1)*/
   };
+
+
+
+
   const handleMonthChangeRight= direction => {
     const getToddayDate ={
       year:today.year,
@@ -205,6 +214,54 @@ const Calendar = ({
   /*  console.log( mainState.activeDate.monthChangeDirection)
     console.log(1) */
   };
+  const handleMonthChangeLeftPlusOne= direction => {
+    const getToddayDate ={
+      year:today.year,
+      month:today.month+2,
+      day:today.day
+    }
+
+    if(mainState.activeDate){
+      mainState.activeDate.month=mainState.activeDate.month+1
+      if( mainState.activeDate.month>=12 || mainState.activeDate.month<1) {mainState.activeDate.year=mainState.activeDate.year+1
+        mainState.activeDate.month= mainState.activeDate.month+1 }
+
+    }else {mainState.activeDate= getToddayDate}
+
+    setMainState({
+      ...mainState,
+      monthChangeDirection: direction,
+    });
+
+    /* console.log( mainState.activeDate.monthChangeDirection)
+     console.log(1)*/
+  };
+
+
+
+  const handleMonthChangeRightPlusOne= direction => {
+    const getToddayDate ={
+      year:today.year,
+      month:today.month+1,
+      day:today.day
+    }
+
+    if(mainState.activeDate){
+      mainState.activeDate.month=mainState.activeDate.month+1
+      if( 2>= mainState.activeDate.month ){
+        mainState.activeDate.month=mainState.activeDate.month-2
+      }
+    }else {mainState.activeDate= getToddayDate}
+
+    setMainState({
+      ...mainState,
+      monthChangeDirection: direction,
+    });
+
+    /* console.log( mainState.activeDate.monthChangeDirection)
+     console.log(1)*/
+  };
+
 
 
   if(value.from.year === 1300 && value.from.day === 4  ){
@@ -246,7 +303,7 @@ const Calendar = ({
         maximumDate={maximumDate}
         minimumDate={minimumDate}
         activeDate={activeDate}
-        onMonthChange={handleMonthChange}
+        onMonthChange={handleMonthChangeRightPlusOne}
         onMonthSelect={toggleMonthSelector}
         onYearSelect={toggleYearSelector}
         /* monthChangeDirection={mainState.monthChangeDirection} */
@@ -327,7 +384,7 @@ const Calendar = ({
         maximumDate={maximumDate}
         minimumDate={minimumDate}
         activeDate={activedateLeft}
-        onMonthChange={handleMonthChangeLeftt}
+        onMonthChange={handleMonthChangeLeftPlusOne}
         onMonthSelect={toggleMonthSelector}
         onYearSelect={toggleYearSelector}
         /* monthChangeDirection={mainState.monthChangeDirection} */

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Calendar/DatePicker.css";
-import { Calendar2 } from "react-modern-calendar-datepicker";
+import { Calendar2 } from '@hassanmojab/react-modern-calendar-datepicker';
 import {Calendar} from "./Calendar";
 
 import  './style/CalendarTest.scss'
@@ -62,8 +62,6 @@ const CalendarTest = () => {
 
             />
 
-
-            {test()}
         </>
     );
 };

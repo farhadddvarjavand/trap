@@ -491,6 +491,33 @@ display: none;
     margin-bottom: 4%;
 }
 
+.fv-DisplayPage .fv-DisplayPageDetailsLeftBodyDateOnInput input , .fv-DisplayPage .fv-DisplayPageDetailsLeftBodyDateOutInput input{
+    width: 108%;
+    height: 39px;
+    margin-right: -8%;
+    margin-top: 4%;
+    margin-bottom: -10%;
+    text-align: initial;
+    border: none;
+}
+.fv-DisplayPageMenu .col-md-2 , .fv-DisplayPageMenu .col-md-1{
+    transform-origin: center;
+    text-align: center;
+}
+.fv-DisplayPageMenu .col-md-2 .slider_pagination_btn_Unselected.slider_pagination_btn {
+    margin-left: 43%;
+}
+.fv-DisplayPage .fv-displayActive{
+    display: block;
+}
+.fv-DisplayPage .fv-displayDeActive{
+    display: none;
+}
+.fv-DisplayPageDetailsّFacilities .col-md-1 button, .fv-DisplayPageDetailsّFacilities .col-md-1 input {
+    width: 20px;
+    height: 25px;
+}
+
 
 
 @media (max-width: 1200px) {

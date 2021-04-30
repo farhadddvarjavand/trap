@@ -25,6 +25,7 @@ import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 import DatePicker from "react-modern-calendar-datepicker";
 import {MapTest} from "../data/MapTest";
 import CalendarForMobile from "../data/CalendarForMobilejs";
+import CalendarLinear from "../data/CalenddarLinear";
 
 
 class DisplayPage extends Datas {
@@ -33,14 +34,22 @@ class DisplayPage extends Datas {
         this.state = {
             ...this.props,
             ...this.state,
-            dateToGo:'',
+            dateToGo: {
+                day:'انتخاب تاریخ',
+                month:'',
+                year : ''
+            },
             dateToReturn:'',
             numberOfPeople:'title',
+            displayButtonName:'',
+
             date: new Date(),
-            selectedPlace: ''
+            selectedPlace: '',
+
         }
     }
-    weekdayshort = moment.weekdaysShort();
+
+    /*weekdayshort = moment.weekdaysShort();
     weekmonthshort = moment.monthsShort();
      weekdayshortname = this.weekdayshort.map(day => {
         return (
@@ -68,13 +77,29 @@ class DisplayPage extends Datas {
     static mapStyles = {
         width: '100%',
         height: '100%'
-    };
-
-    onDayClick = (e, day) => {
+    }; */
+  /*  onDayClick = (e, day) => {
         alert(day);
     }
     onMarkerClick = (e) => {
         this.setState({selectedPlace: e.Name});
+    } */
+
+    static date = ''
+    selectDay = (date) =>{
+        const day = this.state.dateToGo.day
+        if(date) {this.setState(prevstate =>({
+            dateToGo: {
+                ...prevstate.day,
+                ...prevstate.month,
+                ...prevstate.year,
+                day: date.day,
+                month: date.month+'/',
+                year: date.year+'/',
+            }
+        }))
+            console.log(date)
+            console.log('date')}
     }
 
     render() {
@@ -125,7 +150,6 @@ class DisplayPage extends Datas {
                             lat='35.728270'
                             lng='51.548488'/>
 
-
                     <div className="App">  {/* Main Calendar */}
                         <CalendarTest  />
                     </div>
@@ -168,6 +192,10 @@ class DisplayPage extends Datas {
                             </a>
                         </MDBCol>
                     </MDBRow>
+
+
+                   <div> { /* className={this.state.displayButtonName === 'pictures' ? 'fv-displayActive' :  'fv-displayDeActive'} */ }                              {/*        fv-Pictures     */}
+
                     <MDBRow className={"fv-DisplayPageSearchProductImage"}>
                         <MDBCol md={8} sm={12}>
                             <img className={"fv-aboutUsThirdImageRight"} src="https://www.w3schools.com/html/pic_trulli.jpg" />
@@ -198,41 +226,45 @@ class DisplayPage extends Datas {
                         <a> مشاهده تصویر بیشتر <i className="fas fa-angle-left" /></a>
                     </MDBCol>
                 </MDBRow>
+
+                </div>                                              {/*        fv-Pictures     */}
+
+
                 <MDBRow className={"fv-DisplayPageMenu"}>
                     <MDBCol md={1} sm={2}>
-                        <a>    تصاویر    </a>
+                        <a name={'pictures'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}> تصاویر</a>
                         <MDBRow>
-                            <button className="slider_pagination_btn slider_pagination_btn_Unselected" />
+                            <button className={this.state.displayButtonName === 'pictures' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                         </MDBRow>
                     </MDBCol>
                     <MDBCol md={1} sm={2}>
-                        <a>امکانات</a>
+                        <a name={'facilities'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}>امکانات</a>
                         <MDBRow>
-                            <button className="slider_pagination_btn slider_pagination_btn_Unselected" />
+                            <button className={this.state.displayButtonName === 'facilities' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                         </MDBRow>
                     </MDBCol>
                     <MDBCol md={1} sm={2}>
-                        <a>آدرس</a>
+                        <a name={'Address'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}>آدرس</a>
                         <MDBRow>
-                            <button className="slider_pagination_btn slider_pagination_btn_Unselected" />
+                            <button className={this.state.displayButtonName === 'Address' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                         </MDBRow>
                     </MDBCol>
                     <MDBCol md={2} className={"fv-DisplayPageMenuRows"} >
-                        <a>قوانین اقامتگاه</a>
+                        <a  name={'Roles'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}>قوانین اقامتگاه</a>
                         <MDBRow>
-                            <button className="slider_pagination_btn" />
+                            <button className={this.state.displayButtonName === 'Roles' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                         </MDBRow>
                     </MDBCol>
                     <MDBCol sm={2} className={"fv-DisplayPageMenuRowsMobile"}>
-                        <a> قوانین</a>
+                        <a name={'Roles'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}> قوانین</a>
                         <MDBRow>
-                            <button className="slider_pagination_btn" />
+                            <button className={this.state.displayButtonName === 'Roles' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                         </MDBRow>
                     </MDBCol>
                     <MDBCol md={1} sm={2}>
-                        <a>نظرات</a>
+                        <a name={'Comments'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}>نظرات</a>
                         <MDBRow>
-                                <button className="slider_pagination_btn slider_pagination_btn_Unselected" />
+                            <button className={this.state.displayButtonName === 'Comments' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                         </MDBRow>
                     </MDBCol>
                 </MDBRow>
@@ -261,7 +293,8 @@ class DisplayPage extends Datas {
                                 </MDBRow>
                             </MDBCol>
                         </MDBRow>
-                        <div className={'facilities'}>
+
+                        <div  className={this.state.displayButtonName === 'facilities' ? 'fv-displayActive' :  'fv-displayDeActive'}>                                            {/*    fv-facilities      */}
                             <MDBRow className={"fv-DisplayPageDetailsRightHomeImage pMobile"}>
                                 <p><i className="fas fa-home" /> خانه دربست </p>
                             </MDBRow>
@@ -274,8 +307,6 @@ class DisplayPage extends Datas {
                             <MDBRow className={"pMobile"}>
                                 <p><i className="fa fa-bed" aria-hidden="true" /> 1 تخت یک نفره+8 تشک معمولی </p>
                             </MDBRow>
-                        </div>
-
                         <MDBRow className={"h4Mobile"}>
                             <h4>درباره اقامت گاه</h4>
                         </MDBRow>
@@ -450,14 +481,22 @@ class DisplayPage extends Datas {
                             </MDBCol>
                         </MDBRow>
 
-                        <MDBRow className={"fv-DisplayPageCalender"}>
-                            <MDBCol md={6}>
-                                <Calender />
-                            </MDBCol>
-                            <MDBCol md={6} className={"fv-calenderDisplayNonMobile"}>
-                                <Calender />
-                            </MDBCol>
-                        </MDBRow>
+                            <MDBRow className={"fv-DisplayPageCalender"}>                  {/*    calender-calendar     */}
+                                <MDBCol md={6}>
+                                    <Calender />
+                                </MDBCol>
+                                <MDBCol md={6} className={"fv-calenderDisplayNonMobile"}>
+                                    <Calender />
+                                </MDBCol>
+                            </MDBRow>
+                        </div>                                                             {/*         fv-facilities          */}
+
+
+
+
+
+                        <div    className={this.state.displayButtonName === 'Roles' ? 'fv-displayActive' :  'fv-displayDeActive'}>                                      {/*        fv-Roles     */}
+
 
                         <MDBRow>
                             <h4> قوانین </h4>
@@ -481,6 +520,11 @@ class DisplayPage extends Datas {
                             <h5>امکان برگزاری مراسم </h5><p>مجاز است،</p>
                         </MDBRow>
 
+                        </div>                                                             {/*        fv-Roles     */}
+
+
+                        <div className={this.state.displayButtonName === 'Address' ? 'fv-displayActive' :  'fv-displayDeActive'}>                                        {/*        fv-Address     */}
+
                         <MDBRow>
                             <h4> آدرس </h4>
                         </MDBRow>
@@ -491,6 +535,12 @@ class DisplayPage extends Datas {
                         <MDBRow className={"fv-displayPageMap"}>
                             <img src="https://snazzy-maps-cdn.azureedge.net/assets/8097-wy.png?v=20170626083314"/>
                         </MDBRow>
+
+
+                        </div>                                                              {/*        fv-Address     */}
+
+
+                        <div className={this.state.displayButtonName === 'Comments' ? 'fv-displayActive' :  'fv-displayDeActive'}>                                  {/*        fv-Comments     */}
 
                         <MDBRow className={"fv-DisplayPageDetailsRightingComment"}>
                             <MDBCol md={9}>
@@ -655,6 +705,8 @@ class DisplayPage extends Datas {
                             <input type='button' value='2'/>
                         </MDBRow>
 
+                        </div>                                                              {/*        fv-Comments     */}
+
                     </MDBCol>
                     <MDBCol md={4} className={"fv-DisplayPageDetailsLeftBody"}>
                         <MDBRow>
@@ -669,9 +721,11 @@ class DisplayPage extends Datas {
                                 <input type='text' value=' تاریخ خروج' className={"fv-DisplayPageDetailsLeftBodyDateOutText"} />
                             </MDBRow>
                             <MDBRow className={"fv-DisplayPageDetailsLeftTextDate"}>
-                                <input type='searchBbox' placeholder=' انتخاب تاریخ' className={"fv-DisplayPageDetailsLeftBodyDateOnInput"} value={this.state.dateToGo} onChange={(event)=>this.setState({dateToGo:event.target.value})}  />
-                                <input type='searchBbox' placeholder='انتخاب تاریخ' className={"fv-DisplayPageDetailsLeftBodyDateOutInput"} value={this.state.dateToReturn} onChange={(event)=>this.setState({dateToReturn:event.target.value})}  />
+                                <div  className={"fv-DisplayPageDetailsLeftBodyDateOnInput"} onChange={()=>alert(1)}>  <CalendarLinear dayToGo={this.selectDay} setOne={this.state.setOne} /> </div>
+                                <div  className={"fv-DisplayPageDetailsLeftBodyDateOutInput"} >  <CalendarLinear /> </div>
+                                <a><button><a> <CalendarLinear dayToGo={this.selectDay} /> {this.state.dateToGo.year}{this.state.dateToGo.month}{this.state.dateToGo.day}</a> </button></a>
                             </MDBRow>
+                            {console.log(this.state.dateToGo)}
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftBodyCapacityText"}>
                             <input type='text' value=' تعداد نفرات'/>
