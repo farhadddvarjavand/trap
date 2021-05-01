@@ -39,7 +39,12 @@ class DisplayPage extends Datas {
                 month:'',
                 year : ''
             },
-            dateToReturn:'',
+            dateToReturn: {
+                day:'انتخاب تاریخ',
+                month:'',
+                year : ''
+            },
+            facilitiesCheckbox:[],
             numberOfPeople:'title',
             displayButtonName:'',
 
@@ -84,26 +89,57 @@ class DisplayPage extends Datas {
     onMarkerClick = (e) => {
         this.setState({selectedPlace: e.Name});
     } */
+    setFacilitiesCheckbox =(event) =>{
+        let repeat = false
+        const setData= this.state.facilitiesCheckbox
+        if(event.target.checked === false){
+            const index = setData.indexOf(event.target.name)
+            if (index !== -1) {
+                setData.splice(index, 1);
+                this.setState({facilitiesCheckbox:setData})
+            }
+        } else {
+            setData.map(checked=>{
+                if(checked === event.target.name){
+                    repeat=true
+                }
+            })
+            if(repeat === false){
+                setData.push(event.target.name)
+                this.setState({facilitiesCheckbox:setData})
+            }
+        }
+    }
 
-    static date = ''
-    selectDay = (date) =>{
-        const day = this.state.dateToGo.day
+    selectDayToGo = (date) =>{                                    // set date to go
         if(date) {this.setState(prevstate =>({
             dateToGo: {
                 ...prevstate.day,
                 ...prevstate.month,
                 ...prevstate.year,
                 day: date.day,
-                month: date.month+'/',
-                year: date.year+'/',
+                month: date.month,
+                year: date.year
             }
         }))
             console.log(date)
             console.log('date')}
     }
+    selectDayToReturn = (date) =>{                               // set date to return
+        if(date) {this.setState(prevState => ({
+            dateToReturn:{
+                ...prevState.day ,
+                ...prevState.month ,
+                ...prevState.year ,
+                day: date.day,
+                month: date.month,
+                year: date.year
+            }
+        }))}
+    }
+
 
     render() {
-
       /*  console.log(this.weekdayshortname)
         console.log(this.weekdayshortnamemonth) */
         return(
@@ -334,38 +370,42 @@ class DisplayPage extends Datas {
                         <MDBRow>
                             <h4> امکانات </h4>
                         </MDBRow>
-                        <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
-                            <MDBCol md={4} sm={6}>
-                                <p> <i className="fa fa-broom" /> جارو برقی </p>
-                            </MDBCol>
-                            <MDBCol md={8} sm={6}>
-                                <p> <i className="fas fa-wifi" /> اینترنت رایگان </p>
-                            </MDBCol>
-                        </MDBRow>
-                        <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
-                            <MDBCol md={4} sm={6}>
-                                <p> <i className="fas fa-phone" /> تلفن </p>
-                            </MDBCol>
-                            <MDBCol md={8} sm={6}>
-                                <p><i className="fas fa-box" />  جعبه کمک های اولیه </p>
-                            </MDBCol>
-                        </MDBRow>
-                        <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
-                            <MDBCol md={4} sm={6}>
-                                <p> <i className="fas fa-pray" /> مهر و جانماز </p>
-                            </MDBCol>
-                            <MDBCol md={8} sm={6}>
-                                <p><i className="fas fa-tv" /> تلوزیون </p>
-                            </MDBCol>
-                        </MDBRow>
-                        <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
-                            <MDBCol md={4} sm={6}>
-                                <p><i className="fa fa-door-closed" /> یخچال </p>
-                            </MDBCol>
-                            <MDBCol md={8} sm={6}>
-                                <p><i className="fa fa-calendar-minus" /> اجاق گاز </p>
-                            </MDBCol>
-                        </MDBRow>
+
+                            <div>
+                                <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
+                                    <MDBCol md={4} sm={6}>
+                                        <p> <i className="fa fa-broom" /> جارو برقی </p>
+                                    </MDBCol>
+                                    <MDBCol md={8} sm={6}>
+                                        <p> <i className="fas fa-wifi" /> اینترنت رایگان </p>
+                                    </MDBCol>
+                                </MDBRow>
+                                <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
+                                    <MDBCol md={4} sm={6}>
+                                        <p> <i className="fas fa-phone" /> تلفن </p>
+                                    </MDBCol>
+                                    <MDBCol md={8} sm={6}>
+                                        <p><i className="fas fa-box" />  جعبه کمک های اولیه </p>
+                                    </MDBCol>
+                                </MDBRow>
+                                <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
+                                    <MDBCol md={4} sm={6}>
+                                        <p> <i className="fas fa-pray" /> مهر و جانماز </p>
+                                    </MDBCol>
+                                    <MDBCol md={8} sm={6}>
+                                        <p><i className="fas fa-tv" /> تلوزیون </p>
+                                    </MDBCol>
+                                </MDBRow>
+                                <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
+                                    <MDBCol md={4} sm={6}>
+                                        <p><i className="fa fa-door-closed" /> یخچال </p>
+                                    </MDBCol>
+                                    <MDBCol md={8} sm={6}>
+                                        <p><i className="fa fa-calendar-minus" /> اجاق گاز </p>
+                                    </MDBCol>
+                                </MDBRow>
+                            </div>
+
                         <MDBRow  className={"fv-DisplayPageّMoreFacilities"}>
                             <p>مشاهده امکانات بیشتر</p>
                         </MDBRow>
@@ -376,10 +416,10 @@ class DisplayPage extends Datas {
                             <h5>هر کدام از امکانات زیر که دوست دارید انتخاب کنید تا به شما در سفر حس بهتری بدهد </h5>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsّFacilities fv-DisplayPageTomanTitle"}>
-                            <MDBCol>
+                            <MDBCol sm={12} md={12}>
                                 <MDBRow>
                                     <MDBCol md={1} sm={1}>
-                                        <input type="checkbox"/>
+                                        <input type="checkbox"  name="آشپز" onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
                                     </MDBCol>
                                     <MDBCol  md={3} sm={3}>
                                         <p>آشپز</p>
@@ -391,9 +431,11 @@ class DisplayPage extends Datas {
                                         <p> ریال </p>
                                     </MDBCol>
                                 </MDBRow>
+                            </MDBCol>
+                            <MDBCol sm={12} md={12}>
                                 <MDBRow>
                                     <MDBCol md={1} sm={1}>
-                                        <input type="checkbox"/>
+                                        <input type="checkbox"  name="مهماندار" onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
                                     </MDBCol>
                                     <MDBCol  md={3} sm={3}>
                                         <p>مهماندار</p>
@@ -405,9 +447,11 @@ class DisplayPage extends Datas {
                                         <p> ریال </p>
                                     </MDBCol>
                                 </MDBRow>
+                            </MDBCol>
+                            <MDBCol sm={12} md={12}>
                                 <MDBRow>
                                     <MDBCol md={1} sm={1}>
-                                        <input type="checkbox"/>
+                                        <input type="checkbox"  name="راهنمای سفر" onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
                                     </MDBCol>
                                     <MDBCol  md={3} sm={3}>
                                         <p>راهنمای سفر</p>
@@ -419,9 +463,11 @@ class DisplayPage extends Datas {
                                         <p> ریال </p>
                                     </MDBCol>
                                 </MDBRow>
+                            </MDBCol>
+                            <MDBCol sm={12} md={12}>
                                 <MDBRow>
                                     <MDBCol md={1} sm={1}>
-                                        <input type="checkbox"/>
+                                        <input type="checkbox"  name="بادیگارد" onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
                                     </MDBCol>
                                     <MDBCol  md={3} sm={3}>
                                         <p>بادیگارد</p>
@@ -721,11 +767,9 @@ class DisplayPage extends Datas {
                                 <input type='text' value=' تاریخ خروج' className={"fv-DisplayPageDetailsLeftBodyDateOutText"} />
                             </MDBRow>
                             <MDBRow className={"fv-DisplayPageDetailsLeftTextDate"}>
-                                <div  className={"fv-DisplayPageDetailsLeftBodyDateOnInput"} onChange={()=>alert(1)}>  <CalendarLinear dayToGo={this.selectDay} setOne={this.state.setOne} /> </div>
-                                <div  className={"fv-DisplayPageDetailsLeftBodyDateOutInput"} >  <CalendarLinear /> </div>
-                                <a><button><a> <CalendarLinear dayToGo={this.selectDay} /> {this.state.dateToGo.year}{this.state.dateToGo.month}{this.state.dateToGo.day}</a> </button></a>
+                                <div  className={"fv-DisplayPageDetailsLeftBodyDateOnInput"}>  <CalendarLinear dayToGo={this.selectDayToGo} /> </div>
+                                <div  className={"fv-DisplayPageDetailsLeftBodyDateOutInput"} >  <CalendarLinear dayToReturn={this.selectDayToReturn} /> </div>
                             </MDBRow>
-                            {console.log(this.state.dateToGo)}
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftBodyCapacityText"}>
                             <input type='text' value=' تعداد نفرات'/>

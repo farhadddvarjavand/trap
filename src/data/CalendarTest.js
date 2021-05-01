@@ -6,7 +6,7 @@ import {Calendar} from "./Calendar";
 import  './style/CalendarTest.scss'
 import SetPrice from './Calendar/components/DaysList'
 
-const CalendarTest = () => {
+const CalendarTest = (props) => {
     const defaultDay =[
         // here we add some CSS classes
         { year: 1400, month: 2, day: 12, className: 'orangeDay' },
@@ -39,20 +39,20 @@ const CalendarTest = () => {
     const [selectedDay, setSelectedDay] = useState(null);
     const  test2 = [1,2,3,4,5]
     const testname = () =>{
-      /* return ({const [theArray, setTheArray] = useState([]); })*/
+        /* return ({const [theArray, setTheArray] = useState([]); })*/
     }
 
-    const test = () =>{
-        console.log('hi')
-        console.log(selectedDayRange)
-        console.log(setSelectedDayRange)
+    const setData = (data) =>{
+        setSelectedDayRange(data)
+       /*console.log(props.test)
+        console.log('props.dateToGo')*/
     }
     return (
         <>
             <Calendar
                 locale={'fa'}
                 value={selectedDayRange}
-                onChange={setSelectedDayRange}
+                onChange={data=>setData(data)}
                 customDaysClassName={defaultDay}
                 shouldHighlightWeekends
                 priceDays={[1,2000000,3,4]}
@@ -67,3 +67,4 @@ const CalendarTest = () => {
 };
 
 export default CalendarTest;
+

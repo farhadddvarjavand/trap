@@ -43,9 +43,9 @@ const CalendarForMobilejs = () => {
     }
 
     const test = () =>{
-        console.log('hi')
+  /*      console.log('hi')
         console.log(selectedDayRange)
-        console.log(setSelectedDayRange)
+        console.log(setSelectedDayRange)*/
     }
     return (
         <>

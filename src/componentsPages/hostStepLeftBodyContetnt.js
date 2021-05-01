@@ -1,6 +1,7 @@
 import React from "react";
 import MobileLogo from "../images/MobileLogo.png";
 import {MDBCol, MDBRow} from "mdbreact";
+import {Link} from "react-router-dom";
 
 const hostStepLeftBodyContent=(props)=>{
     return(
@@ -10,8 +11,8 @@ const hostStepLeftBodyContent=(props)=>{
                 <img src={props.image} className={"fv-hostStepPage1LeftImage"}/>
             </MDBRow>
             <MDBRow className={"fv-hostStepPage2LeftButtonBody"}>
-                <input type="button" value="مرحله بعد"  className={"fv-hostStepPage1LeftButton"}/>
-                <input type="button" value="مرحله قبل"  className={"fv-hostStepPage2LeftButton"}/>
+                <Link to={props.nextLink} ><input type="button" value="مرحله بعد"  className={"fv-hostStepPage1LeftButton"}/> </Link>
+                <Link to={props.returnLink} > <input type="button" value="مرحله قبل"  className={"fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"}/> </Link>
             </MDBRow>
         </MDBCol>
     )
