@@ -136,3 +136,82 @@ export const changeDatesStatus = (data,id) => {
     
     );
 }
+
+// Get All Reservations Requested  -- Use Token
+export const allReservationsRequested = () => {
+    return http.get(
+    `${config.webapi}/api/v1/user/allReservationsRequested`, 
+    { headers:{ 'Authorization' : `Bearer USER Token` } }
+    );
+}
+
+// Get One Reservations Requested Base id -- Use Token  --  id => villa id
+export const reservationsRequested = id => {
+    return http.get(
+    `${config.webapi}/api/v1/user/reservationsRequested/${id}`, 
+    { headers:{ 'Authorization' : `Bearer USER Token` } }
+    );
+}
+
+// Change Reserve Status  --  Method = POST -- id => villa id
+export const changeReserveStatus = (data,id) => {
+    return http.post(
+
+    `${config.webapi}/api/v1/user/changeReserveStatus/${id}`, 
+    JSON.stringify(data),
+    { headers:{ 'Authorization' : `Bearer USER Token` } }
+    
+    );
+}
+
+// Withdrawal Request  --  Method = POST
+export const withdrawal = data => {
+    return http.post(
+
+    `${config.webapi}/api/v1/user/withdrawal`, 
+    JSON.stringify(data),
+    { headers:{ 'Authorization' : `Bearer USER Token` } }
+    
+    );
+}
+
+// Get user favorite villas -- Use Token
+export const favorites = () => {
+    return http.get(
+    `${config.webapi}/api/v1/user/favorites`, 
+    { headers:{ 'Authorization' : `Bearer USER Token` } }
+    );
+}
+
+// Add To Favorite  --  Method = POST
+export const addToFavorite = data => {
+    return http.post(
+
+    `${config.webapi}/api/v1/user/addToFavorite`, 
+    JSON.stringify(data),
+    { headers:{ 'Authorization' : `Bearer USER Token` } }
+    
+    );
+}
+
+// Remove From Favorite  --  Method = POST
+export const removeFromFavorite = data => {
+    return http.post(
+
+    `${config.webapi}/api/v1/user/removeFromFavorite`, 
+    JSON.stringify(data),
+    { headers:{ 'Authorization' : `Bearer USER Token` } }
+    
+    );
+}
+
+// Reserve Request  --  Method = POST
+export const reserveRequest = data => {
+    return http.post(
+
+    `${config.webapi}/api/v1/reserveRequest`, 
+    JSON.stringify(data),
+    { headers:{ 'Authorization' : `Bearer USER Token` } }
+    
+    );
+}
