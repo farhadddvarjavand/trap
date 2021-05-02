@@ -3,10 +3,10 @@ import "./Calendar/DatePicker.css";
 import { Calendar2 } from '@hassanmojab/react-modern-calendar-datepicker';
 import {Calendar} from "./Calendar";
 
-import  './style/CalendarTest.scss'
+import './style/CalendarDesktop.scss'
 import SetPrice from './Calendar/components/DaysList'
 
-const CalendarTest = (props) => {
+const CalendarDesktop = (props) => {
     const defaultDay =[
         // here we add some CSS classes
         { year: 1400, month: 2, day: 12, className: 'orangeDay' },
@@ -66,5 +66,5 @@ const CalendarTest = (props) => {
     );
 };
 
-export default CalendarTest;
+export default CalendarDesktop;
 

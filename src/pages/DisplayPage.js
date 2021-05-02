@@ -14,7 +14,7 @@ import HeaderSearch from "../componentsPages/HeaderSearch";
 import SearchHomePage from "./SearchHomePage";
 import Datas from "../data/Datas";
 
-import CalendarTest from "../data/CalendarTest";
+import CalendarDesktop from "../data/CalendarDesktop";
 import Calendar from 'react-calendar'
 import moment from 'moment'; // new
 import 'moment/locale/fa';   // new
@@ -26,6 +26,7 @@ import DatePicker from "react-modern-calendar-datepicker";
 import {MapTest} from "../data/MapTest";
 import CalendarForMobile from "../data/CalendarForMobilejs";
 import CalendarLinear from "../data/CalenddarLinear";
+
 
 
 class DisplayPage extends Datas {
@@ -187,7 +188,7 @@ class DisplayPage extends Datas {
                             lng='51.548488'/>
 
                     <div className="App">  {/* Main Calendar */}
-                        <CalendarTest  />
+                        <CalendarDesktop  />
                     </div>
                     <CalendarForMobile />
 
@@ -527,12 +528,19 @@ class DisplayPage extends Datas {
                             </MDBCol>
                         </MDBRow>
 
-                            <MDBRow className={"fv-DisplayPageCalender"}>                  {/*    calender-calendar     */}
-                                <MDBCol md={6}>
+                            <MDBRow className={"fv-DisplayPageCalender fv-DisplayPageCalenderForDesktop"}>                  {/*    calender-calendar     */}
+                                <CalendarDesktop  />
+
+                                {/* <MDBCol md={6}>
                                     <Calender />
                                 </MDBCol>
                                 <MDBCol md={6} className={"fv-calenderDisplayNonMobile"}>
                                     <Calender />
+                                </MDBCol>  */}
+                            </MDBRow>
+                            <MDBRow className={'fv-DisplayPageCalenderForMobile'}>                  {/*    calender-calendar     */}
+                                <MDBCol>
+                                    <CalendarForMobile />
                                 </MDBCol>
                             </MDBRow>
                         </div>                                                             {/*         fv-facilities          */}

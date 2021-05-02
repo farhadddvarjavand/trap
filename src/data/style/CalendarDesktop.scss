@@ -34,7 +34,7 @@
   display: block;
 }
 
-.Calendar {
+/*.Calendar {
   --cl-color-black: #444444;
   --cl-color-disabled: #d4d4d4;
   --cl-color-error: #ff2929;
@@ -51,13 +51,42 @@
   z-index: 10;
   max-width: 90vw;
   min-height: 36.7em;
-  height: 44em;
+  height: 49em;
+}*/
+.Calendar {
+  --cl-color-black: #444444;
+  --cl-color-disabled: #d4d4d4;
+  --cl-color-error: #ff2929;
+  font-size: 9.5px;
+  background: #fff;
+  border-radius: 1em;
+  position: relative;
+  -webkit-user-select: none;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  width: 36em;
+  z-index: 10;
+  max-width: 90vw;
+  min-height: 36.7em;
+  height: 50em;
+  padding-top: 0%;
+  margin-bottom: 8%;
+  border: 1px solid #d4d4d4;
 }
-.Calendar__day.-rtl {
+
+/*.Calendar__day.-rtl {
   font-size: 1.55em;
   height: 2.45em;
   height: 72px;
   margin-right: 2%;
+}*/
+.Calendar__day.-rtl {
+  font-size: 1.55em;
+  height: 2.45em;
+  height: 50px;
+  margin-right: 0.5%;
+  border-radius: 9px;
 }
 
 .Calendar__section {
@@ -95,10 +124,12 @@
   color: black;
   font-size: 1.2em;
   margin-bottom: 0.7em;
-  padding: 0 2.6em;
+  /*padding: 0 2.6em;*/
   position: relative;
   background: rgba(145, 145, 145, 0.2);
   line-height: 46px;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 .Calendar__weekDay {
   display: block;
@@ -164,4 +195,19 @@ abbr[data-original-title], abbr[title] {
 }
 .Calendar__day.-rtl.-selectedStart {
   border-radius: 10px;
+}
+.Calendar__day.-weekend:not(.-selected):not(.-blank):not(.-selectedStart):not(.-selectedEnd):not(.-selectedBetween) {
+  background: rgba(245 , 138 , 138 , 17%) !important;
+}
+.Calendar__day.-weekend:not(.-selected):not(.-blank):not(.-selectedStart):not(.-selectedEnd):not(.-selectedBetween) {
+  background: #ffd6d6 !important;
+}
+.fv-calendar-right .Calendar.-rtl .Calendar__monthArrowWrapper.-left , .fv-calendar-left .Calendar.-rtl .Calendar__monthArrowWrapper.-right{
+  display: none;
+}
+.Calendar__section.-shown {
+  opacity: 1;
+  transform: translateX(0);
+  padding-right: 5%;
+  padding-left: 5%;
 }

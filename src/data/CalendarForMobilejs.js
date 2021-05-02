@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import "./Calendar/DatePicker.css";
 
-import  './style/CalendarTest.scss'
+import './style/CalendarDesktop.scss'
 import {Calendar} from "./CalendarForMobile"
 
 const CalendarForMobilejs = () => {

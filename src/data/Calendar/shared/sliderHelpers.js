@@ -19,8 +19,8 @@ const animateContent = ({ parent, direction }) => {
   const getAnimationClass = value => (value ? '-hiddenNext' : '-hiddenPrevious');
   hiddenItem.style.transition = 'none';
   shownItem.style.transition = '';
-  shownItem.className = `${baseClass} ${getAnimationClass(!isNextMonth)}`;  /* hide */
-  hiddenItem.className = `${baseClass} ${getAnimationClass(isNextMonth)}`;  /* hide */
+  /* shownItem.className = `${baseClass} ${getAnimationClass(!isNextMonth)}`;  /* hide */
+ /* hiddenItem.className = `${baseClass} ${getAnimationClass(isNextMonth)}`;  /* hide */
   hiddenItem.classList.add('-shownAnimated');
 };
 

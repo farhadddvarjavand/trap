@@ -14,10 +14,61 @@ import HostStepCheckbox from "../componentsPages/hostStepCheckbox"
 class HostStep3Page extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            standardCapacity:1,
+            maximumCapacity:1,
+            numberOfBedroom:1,
+            iranianToilet:1,
+            Toilet:1,
+            shower:1,
+            publicToiletCheckbox:[],
+            otherViewsCheckbox:[],
+            accommodationViewsCheckbox:[],
+            typeOfRent:'title',
+            yourSpace:'',
+            yourAccommodationMeasure:''
+
+
+        }
 
     }
 
+    setStandardCapacityIncrement = (nameOfSection) =>{
+            this.setState(prevstate => {
+                return {[nameOfSection]: prevstate[nameOfSection] + 1}
+            })
+    }
+    setStandardCapacityDecrement = (nameOfSection) =>{
+        if(this.state[nameOfSection] >1){
+            this.setState(prevstate => {
+                return {[nameOfSection]: prevstate[nameOfSection] - 1}
+            })
+        }else alert('ظرفیت زیر صفر میباشد')
+    }
+    setCheckbox =(event,checkboxName) =>{
+        let repeat = false
+        const setData= this.state[checkboxName]
+        if(event.target.checked === false){
+            const index = setData.indexOf(event.target.name)
+            if (index !== -1) {
+                setData.splice(index, 1);
+                this.setState({[checkboxName]:setData})
+            }
+        } else {
+            setData.map(checked=>{
+                if(checked === event.target.name){
+                    repeat=true
+                }
+            })
+            if(repeat === false){
+                setData.push(event.target.name)
+                this.setState({[checkboxName]:setData})
+            }
+        }
+    }
+
     render() {
+
         return (
             <div className={" fv-HostStep2Page fv-hostStep2Page2 fv-hostStep3Page"}>
                 <MDBContainer className={"fv-HostStep1Page"}>
@@ -33,45 +84,73 @@ class HostStep3Page extends Component {
 
                             <HostStepIncreaseAndDecreaseButton
                             text="ظرفیت استاندارد"
-                            number="1"/>
+                            incrementFunction={this.setStandardCapacityIncrement}
+                            decrementFunction={this.setStandardCapacityDecrement}
+                            numberValue = {this.state.standardCapacity}
+                            nameOfSection={'standardCapacity'}
+                            />
                             <HostStepIncreaseAndDecreaseButton
-                                text="حداکثر ظرفیت"
-                                number="1"/>
+                                text="ظرفیت حداکثر ظرفیت"
+                                incrementFunction={this.setStandardCapacityIncrement}
+                                decrementFunction={this.setStandardCapacityDecrement}
+                                numberValue = {this.state.maximumCapacity}
+                                nameOfSection={'maximumCapacity'}
+                            />
+
                             <h5>نوع اجاره</h5>
-                            <select>
-                                <option>
-                                    خانه دربست
-                                </option>
-                                <option>
-                                    خانه اشتراکی
-                                </option>
+                            <select value={this.state.typeOfRent} onChange={(event)=>this.setState({typeOfRent:event.target.value})}>
+                                <option value='title' disabled>خانه دربست</option>
+                                <option value="1">خانه اشتراکی</option>
+                                <option value="2"> خانه اشتراکی</option>
                             </select>
+
                             <h5 className={"fv-hostStep3BedRoom"}>اتاق خواب</h5>
+
                             <div  className={"fv-hostStep3CapacityOfRom"}>
                                 <HostStepIncreaseAndDecreaseButton
                                     text="تعداد اتاق خواب را مشخص کنید"
-                                    number="1"/>
+                                    incrementFunction={this.setStandardCapacityIncrement}
+                                    decrementFunction={this.setStandardCapacityDecrement}
+                                    numberValue = {this.state.numberOfBedroom}
+                                    nameOfSection={'numberOfBedroom'}
+                                />
                             </div>
 
                             <h5>حمام/سرویس بهداشتی</h5>
+
                             <HostStepIncreaseAndDecreaseButton
                                 text="توالت ایرانی"
-                                number="1"/>
+                                incrementFunction={this.setStandardCapacityIncrement}
+                                decrementFunction={this.setStandardCapacityDecrement}
+                                numberValue = {this.state.iranianToilet}
+                                nameOfSection={'iranianToilet'}
+                            />
                             <HostStepIncreaseAndDecreaseButton
                                 text="توالت فرنگی"
-                                number="1"/>
+                                incrementFunction={this.setStandardCapacityIncrement}
+                                decrementFunction={this.setStandardCapacityDecrement}
+                                numberValue = {this.state.Toilet}
+                                nameOfSection={'Toilet'}
+                            />
                             <HostStepIncreaseAndDecreaseButton
                                 text="دوش آب"
-                                number="1"/>
+                                incrementFunction={this.setStandardCapacityIncrement}
+                                decrementFunction={this.setStandardCapacityDecrement}
+                                numberValue = {this.state.shower}
+                                nameOfSection={'shower'}
+                            />
 
-                                <HostStepCheckbox
-                                    className="fv-hostStep3CheckBox"
-                                    mdCheckbox = "1"
-                                    smCheckbox="2"
-                                    mdCheckboxText="5"
-                                    smCheckboxText="10"
-                                    text="سرویس بهداشتی مشترک است"/>
 
+
+                            <HostStepCheckbox
+                                className="fv-hostStep3CheckBox"
+                                mdCheckbox = "1"
+                                smCheckbox="2"
+                                mdCheckboxText="5"
+                                smCheckboxText="10"
+                                text="سرویس بهداشتی مشترک است"
+                                setCheckbox = {this.setCheckbox}
+                                nameOfPart={'publicToiletCheckbox'}/>
                             <h5 className={"fv-hostStep3AnyPlace"}>سایر فضاها</h5>
 
                             <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLine"}>
@@ -82,7 +161,9 @@ class HostStep3Page extends Component {
                                         smCheckbox="4"
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
-                                        text="سونا"/>
+                                        text="سونا"
+                                        setCheckbox = {this.setCheckbox}
+                                        nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
                                 <MDBCol  md={2} sm={6} className={"fv-hostStep3CheckBoxGroupInLineOne test"}>
                                     <HostStepCheckbox
@@ -91,7 +172,9 @@ class HostStep3Page extends Component {
                                         smCheckbox="4"
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
-                                        text="استخر"/>
+                                        text="استخر"
+                                        setCheckbox = {this.setCheckbox}
+                                        nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
                                 <MDBCol md={2} sm={6} className={"fv-hostStep3CheckBoxGroupInLineTwo test"}>
                                     <HostStepCheckbox
@@ -100,7 +183,9 @@ class HostStep3Page extends Component {
                                         smCheckbox="4"
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
-                                        text="آلاچیق"/>
+                                        text="آلاچیق"
+                                        setCheckbox = {this.setCheckbox}
+                                        nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
                                 <MDBCol md={2} sm={6}  className={"fv-hostStep3CheckBoxGroupInLineOneThree test"}>
                                     <HostStepCheckbox
@@ -109,7 +194,9 @@ class HostStep3Page extends Component {
                                         smCheckbox="4"
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
-                                        text="باربیکیو"/>
+                                        text="باربیکیو"
+                                        setCheckbox = {this.setCheckbox}
+                                        nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
                                 <MDBCol md={2} sm={6} className={"fv-hostStep3CheckBoxGroupInLineFour test"}>
                                     <HostStepCheckbox
@@ -118,13 +205,16 @@ class HostStep3Page extends Component {
                                         smCheckbox="4"
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
-                                        text="پارکینگ"/>
+                                        text="پارکینگ"
+                                        setCheckbox = {this.setCheckbox}
+                                        nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
                             </MDBRow>
                             <p className={"fv-marginRight fv-hostStep3AddNewPlace"}>اضافه کردن فضای جدید</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" value=" فضا خود را بنویسید "/>
+                                    <input type="text" placeholder=" فضا خود را بنویسید " value={this.state.yourSpace}
+                                    onChange={(e)=>this.setState({yourSpace:e.target.value})}/>
                                 </MDBCol>
                                 <MDBCol sm={2}  className={"fv-hostStep3InputButtonMobile"}>
                                     <input type="button" value=" + "/>
@@ -142,7 +232,10 @@ class HostStep3Page extends Component {
                                         smCheckbox="4"
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
-                                        text="رو به دریا"/>
+                                        text="رو به دریا"
+                                        setCheckbox = {this.setCheckbox}
+                                        nameOfPart={'accommodationViewsCheckbox'}/>
+
                                 </MDBCol>
                                 <MDBCol md={3} sm={6} className={"fv-hostStep3CheckBoxGroupInLineSecondTwo test"}>
                                     <HostStepCheckbox
@@ -151,7 +244,9 @@ class HostStep3Page extends Component {
                                         smCheckbox="4"
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
-                                        text="روبه جنگل"/>
+                                        text="روبه جنگل"
+                                        setCheckbox = {this.setCheckbox}
+                                        nameOfPart={'accommodationViewsCheckbox'}/>
                                 </MDBCol>
                                 <MDBCol md={3} sm={8} className={"fv-hostStep3CheckBoxGroupInLineSecondThree test"}>
                                     <HostStepCheckbox
@@ -160,11 +255,14 @@ class HostStep3Page extends Component {
                                         smCheckbox="4"
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
-                                        text="روبه کوهستان"/>
+                                        text="روبه کوهستان"
+                                        setCheckbox = {this.setCheckbox}
+                                        nameOfPart={'accommodationViewsCheckbox'}/>
                                 </MDBCol>
                             </MDBRow>
                             <h5 className={"fv-hostStep3Measure"}> متراژ اقامت گاه </h5>
-                            <input className={"fv-marginRight"} type="text" value="   "/>
+                            <input className={"fv-marginRight"} type="text" placeholder="" value={this.state.yourAccommodationMeasure}
+                                   onChange={(e)=>this.setState({yourAccommodationMeasure:e.target.value})}/>
                         </MDBCol>
 
                         <HostStepLeftBodyContent
@@ -173,7 +271,9 @@ class HostStep3Page extends Component {
                             ر طراح بخواهد دنبال متن های مرتبط بگردد تمرکزش از روی کار اصلی برداشته میشود و این
                             کار زمان بر خواهد بود. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگرا
                             ن را در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند."
-                            image={Logo}/>
+                            image={Logo}
+                            nextLink={"../../hostStep4"}
+                            returnLink={"../../hostStep2-2"}/>
                     </MDBRow>
                     <MDBRow>
                         <Footer />

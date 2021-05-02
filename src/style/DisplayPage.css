@@ -519,7 +519,12 @@ display: none;
     width: 20px;
     height: 25px;
 }
-
+.fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageCalenderForMobile{
+    display: none;
+}
+.fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageCalenderForDesktop{
+    display: block;
+}
 
 
 @media (max-width: 1200px) {
@@ -942,6 +947,16 @@ display: none;
     .efv-svgPagination.fv-displayPageImagePaginationMobil .slider_pagination {
         display: block;
     }
+    .fv-DisplayPageCalenderForMobile .Calendar {
+        width: 39em;
+        margin-right: -4.5vw;
+    }
+    .fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageCalenderForMobile{
+        display: block;
+    }
+    .fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageCalenderForDesktop {
+        display: none;
+    }
 }
 
 
@@ -981,6 +996,9 @@ display: none;
         padding: 4px;
         margin: 15px;
         margin-top: 4px;
+    }
+    .fv-DisplayPageCalenderForMobile .Calendar {
+        margin-right: -7vw;
     }
 }
 @media (max-width: 280px) {

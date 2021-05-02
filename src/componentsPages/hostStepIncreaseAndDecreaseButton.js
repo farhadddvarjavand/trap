@@ -9,13 +9,15 @@ const HostStepIncreaseAndDecreaseButton =(props)=>{
                 <p>{props.text}</p>
             </MDBCol>
             <MDBCol md={2} sm={2} className={"hostStepIncreaseAndDecreaseButtonRight"}>
-                <input type="button" value="+"/>
+                <input type="button" name={props.nameOfSection} onClick={
+                    (e)=> { props.incrementFunction(e.target.name)} } value="+"/>
             </MDBCol>
             <MDBCol md={1} sm={1}  className={"hostStepIncreaseAndDecreaseNumber"}>
-                <p>{props.number}</p>
+                <p>{props.numberValue}</p>
             </MDBCol>
             <MDBCol md={2} sm={2} className={"hostStepIncreaseAndDecreaseButtonLeft"}>
-                <input type="button" value="-"/>
+                <input type="button" name={props.nameOfSection} onClick={
+                    (e)=>props.decrementFunction(e.target.name)} value="-"/>
             </MDBCol>
         </MDBRow>
 

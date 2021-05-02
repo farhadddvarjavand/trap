@@ -8,30 +8,30 @@ import { Header, MonthSelector, YearSelector, DaysList } from './components';
 import {MDBCol, MDBRow} from "mdbreact";
 
 const Calendar = ({
-  value,
-  onChange,
-  onDisabledDayError,
-  calendarClassName,
-  calendarTodayClassName,
-  calendarSelectedDayClassName,
-  calendarRangeStartClassName,
-  calendarRangeBetweenClassName,
-  calendarRangeEndClassName,
-  disabledDays,
-  colorPrimary,
-  colorPrimaryLight,
-  slideAnimationDuration,
-  minimumDate,
-  maximumDate,
-  selectorStartingYear,
-  selectorEndingYear,
-  locale,
-  shouldHighlightWeekends,
-  renderFooter,
-  customDaysClassName,
-    priceDays,
-    test
-}) => {
+                    value,
+                    onChange,
+                    onDisabledDayError,
+                    calendarClassName,
+                    calendarTodayClassName,
+                    calendarSelectedDayClassName,
+                    calendarRangeStartClassName,
+                    calendarRangeBetweenClassName,
+                    calendarRangeEndClassName,
+                    disabledDays,
+                    colorPrimary,
+                    colorPrimaryLight,
+                    slideAnimationDuration,
+                    minimumDate,
+                    maximumDate,
+                    selectorStartingYear,
+                    selectorEndingYear,
+                    locale,
+                    shouldHighlightWeekends,
+                    renderFooter,
+                    customDaysClassName,
+                    priceDays,
+                    test
+                  }) => {
   const calendarElement = useRef(null);
   const [mainState, setMainState] = useState({
     activeDate: null,
@@ -75,13 +75,13 @@ const Calendar = ({
     return shallowClone(today);
   };
   const activeDate = mainState.activeDate
-    ? shallowClone(mainState.activeDate)
-    : getComputedActiveDate();
+      ? shallowClone(mainState.activeDate)
+      : getComputedActiveDate();
 
   const weekdays = weekDaysList.map(weekDay => (
-    <abbr key={weekDay.name} title={weekDay.name} className="Calendar__weekDay">
-      {weekDay.short}
-    </abbr>
+      <abbr key={weekDay.name} title={weekDay.name} className="Calendar__weekDay">
+        {weekDay.short}
+      </abbr>
   ));
 
   const handleMonthChange = direction => {
@@ -89,18 +89,18 @@ const Calendar = ({
       ...mainState,
       monthChangeDirection: direction,
     });
-   /* console.log(mainState) */
+    /* console.log(mainState) */
   };
 
   const updateDate = () => {
-      setMainState({
-        ...mainState,
-        activeDate: getDateAccordingToMonth(activeDate, mainState.monthChangeDirection),
-        monthChangeDirection: '',
-      });
+    setMainState({
+      ...mainState,
+      activeDate: getDateAccordingToMonth(activeDate, mainState.monthChangeDirection),
+      monthChangeDirection: '',
+    });
 
-   /* console.log(activeDate)
-    console.log(mainState.monthChangeDirection)   // NEXT PREVIOUS */
+    /* console.log(activeDate)
+     console.log(mainState.monthChangeDirection)   // NEXT PREVIOUS */
   };
 
   const selectMonth = newMonthNumber => {
@@ -153,12 +153,12 @@ const Calendar = ({
     }else {mainState.activeDate= statemain.activeData}
 
     setMainState({
-        ...mainState,
+      ...mainState,
       monthChangeDirection: direction,
     });
 
-   /* console.log( mainState.activeDate)
-    console.log(1)*/
+    /* console.log( mainState.activeDate)
+     console.log(1)*/
   };
   const handleMonthChangeLeftt= direction => {
     const getToddayDate ={
@@ -180,8 +180,8 @@ const Calendar = ({
       monthChangeDirection: direction,
     });
 
-   /* console.log( mainState.activeDate.monthChangeDirection)
-    console.log(1)*/
+    /* console.log( mainState.activeDate.monthChangeDirection)
+     console.log(1)*/
   };
 
 
@@ -211,8 +211,8 @@ const Calendar = ({
       monthChangeDirection: direction,
     });
 
-  /*  console.log( mainState.activeDate.monthChangeDirection)
-    console.log(1) */
+    /*  console.log( mainState.activeDate.monthChangeDirection)
+      console.log(1) */
   };
   const handleMonthChangeLeftPlusOne= direction => {
     const getToddayDate ={
@@ -247,9 +247,9 @@ const Calendar = ({
     }
 
     if(mainState.activeDate){
-      mainState.activeDate.month=mainState.activeDate.month+1
+     /* mainState.activeDate.month=mainState.activeDate.month+1 */
       if( 2>= mainState.activeDate.month ){
-        mainState.activeDate.month=mainState.activeDate.month-2
+        mainState.activeDate.month=mainState.activeDate.month-1
       }
     }else {mainState.activeDate= getToddayDate}
 
@@ -284,165 +284,165 @@ const Calendar = ({
   }
 
   return (
-<MDBRow>
-  <MDBCol>
+      <MDBRow>
+        <MDBCol className={'fv-calendar-right'} md={6}>
 
 
-  <div
-      className={`Calendar -noFocusOutline ${calendarClassName} -${isRtl ? 'rtl' : 'ltr'}`}
-      role="grid"
-      style={{
-        '--cl-color-primary': colorPrimary,
-        '--cl-color-primary-light': colorPrimaryLight,
-        '--animation-duration': slideAnimationDuration,
-      }}
-      ref={calendarElement}
-  >
+          <div
+              className={`Calendar -noFocusOutline ${calendarClassName} -${isRtl ? 'rtl' : 'ltr'}`}
+              role="grid"
+              style={{
+                '--cl-color-primary': colorPrimary,
+                '--cl-color-primary-light': colorPrimaryLight,
+                '--animation-duration': slideAnimationDuration,
+              }}
+              ref={calendarElement}
+          >
 
-    <Header
-        maximumDate={maximumDate}
-        minimumDate={minimumDate}
-        activeDate={activeDate}
-        onMonthChange={handleMonthChangeRightPlusOne}
-        onMonthSelect={toggleMonthSelector}
-        onYearSelect={toggleYearSelector}
-        /* monthChangeDirection={mainState.monthChangeDirection} */
-        isMonthSelectorOpen={mainState.isMonthSelectorOpen}
-        isYearSelectorOpen={mainState.isYearSelectorOpen}
-        locale={locale}
-    />
-    {console.log(activeDate)}
-    {console.log('maximumDate')}
+            <Header
+                maximumDate={maximumDate}
+                minimumDate={minimumDate}
+                activeDate={activeDate}
+                onMonthChange={handleMonthChangeRightPlusOne}
+                onMonthSelect={toggleMonthSelector}
+                onYearSelect={toggleYearSelector}
+                /* monthChangeDirection={mainState.monthChangeDirection} */
+                isMonthSelectorOpen={mainState.isMonthSelectorOpen}
+                isYearSelectorOpen={mainState.isYearSelectorOpen}
+                locale={locale}
+            />
+            {console.log(activeDate)}
+            {console.log('maximumDate')}
 
-    <MonthSelector
-        isOpen={mainState.isMonthSelectorOpen}
-        activeDate={activeDate}
-        onMonthSelect={selectMonth}
-        maximumDate={maximumDate}
-        minimumDate={minimumDate}
-        locale={locale}
-    />
+            <MonthSelector
+                isOpen={mainState.isMonthSelectorOpen}
+                activeDate={activeDate}
+                onMonthSelect={selectMonth}
+                maximumDate={maximumDate}
+                minimumDate={minimumDate}
+                locale={locale}
+            />
 
-    <YearSelector
-        isOpen={mainState.isYearSelectorOpen}
-        activeDate={activeDate}
-        onYearSelect={selectYear}
-        selectorStartingYear={selectorStartingYear}
-        selectorEndingYear={selectorEndingYear}
-        maximumDate={maximumDate}
-        minimumDate={minimumDate}
-        locale={locale}
-    />
+            <YearSelector
+                isOpen={mainState.isYearSelectorOpen}
+                activeDate={activeDate}
+                onYearSelect={selectYear}
+                selectorStartingYear={selectorStartingYear}
+                selectorEndingYear={selectorEndingYear}
+                maximumDate={maximumDate}
+                minimumDate={minimumDate}
+                locale={locale}
+            />
 
-    <div className="Calendar__weekDays">{weekdays}</div>
+            <div className="Calendar__weekDays">{weekdays}</div>
 
-    <DaysList
-        activeDate={activeDate}
-        value={value}
-        monthChangeDirection={mainState.monthChangeDirection}
-        onSlideChange={updateDate}
-        disabledDays={disabledDays}
-        onDisabledDayError={onDisabledDayError}
-        minimumDate={minimumDate}
-        maximumDate={maximumDate}
-        onChange={onChange}
-        calendarTodayClassName={calendarTodayClassName}
-        calendarSelectedDayClassName={calendarSelectedDayClassName}
-        calendarRangeStartClassName={calendarRangeStartClassName}
-        calendarRangeEndClassName={calendarRangeEndClassName}
-        calendarRangeBetweenClassName={calendarRangeBetweenClassName}
-        locale={locale}
-        shouldHighlightWeekends={shouldHighlightWeekends}
-        customDaysClassName={customDaysClassName}
-        isQuickSelectorOpen={mainState.isYearSelectorOpen || mainState.isMonthSelectorOpen}
-        priceday={priceDays}
-        testDay = {test}
-    />
-
-
-    <div className="Calendar__footer">{renderFooter()}</div>
-  </div>
-
-  </MDBCol>
+            <DaysList
+                activeDate={activeDate}
+                value={value}
+                monthChangeDirection={mainState.monthChangeDirection}
+                onSlideChange={updateDate}
+                disabledDays={disabledDays}
+                onDisabledDayError={onDisabledDayError}
+                minimumDate={minimumDate}
+                maximumDate={maximumDate}
+                onChange={onChange}
+                calendarTodayClassName={calendarTodayClassName}
+                calendarSelectedDayClassName={calendarSelectedDayClassName}
+                calendarRangeStartClassName={calendarRangeStartClassName}
+                calendarRangeEndClassName={calendarRangeEndClassName}
+                calendarRangeBetweenClassName={calendarRangeBetweenClassName}
+                locale={locale}
+                shouldHighlightWeekends={shouldHighlightWeekends}
+                customDaysClassName={customDaysClassName}
+                isQuickSelectorOpen={mainState.isYearSelectorOpen || mainState.isMonthSelectorOpen}
+                priceday={priceDays}
+                testDay = {test}
+            />
 
 
+            <div className="Calendar__footer">{renderFooter()}</div>
+          </div>
+
+        </MDBCol>
 
 
-<MDBCol  className={'ff'}>
-  <div
-      className={`Calendar -noFocusOutline ${calendarClassName} -${isRtl ? 'rtl' : 'ltr'}`}
-      role="grid"
-      style={{
-        '--cl-color-primary': colorPrimary,
-        '--cl-color-primary-light': colorPrimaryLight,
-        '--animation-duration': slideAnimationDuration,
-      }}
-      ref={calendarElement}
-  >
-
-    <Header
-        maximumDate={maximumDate}
-        minimumDate={minimumDate}
-        activeDate={activedateLeft}
-        onMonthChange={handleMonthChangeLeftPlusOne}
-        onMonthSelect={toggleMonthSelector}
-        onYearSelect={toggleYearSelector}
-        /* monthChangeDirection={mainState.monthChangeDirection} */
-        isMonthSelectorOpen={mainState.isMonthSelectorOpen}
-        isYearSelectorOpen={mainState.isYearSelectorOpen}
-        locale={locale}
-    />
 
 
-    <MonthSelector
-        isOpen={mainState.isMonthSelectorOpen}
-        activeDate={activeDate}
-        onMonthSelect={selectMonth}
-        maximumDate={maximumDate}
-        minimumDate={minimumDate}
-        locale={locale}
-    />
+        <MDBCol  className={'fv-calendar-left'}  md={6}>
+          <div
+              className={`Calendar -noFocusOutline ${calendarClassName} -${isRtl ? 'rtl' : 'ltr'}`}
+              role="grid"
+              style={{
+                '--cl-color-primary': colorPrimary,
+                '--cl-color-primary-light': colorPrimaryLight,
+                '--animation-duration': slideAnimationDuration,
+              }}
+              ref={calendarElement}
+          >
 
-    <YearSelector
-        isOpen={mainState.isYearSelectorOpen}
-        activeDate={activeDate}
-        onYearSelect={selectYear}
-        selectorStartingYear={selectorStartingYear}
-        selectorEndingYear={selectorEndingYear}
-        maximumDate={maximumDate}
-        minimumDate={minimumDate}
-        locale={locale}
-    />
+            <Header
+                maximumDate={maximumDate}
+                minimumDate={minimumDate}
+                activeDate={activedateLeft}
+                onMonthChange={handleMonthChangeLeftPlusOne}
+                onMonthSelect={toggleMonthSelector}
+                onYearSelect={toggleYearSelector}
+                /* monthChangeDirection={mainState.monthChangeDirection} */
+                isMonthSelectorOpen={mainState.isMonthSelectorOpen}
+                isYearSelectorOpen={mainState.isYearSelectorOpen}
+                locale={locale}
+            />
 
-    <div className="Calendar__weekDays">{weekdays}</div>
 
-    <DaysList
-        activeDate={activedateLeft}
-        value={value}
-        monthChangeDirection={mainState.monthChangeDirection}
-        onSlideChange={updateDate}
-        disabledDays={disabledDays}
-        onDisabledDayError={onDisabledDayError}
-        minimumDate={minimumDate}
-        maximumDate={maximumDate}
-        onChange={onChange}
-        calendarTodayClassName={calendarTodayClassName}
-        calendarSelectedDayClassName={calendarSelectedDayClassName}
-        calendarRangeStartClassName={calendarRangeStartClassName}
-        calendarRangeEndClassName={calendarRangeEndClassName}
-        calendarRangeBetweenClassName={calendarRangeBetweenClassName}
-        locale={locale}
-        shouldHighlightWeekends={shouldHighlightWeekends}
-        customDaysClassName={customDaysClassName}
-        isQuickSelectorOpen={mainState.isYearSelectorOpen || mainState.isMonthSelectorOpen}
-        priceday={priceDays}
-        testDay = {test}
-    />
+            <MonthSelector
+                isOpen={mainState.isMonthSelectorOpen}
+                activeDate={activeDate}
+                onMonthSelect={selectMonth}
+                maximumDate={maximumDate}
+                minimumDate={minimumDate}
+                locale={locale}
+            />
 
-    <div className="Calendar__footer">{renderFooter()}</div>
-  </div>
-</MDBCol>
-</MDBRow>
+            <YearSelector
+                isOpen={mainState.isYearSelectorOpen}
+                activeDate={activeDate}
+                onYearSelect={selectYear}
+                selectorStartingYear={selectorStartingYear}
+                selectorEndingYear={selectorEndingYear}
+                maximumDate={maximumDate}
+                minimumDate={minimumDate}
+                locale={locale}
+            />
+
+            <div className="Calendar__weekDays">{weekdays}</div>
+
+            <DaysList
+                activeDate={activedateLeft}
+                value={value}
+                monthChangeDirection={mainState.monthChangeDirection}
+                onSlideChange={updateDate}
+                disabledDays={disabledDays}
+                onDisabledDayError={onDisabledDayError}
+                minimumDate={minimumDate}
+                maximumDate={maximumDate}
+                onChange={onChange}
+                calendarTodayClassName={calendarTodayClassName}
+                calendarSelectedDayClassName={calendarSelectedDayClassName}
+                calendarRangeStartClassName={calendarRangeStartClassName}
+                calendarRangeEndClassName={calendarRangeEndClassName}
+                calendarRangeBetweenClassName={calendarRangeBetweenClassName}
+                locale={locale}
+                shouldHighlightWeekends={shouldHighlightWeekends}
+                customDaysClassName={customDaysClassName}
+                isQuickSelectorOpen={mainState.isYearSelectorOpen || mainState.isMonthSelectorOpen}
+                priceday={priceDays}
+                testDay = {test}
+            />
+
+            <div className="Calendar__footer">{renderFooter()}</div>
+          </div>
+        </MDBCol>
+      </MDBRow>
 
   );
 };

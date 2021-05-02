@@ -39,7 +39,9 @@ class HostStep2Page2 extends Component {
                     بگردد تمرکزش از روی کار اصلی برداشته میشود و اینکار زمان بر خواهد بو
                     د. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگران را
                     در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند"
-                        image={MobileLogo}/>
+                        image={MobileLogo}
+                        nextLink={"../../hostStep3"}
+                        returnLink={"../../hostStep2"}/>
                 </MDBRow>
                 <MDBRow>
                     <Footer />

@@ -50,7 +50,7 @@ class HostStep1Page extends Component {
                     در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند"
                     image={MobileLogo}
                     nextLink={'../../hostStep2'}
-                    returnLink={''}/>
+                    returnLink={'../../hostStep1'}/>
                 </MDBRow>
 
                 <MDBRow>
