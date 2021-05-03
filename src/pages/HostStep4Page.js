@@ -9,11 +9,11 @@ import Logo from "../images/Logo.png";
 import Footer from "../componentsPages/footer";
 import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt"
 import HostStep4PageRightBody from "../componentsPages/hostStep4PageRightBody"
+import HostStepCheckbox from "../componentsPages/hostStepCheckbox";
 
 class HostStep4Page extends Component {
     constructor(props) {
         super(props);
-
     }
 
     render() {
@@ -25,7 +25,9 @@ class HostStep4Page extends Component {
                     </MDBRow>
 
                     <MDBRow className={"fv-HostStep1PageBody"}>
-                        <HostStep4PageRightBody />
+
+
+                         <HostStep4PageRightBody />
 
 
                         <HostStepLeftBodyContent
@@ -34,7 +36,9 @@ class HostStep4Page extends Component {
                             ر طراح بخواهد دنبال متن های مرتبط بگردد تمرکزش از روی کار اصلی برداشته میشود و این
                             کار زمان بر خواهد بود. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگرا
                             ن را در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند."
-                            image={Logo}/>
+                            image={Logo}
+                            nextLink={'../../hostStep5'}
+                            returnLink={'../../hostStep3'}/>
                     </MDBRow>
                     <MDBRow>
                         <Footer />

@@ -7,7 +7,7 @@ const hostStepCheckbox = (props) =>{
 
     <MDBRow className={props.className}>
         <MDBCol md={parseInt(props.mdCheckbox)} sm={parseInt(props.smCheckbox)}>
-            <input type="checkBox" name={props.text}
+            <input type="checkBox" name={props.name}
                    onChange={(event)=>props.setCheckbox(event,props.nameOfPart)}/>
         </MDBCol>
         <MDBCol md={parseInt(props.mdCheckboxText)} sm={parseInt(props.smCheckboxText)}>

@@ -149,6 +149,7 @@ class HostStep3Page extends Component {
                                 mdCheckboxText="5"
                                 smCheckboxText="10"
                                 text="سرویس بهداشتی مشترک است"
+                                name='sharedBathroom'
                                 setCheckbox = {this.setCheckbox}
                                 nameOfPart={'publicToiletCheckbox'}/>
                             <h5 className={"fv-hostStep3AnyPlace"}>سایر فضاها</h5>
@@ -162,6 +163,7 @@ class HostStep3Page extends Component {
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
                                         text="سونا"
+                                        name = "sauna"
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
@@ -173,6 +175,7 @@ class HostStep3Page extends Component {
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
                                         text="استخر"
+                                        name = "pool"
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
@@ -184,6 +187,7 @@ class HostStep3Page extends Component {
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
                                         text="آلاچیق"
+                                        name = "pergola"
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
@@ -195,6 +199,7 @@ class HostStep3Page extends Component {
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
                                         text="باربیکیو"
+                                        name = "pergola"
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
@@ -206,6 +211,7 @@ class HostStep3Page extends Component {
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
                                         text="پارکینگ"
+                                        text = "parking"
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
@@ -233,6 +239,7 @@ class HostStep3Page extends Component {
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
                                         text="رو به دریا"
+                                        name = "viewTheSea"
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'accommodationViewsCheckbox'}/>
 
@@ -245,6 +252,7 @@ class HostStep3Page extends Component {
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
                                         text="روبه جنگل"
+                                        name = "viewTheForest"
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'accommodationViewsCheckbox'}/>
                                 </MDBCol>
@@ -256,6 +264,7 @@ class HostStep3Page extends Component {
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
                                         text="روبه کوهستان"
+                                        name = "facingTheMountains"
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'accommodationViewsCheckbox'}/>
                                 </MDBCol>

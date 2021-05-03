@@ -12,10 +12,28 @@ import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt
 class HostStep5Page3 extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            selectedMainPic:'',
+            selectedFirstPic:'',
+            selectedSecondPic:'',
+            selectedThirdPic:'',
+            selectedFourthPic:'',
+        }
 
     }
 
+    fileSelectedHandler = (event) => {
+        console.log(event.target.files[0]);
+        this.setState({
+            [event.target.name]: event.target.files[0]
+        }, () => this.fileUploadHandler());
+    };
+    fileUploadHandler = () => {
+        /* file upload triggered */
+        console.log('file upload triggered');
+    };
     render() {
+
         return (
             <div className={" fv-HostStep2Page fv-hostStep2Page2 fv-hostStep3Page fv-hostStep4Page fv-hostStep5Page fv-hostStep5Page2 fv-hostStep5Page3"}>
                 <MDBContainer className={"fv-HostStep1Page"}>
@@ -30,8 +48,19 @@ class HostStep5Page3 extends Component {
 
                             <MDBRow className={"fv-hostStep5Page3TopPicImage"}>
                                 <MDBCol>
-                                    <img src={Logo}/>
-                                    <p>تصویر خود را انتخاب کنید</p>
+                                        <div>
+                                            <label htmlFor="myInput">
+                                                <img src={Logo}/>
+                                                <p>تصویر خود را انتخاب کنید</p>
+                                            </label>
+                                            <input
+                                                id="myInput"
+                                                style={{display:'none'}}
+                                                type={"file"}
+                                                name={'selectedMainPic'}
+                                                onChange={this.fileSelectedHandler}
+                                            />
+                                        </div>
                                 </MDBCol>
                             </MDBRow>
 
@@ -54,8 +83,19 @@ class HostStep5Page3 extends Component {
                             <MDBCol md={3} sm={12}>
                                 <MDBRow className={"fv-hostStep5Page3Images"}>
                                     <MDBCol>
-                                        <img src={Logo}/>
-                                        <p>تصویر خود را انتخاب کنید</p>
+                                        <div>
+                                            <label htmlFor="myInput">
+                                                <img src={Logo}/>
+                                                <p>تصویر خود را انتخاب کنید</p>
+                                            </label>
+                                            <input
+                                                id="myInput"
+                                                style={{display:'none'}}
+                                                type={"file"}
+                                                name={'selectedFirstPic'}
+                                                onChange={this.fileSelectedHandler}
+                                            />
+                                        </div>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow>
@@ -68,8 +108,19 @@ class HostStep5Page3 extends Component {
                             <MDBCol md={3} sm={12}>
                                 <MDBRow className={"fv-hostStep5Page3Images"}>
                                     <MDBCol>
-                                        <img src={Logo}/>
-                                        <p>تصویر خود را انتخاب کنید</p>
+                                        <div>
+                                            <label htmlFor="myInput">
+                                                <img src={Logo}/>
+                                                <p>تصویر خود را انتخاب کنید</p>
+                                            </label>
+                                            <input
+                                                id="myInput"
+                                                style={{display:'none'}}
+                                                type={"file"}
+                                                name={'selectedSecondPic'}
+                                                onChange={this.fileSelectedHandler}
+                                            />
+                                        </div>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow>
@@ -82,8 +133,19 @@ class HostStep5Page3 extends Component {
                             <MDBCol md={3} sm={12}>
                                 <MDBRow className={"fv-hostStep5Page3Images"}>
                                     <MDBCol>
-                                        <img src={Logo}/>
-                                        <p>تصویر خود را انتخاب کنید</p>
+                                        <div>
+                                            <label htmlFor="myInput">
+                                                <img src={Logo}/>
+                                                <p>تصویر خود را انتخاب کنید</p>
+                                            </label>
+                                            <input
+                                                id="myInput"
+                                                style={{display:'none'}}
+                                                type={"file"}
+                                                name={'selectedThirdPic'}
+                                                onChange={this.fileSelectedHandler}
+                                            />
+                                        </div>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow>
@@ -96,8 +158,19 @@ class HostStep5Page3 extends Component {
                             <MDBCol md={3} sm={12}>
                                 <MDBRow className={"fv-hostStep5Page3Images"}>
                                     <MDBCol>
-                                        <img src={Logo}/>
-                                        <p>تصویر خود را انتخاب کنید</p>
+                                        <div>
+                                            <label htmlFor="myInput">
+                                                <img src={Logo}/>
+                                                <p>تصویر خود را انتخاب کنید</p>
+                                            </label>
+                                            <input
+                                                id="myInput"
+                                                style={{display:'none'}}
+                                                type={"file"}
+                                                name={'selectedForthPic'}
+                                                onChange={this.fileSelectedHandler}
+                                            />
+                                        </div>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow>

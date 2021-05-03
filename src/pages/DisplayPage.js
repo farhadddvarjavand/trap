@@ -420,7 +420,7 @@ class DisplayPage extends Datas {
                             <MDBCol sm={12} md={12}>
                                 <MDBRow>
                                     <MDBCol md={1} sm={1}>
-                                        <input type="checkbox"  name="آشپز" onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
+                                        <input type="checkbox"  name="Chef" onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
                                     </MDBCol>
                                     <MDBCol  md={3} sm={3}>
                                         <p>آشپز</p>
@@ -436,7 +436,7 @@ class DisplayPage extends Datas {
                             <MDBCol sm={12} md={12}>
                                 <MDBRow>
                                     <MDBCol md={1} sm={1}>
-                                        <input type="checkbox"  name="مهماندار" onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
+                                        <input type="checkbox"  name="host" onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
                                     </MDBCol>
                                     <MDBCol  md={3} sm={3}>
                                         <p>مهماندار</p>
@@ -452,7 +452,7 @@ class DisplayPage extends Datas {
                             <MDBCol sm={12} md={12}>
                                 <MDBRow>
                                     <MDBCol md={1} sm={1}>
-                                        <input type="checkbox"  name="راهنمای سفر" onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
+                                        <input type="checkbox"  name="tourLeader" onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
                                     </MDBCol>
                                     <MDBCol  md={3} sm={3}>
                                         <p>راهنمای سفر</p>
@@ -468,7 +468,7 @@ class DisplayPage extends Datas {
                             <MDBCol sm={12} md={12}>
                                 <MDBRow>
                                     <MDBCol md={1} sm={1}>
-                                        <input type="checkbox"  name="بادیگارد" onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
+                                        <input type="checkbox"  name="bodyguard" onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
                                     </MDBCol>
                                     <MDBCol  md={3} sm={3}>
                                         <p>بادیگارد</p>

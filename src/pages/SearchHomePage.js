@@ -163,27 +163,27 @@ class SearchHomePage extends Datas {
                                     <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
                                         <p>دسته بندی اقامتگاه</p>
                                         <MDBCol md={12}>
-                                            <input type="checkbox" name="استخردار" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>استخردار</p>
+                                            <input type="checkbox" name="pool" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>استخردار</p>
                                         </MDBCol>
                                         <MDBCol md={12}>
-                                            <input type="checkbox" name="ساحلی" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>ساحلی</p>
+                                            <input type="checkbox" name="littoral" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>ساحلی</p>
                                         </MDBCol>
                                         <MDBCol md={12}>
-                                            <input type="checkbox" name="ییلاقی" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p>ییلاقی</p>
+                                            <input type="checkbox" name="summer" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p>ییلاقی</p>
                                         </MDBCol>
                                         <MDBCol md={12}>
-                                            <input type="checkbox" name=" کلبه جنگلی" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p> کلبه جنگلی</p>
+                                            <input type="checkbox" name="forestCottage" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p> کلبه جنگلی</p>
                                         </MDBCol>
                                         <MDBCol md={12}>
-                                            <input type="checkbox" name="خانه قدیمی" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p>خانه قدیمی</p>
+                                            <input type="checkbox" name="oldHouse" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p>خانه قدیمی</p>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
                                         <MDBCol md={12}>
-                                            <input type="checkbox" name="اقامت گاه های دارای تخفیف" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>اقامت گاه های دارای تخفیف</p>
+                                            <input type="checkbox" name="discountedAccommodation" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>اقامت گاه های دارای تخفیف</p>
                                         </MDBCol>
                                         <MDBCol md={12}>
-                                            <input type="checkbox" name="اقامت گاه های ضدعفونی شده" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>اقامت گاه های ضدعفونی شده</p>
+                                            <input type="checkbox" name="disinfectedAccommodation" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>اقامت گاه های ضدعفونی شده</p>
                                         </MDBCol>
                                     </MDBRow>
                                     <input type='button' value='جستجو اقامتگاه' className={'fv-searchMainPagesSearchButton'} onClick={()=>{

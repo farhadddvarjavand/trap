@@ -12,7 +12,14 @@ import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt
 class HostStep5Page extends Component {
     constructor(props) {
         super(props);
-
+        this.state={
+            pricesFromSaturdayToWednesday:'',
+            priceFridayAndHoliday:'',
+            extraPersonPricesOnNormalDays:'',
+            extraPersonPricesOnHolidays:'',
+            weeklyDiscount:'',
+            monthlyDiscount:''
+        }
     }
 
     render() {
@@ -29,25 +36,33 @@ class HostStep5Page extends Component {
                             <p className={"fv-hostStep5P"}>قیمت از شنبه تا چهارشنبه</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" value=""/>
+                                    <input type="text" value={this.state.pricesFromSaturdayToWednesday}
+                                           onChange={(e)=>this.setState({pricesFromSaturdayToWednesday:e.target.value})}
+                                    />
                                 </MDBCol>
                             </MDBRow>
                             <p className={"fv-hostStep5P"}>قیمت پنجشنبه و جمعه و تعطیل (ایام پیک)</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" value=""/>
+                                    <input type="text" value={this.state.priceFridayAndHoliday}
+                                           onChange={(e)=>this.setState({priceFridayAndHoliday:e.target.value})}
+                                    />
                                 </MDBCol>
                             </MDBRow>
                             <p className={"fv-hostStep5P"}>قیمت نفر اضافه در روز های عادی</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" value=""/>
+                                    <input type="text" value={this.state.extraPersonPricesOnNormalDays}
+                                           onChange={(e)=>this.setState({extraPersonPricesOnNormalDays:e.target.value})}
+                                    />
                                 </MDBCol>
                             </MDBRow>
                             <p className={"fv-hostStep5P"}>قیمت نفر اضافه در روز های پیک</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" value=""/>
+                                    <input type="text" value={this.state.extraPersonPricesOnHolidays}
+                                           onChange={(e)=>this.setState({extraPersonPricesOnHolidays:e.target.value})}
+                                    />
                                 </MDBCol>
                             </MDBRow>
 
@@ -56,13 +71,17 @@ class HostStep5Page extends Component {
                             <p className={"fv-hostStep5P"}>تخفیف هفتگی</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" value=""/>
+                                    <input type="text" value={this.state.weeklyDiscount}
+                                           onChange={(e)=>this.setState({weeklyDiscount:e.target.value})}
+                                    />
                                 </MDBCol>
                             </MDBRow>
                             <p className={"fv-hostStep5P"}>تخفیف ماهانه</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" value=""/>
+                                    <input type="text" value={this.state.monthlyDiscount}
+                                           onChange={(e)=>this.setState({monthlyDiscount:e.target.value})}
+                                    />
                                 </MDBCol>
                             </MDBRow>
 
@@ -75,7 +94,9 @@ class HostStep5Page extends Component {
                             ر طراح بخواهد دنبال متن های مرتبط بگردد تمرکزش از روی کار اصلی برداشته میشود و این
                             کار زمان بر خواهد بود. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگرا
                             ن را در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند."
-                            image={Logo}/>
+                            image={Logo}
+                            nextLink={"../../hostStep5-2"}
+                            returnLink={"../../hostStep4"}/>
                     </MDBRow>
                     <MDBRow>
                         <Footer />

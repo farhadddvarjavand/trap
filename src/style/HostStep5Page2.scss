@@ -52,6 +52,12 @@
   .fv-hostStepPage2LeftButtonBody {
     margin-top: 150%;
   }
+  .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right textarea {
+    height: 152px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 14px;
+    width: 444px;
+  }
 }
 @media (max-width: 1200px) and (min-width: 541px){
   .fv-hostStep5Page2 .col-md-10 {
@@ -81,6 +87,12 @@
     }
     .col-md-10 {
       padding-right: 0%;
+    }
+    .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right textarea {
+      height: 152px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 14px;
+      width: 91vw;
     }
   }
 }
