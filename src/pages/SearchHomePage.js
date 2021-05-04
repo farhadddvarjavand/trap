@@ -10,6 +10,7 @@ import MobileMenu from "../images/MobileMenu.png"
 import {Link, Route, Switch,NavLink,BrowserRouter} from "react-router-dom"
 import Datas from "../data/Datas";
 
+/* import {doSearch} from "../services/searchService" */
 
 
 class SearchHomePage extends Datas {

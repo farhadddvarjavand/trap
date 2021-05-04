@@ -96,6 +96,19 @@
 
     }
   }
+   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageUserSetInfoButton.fv-profilePageEnButton input {
+     width: 20%;
+     background: #15BE29;
+     border-radius: 16px;
+     color: white;
+     margin-top: -6.5%;
+  }
+
+   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageUserSetInfoButton.fv-profilePageEnButton {
+     text-align: end;
+     display: contents;
+  }
+
 
 }
 @media (max-width: 763px) {
@@ -145,6 +158,10 @@
   }
   .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsOption {
     margin-right: 8%;
+  }
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageUserSetInfoButton.fv-profilePageEnButton input {
+    margin-top: 12%;
+    width: 50%;
   }
 }
 

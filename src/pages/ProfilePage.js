@@ -10,6 +10,17 @@ import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 class ProfilePage extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            nameAndFamily:'',
+            mobileNumber:'',
+            emailAddress:'',
+            nationalCode:'',
+            job:'',
+            education:'',
+            foreignTab:'',
+            cardNumber:'',
+            shabaNumber:'',
+        }
 
     }
 
@@ -34,25 +45,34 @@ class ProfilePage extends Component {
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo"}>
                         <h5>اطلاعات کاربری</h5>
                         <p>نام و نام خانوادگی</p>
-                        <input type="text" value=""/>
+                        <input type="text" value={this.state.nameAndFamily}
+                               onChange={(e)=>this.setState({nameAndFamily:e.target.value})}/>
                         <p>شماره موبایل</p>
-                        <input type="text" value=""/>
+                        <input type="text" value={this.state.mobileNumber}
+                               onChange={(e)=>this.setState({mobileNumber:e.target.value})}/>
                         <p>آدرس ایمیل</p>
-                        <input type="text" value=""/>
+                        <input type="text" value={this.state.emailAddress}
+                               onChange={(e)=>this.setState({emailAddress:e.target.value})}/>
                         <p>کد ملی</p>
-                        <input type="text" value=""/>
+                        <input type="text" value={this.state.nationalCode}
+                               onChange={(e)=>this.setState({nationalCode:e.target.value})}/>
                         <p>شغل</p>
-                        <input type="text" value=""/>
+                        <input type="text" value={this.state.job}
+                               onChange={(e)=>this.setState({job:e.target.value})}/>
                         <p>تحصیلات</p>
-                        <input type="text" value=""/>
+                        <input type="text" value={this.state.education}
+                               onChange={(e)=>this.setState({education:e.target.value})}/>
                         <p>زبانه خارجه</p>
-                        <input type="text" value=""/>
+                        <input type="text" value={this.state.foreignTab}
+                               onChange={(e)=>this.setState({foreignTab:e.target.value})}/>
                         <p>شماره کارت</p>
-                        <input type="text" value=""/>
+                        <input type="text" value={this.state.cardNumber}
+                               onChange={(e)=>this.setState({cardNumber:e.target.value})}/>
                         <p>شماره شبا</p>
-                        <input type="text" value=""/>
+                        <input type="text" value={this.state.shabaNumber}
+                               onChange={(e)=>this.setState({shabaNumber:e.target.value})}/>
                         <MDBRow>
-                            <MDBCol md={12} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
+                            <MDBCol md={12} sm={12} className={'fv-ProfilePageUserSetInfoButton fv-profilePageEnButton'} >
                                 <input type="button" value="ذخیره"/>
                             </MDBCol>
                         </MDBRow>

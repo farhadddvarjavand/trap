@@ -5,7 +5,16 @@
     height: 50%;
   }
  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageUserSetInfoButton {
+   margin-top: -6%;
+   display: contents;
+  }
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageUserSetInfoButton  input{
+    width: 20%;
+    background: #15BE29;
+    border-radius: 16px;
+    color: white;
     margin-top: -6%;
+    margin-left: 2%;
   }
   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo input {
     text-align: end;
@@ -16,6 +25,16 @@
 
 
 @media (max-width: 764px) {
+  .fv-ProfilePageWallet3 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageUserSetInfoButton  input{
+    width: 50%;
+    background: #15BE29;
+    border-radius: 16px;
+    color: white;
+    margin-top: 5%;
+    margin-left: 2%;
+    text-align: center;
+    margin-right: 47%;
+  }
   .fv-ProfilePageWallet3 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageUserSetInfoButton {
     margin-top: 9%;
   }

@@ -11,7 +11,13 @@ import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 class ProfilePageWallet2 extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            sourceOfTransaction:'',
+            transactionAmount:'',
+            transactionDate:'',
+            transactionDescription:''
 
+        }
     }
 
     render() {
@@ -36,15 +42,20 @@ class ProfilePageWallet2 extends Component {
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo"}>
                         <p>منبع تراکنش</p>
-                        <input type="text" value=""/>
+                        <input type="text"  value={this.state.sourceOfTransaction}
+                               onChange={(event)=>{this.setState({sourceOfTransaction:event.target.value})}}/>
                         <p>مبلغ تراکنش</p>
-                        <input type="text" value=""/>
+                        <input type="text"  value={this.state.transactionAmount}
+                               onChange={(event)=>{this.setState({transactionAmount:event.target.value})}}/>
                         <p>تاریخ تراکنش</p>
-                        <input type="text" value=""/>
+                        <input type="text"  value={this.state.transactionDate}
+                               onChange={(event)=>{this.setState({transactionDate:event.target.value})}}/>
                         <p>شرح تراکنش</p>
                         <MDBRow className={"fv-ProfilePageWallet2TextArea"}>
                             <MDBCol>
-                                <input type="textarea" value="" />
+                                <textarea value={this.state.transactionDescription}
+                                            onChange={(event)=>{this.setState({transactionDescription:event.target.value})}}>
+                                </textarea>
                             </MDBCol>
                         </MDBRow>
 

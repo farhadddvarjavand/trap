@@ -16,6 +16,9 @@ import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 class ProfilePageWallet3 extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            amountRequested:'',
+        }
 
     }
 
@@ -42,7 +45,8 @@ class ProfilePageWallet3 extends Component {
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo"}>
                         <h5>درخواست برداشت</h5>
                         <p>میزان مبلغ درخواستی خود را بنوسید</p>
-                        <input type="text" value="تومان"/>
+                        <input type="text" placeholder="تومان" value={this.state.amountRequested}
+                               onChange={(event)=>{this.setState({amountRequested:event.target.value})}} />
 
 
                         <MDBRow>
