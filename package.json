@@ -21,6 +21,7 @@
     "@testing-library/user-event": "^12.7.3",
     "airbnb": "0.0.2",
     "all-contributors-cli": "^6.20.0",
+    "axios": "^0.21.1",
     "concurrently": "^6.0.2",
     "cross-env": "^7.0.3",
     "css-loader": "^5.2.4",
@@ -51,6 +52,7 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "simple-react-validator": "^1.6.0",
     "webpack": "^4.44.2"
   },
   "scripts": {

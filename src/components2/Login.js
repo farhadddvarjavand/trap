@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import simpleReactValidator from "simple-react-validator";
-import { sendPhoneNumber } from "./../services/userService";
+import { sendPhoneNumber } from "../services/userService";
 
 function Login({ history }) {
 
@@ -24,7 +24,7 @@ function Login({ history }) {
         try {
             if (validator.current.allValid()) {
                 const { status, data } = await sendPhoneNumber(user);
-                if (status === 200 && data.status==2) {
+                if (status === 200 && data.status===2) {
                     // Phone number have to save in local storage for use it, in the next step
                     localStorage.setItem("phone_number",phone_number);
                     alert('پیامک اعتبارسنجی ارسال شد');
@@ -38,6 +38,7 @@ function Login({ history }) {
                 forceUpdate(1);
             }
         } catch (ex) {
+            // eslint-disable-next-line no-undef
             toast.error("مشکلی پیش آمده است،مجددا تلاش فرمایید.", {
                 position: "top-right",
                 closeOnClick: true

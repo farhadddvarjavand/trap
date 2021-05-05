@@ -11,6 +11,7 @@ import MobileLogo from "../images/MobileLogo.png"
 import Calender from "../componentsPages/calender";
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
+import CalendarForProfile from "../data/CalendarForProfile";
 
 class ProfilePageCalender extends Component {
     constructor(props) {
@@ -71,6 +72,8 @@ class ProfilePageCalender extends Component {
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow className={"fv-ProfilePageCalenderDayName"}>
+                                <CalendarForProfile />
+
                                 <MDBCol md={1}>
                                     <p>ش</p>
                                 </MDBCol>

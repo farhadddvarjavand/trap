@@ -214,9 +214,16 @@ const DaysList = ({
     }
 
 
+
     const DaysClass='fv-DaysClass'
     return (
         <>
+
+          <input type={'checkbox'} className={'checkbox'} style={{
+            color:'black',
+            backgroundColor: 'white',
+            border: '1px solid',
+          }} disabled={true} checked={(isSelected || isStartingDayRange || isEndingDayRange || isWithinRange) ? true : false   }/>
           <div
               tabIndex={shouldEnableKeyboardNavigation ? '0' : '-1'}
               key={id}
@@ -239,7 +246,7 @@ const DaysList = ({
 
             <div className={'fv-test2'}>{!isStandard ? '' : getLanguageDigits(day) }</div>
 
-            {dayItem.month ===  2 && dayItem.year===1400? <div className={'fv-test'}>{!isStandard ? '' : priceday[day-1] }</div> :''}
+            {dayItem.month ===  2 && dayItem.year===1400? <div className={'fv-test'}>{!isStandard ? '' : priceday[day-1] }</div> :''} {/* baraie mahe 2 sale 1400  */}
             { /*dayItem.month ===  3 ? !isStandard ? '' : getLanguageDigits(day)  : '' */}
 
           </div>
@@ -256,15 +263,40 @@ const DaysList = ({
       parent: calendarSectionWrapper.current,
     });
     const allDays = getViewMonthDays(date);
+
+
+
     const renderSingleWeekRow = weekRowIndex => {
-      const eachWeekDays = allDays
-          .slice(weekRowIndex * 7, weekRowIndex * 7 + 7)
-          .map(renderEachWeekDays);
-      return (
-          <div key={String(weekRowIndex)} className="Calendar__weekRow" role="row">
-            {eachWeekDays}
-          </div>
-      );
+      if(weekRowIndex * 7 <=26){
+        const eachWeekDays = allDays
+            .slice(weekRowIndex * 7, weekRowIndex * 7 + 7)
+            .map(renderEachWeekDays);
+        return (
+            <div key={String(weekRowIndex)} className="Calendar__weekRow" role="row">
+              {eachWeekDays}
+            </div>
+        );
+      }else if(weekRowIndex * 7 <=29) {
+        console.log(weekRowIndex)
+        const eachWeekDays = allDays
+            .slice(weekRowIndex * 7, weekRowIndex * 7 + 7)
+            .map(renderEachWeekDays);
+        return (
+            <div key={String(weekRowIndex)} className="Calendar__weekRow Calendar__weekRow-fv" role="row">
+              {eachWeekDays}
+            </div>
+        );
+      }else{
+        const eachWeekDays = allDays
+            .slice(weekRowIndex * 7, weekRowIndex * 7 + 7)
+            .map(renderEachWeekDays);
+        return (
+            <div key={String(weekRowIndex)} className="Calendar__weekRow Calendar__weekRow-fv2" role="row">
+              {eachWeekDays}
+            </div>
+        );
+      }
+
     };
     return Array.from(Array(6).keys()).map(renderSingleWeekRow);
   };

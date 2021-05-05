@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 
 import "./Calendar/DatePicker.css";
@@ -43,9 +42,9 @@ const CalendarForMobilejs = () => {
     }
 
     const test = () =>{
-  /*      console.log('hi')
-        console.log(selectedDayRange)
-        console.log(setSelectedDayRange)*/
+        /*      console.log('hi')
+              console.log(selectedDayRange)
+              console.log(setSelectedDayRange)*/
     }
     return (
         <>

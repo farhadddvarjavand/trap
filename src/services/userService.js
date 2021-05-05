@@ -28,7 +28,7 @@ export const verifySmsCode = user => {
 // Get User Info  -- Use Token
 export const getUserInfo =()=> {
     return http.get(
-    `${config.webapi}/api/v1/user/getUserInfo`, 
+    `${config.webapi}/api/v1/user/getUserInfo`,
     { headers:{ 'Authorization' : `Bearer USER Token` } } // USER TOKEN => User Toekn from Local Storage for Auth
     );
 }
@@ -97,7 +97,7 @@ export const replayComment = (data,villaId,parentId) => {
 }
 
 // Add comment for a villa  --  Method = POST -- id => villa id
-export const addComment = id => {
+/* export const addComment = id => {                           // hazf shod be elate error
     return http.post(
 
     `${config.webapi}/api/v1/user/addComment/${id}`, 
@@ -105,7 +105,7 @@ export const addComment = id => {
     { headers:{ 'Authorization' : `Bearer USER Token` } } // USER TOKEN => User Toekn from Local Storage for Auth
     
     );
-}
+} */
 
 // Get User Villa Dates  -- Use Token  --  id => villa id
 export const villaDates =id=> {

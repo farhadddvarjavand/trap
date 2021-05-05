@@ -12,6 +12,8 @@ import HostStepCheckbox from "../componentsPages/hostStepCheckbox"
 import HostStep4PageRightBody from "../componentsPages/hostStep4PageRightBody"
 import {Link, Route, Switch, BrowserRouter as Router, Redirect} from "react-router-dom";
 import MainPage from "./MainPage";
+import Login from "../components2/Login";
+import {getUserInfo} from "../services/userService"
 
 
 class LoginPage extends Component {
@@ -40,6 +42,17 @@ class LoginPage extends Component {
                                 <input type="text" placeholder={'شماره موبایل'} value={this.state.mobileNumber} onChange={((e)=>this.setState({mobileNumber : e.target.value}))}/>
                                 <MDBRow>
                                     <input className={"fv-loginPageButton"} type="button" value={"ادامه"} onClick={()=>{
+
+
+                                        /*  {getUserInfo((dataGet)=>{
+                                            dataGet.then(response => response.json())
+                                            dataGet.then(json => {
+                                                    this.setState({mobileNumber:json.support.text});
+                                                    console.log(this.state.mobileNumber)
+                                                });
+                                        }) }     */
+
+
                                         fetch('https://reqres.in/api/get/1')                            /* GET */
                                             .then(response => response.json())
                                             .then(json => {
