@@ -16,6 +16,10 @@ import CalendarForProfile from "../data/CalendarForProfile";
 class ProfilePageCalender extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            changeStatusSelectedDays:'title',
+            PriceChangeStatusSelectedDays:'',
+        }
 
     }
 
@@ -60,6 +64,8 @@ class ProfilePageCalender extends Component {
                             </MDBCol>
                         </MDBRow>
                         <MDBContainer className={"fv-profilePageCalenderInnerMobile"}>
+
+                            {/*
                             <MDBRow className={"fv-ProfilePageCalenderMonthName"}>
                                 <MDBCol md={1}>
                                     <p><i className="fa fa-file-invoice" /></p>
@@ -71,8 +77,7 @@ class ProfilePageCalender extends Component {
                                     <p><i className="fa fa-file-invoice" /></p>
                                 </MDBCol>
                             </MDBRow>
-                            <MDBRow className={"fv-ProfilePageCalenderDayName"}>
-                                <CalendarForProfile />
+
 
                                 <MDBCol md={1}>
                                     <p>ش</p>
@@ -267,6 +272,10 @@ class ProfilePageCalender extends Component {
                                     <p>200000</p>
                                 </MDBCol>
                             </MDBRow>
+                            */}
+                            <MDBRow className={"fv-ProfilePageCalenderDayName"}>
+                                <CalendarForProfile />
+                            </MDBRow>
 
                             <MDBRow className={"fv-ProfilePageCalenderDayReserve"}>
                                 <MDBCol md={4}>
@@ -274,10 +283,11 @@ class ProfilePageCalender extends Component {
                                         <p>تغییر وضعیت روزهای انتخاب شده</p>
                                     </MDBRow>
                                     <MDBRow>
-                                        <select>
-                                            <option>
-
-                                            </option>
+                                        <select value={this.state.changeStatusSelectedDays} onChange={(event)=>this.setState({changeStatusSelectedDays:event.target.value})}>
+                                            <option value='title' disabled>تغییر روز</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
                                         </select>
                                     </MDBRow>
                                 </MDBCol>
@@ -286,7 +296,8 @@ class ProfilePageCalender extends Component {
                                         <p>تغییر وضعیت روزهای انتخاب شده</p>
                                     </MDBRow>
                                     <MDBRow>
-                                      <input type="text" value={"تومان"}/>
+                                      <input type="text" placeholder={"تومان"} value={this.state.PriceChangeStatusSelectedDays}
+                                      onChange={(e)=>this.setState({PriceChangeStatusSelectedDays:e.target.value})}/>
                                     </MDBRow>
                                 </MDBCol>
                             </MDBRow>
@@ -347,10 +358,11 @@ class ProfilePageCalender extends Component {
                                     </MDBRow>
                                     <MDBRow>
                                         <MDBCol>
-                                            <select>
-                                                <option>
-
-                                                </option>
+                                            <select value={this.state.changeStatusSelectedDays} onChange={(event)=>this.setState({changeStatusSelectedDays:event.target.value})}>
+                                                <option value='title' disabled>تغییر روز</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
                                             </select>
                                         </MDBCol>
                                     </MDBRow>
@@ -363,7 +375,8 @@ class ProfilePageCalender extends Component {
                                     </MDBRow>
                                     <MDBRow>
                                         <MDBCol>
-                                            <input type="text"/>
+                                            <input type="text" placeholder={"تومان"} value={this.state.PriceChangeStatusSelectedDays}
+                                                   onChange={(e)=>this.setState({PriceChangeStatusSelectedDays:e.target.value})}/>
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCol>
@@ -375,7 +388,7 @@ class ProfilePageCalender extends Component {
                                     </MDBRow>
                                     <MDBRow className={"fv-profilePageCalenderTextareaMobile"}>
                                         <MDBCol>
-                                            <input type="textarea"/>
+                                            <input type="textarea" placeholder={'تغییر وضعیت روزهای انتخاب شده'}/>
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCol>

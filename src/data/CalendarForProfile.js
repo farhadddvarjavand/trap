@@ -38,9 +38,9 @@ const CalendarForProfile = () => {
                 onChange={setSelectedDayRange}
                 shouldHighlightWeekends
                 priceDays={[1,2000000,3,4]}
-
             />
 
+            {console.log(selectedDayRange)}
 
         </>
     );

@@ -219,11 +219,6 @@ const DaysList = ({
     return (
         <>
 
-          <input type={'checkbox'} className={'checkbox'} style={{
-            color:'black',
-            backgroundColor: 'white',
-            border: '1px solid',
-          }} disabled={true} checked={(isSelected || isStartingDayRange || isEndingDayRange || isWithinRange) ? true : false   }/>
           <div
               tabIndex={shouldEnableKeyboardNavigation ? '0' : '-1'}
               key={id}
@@ -244,7 +239,16 @@ const DaysList = ({
           >
 
 
+            <input type={'checkbox'} className={'checkbox'} style={{
+              color:'black',
+              backgroundColor: 'white',
+              border: '1px solid',
+            }} disabled={true} checked={(isSelected || isStartingDayRange || isEndingDayRange || isWithinRange) ? true : false   }/>
+
+
+
             <div className={'fv-test2'}>{!isStandard ? '' : getLanguageDigits(day) }</div>
+
 
             {dayItem.month ===  2 && dayItem.year===1400? <div className={'fv-test'}>{!isStandard ? '' : priceday[day-1] }</div> :''} {/* baraie mahe 2 sale 1400  */}
             { /*dayItem.month ===  3 ? !isStandard ? '' : getLanguageDigits(day)  : '' */}

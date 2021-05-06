@@ -13,14 +13,16 @@ import HostStep4PageRightBody from "../componentsPages/hostStep4PageRightBody"
 import {Link, Route, Switch, BrowserRouter as Router, Redirect} from "react-router-dom";
 import MainPage from "./MainPage";
 import Login from "../components2/Login";
-import {getUserInfo} from "../services/userService"
+import {getUserInfo , sendPhoneNumber} from "../services/userService"
 
 
 class LoginPage extends Component {
     constructor(props) {
         super(props);
         this.state={
-            mobileNumber:''
+            mobileNumber:'',
+
+            test:''
         }
     }
 
@@ -52,15 +54,23 @@ class LoginPage extends Component {
                                                 });
                                         }) }     */
 
+                                        /* {sendPhoneNumber(this.state.mobileNumber)}
+                                        {getUserInfo( (dataGet)=>{
+                                            dataGet.then(response => response.json())
+                                            dataGet.then(json => {
+                                                this.setState({test:json.support.text});
+                                                console.log(this.state.test)
+                                            });
+                                        })} */
 
-                                        fetch('https://reqres.in/api/get/1')                            /* GET */
+                                        fetch('https://mahoorapps.ir/api/v1/user/getUserInfo')                            /* GET */
                                             .then(response => response.json())
                                             .then(json => {
                                                 this.setState({mobileNumber:json.support.text});
                                                 this.props.history.push('/login2');
                                             });
 
-                                        fetch('https://reqres.in/api/posts', {                     /* POST */
+                                        fetch('https://mahoorapps.ir/api/v1/login', {                     /* POST */
                                             method: 'POST',
                                             headers: { 'Content-Type': 'application/json' },
                                             body: JSON.stringify({PostData})
@@ -73,6 +83,29 @@ class LoginPage extends Component {
                                                     this.props.history.push('/login2');
                                                 } else this.setState({PostData:"UnSuccessful"})
                                             }) ;
+
+                                        {/*
+                                        fetch('https://reqres.in/api/get/1')                            // GET
+                                            .then(response => response.json())
+                                            .then(json => {
+                                                this.setState({mobileNumber:json.support.text});
+                                                this.props.history.push('/login2');
+                                            });
+
+                                        fetch('https://reqres.in/api/posts', {                     //POST
+                                            method: 'POST',
+                                            headers: { 'Content-Type': 'application/json' },
+                                            body: JSON.stringify({PostData})
+                                        })
+                                            .then(response => response.json())
+                                            .then(data =>{
+                                                if(data){
+                                                    console.log(PostData)
+                                                    this.setState({PostData:"Successful" })
+                                                    this.props.history.push('/login2');
+                                                } else this.setState({PostData:"UnSuccessful"})
+                                            }) ;
+                                        */}
                                     }}/>
                                 </MDBRow>
 

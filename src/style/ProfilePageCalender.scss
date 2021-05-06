@@ -113,29 +113,11 @@
 
 
 
-
-
-
-  .fv-ProfilePageUserSetInfo input {
-    width: 100%;
-    color: #919191;
-    padding-right: 8%;
-    margin-left: -15%;
-    z-index: 2;
-  }
-  .Calendar__day.-rtl {
-    font-size: 2.55em;
-    height: 2.45em;
-    height: 57px;
-    margin-right: 1.5%;
-    border-radius: 9px;
-    width: 293px;
-  }
   .Calendar {
     --cl-color-black: #444444;
     --cl-color-disabled: #d4d4d4;
     --cl-color-error: #ff2929;
-    font-size: 15.5px;
+    font-size: 13.5px;
     background: #fff;
     border-radius: 1em;
     position: relative;
@@ -143,33 +125,68 @@
     user-select: none;
     display: flex;
     flex-direction: column;
-    width: 80em;
+    width: 79em;
     z-index: 10;
-    max-width: 90vw;
-    min-height: 36.7em;
-    height: 50em;
+    max-width: 96vw;
+    min-height: 42.7em;
+    height: 62em;
     padding-top: 0%;
     margin-bottom: 8%;
-    border: 1px solid #d4d4d4;
+    border: none;
+    box-shadow: none;
   }
+
   .Calendar__day.-rtl {
-    font-size: -21.45em;
-    height: 2.45em;
-    height: 95px;
-    margin-right: 1.5%;
+    font-size: 2.55em;
+    height: 110px;
+    margin-right: 0.5%;
     border-radius: 9px;
-    width: 82%;
+    width: 105px;
+  }
+  .Calendar__sectionWrapper {
+    position: relative;
+    min-height: 58.8em;
+    overflow: hidden;
+  }
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderDayName input {
+    width: 18px;
+    color: #919191;
+    padding-right: 8%;
+    margin-top: -15%;
+    margin-left: 66%;
+  }
+  .fv-test {
+    /* background: #2F80ED; */
+    color: #15BE29;
+    font-size: 18px;
   }
   .fv-test2 {
     /* background: white; */
-    font-size: 22px;
-    margin-top: 20%;
+    font-size: 20px;
+    margin-top: -35%;
     margin-bottom: 1%;
   }
 
-
-
-
+  .Calendar__section.-shown {
+    opacity: 1;
+    transform: translateX(0);
+    padding-right: 5%;
+    padding-left: 5%;
+    margin-left: -2.75%;
+  }
+  .Calendar__weekDays {
+    display: flex;
+    justify-content: space-between;
+    color: black;
+    font-size: 1.2em;
+    margin-bottom: 0.7em;
+    /* padding: 0 2.6em; */
+    position: relative;
+    background: rgba(145, 145, 145, 0.2);
+    line-height: 46px;
+    padding-left: 5.5%;
+    padding-right: 6%;
+  }
 
 }
 @media (max-width: 540px) {
