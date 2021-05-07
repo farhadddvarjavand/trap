@@ -1,16 +1,45 @@
 import React from "react";
+import {popularVillas,getBanners,discountedVillas,economicVillas} from "../services/homeService"
 
 class Datas extends React.Component{
     constructor(props) {
         super(props);
         this.state={
+            popularVillas:[],
+            bannersVillage:[],
+            bannersvillas:[],
+            bannersbigBanners:[],
             data:'',
         }
     }
 
    componentDidMount() {
 
+       {  popularVillas()
+           .then(res => {
+               const popularVillas = res.data.data;
+               this.setState({ popularVillas });
+           })
+           .catch(function (error) {
+               console.log('error')
+           })  }
+
+       {  getBanners()
+           .then(res => {
+               const bannersVillage = res.data.villages;
+               const bannersvillas = res.data.villas;
+               const bannersbigBanners = res.data.bigBanners;
+               this.setState({ bannersvillas , bannersbigBanners, bannersVillage});
+           })
+           .catch(function (error) {
+               console.log('error')
+           })  }
+
+
     }
+
+
+
     getData =(url)=>{
         fetch(url)                            /* GET */
             .then(response => response.json())
@@ -34,6 +63,9 @@ class Datas extends React.Component{
                 } else this.setState({PostData:"UnSuccessful"})
             });
     }
+
+
+
     postData = (url , data)=>{
         fetch(url, {                     /* POST */
             method: 'POST',

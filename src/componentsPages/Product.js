@@ -27,15 +27,16 @@ class Product extends React.Component{
                 </MDBRow>
 
                 <MDBRow className={'fv-productCapacityBox'}>
-                    <MDBCol md={2} sm={2}>
-                      نفر{this.props.capacity}
+                    <MDBCol md={2} sm={2} className={'fv-capacityBody'}>
+                     <p> نفر </p><p> {this.props.capacity} </p>
                     </MDBCol>
-                    <MDBCol md={5} sm={9}>
+                    <MDBCol md={5} sm={9} className={'fv-maximumNumber'}>
                        <a>حداکثر نفرات </a>
                         <i className="fa fa-user-friends" />
                     </MDBCol>
-                    <MDBCol md={5} sm={11}>
-                       <a>{this.props.numberOfRoom}خوابه </a>
+                    <MDBCol md={5} sm={11} className={'fv-numberOfBedBody'}>
+                        <p>خوابه</p><p>{this.props.numberOfRoom}</p>
+
                         <i className="fas fa-bed" />
                     </MDBCol>
                 </MDBRow>

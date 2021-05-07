@@ -221,6 +221,24 @@ html .col-md-3{
     max-width: 92.333333%;
 }
 
+.fv-product .fv-productCapacityBox .col-md-2 {
+    margin-left: 22px;
+    /* padding: 0; */
+    display: flex;
+}
+.fv-product .fv-productCapacityBox .fv-numberOfBedBody {
+    margin-left: 12.5%;
+    margin-right: -16%;
+    display: flex;
+}
+.fv-product .fv-productCapacityBox .fv-numberOfBedBody .fa,.fv-product .fv-productCapacityBox .fv-numberOfBedBody .fas {
+    margin-left: 3%;
+    margin-top: 2%;
+}
+.fv-product .fv-productCapacityBox .fv-capacityBody p {
+    margin-left: 8%;
+}
+
 
 
 
@@ -464,6 +482,16 @@ html .col-md-3{
         margin-left: 25px;
     }
 
+    .fv-product .fv-productCapacityBox .fv-numberOfBedBody {
+        display: flex;
+        justify-content: flex-end;
+        margin-left: 4.5%;
+        margin-top: -34%;
+    }
+    .fv-product .fv-productCapacityBox .fv-maximumNumber , .fv-product .fv-productCapacityBox .fv-capacityBody{
+        margin-top: 8%;
+    }
+
 
 }
 @media (max-width: 1193px) and (min-width: 991px){
@@ -559,8 +587,17 @@ html .col-md-3{
         font-size: 9px;
         margin-bottom: 2.5vw;
     }
+
+}
+@media (max-width: 320px){
+    .fv-product .row {
+        font-size: 15px;
+    }
 }
 @media (max-width: 280px) {
+    .fv-product .row {
+        font-size: 13px;
+    }
     .fv-topicMainPageTopic h4 {
         font-size: 13px;
         font-weight: 450;

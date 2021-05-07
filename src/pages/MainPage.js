@@ -15,6 +15,8 @@ import {Link} from "react-router-dom";
 import {productData} from "../data/testData"
 import Datas from "../data/Datas";
 
+import {popularVillas,getBanners,discountedVillas,economicVillas} from "../services/homeService"
+
 
 
 class MainPage extends Datas {
@@ -56,14 +58,41 @@ class MainPage extends Datas {
                     topicProduct:'باغ',
                     locationProduct:'مازندران',
                     priceProduct:'25000',}
+
             ],
+
         }
     }
 
+    componentDidMount() {
+        super.componentDidMount();
+
+
+
+    }
 
     render() {
-       /* const a =this.getData('https://reqres.in/api/get/1')
-        console.log(a.text)  */
+
+        const popularVillage = this.state.popularVillas
+
+        const bannersvillages = this.state.bannersVillage
+
+        const bannersvillas = this.state.bannersvillas
+
+        const bannersbigBanners = this.state.bannersbigBanners
+
+
+        console.log(bannersbigBanners)
+        console.log('bannersbigBanners')
+
+
+
+
+
+
+
+        /* const a =this.getData('https://reqres.in/api/get/1')
+         console.log(a.text)  */
 
         const pagination =[]
         const numbetOfComments = 20
@@ -160,18 +189,39 @@ class MainPage extends Datas {
                                 linkToPage={"./searchHomePage/1"}/>
             </MDBRow>
             <MDBRow className={"fv-mainProduct fv-mainMobile"} >
-                {data.map(productDetails=>{
-                  return(
-                      <MDBCol md={3} sm={7}>
-                          <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                   rate={productDetails.rateProduct}
-                                   topic={productDetails.topicProduct}
-                                   location={productDetails.locationProduct}
-                                   numberOfRoom={productDetails.numberOfRoomProduct}
-                                   capacity={productDetails.NumberOfCapacityProduct}
-                                   price={productDetails.priceProduct}/>
-                      </MDBCol>
-                  )
+
+
+
+                {popularVillage.map(productDetails=>{
+                        if(productDetails.details){
+                            return(
+                                <MDBCol md={3} sm={7}>
+                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                             rate={''}
+                                             topic={productDetails.title}
+                                             location={productDetails.city}
+                                             numberOfRoom={productDetails.details.bedroom}
+                                             capacity={productDetails.details.max_capacity}
+                                             price={''}/>
+
+                                </MDBCol>
+                            )
+                        }else {
+                            return(
+                                <MDBCol md={3} sm={7}>
+                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                             rate={''}
+                                             topic={productDetails.title}
+                                             location={productDetails.city}
+                                             numberOfRoom={''}
+                                             capacity={''}
+                                             price={''}/>
+
+                                </MDBCol>
+                            )
+                    }
+
+
                 })}
 
             </MDBRow>
@@ -180,47 +230,30 @@ class MainPage extends Datas {
                                 linkToPage={"/searchHomePage/cheapest/1"}/>
             </MDBRow>
             <MDBRow className={"fv-mainMobileVillage"}>
-                {data.map(productData=>{})}
-                <MDBCol md={3} sm={7}>
-                    <PopularVillage srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                    location="مازندران"
-                                    capacity="2"/>
-                </MDBCol>
-                <MDBCol md={3} sm={7}>
-                    <PopularVillage srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                    location="مازندران"
-                                    capacity="2"/>
-                </MDBCol>
-                <MDBCol md={3} sm={7}>
-                    <PopularVillage srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                    location="مازندران"
-                                    capacity="2"/>
-                </MDBCol>
-                <MDBCol md={3} sm={7}>
-                    <PopularVillage srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                    location="مازندران"
-                                    capacity="2"/>
-                </MDBCol>
+
+                {bannersvillages.map(banners=>{
+                   return( <MDBCol md={3} sm={7}>
+                        <PopularVillage srcImage={banners.link}
+                                        location={banners.title}
+                                        capacity="2"/>
+                    </MDBCol>)
+                })}
             </MDBRow>
+
             <MDBRow className={"fv-topicMainPage"}>
                 <TopicsMainPage topic="انواع اقامتگاه ها"
                                 linkToPage={"/searchHomePage/cheapest/1"}/>
             </MDBRow>
             <MDBRow className={'fv-mainMobileAccommodation'} >
-                {data.map(productData=>{})}
-                <MDBCol md={3} sm={7} >
-                   <TypesAccommodation topic="استخردار"/>
-                </MDBCol>
-                <MDBCol  md={3} sm={7}>
-                    <TypesAccommodation topic="استخردار"/>
-                </MDBCol>
-                <MDBCol  md={3} sm={7}>
-                    <TypesAccommodation topic="استخردار"/>
-                </MDBCol>
-                <MDBCol md={3} sm={7}>
-                    <TypesAccommodation topic="استخردار"/>
-                </MDBCol>
+                {bannersvillas.map(bannersvila=>{
+                  return  <MDBCol md={3} sm={7} >
+                                 <TypesAccommodation
+                                     topic={bannersvila.title}
+                                     image={bannersvila.link}/>
+                          </MDBCol>
+                })}
             </MDBRow>
+
             <MDBRow className={"fv-topicMainPage"}>
                 <TopicsMainPage topic="انواع اقامتگاه ها"
                                 linkToPage={"./searchHomePage/1"}/>
