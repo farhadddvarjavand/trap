@@ -5,8 +5,8 @@
 }
 .fv-searchMainPage [type=button]:not(:disabled),.fv-searchMainPage [type=reset]:not(:disabled),.fv-searchMainPage [type=submit]:not(:disabled),.fv-searchMainPage button:not(:disabled) {
     cursor: pointer;
-    margin-left: 5%;
-    margin-right: -3%;
+    margin-left: 0%;
+    margin-right: -4%;
 }
 .fv-SearchHomePagePaginationSelected , .fv-SearchHomePagePaginationDefault{
     margin-top: 0%;
@@ -144,9 +144,31 @@
 }
 .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox{
     font-size: 12px;
+    direction: ltr;
+}
+.fv-SearchHomePage  .fv-searchMainPageBodyLeft .fv-mainProduct {
+    direction: ltr;
+    margin-left: 1%;
+    padding-right: 1%;
+    padding-top: 2%;
+    direction: rtl;
+}
+.fv-SearchHomePage  .fv-product .fv-productTopic {
+    padding-right: 12.5%;
+    font-size: 19px;
+    color: #15BE29;
+    direction: ltr;
+}
+.fv-SearchHomePage .fv-productLocation .col-md-9 {
+    border-bottom: 1px solid #400a0a;
+    text-align: end;
+    padding-right: 0;
+    margin: auto;
+    font-size: 14px;
+    direction: ltr;
 }
 .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox .col-md-5 {
-    padding-left: 0;
+    padding-left: 10px;
 }
 .fv-SearchHomePage .fv-productRateBox {
     font-size: 14px;
@@ -239,6 +261,15 @@
     display: none;
 }
 @media (max-width: 766px) {
+    .fv-SearchHomePage .fv-product .fv-productCapacityBox .fv-numberOfBedBody {
+        display: flex;
+        justify-content: flex-end;
+        margin-left: -6px;
+        margin-top: -34%;
+    }
+    .fv-SearchHomePage .fv-product .row .col-md-2 {
+        margin-left: 21px;
+    }
     .fv-SearchHomePageMobileProduct .fv-product .fv-productCapacityBox .col-sm-9 {
         flex: 0 0 41.666667%;
         max-width: 41.666667% !important;
@@ -251,7 +282,7 @@
     }
     .fv-SearchHomePageMobileProduct .fv-product .fv-productCapacityBox {
         margin-top: 0%;
-        font-size: 3vw;
+        font-size: 4vw;
     }
     .fv-SearchHomePageMobileProduct .fv-product .fv-productPriceBoxPriceText {
         float: none;
@@ -338,6 +369,72 @@
         width: 146%;
         direction: ltr;
     }
+    .fv-SearchHomePage .fv-product .fv-productCapacityBox .fv-maximumNumber, .fv-SearchHomePage  .fv-product .fv-productCapacityBox .fv-capacityBody {
+        margin-top: 0%;
+    }
+
+
+
+    .fv-searchMainPageForMobile .fv-searchMainPage [type=button]:not(:disabled),.fv-searchMainPageForMobile .fv-searchMainPage [type=reset]:not(:disabled), .fv-searchMainPage [type=submit]:not(:disabled), .fv-searchMainPage button:not(:disabled) {
+        cursor: pointer;
+        margin-left: -3%;
+        margin-right: 6%;
+    }
+
+    .fv-searchMainPageForMobile input[type=checkbox], input[type=radio] {
+        height: 69%;
+        box-shadow: none;
+    }
+
+    .fv-searchMainPageForMobile .fv-searchMainPagePrice.fv-searchMainPagePriceSecond {
+        text-align: start;
+        padding-top: 2%;
+    }
+    fv-searchMainPageForMobile .fv-searchMainPagePrice {
+        width: 102%;
+        margin-right: -1%;
+        padding-left: 5%;
+        padding-right: 5%;
+        padding-top: 9%;
+        border: 1px solid #88888836;
+        border-radius: 15px;
+        margin-top: 2%;
+        padding-bottom: 6%;
+        direction: rtl;
+    }
+
+    .fv-searchMainPage .fv-searchMainPageForMobile  button, .fv-searchMainPage .fv-searchMainPageForMobile input {
+        width: 100%;
+        line-height: 54px;
+        /* margin-top: 3%; */
+        padding-right: 9px;
+        border: 1px solid #88888836;
+        border-radius: 15px;
+        box-shadow: 0px 1px 1px #88888836;
+        width: 8%;
+    }
+    .fv-SearchHomePage .fv-searchMainPageForMobile.fv-searchMainPage.row {
+        margin-left: 3%;
+        margin-right: 9%;
+    }
+
+    .fv-searchMainPageForMobile input[type=checkbox], input[type=radio] {
+        height: 69%;
+        box-shadow: none;
+        width: 13%;
+    }
+    .fv-searchMainPageForMobile .fv-searchMainPagePriceSecond.fv-searchMainPagePrice p {
+        width: 100%;
+        text-align: initial;
+        margin-right: 4%;
+        margin-top: 4%;
+        font-size: 15px;
+    }
+    .fv-searchMainPageForMobile.fv-searchMainPage [type=button]:not(:disabled), .fv-searchMainPageForMobile.fv-searchMainPage [type=reset]:not(:disabled),.fv-searchMainPageForMobile.fv-searchMainPage [type=submit]:not(:disabled),.fv-searchMainPageForMobile.fv-searchMainPage button:not(:disabled) {
+        cursor: pointer;
+        margin-left: -3%;
+        margin-right: -4%;
+    }
 }
 @media (max-width: 320px) {
     .fv-searchMainPage.fv-searchMainPageDateReturn input {
@@ -345,5 +442,12 @@
     }
     .fv-searchMainPage.fv-searchMainPageDateReturn input, .fv-searchMainPage.fv-searchMainPageDateOut input {
         width: 232%;
+    }
+
+    .fv-searchMainPageForMobile.fv-searchMainPage .fv-searchMainPageDateReturn input, .fv-searchMainPageForMobile.fv-searchMainPage .fv-searchMainPageDateOut input {
+        width: 208%;
+    }
+    .fv-searchMainPageForMobile.fv-searchMainPage .fv-searchMainPageBetweenDate.col-sm-1 {
+        margin-right: 19%;
     }
 }

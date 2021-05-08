@@ -10,13 +10,18 @@ import MobileMenu from "../images/MobileMenu.png"
 import {Link, Route, Switch,NavLink,BrowserRouter} from "react-router-dom"
 import Datas from "../data/Datas";
 
+import {doSearch} from "../services/searchService"
 /* import {doSearch} from "../services/searchService" */
+
+
 
 
 class SearchHomePage extends Datas {
     constructor(props) {
         super(props);
         this.state={
+            ...this.props,
+            ...this.state,
             sortedBy:'',
             pageNumber:'',
             setVillage:'',
@@ -55,11 +60,78 @@ class SearchHomePage extends Datas {
     }
 
     render() {
-        console.log(this.state.accommodationGroup)
+
+        const searchPageVillas = this.state.searchPageVillas
+
+        const resultSearchPageVillas = this.state.resultSearchPageVillas
+        console.log(resultSearchPageVillas)
 
         return(
             <MDBContainer className={"fv-SearchHomePage"}>
                 <MDBContainer className={'fv-SearchHomePageBodyMobile fv-footerMenu main'}>
+
+                    <MDBRow>
+                        <MDBRow className={'fv-searchMainPage fv-searchMainPageForMobile'}>
+                            <MDBRow className={'fv-searchMainPagePrice'}>
+                                <input type='text' placeholder={'شهر یا روستا را وارد کنید'} value={this.state.setVillage} onChange={(event)=>{this.setState({setVillage:event.target.value})}}/>
+                                <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateOut'}>
+                                    <input type='text' placeholder='تاریخ رفت' value={this.state.dateToGo} onChange={(event)=>{this.setState({dateToGo:event.target.value})}}/>
+                                </MDBCol>
+                                <MDBCol md={1} sm={1} className={'fv-searchMainPageBetweenDate'}>
+
+                                </MDBCol>
+                                <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateReturn'}>
+                                    <input type='text' placeholder='تاریخ برگشت' value={this.state.dateToReturn} onChange={(event)=>{this.setState({dateToReturn:event.target.value})}}/>
+                                </MDBCol>
+                                <input type='text' placeholder='تعداد نفرات' value={this.state.numberOfPeople} onChange={(event)=>{this.setState({numberOfPeople:event.target.value})}}/>
+                                <input type='text' placeholder='تعداد خواب' value={this.state.numberOfBedroom} onChange={(event)=>{this.setState({numberOfBedroom:event.target.value})}}/>
+                            </MDBRow>
+                            <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
+                                <p>قیمت</p>
+                                <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateOut'}>
+                                    <input type='text' placeholder='از' value={this.state.dateIn} onChange={(event)=>{this.setState({dateIn:event.target.value})}}/>
+                                </MDBCol>
+                                <MDBCol md={1} sm={1} className={'fv-searchMainPageBetweenDate'}>
+
+                                </MDBCol>
+                                <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateReturn'}>
+                                    <input type='text' placeholder='تا' value={this.state.dateOut} onChange={(event)=>{this.setState({dateOut:event.target.value})}}/>
+                                </MDBCol>
+                            </MDBRow>
+                            <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
+                                <p>دسته بندی اقامتگاه</p>
+                                <MDBCol md={12}>
+                                    <input type="checkbox" name="pool" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>استخردار</p>
+                                </MDBCol>
+                                <MDBCol md={12}>
+                                    <input type="checkbox" name="littoral" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>ساحلی</p>
+                                </MDBCol>
+                                <MDBCol md={12}>
+                                    <input type="checkbox" name="summer" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p>ییلاقی</p>
+                                </MDBCol>
+                                <MDBCol md={12}>
+                                    <input type="checkbox" name="forestCottage" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p> کلبه جنگلی</p>
+                                </MDBCol>
+                                <MDBCol md={12}>
+                                    <input type="checkbox" name="oldHouse" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p>خانه قدیمی</p>
+                                </MDBCol>
+                            </MDBRow>
+                            <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
+                                <MDBCol md={12}>
+                                    <input type="checkbox" name="discountedAccommodation" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>اقامت گاه های دارای تخفیف</p>
+                                </MDBCol>
+                                <MDBCol md={12}>
+                                    <input type="checkbox" name="disinfectedAccommodation" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>اقامت گاه های ضدعفونی شده</p>
+                                </MDBCol>
+                            </MDBRow>
+                            <input type='button' value='جستجو اقامتگاه' className={'fv-searchMainPagesSearchButton'} onClick={()=>{
+
+                                this.postDataAndPush('','data','')
+                            }}/>
+
+                        </MDBRow>
+                    </MDBRow>
+
                     <MDBRow className={'fv-footerMenuRibbonMobile'}>
                         <MDBCol sm={8}>
                             <img src={MobileMenu} />
@@ -85,37 +157,38 @@ class SearchHomePage extends Datas {
                     </MDBRow>
                     <MDBRow>
                         <MDBRow className={"fv-SearchHomePageMobileProduct"} >
-                            <MDBCol md={4} sm={7} >
-                                <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                         rate="5.5/5"
-                                         topic="کوچه باغ سبز"
-                                         location="مازندران"
-                                         numberOfRoom="2"
-                                         capacity="2"
-                                         price="20000"/>
-                            </MDBCol>
-                            <MDBCol md={4} sm={7} >
-                                <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                         rate="5.5/5"
-                                         topic="کوچه باغ سبز"
-                                         location="مازندران"
-                                         numberOfRoom="2"
-                                         capacity="2"
-                                         price="20000"/>
-                            </MDBCol>
-                            <MDBCol md={4} sm={7} >
-                                <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                         rate="5.5/5"
-                                         topic="کوچه باغ سبز"
-                                         location="مازندران"
-                                         numberOfRoom="2"
-                                         capacity="2"
-                                         price="20000"/>
-                            </MDBCol>
+                            {searchPageVillas.map(searchPageVilla=>{
+                                if(searchPageVilla.details){
+                                    return(
+                                        <MDBCol md={4} sm={7} >
+                                            <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                                     rate="5.5/5"
+                                                     topic={searchPageVilla.title}
+                                                     location={searchPageVilla.state}
+                                                     numberOfRoom={searchPageVilla.details.bedroom}
+                                                     capacity={searchPageVilla.details.max_capacity}
+                                                     price={searchPageVilla.normal_cost}/>
+                                        </MDBCol>
+                                    )
+                                }else {
+                                    return(
+                                        <MDBCol md={4} sm={7} >
+                                            <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                                     rate="5.5/5"
+                                                     topic={searchPageVilla.title}
+                                                     location={searchPageVilla.state}
+                                                     numberOfRoom="2"
+                                                     capacity="2"
+                                                     price={searchPageVilla.normal_cost}/>
+                                        </MDBCol>
+                                    )
+                                }
+                            })}
                         </MDBRow>
                         </MDBRow>
                 </MDBContainer>
 
+                {/*                                   Desktop                                               */}
 
                 <MDBContainer className={'fv-footerMenu fv-SearchHomePageBody'}>
                     <MDBRow className={'fv-footerMenuRibbon'}>
@@ -200,116 +273,67 @@ class SearchHomePage extends Datas {
                             <MDBRow className={"fv-SortMenu"}>
                                 <p>مرتب سازی بر اساس:</p>
 
-                                <NavLink to={`/searchHomePage/newest/${this.props.match.params.id}`}  exact name={'newest'} className={'fv-unSelected'} activeClassName="fv-selected"  onClick={(event)=>{
-                                    this.setState({sortedBy:event.target.name})
+                                <NavLink to={this.props.match.params.sort === 'newest' ? `/searchHomePage/newest/${this.props.match.params.id}` : `/searchHomePage/newest/1`}  exact
+                                         name={'newest'} className={'fv-unSelected'} activeClassName="fv-selected"
+                                         onClick={(event)=>{ this.setState({sortedBy:event.target.name})
                                 }}>
                                     جدیدترین
                                 </NavLink>
-                                <NavLink  to={`/searchHomePage/expensive/${this.props.match.params.id}`}  name={'expensive'} exact className={'fv-unSelected'} activeClassName="fv-selected" onClick={(event)=>{
-                                    this.setState({sortedBy:event.target.name})
+                                <NavLink  to={this.props.match.params.sort === 'expensive' ? `/searchHomePage/expensive/${this.props.match.params.id}` : `/searchHomePage/expensive/1`}
+                                          name={'expensive'} exact className={'fv-unSelected'} activeClassName="fv-selected"
+                                          onClick={(event)=>{ this.setState({sortedBy:event.target.name})
                                 }}>
                                     گران‌ترین
                                 </NavLink>
-                                <NavLink  to={`/searchHomePage/cheapest/${this.props.match.params.id}`}  name={'cheapest'} exact className={'fv-unSelected'} activeClassName="fv-selected" onClick={(event)=>{
-                                    this.setState({sortedBy:event.target.name})
+                                <NavLink  to={this.props.match.params.sort === 'cheapest' ? `/searchHomePage/cheapest/${this.props.match.params.id}` : `/searchHomePage/cheapest/1`}
+                                          name={'cheapest'} exact className={'fv-unSelected'} activeClassName="fv-selected"
+                                          onClick={(event)=>{ this.setState({sortedBy:event.target.name})
                                 }}>
                                     ارزان‌ترین
                                 </NavLink>
-                                <NavLink  to={`/searchHomePage/popular/${this.props.match.params.id}`}  name={'popular'} exact className={'fv-unSelected'} activeClassName="fv-selected" onClick={(event)=>{
-                                    this.setState({sortedBy:event.target.name})
+                                <NavLink  to={this.props.match.params.sort === 'popular' ? `/searchHomePage/popular/${this.props.match.params.id}` : `/searchHomePage/popular/1`}
+                                          name={'popular'} exact className={'fv-unSelected'} activeClassName="fv-selected"
+                                          onClick={(event)=>{ this.setState({sortedBy:event.target.name})
                                 }}>
                                     محبوب‌ترین
                                 </NavLink>
-                                <NavLink to={`/searchHomePage/closest/${this.props.match.params.id}`} name={'closest'} exact className={'fv-unSelected'} activeClassName="fv-selected" onClick={(event)=>{
-                                    this.setState({sortedBy:event.target.name})
+                                <NavLink  to={this.props.match.params.sort === 'closest' ? `/searchHomePage/closest/${this.props.match.params.id}` : `/searchHomePage/closest/1`}
+                                         name={'closest'} exact className={'fv-unSelected'} activeClassName="fv-selected"
+                                         onClick={(event)=>{ this.setState({sortedBy:event.target.name})
                                 }}>
                                     نزدیکترین
                                 </NavLink>
 
                             </MDBRow>
                             <MDBRow className={"fv-mainProduct fv-mainMobile"} >
-                                <MDBCol md={4} sm={7} >
-                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                             rate="5.5/5"
-                                             topic="کوچه باغ سبز"
-                                             location="مازندران"
-                                             numberOfRoom="2"
-                                             capacity="2"
-                                             price="20000"/>
-                                </MDBCol>
-                                <MDBCol md={4} sm={7} >
-                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                             rate="5.5/5"
-                                             topic="کوچه باغ سبز"
-                                             location="مازندران"
-                                             numberOfRoom="2"
-                                             capacity="2"
-                                             price="20000"/>
-                                </MDBCol>
-                                <MDBCol md={4} sm={7} >
-                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                             rate="5.5/5"
-                                             topic="کوچه باغ سبز"
-                                             location="مازندران"
-                                             numberOfRoom="2"
-                                             capacity="2"
-                                             price="20000"/>
-                                </MDBCol>
+                                {searchPageVillas.map(searchPageVilla=>{
+                                    if(searchPageVilla.details){
+                                        return(
+                                            <MDBCol md={4} sm={7} >
+                                                <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                                         rate="5.5/5"
+                                                         topic={searchPageVilla.title}
+                                                         location={searchPageVilla.state}
+                                                         numberOfRoom={searchPageVilla.details.bedroom}
+                                                         capacity={searchPageVilla.details.max_capacity}
+                                                         price={searchPageVilla.normal_cost}/>
+                                            </MDBCol>
+                                        )
+                                    }else {
+                                        return(
+                                            <MDBCol md={4} sm={7} >
+                                                <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                                         rate="5.5/5"
+                                                         topic={searchPageVilla.title}
+                                                         location={searchPageVilla.state}
+                                                         numberOfRoom="2"
+                                                         capacity="2"
+                                                         price={searchPageVilla.normal_cost}/>
+                                            </MDBCol>
+                                        )
+                                    }
+                                })}
 
-                                <MDBCol md={4} sm={7} >
-                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                             rate="5.5/5"
-                                             topic="کوچه باغ سبز"
-                                             location="مازندران"
-                                             numberOfRoom="2"
-                                             capacity="2"
-                                             price="20000"/>
-                                </MDBCol>
-                                <MDBCol md={4} sm={7} >
-                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                             rate="5.5/5"
-                                             topic="کوچه باغ سبز"
-                                             location="مازندران"
-                                             numberOfRoom="2"
-                                             capacity="2"
-                                             price="20000"/>
-                                </MDBCol>
-                                <MDBCol md={4} sm={7} >
-                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                             rate="5.5/5"
-                                             topic="کوچه باغ سبز"
-                                             location="مازندران"
-                                             numberOfRoom="2"
-                                             capacity="2"
-                                             price="20000"/>
-                                </MDBCol>
-                                <MDBCol md={4} sm={7} >
-                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                             rate="5.5/5"
-                                             topic="کوچه باغ سبز"
-                                             location="مازندران"
-                                             numberOfRoom="2"
-                                             capacity="2"
-                                             price="20000"/>
-                                </MDBCol>
-                                <MDBCol md={4} sm={7} >
-                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                             rate="5.5/5"
-                                             topic="کوچه باغ سبز"
-                                             location="مازندران"
-                                             numberOfRoom="2"
-                                             capacity="2"
-                                             price="20000"/>
-                                </MDBCol>
-                                <MDBCol md={4} sm={7} >
-                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                             rate="5.5/5"
-                                             topic="کوچه باغ سبز"
-                                             location="مازندران"
-                                             numberOfRoom="2"
-                                             capacity="2"
-                                             price="20000"/>
-                                </MDBCol>
                             </MDBRow>
                             <MDBRow className={"fv-SearchHomePagePagination"}>
                                 <NavLink to={`/searchHomePage/${this.props.match.params.sort}/1`} exact name={1} className={'fv-SearchHomePagePaginationDefault'} activeClassName="fv-SearchHomePagePaginationSelected" onClick={(event)=>{

@@ -501,6 +501,15 @@ html .col-md-3{
     .fv-discountedProductAmount {
         margin-bottom: -1%;
     }
+
+    .fv-product .fv-maximumNumber .col-md-5 {
+        text-align: end;
+        margin-right: -44px;
+        display: inherit;
+    }
+    .fv-product .fv-productCapacityBox{
+        font-size: 11px;
+    }
 }
 @media (max-width: 991px) and  (min-width: 768px) {
     .fv-product .fv-discountedProductAmount.col-md-2 {
@@ -522,6 +531,13 @@ html .col-md-3{
     .fv-popularVillageTitle.fv-typesAccommodationTopic.col-11 {
         flex: 0 0 160.666667%;
         max-width: 86.666667%;
+    }
+    .fv-product .col-md-5 {
+        text-align: end;
+        margin-right: -23px;
+        padding: 0;
+        padding-left: 0%;
+        padding-right: 8%;
     }
 }
 @media (max-width: 766px) and  (min-width: 508px){

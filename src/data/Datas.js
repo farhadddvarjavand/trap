@@ -1,5 +1,6 @@
 import React from "react";
 import {popularVillas,getBanners,discountedVillas,economicVillas} from "../services/homeService"
+import {search  , doSearch} from "../services/searchService"
 
 class Datas extends React.Component{
     constructor(props) {
@@ -9,6 +10,10 @@ class Datas extends React.Component{
             bannersVillage:[],
             bannersvillas:[],
             bannersbigBanners:[],
+            discountedVillas:[],
+            economicVillas:[],
+            searchPageVillas:[],
+            resultSearchPageVillas:[],
             data:'',
         }
     }
@@ -35,6 +40,29 @@ class Datas extends React.Component{
                console.log('error')
            })  }
 
+       {  discountedVillas()
+           .then(res => {
+               this.setState({ discountedVillas: res.data.data });
+           })
+           .catch(function (error) {
+               console.log('error')
+           })  }
+       {  economicVillas()
+           .then(res => {
+               this.setState({ economicVillas: res.data.data });
+           })
+           .catch(function (error) {
+               console.log('error')
+           })  }
+       {  search()
+           .then(res => {
+               this.setState({ searchPageVillas: res.data.data });
+           })
+           .catch(function (error) {
+               console.log('error')
+           })  }
+
+
 
     }
 
@@ -48,8 +76,23 @@ class Datas extends React.Component{
             });
         return this.state.data
     }
-    postDataAndPush = (url , data , push)=>{
-        fetch(url, {                     /* POST */
+
+
+
+    postDataAndPush = (url , data ,push)=>{
+
+        doSearch(data)
+            .then(res => {
+                console.log(res)
+                this.setState({ resultSearchPageVillas: res.data.data });
+            })
+            .catch(function (error) {
+                console.log('error')
+            })
+
+
+
+    /*    fetch(url, {                     // POST
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({data})
@@ -61,12 +104,15 @@ class Datas extends React.Component{
                     this.setState({PostData:"Successful" })
                     this.props.history.push(push)
                 } else this.setState({PostData:"UnSuccessful"})
-            });
+            }); */
+
     }
 
 
 
     postData = (url , data)=>{
+
+
         fetch(url, {                     /* POST */
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

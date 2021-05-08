@@ -15,7 +15,6 @@ import {Link} from "react-router-dom";
 import {productData} from "../data/testData"
 import Datas from "../data/Datas";
 
-import {popularVillas,getBanners,discountedVillas,economicVillas} from "../services/homeService"
 
 
 
@@ -81,9 +80,12 @@ class MainPage extends Datas {
 
         const bannersbigBanners = this.state.bannersbigBanners
 
+        const discountedVillas = this.state.discountedVillas
 
-        console.log(bannersbigBanners)
-        console.log('bannersbigBanners')
+        const economicVillas = this.state.economicVillas
+
+        console.log(economicVillas)
+        console.log('economicVillas')
 
 
 
@@ -260,102 +262,68 @@ class MainPage extends Datas {
             </MDBRow>
 
             <MDBRow className={'fv-mainMobile'}>
-                {data.map(productData=>{})}
-                <MDBCol md={3} sm={7}>
-                    <DiscountedProduct discountedAmount="20%"
-                        srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                        rate="5.5/5"
-                        topic="کوچه باغ سبز"
-                        location="مازندران"
-                        numberOfRoom="2"
-                        capacity="2"
-                        price="20000"
-                        PreventPrice="22000"/>
-                </MDBCol>
-                <MDBCol md={3} sm={7}>
-                    <DiscountedProduct discountedAmount="20%"
-                                       srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                       rate="5.5/5"
-                                       topic="کوچه باغ سبز"
-                                       location="مازندران"
-                                       numberOfRoom="2"
-                                       capacity="2"
-                                       price="20000"
-                                       PreventPrice="22000"/>
-                </MDBCol>
-                <MDBCol md={3} sm={7}>
-                    <DiscountedProduct discountedAmount="20%"
-                                       srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                       rate="5.5/5"
-                                       topic="کوچه باغ سبز"
-                                       location="مازندران"
-                                       numberOfRoom="2"
-                                       capacity="2"
-                                       price="20000"
-                                       PreventPrice="22000"/>
-                </MDBCol>
-                <MDBCol md={3} sm={7}>
-                    <DiscountedProduct discountedAmount="20%"
-                                       srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                       rate="5.5/5"
-                                       topic="کوچه باغ سبز"
-                                       location="مازندران"
-                                       numberOfRoom="2"
-                                       capacity="2"
-                                       price="20000"
-                                       PreventPrice="22000"/>
-                </MDBCol>
+                {discountedVillas.map(discountedVilla=>{
+                    let discountPrice = ''
+                    discountPrice = (discountedVilla.normal_cost * discountedVilla.weekly_discount) / 100
+                    if(discountedVilla.details){
+                        return(
+                            <MDBCol md={3} sm={7}>
+                                <DiscountedProduct discountedAmount={discountedVilla.weekly_discount+"%"}
+                                                   srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                                   rate="5.5/5"
+                                                   topic={discountedVilla.villa.title}
+                                                   location={discountedVilla.villa.city}
+                                                   numberOfRoom={discountedVilla.details.bedroom}
+                                                   capacity={discountedVilla.details.max_capacity}
+                                                   price={discountedVilla.normal_cost - discountPrice}
+                                                   PreventPrice={discountedVilla.normal_cost}/>
+
+                            </MDBCol>
+                        ) }else {
+                        return (
+                            <MDBCol md={3} sm={7}>
+                                <DiscountedProduct discountedAmount={discountedVilla.weekly_discount+"%"}
+                                                   srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                                   rate="5.5/5"
+                                                   topic={discountedVilla.villa.title}
+                                                   location={discountedVilla.villa.city}
+                                                   numberOfRoom={''}
+                                                   capacity={''}
+                                                   price={discountedVilla.normal_cost - discountPrice}
+                                                   PreventPrice={discountedVilla.normal_cost}/>
+
+                            </MDBCol>
+                        )
+                    }
+                })}
             </MDBRow>
             <MDBRow className={'fv-centerImage'}>
-                <MDBCol md={6} sm={12}>
-                <img src="https://www.w3schools.com/html/pic_trulli.jpg" />
-                </MDBCol>
-                <MDBCol md={6} sm={12}>
-                <img src="https://www.w3schools.com/html/pic_trulli.jpg" />
-                </MDBCol>
+                {bannersbigBanners.map(bigBanners => {
+                    return(
+                        <MDBCol md={6} sm={12}>
+                            <img src={bigBanners.link} />
+                        </MDBCol>
+                    )
+                })}
             </MDBRow>
             <MDBRow className={"fv-topicMainPage"}>
                 <TopicsMainPage topic="اقامتگاه های اقتصادی"
                                 linkToPage={"./searchHomePage/1"}/>
             </MDBRow>
             <MDBRow className={'fv-mainMobile'}>
-                {data.map(productData=>{})}
-                <MDBCol md={3} sm={6}>
-                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                             rate="5.5/5"
-                             topic="کوچه باغ سبز"
-                             location="مازندران"
-                             numberOfRoom="2"
-                             capacity="2"
-                             price="20000"/>
-                </MDBCol>
-                <MDBCol md={3} sm={6}>
-                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                             rate="5.5/5"
-                             topic="کوچه باغ سبز"
-                             location="مازندران"
-                             numberOfRoom="2"
-                             capacity="2"
-                             price="20000"/>
-                </MDBCol>
-                <MDBCol md={3} sm={6}>
-                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                             rate="5.5/5"
-                             topic="کوچه باغ سبز"
-                             location="مازندران"
-                             numberOfRoom="2"
-                             capacity="2"
-                             price="20000"/>
-                </MDBCol>
-                <MDBCol md={3} sm={6}>
-                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                             rate="5.5/5"
-                             topic="کوچه باغ سبز"
-                             location="مازندران"
-                             numberOfRoom="2"
-                             capacity="2"
-                             price="20000"/>
-                </MDBCol>
+                {economicVillas.map(economicVilla=>{
+                    return(
+                        <MDBCol md={3} sm={6}>
+                            <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                     rate="5.5/5"
+                                     topic={economicVilla.title}
+                                     location={economicVilla.state}
+                                     numberOfRoom={economicVilla.details.bedroom}
+                                     capacity={economicVilla.details.max_capacity}
+                                     price={economicVilla.normal_cost}/>
+                        </MDBCol>
+                    )
+                })}
             </MDBRow>
             <MDBRow className={"fv-aboutUs"}>
                 <MDBCol md={6}>
