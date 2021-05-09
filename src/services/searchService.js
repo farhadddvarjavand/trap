@@ -8,12 +8,8 @@ export const search = () => {
 }
 
 // Searching according to parameters
-export const doSearch = data => {
+export const doSearch = params => {
     return http.get(
-        `${config.webapi}/api/v1/doSearch`, {
-        params: {
-            data
-        }
-      }
+        `${config.webapi}/api/v1/doSearch`, { params }
     );
 }

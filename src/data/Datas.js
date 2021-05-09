@@ -13,6 +13,7 @@ class Datas extends React.Component{
             discountedVillas:[],
             economicVillas:[],
             searchPageVillas:[],
+            lastPageOfSearchPage:0,
             resultSearchPageVillas:[],
             data:'',
         }
@@ -54,13 +55,14 @@ class Datas extends React.Component{
            .catch(function (error) {
                console.log('error')
            })  }
+           /*
        {  search()
            .then(res => {
                this.setState({ searchPageVillas: res.data.data });
            })
            .catch(function (error) {
                console.log('error')
-           })  }
+           })  }  */
 
 
 
@@ -78,18 +80,34 @@ class Datas extends React.Component{
     }
 
 
-
-    postDataAndPush = (url , data ,push)=>{
-
+    postAndPushResultSearchPageVillas = (data)=> {
         doSearch(data)
             .then(res => {
-                console.log(res)
-                this.setState({ resultSearchPageVillas: res.data.data });
+                this.setState({searchPageVillas: res.data.data , lastPageOfSearchPage:res.data.meta.last_page});
             })
             .catch(function (error) {
                 console.log('error')
             })
+    }
 
+
+
+
+
+
+    postDataAndPush = (data)=>{
+      /*  const data2 = {
+            passengers_count:10
+        } */
+       /* const data2 = {orderBy:'Expencive'}  */
+
+        doSearch(data)
+            .then(res => {
+                this.setState({ resultSearchPageVillas: res.data });
+            })
+            .catch(function (error) {
+                console.log('error')
+            })
 
 
     /*    fetch(url, {                     // POST

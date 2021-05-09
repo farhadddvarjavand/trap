@@ -32,6 +32,12 @@ class SearchHomePage extends Datas {
             dateIn:'',
             dateOut:'',
             accommodationGroup:[],
+            discountAccommodation:false,
+            disinfectedAccommodation:false,
+            doSearch:false,
+
+            test:[],
+
 
         }
 
@@ -59,18 +65,62 @@ class SearchHomePage extends Datas {
         }
     }
 
+    componentDidMount() {
+        super.componentDidMount();
+        this.postAndPushResultSearchPageVillas( {orderBy:'Newest'})   //   دیتای اولیه که با جدیدترین ست میکنیم توسط تابعی که در کامپوننت دیتاس میباشد
+    }
+
     render() {
+        const discountAccommodation = this.state.discountAccommodation
+        const disinfectedAccommodation = this.state.disinfectedAccommodation
+        const searchPageVillas = this.state.searchPageVillas      // دیتا هایی که از کامپوننت دیتاس گرفته شده و برای همه سورت ها و کلیک جستجو آپدیت میشود
 
-        const searchPageVillas = this.state.searchPageVillas
 
+
+
+
+        const accommodationGroup = this.state.accommodationGroup
+        const setAccommodationGroupToString = accommodationGroup.toLocaleString()
+        const setAreaCity = 'C ' + this.state.setVillage
+        const setAreaVillage = 'V ' + this.state.setVillage
+        const setDateToGo = this.state.dateToGo
+        const setDateToReturn = this.state.dateToReturn
+        const setDateToGoAndDateToReturn = setDateToGo + ',' + setDateToReturn
+        const setDateIn = this.state.dateIn
+        const setDateOut = this.state.dateOut
+        const setCostRange = setDateIn + ',' + setDateOut
+
+        let setDiscountAccommodation = 0
+        let setDisinfectedAccommodation = 0
+
+        if (discountAccommodation) {setDiscountAccommodation=1}else {
+            setDiscountAccommodation=0
+        }
+        if (disinfectedAccommodation) {setDisinfectedAccommodation=1}else {
+            setDisinfectedAccommodation=0
+        }
+
+        const lastNumberPage = this.state.lastPageOfSearchPage
+        const pages = []
+        for(let i = 0 ; i < lastNumberPage ; i ++)
+        {
+            pages.push(i+1)
+        }
+
+
+
+
+
+        // for test
         const resultSearchPageVillas = this.state.resultSearchPageVillas
-        console.log(resultSearchPageVillas)
+        console.log(searchPageVillas)
+        console.log('this.state.test')
 
         return(
             <MDBContainer className={"fv-SearchHomePage"}>
                 <MDBContainer className={'fv-SearchHomePageBodyMobile fv-footerMenu main'}>
 
-                    <MDBRow>
+                    {/* <MDBRow>
                         <MDBRow className={'fv-searchMainPage fv-searchMainPageForMobile'}>
                             <MDBRow className={'fv-searchMainPagePrice'}>
                                 <input type='text' placeholder={'شهر یا روستا را وارد کنید'} value={this.state.setVillage} onChange={(event)=>{this.setState({setVillage:event.target.value})}}/>
@@ -101,36 +151,48 @@ class SearchHomePage extends Datas {
                             <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
                                 <p>دسته بندی اقامتگاه</p>
                                 <MDBCol md={12}>
-                                    <input type="checkbox" name="pool" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>استخردار</p>
+                                    <input type="checkbox" name="استخردار" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>استخردار</p>
                                 </MDBCol>
                                 <MDBCol md={12}>
-                                    <input type="checkbox" name="littoral" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>ساحلی</p>
+                                    <input type="checkbox" name="ساحلی" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>ساحلی</p>
                                 </MDBCol>
                                 <MDBCol md={12}>
-                                    <input type="checkbox" name="summer" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p>ییلاقی</p>
+                                    <input type="checkbox" name="ییلاقی" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p>ییلاقی</p>
                                 </MDBCol>
                                 <MDBCol md={12}>
-                                    <input type="checkbox" name="forestCottage" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p> کلبه جنگلی</p>
+                                    <input type="checkbox" name="کلبه جنگلی" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p> کلبه جنگلی</p>
                                 </MDBCol>
                                 <MDBCol md={12}>
-                                    <input type="checkbox" name="oldHouse" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p>خانه قدیمی</p>
+                                    <input type="checkbox" name="خانه قدیمی" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p>خانه قدیمی</p>
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
                                 <MDBCol md={12}>
-                                    <input type="checkbox" name="discountedAccommodation" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>اقامت گاه های دارای تخفیف</p>
+                                    <input type="checkbox" name="اقامت گاه های دارای تخفیف"
+                                           onChange={()=>{ this.setState({discountAccommodation: !discountAccommodation})}}/> <p>اقامت گاه های دارای تخفیف</p>
                                 </MDBCol>
                                 <MDBCol md={12}>
-                                    <input type="checkbox" name="disinfectedAccommodation" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>اقامت گاه های ضدعفونی شده</p>
+                                    <input type="checkbox" name="اقامت گاه های ضدعفونی شده"
+                                           onChange={()=>{ this.setState({disinfectedAccommodation: !disinfectedAccommodation})}}/> <p>اقامت گاه های ضدعفونی شده</p>
                                 </MDBCol>
                             </MDBRow>
                             <input type='button' value='جستجو اقامتگاه' className={'fv-searchMainPagesSearchButton'} onClick={()=>{
 
-                                this.postDataAndPush('','data','')
+                                const data = {
+                                    passengers_count:this.state.numberOfPeople,
+                                    area:setAreaCity,
+                                    bedroom:this.state.numberOfBedroom,
+                                    dateRange:setDateToGoAndDateToReturn,    // agar vared nashavad az server error migirad
+                                    costRange:setCostRange,                   // agar vared nashavad az server error migirad
+                                    type:setAccommodationGroupToString,
+                                    discount:setDiscountAccommodation,
+                                    disinfected:setDisinfectedAccommodation,
+                                }
+                                return this.postAndPushResultSearchPageVillas(data)
                             }}/>
 
                         </MDBRow>
-                    </MDBRow>
+                    </MDBRow> */}
 
                     <MDBRow className={'fv-footerMenuRibbonMobile'}>
                         <MDBCol sm={8}>
@@ -155,9 +217,9 @@ class SearchHomePage extends Datas {
                             </MDBRow>
                         </MDBCol>
                     </MDBRow>
-                    <MDBRow>
+                    {/* <MDBRow>
                         <MDBRow className={"fv-SearchHomePageMobileProduct"} >
-                            {searchPageVillas.map(searchPageVilla=>{
+                            {searchPageVillas.slice( (this.state.pageNum - 1) * this.state.villasInPerPage , this.state.pageNum * this.state.villasInPerPage ).map(searchPageVilla=>{
                                 if(searchPageVilla.details){
                                     return(
                                         <MDBCol md={4} sm={7} >
@@ -185,7 +247,7 @@ class SearchHomePage extends Datas {
                                 }
                             })}
                         </MDBRow>
-                        </MDBRow>
+                    </MDBRow> */}
                 </MDBContainer>
 
                 {/*                                   Desktop                                               */}
@@ -254,14 +316,28 @@ class SearchHomePage extends Datas {
                                     </MDBRow>
                                     <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
                                         <MDBCol md={12}>
-                                            <input type="checkbox" name="discountedAccommodation" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>اقامت گاه های دارای تخفیف</p>
+                                            <input type="checkbox" name="اقامت گاه های دارای تخفیف"
+                                                   onChange={()=>{ this.setState({discountAccommodation: !discountAccommodation})}}/> <p>اقامت گاه های دارای تخفیف</p>
                                         </MDBCol>
                                         <MDBCol md={12}>
-                                            <input type="checkbox" name="disinfectedAccommodation" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>اقامت گاه های ضدعفونی شده</p>
+                                            <input type="checkbox" name="اقامت گاه های ضدعفونی شده"
+                                                   onChange={()=>{ this.setState({disinfectedAccommodation: !disinfectedAccommodation})}}/> <p>اقامت گاه های ضدعفونی شده</p>
                                         </MDBCol>
                                     </MDBRow>
                                     <input type='button' value='جستجو اقامتگاه' className={'fv-searchMainPagesSearchButton'} onClick={()=>{
-                                        this.postDataAndPush('https://reqres.in/api/posts','data','../../displayPage')
+                                        const data = {
+                                            passengers_count:this.state.numberOfPeople,
+                                            area:setAreaCity,
+                                            bedroom:this.state.numberOfBedroom,
+                                            dateRange:setDateToGoAndDateToReturn,      /* agar vared nashavad az server error migirad */
+                                            costRange:setCostRange,                    /* agar vared nashavad az server error migirad */
+                                            type:setAccommodationGroupToString,
+                                            discount:setDiscountAccommodation,
+                                            disinfected:setDisinfectedAccommodation,
+                                        }
+                                        this.postAndPushResultSearchPageVillas(data)
+                                        this.setState({doSearch:true})
+                                        this.props.history.push('/searchHomePage/doSearch/1')
                                     }}/>
 
                                 </MDBRow>
@@ -273,33 +349,48 @@ class SearchHomePage extends Datas {
                             <MDBRow className={"fv-SortMenu"}>
                                 <p>مرتب سازی بر اساس:</p>
 
-                                <NavLink to={this.props.match.params.sort === 'newest' ? `/searchHomePage/newest/${this.props.match.params.id}` : `/searchHomePage/newest/1`}  exact
-                                         name={'newest'} className={'fv-unSelected'} activeClassName="fv-selected"
-                                         onClick={(event)=>{ this.setState({sortedBy:event.target.name})
+                                <NavLink to={this.props.match.params.sort === 'Newest' ? `/searchHomePage/Newest/${this.props.match.params.id}` : `/searchHomePage/Newest/1`}  exact
+                                         name={'Newest'} className={'fv-unSelected'} activeClassName="fv-selected"
+                                         onClick={(event)=>{
+                                             const data = {orderBy:'Newest'}
+                                             this.postAndPushResultSearchPageVillas(data)
+                                             this.setState({sortedBy:event.target.name , doSearch:false})
                                 }}>
                                     جدیدترین
                                 </NavLink>
-                                <NavLink  to={this.props.match.params.sort === 'expensive' ? `/searchHomePage/expensive/${this.props.match.params.id}` : `/searchHomePage/expensive/1`}
-                                          name={'expensive'} exact className={'fv-unSelected'} activeClassName="fv-selected"
-                                          onClick={(event)=>{ this.setState({sortedBy:event.target.name})
+                                <NavLink  to={this.props.match.params.sort === 'Expensive' ? `/searchHomePage/Expensive/${this.props.match.params.id}` : `/searchHomePage/Expensive/1`}
+                                          name={'Expensive'} exact className={'fv-unSelected'} activeClassName="fv-selected"
+                                          onClick={(event)=>{
+                                              const data = {orderBy:'Expensive'}
+                                              this.postAndPushResultSearchPageVillas(data)
+                                              this.setState({sortedBy:event.target.name , doSearch:false})
                                 }}>
                                     گران‌ترین
                                 </NavLink>
-                                <NavLink  to={this.props.match.params.sort === 'cheapest' ? `/searchHomePage/cheapest/${this.props.match.params.id}` : `/searchHomePage/cheapest/1`}
-                                          name={'cheapest'} exact className={'fv-unSelected'} activeClassName="fv-selected"
-                                          onClick={(event)=>{ this.setState({sortedBy:event.target.name})
+                                <NavLink  to={this.props.match.params.sort === 'Cheapest' ? `/searchHomePage/Cheapest/${this.props.match.params.id}` : `/searchHomePage/Cheapest/1`}
+                                          name={'Cheapest'} exact className={'fv-unSelected'} activeClassName="fv-selected"
+                                          onClick={(event)=>{
+                                              const data = {orderBy:'Cheapest'}
+                                              this.postAndPushResultSearchPageVillas(data)
+                                              this.setState({sortedBy:event.target.name , doSearch:false})
                                 }}>
                                     ارزان‌ترین
                                 </NavLink>
-                                <NavLink  to={this.props.match.params.sort === 'popular' ? `/searchHomePage/popular/${this.props.match.params.id}` : `/searchHomePage/popular/1`}
-                                          name={'popular'} exact className={'fv-unSelected'} activeClassName="fv-selected"
-                                          onClick={(event)=>{ this.setState({sortedBy:event.target.name})
+                                <NavLink  to={this.props.match.params.sort === 'Popular' ? `/searchHomePage/Popular/${this.props.match.params.id}` : `/searchHomePage/Popular/1`}
+                                          name={'Popular'} exact className={'fv-unSelected'} activeClassName="fv-selected"
+                                          onClick={(event)=>{
+                                              const data = {orderBy:'Popular'}
+                                              this.postAndPushResultSearchPageVillas(data)
+                                              this.setState({sortedBy:event.target.name , doSearch:false})
                                 }}>
                                     محبوب‌ترین
                                 </NavLink>
-                                <NavLink  to={this.props.match.params.sort === 'closest' ? `/searchHomePage/closest/${this.props.match.params.id}` : `/searchHomePage/closest/1`}
-                                         name={'closest'} exact className={'fv-unSelected'} activeClassName="fv-selected"
-                                         onClick={(event)=>{ this.setState({sortedBy:event.target.name})
+                                <NavLink  to={this.props.match.params.sort === 'Nearest' ? `/searchHomePage/Nearest/${this.props.match.params.id}` : `/searchHomePage/Nearest/1`}
+                                         name={'Nearest'} exact className={'fv-unSelected'} activeClassName="fv-selected"
+                                         onClick={(event)=>{
+                                             const data = {orderBy:'Nearest'}
+                                             this.postAndPushResultSearchPageVillas(data)
+                                             this.setState({sortedBy:event.target.name , doSearch:false})
                                 }}>
                                     نزدیکترین
                                 </NavLink>
@@ -336,22 +427,42 @@ class SearchHomePage extends Datas {
 
                             </MDBRow>
                             <MDBRow className={"fv-SearchHomePagePagination"}>
-                                <NavLink to={`/searchHomePage/${this.props.match.params.sort}/1`} exact name={1} className={'fv-SearchHomePagePaginationDefault'} activeClassName="fv-SearchHomePagePaginationSelected" onClick={(event)=>{
-                                    this.setState({pageNumber:event.target.name})
-                                }}>
-                                    1
-                                </NavLink>
-                                <NavLink to={`/searchHomePage/${this.props.match.params.sort}/2`} exact name={2} className={'fv-SearchHomePagePaginationDefault'} activeClassName="fv-SearchHomePagePaginationSelected" onClick={(event)=>{
-                                    this.setState({pageNumber:event.target.name})
-                                }}>
-                                    2
-                                </NavLink>
+                                {pages.map(pagenumber => {
+                                    return(
 
-                                <NavLink to={`/searchHomePage/${this.props.match.params.sort}/3`} exact name={3} className={'fv-SearchHomePagePaginationDefault'} activeClassName="fv-SearchHomePagePaginationSelected" onClick={(event)=>{
-                                    this.setState({pageNumber:event.target.name})
-                                }}>
-                                    3
-                                </NavLink>
+                                        <NavLink to={`/searchHomePage/${this.props.match.params.sort}/${pagenumber}`} exact name={pagenumber}
+                                                 className={'fv-SearchHomePagePaginationDefault'} activeClassName="fv-SearchHomePagePaginationSelected"
+                                                 onClick={(event)=>{
+                                                     let data = ''
+
+                                                     if(this.state.doSearch){
+                                                         data = {
+                                                             passengers_count:this.state.numberOfPeople,
+                                                             area:setAreaCity,
+                                                             bedroom:this.state.numberOfBedroom,
+                                                             dateRange:setDateToGoAndDateToReturn,      /* agar vared nashavad az server error migirad */
+                                                             costRange:setCostRange,                    /* agar vared nashavad az server error migirad */
+                                                             type:setAccommodationGroupToString,
+                                                             discount:setDiscountAccommodation,
+                                                             disinfected:setDisinfectedAccommodation,
+                                                             page:pagenumber,
+                                                         }
+                                                     }else {
+                                                         data = {
+                                                             page:pagenumber,
+                                                             orderBy:this.props.match.params.sort}
+                                                     }
+
+                                                     this.postAndPushResultSearchPageVillas(data)
+                                                     this.setState({pageNumber:event.target.name , pageNum:pagenumber})
+                                                 }}>
+                                            {pagenumber}
+                                        </NavLink>
+
+                                    )
+                                })}
+
+
                             </MDBRow>
                         </MDBCol>
 
