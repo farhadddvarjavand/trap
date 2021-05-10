@@ -34,6 +34,7 @@ import FactorPage from "./pages/FactorPage";
 import LoginPage from "./pages/LoginPage";
 import LoginPage2 from "./pages/LoginPage2";
 import LoginPage3 from "./pages/LoginPage3";
+import NotFoundPage from "./pages/NotFoundPage"
 import TopicMainPage from "./componentsPages/topicsMainPage"
 import Api from "./components/Api";
 import {withCookies, Cookies, CookiesProvider} from 'react-cookie';
@@ -54,7 +55,7 @@ ReactDOM.render(
                         <Link to={'/profileCalender'}>ProfilePageCalender</Link>
                         <Link to={'/profileGustComments2'}>ProfilePageGustComments2</Link>
                         <Link to={'/profileGustComments'}>PrfilePageGustComments</Link>
-                        <Link to={'/displayPage'}>DisplayPage</Link>
+                        <Link to={'/displayPage/1'}>DisplayPage</Link>
                         <Link to={'/ProfileWallet3'}>ProfilePageWallet3</Link>
                         <Link to={'/ProfileWallet2'}>ProfilePageWallet2</Link>
                         <Link to={'/ProfileWallet'}>ProfilePageWallet</Link>
@@ -73,6 +74,7 @@ ReactDOM.render(
                         <Link to={'/hostStep1'}>HostStep1Page</Link>
                         <Link to={'/searchHomePage/cheapest/1'}>SearchHomePage</Link>
                         <Link to={'/mainPage'}>MainPage</Link>
+                        <Link to={'/notFound'}>NotFoundPage</Link>
 
                     </div>
 
@@ -86,7 +88,7 @@ ReactDOM.render(
                             <Route exact path={'/profileCalender'} component={ProfilePageCalender}/>
                             <Route exact path={'/profileGustComments2'} component={ProfilePageGustComments2}/>
                             <Route exact path={'/profileGustComments'} component={PrfilePageGustComments}/>
-                            <Route exact path={'/displayPage'} component={DisplayPage}/>
+                            <Route exact path={'/displayPage/:id'} component={DisplayPage}/>
                             <Route exact path={'/profileWallet3'} component={ProfilePageWallet3}/>
                             <Route exact path={'/ProfileWallet2'} component={ProfilePageWallet2}/>
                             <Route exact path={'/ProfileWallet'} component={ProfilePageWallet}/>
@@ -107,7 +109,7 @@ ReactDOM.render(
                             <Route exact path={'/hostStep1'} component={HostStep1Page}/>
                             <Route exact path={'/searchHomePage/:sort/:id'} component={SearchHomePage}/>
                             <Route exact path={'/mainPage'} component={MainPage}/>
-
+                            <Route exact path={'/notFound'} component={NotFoundPage}/>
 
                         </div>
                     </div>

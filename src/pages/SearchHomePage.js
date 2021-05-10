@@ -67,14 +67,18 @@ class SearchHomePage extends Datas {
 
     componentDidMount() {
         super.componentDidMount();
-        this.postAndPushResultSearchPageVillas( {orderBy:'Newest'})   //   دیتای اولیه که با جدیدترین ست میکنیم توسط تابعی که در کامپوننت دیتاس میباشد
+        const data ={
+            orderBy:this.props.match.params.sort,
+            page:this.props.match.params.id
+        }
+        this.postAndPushResultSearchPageVillas(data)   //   دیتای اولیه که با جدیدترین ست میکنیم توسط تابعی که در کامپوننت دیتاس میباشد
+
     }
 
     render() {
         const discountAccommodation = this.state.discountAccommodation
         const disinfectedAccommodation = this.state.disinfectedAccommodation
         const searchPageVillas = this.state.searchPageVillas      // دیتا هایی که از کامپوننت دیتاس گرفته شده و برای همه سورت ها و کلیک جستجو آپدیت میشود
-
 
 
 
@@ -299,19 +303,19 @@ class SearchHomePage extends Datas {
                                     <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
                                         <p>دسته بندی اقامتگاه</p>
                                         <MDBCol md={12}>
-                                            <input type="checkbox" name="pool" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>استخردار</p>
+                                            <input type="checkbox" name="استخردار" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>استخردار</p>
                                         </MDBCol>
                                         <MDBCol md={12}>
-                                            <input type="checkbox" name="littoral" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>ساحلی</p>
+                                            <input type="checkbox" name="ساحلی" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>ساحلی</p>
                                         </MDBCol>
                                         <MDBCol md={12}>
-                                            <input type="checkbox" name="summer" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p>ییلاقی</p>
+                                            <input type="checkbox" name="ییلاقی" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p>ییلاقی</p>
                                         </MDBCol>
                                         <MDBCol md={12}>
-                                            <input type="checkbox" name="forestCottage" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p> کلبه جنگلی</p>
+                                            <input type="checkbox" name="کلبه جنگلی" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p> کلبه جنگلی</p>
                                         </MDBCol>
                                         <MDBCol md={12}>
-                                            <input type="checkbox" name="oldHouse" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p>خانه قدیمی</p>
+                                            <input type="checkbox" name="خانه قدیمی" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p>خانه قدیمی</p>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
@@ -400,26 +404,35 @@ class SearchHomePage extends Datas {
                                 {searchPageVillas.map(searchPageVilla=>{
                                     if(searchPageVilla.details){
                                         return(
-                                            <MDBCol md={4} sm={7} >
-                                                <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                                         rate="5.5/5"
-                                                         topic={searchPageVilla.title}
-                                                         location={searchPageVilla.state}
-                                                         numberOfRoom={searchPageVilla.details.bedroom}
-                                                         capacity={searchPageVilla.details.max_capacity}
-                                                         price={searchPageVilla.normal_cost}/>
+                                            <MDBCol md={4} sm={7}
+                                                    onClick={()=>this.props.history.push(`/displayPage/${searchPageVilla.id}`) }
+                                            >  {/* میرستیم برای صفحه شخصی ویلا که displaypage هست با همان id */}
+
+                                                <a>
+                                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                                             rate="5.5/5"
+                                                             topic={searchPageVilla.title}
+                                                             location={searchPageVilla.state}
+                                                             numberOfRoom={searchPageVilla.details.bedroom}
+                                                             capacity={searchPageVilla.details.max_capacity}
+                                                             price={searchPageVilla.normal_cost}
+                                                    />
+                                                </a>
                                             </MDBCol>
                                         )
                                     }else {
                                         return(
-                                            <MDBCol md={4} sm={7} >
-                                                <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                                         rate="5.5/5"
-                                                         topic={searchPageVilla.title}
-                                                         location={searchPageVilla.state}
-                                                         numberOfRoom="2"
-                                                         capacity="2"
-                                                         price={searchPageVilla.normal_cost}/>
+                                            <MDBCol md={4} sm={7}
+                                                    onClick={()=>this.props.history.push(`/displayPage/${searchPageVilla.id}`) }>
+                                                <a>
+                                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                                             rate="5.5/5"
+                                                             topic={searchPageVilla.title}
+                                                             location={searchPageVilla.state}
+                                                             numberOfRoom="2"
+                                                             capacity="2"
+                                                             price={searchPageVilla.normal_cost}/>
+                                                </a>
                                             </MDBCol>
                                         )
                                     }

@@ -26,10 +26,10 @@ import DatePicker from "react-modern-calendar-datepicker";
 import {MapTest} from "../data/MapTest";
 import CalendarForMobile from "../data/CalendarForMobilejs";
 import CalendarLinear from "../data/CalenddarLinear";
+import {villa , villaComments , villaImages} from "../services/villaService"
 
 
-
-class DisplayPage extends Datas {
+class DisplayPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -49,11 +49,40 @@ class DisplayPage extends Datas {
             numberOfPeople:'title',
             displayButtonName:'',
 
+            resultVilla:[],
+            resultComments:[],
+            error:'',
+
             date: new Date(),
             selectedPlace: '',
 
         }
     }
+
+
+componentDidMount() {
+
+    villa(this.props.match.params.id)
+        .then(res => {
+            console.log(res)
+            console.log('resresresresres')
+           if(res.data === undefined){
+               alert(res.data)
+           }
+            this.setState({resultVilla: res.data.data});
+        })
+        .catch(function (error) {
+            console.log('error')
+        })
+    villaComments(this.props.match.params.id)
+        .then(res => {
+            this.setState({resultComments: res.data.data});
+        })
+        .catch(function (error) {
+            console.log('error')
+        })
+
+}
 
     /*weekdayshort = moment.weekdaysShort();
     weekmonthshort = moment.monthsShort();
@@ -141,6 +170,75 @@ class DisplayPage extends Datas {
 
 
     render() {
+
+
+        console.log(this.state.resultVilla)
+        console.log('this.state.resultVilla')
+
+        let aboutVillaCheckbox = ''
+        let rentType = ''
+        let standardCapacity = ''
+        let maxCapacity = ''
+        let bedroom=''
+        let irToilet=''
+        let euToilet=''
+        let shower=''
+        let sharedBathroom=''
+
+        let normalCostRules=''
+        let specialCostRules=''
+        let normalExtraCostRules=''
+        let specialExtraCostRules=''
+        let weeklyDiscountRules=''
+        let monthlyDiscountRules=''
+        let specialRules=''
+
+        let chefPrice = ''
+        let hostPrice = ''
+        let tourGuidePrice = ''
+        let bodyguardPrice = ''
+
+        let address = this.state.resultVilla.address
+        let phoneNumber = this.state.resultVilla.phone_number
+        let story = this.state.resultVilla.story
+
+        if(this.state.resultVilla.details){
+            aboutVillaCheckbox = this.state.resultVilla.details.view
+            rentType = this.state.resultVilla.details.rent_type
+            standardCapacity = this.state.resultVilla.details.standard_capacity
+            maxCapacity = this.state.resultVilla.details.max_capacity
+            bedroom = this.state.resultVilla.details.bedroom
+            irToilet = this.state.resultVilla.details.ir_toilet
+            euToilet = this.state.resultVilla.details.eu_toilet
+            shower = this.state.resultVilla.details.shower
+            sharedBathroom = this.state.resultVilla.details.shared_bathroom
+        }
+        if(this.state.resultVilla.rules){
+            normalCostRules = this.state.resultVilla.rules.normal_cost
+            specialCostRules = this.state.resultVilla.rules.special_cost
+            normalExtraCostRules= this.state.resultVilla.rules.normal_extra_cost
+            specialExtraCostRules= this.state.resultVilla.rules.special_extra_cost
+            weeklyDiscountRules= this.state.resultVilla.rules.weekly_discount
+            monthlyDiscountRules= this.state.resultVilla.rules.monthly_discount
+            specialRules=this.state.resultVilla.rules.special_rules
+
+        }
+        if(this.state.resultVilla.info){
+            chefPrice=this.state.resultVilla.info.chef
+            hostPrice=this.state.resultVilla.info.host
+            tourGuidePrice=this.state.resultVilla.info.tour_guide
+            bodyguardPrice=this.state.resultVilla.info.bodyguard
+        }
+
+
+
+        console.log(bedroom)
+        console.log(irToilet)
+        console.log(euToilet)
+        console.log(shower)
+        console.log(sharedBathroom)
+        console.log('this.state.resultVilla')
+
       /*  console.log(this.weekdayshortname)
         console.log(this.weekdayshortnamemonth) */
         return(
@@ -207,12 +305,12 @@ class DisplayPage extends Datas {
                 <div className={"fv-DisplayPageTitle"}>
                     <MDBRow className={"fv-DisplayPageTitleTopic"}>
                         <MDBCol md={2}>
-                        <p>باغ سبز</p>
+                        <p> {this.state.resultVilla.title} </p>
                         </MDBCol>
                     </MDBRow>
                     <MDBRow className={"fv-DisplayPageSearchName"}>
                         <MDBCol md={2}>
-                            <p><i className="fa fa-map-marker-alt" /> باغ سبز باغ سبز</p>
+                            <p><i className="fa fa-map-marker-alt" /> {this.state.resultVilla.state} </p>
                         </MDBCol>
                         <MDBCol md={2}>
                                 <p className={"fv-DisplayPageDetailsRating  fv-DisplayPageDetailsRatingTop"}> 5 </p>
@@ -333,33 +431,33 @@ class DisplayPage extends Datas {
 
                         <div  className={this.state.displayButtonName === 'facilities' ? 'fv-displayActive' :  'fv-displayDeActive'}>                                            {/*    fv-facilities      */}
                             <MDBRow className={"fv-DisplayPageDetailsRightHomeImage pMobile"}>
-                                <p><i className="fas fa-home" /> خانه دربست </p>
+                                <p><i className="fas fa-home" /> {rentType} </p>
                             </MDBRow>
                             <MDBRow className={"pMobile"}>
-                                <p> <i className="fa fa-users" />  ظرفیت استاندار 4 نفر+4 نفر اضافه </p>
+                                <p> <i className="fa fa-users" />  ظرفیت استاندارد {standardCapacity }  نفر+{maxCapacity} نفر اضافه </p>
                             </MDBRow>
                             <MDBRow className={"pMobile"}>
-                                <p><i className="fa fa-building" /> 2 اتاق خواب+یک حمام+یک دست شویی </p>
+                                <p><i className="fa fa-building" /> {bedroom} اتاق خواب+{shower} حمام+{irToilet} دست شویی ایرانی + {euToilet} دستشویی فرنگی </p>
                             </MDBRow>
                             <MDBRow className={"pMobile"}>
-                                <p><i className="fa fa-bed" aria-hidden="true" /> 1 تخت یک نفره+8 تشک معمولی </p>
+                                <p><i className="fa fa-bed" aria-hidden="true" /> ???? تخت یک نفره + ????? تشک معمولی </p>
                             </MDBRow>
                         <MDBRow className={"h4Mobile"}>
                             <h4>درباره اقامت گاه</h4>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsRightParagraph pMobile"}>
-                            <p> این خانه بومی در میان باغی بزرگ و سرسبز با مساحت 4000 متر قرار دارد. باغ
-                                ویلای ثامن با فضایی دلباز و روح نواز شامل 6 سوئیت یک
-                                خوابه،دو خوابه و سه خوابه است. تمامی سوئیت ها دارای آشپزخا
-                                نه مجهز با تمامی امکانات و لوازم مورد نیاز آشپزی، یخچال، تلویزیون،
-                                سرویس بهداشتی ( توالت ایرانی و فرنگی ) و حمام اختصاصی، رخت و خواب نو و سنتی می باشند</p>
+                            <p>{story}</p>
                         </MDBRow>
-                        <MDBRow className={"pMobile"}>
-                            <p> <i className="fas fa-check-square" /> مناسب برای معلولین </p>
-                        </MDBRow>
-                        <MDBRow className={"pMobile"}>
-                            <p>  <i className="fas fa-check-square" /> ویوی رو به دریا </p>
-                        </MDBRow>
+
+                             <MDBRow className={"pMobile"}>
+                                     <p> <i className="fas fa-check-square" /> {aboutVillaCheckbox} </p>
+                              </MDBRow>
+                            {this.state.resultVilla.details ? this.state.resultVilla.details.places.map(facilitie=>{
+                                return <MDBRow className={"pMobile"}>
+                                    <p> <i className="fas fa-check-square" /> {facilitie} </p>
+                                </MDBRow>
+                            }) : ''}
+
                         <MDBRow className={"fv-DisplayPageDetailsRightStayInHome"}>
                             <MDBCol md={5} sm={11}>
                                 <h4> حداقل تعداد روز اقامت </h4>
@@ -374,10 +472,10 @@ class DisplayPage extends Datas {
 
                             <div>
                                 <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
-                                    <MDBCol md={4} sm={6}>
+                                    <MDBCol md={5} sm={6}>
                                         <p> <i className="fa fa-broom" /> جارو برقی </p>
                                     </MDBCol>
-                                    <MDBCol md={8} sm={6}>
+                                    <MDBCol md={5} sm={6}>
                                         <p> <i className="fas fa-wifi" /> اینترنت رایگان </p>
                                     </MDBCol>
                                 </MDBRow>
@@ -420,13 +518,13 @@ class DisplayPage extends Datas {
                             <MDBCol sm={12} md={12}>
                                 <MDBRow>
                                     <MDBCol md={1} sm={1}>
-                                        <input type="checkbox"  name="Chef" onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
+                                        <input type="checkbox"  name="chef" onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
                                     </MDBCol>
                                     <MDBCol  md={3} sm={3}>
                                         <p>آشپز</p>
                                     </MDBCol>
                                     <MDBCol  md={2} sm={2}>
-                                        <p> ۲٫۰۰۰٫۰۰۰ </p>
+                                        <p> {chefPrice} </p>
                                     </MDBCol>
                                     <MDBCol  md={4} sm={4}>
                                         <p> ریال </p>
@@ -442,7 +540,7 @@ class DisplayPage extends Datas {
                                         <p>مهماندار</p>
                                     </MDBCol>
                                     <MDBCol  md={2} sm={2}>
-                                        <p> ۲٫۰۰۰٫۰۰۰ </p>
+                                        <p> {hostPrice}  </p>
                                     </MDBCol>
                                     <MDBCol  md={4} sm={4}>
                                         <p> ریال </p>
@@ -452,13 +550,13 @@ class DisplayPage extends Datas {
                             <MDBCol sm={12} md={12}>
                                 <MDBRow>
                                     <MDBCol md={1} sm={1}>
-                                        <input type="checkbox"  name="tourLeader" onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
+                                        <input type="checkbox"  name="tour_guide" onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
                                     </MDBCol>
                                     <MDBCol  md={3} sm={3}>
                                         <p>راهنمای سفر</p>
                                     </MDBCol>
                                     <MDBCol  md={2} sm={2}>
-                                        <p> ۲٫۰۰۰٫۰۰۰ </p>
+                                        <p> {tourGuidePrice} </p>
                                     </MDBCol>
                                     <MDBCol  md={4} sm={4}>
                                         <p> ریال </p>
@@ -474,7 +572,7 @@ class DisplayPage extends Datas {
                                         <p>بادیگارد</p>
                                     </MDBCol>
                                     <MDBCol  md={2} sm={2}>
-                                        <p> ۲٫۰۰۰٫۰۰۰ </p>
+                                        <p> {bodyguardPrice} </p>
                                     </MDBCol>
                                     <MDBCol  md={4} sm={4}>
                                         <p> ریال </p>
@@ -487,6 +585,16 @@ class DisplayPage extends Datas {
                             <h4> اجاره بها </h4>
                         </MDBRow>
 
+                            <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
+                                <MDBCol md={1} sm={1}>
+                                    <MDBRow>
+                                        <button className="slider_pagination_btn" />
+                                    </MDBRow>
+                                </MDBCol>
+                                <MDBCol md={11} sm={11}>
+                                    <p>ایام عادی : </p> <h5> {normalCostRules} </h5>
+                                </MDBCol>
+                            </MDBRow>
                         <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
                             <MDBCol md={1} sm={1}>
                                 <MDBRow>
@@ -494,7 +602,7 @@ class DisplayPage extends Datas {
                                 </MDBRow>
                             </MDBCol>
                             <MDBCol md={11} sm={11}>
-                                <p> هزینه هر نفر اضافه به ازای هر شب:  </p> <h5>50000</h5>
+                                <p> هزینه هر نفر اضافه به ازای هر شب :  </p> <h5>{normalExtraCostRules}</h5>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
@@ -504,7 +612,27 @@ class DisplayPage extends Datas {
                                 </MDBRow>
                             </MDBCol>
                             <MDBCol md={11} sm={11}>
-                                <p>ایام پیک: </p> <h5></h5>
+                                <p>ایام پیک : </p> <h5> {specialCostRules} </h5>
+                            </MDBCol>
+                        </MDBRow>
+                            <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
+                                <MDBCol md={1} sm={1}>
+                                    <MDBRow>
+                                        <button className="slider_pagination_btn" />
+                                    </MDBRow>
+                                </MDBCol>
+                                <MDBCol md={11} sm={11}>
+                                    <p>نفر اضافه در ایام پیک : </p> <h5> {specialExtraCostRules} </h5>
+                                </MDBCol>
+                            </MDBRow>
+                        <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
+                            <MDBCol md={1} sm={1}>
+                                <MDBRow>
+                                    <button className="slider_pagination_btn" />
+                                </MDBRow>
+                            </MDBCol>
+                            <MDBCol md={11} sm={11}>
+                                <p>تخفیف هفتگی :  </p> <h5> {weeklyDiscountRules} درصد </h5>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
@@ -514,17 +642,7 @@ class DisplayPage extends Datas {
                                 </MDBRow>
                             </MDBCol>
                             <MDBCol md={11} sm={11}>
-                                <p>تخفیف هفتگی:  </p> <h5>5 درصد</h5>
-                            </MDBCol>
-                        </MDBRow>
-                        <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
-                            <MDBCol md={1} sm={1}>
-                                <MDBRow>
-                                    <button className="slider_pagination_btn" />
-                                </MDBRow>
-                            </MDBCol>
-                            <MDBCol md={11} sm={11}>
-                                <p>تخفیف ماهانه </p> <h5>5 درصد</h5>
+                                <p>تخفیف ماهانه : </p> <h5> {monthlyDiscountRules} درصد </h5>
                             </MDBCol>
                         </MDBRow>
 
@@ -564,15 +682,18 @@ class DisplayPage extends Datas {
                             </MDBCol>
                         </MDBRow>
 
-                        <MDBRow>
-                            <h5>امکان ورود حیوان خانگی: </h5><p>بیرون ساختمان ورود </p>
-                        </MDBRow>
-                        <MDBRow>
-                            <p>حیوانات به داخل اقامتگاه کاملا ممنوع است</p>
-                        </MDBRow>
-                        <MDBRow>
-                            <h5>امکان برگزاری مراسم </h5><p>مجاز است،</p>
-                        </MDBRow>
+                            {this.state.resultVilla.rules ? this.state.resultVilla.rules.auth_rules.map(authRule =>{
+                                return(
+                                    <MDBRow>
+                                       <p>{authRule}</p>
+                                    </MDBRow>
+                                )
+                            }) : ''}
+
+                             <MDBRow>
+                                   <p>{specialRules}</p>
+                             </MDBRow>
+
 
                         </div>                                                             {/*        fv-Roles     */}
 
@@ -583,8 +704,11 @@ class DisplayPage extends Datas {
                             <h4> آدرس </h4>
                         </MDBRow>
                         <MDBRow>
-                            <h5> اردبیل-خلخال </h5>
+                            <h5> {address} </h5>
                         </MDBRow>
+                         <MDBRow>
+                             <h5> {phoneNumber} </h5>
+                         </MDBRow>
 
                         <MDBRow className={"fv-displayPageMap"}>
                             <img src="https://snazzy-maps-cdn.azureedge.net/assets/8097-wy.png?v=20170626083314"/>
@@ -685,6 +809,7 @@ class DisplayPage extends Datas {
                             </MDBCol>
                         </MDBRow>
                      <div className={"fv-displayPageCommentOne"}>
+
                         <MDBRow className={"fv-displayPageCommentPerson"}>
                             <MDBCol md={2} sm={2}>
                                 <img src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg"/>

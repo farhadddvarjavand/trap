@@ -1,6 +1,7 @@
 import React from "react";
 import {popularVillas,getBanners,discountedVillas,economicVillas} from "../services/homeService"
 import {search  , doSearch} from "../services/searchService"
+import {villa} from "../services/villaService"
 
 class Datas extends React.Component{
     constructor(props) {
@@ -14,6 +15,8 @@ class Datas extends React.Component{
             economicVillas:[],
             searchPageVillas:[],
             lastPageOfSearchPage:0,
+            resultVilla:[],
+
             resultSearchPageVillas:[],
             data:'',
         }
@@ -68,18 +71,6 @@ class Datas extends React.Component{
 
     }
 
-
-
-    getData =(url)=>{
-        fetch(url)                            /* GET */
-            .then(response => response.json())
-            .then(json => {
-                this.setState({data:json.support});
-            });
-        return this.state.data
-    }
-
-
     postAndPushResultSearchPageVillas = (data)=> {
         doSearch(data)
             .then(res => {
@@ -90,6 +81,30 @@ class Datas extends React.Component{
             })
     }
 
+
+
+    postAndPushResultVillaShow = (data)=> {
+        villa(data)
+            .then(res => {
+                this.setState({resultVilla: res.data.data });
+            })
+            .catch(function (error) {
+                console.log('error')
+            })
+    }
+
+
+
+
+
+    getData =(url)=>{
+        fetch(url)                            /* GET */
+            .then(response => response.json())
+            .then(json => {
+                this.setState({data:json.support});
+            });
+        return this.state.data
+    }
 
 
 

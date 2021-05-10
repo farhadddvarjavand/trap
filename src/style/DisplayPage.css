@@ -511,6 +511,7 @@ display: none;
 }
 .fv-DisplayPage .fv-displayActive{
     display: block;
+    margin-right: 2%;
 }
 .fv-DisplayPage .fv-displayDeActive{
     display: none;
@@ -949,7 +950,7 @@ display: none;
     }
     .fv-DisplayPageCalenderForMobile .Calendar {
         width: 39em;
-        margin-right: -4.5vw;
+        margin-right: -7.5vw;
     }
     .fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageCalenderForMobile{
         display: block;
