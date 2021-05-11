@@ -26,7 +26,9 @@ import DatePicker from "react-modern-calendar-datepicker";
 import {MapTest} from "../data/MapTest";
 import CalendarForMobile from "../data/CalendarForMobilejs";
 import CalendarLinear from "../data/CalenddarLinear";
-import {villa , villaComments , villaImages} from "../services/villaService"
+import {villa , villaComments , villaImages ,similarVillas} from "../services/villaService"
+import AwesomeSlider from 'react-awesome-slider';
+import 'react-awesome-slider/dist/styles.css';
 
 
 class DisplayPage extends Component {
@@ -51,6 +53,9 @@ class DisplayPage extends Component {
 
             resultVilla:[],
             resultComments:[],
+            resultRateComments:[],
+            resultImages:[],
+            resultSimilarVillas:[],
             error:'',
 
             date: new Date(),
@@ -62,24 +67,45 @@ class DisplayPage extends Component {
 
 componentDidMount() {
 
+
     villa(this.props.match.params.id)
         .then(res => {
-            console.log(res)
-            console.log('resresresresres')
-           if(res.data === undefined){
-               alert(res.data)
+           if(res.data.status === 404){
+               this.props.history.push('/notFound');
            }
             this.setState({resultVilla: res.data.data});
         })
-        .catch(function (error) {
-            console.log('error')
+        .catch(error =>{
+            console.log(error)
         })
+
+    villaImages(this.props.match.params.id)
+        .then(res => {
+            this.setState({resultImages: res.data.data});
+        })
+        .catch(error =>{
+        })
+
     villaComments(this.props.match.params.id)
         .then(res => {
-            this.setState({resultComments: res.data.data});
+            // console.log( res)
+            // console.log( 'resultcomments-hadi')
+            if(res.data.data)
+                this.setState({resultComments: Object.values(res.data.data) , resultRateComments: res.data});
+            // else
+            //     console.log(res.data.data);
         })
-        .catch(function (error) {
-            console.log('error')
+        .catch(error =>{
+
+        })
+
+    similarVillas(this.props.match.params.id)
+        .then(res => {
+            if(res.data.data)
+                this.setState({resultSimilarVillas: res.data.data});
+        })
+        .catch(error =>{
+
         })
 
 }
@@ -172,8 +198,9 @@ componentDidMount() {
     render() {
 
 
-        console.log(this.state.resultVilla)
-        console.log('this.state.resultVilla')
+
+
+
 
         let aboutVillaCheckbox = ''
         let rentType = ''
@@ -197,10 +224,19 @@ componentDidMount() {
         let hostPrice = ''
         let tourGuidePrice = ''
         let bodyguardPrice = ''
+        let generalFacilities=''
 
         let address = this.state.resultVilla.address
         let phoneNumber = this.state.resultVilla.phone_number
         let story = this.state.resultVilla.story
+
+        let cleaningRate = ''
+        let adComplianceRate = ''
+        let hospitalityRate = ''
+        let hostingQualityRate = ''
+
+        let resultComments = []
+
 
         if(this.state.resultVilla.details){
             aboutVillaCheckbox = this.state.resultVilla.details.view
@@ -228,16 +264,19 @@ componentDidMount() {
             hostPrice=this.state.resultVilla.info.host
             tourGuidePrice=this.state.resultVilla.info.tour_guide
             bodyguardPrice=this.state.resultVilla.info.bodyguard
+            generalFacilities=this.state.resultVilla.info.fac
+        }
+        if(this.state.resultRateComments.scores){
+            cleaningRate=this.state.resultRateComments.scores[0].Cleaning
+            adComplianceRate =this.state.resultRateComments.scores[0].Ad_compliance
+            hospitalityRate =this.state.resultRateComments.scores[0].Hospitality
+            hostingQualityRate =this.state.resultRateComments.scores[0].Hosting_quality
         }
 
 
 
-        console.log(bedroom)
-        console.log(irToilet)
-        console.log(euToilet)
-        console.log(shower)
-        console.log(sharedBathroom)
-        console.log('this.state.resultVilla')
+
+
 
       /*  console.log(this.weekdayshortname)
         console.log(this.weekdayshortnamemonth) */
@@ -333,27 +372,29 @@ componentDidMount() {
 
                     <MDBRow className={"fv-DisplayPageSearchProductImage"}>
                         <MDBCol md={8} sm={12}>
-                            <img className={"fv-aboutUsThirdImageRight"} src="https://www.w3schools.com/html/pic_trulli.jpg" />
+                            <img className={"fv-aboutUsThirdImageRight"} src={this.state.resultImages[0] ? this.state.resultImages[0].img_src : ''} />
                         </MDBCol>
                         <MDBCol md={4}>
                             <MDBRow>
-                                <img className={"fv-aboutUsThirdImageLeftFirst"} src="https://www.w3schools.com/html/pic_trulli.jpg" />
+                                <img className={"fv-aboutUsThirdImageLeftFirst"} src={this.state.resultImages[1] ? this.state.resultImages[1].img_src : ''} />
                             </MDBRow>
                             <MDBRow>
-                                <img className={"fv-aboutUsThirdImageLeftSecond"} src="https://www.w3schools.com/html/pic_trulli.jpg" />
+                                <img className={"fv-aboutUsThirdImageLeftSecond"} src={this.state.resultImages[2] ? this.state.resultImages[2].img_src :''}/>
                             </MDBRow>
                         </MDBCol>
                     </MDBRow>
                     <MDBRow className={"efv-svgPagination fv-displayPageImagePaginationMobil"}>
-                        <MDBCol md={12}>
-                            <div className="slider_pagination">
-                                <button className="slider_pagination_btn slider_pagination_btn--sel" />
-                                <button className="slider_pagination_btn" />
-                                <button className="slider_pagination_btn" />
-                                <button className="slider_pagination_btn" />
-                                <button className="slider_pagination_btn" />
-                            </div>
-                        </MDBCol>
+
+                             <MDBCol md={12}>
+                                <div className="slider_pagination">
+                                    <AwesomeSlider animation="cubeAnimation">
+                                        {this.state.resultImages.map(resultImage => {
+                                       return <div data-src={resultImage.img_src} />
+                                        })}
+                                    </AwesomeSlider>
+                                </div>
+                            </MDBCol>
+
                     </MDBRow>
                 </div>
                 <MDBRow className={"fv-DisplayPageDisplayMoreImage"}>
@@ -472,34 +513,34 @@ componentDidMount() {
 
                             <div>
                                 <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
-                                    <MDBCol md={5} sm={6}>
+                                    <MDBCol md={4} sm={6} className={generalFacilities.includes('جارو برقی')?'fv-facilitiesAvailable': 'fv-facilitiesUnavailable'}>
                                         <p> <i className="fa fa-broom" /> جارو برقی </p>
                                     </MDBCol>
-                                    <MDBCol md={5} sm={6}>
+                                    <MDBCol md={8} sm={6} className={generalFacilities.includes('اینترنت رایگان')?'fv-facilitiesAvailable': 'fv-facilitiesUnavailable'}>
                                         <p> <i className="fas fa-wifi" /> اینترنت رایگان </p>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
-                                    <MDBCol md={4} sm={6}>
+                                    <MDBCol md={4} sm={6} className={generalFacilities.includes('تلفن')?'fv-facilitiesAvailable': 'fv-facilitiesUnavailable'}>
                                         <p> <i className="fas fa-phone" /> تلفن </p>
                                     </MDBCol>
-                                    <MDBCol md={8} sm={6}>
+                                    <MDBCol md={8} sm={6} className={generalFacilities.includes('جعبه کمک های اولیه')?'fv-facilitiesAvailable': 'fv-facilitiesUnavailable'}>
                                         <p><i className="fas fa-box" />  جعبه کمک های اولیه </p>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
-                                    <MDBCol md={4} sm={6}>
+                                    <MDBCol md={4} sm={6} className={generalFacilities.includes('مهر و جانماز')?'fv-facilitiesAvailable': 'fv-facilitiesUnavailable'}>
                                         <p> <i className="fas fa-pray" /> مهر و جانماز </p>
                                     </MDBCol>
-                                    <MDBCol md={8} sm={6}>
+                                    <MDBCol md={8} sm={6} className={generalFacilities.includes('تلوزیون')?'fv-facilitiesAvailable': 'fv-facilitiesUnavailable'}>
                                         <p><i className="fas fa-tv" /> تلوزیون </p>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
-                                    <MDBCol md={4} sm={6}>
+                                    <MDBCol md={4} sm={6} className={generalFacilities.includes('یخچال')?'fv-facilitiesAvailable': 'fv-facilitiesUnavailable'}>
                                         <p><i className="fa fa-door-closed" /> یخچال </p>
                                     </MDBCol>
-                                    <MDBCol md={8} sm={6}>
+                                    <MDBCol md={8} sm={6} className={generalFacilities.includes('اجاق گاز')?'fv-facilitiesAvailable': 'fv-facilitiesUnavailable'}>
                                         <p><i className="fa fa-calendar-minus" /> اجاق گاز </p>
                                     </MDBCol>
                                 </MDBRow>
@@ -750,12 +791,13 @@ componentDidMount() {
                                     </MDBCol >
                                     <MDBCol  md={4} sm={4}>
                                        <input type="button" style={{
+                                           padding: 0,
                                            position: "absolute" ,
-                                           width: `${4.5*20}%` ,
+                                           width: `${cleaningRate*20}%` ,
                                            background: "#15BE29"}}/>
                                     </MDBCol >
                                     <MDBCol md={1} sm={1}  className={"fv-DisplayPageDetailsScoreRateText"}>
-                                        <p> 4.5 </p>
+                                        <p> {cleaningRate} </p>
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCol>
@@ -768,10 +810,14 @@ componentDidMount() {
                                         <input type="button" className={"fv-DisplayPageDetailsScoreButtonFirst"}/>
                                     </MDBCol >
                                     <MDBCol  md={4} sm={4}>
-                                        <input type="button" className={"fv-DisplayPageDetailsScoreButtonSecond"}/>
+                                        <input type="button" style={{
+                                            padding: 0,
+                                            position: "absolute" ,
+                                            width: `${adComplianceRate*20}%` ,
+                                            background: "#15BE29"}}/>
                                     </MDBCol >
                                     <MDBCol md={1} sm={1} className={"fv-DisplayPageDetailsScoreRateText"}>
-                                        <p> 4.5 </p>
+                                        <p> {adComplianceRate} </p>
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCol>
@@ -784,10 +830,14 @@ componentDidMount() {
                                         <input type="button" className={"fv-DisplayPageDetailsScoreButtonFirst"}/>
                                     </MDBCol >
                                     <MDBCol  md={4} sm={4}>
-                                        <input type="button" className={"fv-DisplayPageDetailsScoreButtonSecond"}/>
+                                        <input type="button" style={{
+                                            padding: 0,
+                                            position: "absolute" ,
+                                            width: `${hospitalityRate*20}%` ,
+                                            background: "#15BE29"}}/>
                                     </MDBCol >
                                     <MDBCol md={1} sm={1} className={"fv-DisplayPageDetailsScoreRateText"}>
-                                        <p> 4.5 </p>
+                                        <p> {hospitalityRate} </p>
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCol>
@@ -800,84 +850,131 @@ componentDidMount() {
                                         <input type="button" className={"fv-DisplayPageDetailsScoreButtonFirst"}/>
                                     </MDBCol >
                                     <MDBCol  md={4} sm={4}>
-                                        <input type="button" className={"fv-DisplayPageDetailsScoreButtonSecond"}/>
+                                        <input type="button" style={{
+                                            padding: 0,
+                                            position: "absolute" ,
+                                            width: `${hostingQualityRate*20}%` ,
+                                            background: "#15BE29"}}/>
                                     </MDBCol >
                                     <MDBCol md={1} sm={1} className={"fv-DisplayPageDetailsScoreRateText"}>
-                                        <p> 4.5 </p>
+                                        <p> {hostingQualityRate} </p>
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCol>
                         </MDBRow>
                      <div className={"fv-displayPageCommentOne"}>
-
-                        <MDBRow className={"fv-displayPageCommentPerson"}>
-                            <MDBCol md={2} sm={2}>
-                                <img src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg"/>
-                            </MDBCol>
-                            <MDBCol className={"fv-DisplayPageDetailsPersonInformation"}>
-                                <MDBRow>
-                                    <MDBCol sm={10}>
-                                        <h5> بهار</h5>
-                                    </MDBCol>
-                                </MDBRow>
-                                <MDBRow className={"fv-DisplayPageDetailsCode"}>
-                                    <MDBCol sm={10}>
-                                        <p> مهر ماه ۹۸ ۸ ۱۲</p>
-                                    </MDBCol>
-                                </MDBRow>
-                            </MDBCol>
-                        </MDBRow>
-                        <MDBRow>
-                            <p>.نﺎﺑﺰﯿﻣ درﻮﺧﺮﺑ و رﺎﺘﻓر ﺎﺻﻮﺼﺨﻣ،دﻮﺑ ﯽﻟﺎﻋ ﯽﻠﯿﺧ</p>
-                        </MDBRow>
-                        <MDBRow className={"fv-displayPageComments"}>
-                            <MDBCol>
-                                <MDBRow className={"fv-displayPageCommentsDate"}>
-                                    <p>۳۱ مهرماه ۸۹۳۱</p>
-                                </MDBRow>
-                                <MDBRow className={"fv-displayPageCommentsTitle"}>
-                                    <p> میزبان کلبه سبز </p>
-                                </MDBRow>
-                                <MDBRow>
-                                    <p> با تشکر از نظر شما </p>
-                                </MDBRow>
-                            </MDBCol>
-                        </MDBRow>
-                     </div>
-                     <div className={"fv-displayPageCommentTwo"}>
-                        <MDBRow className={"fv-displayPageCommentPerson"}>
-                            <MDBCol md={2} sm={2}>
-                                <img src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg"/>
-                            </MDBCol>
-                            <MDBCol className={"fv-DisplayPageDetailsPersonInformation"}>
-                                <MDBRow>
-                                    <MDBCol sm={10}>
-                                        <h5> بهار</h5>
-                                    </MDBCol>
-                                </MDBRow>
-                                <MDBRow className={"fv-DisplayPageDetailsCode"}>
-                                    <MDBCol sm={10}>
-                                        <p> مهر ماه ۹۸ ۸ ۱۲</p>
-                                    </MDBCol>
-                                </MDBRow>
-                            </MDBCol>
-                        </MDBRow>
-                        <MDBRow>
-                            <p>.نﺎﺑﺰﯿﻣ درﻮﺧﺮﺑ و رﺎﺘﻓر ﺎﺻﻮﺼﺨﻣ،دﻮﺑ ﯽﻟﺎﻋ ﯽﻠﯿﺧ</p>
-                        </MDBRow>
-                        <MDBRow className={"fv-displayPageComments"}>
-                            <MDBCol>
-                                <MDBRow className={"fv-displayPageCommentsDate"}>
-                                    <p>۳۱ مهرماه ۸۹۳۱</p>
-                                </MDBRow>
-                                <MDBRow className={"fv-displayPageCommentsTitle"}>
-                                    <p> میزبان کلبه سبز </p>
-                                </MDBRow>
-                                <MDBRow>
-                                    <p> با تشکر از نظر شما </p>
-                                </MDBRow>
-                            </MDBCol>
-                        </MDBRow>
+                         {this.state.resultComments.map(resultComment=>{
+                             if(resultComment.answer === null){
+                                     return (
+                                         <div className={"fv-displayPageCommentOneInner"} >
+                                             <MDBRow className={"fv-displayPageCommentPerson"}>
+                                                 <MDBCol md={2} sm={2}>
+                                                     <img src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg"/>
+                                                 </MDBCol>
+                                                 <MDBCol className={"fv-DisplayPageDetailsPersonInformation"}>
+                                                     <MDBRow>
+                                                         <MDBCol sm={10}>
+                                                             <h5> {resultComment.user_name}</h5>
+                                                         </MDBCol>
+                                                     </MDBRow>
+                                                     <MDBRow className={"fv-DisplayPageDetailsCode"}>
+                                                         <MDBCol sm={10}>
+                                                             <p>{resultComment.created_at}</p>
+                                                         </MDBCol>
+                                                     </MDBRow>
+                                                 </MDBCol>
+                                             </MDBRow>
+                                             <MDBRow>
+                                                 <p>{resultComment.text}</p>
+                                             </MDBRow>
+                                         </div>
+                                     )}
+                                    else {
+                                         return (
+                                             <div  className={"fv-displayPageCommentOneInner"}>
+                                                 <MDBRow className={"fv-displayPageCommentPerson"}>
+                                                     <MDBCol md={2} sm={2}>
+                                                         <img src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg"/>
+                                                     </MDBCol>
+                                                     <MDBCol className={"fv-DisplayPageDetailsPersonInformation"}>
+                                                         <MDBRow>
+                                                             <MDBCol sm={10}>
+                                                                 <h5> {resultComment.user_name}</h5>
+                                                             </MDBCol>
+                                                         </MDBRow>
+                                                         <MDBRow className={"fv-DisplayPageDetailsCode"}>
+                                                             <MDBCol sm={10}>
+                                                                 <p>{resultComment.created_at}</p>
+                                                             </MDBCol>
+                                                         </MDBRow>
+                                                     </MDBCol>
+                                                 </MDBRow>
+                                                 <MDBRow>
+                                                     <p>{resultComment.text}</p>
+                                                 </MDBRow>
+                                                 <MDBRow className={"fv-displayPageComments"}>
+                                                     <MDBCol>
+                                                         <MDBRow className={"fv-displayPageCommentsDate"}>
+                                                             <p>{resultComment.answer.created_at}</p>
+                                                         </MDBRow>
+                                                         <MDBRow className={"fv-displayPageCommentsTitle"}>
+                                                             <p> {resultComment.user_name} </p>
+                                                         </MDBRow>
+                                                         <MDBRow>
+                                                             <p>{resultComment.answer.text}</p>
+                                                         </MDBRow>
+                                                     </MDBCol>
+                                                 </MDBRow>
+                                             </div>
+                                         )
+                                     }
+                                 })
+                         }
+                         {/*   {this.state.resultComments.map(resultComment=>{
+                                 return (
+                                     <div >
+                                         <MDBRow className={"fv-displayPageCommentPerson"}>
+                                             <MDBCol md={2} sm={2}>
+                                                 <img src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg"/>
+                                             </MDBCol>
+                                             <MDBCol className={"fv-DisplayPageDetailsPersonInformation"}>
+                                                 <MDBRow>
+                                                     <MDBCol sm={10}>
+                                                         <h5> {resultComment.user_name}</h5>
+                                                     </MDBCol>
+                                                 </MDBRow>
+                                                 <MDBRow className={"fv-DisplayPageDetailsCode"}>
+                                                     <MDBCol sm={10}>
+                                                         <p>{resultComment.created_at}</p>
+                                                     </MDBCol>
+                                                 </MDBRow>
+                                             </MDBCol>
+                                         </MDBRow>
+                                         <MDBRow>
+                                             <p>{resultComment.text}</p>
+                                         </MDBRow>
+                                     </div>
+                                 )
+                              if(resultComments.answer){
+                                 return (
+                                     <div  className={"fv-displayPageCommentOne"}>
+                                         <MDBRow className={"fv-displayPageComments"}>
+                                             <MDBCol>
+                                                 <MDBRow className={"fv-displayPageCommentsDate"}>
+                                                     <p>{resultComment.answer.created_at}</p>
+                                                 </MDBRow>
+                                                 <MDBRow className={"fv-displayPageCommentsTitle"}>
+                                                     <p> {resultComment.user_name} </p>
+                                                 </MDBRow>
+                                                 <MDBRow>
+                                                     <p>{resultComment.answer.text}</p>
+                                                 </MDBRow>
+                                             </MDBCol>
+                                         </MDBRow>
+                                     </div>
+                                 )
+                             }
+                         })}  */}
                      </div>
                         <MDBRow className={"fv-SearchHomePagePagination fv-displayPageCommentPagination"}>
                             <input type='button' value='1'/>
@@ -915,6 +1012,31 @@ componentDidMount() {
                                 <option value="3">3</option>
                             </select>
                         </MDBRow>
+                        <MDBRow className={"fv-DisplayPageDetailsLeftFactor"}>
+                            <MDBCol md={6}  sm={6} className={"fv-DisplayPageDetailsLeftFactorLeft"}>
+                               <p>10 شب</p>
+                            </MDBCol>
+                            <MDBCol  md={6}  sm={6} >
+                               <p>۰۰۰٫۰۰۰٫۲ تومان</p>
+                            </MDBCol>
+                        </MDBRow>
+                        <MDBRow className={"fv-DisplayPageDetailsLeftFactor fv-DisplayPageDetailsLeftFactorBorderLine"}>
+                            <MDBCol  md={6}  sm={6} className={"fv-DisplayPageDetailsLeftFactorLeft"}>
+                                <p>10 شب</p>
+                            </MDBCol>
+                            <MDBCol  md={6}  sm={6} >
+                                <p>۰۰۰٫۰۰۰٫۲ تومان</p>
+                            </MDBCol>
+                        </MDBRow>
+
+                        <MDBRow className={"fv-DisplayPageDetailsLeftFactor"}>
+                            <MDBCol  md={6}  sm={6} className={"fv-DisplayPageDetailsLeftFactorLeft"}>
+                                <p>جمع کل</p>
+                            </MDBCol>
+                            <MDBCol  md={6}  sm={6} >
+                                <p> تومان</p>
+                            </MDBCol>
+                        </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftButton"}>
                             <MDBCol>
                                 <input type="button" value="درخواست رزرو" onClick={()=>this.postData('','')}/>
@@ -929,42 +1051,19 @@ componentDidMount() {
                     <TopicsMainPage topic="اقامتگاه های مشابه"/>
                 </MDBRow>
                 <MDBRow className={"fv-mainProduct fv-mainMobile"} >
-                    <MDBCol md={3} sm={7} >
-                        <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                 rate="5.5/5"
-                                 topic="کوچه باغ سبز"
-                                 location="مازندران"
-                                 numberOfRoom="2"
-                                 capacity="2"
-                                 price="20000"/>
-                    </MDBCol>
-                    <MDBCol md={3} sm={7} >
-                        <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                 rate="5.5/5"
-                                 topic="کوچه باغ سبز"
-                                 location="مازندران"
-                                 numberOfRoom="2"
-                                 capacity="20"
-                                 price="20000"/>
-                    </MDBCol>
-                    <MDBCol md={3} sm={7} >
-                        <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                 rate="5.5/5"
-                                 topic="کوچه باغ سبز"
-                                 location="مازندران"
-                                 numberOfRoom="2"
-                                 capacity="2"
-                                 price="20000"/>
-                    </MDBCol>
-                    <MDBCol md={3} sm={7} >
-                        <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                 rate="5.5/5"
-                                 topic="کوچه باغ سبز"
-                                 location="مازندران"
-                                 numberOfRoom="2"
-                                 capacity="2"
-                                 price="20000"/>
-                    </MDBCol>
+                    {this.state.resultSimilarVillas.map(resultSimilarVilla =>{
+                        return(
+                            <MDBCol md={3} sm={7} >
+                                <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                         rate="5.5/5"
+                                         topic={resultSimilarVilla.title}
+                                         location={resultSimilarVilla.city}
+                                         numberOfRoom={resultSimilarVilla.details.bedroom}
+                                         capacity={resultSimilarVilla.details.max_capacity}
+                                         price="20000"/>
+                            </MDBCol>
+                        )
+                    })}
                 </MDBRow>
 
                 <MDBRow>

@@ -315,8 +315,8 @@
     line-height: 3px;
 }
 .fv-DisplayPageDetailsScore .fv-DisplayPageDetailsScoreBody .col-md-3 {
-    flex: 0 0 29%;
-    max-width: 29%;
+    flex: 0 0 31%;
+    max-width: 30%;
     font-size: 15px;
 }
 
@@ -367,6 +367,7 @@
     padding-left: 2%;
     padding-top: 2%;
     width: 100%;
+    margin-bottom: 4%;
 }
 .fv-displayPageCommentsTitle {
     margin-top: -7%;
@@ -379,11 +380,12 @@
 .fv-displayPageTopicMainPage{
     direction: ltr;
 }
-.fv-displayPageCommentOne{
-    border-bottom: 1px solid #909090;
+.fv-DisplayPage .fv-displayPageCommentOne{
     padding-bottom: 3%;
-    width: 90%;
+    width: 94%;
     padding-right: 3%;
+    margin-top: 0%;
+    margin-bottom: 10%;
 }
 .fv-DisplayPageCalender{
     padding-top: 4%;
@@ -526,6 +528,40 @@ display: none;
 .fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageCalenderForDesktop{
     display: block;
 }
+.fv-SearchHomePage .fv-DisplayPageDetailsّFacilities .fv-facilitiesUnavailable p{
+    color: #cecccc;
+}
+.fv-SearchHomePage .fv-DisplayPageDetailsّFacilities .fv-facilitiesAvailable p{
+    color: black;
+}
+.fv-DisplayPageDetailsLeftFactor .col-md-6{
+    flex: 0 0 48%;
+    max-width: 50%;
+    padding: 0;
+}
+.fv-DisplayPageDetailsLeftFactorBorderLine .col-md-6{
+    border:none;
+    border-bottom: 1px solid black;
+}
+.fv-DisplayPageDetailsLeftFactor  .fv-DisplayPageDetailsLeftFactorLeft{
+    text-align: initial;
+}
+.awssld {
+    direction: initial;
+}
+.fv-DisplayPage .fv-displayPageCommentOneInner{
+    border-bottom: 1px solid #909090;
+    padding-right: 3%;
+    margin-right: -6%;
+    margin-left: 6%;
+}
+.fv-DisplayPage .fv-mainProduct.fv-mainMobile{
+    direction: rtl;
+}
+.fv-DisplayPage .fv-mainProduct.fv-mainMobile .fv-product {
+    direction: initial;
+}
+
 
 
 @media (max-width: 1200px) {
@@ -698,7 +734,7 @@ display: none;
 
 
 @media (max-width: 766px) {
-    .fv-footerDisplayPageBody .col-md-2,.fv-DisplayPageSearchProductImage .fv-aboutUsThirdImageLeftFirst , .fv-DisplayPageSearchProductImage .fv-aboutUsThirdImageLeftSecond, .fv-DisplayPageMenuRows , .fv-DisplayPageDisplayMoreImage .col , .fv-DisplayPageDetailsRightBody .col-md-2 h4{
+    .fv-footerDisplayPageBody .col-md-2,.fv-DisplayPageSearchProductImage .fv-aboutUsThirdImageRight,.fv-DisplayPageSearchProductImage .fv-aboutUsThirdImageLeftFirst , .fv-DisplayPageSearchProductImage .fv-aboutUsThirdImageLeftSecond, .fv-DisplayPageMenuRows , .fv-DisplayPageDisplayMoreImage .col , .fv-DisplayPageDetailsRightBody .col-md-2 h4{
         display: none;
     }
     .fv-DisplayPageSearchName .fv-DisplayPageDetailsRate, .fv-DisplayPageDetailsRatingTop.fv-DisplayPageDetailsRating ,.fv-DisplayPageSearchName .fv-DisplayPageLike,.fv-DisplayPageSearchName .fv-DisplayPageTitleShare ,.fv-DisplayPageDetailsLeftBody {
@@ -774,7 +810,7 @@ display: none;
         text-align: center;
     }
     .fv-DisplayPageTitle img {
-         margin-left: 4%;
+        /* margin-left: 0%; */
      }
     .fv-svgPagination.fv-displayPageImagePaginationMobile .slider_pagination_btn.slider_pagination_btn--sel {
         background-color: #15BE29;
@@ -792,7 +828,7 @@ display: none;
         margin-top: 4px;
     }
     .fv-DisplayPageMenu {
-        margin-top: 8%;
+        margin-top: 30%;
     }
     .fv-DisplayPageMenu.row .col-sm-2 {
         margin-right: 2%;
@@ -924,6 +960,7 @@ display: none;
     }
     .fv-SearchHomePagePagination.fv-displayPageCommentPagination{
         display: flex;
+        margin-bottom: 17%;
     }
     .fv-DisplayPageCalender .col-md-6 {
         flex: 0 0 91%;
@@ -958,6 +995,58 @@ display: none;
     .fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageCalenderForDesktop {
         display: none;
     }
+    .fv-DisplayPage .fv-displayPageCommentOne {
+        margin-bottom: 5%;
+    }
+
+
+
+    .fv-DisplayPage .fv-product .row .col-md-2 {
+        margin-left: 10px;
+    }
+    .fv-DisplayPage .fv-mainMobile .col-sm-7,.fv-SearchHomePage .fv-mainMobile .col-sm-6 {
+        /* padding-right: 5px; */
+        /* padding-left: 11px; */
+        display: inline-block;
+        margin-right: 9vw;
+        /* margin-left: 9%; */
+    }
+    .fv-DisplayPage .fv-mobileProduct {
+        width: 116%;
+        direction: ltr;
+    }
+    .fv-DisplayPage .fv-product .col-md-5 {
+        margin-left: -57px;
+    }
+    .fv-DisplayPage .fv-product .fv-productCapacityBox .fv-numberOfBedBody {
+        display: flex;
+        justify-content: flex-end;
+        margin-left: 6px;
+        margin-top: -15%;
+    }
+    .fv-DisplayPage .fv-productCapacityBox {
+        margin-top: 0;
+        font-size: 3.5vw;
+    }
+    .fv-DisplayPage .fv-product .fv-productPriceBox .col-md-10 {
+        margin-left: -6%;
+        margin-top: 8%;
+    }
+    .fv-DisplayPage .fv-productPriceBoxPriceText {
+        /* background-color: #aaaaaa; */
+        float: right;
+        margin-top: 0vw;
+        font-size: 14px;
+        margin-right: 11vw;
+    }
+    .fv-DisplayPage .fv-displayPageCommentOne {
+       /* border-bottom: 1px solid #909090; */
+    }
+    .fv-DisplayPage .fv-displayPageCommentOneInner{
+        border-bottom: 1px solid #909090;
+    }
+
+
 }
 
 
@@ -984,7 +1073,7 @@ display: none;
         padding-top: 4%;
     }
     .fv-DisplayPageTitle img {
-        margin-left: 1%;
+        /* margin-left: 0%; */
     }
     .fv-aboutUsThirdImageRight {
         width: 428px;
@@ -1000,6 +1089,22 @@ display: none;
     }
     .fv-DisplayPageCalenderForMobile .Calendar {
         margin-right: -7vw;
+    }
+
+
+    .fv-SearchHomePage .fv-product .col-md-5 {
+        margin-left: -48px;
+    }
+    .fv-SearchHomePage .fv-productPriceBoxPriceText {
+        /* background-color: #aaaaaa; */
+        float: right;
+        margin-top: 0vw;
+        font-size: 14px;
+        margin-right: 6vw;
+    }
+    .fv-SearchHomePage .fv-productCapacityBox {
+        margin-top: 0;
+        font-size: 3vw;
     }
 }
 @media (max-width: 280px) {

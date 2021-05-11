@@ -42,6 +42,25 @@ const CalendarDesktop = (props) => {
         /* return ({const [theArray, setTheArray] = useState([]); })*/
     }
 
+
+    const disabledDays = [
+        {
+            year: 1400,
+            month: 2,
+            day: 20,
+        },
+        {
+            year: 1400,
+            month: 2,
+            day: 25,
+        },
+        {
+            year: 1400,
+            month: 2,
+            day: 7,
+        }
+    ];
+
     const setData = (data) =>{
         setSelectedDayRange(data)
        /*console.log(props.test)
@@ -55,6 +74,7 @@ const CalendarDesktop = (props) => {
                 onChange={data=>setData(data)}
                 customDaysClassName={defaultDay}
                 shouldHighlightWeekends
+                disabledDays={disabledDays}
                 priceDays={[1,2000000,3,4]}
                 test = {testname}
 
