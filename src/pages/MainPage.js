@@ -14,6 +14,7 @@ import MobileMenu from "../images/MobileMenu.png"
 import {Link} from "react-router-dom";
 import {productData} from "../data/testData"
 import Datas from "../data/Datas";
+import config from "../services/config.json"
 
 
 
@@ -198,7 +199,7 @@ class MainPage extends Datas {
                         if(productDetails.details){
                             return(
                                 <MDBCol md={3} sm={7}>
-                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                    <Product srcImage={`${config.webapi}/images/villas/thum/${productDetails.main_img }`}
                                              rate={''}
                                              topic={productDetails.title}
                                              location={productDetails.city}
@@ -211,7 +212,7 @@ class MainPage extends Datas {
                         }else {
                             return(
                                 <MDBCol md={3} sm={7}>
-                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                    <Product srcImage={`${config.webapi}/images/villas/thum/${productDetails.main_img }`}
                                              rate={''}
                                              topic={productDetails.title}
                                              location={productDetails.city}
@@ -269,7 +270,7 @@ class MainPage extends Datas {
                         return(
                             <MDBCol md={3} sm={7}>
                                 <DiscountedProduct discountedAmount={discountedVilla.weekly_discount+"%"}
-                                                   srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                                   srcImage={`${config.webapi}/images/villas/thum/${discountedVilla.main_img }`}
                                                    rate="5.5/5"
                                                    topic={discountedVilla.villa.title}
                                                    location={discountedVilla.villa.city}
@@ -283,7 +284,7 @@ class MainPage extends Datas {
                         return (
                             <MDBCol md={3} sm={7}>
                                 <DiscountedProduct discountedAmount={discountedVilla.weekly_discount+"%"}
-                                                   srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                                   srcImage={`${config.webapi}/images/villas/thum/${discountedVilla.main_img }`}
                                                    rate="5.5/5"
                                                    topic={discountedVilla.villa.title}
                                                    location={discountedVilla.villa.city}
@@ -314,7 +315,7 @@ class MainPage extends Datas {
                 {economicVillas.map(economicVilla=>{
                     return(
                         <MDBCol md={3} sm={6}>
-                            <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                            <Product srcImage={`${config.webapi}/images/villas/thum/${economicVillas.main_img }`}
                                      rate="5.5/5"
                                      topic={economicVilla.title}
                                      location={economicVilla.state}

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "./Calendar/DatePicker.css";
 import { Calendar2 } from '@hassanmojab/react-modern-calendar-datepicker';
-import {Calendar} from "./Calendar";
+import {Calendar,utils } from "./Calendar";
+import moment from "moment-jalaali";
+
 
 import './style/CalendarDesktop.scss'
 import SetPrice from './Calendar/components/DaysList'
@@ -32,12 +34,11 @@ const CalendarDesktop = (props) => {
         to: defaultTo,
     };
 
-    console.log('aaaa')
+
     const [selectedDayRange, setSelectedDayRange] = useState(
         defaultRange
     );
-    const [selectedDay, setSelectedDay] = useState(null);
-    const  test2 = [1,2,3,4,5]
+
     const testname = () =>{
         /* return ({const [theArray, setTheArray] = useState([]); })*/
     }
@@ -66,6 +67,10 @@ const CalendarDesktop = (props) => {
        /*console.log(props.test)
         console.log('props.dateToGo')*/
     }
+    const dayOfMonth = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+    const monthOfYear = 2
+    const year = 1400
+
     return (
         <>
             <Calendar
@@ -75,7 +80,9 @@ const CalendarDesktop = (props) => {
                 customDaysClassName={defaultDay}
                 shouldHighlightWeekends
                 disabledDays={disabledDays}
-                priceDays={[1,2000000,3,4]}
+                priceDays={dayOfMonth}
+                PriceMonth={monthOfYear}
+                PriceYear={year}
                 test = {testname}
 
 

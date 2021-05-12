@@ -561,6 +561,10 @@ display: none;
 .fv-DisplayPage .fv-mainProduct.fv-mainMobile .fv-product {
     direction: initial;
 }
+.fv-aboutUsThirdImageDesktopNone{
+    display: none;
+}
+
 
 
 

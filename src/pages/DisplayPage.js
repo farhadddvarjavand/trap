@@ -13,10 +13,9 @@ import Calender from "../componentsPages/calender";
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import SearchHomePage from "./SearchHomePage";
 import Datas from "../data/Datas";
-
+import config from "../services/config.json";
 import CalendarDesktop from "../data/CalendarDesktop";
 import Calendar from 'react-calendar'
-import moment from 'moment'; // new
 import 'moment/locale/fa';   // new
 import GoogleMapReact from 'google-map-react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
@@ -26,9 +25,16 @@ import DatePicker from "react-modern-calendar-datepicker";
 import {MapTest} from "../data/MapTest";
 import CalendarForMobile from "../data/CalendarForMobilejs";
 import CalendarLinear from "../data/CalenddarLinear";
-import {villa , villaComments , villaImages ,similarVillas} from "../services/villaService"
+import {villa , villaComments , villaImages ,similarVillas , reservedDates} from "../services/villaService"
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
+import Moment from 'moment';
+import { extendMoment } from 'moment-range';
+import * as moment from 'jalali-moment';
+import {utils} from "../data/Calendar";
+import {arrayBetweenDates , arrayBetweenDatesObject} from "../componentsPages/calculationsDate"
+
+
 
 
 class DisplayPage extends Component {
@@ -38,7 +44,7 @@ class DisplayPage extends Component {
             ...this.props,
             ...this.state,
             dateToGo: {
-                day:'انتخاب تاریخ',
+                day:1400,
                 month:'',
                 year : ''
             },
@@ -56,6 +62,7 @@ class DisplayPage extends Component {
             resultRateComments:[],
             resultImages:[],
             resultSimilarVillas:[],
+            resultReservedDates:[],
             error:'',
 
             date: new Date(),
@@ -103,6 +110,16 @@ componentDidMount() {
         .then(res => {
             if(res.data.data)
                 this.setState({resultSimilarVillas: res.data.data});
+        })
+        .catch(error =>{
+
+        })
+
+    reservedDates(this.props.match.params.id)
+        .then(res => {
+            if(res.data.data)
+                console.log(Object.values(res.data.data))
+                this.setState({resultReservedDates: Object.values(res.data.data)});
         })
         .catch(error =>{
 
@@ -194,11 +211,147 @@ componentDidMount() {
         }))}
     }
 
+    setDateFormat=(year,month,day)=>{
+        return year+'/'+month+'/'+day
+    }
 
     render() {
+        const moment = extendMoment(Moment);
+        const start = new Date(this.state.dateToGo.year, this.state.dateToGo.month, this.state.dateToGo.day);
+        const end   = new Date(this.state.dateToReturn.year, this.state.dateToReturn.month, this.state.dateToReturn.day);
+        const range = moment.range(start, end);
+
+        let rangeBetween = ' ---- '
+
+        if(range.diff('days')){
+            if(range.diff('days')<0)
+            {
+                rangeBetween='---'
+            }
+            else {
+                rangeBetween = range.diff('days');
+            }
+        }
+
+
+        const daytogoGeneralFormat = this.setDateFormat(this.state.dateToGo.year+"/"+ this.state.dateToGo.month+"/"+ this.state.dateToGo.day)
+        const daytoreturnGeneralFormat = this.setDateFormat(this.state.dateToReturn.year+"/"+ this.state.dateToReturn.month+"/"+ this.state.dateToReturn.day)
+
+            console.log(arrayBetweenDates(daytogoGeneralFormat,daytoreturnGeneralFormat,rangeBetween)) // date general
+            console.log('arrayBetweenDates(start,end,rangeBetween)')
+
+        console.log(arrayBetweenDatesObject(daytogoGeneralFormat,daytoreturnGeneralFormat,rangeBetween)) // date object
+        console.log('arrayBetweenDates(start,end,rangeBetween)')
 
 
 
+      /*  let enddate=""
+        let startdate=""
+        if(this.state.resultReservedDates[0]){
+            enddate = this.state.resultReservedDates[0].end_date
+            startdate = this.state.resultReservedDates[0].start_date
+        }
+
+        const setstartdate = startdate.split("/")
+        const setenddate = enddate.split("/");
+
+        const startDay={
+            year:setstartdate[0],
+            month:setstartdate[1],
+            day:5,
+        }
+        const endDay={
+            year:setenddate[0],
+            month:2,
+            day:10,
+        }
+
+        const test =[]
+        const date1 = new Date('7/13/2010');
+        const date2 = new Date('12/15/2010');
+
+        const day = new Date('1400,06,31');
+        const nextDay = new Date(day);
+        nextDay.setDate(day.getDate() + 1);
+        console.log(nextDay.setDate(day.getDate() + 1))
+        console.log(nextDay)
+        console.log('nextconsole.log(nextDay)Day')
+
+        function getDifferenceInDays(date1, date2) {
+            const diffInMs = Math.abs(date2 - date1);
+            return diffInMs / (1000 * 60 * 60 * 24);
+        }
+        if(endDay.month - startDay.month < 0 ){
+            if(startDay.month===12){
+                for(let j = 0 ; j<= endDay.month -1 ; j++){
+                    if(j===0 ){
+                        for(let i = startDay.day ; i<= endDay.day ; i++){
+                            test.push(i)
+                        }
+                    }
+                    if(j===0 && endDay.month - startDay.month !== 0){
+                        for(let i = startDay.day ; i<= 30 ; i++){
+                            test.push(i)
+                        }
+                        if( 6 >= startDay.month+j+1 >=0){
+                            test.push(31)
+                        }
+                    }
+                    if(j > 0){
+                        if(j < endDay.month - startDay.month){
+                            for(let i = 1 ; i<= 30 ; i++){
+                                test.push(i)
+                            }
+                            if(  startDay.month+j <= 6){
+                                test.push(31)
+                            }
+                        }
+                        if(j === endDay.month - startDay.month){
+                            for(let i = 1 ; i<= endDay.day ; i++){
+                                test.push(i)
+                            }
+                        }
+                    }
+                    //  getDifferenceInDays(date1, date2)
+                }
+            }
+            if(startDay.month===11){
+
+            }
+
+        }else {
+            for(let j = 0 ; j<= endDay.month - startDay.month ; j++){
+                if(j===0 && endDay.month - startDay.month === 0){
+                    for(let i = startDay.day ; i<= endDay.day ; i++){
+                        test.push(i)
+                    }
+                }
+                if(j===0 && endDay.month - startDay.month !== 0){
+                    for(let i = startDay.day ; i<= 30 ; i++){
+                        test.push(i)
+                    }
+                    if( 6 >= startDay.month+j+1 >=0){
+                        test.push(31)
+                    }
+                }
+                if(j > 0){
+                    if(j < endDay.month - startDay.month){
+                        for(let i = 1 ; i<= 30 ; i++){
+                            test.push(i)
+                        }
+                        if(  startDay.month+j <= 6){
+                            test.push(31)
+                        }
+                    }
+                    if(j === endDay.month - startDay.month){
+                        for(let i = 1 ; i<= endDay.day ; i++){
+                            test.push(i)
+                        }
+                    }
+                }
+                //  getDifferenceInDays(date1, date2)
+            }
+        }  */
 
 
 
@@ -372,14 +525,14 @@ componentDidMount() {
 
                     <MDBRow className={"fv-DisplayPageSearchProductImage"}>
                         <MDBCol md={8} sm={12}>
-                            <img className={"fv-aboutUsThirdImageRight"} src={this.state.resultImages[0] ? this.state.resultImages[0].img_src : ''} />
+                            <img className={this.state.resultImages[0] ? "fv-aboutUsThirdImageRight" : "fv-aboutUsThirdImageDesktopNone"} src={this.state.resultImages[0] ? `${config.webapi}/images/villas/main/${this.state.resultImages[0].img_src }`: ''} />
                         </MDBCol>
                         <MDBCol md={4}>
                             <MDBRow>
-                                <img className={"fv-aboutUsThirdImageLeftFirst"} src={this.state.resultImages[1] ? this.state.resultImages[1].img_src : ''} />
+                                <img className={this.state.resultImages[1] ? "fv-aboutUsThirdImageLeftFirst" : "fv-aboutUsThirdImageDesktopNone"} src={this.state.resultImages[1] ? `${config.webapi}/images/villas/main/${this.state.resultImages[1].img_src }` : ''} />
                             </MDBRow>
                             <MDBRow>
-                                <img className={"fv-aboutUsThirdImageLeftSecond"} src={this.state.resultImages[2] ? this.state.resultImages[2].img_src :''}/>
+                                <img className={this.state.resultImages[2] ? "fv-aboutUsThirdImageLeftSecond" : "fv-aboutUsThirdImageDesktopNone"} src={this.state.resultImages[2] ? `${config.webapi}/images/villas/main/${this.state.resultImages[2].img_src }`:''}/>
                             </MDBRow>
                         </MDBCol>
                     </MDBRow>
@@ -389,7 +542,7 @@ componentDidMount() {
                                 <div className="slider_pagination">
                                     <AwesomeSlider animation="cubeAnimation">
                                         {this.state.resultImages.map(resultImage => {
-                                       return <div data-src={resultImage.img_src} />
+                                       return <div data-src={`${config.webapi}/images/villas/main/${resultImage.img_src }`} />
                                         })}
                                     </AwesomeSlider>
                                 </div>
@@ -1010,11 +1163,14 @@ componentDidMount() {
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
                             </select>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftFactor"}>
                             <MDBCol md={6}  sm={6} className={"fv-DisplayPageDetailsLeftFactorLeft"}>
-                               <p>10 شب</p>
+                               <p>{rangeBetween} شب </p>
                             </MDBCol>
                             <MDBCol  md={6}  sm={6} >
                                <p>۰۰۰٫۰۰۰٫۲ تومان</p>
@@ -1022,10 +1178,10 @@ componentDidMount() {
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftFactor fv-DisplayPageDetailsLeftFactorBorderLine"}>
                             <MDBCol  md={6}  sm={6} className={"fv-DisplayPageDetailsLeftFactorLeft"}>
-                                <p>10 شب</p>
+                                <p>نفر اضافه</p>
                             </MDBCol>
                             <MDBCol  md={6}  sm={6} >
-                                <p>۰۰۰٫۰۰۰٫۲ تومان</p>
+                                <p>{this.state.numberOfPeople * normalExtraCostRules ? normalExtraCostRules * this.state.numberOfPeople : '------------'} تومان</p>
                             </MDBCol>
                         </MDBRow>
 
@@ -1052,9 +1208,11 @@ componentDidMount() {
                 </MDBRow>
                 <MDBRow className={"fv-mainProduct fv-mainMobile"} >
                     {this.state.resultSimilarVillas.map(resultSimilarVilla =>{
+                        console.log(this.state.resultSimilarVillas)
+                        console.log('this.state.resultSimilarVillas')
                         return(
                             <MDBCol md={3} sm={7} >
-                                <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                <Product srcImage={`${config.webapi}/images/villas/thum/${resultSimilarVilla.main_img }`}
                                          rate="5.5/5"
                                          topic={resultSimilarVilla.title}
                                          location={resultSimilarVilla.city}

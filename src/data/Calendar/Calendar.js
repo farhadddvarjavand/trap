@@ -30,6 +30,9 @@ const Calendar = ({
                     renderFooter,
                     customDaysClassName,
                     priceDays,
+                    PriceYear,
+                    PriceMonth,
+
                     test
                   }) => {
   const calendarElement = useRef(null);
@@ -356,6 +359,8 @@ const Calendar = ({
                 customDaysClassName={customDaysClassName}
                 isQuickSelectorOpen={mainState.isYearSelectorOpen || mainState.isMonthSelectorOpen}
                 priceday={priceDays}
+                pricemonth={PriceMonth}
+                priceyear={PriceYear}
                 testDay = {test}
             />
 
@@ -436,6 +441,8 @@ const Calendar = ({
                 customDaysClassName={customDaysClassName}
                 isQuickSelectorOpen={mainState.isYearSelectorOpen || mainState.isMonthSelectorOpen}
                 priceday={priceDays}
+                pricemonth={PriceMonth}
+                priceyear={PriceYear}
                 testDay = {test}
             />
 
