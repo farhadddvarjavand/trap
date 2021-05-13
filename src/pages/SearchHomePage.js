@@ -11,6 +11,7 @@ import {Link, Route, Switch,NavLink,BrowserRouter} from "react-router-dom"
 import Datas from "../data/Datas";
 
 import {doSearch} from "../services/searchService"
+import {convertNeSwToNwSe} from "google-map-react";
 /* import {doSearch} from "../services/searchService" */
 
 
@@ -35,6 +36,8 @@ class SearchHomePage extends Datas {
             discountAccommodation:false,
             disinfectedAccommodation:false,
             doSearch:false,
+            minCost:'',
+            maxCost:'',
 
             test:[],
 
@@ -42,6 +45,7 @@ class SearchHomePage extends Datas {
         }
 
     }
+
 
     setAccommodationGroup =(event) =>{
         let repeat = false
@@ -90,9 +94,9 @@ class SearchHomePage extends Datas {
         const setDateToGo = this.state.dateToGo
         const setDateToReturn = this.state.dateToReturn
         const setDateToGoAndDateToReturn = setDateToGo + ',' + setDateToReturn
-        const setDateIn = this.state.dateIn
-        const setDateOut = this.state.dateOut
-        const setCostRange = setDateIn + ',' + setDateOut
+        const setMinCost = this.state.minCost
+        const setMaxCost = this.state.maxCost
+        const setCostRange = `${setMinCost},${setMaxCost}`
 
         let setDiscountAccommodation = 0
         let setDisinfectedAccommodation = 0
@@ -110,7 +114,6 @@ class SearchHomePage extends Datas {
         {
             pages.push(i+1)
         }
-
 
 
 
@@ -291,13 +294,13 @@ class SearchHomePage extends Datas {
                                     <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
                                         <p>قیمت</p>
                                         <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateOut'}>
-                                            <input type='text' placeholder='از' value={this.state.dateIn} onChange={(event)=>{this.setState({dateIn:event.target.value})}}/>
+                                            <input type='text' placeholder='از' value={this.state.minCost} onChange={(event)=>{this.setState({minCost:event.target.value})}}/>
                                         </MDBCol>
                                         <MDBCol md={1} sm={1} className={'fv-searchMainPageBetweenDate'}>
 
                                         </MDBCol>
                                         <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateReturn'}>
-                                            <input type='text' placeholder='تا' value={this.state.dateOut} onChange={(event)=>{this.setState({dateOut:event.target.value})}}/>
+                                            <input type='text' placeholder='تا' value={this.state.maxCost} onChange={(event)=>{this.setState({maxCost:event.target.value})}}/>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
@@ -329,15 +332,50 @@ class SearchHomePage extends Datas {
                                         </MDBCol>
                                     </MDBRow>
                                     <input type='button' value='جستجو اقامتگاه' className={'fv-searchMainPagesSearchButton'} onClick={()=>{
-                                        const data = {
-                                            passengers_count:this.state.numberOfPeople,
-                                            area:setAreaCity,
-                                            bedroom:this.state.numberOfBedroom,
-                                            dateRange:setDateToGoAndDateToReturn,      /* agar vared nashavad az server error migirad */
-                                            costRange:setCostRange,                    /* agar vared nashavad az server error migirad */
-                                            type:setAccommodationGroupToString,
-                                            discount:setDiscountAccommodation,
-                                            disinfected:setDisinfectedAccommodation,
+                                        let data = ''
+                                        if(setCostRange ===',' && setDateToGoAndDateToReturn === ',' ){
+                                            alert(this.state.numberOfPeople)
+                                            data = {
+                                                passengers_count:this.state.numberOfPeople,
+                                                bedroom:this.state.numberOfBedroom,
+                                                type:setAccommodationGroupToString,
+                                                discount:setDiscountAccommodation,
+                                                disinfected:setDisinfectedAccommodation,
+                                            }
+                                        }
+                                        if(setCostRange !== "," && setDateToGoAndDateToReturn === ',' ){
+                                             data = {
+                                                passengers_count:this.state.numberOfPeople,
+                                                area:setAreaCity,
+                                                bedroom:this.state.numberOfBedroom,
+                                                costRange:setCostRange,                    /* agar vared nashavad az server error migirad */
+                                                type:setAccommodationGroupToString,
+                                                discount:setDiscountAccommodation,
+                                                disinfected:setDisinfectedAccommodation,
+                                            }
+                                        }
+                                        if(setCostRange === "," && setDateToGoAndDateToReturn !== ',' ){
+                                            data = {
+                                                passengers_count:this.state.numberOfPeople,
+                                                area:setAreaCity,
+                                                bedroom:this.state.numberOfBedroom,
+                                                dateRange:setDateToGoAndDateToReturn,      /* agar vared nashavad az server error migirad */
+                                                type:setAccommodationGroupToString,
+                                                discount:setDiscountAccommodation,
+                                                disinfected:setDisinfectedAccommodation,
+                                            }
+                                        }
+                                        if(setCostRange !== "," && setDateToGoAndDateToReturn !== ',' ) {
+                                             data = {
+                                                passengers_count:this.state.numberOfPeople,
+                                                area:setAreaCity,
+                                                bedroom:this.state.numberOfBedroom,
+                                                dateRange:setDateToGoAndDateToReturn,      /* agar vared nashavad az server error migirad */
+                                                costRange:setCostRange,                    /* agar vared nashavad az server error migirad */
+                                                type:setAccommodationGroupToString,
+                                                discount:setDiscountAccommodation,
+                                                disinfected:setDisinfectedAccommodation,
+                                            }
                                         }
                                         this.postAndPushResultSearchPageVillas(data)
                                         this.setState({doSearch:true})
@@ -446,21 +484,58 @@ class SearchHomePage extends Datas {
                                         <NavLink to={`/searchHomePage/${this.props.match.params.sort}/${pagenumber}`} exact name={pagenumber}
                                                  className={'fv-SearchHomePagePaginationDefault'} activeClassName="fv-SearchHomePagePaginationSelected"
                                                  onClick={(event)=>{
-                                                     let data = ''
 
+
+                                                     let data = ''
                                                      if(this.state.doSearch){
-                                                         data = {
-                                                             passengers_count:this.state.numberOfPeople,
-                                                             area:setAreaCity,
-                                                             bedroom:this.state.numberOfBedroom,
-                                                             dateRange:setDateToGoAndDateToReturn,      /* agar vared nashavad az server error migirad */
-                                                             costRange:setCostRange,                    /* agar vared nashavad az server error migirad */
-                                                             type:setAccommodationGroupToString,
-                                                             discount:setDiscountAccommodation,
-                                                             disinfected:setDisinfectedAccommodation,
-                                                             page:pagenumber,
+                                                         if(setCostRange ===',' && setDateToGoAndDateToReturn === ',' ){
+                                                             data = {
+                                                                 passengers_count:this.state.numberOfPeople,
+                                                                 bedroom:this.state.numberOfBedroom,
+                                                                 type:setAccommodationGroupToString,
+                                                                 discount:setDiscountAccommodation,
+                                                                 disinfected:setDisinfectedAccommodation,
+                                                                 page:pagenumber,
+                                                             }
                                                          }
-                                                     }else {
+                                                         if(setCostRange !== "," && setDateToGoAndDateToReturn === ',' ){
+                                                             data = {
+                                                                 passengers_count:this.state.numberOfPeople,
+                                                                 area:setAreaCity,
+                                                                 bedroom:this.state.numberOfBedroom,
+                                                                 costRange:setCostRange,                    /* agar vared nashavad az server error migirad */
+                                                                 type:setAccommodationGroupToString,
+                                                                 discount:setDiscountAccommodation,
+                                                                 disinfected:setDisinfectedAccommodation,
+                                                                 page:pagenumber,
+                                                             }
+                                                         }
+                                                         if(setCostRange === "," && setDateToGoAndDateToReturn !== ',' ){
+                                                             data = {
+                                                                 passengers_count:this.state.numberOfPeople,
+                                                                 area:setAreaCity,
+                                                                 bedroom:this.state.numberOfBedroom,
+                                                                 dateRange:setDateToGoAndDateToReturn,      /* agar vared nashavad az server error migirad */
+                                                                 type:setAccommodationGroupToString,
+                                                                 discount:setDiscountAccommodation,
+                                                                 disinfected:setDisinfectedAccommodation,
+                                                                 page:pagenumber,
+                                                             }
+                                                         }
+                                                         if(setCostRange !== "," && setDateToGoAndDateToReturn !== ',' ) {
+                                                             data = {
+                                                                 passengers_count:this.state.numberOfPeople,
+                                                                 area:setAreaCity,
+                                                                 bedroom:this.state.numberOfBedroom,
+                                                                 dateRange:setDateToGoAndDateToReturn,      /* agar vared nashavad az server error migirad */
+                                                                 costRange:setCostRange,                    /* agar vared nashavad az server error migirad */
+                                                                 type:setAccommodationGroupToString,
+                                                                 discount:setDiscountAccommodation,
+                                                                 disinfected:setDisinfectedAccommodation,
+                                                                 page:pagenumber,
+                                                             }
+                                                         } }
+                                                     else {
                                                          data = {
                                                              page:pagenumber,
                                                              orderBy:this.props.match.params.sort}

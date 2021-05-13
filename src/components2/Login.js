@@ -4,7 +4,7 @@ import { sendPhoneNumber } from "../services/userService";
 
 function Login({ history }) {
 
-
+alert(1)
     const [phone_number, setPhone_number] = useState("");
 
     const [, forceUpdate] = useState();

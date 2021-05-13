@@ -375,7 +375,12 @@ padding-top: 10%;
 .fv-aboutUsMobile.row{
   display: none;
 }
-
+.fv-footerMenu .fv-searchMainPage [type=button]:not(:disabled), .fv-footerMenu .fv-searchMainPage [type=reset]:not(:disabled),.fv-footerMenu .fv-searchMainPage [type=submit]:not(:disabled),.fv-footerMenu .fv-searchMainPage button:not(:disabled) {
+  cursor: pointer;
+  margin-left: 0;
+  margin-right: 0;
+  margin-right: auto;
+}
 
 @media (max-width: 767px){
   .fv-aboutUs.row{

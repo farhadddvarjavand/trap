@@ -4,7 +4,7 @@ import config from "./config.json";
 // Register 
 export const registerUser = user => {
     return http.post(
-        `${config.localapi}/api/v1/register`,
+        `${config.webapi}/api/v1/register`,
         JSON.stringify(user)
     );
 };
@@ -97,7 +97,7 @@ export const replayComment = (data,villaId,parentId) => {
 }
 
 // Add comment for a villa  --  Method = POST -- id => villa id
-/* export const addComment = id => {                           // hazf shod be elate error
+ export const addComment = (data,id) => {
     return http.post(
 
     `${config.webapi}/api/v1/user/addComment/${id}`, 
@@ -105,7 +105,7 @@ export const replayComment = (data,villaId,parentId) => {
     { headers:{ 'Authorization' : `Bearer USER Token` } } // USER TOKEN => User Toekn from Local Storage for Auth
     
     );
-} */
+}
 
 // Get User Villa Dates  -- Use Token  --  id => villa id
 export const villaDates =id=> {

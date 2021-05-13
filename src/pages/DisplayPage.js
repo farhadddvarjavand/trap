@@ -33,7 +33,7 @@ import { extendMoment } from 'moment-range';
 import * as moment from 'jalali-moment';
 import {utils} from "../data/Calendar";
 import {arrayBetweenDates , arrayBetweenDatesObject} from "../componentsPages/calculationsDate"
-
+import Mapir from "mapir-react-component";
 
 
 
@@ -67,7 +67,8 @@ class DisplayPage extends Component {
 
             date: new Date(),
             selectedPlace: '',
-
+            lat:35.72,
+            lon:51.42
         }
     }
 
@@ -215,6 +216,8 @@ componentDidMount() {
         return year+'/'+month+'/'+day
     }
 
+
+
     render() {
         const moment = extendMoment(Moment);
         const start = new Date(this.state.dateToGo.year, this.state.dateToGo.month, this.state.dateToGo.day);
@@ -237,10 +240,10 @@ componentDidMount() {
         const daytogoGeneralFormat = this.setDateFormat(this.state.dateToGo.year+"/"+ this.state.dateToGo.month+"/"+ this.state.dateToGo.day)
         const daytoreturnGeneralFormat = this.setDateFormat(this.state.dateToReturn.year+"/"+ this.state.dateToReturn.month+"/"+ this.state.dateToReturn.day)
 
-            console.log(arrayBetweenDates(daytogoGeneralFormat,daytoreturnGeneralFormat,rangeBetween)) // date general
+            console.log(arrayBetweenDates(daytogoGeneralFormat,daytoreturnGeneralFormat,rangeBetween)) // date general   return =>   1400/01/01
             console.log('arrayBetweenDates(start,end,rangeBetween)')
 
-        console.log(arrayBetweenDatesObject(daytogoGeneralFormat,daytoreturnGeneralFormat,rangeBetween)) // date object
+        console.log(arrayBetweenDatesObject(daytogoGeneralFormat,daytoreturnGeneralFormat,rangeBetween)) // date object   return =>   [{ year:1400 , month: 01 , day:01  }]
         console.log('arrayBetweenDates(start,end,rangeBetween)')
 
 
@@ -427,6 +430,23 @@ componentDidMount() {
         }
 
 
+        const Map = Mapir.setToken({
+            //factory parameters
+            hash:true,
+            logoPosition:"top-left",
+            maxZoom:[16],
+            transformRequest: (url) => {
+                return {
+                    url: url,
+                    headers: {
+                        'x-api-key':
+                            'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImY1ZDU3NTg4MDA3MjQ1MGM2ZjJkMWYyNWYzNjZlMDJhMGVmNGEzYWE5NjZlYjc3YzI4MTkwZWE3Y2RjYmU2MWYzYjQ3NjdmZjNkNDAxNDU0In0.eyJhdWQiOiIxMzk2MiIsImp0aSI6ImY1ZDU3NTg4MDA3MjQ1MGM2ZjJkMWYyNWYzNjZlMDJhMGVmNGEzYWE5NjZlYjc3YzI4MTkwZWE3Y2RjYmU2MWYzYjQ3NjdmZjNkNDAxNDU0IiwiaWF0IjoxNjIwOTEwNDA2LCJuYmYiOjE2MjA5MTA0MDYsImV4cCI6MTYyMzUwMjQwNiwic3ViIjoiIiwic2NvcGVzIjpbImJhc2ljIl19.JURJHCjC_7gcpLXnXJaNjp1l9O6z4t4rqais2S8FE9GApwpdo1amHqdMMlk87m_08GLnxG8E_ADOavM9sZjJMikekrTOzc7IDBn1DN7RC75IF-lA5x8uyZs7EdSzEB7fTdVtgs0z6frjO4KYciznkPP0eSHyueV84Scsi-M1q95vQ7DU_2w216yH2sdc3aXUs_emNqNyGOuQ4q9qFmjR5nMOIGy1AP9Bb5NqFTnvFZzJ022bX7_atlxysLPQ5h1r1LwzRpHBlIT2KG3bJo1SjSiOVNxK-cUSF1yG8YKvZAwfzZHFFJ1wnViH6KnR_yPSczGi14xUUA7wCKCwqKkcVQ', //Mapir api key
+                        'Mapir-SDK': 'reactjs'
+                    },
+                }
+            }
+        });
+
 
 
 
@@ -436,6 +456,47 @@ componentDidMount() {
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
+                    {/*  <div className="App">
+                        <Mapir
+                            center={[51.420470, 35.729054]}
+                            Map={Map}
+                            zoom_level={[25]}
+
+
+                        >
+                            <Mapir.Layer
+                                type="symbol"
+                                layout={{ "icon-image": "harbor-15" }}>
+                            </Mapir.Layer>
+                            <Mapir.Popup
+                                coordinates={[51.42, 35.71]}
+                                offset={{
+                                    'bottom-left': [12, -38], 'bottom': [0, -38], 'bottom-right': [-12, -38]
+                                }}>
+                                <i className="fa fa-map-marker" aria-hidden="true" />
+                            </Mapir.Popup>
+
+                        </Mapir>
+                    </div >
+                     */}
+
+
+                    <div className="App">
+                        <Mapir
+                            center={[35.728270, 51.548488]}
+                            Map={Map}
+
+                        >
+                            <Mapir.Layer
+                                type="symbol"
+                                layout={{ "icon-image": "harbor-15" }}>
+                            </Mapir.Layer>
+                            <Mapir.Marker
+                                coordinates={[35.728270, 51.548488]}
+                                anchor="bottom">
+                            </Mapir.Marker>
+                        </Mapir>
+                    </div >
                     {/*  <DatePicker
                         shouldHighlightWeekends
                         locale="fa" // add this

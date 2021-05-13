@@ -11,20 +11,30 @@ import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt
 import HostStepCheckbox from "../componentsPages/hostStepCheckbox"
 import HostStep4PageRightBody from "../componentsPages/hostStep4PageRightBody"
 import {Link} from "react-router-dom";
+import {sendPhoneNumber, verifySmsCode} from "../services/userService";
 
 class LoginPage2 extends Component {
     constructor(props) {
         super(props);
         this.state={
             validationCode:'',
-            minutes: 2,
+            minutes: 3,
             seconds: 0,
+
 
         }
     }
 
 
     componentDidMount() {
+        this.setTime()
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.myInterval)
+    }
+
+    setTime=()=>{
         this.myInterval = setInterval(() => {
             const { seconds, minutes } = this.state
 
@@ -45,12 +55,56 @@ class LoginPage2 extends Component {
             }
         }, 1000)
     }
+    sendRepeatSms = async () =>{
+        const phone_number = {
+            phone_number: localStorage.getItem("phone_number")
+        }
 
-    componentWillUnmount() {
-        clearInterval(this.myInterval)
+        const { status, data } =await sendPhoneNumber(phone_number)
+        if (status === 200 &&  data.status===2) {
+            // Phone number have to save in local storage for use it, in the next step
+            alert('پیامک اعتبارسنجی ارسال شد');
+            this.setTime()
+            this.setState({ minutes: 3,seconds: 0})
+
+        }else if(status === 200 &&  data.status===1){
+            alert('پیامک برای شما ارسال شده لطفا چند دقیقه دیگر تلاش مجدد فرمایید');
+        }
+        else{
+            alert('شماره نامعتبر است')
+        }
+        console.log(phone_number.phone_number)
+        console.log(status)
+        console.log(data)
     }
+    validation = async ()=>{
+        const phone_number = localStorage.getItem("phone_number")
+        const user={
+            phone_number ,
+            sms_code:this.state.validationCode
+        }
+        const { status, data } = await verifySmsCode(user);
+        if (status === 200 && data.data.user) {
 
+            // Redirect User
+            this.props.history.push("/mainPage");
+
+            // Save api token in local storage
+            localStorage.setItem("token",data.data.token);
+
+            // Save user data in State
+            // ...
+
+        }else{
+            // If code was invalid
+            alert('کد نامعتبر میباشد.لطفا مجددا لاگین کنید')
+        }
+    }
     render() {
+
+
+
+
         const { minutes, seconds  , validationCode} = this.state
         return (
             <div>
@@ -83,15 +137,16 @@ class LoginPage2 extends Component {
                                     <MDBCol md={8} sm={6}>
                                         <p> <div>
                                             { minutes === 0 && seconds === 0
-                                                ? <p><Link to={'/login'}>ویرایش شماره</Link></p>
+                                                ? <p onClick={()=> {this.sendRepeatSms()}} className={'fv-reloadLink'}>ارسال مجدد پیامک</p>
                                                 : <p>زمان باقیمانده : {minutes}:{seconds}</p>
                                             }
                                         </div></p>
                                     </MDBCol>
                                     <MDBCol md={4} sm={6}>
                                         <input className={"fv-loginPageButton"} type="button" onClick={()=>{
-
-                                            fetch('https://reqres.in/api/posts', {                     /* POST */
+                                            {this.validation()}
+                                            /*
+                                            fetch('https://reqres.in/api/posts', {                     / POST
                                                 method: 'POST',
                                                 headers: { 'Content-Type': 'application/json' },
                                                 body: JSON.stringify({validationCode})
@@ -102,7 +157,7 @@ class LoginPage2 extends Component {
                                                         console.log(validationCode)
                                                         this.props.history.push('/login3')
                                                     }
-                                                }) ;
+                                                }) ; */
                                         }} value={"ادامه"} />
                                     </MDBCol>
                                 </MDBRow>

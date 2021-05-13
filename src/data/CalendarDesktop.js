@@ -15,6 +15,9 @@ const CalendarDesktop = (props) => {
         { year: 1400, month: 2, day: 23, className: 'orangeDay' },
         { year: 1400, month: 2, day: 18, className: 'orangeDay' },
         { year: 1400, month: 3, day: 26, className: 'orangeDay' },
+        { year: 1400, month: 3, day: 4, className: 'purpleDay' },
+        { year: 1400, month: 3, day: 18, className: 'yellowDay' },
+        { year: 1400, month: 3, day: 26, className: 'navyBlueDay' },
     ];
 
     const defaultFrom = {

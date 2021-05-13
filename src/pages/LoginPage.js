@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, useRef} from "react";
 import {MDBAlert, MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import "../style/LoginPage.scss"
 import HostStepIncreaseAndDecreaseButton from "../componentsPages/hostStepIncreaseAndDecreaseButton"
@@ -13,7 +13,10 @@ import HostStep4PageRightBody from "../componentsPages/hostStep4PageRightBody"
 import {Link, Route, Switch, BrowserRouter as Router, Redirect} from "react-router-dom";
 import MainPage from "./MainPage";
 import Login from "../components2/Login";
-import {getUserInfo , sendPhoneNumber} from "../services/userService"
+import { sendPhoneNumber} from "../services/userService"
+import simpleReactValidator from "simple-react-validator";
+import axios from "axios";
+import config from "../services/config.json";
 
 
 class LoginPage extends Component {
@@ -21,12 +24,49 @@ class LoginPage extends Component {
         super(props);
         this.state={
             mobileNumber:'',
+            eNumber:'',
+            phone_number:'',
 
-            test:''
+            test:'',
         }
     }
 
+     sendSms = async  () =>{
+
+         const params = new URLSearchParams();
+         params.append('phone_number', '09222325617');
+         const phone_number = {
+             phone_number: this.state.phone_number,
+         }
+
+         const { status, data } = await sendPhoneNumber(phone_number);
+         if (status === 200 &&  data.status===2) {
+             // Phone number have to save in local storage for use it, in the next step
+             localStorage.setItem('phone_number', (phone_number.phone_number));
+             alert('پیامک اعتبارسنجی ارسال شد');
+             this.props.history.push("/login2");
+
+         }else if(status === 200 &&  data.status===1){
+             alert('پیامک برای شما ارسال شده لطفا چند دقیقه دیگر تلاش مجدد فرمایید');
+         }
+             else{
+             alert('شماره نامعتبر است')
+         }
+         console.log(status)
+         console.log(data)
+
+    }
+
     render() {
+        const validator = new simpleReactValidator({
+            messages: {
+                required: "این فیلد الزامی میباشد",
+                min: "حداقل طول کلمه عبور 11 کاراکتر میباشد"
+            },
+            element: message => <sub className="text-danger pb-2">{message}</sub>
+        });
+
+
         const PostData = this.state.mobileNumber
         return (
             <div>
@@ -41,9 +81,24 @@ class LoginPage extends Component {
                             <MDBCol sm={12}>
                                 <h3>ورود به حساب کاربری</h3>
                                 <p>شماره موبایل خود را وارد نمایید</p>
-                                <input type="text" placeholder={'شماره موبایل'} value={this.state.mobileNumber} onChange={((e)=>this.setState({mobileNumber : e.target.value}))}/>
+                                <input type="text" placeholder={'شماره موبایل'} name={'phone_number'} value={this.state.phone_number}
+                                       onChange={((e)=>this.setState({phone_number : e.target.value }))}/>
                                 <MDBRow>
                                     <input className={"fv-loginPageButton"} type="button" value={"ادامه"} onClick={()=>{
+                                        {this.sendSms()}
+
+
+                                          /*  const { status, data } = await sendPhoneNumber(user);
+                                            if (status === 200 && data.status===2) {
+                                                // Phone number have to save in local storage for use it, in the next step
+                                                localStorage.setItem("phone_number",phone_number);
+                                                alert('پیامک اعتبارسنجی ارسال شد');
+                                                history.replace("/verifySms");
+
+                                            }else{
+                                                alert('شماره نامعتبر است')
+                                            } */
+
 
 
                                         /*  {getUserInfo((dataGet)=>{
@@ -63,26 +118,7 @@ class LoginPage extends Component {
                                             });
                                         })} */
 
-                                        fetch('https://mahoorapps.ir/api/v1/user/getUserInfo')                            /* GET */
-                                            .then(response => response.json())
-                                            .then(json => {
-                                                this.setState({mobileNumber:json.support.text});
-                                                this.props.history.push('/login2');
-                                            });
 
-                                        fetch('https://mahoorapps.ir/api/v1/login', {                     /* POST */
-                                            method: 'POST',
-                                            headers: { 'Content-Type': 'application/json' },
-                                            body: JSON.stringify({PostData})
-                                        })
-                                            .then(response => response.json())
-                                            .then(data =>{
-                                                if(data){
-                                                    console.log(PostData)
-                                                    this.setState({PostData:"Successful" })
-                                                    this.props.history.push('/login2');
-                                                } else this.setState({PostData:"UnSuccessful"})
-                                            }) ;
 
                                         {/*
                                         fetch('https://reqres.in/api/get/1')                            // GET
