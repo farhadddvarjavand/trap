@@ -30,36 +30,6 @@ class MainPage extends Datas {
             dateToGo:'',
             dateToReturn:'',
             numberOfPeople:'',
-            productData:[
-                {numberOfRoomProduct:'3',
-                    NumberOfCapacityProduct:'3',
-                    rateProduct:'3.5',
-                    topicProduct:'باغ',
-                    locationProduct:'مازندران',
-                    priceProduct:'25000',},
-
-                {numberOfRoomProduct:'2',
-                    NumberOfCapacityProduct:'3',
-                    rateProduct:'3.5',
-                    topicProduct:'باغ',
-                    locationProduct:'مازندران',
-                    priceProduct:'25000',},
-
-                {numberOfRoomProduct:'1',
-                    NumberOfCapacityProduct:'3',
-                    rateProduct:'3.5',
-                    topicProduct:'باغ',
-                    locationProduct:'مازندران',
-                    priceProduct:'25000',},
-
-                {numberOfRoomProduct:'4',
-                    NumberOfCapacityProduct:'3',
-                    rateProduct:'3.5',
-                    topicProduct:'باغ',
-                    locationProduct:'مازندران',
-                    priceProduct:'25000',}
-
-            ],
 
         }
     }

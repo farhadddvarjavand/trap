@@ -31,7 +31,7 @@ class CalendarLinear extends React.Component{
                 value={this.state.date}
                 onChange={data => this.setData(data)}
                 locale={'fa'}
-                inputPlaceholder="انتخاب روز"
+                inputPlaceholder={this.props.text}
                 shouldHighlightWeekends
 
             />

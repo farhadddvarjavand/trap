@@ -24,31 +24,40 @@ export const verifySmsCode = user => {
         JSON.stringify(user)
     );
 };
-
-// Get User Info  -- Use Token
-export const getUserInfo =()=> {
-    return http.get(
-    `${config.webapi}/api/v1/user/getUserInfo`,
-    { headers:{ 'Authorization' : `Bearer USER Token` } } // USER TOKEN => User Toekn from Local Storage for Auth
-    );
+export const getToken = async () =>{
+    const token = await localStorage.getItem("token");
+    return `Bearer ${token}`
 }
 
-// Update user info  --  Method = POST
-export const updateUserInfo = data => {
-    return http.post(
+export const  getUserInformation = async () =>{
+   return http.get(
+        `${config.webapi}/api/v1/user/getUserInfo`,
+        { headers:{ 'Authorization' : await getToken() } } // USER TOKEN => User Toekn from Local Storage for Auth
+    );
+}
+// Get User Info  -- Use Token
+/*export const getUserInfo = async ()=> {
+    return http.get(
+    `${config.webapi}/api/v1/user/getUserInfo`,
+    { headers:{ 'Authorization' : await getToken() } } // USER TOKEN => User Toekn from Local Storage for Auth
+    );
+} */
 
+// Update user info  --  Method = POST
+export const updateUserInfo = async (data) => {
+    return http.post(
     `${config.webapi}/api/v1/user/updateInfo`, 
     JSON.stringify(data),
-    { headers:{ 'Authorization' : `Bearer USER Token` } } // USER TOKEN => User Toekn from Local Storage for Auth
+    { headers:{ 'Authorization' : await getToken() } } // USER TOKEN => User Toekn from Local Storage for Auth
     
     );
 }
 
 // Get User Reserves  -- Use Token
-export const userReserves =()=> {
+export const userReserves = async ()=> {
     return http.get(
     `${config.webapi}/api/v1/user/reserves`, 
-    { headers:{ 'Authorization' : `Bearer USER Token` } } // USER TOKEN => User Toekn from Local Storage for Auth
+    { headers:{ 'Authorization' : await getToken()} } // USER TOKEN => User Toekn from Local Storage for Auth
     );
 }
 

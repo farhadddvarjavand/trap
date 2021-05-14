@@ -3,7 +3,7 @@ import {MDBAlert, MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import "../style/LoginPage3.scss"
 import MobileLogo from "../images/MobileLogo.png"
 import {Link} from "react-router-dom";
-import {registerUser} from "../services/userService"
+import {registerUser, sendPhoneNumber} from "../services/userService"
 import axios from "axios";
 
 class LoginPage3 extends Component {
@@ -21,22 +21,38 @@ class LoginPage3 extends Component {
             phone_number: this.state.mobileNumber
         }
 
-        const { status, data } = await registerUser(datas);
-        if (status === 200 &&  data.status===2) {
-            // Phone number have to save in local storage for use it, in the next step
+        await registerUser(datas).then(result => {
+            const status = result.status
+            const data = result.data
+            if (status === 200 &&  data.status===2) {
+                // Phone number have to save in local storage for use it, in the next step
 
-            localStorage.setItem('phone_number', (datas.phone_number));
-            alert('پیامک اعتبارسنجی ارسال شد');
-            this.props.history.push("/login2");
+                localStorage.setItem('phone_number', (datas.phone_number));
+                alert('پیامک اعتبارسنجی ارسال شد');
+                this.props.history.push("/login2");
 
-        }else if(status === 200 &&  data.status===1){
-            alert('پیامک برای شما ارسال شده لطفا چند دقیقه دیگر تلاش مجدد فرمایید');
-        }
-        else{
-            alert('شماره نامعتبر است')
-        }
-        console.log(datas)
-        console.log(data)
+            }else if(status === 200 &&  data.status===1){
+                alert('پیامک برای شما ارسال شده لطفا چند دقیقه دیگر تلاش مجدد فرمایید');
+            }
+            else{
+                alert('شماره نامعتبر است')
+            }
+        })
+            .catch(error => {
+                console.log(error.response.data.errors.fullname )
+                if(error.response.data.errors.phone_number && error.response.data.errors.fullname === undefined){
+                    if(error.response.data.errors.phone_number[0] === "The phone number has already been taken."){
+                        alert('شما قبلا ثبت نام کرده اید')
+                    }else {
+                        alert('لطفا شماره موبایل خود را به درستی وارد نمایید')
+                    }
+                }
+                if(error.response.data.errors.phone_number && error.response.data.errors.fullname){
+                    alert('لطفا اطلاعات خود را به درستی وارد نمایید')
+                }
+
+
+            } )
 
 
         /* axios.post('/login', {

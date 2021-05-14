@@ -33,41 +33,51 @@ class LoginPage extends Component {
 
      sendSms = async  () =>{
 
-         const params = new URLSearchParams();
-         params.append('phone_number', '09222325617');
          const phone_number = {
              phone_number: this.state.phone_number,
          }
 
-         const { status, data } = await sendPhoneNumber(phone_number);
-         if (status === 200 &&  data.status===2) {
-             // Phone number have to save in local storage for use it, in the next step
-             localStorage.setItem('phone_number', (phone_number.phone_number));
-             alert('پیامک اعتبارسنجی ارسال شد');
-             this.props.history.push("/login2");
 
-         }else if(status === 200 &&  data.status===1){
-             alert('پیامک برای شما ارسال شده لطفا چند دقیقه دیگر تلاش مجدد فرمایید');
-         }
+     /*    axios.post(`${config.webapi}/api/v1/login`, {
+             phone_number: this.state.phone_number,
+         })
+             .then((response) => {
+                 console.log(response);
+             }, (error) => {
+                 console.log(error);
+             });
+
+
+
+         await sendPhoneNumber(phone_number)
+             .then(res =>console.log(res))
+             .catch(err => console.log(err))
+
+             */
+
+         await sendPhoneNumber(phone_number).then(result => {
+             const status = result.status
+             const data = result.data
+             if (status === 200 &&  data.status===2) {
+                 // Phone number have to save in local storage for use it, in the next step
+                 localStorage.setItem('phone_number', (phone_number.phone_number));
+                 alert('پیامک اعتبارسنجی ارسال شد');
+                 this.props.history.push("/login2");
+
+             }else if(status === 200 &&  data.status===1){
+                 alert('پیامک برای شما ارسال شده لطفا چند دقیقه دیگر تلاش مجدد فرمایید');
+             }
              else{
-             alert('شماره نامعتبر است')
-         }
-         console.log(status)
-         console.log(data)
+                 alert('شماره نامعتبر است')
+             }
+         })
+             .catch(error => error.response.status === 422 ? alert('شماره مورد نظر معتبر نمیباشد') : '')
+
+
 
     }
 
     render() {
-        const validator = new simpleReactValidator({
-            messages: {
-                required: "این فیلد الزامی میباشد",
-                min: "حداقل طول کلمه عبور 11 کاراکتر میباشد"
-            },
-            element: message => <sub className="text-danger pb-2">{message}</sub>
-        });
-
-
-        const PostData = this.state.mobileNumber
         return (
             <div>
                 <MDBRow className={"fv-loginPage"} >

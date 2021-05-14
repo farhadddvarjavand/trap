@@ -7,7 +7,7 @@ const ReservationProduct =(props) =>{
             <MDBRow className={'fv-product fv-mobileProduct'}>
                 <MDBRow className={"fv-ProfilePageReservation2ImageProductContentTopOne"}>
                     <MDBCol md={props.md}>
-                        <p>{props.title}</p>
+                        <p>{props.payStatus}</p>
                         <input type="text"/>
                     </MDBCol>
                 </MDBRow>
@@ -15,12 +15,12 @@ const ReservationProduct =(props) =>{
 
                 <MDBRow>
                     <MDBCol className={'fv-productTopic'}>
-                        کلبه باغ سبز
+                        {props.villaTitle}
                     </MDBCol>
                 </MDBRow>
                 <MDBRow className={'fv-ProfilePageReservation2ProductLocaton'}>
                     <MDBCol md={12} sm={10}>
-                        <a>مازندران -محمود آباد </a>
+                        <a>{props.state}</a>
                         <i className="fa fa-map-marker-alt" />
                     </MDBCol>
                 </MDBRow>
@@ -28,7 +28,7 @@ const ReservationProduct =(props) =>{
                 <MDBRow className={'fv-productCapacityBox'}>
                     <MDBCol md={12} sm={9} className={"fv-ProfilePageReservation2ProductDate"}>
                         <i className="fa fa-calendar" />
-                        <a> 1399/01/01  تا  1399/01/02 </a>
+                        <a> {props.entryDay}  تا {props.exitDate} </a>
                     </MDBCol>
                 </MDBRow>
                 <MDBRow className={"fv-borderButton"}>
@@ -39,14 +39,21 @@ const ReservationProduct =(props) =>{
                         <p>تومان</p>
                     </MDBCol>
                     <MDBCol md={3} sm={3}>
-                        <h5>۲,۰۰۰٫۰۰۰</h5>
+                        <h5>{props.cost}</h5>
                     </MDBCol>
                     <MDBCol md={7} sm={7}>
                         <h5>مبلغ قابل پرداخت</h5>
                     </MDBCol>
                 </MDBRow>
                 <MDBRow className={props.classnameButton}>
-                    <input type="button" value="پرداخت"/>
+                    {props.classnameButton === "fv-profilePaeReservation2PayButton" ?
+                         <input type="button" value="پرداخت"/> :
+
+                         <input type="button" value="پرداخت2" onClick={()=> {
+                             props.history.push("/ProfileTransaction2");
+                         }}/>
+                    }
+
                 </MDBRow>
             </MDBRow>
         </MDBCol>

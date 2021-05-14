@@ -7,12 +7,60 @@ import Footer from "../componentsPages/footer"
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 import ReservationProduct from "../componentsPages/ReservatioonProduct";
+import CalendarLinear from "../data/CalenddarLinear";
+import {getUserInformation, userReserves} from "../services/userService";
+
 
 class ProfilePageReservation2 extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            city:'title',
+            dateToGo: {
+                day:'انتخاب تاریخ',
+                month:'',
+                year : ''
+            },
+            dateToReturn: {
+                day:'انتخاب تاریخ',
+                month:'',
+                year : ''
+            },
+            reservesData:[],
+        }
 
     }
+
+    componentDidMount() {
+        userReserves()
+            .then(res=>res.status===200 ? this.setState({reservesData:res.data.data}) : '')
+    }
+
+    selectDayToGo = (date) =>{                                    // set date to go
+        if(date) {this.setState(prevstate =>({
+            dateToGo: {
+                ...prevstate.day,
+                ...prevstate.month,
+                ...prevstate.year,
+                day: date.day,
+                month: date.month,
+                year: date.year
+            }
+        }))}
+    }
+    selectDayToReturn = (date) =>{                               // set date to return
+        if(date) {this.setState(prevState => ({
+            dateToReturn:{
+                ...prevState.day ,
+                ...prevState.month ,
+                ...prevState.year ,
+                day: date.day,
+                month: date.month,
+                year: date.year
+            }
+        }))}
+    }
+
 
     render() {
         return(
@@ -38,45 +86,114 @@ class ProfilePageReservation2 extends Component {
                         <h5>رزورو های من</h5>
                         <MDBRow className={"fv-ProfilePageReservationSetInfo"}>
                             <MDBCol md={4} sm={12} className={""}>
-                                <select>
-                                    <option>
-                                        شهر یا روستا را انتخاب کنید
-                                    </option>
-                                </select>
+                                    <select value={this.state.city} onChange={(event)=>this.setState({city:event.target.value})}>
+                                        <option value='title' disabled>شهر یا روستا را انتخاب کنید</option>
+                                        <option value="1">تهران</option>
+                                        <option value="2">یزد</option>
+                                        <option value="3">شیراز</option>
+                                        <option value="4">مراغه</option>
+                                        <option value="5">مازندران</option>
+                                        <option value="6">ساری</option>
+                                    </select>
+                            </MDBCol>
+
+                            <MDBCol md={2} sm={5} className={""}>
+                                <CalendarLinear dayToReturn={this.selectDayToGo} text={'تاریخ رفت'}/>
                             </MDBCol>
                             <MDBCol md={2} sm={5} className={""}>
-                                <input type="text" value="رزرو اقامتگاه"/>
-                            </MDBCol>
-                            <MDBCol md={2} sm={5} className={""}>
-                                <input type="text" value="رزرو اقامتگاه"/>
+                                <CalendarLinear dayToReturn={this.selectDayToReturn} text={'تاریخ برگشت'} />
                             </MDBCol>
                             <MDBCol md={2} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
-                                <input type="button" value="رزرو اقامتگاه"/>
+                                <input type="button" value="جستجو " onClick={()=>{
+                                    console.log(this.state.reservesData)
+                                }}/>
                             </MDBCol>
                         </MDBRow>
 
                         <MDBRow>
+                            {this.state.reservesData.map(reserve=>{
+                                let className =''
+                                let md = ''
+                                if(reserve.pay_status === "در انتظار پرداخت"){
+                                    className = "fv-profilePaeReservation2PayButtonSet"
+                                    md="5"
+                                }
+                                if(reserve.pay_status === "پرداخت شده"){
+                                    className = "fv-profilePaeReservation2PayButton"
+                                    md="4"
+                                }
+                                if(reserve.pay_status === "در انتظار پذیرش میزبان"){
+                                    className = "fv-profilePaeReservation2PayButton"
+                                    md="7"
+                                }
+                                console.log(reserve)
+                                return(
+                                    <MDBCol md={4}>
+                                        <MDBRow className={'fv-product fv-mobileProduct'}>
+                                            <MDBRow className={"fv-ProfilePageReservation2ImageProductContentTopOne"}>
+                                                <MDBCol md={md}>
+                                                    <p>{reserve.pay_status}</p>
+                                                    <input type="text"/>
+                                                </MDBCol>
+                                            </MDBRow>
+                                            <img src={"https://www.w3schools.com/html/pic_trulli.jpg"} className={'fv-productImage'}/>
 
-                          <ReservationProduct
-                          md="7"
-                          title="در انتظار پذیرش میزبان"
-                          classnameButton="fv-profilePaeReservation2PayButton"
-                          />
+                                            <MDBRow>
+                                                <MDBCol className={'fv-productTopic'}>
+                                                    {reserve.villa_title}
+                                                </MDBCol>
+                                            </MDBRow>
+                                            <MDBRow className={'fv-ProfilePageReservation2ProductLocaton'}>
+                                                <MDBCol md={12} sm={10}>
+                                                    <a>{reserve.state}</a>
+                                                    <i className="fa fa-map-marker-alt" />
+                                                </MDBCol>
+                                            </MDBRow>
 
-                            <ReservationProduct
-                                md="5"
-                                title="در انتظار پرداخت"
-                                classnameButton="fv-profilePaeReservation2PayButtonSet"
-                            />
-                            <ReservationProduct
-                                md="4"
-                                title="پرداخت شد"
-                                classnameButton="fv-profilePaeReservation2PayButton"
-                            />
+                                            <MDBRow className={'fv-productCapacityBox'}>
+                                                <MDBCol md={12} sm={9} className={"fv-ProfilePageReservation2ProductDate"}>
+                                                    <i className="fa fa-calendar" />
+                                                    <a> {reserve.entry_date}  تا {reserve.exit_date} </a>
+                                                </MDBCol>
+                                            </MDBRow>
+                                            <MDBRow className={"fv-borderButton"}>
 
+                                            </MDBRow>
+                                            <MDBRow className={"fv-profilePaeReservation2PriceBox"}>
+                                                <MDBCol md={2} sm={2}>
+                                                    <p>تومان</p>
+                                                </MDBCol>
+                                                <MDBCol md={3} sm={3}>
+                                                    <h5>{reserve.cost}</h5>
+                                                </MDBCol>
+                                                <MDBCol md={7} sm={7}>
+                                                    <h5>مبلغ قابل پرداخت</h5>
+                                                </MDBCol>
+                                            </MDBRow>
+                                            <MDBRow className={className}>
+                                                {className === "fv-profilePaeReservation2PayButton" ?
+                                                    <input type="button" value="پرداخت"/> :
 
+                                                    <input type="button" value="پرداخت2" onClick={()=> {
+                                                        this.props.history.push("/ProfileTransaction2");
+                                                    }}/>
+                                                }
 
-
+                                            </MDBRow>
+                                        </MDBRow>
+                                    </MDBCol>
+                                  /*  <ReservationProduct
+                                        md={md}
+                                        classnameButton={className}
+                                        payStatus={reserve.pay_status}
+                                        villaTitle={}
+                                        state={}
+                                        entryDay={}
+                                        exitDate={}
+                                        cost={}
+                                    />*/
+                                )
+                            })}
 
                         </MDBRow>
                     </MDBCol>

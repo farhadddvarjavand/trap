@@ -13,6 +13,7 @@ import Datas from "../data/Datas";
 import {doSearch} from "../services/searchService"
 import {convertNeSwToNwSe} from "google-map-react";
 /* import {doSearch} from "../services/searchService" */
+import config from "../services/config.json";
 
 
 
@@ -45,7 +46,6 @@ class SearchHomePage extends Datas {
         }
 
     }
-
 
     setAccommodationGroup =(event) =>{
         let repeat = false
@@ -334,7 +334,6 @@ class SearchHomePage extends Datas {
                                     <input type='button' value='جستجو اقامتگاه' className={'fv-searchMainPagesSearchButton'} onClick={()=>{
                                         let data = ''
                                         if(setCostRange ===',' && setDateToGoAndDateToReturn === ',' ){
-                                            alert(this.state.numberOfPeople)
                                             data = {
                                                 passengers_count:this.state.numberOfPeople,
                                                 bedroom:this.state.numberOfBedroom,
@@ -447,7 +446,7 @@ class SearchHomePage extends Datas {
                                             >  {/* میرستیم برای صفحه شخصی ویلا که displaypage هست با همان id */}
 
                                                 <a>
-                                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                                    <Product srcImage={`${config.webapi}/images/villas/thum/${searchPageVilla.main_img }`}
                                                              rate="5.5/5"
                                                              topic={searchPageVilla.title}
                                                              location={searchPageVilla.state}
@@ -463,7 +462,7 @@ class SearchHomePage extends Datas {
                                             <MDBCol md={4} sm={7}
                                                     onClick={()=>this.props.history.push(`/displayPage/${searchPageVilla.id}`) }>
                                                 <a>
-                                                    <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
+                                                    <Product srcImage={`${config.webapi}/images/villas/thum/${searchPageVilla.main_img }`}
                                                              rate="5.5/5"
                                                              topic={searchPageVilla.title}
                                                              location={searchPageVilla.state}

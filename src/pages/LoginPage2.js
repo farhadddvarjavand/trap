@@ -55,12 +55,12 @@ class LoginPage2 extends Component {
             }
         }, 1000)
     }
+
     sendRepeatSms = async () =>{
         const phone_number = {
             phone_number: localStorage.getItem("phone_number")
         }
-
-        const { status, data } =await sendPhoneNumber(phone_number)
+        const { status, data } =(await sendPhoneNumber(phone_number))
         if (status === 200 &&  data.status===2) {
             // Phone number have to save in local storage for use it, in the next step
             alert('پیامک اعتبارسنجی ارسال شد');
@@ -73,9 +73,6 @@ class LoginPage2 extends Component {
         else{
             alert('شماره نامعتبر است')
         }
-        console.log(phone_number.phone_number)
-        console.log(status)
-        console.log(data)
     }
     validation = async ()=>{
         const phone_number = localStorage.getItem("phone_number")

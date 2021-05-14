@@ -35,6 +35,7 @@ import LoginPage from "./pages/LoginPage";
 import LoginPage2 from "./pages/LoginPage2";
 import LoginPage3 from "./pages/LoginPage3";
 import NotFoundPage from "./pages/NotFoundPage"
+import ReservationProduct from "./componentsPages/ReservatioonProduct";
 import TopicMainPage from "./componentsPages/topicsMainPage"
 import Api from "./components/Api";
 import {withCookies, Cookies, CookiesProvider} from 'react-cookie';
@@ -51,6 +52,8 @@ ReactDOM.render(
                         <Link to={'/login2'}>LoginPage2</Link>
                         <Link to={'/login3'}>LoginPage3</Link>
                         <Link to={'/factor'}>FactorPage</Link>
+                        <Link to={'/ProfileReservation2'}>ProfilePageReservation2</Link>
+                        <Link to={'/profileReservation'}>ProfilePageReservation</Link>
                         <Link to={'/profileReservations'}>ProfilePageReservationsRequested</Link>
                         <Link to={'/profileCalender'}>ProfilePageCalender</Link>
                         <Link to={'/profileGustComments2'}>ProfilePageGustComments2</Link>

@@ -382,6 +382,7 @@ padding-top: 10%;
   margin-right: auto;
 }
 
+
 @media (max-width: 767px){
   .fv-aboutUs.row{
     display: none;
