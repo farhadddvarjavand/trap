@@ -9,11 +9,20 @@ import Footer from "../componentsPages/footer"
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 import AccommmodationProduct from "../componentsPages/AccomodationProduct";
+import {userVillas} from "../services/userService";
+import config from "../services/config.json";
 
 class MyAccommodationPage extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            userVillas:[]
+        }
+    }
 
+    componentDidMount() {
+        userVillas()
+            .then(res=>res.data ? this.setState({userVillas: res.data.data}) : '')
     }
 
     render() {
@@ -40,34 +49,43 @@ class MyAccommodationPage extends Component {
                         <h5>تراکنش های من</h5>
                         <MDBRow>
 
-                            <AccommmodationProduct
-                              md={7}
-                              title="در انتظار تایید"
-                              classNameActiveTopRight=""
-                              classNameActiveTopLeft=""
-                              classNameActiveBottonRight=""
-                              classNameActiveBottonLeft=""
-                              classNameActiveButton=""/>
-                            <AccommmodationProduct
-                                md={5}
-                                title="غیرفعال"
-                                classNameActiveTopRight="fv-myAccommodationPageActiveButton"
-                                classNameActiveTopLeft=""
-                                classNameActiveBottonRight=""
-                                classNameActiveBottonLeft=""
-                                classNameActiveButton=""
-                                />
-                            <AccommmodationProduct
-                                md={4}
-                                title="تایید شد"
-                                classNameActiveTopRight="fv-myAccommodationPageActiveButton"
-                                classNameActiveTopLeft="fv-myAccommodationPageActiveButton"
-                                classNameActiveBottonRight="fv-myAccommodationPageActiveButton"
-                                classNameActiveBottonLeft="fv-myAccommodationPageActiveButton"
-                                classNameActiveButton="fv-myAccommodationPageActiveButton"
-                                />
+                            {this.state.userVillas.map(userVilla=>{
+                                let md = ''
+                                let classNameActiveTopRightIn=""
+                                let classNameActiveTopLeftIn=""
+                                let classNameActiveBottonRightIn=""
+                                let classNameActiveBottonLeftIn=""
+                                let classNameActiveButtonIn=""
+                                if(userVilla.status === "در انتظار تایید"){
+                                    md=7
+                                }
+                                if(userVilla.status ==="غیر فعال"){
+                                    md=5
+                                    classNameActiveTopRightIn="fv-myAccommodationPageActiveButton"
 
-
+                                }
+                                if(userVilla.status ==="تایید شد"){
+                                    md=4
+                                    classNameActiveTopRightIn="fv-myAccommodationPageActiveButton"
+                                    classNameActiveTopLeftIn="fv-myAccommodationPageActiveButton"
+                                    classNameActiveBottonRightIn="fv-myAccommodationPageActiveButton"
+                                    classNameActiveBottonLeftIn="fv-myAccommodationPageActiveButton"
+                                    classNameActiveButtonIn="fv-myAccommodationPageActiveButton"
+                                }
+                                return(
+                                    <AccommmodationProduct
+                                        md={md}
+                                        status={userVilla.status}
+                                        title={userVilla.title}
+                                        code={userVilla.id}
+                                        mainImg={`${config.webapi}/images/villas/main/${userVilla.main_img }`}
+                                        classNameActiveTopRight={classNameActiveTopRightIn}
+                                        classNameActiveTopLeft={classNameActiveTopLeftIn}
+                                        classNameActiveBottonRight={classNameActiveBottonRightIn}
+                                        classNameActiveBottonLeft={classNameActiveBottonLeftIn}
+                                        classNameActiveButton={classNameActiveButtonIn}/>
+                                )
+                            })}
 
 
                         </MDBRow>

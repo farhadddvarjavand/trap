@@ -56,7 +56,7 @@ ReactDOM.render(
                         <Link to={'/profileReservation'}>ProfilePageReservation</Link>
                         <Link to={'/profileReservations'}>ProfilePageReservationsRequested</Link>
                         <Link to={'/profileCalender'}>ProfilePageCalender</Link>
-                        <Link to={'/profileGustComments2'}>ProfilePageGustComments2</Link>
+                        <Link to={'/profileGustComments2/1'}>ProfilePageGustComments2</Link>
                         <Link to={'/profileGustComments'}>PrfilePageGustComments</Link>
                         <Link to={'/displayPage/1'}>DisplayPage</Link>
                         <Link to={'/ProfileWallet3'}>ProfilePageWallet3</Link>
@@ -89,7 +89,7 @@ ReactDOM.render(
                             <Route exact path={'/factor'} component={FactorPage}/>
                             <Route exact path={'/profileReservations'} component={ProfilePageReservationsRequested}/>
                             <Route exact path={'/profileCalender'} component={ProfilePageCalender}/>
-                            <Route exact path={'/profileGustComments2'} component={ProfilePageGustComments2}/>
+                            <Route exact path={'/profileGustComments2/:id'} component={ProfilePageGustComments2}/>
                             <Route exact path={'/profileGustComments'} component={PrfilePageGustComments}/>
                             <Route exact path={'/displayPage/:id'} component={DisplayPage}/>
                             <Route exact path={'/profileWallet3'} component={ProfilePageWallet3}/>

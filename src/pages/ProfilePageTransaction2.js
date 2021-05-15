@@ -7,14 +7,23 @@ import "../style/ProfilePageTransaction2.scss"
 import Footer from "../componentsPages/footer"
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
+import {userTransactions} from "../services/userService";
 
 class ProfilePageTransaction2 extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            transactionDatas:[]
+        }
 
+    }
+    componentDidMount() {
+        userTransactions()
+            .then(res=>res.status===200 ? this.setState({transactionDatas:res.data.data}) : '')
     }
 
     render() {
+        console.log(this.state.transactionDatas)
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction fv-ProfilePageTransaction2"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
@@ -58,20 +67,18 @@ class ProfilePageTransaction2 extends Component {
                                 <th className={"fv-tableTitleContent"}>شرح تراکنش</th>
                                 <th className={"fv-tableTitleLeftOne"}>وضعیت</th>
                             </tr>
-                            <tr>
-                                <td>برداشت</td>
-                                <td>99/10/01</td>
-                                <td>2000000</td>
-                                <td>برداشت از کیف پول</td>
-                                <td>پرداخت شد</td>
-                            </tr>
-                            <tr>
-                                <td>واریز</td>
-                                <td>99/10/01</td>
-                                <td>2000000</td>
-                                <td>اجرا اقامتگاه کلبه سبز</td>
-                                <td className={"fv-test"}>پرداخت شد</td>
-                            </tr>
+                            {this.state.transactionDatas.map(transactionData=>{
+                                return(
+                                    <tr>
+                                        <td>{transactionData.type}</td>
+                                        <td>{transactionData.date}</td>
+                                        <td>{transactionData.amount}</td>
+                                        <td>{transactionData.description}</td>
+                                        <td className={transactionData.status === "پرداخت شد"  ? "fv-test" :''}>{transactionData.status}</td>
+                                    </tr>
+                                )
+                            })}
+
                         </table>
 
                     </MDBCol>

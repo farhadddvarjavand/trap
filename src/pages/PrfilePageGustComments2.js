@@ -10,11 +10,19 @@ import Footer from "../componentsPages/footer"
 import MobileLogo from "../images/MobileLogo.png"
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
+import {getUserVillaComments} from "../services/userService";
 
 class PrfilePageGustComments2 extends Component {
     constructor(props) {
         super(props);
+        this.state={
 
+        }
+    }
+
+    componentDidMount() {
+        getUserVillaComments(this.props.match.params.id)
+            .then(res=>console.log(res.data.data))
     }
 
     render() {

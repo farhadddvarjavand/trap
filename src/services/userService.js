@@ -62,18 +62,18 @@ export const userReserves = async ()=> {
 }
 
 // Get User Transactions  -- Use Token
-export const userTransactions =()=> {
+export const userTransactions = async ()=> {
     return http.get(
     `${config.webapi}/api/v1/user/transactions`, 
-    { headers:{ 'Authorization' : `Bearer USER Token` } } // USER TOKEN => User Toekn from Local Storage for Auth
+    { headers:{ 'Authorization' : await getToken() } } // USER TOKEN => User Toekn from Local Storage for Auth
     );
 }
 
 // Get User Villas  -- Use Token
-export const userVillas =()=> {
+export const userVillas = async ()=> {
     return http.get(
     `${config.webapi}/api/v1/user/villas`, 
-    { headers:{ 'Authorization' : `Bearer USER Token` } } // USER TOKEN => User Toekn from Local Storage for Auth
+    { headers:{ 'Authorization' : await getToken() } } // USER TOKEN => User Toekn from Local Storage for Auth
     );
 }
 
@@ -87,10 +87,10 @@ export const editVilla =id=> {
 
 
 // Get User Villa Comments  -- Use Token  --  id => villa id
-export const getUserVillaComments =id=> {
+export const getUserVillaComments =async id=> {
     return http.get(
     `${config.webapi}/api/v1/user/getUserVillaComments/${id}`, 
-    { headers:{ 'Authorization' : `Bearer USER Token` } } // USER TOKEN => User Toekn from Local Storage for Auth
+    { headers:{ 'Authorization' :  await getToken() } } // USER TOKEN => User Toekn from Local Storage for Auth
     );
 }
 
