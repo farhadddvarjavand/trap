@@ -25,14 +25,14 @@ import DatePicker from "react-modern-calendar-datepicker";
 import {MapTest} from "../data/MapTest";
 import CalendarForMobile from "../data/CalendarForMobilejs";
 import CalendarLinear from "../data/CalenddarLinear";
-import {villa , villaComments , villaImages ,similarVillas , reservedDates} from "../services/villaService"
+import {villa , villaComments , villaImages ,similarVillas , reservedDates , villaPrice} from "../services/villaService"
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
 import * as moment from 'jalali-moment';
 import {utils} from "../data/Calendar";
-import {arrayBetweenDates , arrayBetweenDatesObject} from "../componentsPages/calculationsDate"
+import {arrayBetweenDates , arrayBetweenDatesObject , priceOfPerMonth} from "../componentsPages/calculationsDate"
 import Mapir from "mapir-react-component";
 
 
@@ -125,6 +125,9 @@ componentDidMount() {
         .catch(error =>{
 
         })
+
+    villaPrice(this.props.match.params.id)
+        .then(res=>console.log(res))
 
 }
 
@@ -219,6 +222,7 @@ componentDidMount() {
 
 
     render() {
+        console.log(priceOfPerMonth(1400 , 2 , [1,2,3,4,"",6,7]))   // price days
         const moment = extendMoment(Moment);
         const start = new Date(this.state.dateToGo.year, this.state.dateToGo.month, this.state.dateToGo.day);
         const end   = new Date(this.state.dateToReturn.year, this.state.dateToReturn.month, this.state.dateToReturn.day);

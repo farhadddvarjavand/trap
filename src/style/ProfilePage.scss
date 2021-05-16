@@ -8,7 +8,7 @@
     .col-md-8 {
       flex: 0 0 72.666667%;
       max-width: 72.666667%;
-      margin-bottom: 8%;
+      margin-bottom: 5%;
        }
     .fv-ProfilePageUserSetInfo{
       text-align: initial;
@@ -90,6 +90,7 @@
         text-align: initial;
         a {
           color: black;
+          font-size: 17px;
         }
         .fa, .fas {
           margin-left: 4%;
@@ -98,6 +99,7 @@
           flex: 0 0 31.333333%;
           max-width: 24.333333%;
           text-align: center;
+          margin-block: auto;
         }
         p{
          /*  font-size: 14px; */

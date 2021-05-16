@@ -26,7 +26,9 @@ export const reservedDates= id =>{
 export const similarVillas= id =>{
     return http.get(`${config.webapi}/api/v1/villa/similarVillas/${id}`);
 }
-
+export const villaPrice = id =>{
+    return http.get(`${config.webapi}/api/v1/villa/villaPrices/${id}`);
+}
 // Create a new villa  --  Method = POST
 export const storeVilla = data => {
     return http.post(

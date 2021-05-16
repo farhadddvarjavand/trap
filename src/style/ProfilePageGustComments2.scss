@@ -6,14 +6,31 @@
       margin-right: 340%;
       padding: 0;
     }
-    .fv-ProfilePageGustComments2SetComment input{
-      margin-right: 1%;
-      margin-left: 1%;
-      height: 115px;
-      padding: 0;
+    .fv-ProfilePageGustComments2SetComment {
+      textarea {
+        width: 775px;
+        margin-right: 12px;
+        margin-left: 1%;
+        height: 115px;
+        padding: 0;
+        background: #FFFFFF;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        border-radius: 14px;
+        color: #919191;
+      }
+
+      form {
+        width: 100%;
+      }
     }
   }
-
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageWalletWalletButton .fv-ProfilePageUserSetInfoButton input {
+    width: 70.5%;
+    padding: 0;
+    margin-left: 13%;
+    margin-top: 20%;
+  }
   .fv-ProfilePageGustComments2CommentOne{
     border: 1px solid rgba(145, 145, 145, 0.2);
     box-sizing: border-box;
@@ -68,10 +85,18 @@
         color: #3EC886;
       }
     }
-
+    .fv-hideAnswerComments{
+      display: none;
+    }
   }
   .fv-ProfilePageGustComments2CommentOne2 {
     padding-bottom: 0%;
+  }
+  .fv-ProfilePageWalletWalletButton {
+    margin-left: 1.5%;
+  }
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageWalletWalletButton .fv-ProfilePageUserSetInfoButton input {
+    margin-left: -6%;
   }
 
 }
@@ -108,11 +133,23 @@
     .fv-ProfilePageWallet .fv-footerMenuMobileTitle {
       margin-top: 190%;
     }
-
   }
-
+  .fv-ProfilePageGustComments2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageGustComments2SetComment textarea {
+    width: 67vw;
+    margin-right: -6%;
+  }
+  .fv-ProfilePageGustComments2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageWalletWalletButton .fv-ProfilePageUserSetInfoButton input {
+    width: 47.5%;
+    margin-top: 15px;
+    margin-left: 9%;
+  }
 }
-
+@media (max-width: 560px) {
+  .fv-ProfilePageGustComments2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageGustComments2SetComment textarea {
+    width: 73vw;
+    margin-right: -5%;
+  }
+}
 @media (max-width: 320px) {
   .fv-ProfilePageGustComments2{
      .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo h5 {
@@ -130,6 +167,10 @@
     }
     .fv-footerMenuMobileTitle {
       margin-top: 220%;
+    }
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageGustComments2SetComment textarea {
+      width: 71vw;
+      margin-right: -5%;
     }
   }
 }

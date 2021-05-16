@@ -10,19 +10,25 @@ import Footer from "../componentsPages/footer"
 import MobileLogo from "../images/MobileLogo.png"
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
-import {getUserVillaComments} from "../services/userService";
+import {getUserVillaComments , replayComment} from "../services/userService";
 
 class PrfilePageGustComments2 extends Component {
     constructor(props) {
         super(props);
         this.state={
+            comments:[],
+            answerCommentId:'',
+            textAreaComment:''
 
         }
     }
 
     componentDidMount() {
         getUserVillaComments(this.props.match.params.id)
-            .then(res=>console.log(res.data.data))
+            .then(res=>{
+                if(res.data.data)
+                this.setState({comments: Object.values(res.data.data)})
+            })
     }
 
     render() {
@@ -59,99 +65,101 @@ class PrfilePageGustComments2 extends Component {
                             </MDBCol>
                         </MDBRow>
 
-                        <MDBContainer className={"fv-ProfilePageGustComments2CommentOne"}>
-                            <MDBRow className={"fv-ProfilePageGustComments2CommentOneLogo"}>
-                                <MDBCol md={2} sm={3}>
-                                    <img src={MobileLogo}/>
-                                </MDBCol>
-                                <MDBCol md={7} sm={7}>
-                                    <MDBRow>
-                                        <h5>بهار</h5>
-                                    </MDBRow>
-                                    <MDBRow>
-                                        <p>۳۱ مهرماه ۸۹۳۱</p>
-                                    </MDBRow>
-                                </MDBCol>
-                            </MDBRow>
-                            <MDBRow>
-                                <MDBCol>
-                                    <p>خیلی عالی بود،مخصوصا رفتار و برخورد میزبان.</p>
-                                </MDBCol>
-                            </MDBRow>
-                            <MDBContainer className={"fv-ProfilePageGustComments2CommentOneAnswer"}>
-                                <MDBRow className={"fv-ProfilePageGustComments2CommentOneAnswerCommentDate"}>
-                                    <MDBCol>
-                                        <p>۳۱ مهرماه ۸۹۳۱</p>
-                                    </MDBCol>
-                                </MDBRow>
-                                <MDBRow>
-                                    <MDBCol>
-                                        <h5>میزبان کلبه سبز</h5>
-                                    </MDBCol>
-                                </MDBRow>
-                                <MDBRow className={"fv-ProfilePageGustComments2CommentOneAnswerComment"}>
-                                    <MDBCol>
-                                        <p> با تشکر از نظر شما</p>
-                                    </MDBCol>
-                                </MDBRow>
-                            </MDBContainer>
-                        </MDBContainer>
+                        {this.state.comments.map(comment => {
+                            if(comment.answer){
+                                return  <MDBContainer className={"fv-ProfilePageGustComments2CommentOne"}>
+                                            <MDBRow className={"fv-ProfilePageGustComments2CommentOneLogo"}>
+                                                <MDBCol md={2} sm={3}>
+                                                    <img src={MobileLogo}/>
+                                                </MDBCol>
+                                                <MDBCol md={7} sm={7}>
+                                                    <MDBRow>
+                                                        <h5>{comment.user_name}</h5>
+                                                    </MDBRow>
+                                                    <MDBRow>
+                                                        <p>{comment.created_at}</p>
+                                                    </MDBRow>
+                                                </MDBCol>
+                                            </MDBRow>
+                                            <MDBRow>
+                                                <MDBCol>
+                                                    <p>{comment.text}</p>
+                                                </MDBCol>
+                                            </MDBRow>
 
-                        <MDBContainer className={"fv-ProfilePageGustComments2CommentOne fv-ProfilePageGustComments2CommentOne2"}>
-                            <MDBRow className={"fv-ProfilePageGustComments2CommentOneLogo"}>
-                                <MDBCol md={2} sm={3}>
-                                    <img src={MobileLogo}/>
-                                </MDBCol>
-                                <MDBCol md={7} sm={7}>
-                                    <MDBRow>
-                                        <h5>علی </h5>
-                                    </MDBRow>
-                                    <MDBRow>
-                                        <p>۳۱ مهرماه ۸۹۳۱</p>
-                                    </MDBRow>
-                                </MDBCol>
-                            </MDBRow>
-                            <MDBRow>
-                                <MDBCol>
-                                    <p>خیلی عالی بود،مخصوصا رفتار و برخورد میزبان.</p>
-                                </MDBCol>
-                            </MDBRow>
-                            <MDBRow className={"fv-ProfilePageGustComments2CommentOneAnswerButton"}>
-                                <MDBCol>
-                                    <h5>جواب دادن به نظر</h5>
-                                </MDBCol>
-                            </MDBRow>
-                        </MDBContainer>
 
-                        <MDBContainer className={"fv-ProfilePageGustComments2CommentOne"}>
-                            <MDBRow className={"fv-ProfilePageGustComments2CommentOneLogo"}>
-                                <MDBCol md={2} sm={3}>
-                                    <img src={MobileLogo}/>
-                                </MDBCol>
-                                <MDBCol md={7} sm={7}>
-                                    <MDBRow>
-                                        <h5>سعید </h5>
-                                    </MDBRow>
-                                    <MDBRow>
-                                        <p>۳۱ مهرماه ۸۹۳۱</p>
-                                    </MDBRow>
-                                </MDBCol>
-                            </MDBRow>
-                            <MDBRow>
-                                <MDBCol>
-                                    <p>خیلی عالی بود،مخصوصا رفتار و برخورد میزبان.</p>
-                                </MDBCol>
-                            </MDBRow>
-                            <MDBRow className={"fv-ProfilePageGustComments2SetComment"}>
-                                <input type="textarea"/>
-                            </MDBRow>
+                                            <MDBContainer className={"fv-ProfilePageGustComments2CommentOneAnswer"}>
+                                                <MDBRow className={"fv-ProfilePageGustComments2CommentOneAnswerCommentDate"}>
+                                                    <MDBCol>
+                                                        <p>{comment.answer.created_at}</p>
+                                                    </MDBCol>
+                                                </MDBRow>
+                                                <MDBRow>
+                                                    <MDBCol>
+                                                        <h5>میزبان کلبه سبز</h5>
+                                                    </MDBCol>
+                                                </MDBRow>
+                                                <MDBRow className={"fv-ProfilePageGustComments2CommentOneAnswerComment"}>
+                                                    <MDBCol>
+                                                        <p>{comment.answer.text}</p>
+                                                    </MDBCol>
+                                                </MDBRow>
+                                            </MDBContainer>
+                                </MDBContainer>
+                            }else {
+                             return   <MDBContainer className={"fv-ProfilePageGustComments2CommentOne"}>
+                                             <MDBRow className={"fv-ProfilePageGustComments2CommentOneLogo"}>
+                                                 <MDBCol md={2} sm={3}>
+                                                     <img src={MobileLogo}/>
+                                                 </MDBCol>
+                                                 <MDBCol md={7} sm={7}>
+                                                     <MDBRow>
+                                                         <h5>{comment.user_name}</h5>
+                                                     </MDBRow>
+                                                     <MDBRow>
+                                                         <p>{comment.created_at}</p>
+                                                     </MDBRow>
+                                                 </MDBCol>
+                                             </MDBRow>
+                                             <MDBRow>
+                                                 <MDBCol>
+                                                     <p>{comment.text}</p>
+                                                 </MDBCol>
+                                             </MDBRow>
+                                             <MDBRow className={comment.id === this.state.answerCommentId ? "fv-hideAnswerComments" : "fv-ProfilePageGustComments2CommentOneAnswerButton"}>
+                                                 <MDBCol>
+                                                     <a onClick={()=>{
+                                                         this.setState({textareaClassName:"fv-ProfilePageGustComments2SetComment"
+                                                             ,buttonClassname:"fv-ProfilePageWalletWalletButton" , answerATag:"fv-hideAnswerComments"
+                                                             , answerCommentId:comment.id})
+                                                         console.log(comment.id)
+                                                     }}><h5>جواب دادن به نظر</h5></a>
+                                                 </MDBCol>
+                                             </MDBRow>
 
-                            <MDBRow className={"fv-ProfilePageWalletWalletButton"}>
-                                <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
-                                    <input type="button" value="ذخیره پیام"/>
-                                </MDBCol>
-                            </MDBRow>
-                        </MDBContainer>
+                                             <MDBRow className={comment.id === this.state.answerCommentId ? "fv-ProfilePageWalletWalletButton" : "fv-hideAnswerComments" } >
+                                                 <MDBRow className={"fv-ProfilePageGustComments2SetComment"}>
+                                                     <form onSubmit={(event)=>{
+                                                         const data = {
+                                                                 text:this.state.textAreaComment
+                                                             }
+                                                         replayComment(data,this.props.match.params.id,this.state.answerCommentId)
+                                                     }}>
+                                                         <label>
+                                                             <textarea value={this.state.textAreaComment} onChange={(e)=>this.setState({textAreaComment:e.target.value})} />
+                                                         </label>
+                                                         <MDBRow className={"fv-ProfilePageWalletWalletButton"}>
+                                                             <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
+                                                                 <input type="submit" value="ذخیره پیام"/>
+                                                             </MDBCol>
+                                                         </MDBRow>
+                                                     </form>
+                                                 </MDBRow>
+                                             </MDBRow>
+                                        </MDBContainer>
+                            }
+
+                        })}
 
 
                     </MDBCol>

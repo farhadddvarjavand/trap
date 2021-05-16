@@ -17,6 +17,9 @@ export const arrayBetweenDates=(dateA , dateB , range) =>{
                 let startdate = moment(dateA, 'jYYYY/jM/jD');
                 startdate = startdate.add(i, "days");
                 startdate = startdate.format("YYYY/MM/DD");
+                let date = moment().add('months', 1).endOf('month');
+                console.log(date)
+
                 const test=  moment(startdate, 'YYYY/M/D').format('jYYYY/jM/jD ') // today in shamsi
                 daysList.push(test)
             }
@@ -80,4 +83,16 @@ export const arrayBetweenDatesObject =(dateA , dateB , range) =>{
         }
 
     }
+}
+export const priceOfPerMonth = (year , month , daysArray) =>{
+    const priceDays = []
+    const endOfDayThisMonth = moment.jDaysInMonth(year, month-1)
+    const range = endOfDayThisMonth-daysArray.length
+    for (let i = 0 ; i < range ; i++){
+        priceDays.push("")
+    }
+    for (let i = 0 ; i < daysArray.length ; i++){
+        priceDays.push(daysArray[i])
+    }
+    return priceDays
 }

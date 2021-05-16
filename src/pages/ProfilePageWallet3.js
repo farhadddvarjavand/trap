@@ -12,6 +12,7 @@ import TopicsMainPage from "../componentsPages/topicsMainPage";
 import Calender from "../componentsPages/calender";
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
+import {withdrawal} from "../services/userService";
 
 class ProfilePageWallet3 extends Component {
     constructor(props) {
@@ -51,7 +52,15 @@ class ProfilePageWallet3 extends Component {
 
                         <MDBRow>
                             <MDBCol md={12} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
-                                <input type="button" value="ارسال درخواست"/>
+                                <input type="button" value="ارسال درخواست" onClick={()=>{
+
+                                    if(this.state.amountRequested){
+                                        withdrawal(this.state.amountRequested)
+                                            .catch(err=>{if(err.response.data.errors.requested_amount[0]){
+                                                return alert('مقدار نامعتبر میباشد')
+                                            }})
+                                    }
+                                }}/>
                             </MDBCol>
                         </MDBRow>
                     </MDBCol>

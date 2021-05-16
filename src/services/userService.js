@@ -95,12 +95,12 @@ export const getUserVillaComments =async id=> {
 }
 
 // Replay comment from user panel  --  Method = POST
-export const replayComment = (data,villaId,parentId) => {
+export const replayComment = async (data,villaId,parentId) => {
     return http.post(
 
     `${config.webapi}/api/v1/user/replayComment/${villaId}/${parentId}`, 
     JSON.stringify(data),
-    { headers:{ 'Authorization' : `Bearer USER Token` } } // USER TOKEN => User Toekn from Local Storage for Auth
+    { headers:{ 'Authorization' :  await getToken() } } // USER TOKEN => User Toekn from Local Storage for Auth
     
     );
 }
@@ -117,10 +117,10 @@ export const replayComment = (data,villaId,parentId) => {
 }
 
 // Get User Villa Dates  -- Use Token  --  id => villa id
-export const villaDates =id=> {
+export const villaDates = async  id=> {
     return http.get(
     `${config.webapi}/api/v1/user/villaDates/${id}`, 
-    { headers:{ 'Authorization' : `Bearer USER Token` } } // USER TOKEN => User Toekn from Local Storage for Auth
+    { headers:{ 'Authorization' : await getToken() } } // USER TOKEN => User Toekn from Local Storage for Auth
     );
 }
 
@@ -174,12 +174,12 @@ export const changeReserveStatus = (data,id) => {
 }
 
 // Withdrawal Request  --  Method = POST
-export const withdrawal = data => {
+export const withdrawal = async data => {
     return http.post(
 
     `${config.webapi}/api/v1/user/withdrawal`, 
     JSON.stringify(data),
-    { headers:{ 'Authorization' : `Bearer USER Token` } }
+    { headers:{ 'Authorization' :  await getToken() } }
     
     );
 }

@@ -12,6 +12,7 @@ import Calender from "../componentsPages/calender";
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 import CalendarForProfile from "../data/CalendarForProfile";
+import {villaDates} from "../services/userService";
 
 class ProfilePageCalender extends Component {
     constructor(props) {
@@ -284,16 +285,16 @@ class ProfilePageCalender extends Component {
                                     </MDBRow>
                                     <MDBRow>
                                         <select value={this.state.changeStatusSelectedDays} onChange={(event)=>this.setState({changeStatusSelectedDays:event.target.value})}>
-                                            <option value='title' disabled>تغییر روز</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
+                                            <option value='title' disabled>وضعیت</option>
+                                            <option value="1">تعطیل</option>
+                                            <option value="2">تکمیل</option>
+                                            <option value="3">غیر قابل رزرو</option>
                                         </select>
                                     </MDBRow>
                                 </MDBCol>
                                 <MDBCol md={7}>
                                     <MDBRow>
-                                        <p>تغییر وضعیت روزهای انتخاب شده</p>
+                                        <p>تغییر قیمت روزهای انتخاب شده</p>
                                     </MDBRow>
                                     <MDBRow>
                                       <input type="text" placeholder={"تومان"} value={this.state.PriceChangeStatusSelectedDays}
@@ -395,7 +396,12 @@ class ProfilePageCalender extends Component {
                             </MDBRow>
                             <MDBRow className={"fv-ProfilePageWalletWalletButton"}>
                                 <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
-                                    <input type="button" value="ذخیره پیام"/>
+                                    <input type="button" value="ذخیره پیام" onClick={()=>{
+                                        alert(1)
+                                        villaDates(24)
+                                            .then(res=>console.log(res))
+                                            .catch(err=>console.log(err.response))
+                                    }}/>
                                 </MDBCol>
                             </MDBRow>
                         </MDBContainer>
