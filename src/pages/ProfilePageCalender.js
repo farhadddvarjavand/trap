@@ -304,7 +304,12 @@ class ProfilePageCalender extends Component {
                             </MDBRow>
                             <MDBRow className={"fv-ProfilePageWalletWalletButton"}>
                                 <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
-                                    <input type="button" value="ذخیره پیام"/>
+                                    <input type="button" value="ذخیره پیام" onClick={()=>{
+                                        alert(1)
+                                        villaDates(24)
+                                            .then(res=>console.log(res))
+                                            .catch(err=>console.log(err.response))
+                                    }}/>
                                 </MDBCol>
                             </MDBRow>
                         </MDBContainer>
@@ -396,12 +401,7 @@ class ProfilePageCalender extends Component {
                             </MDBRow>
                             <MDBRow className={"fv-ProfilePageWalletWalletButton"}>
                                 <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
-                                    <input type="button" value="ذخیره پیام" onClick={()=>{
-                                        alert(1)
-                                        villaDates(24)
-                                            .then(res=>console.log(res))
-                                            .catch(err=>console.log(err.response))
-                                    }}/>
+                                    <input type="button" value="ذخیره پیام" onClick={()=>{ }}/>
                                 </MDBCol>
                             </MDBRow>
                         </MDBContainer>

@@ -53,9 +53,11 @@
     "react-google-maps": "^9.4.5",
     "react-json-pretty": "^2.2.0",
     "react-modern-calendar-datepicker": "^3.1.6",
+    "react-rating-stars-component": "^2.2.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-star-ratings": "^2.3.0",
     "simple-react-validator": "^1.6.0",
     "webpack": "^4.44.2"
   },

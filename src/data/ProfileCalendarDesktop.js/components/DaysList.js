@@ -281,7 +281,7 @@ const DaysList = ({
             </div>
         );
       }else if(weekRowIndex * 7 <=29) {
-        console.log(weekRowIndex)
+        // console.log(weekRowIndex)
         const eachWeekDays = allDays
             .slice(weekRowIndex * 7, weekRowIndex * 7 + 7)
             .map(renderEachWeekDays);

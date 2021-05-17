@@ -52,7 +52,7 @@ class ProfilePageUserInfo extends React.Component{
                         }
                         <Link to={'/ProfileWallet'}><p className={ window.location.href.match(/\bProfileWallet\b/) ? "fv-walletActive" : ''}  ><i className="fas fa-wallet"/>کیف پول</p></Link>
                         <Link to={'/Profile'}><p  className={ window.location.href.match(/\bProfile\b/) ? "fv-updateProfileActive" : ''} ><i className="fas fa-user" />ویرایش پروفایل</p></Link>
-                        <p  className={ window.location.href.match(/\bLink\b/) ? "fv-myFavorite" : ''} ><i className="fa fa-heart" />علاقه مندی ها</p>
+                        <Link to={'/profileFavoritesPage'}><p  className={ window.location.href.match(/\bprofileFavoritesPage\b/) ? "fv-myFavoritesActive" : ''} ><i className="fa fa-heart" />علاقه مندی ها</p></Link>
                     </MDBCol>
                 </MDBRow>
             </MDBCol>

@@ -106,12 +106,12 @@ export const replayComment = async (data,villaId,parentId) => {
 }
 
 // Add comment for a villa  --  Method = POST -- id => villa id
- export const addComment = (data,id) => {
+ export const addComment = async (data,id) => {
     return http.post(
 
     `${config.webapi}/api/v1/user/addComment/${id}`, 
     JSON.stringify(data),
-    { headers:{ 'Authorization' : `Bearer USER Token` } } // USER TOKEN => User Toekn from Local Storage for Auth
+    { headers:{ 'Authorization' : await getToken() } } // USER TOKEN => User Toekn from Local Storage for Auth
     
     );
 }
@@ -185,31 +185,30 @@ export const withdrawal = async data => {
 }
 
 // Get user favorite villas -- Use Token
-export const favorites = () => {
+export const favorites = async () => {
     return http.get(
     `${config.webapi}/api/v1/user/favorites`, 
-    { headers:{ 'Authorization' : `Bearer USER Token` } }
+    { headers:{ 'Authorization' : await getToken() } }
     );
 }
 
 // Add To Favorite  --  Method = POST
-export const addToFavorite = data => {
+export const addToFavorite = async data => {
     return http.post(
-
     `${config.webapi}/api/v1/user/addToFavorite`, 
     JSON.stringify(data),
-    { headers:{ 'Authorization' : `Bearer USER Token` } }
+    { headers:{ 'Authorization' :  await getToken() } }
     
     );
 }
 
 // Remove From Favorite  --  Method = POST
-export const removeFromFavorite = data => {
+export const removeFromFavorite = async  data => {
     return http.post(
 
     `${config.webapi}/api/v1/user/removeFromFavorite`, 
     JSON.stringify(data),
-    { headers:{ 'Authorization' : `Bearer USER Token` } }
+    { headers:{ 'Authorization' :  await getToken()  } }
     
     );
 }

@@ -34,6 +34,8 @@ import * as moment from 'jalali-moment';
 import {utils} from "../data/Calendar";
 import {arrayBetweenDates , arrayBetweenDatesObject , priceOfPerMonth} from "../componentsPages/calculationsDate"
 import Mapir from "mapir-react-component";
+import {Link} from "react-router-dom";
+import {addToFavorite} from "../services/userService";
 
 
 
@@ -574,9 +576,13 @@ componentDidMount() {
                                 <p className={"fv-DisplayPageDetailsRate fv-DisplayPageDetailsRateTop"}>  /4.5 <i className="fa fa-star" /> </p>
                         </MDBCol>
                         <MDBCol md={6} className={"fv-DisplayPageLike"}>
-                            <a onClick={()=>this.postData('rl','data')}>
-                                <p> اضافه به علاقه مندی ها <i className="fas fa-heart"/></p>
-                            </a>
+                                <a onClick={()=>{
+                                   const data ={
+                                       villa_id:this.props.match.params.id
+                                    }
+                                    addToFavorite(data)
+                                        .then(res=>res.status===200 ? alert('ویلا به علاقه مندی های شما اضافه شد'):'')
+                                }}><p> اضافه به علاقه مندی ها <i className="fas fa-heart"/></p></a>
                         </MDBCol>
                         <MDBCol md={2} className={"fv-DisplayPageTitleShare"}>
                             <a onClick={()=>this.postData('rl','data')}>
@@ -984,7 +990,7 @@ componentDidMount() {
                                 <h4> نظرات </h4>
                             </MDBCol>
                             <MDBCol md={2}>
-                                <h4> نوشتن نظر<i className="fas fa-chevron-left" /> </h4>
+                                <Link to={`/addComments/${this.props.match.params.id}`}><h4> نوشتن نظر<i className="fas fa-chevron-left" /> </h4></Link>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow>

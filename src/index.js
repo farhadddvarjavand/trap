@@ -35,6 +35,8 @@ import LoginPage from "./pages/LoginPage";
 import LoginPage2 from "./pages/LoginPage2";
 import LoginPage3 from "./pages/LoginPage3";
 import NotFoundPage from "./pages/NotFoundPage"
+import AddComments from "./pages/addComments"
+import ProfileFavoritesPage from "./pages/profileFavoritesPage"
 import ReservationProduct from "./componentsPages/ReservatioonProduct";
 import TopicMainPage from "./componentsPages/topicsMainPage"
 import Api from "./components/Api";
@@ -78,6 +80,8 @@ ReactDOM.render(
                         <Link to={'/searchHomePage/cheapest/1'}>SearchHomePage</Link>
                         <Link to={'/mainPage'}>MainPage</Link>
                         <Link to={'/notFound'}>NotFoundPage</Link>
+                        <Link to={'/addComments/24'}>AddComments</Link>
+                        <Link to={'/profileFavoritesPage'}>ProfileFavoritesPage</Link>
 
                     </div>
 
@@ -113,7 +117,8 @@ ReactDOM.render(
                             <Route exact path={'/searchHomePage/:sort/:id'} component={SearchHomePage}/>
                             <Route exact path={'/mainPage'} component={MainPage}/>
                             <Route exact path={'/notFound'} component={NotFoundPage}/>
-
+                            <Route exact path={'/addComments/:id'} component={AddComments}/>
+                            <Route exact path={'/profileFavoritesPage'} component={ProfileFavoritesPage}/>
                         </div>
                     </div>
 
