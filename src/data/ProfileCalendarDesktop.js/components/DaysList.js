@@ -10,6 +10,7 @@ import {
 import { TYPE_SINGLE_DATE, TYPE_RANGE, TYPE_MUTLI_DATE } from '../shared/constants';
 import handleKeyboardNavigation from '../shared/keyboardNavigation';
 import { useLocaleUtils, useLocaleLanguage } from '../shared/hooks';
+import {villaPrice} from "../../../services/villaService";
 
 const DaysList = ({
                     activeDate,
@@ -30,7 +31,7 @@ const DaysList = ({
                     shouldHighlightWeekends,
                     isQuickSelectorOpen,
                     customDaysClassName,
-                    priceday,
+                    villaPrices,
                     testDay
                   }) => {
   const calendarSectionWrapper = useRef(null);
@@ -249,9 +250,12 @@ const DaysList = ({
 
             <div className={'fv-test2'}>{!isStandard ? '' : getLanguageDigits(day) }</div>
 
+            {villaPrices.map(vilaprice=>{
+              if(vilaprice.month===dayItem.month && vilaprice.year === dayItem.year){
+                return <div className={'fv-test'}>{!isStandard ? '' : vilaprice.daysPrice[day-1] }</div>
+              }
+            })}
 
-            {dayItem.month ===  2 && dayItem.year===1400? <div className={'fv-test'}>{!isStandard ? '' : priceday[day-1] }</div> :''} {/* baraie mahe 2 sale 1400  */}
-            { /*dayItem.month ===  3 ? !isStandard ? '' : getLanguageDigits(day)  : '' */}
 
           </div>
 

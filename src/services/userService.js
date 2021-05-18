@@ -125,23 +125,23 @@ export const villaDates = async  id=> {
 }
 
 // Change Dates Cost (Customize villa costs)  --  Method = POST -- id => villa id
-export const changeDatesCost = (data,id) => {
+export const changeDatesCost = async (data,id) => {
     return http.post(
 
     `${config.webapi}/api/v1/user/changeDatesCost/${id}`, 
     JSON.stringify(data),
-    { headers:{ 'Authorization' : `Bearer USER Token` } }
+    { headers:{ 'Authorization' : await getToken()  } }
     
     );
 }
 
 // Change Dates Status (Customize villa status)  --  Method = POST -- id => villa id
-export const changeDatesStatus = (data,id) => {
+export const changeDatesStatus = async (data,id) => {
     return http.post(
 
     `${config.webapi}/api/v1/user/changeDatesStatus/${id}`, 
     JSON.stringify(data),
-    { headers:{ 'Authorization' : `Bearer USER Token` } }
+    { headers:{ 'Authorization' : await getToken() } }
     
     );
 }

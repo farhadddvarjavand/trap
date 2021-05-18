@@ -5,31 +5,28 @@ import "./Calendar/DatePicker.css";
 
 import './style/CalendarDesktop.scss'
 import {Calendar} from "./ProfileCalendarDesktop.js"
+import {getToday} from "../componentsPages/calculationsDate";
 
-const CalendarForProfile = () => {
+const CalendarForProfile = (props) => {
 
+   const today = getToday()    /// show today date {year , month , dday }
     const preselectedDays = [
         {
-            year: 1399,
-            month: 10,
-            day: 2,
+            year: parseInt(today.year),
+            month:parseInt(today.month),
+            day: parseInt(today.day),
         },
-        {
-            year: 1399,
-            month: 10,
-            day: 15,
-        },
-        {
-            year: 1400,
-            month: 10,
-            day: 30,
-        },
+
     ]
+
 
 
     const [selectedDayRange, setSelectedDayRange] = useState(
         preselectedDays
     );
+   props.getSelectedDay(selectedDayRange)
+
+
     return (
         <>
             <Calendar
@@ -37,10 +34,9 @@ const CalendarForProfile = () => {
                 value={selectedDayRange}
                 onChange={setSelectedDayRange}
                 shouldHighlightWeekends
-                priceDays={[1,2000000,3,4]}
+                villaPrice={props.villaPrice}
             />
 
-            {console.log(selectedDayRange)}
 
         </>
     );

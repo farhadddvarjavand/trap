@@ -262,11 +262,11 @@ class SearchHomePage extends Datas {
                 <MDBContainer className={'fv-footerMenu fv-SearchHomePageBody'}>
                     <MDBRow className={'fv-footerMenuRibbon'}>
                         <MDBCol md={1}>
-                            <i className="fa fa-user-alt" />
-                            <a> ورود</a>
+                            <i className={localStorage.getItem("token") ? "" : "fa fa-user-alt"}/>
+                            <a className={localStorage.getItem("token") ? "fv-hideButtonRegister" : ""}> <Link to={'/login'}>ورود</Link></a>
                         </MDBCol>
                         <MDBCol md={2} className={"fv-footerMenuRibbonButton"}>
-                            <input type='button' value=' میزبان شوید'/>
+                            <input className={localStorage.getItem("token") ? "fv-hideButtonRegister" : ""} type='button' value=' میزبان شوید' onClick={()=> this.props.history.push('/login3')}/>
                         </MDBCol>
                         <MDBCol md={9}>
                             <img src={FotterpageLogo} />

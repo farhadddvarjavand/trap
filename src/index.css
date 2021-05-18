@@ -152,6 +152,9 @@ padding-top: 10%;
   padding-left: 3%;
   color: white;
 }
+.fv-footerMenu .fv-footerMenuRibbon .fv-hideButtonRegister{
+  display: none;
+}
 .fv-footerMenuRibbonButton input, .fv-footerMenuRibbonButton button{
   /* width: 63%; */
   /* float: left; */
@@ -160,7 +163,7 @@ padding-top: 10%;
   margin-top: 2%;
   padding: 13px;
   border: none;
-  margin-left: 25%;
+  margin-left: -35%;
   /* padding-bottom: 8%; */
   text-align: center;
   border-radius: 15px;
@@ -378,12 +381,131 @@ padding-top: 10%;
 .fv-footerMenu .fv-searchMainPage [type=button]:not(:disabled), .fv-footerMenu .fv-searchMainPage [type=reset]:not(:disabled),.fv-footerMenu .fv-searchMainPage [type=submit]:not(:disabled),.fv-footerMenu .fv-searchMainPage button:not(:disabled) {
   cursor: pointer;
   margin-left: 0;
-  margin-right: 0;
   margin-right: auto;
 }
 
 
+
+.fv-footerMenu .fv-cascadeOptionMainPage {
+  background-color: white;
+  width: 25%;
+  margin-right: 5%;
+  text-align: start;
+  font-size: 18px;
+  align-items: center;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  display: block;
+}
+.fv-footerMenu .fv-cascadeOptionMainPage a{
+  color: black;
+}
+.fv-footerMenu .fv-cascadeOptionMainPage .col-md-12{
+  display: contents;
+}
+.fv-footerMenu .fv-cascadeOptionMainPage .col-md-12 p{
+  display: contents;
+  margin: auto;
+}
+.fv-footerMenu .fv-cascadeOptionMainPage .col-md-12 .fa{
+  font-size: 20px;
+  margin-right: 5%;
+  margin-left: 3%;
+}
+.fv-footerMenu .fv-cascadeOptionMainPageRowTop{
+  background-color: #3EC886;
+  width: 25%;
+  margin-right: 5%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  text-align: start;
+  place-self: center;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+.fv-footerMenu .fv-cascadeOptionMainPageRowTop a{
+  color: white;
+}
+.fv-cascadeOptionMainPageRowTop .col-md-12{
+  display: contents;
+}
+.fv-cascadeOptionMainPageEndRadus{
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+.fv-footerMenu .fv-cascadeOptionMainPageRowTop .col-md-12{
+  padding: 0;
+}
+.fv-footerMenu .fv-cascadeOptionMainPageRowTop img {
+  width: 114%;
+  margin-right: 1%;
+}
+.fv-textInToCascadeOptionMainPage{
+  margin: auto;
+  text-align: center;
+  color: white;
+  margin-right: 1%;
+  padding: 0;
+}
+.fv-footerMenu .fv-cascadeOptionMainPageRowTop .col-md-12{
+  place-self: center;
+}
+.fv-footerMenuRibbon  .col-md-2 .fv-userInfoButtonCascade {
+  position: absolute;
+  margin-right: -126%;
+  width: 93%;
+  margin-top: 6%;
+}
+.fv-footerMenuRibbon .fv-userInfoButtonCascade img {
+  margin-top: -44px;
+  margin-bottom: -47px;
+  margin-left: 5%;
+  width: 105px;
+}
+.fv-getHostButtonMainPage{
+  margin-right: 5%;
+}
+.fv-containerOptionMainPageRowTop{
+  padding: 0;
+  margin: 0;
+  text-align: end;
+  position: absolute;
+  z-index: 2;
+}
+.main .fv-footerMenu .fv-footerMenuRibbon .col-md-1 a {
+  color: white;
+}
+
+
 @media (max-width: 767px){
+  .fv-footerMenu .fv-cascadeOptionMainPageRowTop {
+    width: 85%;
+  }
+  .fv-footerMenu .fv-cascadeOptionMainPageRowTop img {
+    width: 152%;
+    margin-right: -15%;
+  }
+  .fv-footerMenu .fv-cascadeOptionMainPage {
+    width: 85%;
+  }
+  .fv-cascadeOptionMainPage .col-sm-12 {
+    display: contents;
+  }
+  .fv-textInToCascadeOptionMainPage .col-sm-12 p{
+    text-align: center;
+  }
+  .fv-cascadeOptionMainPage .col-sm-12 .fa{
+    margin-right: 5%;
+    margin-left: 3%;
+  }
+  .fv-footerMenu .fv-cascadeOptionMainPage p {
+    margin-top: 10%;
+    margin-bottom: 10%;
+  }
+
+
+
+
   .fv-aboutUs.row{
     display: none;
   }

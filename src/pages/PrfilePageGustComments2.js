@@ -26,8 +26,9 @@ class PrfilePageGustComments2 extends Component {
     componentDidMount() {
         getUserVillaComments(this.props.match.params.id)
             .then(res=>{
-                if(res.data.data)
+                if(res.data.data && res.data.data !== "Something went wrong!")
                 this.setState({comments: Object.values(res.data.data)})
+                console.log(res.data.data)
             })
     }
 
@@ -65,7 +66,9 @@ class PrfilePageGustComments2 extends Component {
                             </MDBCol>
                         </MDBRow>
 
+                        {console.log(this.state.comments)}
                         {this.state.comments.map(comment => {
+                            console.log(comment)
                             if(comment.answer){
                                 return  <MDBContainer className={"fv-ProfilePageGustComments2CommentOne"}>
                                             <MDBRow className={"fv-ProfilePageGustComments2CommentOneLogo"}>

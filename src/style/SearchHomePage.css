@@ -31,6 +31,7 @@
 .fv-footerMenuRibbon{
     box-shadow: none;
 }
+
 .fv-SearchHomePage .fv-footerMenuRibbon{
     color: black;
     /* margin-right: -9%;
@@ -253,7 +254,7 @@
     margin: auto;
 }
 .fv-footerMenuRibbon .col-md-1 a {
-    color: white;
+    color: black;
 }
 
 

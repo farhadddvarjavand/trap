@@ -187,7 +187,13 @@
     padding-left: 5.5%;
     padding-right: 6%;
   }
+}
 
+.fv-ProfilePageWallet.fv-ProfilePageGustComments2.fv-ProfilePageCalender .Calendar__day.-rtl.-selected.fv-DaysClass .fv-test {
+  /* background: #2F80ED; */
+  color: #f3f3f3 ;
+  font-size: 15px;
+  margin-top: 6%;
 }
 @media (max-width: 540px) {
   .fv-ProfilePageCalender {

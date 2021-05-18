@@ -90,29 +90,83 @@ class MainPage extends Datas {
                 <img src={FotterpageImage} alt="Trulli" />
             </MDBRow>
                     <MDBRow className={'fv-footerMenuRibbon'}>
+
                         <MDBCol md={1}>
-                            <i className="fa fa-user-alt" />
-                            <a> <Link to={'/login'}>ورود</Link></a>
+                            <i className={localStorage.getItem("token") ? "" : "fa fa-user-alt"}/>
+                            <a className={localStorage.getItem("token") ? "fv-hideButtonRegister" : "fv-interTextMainPage"}> <Link to={'/login'}>ورود</Link></a>
+
                         </MDBCol>
                         <MDBCol md={2} className={"fv-footerMenuRibbonButton"}>
-                            <input type='button' value=' میزبان شوید' onClick={()=> this.props.history.push('/login')}/>
+
+                            <a className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" : "fv-hideButtonRegister"}  onClick={()=> localStorage.clear()}> <img src={FotterpageLogo} /> لیدا بابایی </a>
+                            <Link to={ "/hostStep1"} ><input type='button' value=' میزبان شوید' onClick={()=> this.props.history.push('/login3')} className={localStorage.getItem("token") ? "fv-getHostButtonMainPage" : "fv-hideButtonRegister"}  /> </Link>
                         </MDBCol>
                         <MDBCol md={9}>
                             <img src={FotterpageLogo} />
                         </MDBCol>
                     </MDBRow>
 
-            <MDBRow className={'fv-footerMenuRibbonMobile'}>
-                <MDBCol sm={8}>
-                    <img src={MobileMenu} />
-                </MDBCol>
-                <MDBCol sm={2} className={"fv-footerMenuRibbonButton"}>
-                    <img src={LogoName} />
-                </MDBCol>
-                <MDBCol sm={2}>
-                    <img src={MobileLogo} />
-                </MDBCol>
-            </MDBRow>
+                    <MDBRow className={'fv-footerMenuRibbonMobile'}>
+                        <MDBCol sm={8}>
+                            <img src={MobileMenu} />
+                        </MDBCol>
+                        <MDBCol sm={2} className={"fv-footerMenuRibbonButton"}>
+                            <img src={LogoName} />
+                        </MDBCol>
+                        <MDBCol sm={2}>
+                            <img src={MobileLogo} />
+                        </MDBCol>
+                    </MDBRow>
+
+            <MDBContainer className={"fv-containerOptionMainPageRowTop"}>
+                <MDBRow className={"fv-cascadeOptionMainPageRowTop"}>
+                    <MDBCol md={12} sm={12}>
+                        <MDBRow>
+                            <MDBCol md={4} sm={4}>
+                                <img src={FotterpageLogo} />
+                            </MDBCol>
+                            <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={7} sm={8}>
+                                <MDBRow>
+                                    <a><h5>لیدا بابایی</h5></a>
+                                </MDBRow>
+                                <MDBRow>
+                                    <Link to={"/ProfileWallet"}><a>مشاهده حساب کاربری</a></Link>
+                                </MDBRow>
+                            </MDBCol>
+                        </MDBRow>
+                    </MDBCol>
+                </MDBRow>
+                <MDBRow className={"fv-cascadeOptionMainPage"}>
+                    <MDBCol md={12} sm={12}>
+                        <Link to={"/Profile"}> <i  className={"fa fa-chart-line"} />
+                            <a><p>داشبورد من</p></a> </Link>
+                    </MDBCol>
+                </MDBRow>
+                <MDBRow className={"fv-cascadeOptionMainPage"}>
+                    <MDBCol md={12} sm={12}>
+                        <Link to={"/myAccommodation"}> <i className="fa fa-credit-card" />
+                            <a><p>اقامت گاه های من</p></a> </Link>
+                    </MDBCol>
+                </MDBRow>
+                <MDBRow className={"fv-cascadeOptionMainPage"}>
+                    <MDBCol md={12} sm={12}>
+                        <Link to={"/ProfileReservation2"}> <i className="fa fa-receipt" />
+                            <a><p>رزور های من</p></a> </Link>
+                    </MDBCol>
+                </MDBRow>
+                <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus"}>
+                    <MDBCol md={12} sm={12}>
+                        <a onClick={()=>{
+                            localStorage.clear()
+                        }}> <i className="fa fa-sign-out-alt" />
+                            <p>خروج از حساب کاربری</p></a>
+                    </MDBCol>
+                </MDBRow>
+            </MDBContainer>
+
+
+
+
 
             <MDBRow className={'fv-searchMainPageTopic'}>
                 <MDBCol md={12}>
@@ -138,6 +192,7 @@ class MainPage extends Datas {
                         </MDBCol>
                     <input type='text'  placeholder={'تعداد نفرات'} value={numberOfPeople} onChange={(event)=>this.setState({numberOfPeople:event.target.value})}/>
                     <input type='button' value='جستجو اقامتگاه' className={'fv-searchMainPageSearchButton'} onClick={()=>{
+
                         fetch('https://reqres.in/api/posts', {                     /* POST */
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
@@ -159,7 +214,7 @@ class MainPage extends Datas {
         <MDBContainer className={"fv-MainBody"}>
             <MDBRow className={"fv-topicFirstMainPage"}>
                 <TopicsMainPage topic="اقامتگاه های پر بازدید"
-                                linkToPage={"./searchHomePage/1"}/>
+                                linkToPage={"/searchHomePage/Newest/1"}/>
             </MDBRow>
             <MDBRow className={"fv-mainProduct fv-mainMobile"} >
 
@@ -200,7 +255,7 @@ class MainPage extends Datas {
             </MDBRow>
             <MDBRow className={"fv-topicMainPage"}>
                 <TopicsMainPage topic="روستاهای پر بازدید"
-                                linkToPage={"/searchHomePage/cheapest/1"}/>
+                                linkToPage={"/searchHomePage/Newest/1"}/>
             </MDBRow>
             <MDBRow className={"fv-mainMobileVillage"}>
 
@@ -279,7 +334,7 @@ class MainPage extends Datas {
             </MDBRow>
             <MDBRow className={"fv-topicMainPage"}>
                 <TopicsMainPage topic="اقامتگاه های اقتصادی"
-                                linkToPage={"./searchHomePage/1"}/>
+                                linkToPage={"/searchHomePage/Newest/1"}/>
             </MDBRow>
             <MDBRow className={'fv-mainMobile'}>
                 {economicVillas.map(economicVilla=>{
@@ -404,7 +459,7 @@ class MainPage extends Datas {
             </MDBRow>
                 <MDBRow className={"fv-topicMainPage"}>
                     <TopicsMainPage topic="مجله ترپ"
-                                    linkToPage={"./searchHomePage/1"}/>
+                                    linkToPage={"/searchHomePage/Newest/1"}/>
                 </MDBRow>
                 <MDBRow className={'fv-mainMobile fv-trapMagazine'}>
                     <MDBCol md={3} sm={6}>

@@ -12,19 +12,53 @@ import Calender from "../componentsPages/calender";
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 import CalendarForProfile from "../data/CalendarForProfile";
-import {villaDates} from "../services/userService";
+import {changeDatesCost, changeDatesStatus, villaDates} from "../services/userService";
+import {villaPrice} from "../services/villaService";
+import {getToday, priceOfPerMonth} from "../componentsPages/calculationsDate";
 
 class ProfilePageCalender extends Component {
     constructor(props) {
         super(props);
         this.state={
             changeStatusSelectedDays:'title',
-            PriceChangeStatusSelectedDays:'',
+            price:'',
+            villaPrice:[],
+            selectedDays : '',
+
         }
 
     }
 
+    componentDidMount() {
+        villaPrice(this.props.match.params.id)
+            .then(res=>this.setState(res.data.data ? {villaPrice:res.data.data} : ''))
+    }
+
+    getSelectedDays = (selectedDay)=>{
+        if(selectedDay && selectedDay !== this.state.selectedDays){
+            this.setState({selectedDays:selectedDay})
+        }
+    }
     render() {
+        const priceDaysUpdates = []  /// مورد نظر
+        let priceArrayOneMonth ={
+            daysPrice: [] ,
+            month: '',
+            year: ''
+        }
+        if(this.state.villaPrice[0]){
+             priceArrayOneMonth.daysPrice = priceOfPerMonth(this.state.villaPrice[0].year , this.state.villaPrice[0].month , this.state.villaPrice[0].daysPrice)
+            priceArrayOneMonth.month=this.state.villaPrice[0].month
+            priceArrayOneMonth.year=this.state.villaPrice[0].year
+        }
+        for(let i = 0 ; i<this.state.villaPrice.length ; i++){
+            if(i===0){
+                priceDaysUpdates.push(priceArrayOneMonth)
+            }
+            else {
+                priceDaysUpdates.push(this.state.villaPrice[i])
+            }
+        }
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageGustComments2 fv-ProfilePageCalender"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
@@ -66,216 +100,12 @@ class ProfilePageCalender extends Component {
                         </MDBRow>
                         <MDBContainer className={"fv-profilePageCalenderInnerMobile"}>
 
-                            {/*
-                            <MDBRow className={"fv-ProfilePageCalenderMonthName"}>
-                                <MDBCol md={1}>
-                                    <p><i className="fa fa-file-invoice" /></p>
-                                </MDBCol>
-                                <MDBCol  md={8}>
-                                    <h5>اسفند </h5>
-                                </MDBCol>
-                                <MDBCol  md={1}>
-                                    <p><i className="fa fa-file-invoice" /></p>
-                                </MDBCol>
-                            </MDBRow>
-
-
-                                <MDBCol md={1}>
-                                    <p>ش</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <p>ی</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <p>د</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <p>س</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <p>چ</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <p>پ</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <p>ج</p>
-                                </MDBCol>
-                            </MDBRow>
-
-                            <MDBRow className={"fv-ProfilePageCalenderDayPart"}>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1} className={"fv-ProfilePageCalenderHoliday"}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                            </MDBRow>
-                            <MDBRow className={"fv-ProfilePageCalenderDayPart"}>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1} className={"fv-ProfilePageCalenderHoliday"}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                            </MDBRow>
-                            <MDBRow className={"fv-ProfilePageCalenderDayPart"}>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1} className={"fv-ProfilePageCalenderHoliday"}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                            </MDBRow>
-                            <MDBRow className={"fv-ProfilePageCalenderDayPart"}>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1} className={"fv-ProfilePageCalenderHoliday"}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                            </MDBRow>
-                            <MDBRow className={"fv-ProfilePageCalenderDayPart fv-ProfilePageCalenderDayPartEnd"}>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                                <MDBCol md={1} className={"fv-ProfilePageCalenderHoliday"}>
-                                    <input type="Checkbox"/>
-                                    <p className={"fv-ProfilePageCalenderDay"}>1</p>
-                                    <p>200000</p>
-                                </MDBCol>
-                            </MDBRow>
-                            */}
                             <MDBRow className={"fv-ProfilePageCalenderDayName"}>
-                                <CalendarForProfile />
+
+
+                                <CalendarForProfile
+                                 villaPrice={priceDaysUpdates}
+                                getSelectedDay={this.getSelectedDays} />
                             </MDBRow>
 
                             <MDBRow className={"fv-ProfilePageCalenderDayReserve"}>
@@ -286,9 +116,9 @@ class ProfilePageCalender extends Component {
                                     <MDBRow>
                                         <select value={this.state.changeStatusSelectedDays} onChange={(event)=>this.setState({changeStatusSelectedDays:event.target.value})}>
                                             <option value='title' disabled>وضعیت</option>
-                                            <option value="1">تعطیل</option>
-                                            <option value="2">تکمیل</option>
-                                            <option value="3">غیر قابل رزرو</option>
+                                            <option value="0">قابل رزرو (فعال)</option>
+                                            <option value="1">غیر قابل رزرو(تکمیل)</option>
+                                            <option value="2">تعطیل</option>
                                         </select>
                                     </MDBRow>
                                 </MDBCol>
@@ -297,18 +127,63 @@ class ProfilePageCalender extends Component {
                                         <p>تغییر قیمت روزهای انتخاب شده</p>
                                     </MDBRow>
                                     <MDBRow>
-                                      <input type="text" placeholder={"تومان"} value={this.state.PriceChangeStatusSelectedDays}
-                                      onChange={(e)=>this.setState({PriceChangeStatusSelectedDays:e.target.value})}/>
+                                      <input type="text" placeholder={"تومان"} value={this.state.price}
+                                      onChange={(e)=>this.setState({price:e.target.value})}/>
                                     </MDBRow>
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow className={"fv-ProfilePageWalletWalletButton"}>
                                 <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
-                                    <input type="button" value="ذخیره پیام" onClick={()=>{
-                                        alert(1)
-                                        villaDates(24)
-                                            .then(res=>console.log(res))
-                                            .catch(err=>console.log(err.response))
+                                    <input type="button" value="ذخیره قیمت" onClick={()=>{
+                                        const setDatesArray = []
+                                        let setDatesString = ''
+                                        for(let i = 0 ; i < this.state.selectedDays.length ; i++){
+                                            setDatesArray.push(`${this.state.selectedDays[i].year}/${this.state.selectedDays[i].month}/${this.state.selectedDays[i].day}`)
+                                        }
+                                        for(let j = 0 ; j < setDatesArray.length ; j ++){
+                                            if(j===0){
+                                                setDatesString= `${setDatesArray[j]}`
+                                            }
+                                            else {
+                                                setDatesString= `${setDatesString},${setDatesArray[j]}`
+                                            }
+                                        }
+                                        const datasForPrice = {             // برای تغییر دادن قیمت میباشد
+                                            dates : setDatesString ,
+                                            special_price : this.state.price
+                                        }
+
+                                        if(this.state.price){                                         // برای تغییر دادن قیمت میباشد
+                                            changeDatesCost(datasForPrice , this.props.match.params.id)
+                                                .then(res => res.status === 200 ?  window.location.reload() : '')
+                                        }
+
+
+                                    }}/>
+                                    <input type="button" value="ذخیره وضعیت" onClick={()=>{
+                                        const setDatesArray = []
+                                        let setDatesString = ''
+                                        for(let i = 0 ; i < this.state.selectedDays.length ; i++){
+                                            setDatesArray.push(`${this.state.selectedDays[i].year}/${this.state.selectedDays[i].month}/${this.state.selectedDays[i].day}`)
+                                        }
+                                        for(let j = 0 ; j < setDatesArray.length ; j ++){
+                                            if(j===0){
+                                                setDatesString= `${setDatesArray[j]}`
+                                            }
+                                            else {
+                                                setDatesString= `${setDatesString},${setDatesArray[j]}`
+                                            }
+                                        }
+
+                                        const datasForStatus = {             // برای تغییر دادن status میباشد
+                                            dates : setDatesString ,
+                                            status : this.state.changeStatusSelectedDays
+                                        }
+
+                                        if(this.state.changeStatusSelectedDays !== 'title'){           // برای تغییر دادن status میباشد
+                                            changeDatesStatus(datasForStatus ,  this.props.match.params.id)
+                                        }
+
                                     }}/>
                                 </MDBCol>
                             </MDBRow>
@@ -381,8 +256,8 @@ class ProfilePageCalender extends Component {
                                     </MDBRow>
                                     <MDBRow>
                                         <MDBCol>
-                                            <input type="text" placeholder={"تومان"} value={this.state.PriceChangeStatusSelectedDays}
-                                                   onChange={(e)=>this.setState({PriceChangeStatusSelectedDays:e.target.value})}/>
+                                            <input type="text" placeholder={"تومان"} value={this.state.price}
+                                                   onChange={(e)=>this.setState({price:e.target.value})}/>
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCol>
@@ -401,7 +276,9 @@ class ProfilePageCalender extends Component {
                             </MDBRow>
                             <MDBRow className={"fv-ProfilePageWalletWalletButton"}>
                                 <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
-                                    <input type="button" value="ذخیره پیام" onClick={()=>{ }}/>
+                                    <input type="button" value="ذخیره پیام" onClick={()=>{
+
+                                    }}/>
                                 </MDBCol>
                             </MDBRow>
                         </MDBContainer>

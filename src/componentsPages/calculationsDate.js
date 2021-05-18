@@ -84,7 +84,7 @@ export const arrayBetweenDatesObject =(dateA , dateB , range) =>{
 
     }
 }
-export const priceOfPerMonth = (year , month , daysArray) =>{
+export const priceOfPerMonth = (year , month , daysArray) =>{    // ["" , "" , "" , ..... , 200 , 300 , 400] خالی کردن اول های آرایه تا جایی که قیمت دارد
     const priceDays = []
     const endOfDayThisMonth = moment.jDaysInMonth(year, month-1)
     const range = endOfDayThisMonth-daysArray.length
@@ -95,4 +95,15 @@ export const priceOfPerMonth = (year , month , daysArray) =>{
         priceDays.push(daysArray[i])
     }
     return priceDays
+}
+export const getToday = () =>{
+    const todayJalali = moment().locale('fa').format('YYYY/M/D');
+    const today=  moment(todayJalali, 'YYYY/M/D').format('jYYYY/jM/jD ') // today in shamsi
+    const isToday = today.split("/")
+    const setToday = {
+        year:isToday[0],
+        month:isToday[1],
+        day:isToday[2],
+    }
+    return setToday
 }
