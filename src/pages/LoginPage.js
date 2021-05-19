@@ -90,7 +90,15 @@ class LoginPage extends Component {
                         <MDBRow className={"fv-loginPageBodyOne"}>
                             <MDBCol sm={12}>
                                 <h3>ورود به حساب کاربری</h3>
-                                <p>شماره موبایل خود را وارد نمایید</p>
+                                {/* <p>شماره موبایل خود را وارد نمایید</p> */}
+                                <MDBRow>
+                                    <MDBCol md={4}>
+                                        <p>شماره موبایل خود را وارد نمایید</p>
+                                    </MDBCol>
+                                    <MDBCol >
+                                        <Link to={"/login3"} ><p>عضو شوید</p> </Link>
+                                    </MDBCol>
+                                </MDBRow>
                                 <input type="text" placeholder={'شماره موبایل'} name={'phone_number'} value={this.state.phone_number}
                                        onChange={((e)=>this.setState({phone_number : e.target.value }))}/>
                                 <MDBRow>

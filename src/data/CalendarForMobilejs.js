@@ -5,7 +5,7 @@ import "./Calendar/DatePicker.css";
 import './style/CalendarDesktop.scss'
 import {Calendar} from "./CalendarForMobile"
 
-const CalendarForMobilejs = () => {
+const CalendarForMobilejs = (props) => {
 
     const defaultDay =[
         // here we add some CSS classes
@@ -56,6 +56,7 @@ const CalendarForMobilejs = () => {
                 shouldHighlightWeekends
                 priceDays={[1,2000000,3,4]}
                 test = {testname}
+                villaPrice={props.villaPrice}
 
 
             />

@@ -161,7 +161,7 @@
     padding-right: 3%;
 }
 .fv-DisplayPageDetailsLeftBodyDateOnInput{
-    border: 1px solid gray;
+   /* border: 1px solid gray; */
     border-top: none;
     border-left: none;
     font-size: 10px;
@@ -185,6 +185,7 @@
 }
 .fv-DisplayPageDetailsLeftTextDate{
     width: 99%;
+    z-index: 1;
 }
 .fv-DisplayPageDetailsLeftTextDate .fv-DisplayPageDetailsLeftBodyDateOutInput{
     width: 50%
@@ -404,13 +405,13 @@
 }
 .fv-DisplayPageDetailsRateTop {
     margin-right: -16px;
-    font-size: 12px;
+    font-size: 16px;
 }
 .fv-DisplayPageDetailsRatingTop.fv-DisplayPageDetailsRating {
-    font-size: 9px;
-    margin-top: 5%;
+    font-size: 12px;
+    margin-top: 2%;
     color: #909090;
-    margin-bottom: -10%;
+    margin-bottom: -14%;
     margin-right: -14%;
 }
 .fv-DisplayPageDetailsRateTop .fa,.fv-DisplayPageDetailsRateTop .fas , .fv-DisplayPageDetailsRate .fa ,.fv-DisplayPageDetailsRate .fas{
@@ -471,11 +472,6 @@ display: none;
 }
 .fv-DisplayPageDetailsّFacilitiesRow .col-md-12 {
     display: contents;
-}
-.fv-displayPageMap img {
-    width: 704px;
-    height: 399px;
-    border-radius: 0px;
 }
 .fv-DisplayPageDetailsRightingComment .col-md-9 {
     flex: 0 0 81%;
@@ -566,6 +562,90 @@ display: none;
 }
 
 
+/*    ezafe */
+.fv-DisplayPageTitle .fv-morePicturesDisplayPage{
+    width: 91%;
+    position: absolute;
+    z-index: 4;
+    place-content: center;
+    margin-right: -5%;
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+}
+.fv-morePicturesDisplayPage .awssld__wrapper {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    height: 117%;
+    width: 114%;
+    margin-left: -5%;
+    margin-top: 2%;
+    margin-bottom: 17%;
+    z-index: -1;
+}
+.fv-morePicturesDisplayPage .awssld__bullets button , .fv-morePicturesDisplayPage .awssld__bullets .awssld__bullets--active{
+    width: 20px;
+    height: 20px;
+}
+.fv-morePicturesDisplayPage  .awssld__controls__arrow-left:after, .awssld__controls__arrow-right:after {
+    background: white;
+}
+
+.fv-morePicturesDisplayPage  .awssld__controls__arrow-left:before,.fv-morePicturesDisplayPage .awssld__controls__arrow-right:before , .fv-morePicturesDisplayPage .awssld__controls__arrow-left:after,.fv-morePicturesDisplayPage .awssld__controls__arrow-right:after {
+    background: white;
+}
+.fv-morePicturesDisplayPageBody .fa, .fv-morePicturesDisplayPageBody .fas {
+    font-size: 70px;
+    margin-left: -20%;
+    color: black;
+    margin-top: 5%;
+    z-index: 2;
+}
+.fv-morePicturesDisplayPageBody{
+    background-color: white;
+}
+/*    ezafe */
+
+.fv-DisplayPageDetailsLeftEmptyMobile {
+    font-size: 14px;
+}
+.fv-sliderMorePics .awssld__wrapper {
+    width: 120%;
+    margin-left: 27%;
+}
+.fv-sliderMorePics .awssld__bullets {
+    margin-left: 36%;
+}
+.fv-sliderMorePics .fa,.fv-sliderMorePics .far,.fv-sliderMorePics .fas {
+    font-size: 42px;
+}
+.fv-MadeDisplayNoneForPics{
+    display: none;
+}
+.mapboxgl-ctrl-logo {
+    display: none !important;
+}
+.container .mapboxgl-map , .container-lg .mapboxgl-map , .container-md .mapboxgl-map , .container-sm .mapboxgl-map , .container-xl .mapboxgl-map {
+    max-width: 660px;
+    max-height: 400px;
+}
+.fv-DisplayPageMenu .col-md-2 a, .fv-DisplayPageMenu .col-md-1 a {
+    color: black;
+}
+.awssld__controls__arrow-left:after, .awssld__controls__arrow-right:after {
+    background: white !important;
+}
+.awssld__controls__arrow-left:before, .awssld__controls__arrow-right:before {
+    background: white !important;
+}
+.fv-DisplayPageّMoreFacilities {
+    margin-top: 2%;
+}
+.fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageDetailsLeftBodyDateOnInput {
+    border: 1px solid gray;
+    border-top: none;
+    border-left: none;
+}
 
 
 @media (max-width: 1200px) {
@@ -733,6 +813,9 @@ display: none;
         margin-right: 5%;
     }
 
+    .fv-DisplayPageMenu.row .col-sm-2 a {
+        color: black;
+    }
 }
 
 
@@ -835,7 +918,7 @@ display: none;
         margin-top: 30%;
     }
     .fv-DisplayPageMenu.row .col-sm-2 {
-        margin-right: 2%;
+        margin-right: 5%;
         font-size: 4.5vw;
     }
     .fv-DisplayPageMenuRowsMobile{
@@ -1050,6 +1133,15 @@ display: none;
         border-bottom: 1px solid #909090;
     }
 
+    .container .mapboxgl-map , .container-lg .mapboxgl-map , .container-md .mapboxgl-map , .container-sm .mapboxgl-map , .container-xl .mapboxgl-map {
+        width: 300px !important;
+        height: 208px  !important;
+        margin-right: -9%;
+    }
+    .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo .col-sm-6 {
+        width: 64% !important;
+    }
+
 
 }
 
@@ -1110,6 +1202,62 @@ display: none;
         margin-top: 0;
         font-size: 3vw;
     }
+    .fv-displayPageCommentPerson .col-sm-10 {
+        flex: 0 0 128.333333%;
+        width: 98.333333% !important;
+    }
+
+    .fv-DisplayPageDetailsRightBody .fv-DisplayPageDetailsPersonInformation h5, .fv-DisplayPageDetailsRightBody .fv-DisplayPageDetailsPersonInformation p {
+        margin-right: 6%;
+    }
+
+    .fv-DisplayPage .fv-displayPageCommentOneInner {
+        border-bottom: 1px solid #909090;
+        padding-right: 4%;
+        margin-right: -5%;
+        margin-left: 0%;
+    }
+    .fv-DisplayPageCalenderForMobile .Calendar {
+        margin-right: -10vw;
+    }
+    .fv-DisplayPageDetailsRateNumberPerson p {
+        margin-right: -7px;
+    }
+    .fv-DisplayPageCalenderForMobile .Calendar {
+        margin-right: -12vw;
+    }
+    .container .mapboxgl-map , .container-lg .mapboxgl-map , .container-md .mapboxgl-map , .container-sm .mapboxgl-map , .container-xl .mapboxgl-map {
+        width: 251px !important;
+        height: 208px !important;
+    }
+
+
+    .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo .col-sm-6 {
+        width: 64% !important;
+        padding-right: 18%;
+    }
+
+    .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo .col-sm-4 {
+        text-align: end;
+        margin-right: 16%;
+        margin-left: -15%;
+    }
+
+    .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo .col-sm-5 {
+        text-align: center;
+        margin-right: 10%;
+    }
+    .fv-DisplayPageDetailsRightBody .fv-DisplayPageDetailsPersonInformation h5, .fv-DisplayPageDetailsRightBody .fv-DisplayPageDetailsPersonInformation p {
+        font-size: 5vw;
+    }
+    .fv-DisplayPageDetailsCode .col-sm-5 {
+        flex: 0 0 52.666667%;
+        max-width: 52.666667% !important;
+    }
+    .fv-footerMenu .col-md-6 {
+        margin-right: 12%;
+    }
+
 }
 @media (max-width: 280px) {
     .fv-DisplayPageLoginSignMobile {

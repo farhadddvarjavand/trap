@@ -32,7 +32,7 @@ const Calendar = ({
                     priceDays,
                     PriceYear,
                     PriceMonth,
-
+                    villaPrice,
                     test
                   }) => {
   const calendarElement = useRef(null);
@@ -362,6 +362,7 @@ const Calendar = ({
                 pricemonth={PriceMonth}
                 priceyear={PriceYear}
                 testDay = {test}
+                villaPrices={villaPrice}
             />
 
 
@@ -444,6 +445,7 @@ const Calendar = ({
                 pricemonth={PriceMonth}
                 priceyear={PriceYear}
                 testDay = {test}
+                villaPrices={villaPrice}
             />
 
             <div className="Calendar__footer">{renderFooter()}</div>

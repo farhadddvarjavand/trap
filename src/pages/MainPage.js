@@ -30,6 +30,7 @@ class MainPage extends Datas {
             dateToGo:'',
             dateToReturn:'',
             numberOfPeople:'',
+            hideButtonLogin:true
 
         }
     }
@@ -98,7 +99,9 @@ class MainPage extends Datas {
                         </MDBCol>
                         <MDBCol md={2} className={"fv-footerMenuRibbonButton"}>
 
-                            <a className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" : "fv-hideButtonRegister"}  onClick={()=> localStorage.clear()}> <img src={FotterpageLogo} /> لیدا بابایی </a>
+                            <a className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" : "fv-hideButtonRegister"}  onClick={()=>{
+                                this.setState({hideButtonLogin:!this.state.hideButtonLogin})
+                            }}> <img src={MobileLogo} /> لیدا بابایی </a>
                             <Link to={ "/hostStep1"} ><input type='button' value=' میزبان شوید' onClick={()=> this.props.history.push('/login3')} className={localStorage.getItem("token") ? "fv-getHostButtonMainPage" : "fv-hideButtonRegister"}  /> </Link>
                         </MDBCol>
                         <MDBCol md={9}>
@@ -118,12 +121,12 @@ class MainPage extends Datas {
                         </MDBCol>
                     </MDBRow>
 
-            <MDBContainer className={"fv-containerOptionMainPageRowTop"}>
+            <MDBContainer className={localStorage.getItem("token") ? `fv-containerOptionMainPageRowTop ${this.state.hideButtonLogin ? "fv-displayNoneLogin" : ""}` : "fv-containerOptionMainPageRowTop fv-displayNoneLogin "}>
                 <MDBRow className={"fv-cascadeOptionMainPageRowTop"}>
                     <MDBCol md={12} sm={12}>
                         <MDBRow>
-                            <MDBCol md={4} sm={4}>
-                                <img src={FotterpageLogo} />
+                            <MDBCol md={2} sm={2}>
+                                <img src={MobileLogo} />
                             </MDBCol>
                             <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={7} sm={8}>
                                 <MDBRow>
@@ -158,6 +161,7 @@ class MainPage extends Datas {
                     <MDBCol md={12} sm={12}>
                         <a onClick={()=>{
                             localStorage.clear()
+                            window.location.reload();
                         }}> <i className="fa fa-sign-out-alt" />
                             <p>خروج از حساب کاربری</p></a>
                     </MDBCol>
@@ -283,7 +287,7 @@ class MainPage extends Datas {
             </MDBRow>
 
             <MDBRow className={"fv-topicMainPage"}>
-                <TopicsMainPage topic="انواع اقامتگاه ها"
+                <TopicsMainPage topic="اقامت گاه های تخفیف دار"
                                 linkToPage={"./searchHomePage/1"}/>
             </MDBRow>
 

@@ -65,7 +65,10 @@ class DisplayPage extends Component {
             resultImages:[],
             resultSimilarVillas:[],
             resultReservedDates:[],
+            villaPrice:[],
+            selectedDays : '',
             error:'',
+            morePics:false,
 
             date: new Date(),
             selectedPlace: '',
@@ -129,7 +132,7 @@ componentDidMount() {
         })
 
     villaPrice(this.props.match.params.id)
-        .then(res=>console.log(res))
+        .then(res=>this.setState(res.data.data ? {villaPrice:res.data.data} : ''))
 
 }
 
@@ -201,8 +204,7 @@ componentDidMount() {
                 year: date.year
             }
         }))
-            console.log(date)
-            console.log('date')}
+         }
     }
     selectDayToReturn = (date) =>{                               // set date to return
         if(date) {this.setState(prevState => ({
@@ -221,6 +223,11 @@ componentDidMount() {
         return year+'/'+month+'/'+day
     }
 
+    getSelectedDays = (selectedDay)=>{
+        if(selectedDay && selectedDay !== this.state.selectedDays){
+            this.setState({selectedDays:selectedDay})
+        }
+    }
 
 
     render() {
@@ -252,7 +259,25 @@ componentDidMount() {
         console.log(arrayBetweenDatesObject(daytogoGeneralFormat,daytoreturnGeneralFormat,rangeBetween)) // date object   return =>   [{ year:1400 , month: 01 , day:01  }]
         console.log('arrayBetweenDates(start,end,rangeBetween)')
 
-
+        const priceDaysUpdates = []  /// مورد نظر
+        let priceArrayOneMonth ={
+            daysPrice: [] ,
+            month: '',
+            year: ''
+        }
+        if(this.state.villaPrice[0]){
+            priceArrayOneMonth.daysPrice = priceOfPerMonth(this.state.villaPrice[0].year , this.state.villaPrice[0].month , this.state.villaPrice[0].daysPrice)
+            priceArrayOneMonth.month=this.state.villaPrice[0].month
+            priceArrayOneMonth.year=this.state.villaPrice[0].year
+        }
+        for(let i = 0 ; i<this.state.villaPrice.length ; i++){
+            if(i===0){
+                priceDaysUpdates.push(priceArrayOneMonth)
+            }
+            else {
+                priceDaysUpdates.push(this.state.villaPrice[i])
+            }
+        }
 
       /*  let enddate=""
         let startdate=""
@@ -461,6 +486,9 @@ componentDidMount() {
         console.log(this.weekdayshortnamemonth) */
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage"}>
+
+                <MDBContainer className={this.state.morePics === true ? "fv-MadeDisplayNoneForPics"    : ""}>
+
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
                     {/*  <div className="App">
                         <Mapir
@@ -487,22 +515,7 @@ componentDidMount() {
                      */}
 
 
-                    <div className="App">
-                        <Mapir
-                            center={[35.728270, 51.548488]}
-                            Map={Map}
 
-                        >
-                            <Mapir.Layer
-                                type="symbol"
-                                layout={{ "icon-image": "harbor-15" }}>
-                            </Mapir.Layer>
-                            <Mapir.Marker
-                                coordinates={[35.728270, 51.548488]}
-                                anchor="bottom">
-                            </Mapir.Marker>
-                        </Mapir>
-                    </div >
                     {/*  <DatePicker
                         shouldHighlightWeekends
                         locale="fa" // add this
@@ -540,14 +553,8 @@ componentDidMount() {
                         value={this.state.date}
                         tileClassName="content"
                     /> */}
-                        <MapTest
-                            lat='35.728270'
-                            lng='51.548488'/>
 
-                    <div className="App">  {/* Main Calendar */}
-                        <CalendarDesktop  />
-                    </div>
-                    <CalendarForMobile />
+
 
 
 
@@ -573,7 +580,7 @@ componentDidMount() {
                         </MDBCol>
                         <MDBCol md={2}>
                                 <p className={"fv-DisplayPageDetailsRating  fv-DisplayPageDetailsRatingTop"}> 5 </p>
-                                <p className={"fv-DisplayPageDetailsRate fv-DisplayPageDetailsRateTop"}>  /4.5 <i className="fa fa-star" /> </p>
+                                <p className={"fv-DisplayPageDetailsRate fv-DisplayPageDetailsRateTop"}>  /{this.state.resultVilla.score}<i className="fa fa-star" /> </p>
                         </MDBCol>
                         <MDBCol md={6} className={"fv-DisplayPageLike"}>
                                 <a onClick={()=>{
@@ -607,6 +614,9 @@ componentDidMount() {
                             </MDBRow>
                         </MDBCol>
                     </MDBRow>
+
+
+
                     <MDBRow className={"efv-svgPagination fv-displayPageImagePaginationMobil"}>
 
                              <MDBCol md={12}>
@@ -623,7 +633,7 @@ componentDidMount() {
                 </div>
                 <MDBRow className={"fv-DisplayPageDisplayMoreImage"}>
                     <MDBCol>
-                        <a> مشاهده تصویر بیشتر <i className="fas fa-angle-left" /></a>
+                        <a onClick={()=> this.setState({morePics:true})}> مشاهده تصویر بیشتر <i className="fas fa-angle-left" /></a>
                     </MDBCol>
                 </MDBRow>
 
@@ -631,38 +641,38 @@ componentDidMount() {
 
 
                 <MDBRow className={"fv-DisplayPageMenu"}>
-                    <MDBCol md={1} sm={2}>
+                    {/*  <MDBCol md={1} sm={2}>
                         <a name={'pictures'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}> تصاویر</a>
                         <MDBRow>
                             <button className={this.state.displayButtonName === 'pictures' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                         </MDBRow>
-                    </MDBCol>
+                    </MDBCol>     */}
                     <MDBCol md={1} sm={2}>
-                        <a name={'facilities'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}>امکانات</a>
+                        <a href="#facilities" name={'facilities'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}>امکانات</a>
                         <MDBRow>
                             <button className={this.state.displayButtonName === 'facilities' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                         </MDBRow>
                     </MDBCol>
                     <MDBCol md={1} sm={2}>
-                        <a name={'Address'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}>آدرس</a>
+                        <a href="#Address" name={'Address'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}>آدرس</a>
                         <MDBRow>
                             <button className={this.state.displayButtonName === 'Address' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                         </MDBRow>
                     </MDBCol>
                     <MDBCol md={2} className={"fv-DisplayPageMenuRows"} >
-                        <a  name={'Roles'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}>قوانین اقامتگاه</a>
+                        <a href="#Roles"  name={'Roles'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}>قوانین اقامتگاه</a>
                         <MDBRow>
                             <button className={this.state.displayButtonName === 'Roles' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                         </MDBRow>
                     </MDBCol>
                     <MDBCol sm={2} className={"fv-DisplayPageMenuRowsMobile"}>
-                        <a name={'Roles'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}> قوانین</a>
+                        <a  href="#Roles" name={'Roles'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}> قوانین</a>
                         <MDBRow>
                             <button className={this.state.displayButtonName === 'Roles' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                         </MDBRow>
                     </MDBCol>
                     <MDBCol md={1} sm={2}>
-                        <a name={'Comments'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}>نظرات</a>
+                        <a href="#Comments" name={'Comments'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}>نظرات</a>
                         <MDBRow>
                             <button className={this.state.displayButtonName === 'Comments' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                         </MDBRow>
@@ -694,7 +704,7 @@ componentDidMount() {
                             </MDBCol>
                         </MDBRow>
 
-                        <div  className={this.state.displayButtonName === 'facilities' ? 'fv-displayActive' :  'fv-displayDeActive'}>                                            {/*    fv-facilities      */}
+                        <div id="facilities" className={''}>                                            {/*    fv-facilities      */}
                             <MDBRow className={"fv-DisplayPageDetailsRightHomeImage pMobile"}>
                                 <p><i className="fas fa-home" /> {rentType} </p>
                             </MDBRow>
@@ -771,7 +781,7 @@ componentDidMount() {
                             </div>
 
                         <MDBRow  className={"fv-DisplayPageّMoreFacilities"}>
-                            <p>مشاهده امکانات بیشتر</p>
+                            {/*<p>مشاهده امکانات بیشتر</p>  */}
                         </MDBRow>
                         <MDBRow  className={"fv-DisplayPageّMoreFacilities"}>
                             <h4>امکانات ویژه</h4>
@@ -912,7 +922,9 @@ componentDidMount() {
                         </MDBRow>
 
                             <MDBRow className={"fv-DisplayPageCalender fv-DisplayPageCalenderForDesktop"}>                  {/*    calender-calendar     */}
-                                <CalendarDesktop  />
+                                <CalendarDesktop
+                                    villaPrice={priceDaysUpdates}
+                                    getSelectedDay={this.getSelectedDays} />
 
                                 {/* <MDBCol md={6}>
                                     <Calender />
@@ -923,7 +935,9 @@ componentDidMount() {
                             </MDBRow>
                             <MDBRow className={'fv-DisplayPageCalenderForMobile'}>                  {/*    calender-calendar     */}
                                 <MDBCol>
-                                    <CalendarForMobile />
+                                    <CalendarForMobile
+                                        villaPrice={priceDaysUpdates}
+                                        getSelectedDay={this.getSelectedDays} />
                                 </MDBCol>
                             </MDBRow>
                         </div>                                                             {/*         fv-facilities          */}
@@ -932,7 +946,7 @@ componentDidMount() {
 
 
 
-                        <div    className={this.state.displayButtonName === 'Roles' ? 'fv-displayActive' :  'fv-displayDeActive'}>                                      {/*        fv-Roles     */}
+                        <div  id="Roles">                                      {/*        fv-Roles     */}
 
 
                         <MDBRow>
@@ -963,10 +977,11 @@ componentDidMount() {
                         </div>                                                             {/*        fv-Roles     */}
 
 
-                        <div className={this.state.displayButtonName === 'Address' ? 'fv-displayActive' :  'fv-displayDeActive'}>                                        {/*        fv-Address     */}
+                        <div id="Address">                                        {/*        fv-Address     */}
 
                         <MDBRow>
                             <h4> آدرس </h4>
+                            {console.log(this.state.resultVilla)}
                         </MDBRow>
                         <MDBRow>
                             <h5> {address} </h5>
@@ -975,15 +990,32 @@ componentDidMount() {
                              <h5> {phoneNumber} </h5>
                          </MDBRow>
 
+
                         <MDBRow className={"fv-displayPageMap"}>
-                            <img src="https://snazzy-maps-cdn.azureedge.net/assets/8097-wy.png?v=20170626083314"/>
+                            <MDBCol md={8}>
+                                    <Mapir
+                                        width="636"
+                                        center={[34,55 ]}
+                                        Map={Map}
+                                    >
+                                        <Mapir.Layer
+                                            type="symbol"
+                                            layout={{ "icon-image": "harbor-15" }}>
+                                        </Mapir.Layer>
+                                        <Mapir.Marker
+                                            coordinates={[34,55 ]}
+                                            anchor="bottom">
+                                        </Mapir.Marker>
+                                    </Mapir>
+                            </MDBCol>
+
                         </MDBRow>
 
 
                         </div>                                                              {/*        fv-Address     */}
 
 
-                        <div className={this.state.displayButtonName === 'Comments' ? 'fv-displayActive' :  'fv-displayDeActive'}>                                  {/*        fv-Comments     */}
+                        <div id="Comments">                                  {/*        fv-Comments     */}
 
                         <MDBRow className={"fv-DisplayPageDetailsRightingComment"}>
                             <MDBCol md={9}>
@@ -998,10 +1030,10 @@ componentDidMount() {
                                 <p className={"fv-DisplayPageDetailsRating"}> 5 </p>
                             </MDBCol>
                             <MDBCol md={2} sm={3}>
-                            <p className={"fv-DisplayPageDetailsRate"}>  /4.5 <i className="fa fa-star" /> </p>
+                            <p className={"fv-DisplayPageDetailsRate"}>  /{(cleaningRate+adComplianceRate+hospitalityRate+hostingQualityRate)/5} <i className="fa fa-star" /> </p>
                             </MDBCol >
                             <MDBCol md={2} sm={4} className={"fv-DisplayPageDetailsRateNumberPerson"}>
-                                <p> (۲۰ نظر) </p>
+                                <p> ({this.state.resultComments.length} نظر) </p>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsScore"}>
@@ -1275,11 +1307,11 @@ componentDidMount() {
                 </MDBRow>
 
                 <MDBRow className={"fv-topicMainPage fv-displayPageTopicMainPage"}>
-                    <TopicsMainPage topic="اقامتگاه های مشابه"/>
+                    <TopicsMainPage topic="اقامتگاه های مشابه"
+                                    linkToPage={"/searchHomePage/Newest/1"}/>
                 </MDBRow>
                 <MDBRow className={"fv-mainProduct fv-mainMobile"} >
                     {this.state.resultSimilarVillas.map(resultSimilarVilla =>{
-                        console.log(this.state.resultSimilarVillas)
                         console.log('this.state.resultSimilarVillas')
                         return(
                             <MDBCol md={3} sm={7} >
@@ -1294,10 +1326,32 @@ componentDidMount() {
                         )
                     })}
                 </MDBRow>
+                </MDBContainer>
 
-                <MDBRow>
-                    <Footer />
-                </MDBRow>
+                <MDBContainer className={this.state.morePics === true ? "fv-sliderMorePics" : "fv-MadeDisplayNoneForPics"}>
+                    <MDBRow >
+                        <MDBCol md={7}>
+                            <div className="slider_pagination">
+                                <a onClick={()=>{
+                                    this.setState({morePics:false})
+                                }}><i className="fa fa-times" aria-hidden="true" /></a>
+                                <AwesomeSlider animation="cubeAnimation">
+                                    {this.state.resultImages.map(resultImage => {
+                                        return <div data-src={`${config.webapi}/images/villas/main/${resultImage.img_src }`} />
+                                    })}
+                                </AwesomeSlider>
+                            </div>
+                        </MDBCol>
+                    </MDBRow>
+                </MDBContainer>
+
+
+                <div className={this.state.morePics === true ? "fv-MadeDisplayNoneForPics" : "" }>
+                    <MDBRow  >
+                        <Footer />
+                    </MDBRow>
+                </div>
+
 
             </MDBContainer>
         )}

@@ -30,8 +30,7 @@ const DaysList = ({
                     shouldHighlightWeekends,
                     isQuickSelectorOpen,
                     customDaysClassName,
-                    priceday,
-                    testDay
+                    villaPrices,
                   }) => {
   const calendarSectionWrapper = useRef(null);
   const { isRtl, weekDays: weekDaysList } = useLocaleLanguage(locale);
@@ -239,9 +238,11 @@ const DaysList = ({
 
             <div className={'fv-test2'}>{!isStandard ? '' : getLanguageDigits(day) }</div>
 
-            {dayItem.month ===  2 && dayItem.year===1400? <div className={'fv-test'}>{!isStandard ? '' : priceday[day-1] }</div> :''}
-            { /*dayItem.month ===  3 ? !isStandard ? '' : getLanguageDigits(day)  : '' */}
-
+            {villaPrices.map(vilaprice=>{
+              if(vilaprice.month===dayItem.month && vilaprice.year === dayItem.year){
+                return <div className={'fv-test'}>{!isStandard ? '' : vilaprice.daysPrice[day-1] }</div>
+              }
+            })}
           </div>
 
         </>

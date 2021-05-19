@@ -28,8 +28,7 @@ const Calendar = ({
   shouldHighlightWeekends,
   renderFooter,
   customDaysClassName,
-                    priceDays,
-                    test
+                    villaPrice,
 }) => {
   const calendarElement = useRef(null);
   const [mainState, setMainState] = useState({
@@ -182,8 +181,7 @@ const Calendar = ({
         shouldHighlightWeekends={shouldHighlightWeekends}
         customDaysClassName={customDaysClassName}
         isQuickSelectorOpen={mainState.isYearSelectorOpen || mainState.isMonthSelectorOpen}
-        priceday={priceDays}
-        testDay = {test}
+        villaPrices={villaPrice}
       />
       <div className="Calendar__footer">{renderFooter()}</div>
     </div>

@@ -14,6 +14,7 @@ import {doSearch} from "../services/searchService"
 import {convertNeSwToNwSe} from "google-map-react";
 /* import {doSearch} from "../services/searchService" */
 import config from "../services/config.json";
+import CalendarLinear from "../data/CalenddarLinear";
 
 
 
@@ -39,6 +40,8 @@ class SearchHomePage extends Datas {
             doSearch:false,
             minCost:'',
             maxCost:'',
+            mobileSortClass:"fv-searchMobileSearchPageHide",
+            mobileSearchClass:"fv-searchMobileSearchPageHide2",
 
             test:[],
 
@@ -79,11 +82,21 @@ class SearchHomePage extends Datas {
 
     }
 
+    selectDayToGo = (date) =>{                                    // set date to go
+        if(date) {
+            this.setState({dateToGo:`${date.year}/${date.month}/${date.day}`})
+        }
+    }
+    selectDayToReturn = (date) =>{                                    // set date to go
+        if(date) {
+            this.setState({dateToReturn:`${date.year}/${date.month}/${date.day}`})
+        }
+    }
+
     render() {
         const discountAccommodation = this.state.discountAccommodation
         const disinfectedAccommodation = this.state.disinfectedAccommodation
         const searchPageVillas = this.state.searchPageVillas      // دیتا هایی که از کامپوننت دیتاس گرفته شده و برای همه سورت ها و کلیک جستجو آپدیت میشود
-
 
 
 
@@ -120,8 +133,6 @@ class SearchHomePage extends Datas {
 
         // for test
         const resultSearchPageVillas = this.state.resultSearchPageVillas
-        console.log(searchPageVillas)
-        console.log('this.state.test')
 
         return(
             <MDBContainer className={"fv-SearchHomePage"}>
@@ -215,12 +226,12 @@ class SearchHomePage extends Datas {
                     <MDBRow>
                         <MDBCol>
                             <MDBRow className={'fv-searchMainPage'}>
-                                <button><i className="fas fa-exchange-alt" /> جست و جو پیشرفته</button>
+                                <button onClick={()=>{this.state.mobileSearchClass === "fv-searchMobileSearchPageHide2" ? this.setState({mobileSearchClass:""}) : this.setState({mobileSearchClass:"fv-searchMobileSearchPageHide2"})}}><i className="fas fa-exchange-alt" /> جست و جو پیشرفته</button>
                             </MDBRow>
                         </MDBCol>
                         <MDBCol>
                             <MDBRow className={'fv-searchMainPage fv-searchMainPageLeft'}>
-                                <button><i className="fa fa-arrows-alt-v" /> مرتب سازی</button>
+                                <button onClick={()=>{this.state.mobileSortClass === "fv-searchMobileSearchPageHide" ? this.setState({mobileSortClass:""}) : this.setState({mobileSortClass:"fv-searchMobileSearchPageHide"})}}><i className="fa fa-arrows-alt-v" /> مرتب سازی</button>
                             </MDBRow>
                         </MDBCol>
                     </MDBRow>
@@ -272,21 +283,21 @@ class SearchHomePage extends Datas {
                             <img src={FotterpageLogo} />
                         </MDBCol>
                     </MDBRow>
-                    <MDBRow className={"fv-searchMainPageBody"}>
+                    <MDBRow >
 
-                        <MDBCol md={4}>
+                        <MDBCol md={4} className={`${this.state.mobileSearchClass} fv-searchMainPageBody`}>
                             <MDBRow>
                                 <MDBRow className={'fv-searchMainPage'}>
                                     <MDBRow className={'fv-searchMainPagePrice'}>
                                         <input type='text' placeholder={'شهر یا روستا را وارد کنید'} value={this.state.setVillage} onChange={(event)=>{this.setState({setVillage:event.target.value})}}/>
                                         <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateOut'}>
-                                            <input type='text' placeholder='تاریخ رفت' value={this.state.dateToGo} onChange={(event)=>{this.setState({dateToGo:event.target.value})}}/>
+                                            <div  className={"fv-DisplayPageDetailsLeftBodyDateOnInput"}>  <CalendarLinear dayToGo={this.selectDayToGo} text={'تاریخ رفت'}/> </div>
                                         </MDBCol>
                                         <MDBCol md={1} sm={1} className={'fv-searchMainPageBetweenDate'}>
 
                                         </MDBCol>
                                         <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateReturn'}>
-                                            <input type='text' placeholder='تاریخ برگشت' value={this.state.dateToReturn} onChange={(event)=>{this.setState({dateToReturn:event.target.value})}}/>
+                                            <div  className={"fv-DisplayPageDetailsLeftBodyDateOnInput"}>  <CalendarLinear dayToGo={this.selectDayToReturn} text={'تاریخ برگشت'}/> </div>
                                         </MDBCol>
                                         <input type='text' placeholder='تعداد نفرات' value={this.state.numberOfPeople} onChange={(event)=>{this.setState({numberOfPeople:event.target.value})}}/>
                                         <input type='text' placeholder='تعداد خواب' value={this.state.numberOfBedroom} onChange={(event)=>{this.setState({numberOfBedroom:event.target.value})}}/>
@@ -333,49 +344,42 @@ class SearchHomePage extends Datas {
                                     </MDBRow>
                                     <input type='button' value='جستجو اقامتگاه' className={'fv-searchMainPagesSearchButton'} onClick={()=>{
                                         let data = ''
-                                        if(setCostRange ===',' && setDateToGoAndDateToReturn === ',' ){
-                                            data = {
-                                                passengers_count:this.state.numberOfPeople,
-                                                bedroom:this.state.numberOfBedroom,
-                                                type:setAccommodationGroupToString,
-                                                discount:setDiscountAccommodation,
-                                                disinfected:setDisinfectedAccommodation,
-                                            }
+                                        data = {
+                                            passengers_count:this.state.numberOfPeople,
+                                            area:setAreaCity,
+                                            bedroom:this.state.numberOfBedroom,
+                                            dateRange:setDateToGoAndDateToReturn,      /* agar vared nashavad az server error migirad */
+                                            costRange:setCostRange,                    /* agar vared nashavad az server error migirad */
+                                            type:setAccommodationGroupToString,
+                                            discount:setDiscountAccommodation,
+                                            disinfected:setDisinfectedAccommodation,
                                         }
-                                        if(setCostRange !== "," && setDateToGoAndDateToReturn === ',' ){
-                                             data = {
-                                                passengers_count:this.state.numberOfPeople,
-                                                area:setAreaCity,
-                                                bedroom:this.state.numberOfBedroom,
-                                                costRange:setCostRange,                    /* agar vared nashavad az server error migirad */
-                                                type:setAccommodationGroupToString,
-                                                discount:setDiscountAccommodation,
-                                                disinfected:setDisinfectedAccommodation,
-                                            }
+
+                                        if(setCostRange ===','){
+                                           delete data.costRange
                                         }
-                                        if(setCostRange === "," && setDateToGoAndDateToReturn !== ',' ){
-                                            data = {
-                                                passengers_count:this.state.numberOfPeople,
-                                                area:setAreaCity,
-                                                bedroom:this.state.numberOfBedroom,
-                                                dateRange:setDateToGoAndDateToReturn,      /* agar vared nashavad az server error migirad */
-                                                type:setAccommodationGroupToString,
-                                                discount:setDiscountAccommodation,
-                                                disinfected:setDisinfectedAccommodation,
-                                            }
+                                        if(setDateToGoAndDateToReturn === ',' ){
+                                            delete data.dateRange
                                         }
-                                        if(setCostRange !== "," && setDateToGoAndDateToReturn !== ',' ) {
-                                             data = {
-                                                passengers_count:this.state.numberOfPeople,
-                                                area:setAreaCity,
-                                                bedroom:this.state.numberOfBedroom,
-                                                dateRange:setDateToGoAndDateToReturn,      /* agar vared nashavad az server error migirad */
-                                                costRange:setCostRange,                    /* agar vared nashavad az server error migirad */
-                                                type:setAccommodationGroupToString,
-                                                discount:setDiscountAccommodation,
-                                                disinfected:setDisinfectedAccommodation,
-                                            }
+                                        if(data.passengers_count === null || data.passengers_count === "" || data.passengers_count === undefined){
+                                            delete data.passengers_count
                                         }
+                                        if(data.area === "C "){
+                                            delete data.area
+                                        }
+                                        if(data.bedroom === null || data.bedroom === "" || data.bedroom === undefined){
+                                            delete data.bedroom
+                                        }
+                                        if(data.type === null || data.type === "" || data.type === undefined){
+                                            delete data.type
+                                        }
+                                        if(setDiscountAccommodation===0){
+                                            delete data.discount
+                                        }
+                                        if(setDisinfectedAccommodation===0){
+                                            delete data.disinfected
+                                        }
+
                                         this.postAndPushResultSearchPageVillas(data)
                                         this.setState({doSearch:true})
                                         this.props.history.push('/searchHomePage/doSearch/1')
@@ -386,8 +390,8 @@ class SearchHomePage extends Datas {
                         </MDBCol>
 
                         <MDBCol md={8} className={"fv-searchMainPageBodyLeft"}>
-                            <p>20 اقامتگاه یافت شد</p>
-                            <MDBRow className={"fv-SortMenu"}>
+                            <p>{this.state.totalVillas} اقامتگاه یافت شد</p>
+                            <MDBRow  className={`${this.state.mobileSortClass} fv-SortMenu`} >
                                 <p>مرتب سازی بر اساس:</p>
 
                                 <NavLink to={this.props.match.params.sort === 'Newest' ? `/searchHomePage/Newest/${this.props.match.params.id}` : `/searchHomePage/Newest/1`}  exact
@@ -426,7 +430,7 @@ class SearchHomePage extends Datas {
                                 }}>
                                     محبوب‌ترین
                                 </NavLink>
-                                <NavLink  to={this.props.match.params.sort === 'Nearest' ? `/searchHomePage/Nearest/${this.props.match.params.id}` : `/searchHomePage/Nearest/1`}
+                                {/* <NavLink  to={this.props.match.params.sort === 'Nearest' ? `/searchHomePage/Nearest/${this.props.match.params.id}` : `/searchHomePage/Nearest/1`}
                                          name={'Nearest'} exact className={'fv-unSelected'} activeClassName="fv-selected"
                                          onClick={(event)=>{
                                              const data = {orderBy:'Nearest'}
@@ -434,7 +438,7 @@ class SearchHomePage extends Datas {
                                              this.setState({sortedBy:event.target.name , doSearch:false})
                                 }}>
                                     نزدیکترین
-                                </NavLink>
+                                </NavLink>  */}
 
                             </MDBRow>
                             <MDBRow className={"fv-mainProduct fv-mainMobile"} >
@@ -447,7 +451,7 @@ class SearchHomePage extends Datas {
 
                                                 <a>
                                                     <Product srcImage={`${config.webapi}/images/villas/thum/${searchPageVilla.main_img }`}
-                                                             rate="5.5/5"
+                                                             rate={searchPageVilla.score}
                                                              topic={searchPageVilla.title}
                                                              location={searchPageVilla.state}
                                                              numberOfRoom={searchPageVilla.details.bedroom}
@@ -463,7 +467,7 @@ class SearchHomePage extends Datas {
                                                     onClick={()=>this.props.history.push(`/displayPage/${searchPageVilla.id}`) }>
                                                 <a>
                                                     <Product srcImage={`${config.webapi}/images/villas/thum/${searchPageVilla.main_img }`}
-                                                             rate="5.5/5"
+                                                             rate={searchPageVilla.score}
                                                              topic={searchPageVilla.title}
                                                              location={searchPageVilla.state}
                                                              numberOfRoom="2"
@@ -484,61 +488,44 @@ class SearchHomePage extends Datas {
                                                  className={'fv-SearchHomePagePaginationDefault'} activeClassName="fv-SearchHomePagePaginationSelected"
                                                  onClick={(event)=>{
 
-
                                                      let data = ''
-                                                     if(this.state.doSearch){
-                                                         if(setCostRange ===',' && setDateToGoAndDateToReturn === ',' ){
-                                                             data = {
-                                                                 passengers_count:this.state.numberOfPeople,
-                                                                 bedroom:this.state.numberOfBedroom,
-                                                                 type:setAccommodationGroupToString,
-                                                                 discount:setDiscountAccommodation,
-                                                                 disinfected:setDisinfectedAccommodation,
-                                                                 page:pagenumber,
-                                                             }
-                                                         }
-                                                         if(setCostRange !== "," && setDateToGoAndDateToReturn === ',' ){
-                                                             data = {
-                                                                 passengers_count:this.state.numberOfPeople,
-                                                                 area:setAreaCity,
-                                                                 bedroom:this.state.numberOfBedroom,
-                                                                 costRange:setCostRange,                    /* agar vared nashavad az server error migirad */
-                                                                 type:setAccommodationGroupToString,
-                                                                 discount:setDiscountAccommodation,
-                                                                 disinfected:setDisinfectedAccommodation,
-                                                                 page:pagenumber,
-                                                             }
-                                                         }
-                                                         if(setCostRange === "," && setDateToGoAndDateToReturn !== ',' ){
-                                                             data = {
-                                                                 passengers_count:this.state.numberOfPeople,
-                                                                 area:setAreaCity,
-                                                                 bedroom:this.state.numberOfBedroom,
-                                                                 dateRange:setDateToGoAndDateToReturn,      /* agar vared nashavad az server error migirad */
-                                                                 type:setAccommodationGroupToString,
-                                                                 discount:setDiscountAccommodation,
-                                                                 disinfected:setDisinfectedAccommodation,
-                                                                 page:pagenumber,
-                                                             }
-                                                         }
-                                                         if(setCostRange !== "," && setDateToGoAndDateToReturn !== ',' ) {
-                                                             data = {
-                                                                 passengers_count:this.state.numberOfPeople,
-                                                                 area:setAreaCity,
-                                                                 bedroom:this.state.numberOfBedroom,
-                                                                 dateRange:setDateToGoAndDateToReturn,      /* agar vared nashavad az server error migirad */
-                                                                 costRange:setCostRange,                    /* agar vared nashavad az server error migirad */
-                                                                 type:setAccommodationGroupToString,
-                                                                 discount:setDiscountAccommodation,
-                                                                 disinfected:setDisinfectedAccommodation,
-                                                                 page:pagenumber,
-                                                             }
-                                                         } }
-                                                     else {
-                                                         data = {
-                                                             page:pagenumber,
-                                                             orderBy:this.props.match.params.sort}
+                                                     data = {
+                                                         passengers_count:this.state.numberOfPeople,
+                                                         area:setAreaCity,
+                                                         bedroom:this.state.numberOfBedroom,
+                                                         dateRange:setDateToGoAndDateToReturn,      /* agar vared nashavad az server error migirad */
+                                                         costRange:setCostRange,                    /* agar vared nashavad az server error migirad */
+                                                         type:setAccommodationGroupToString,
+                                                         discount:setDiscountAccommodation,
+                                                         disinfected:setDisinfectedAccommodation,
+                                                         page:pagenumber,
                                                      }
+
+                                                     if(setCostRange ===','){
+                                                         delete data.costRange
+                                                     }
+                                                     if(setDateToGoAndDateToReturn === ',' ){
+                                                         delete data.dateRange
+                                                     }
+                                                     if(data.passengers_count === null || data.passengers_count === "" || data.passengers_count === undefined){
+                                                         delete data.passengers_count
+                                                     }
+                                                     if(data.area === "C "){
+                                                         delete data.area
+                                                     }
+                                                     if(data.bedroom === null || data.bedroom === "" || data.bedroom === undefined){
+                                                         delete data.bedroom
+                                                     }
+                                                     if(data.type === null || data.type === "" || data.type === undefined){
+                                                         delete data.type
+                                                     }
+                                                     if(setDiscountAccommodation===0){
+                                                         delete data.discount
+                                                     }
+                                                     if(setDisinfectedAccommodation===0){
+                                                         delete data.disinfected
+                                                     }
+
 
                                                      this.postAndPushResultSearchPageVillas(data)
                                                      this.setState({pageNumber:event.target.name , pageNum:pagenumber})

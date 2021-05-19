@@ -87,6 +87,7 @@ const CalendarDesktop = (props) => {
                 PriceMonth={monthOfYear}
                 PriceYear={year}
                 test = {testname}
+                villaPrice={props.villaPrice}
 
 
 

@@ -119,6 +119,7 @@
 .fv-SortMenu p {
     margin-top: auto;
     margin-bottom: auto;
+    margin-left: 7%;
 }
 .fv-SortMenu{
     border: 1px solid #88888836;
@@ -257,12 +258,16 @@
     color: black;
 }
 
-
-
-.fv-footerMainPage.fv-footerMenuMobile{
+.fv-footerMainPage.fv-footerMenuMobile {
     display: none;
 }
+
+
 @media (max-width: 766px) {
+    .fv-searchMobileSearchPageHide , .fv-searchMobileSearchPageHide2{
+        display: none !important;
+    }
+
     .fv-SearchHomePage .fv-product .fv-productCapacityBox .fv-numberOfBedBody {
         display: flex;
         justify-content: flex-end;
@@ -526,8 +531,12 @@
     }
     .fv-SearchHomePage .fv-searchMainPage.row {
         margin-left: 4%;
-        margin-right: 2%;
+        margin-right: 11%;
     }
+    .fv-searchMainPageBodyLeft {
+        margin-right: 9%;
+    }
+
 }
 @media (max-width: 320px) {
     .fv-searchMainPage.fv-searchMainPageDateReturn input {

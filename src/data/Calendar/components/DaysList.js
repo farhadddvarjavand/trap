@@ -33,6 +33,7 @@ const DaysList = ({
                     priceday,
                     pricemonth,
                     priceyear,
+                    villaPrices,
                     testDay
                   }) => {
   const calendarSectionWrapper = useRef(null);
@@ -241,9 +242,11 @@ const DaysList = ({
 
           <div className={'fv-test2'}>{!isStandard ? '' : getLanguageDigits(day) }</div>
 
-          {dayItem.month ===pricemonth   && dayItem.year===priceyear? <div className={'fv-test'}>{!isStandard ? '' : priceday[day-1] }</div> :''}
-          { /*dayItem.month ===  3 ? !isStandard ? '' : getLanguageDigits(day)  : '' */}
-
+            {villaPrices.map(vilaprice=>{
+                if(vilaprice.month===dayItem.month && vilaprice.year === dayItem.year){
+                    return <div className={'fv-test'}>{!isStandard ? '' : vilaprice.daysPrice[day-1] }</div>
+                }
+            })}
         </div>
 
           </>
