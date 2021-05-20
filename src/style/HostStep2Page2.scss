@@ -15,7 +15,13 @@
 }
 .fv-HostStep2Page.fv-hostStep2Page2 .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .fv-hostStep2Page2Textarea{
   height: 25%;
+  margin-bottom: 5%;
 }
+.fv-HostStep2Page .container .mapboxgl-map ,.fv-HostStep2Page .container-lg .mapboxgl-map ,.fv-HostStep2Page .container-md .mapboxgl-map ,.fv-HostStep2Page .container-sm .mapboxgl-map ,.fv-HostStep2Page .container-xl .mapboxgl-map {
+  width: 446px !important;
+  height: 348px !important;
+}
+
 
 @media (max-width: 1200px) {
   .fv-HostStep2Page.fv-hostStep2Page2 .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .fv-hostStep2Page2Map img {
@@ -40,5 +46,21 @@
     margin-right: 4%;
     margin-top: 6%;
     margin-bottom: 4%;
+  }
+  .fv-HostStep2Page .container .mapboxgl-map ,.fv-HostStep2Page .container-lg .mapboxgl-map ,.fv-HostStep2Page .container-md .mapboxgl-map ,.fv-HostStep2Page .container-sm .mapboxgl-map ,.fv-HostStep2Page .container-xl .mapboxgl-map {
+    width: 311px !important;
+    height: 245px !important;
+    margin-right: 4%;
+    margin-bottom: 23%;
+  }
+}
+
+
+@media (max-width: 320px) {
+  .fv-HostStep2Page .container .mapboxgl-map, .fv-HostStep2Page .container-lg .mapboxgl-map, .fv-HostStep2Page .container-md .mapboxgl-map, .fv-HostStep2Page .container-sm .mapboxgl-map, .fv-HostStep2Page .container-xl .mapboxgl-map {
+    width: 284px !important;
+    height: 234px !important;
+    margin-right: 2%;
+    margin-bottom: 23%;
   }
 }

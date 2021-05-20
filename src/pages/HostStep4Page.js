@@ -17,6 +17,9 @@ class HostStep4Page extends Component {
     }
 
     render() {
+        const localStorageData={
+        }
+        // console.log(JSON.parse(localStorage.getItem("step3")))
         return (
             <div className={" fv-HostStep2Page fv-hostStep2Page2 fv-hostStep3Page fv-hostStep4Page"}>
                 <MDBContainer className={"fv-HostStep1Page"}>
@@ -38,7 +41,9 @@ class HostStep4Page extends Component {
                             ن را در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند."
                             image={Logo}
                             nextLink={'../../hostStep5'}
-                            returnLink={'../../hostStep3'}/>
+                            returnLink={'../../hostStep3'}
+                            localStorageName={"step1"}
+                            localStorageData={localStorageData}/>
                     </MDBRow>
                     <MDBRow>
                         <Footer />

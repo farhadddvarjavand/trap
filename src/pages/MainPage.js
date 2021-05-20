@@ -15,6 +15,8 @@ import {Link} from "react-router-dom";
 import {productData} from "../data/testData"
 import Datas from "../data/Datas";
 import config from "../services/config.json"
+import CalendarLinear from "../data/CalenddarLinear";
+import {getUserInformation} from "../services/userService";
 
 
 
@@ -26,21 +28,43 @@ class MainPage extends Datas {
             ...this.props,
             ...this.state,
             buttonCommentActiveName:'',
-            enterTheVillage:'',
+            city:'',
             dateToGo:'',
             dateToReturn:'',
             numberOfPeople:'',
-            hideButtonLogin:true
+            hideButtonLogin:true,
+            nameAndFamily:'',
+            avatar:'',
 
         }
     }
 
     componentDidMount() {
         super.componentDidMount();
-
+       this.getUserInfo()
 
 
     }
+    getUserInfo = async () =>{
+        await  getUserInformation()
+         .then(res=> this.setState({
+                nameAndFamily:res.data.fullname,
+                avatar:res.data.avatar
+            }))
+            .catch(err=>console.log(err.response))
+    }
+
+    selectDayToGo = (date) =>{                                    // set date to go
+        if(date) {
+            this.setState({dateToGo:`${date.year}/${date.month}/${date.day}`})
+        }
+    }
+    selectDayToReturn = (date) =>{                                    // set date to go
+        if(date) {
+            this.setState({dateToReturn:`${date.year}/${date.month}/${date.day}`})
+        }
+    }
+
 
     render() {
 
@@ -56,8 +80,6 @@ class MainPage extends Datas {
 
         const economicVillas = this.state.economicVillas
 
-        console.log(economicVillas)
-        console.log('economicVillas')
 
 
 
@@ -77,13 +99,11 @@ class MainPage extends Datas {
             pagination.push(i+1)
         }
 
-        console.log(this.state.buttonCommentActiveName)
-        const setdata = this.state.data.url
-        console.log(setdata)
+       // const setdata = this.state.data.url
 
-        const data = this.state.productData;
+        // const data = this.state.productData;
 
-       const {enterTheVillage,dateToGo,dateToReturn,numberOfPeople} = this.state
+       const {city,dateToGo,dateToReturn,numberOfPeople} = this.state
         return(
             <div className={"main"}>
         <div className={'fv-footerMenu'}>
@@ -101,7 +121,7 @@ class MainPage extends Datas {
 
                             <a className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" : "fv-hideButtonRegister"}  onClick={()=>{
                                 this.setState({hideButtonLogin:!this.state.hideButtonLogin})
-                            }}> <img src={MobileLogo} /> لیدا بابایی </a>
+                            }}> <img src={this.state.avatar ? `${config.webapi}/images/villas/thum/${this.state.avatar}` : MobileLogo} /> {this.state.nameAndFamily} </a>
                             <Link to={ "/hostStep1"} ><input type='button' value=' میزبان شوید' onClick={()=> this.props.history.push('/login3')} className={localStorage.getItem("token") ? "fv-getHostButtonMainPage" : "fv-hideButtonRegister"}  /> </Link>
                         </MDBCol>
                         <MDBCol md={9}>
@@ -111,7 +131,14 @@ class MainPage extends Datas {
 
                     <MDBRow className={'fv-footerMenuRibbonMobile'}>
                         <MDBCol sm={8}>
-                            <img src={MobileMenu} />
+                            <img src={MobileMenu}  onClick={()=>{
+                                if(localStorage.getItem("token")){
+                                    this.setState({hideButtonLogin:!this.state.hideButtonLogin})
+                                }else {
+                                    this.props.history.push("/login")
+                                }
+
+                            }}/>
                         </MDBCol>
                         <MDBCol sm={2} className={"fv-footerMenuRibbonButton"}>
                             <img src={LogoName} />
@@ -126,14 +153,14 @@ class MainPage extends Datas {
                     <MDBCol md={12} sm={12}>
                         <MDBRow>
                             <MDBCol md={2} sm={2}>
-                                <img src={MobileLogo} />
+                                <img src={this.state.avatar ? `${config.webapi}/images/villas/thum/${this.state.avatar}` : MobileLogo} />
                             </MDBCol>
                             <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={7} sm={8}>
                                 <MDBRow>
-                                    <a><h5>لیدا بابایی</h5></a>
+                                    <a><h5>{this.state.nameAndFamily}</h5></a>
                                 </MDBRow>
                                 <MDBRow>
-                                    <Link to={"/ProfileWallet"}><a>مشاهده حساب کاربری</a></Link>
+                                    <Link to={"/Profile"}><a>مشاهده حساب کاربری</a></Link>
                                 </MDBRow>
                             </MDBCol>
                         </MDBRow>
@@ -184,33 +211,40 @@ class MainPage extends Datas {
                 <MDBRow>
                     <MDBRow className={'fv-searchMainPage'}>
                     <p>اقامتگاه رویایی خود را جست و جو کنید</p>
-                    <input type='text' placeholder={'شهر یا روستا را وارد کنید'} value={enterTheVillage} onChange={(event)=>this.setState({enterTheVillage:event.target.value})}/>
+                    <input type='text' placeholder={'شهر یا روستا را وارد کنید'} value={city} onChange={(event)=>this.setState({city:event.target.value})}/>
                         <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateOut'}>
-                            <input type='text' placeholder={'تاریخ رفت'} value={dateToGo} onChange={(event)=>this.setState({dateToGo:event.target.value})}/>
+                            <div  className={"fv-DisplayPageDetailsLeftBodyDateOnInput"}>  <CalendarLinear dayToGo={this.selectDayToGo} text={'تاریخ رفت'}/> </div>
                         </MDBCol>
                         <MDBCol md={1} sm={1} className={'fv-searchMainPageBetweenDate'}>
 
                         </MDBCol>
                         <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateReturn'}>
-                            <input type='text' placeholder={'تاریخ برگشت'} value={dateToReturn} onChange={(event)=>this.setState({dateToReturn:event.target.value})}/>
+                            <div  className={"fv-DisplayPageDetailsLeftBodyDateOnInput"}>  <CalendarLinear dayToGo={this.selectDayToReturn} text={'تاریخ برگشت'}/> </div>
                         </MDBCol>
                     <input type='text'  placeholder={'تعداد نفرات'} value={numberOfPeople} onChange={(event)=>this.setState({numberOfPeople:event.target.value})}/>
-                    <input type='button' value='جستجو اقامتگاه' className={'fv-searchMainPageSearchButton'} onClick={()=>{
-
-                        fetch('https://reqres.in/api/posts', {                     /* POST */
+                        <input type='button' value='جستجو اقامتگاه' className={'fv-searchMainPageSearchButton'} onClick={()=>{
+                        const mainPageSearch = {
+                            city:`C ${this.state.city}`,
+                            numberOfPeople: this.state.numberOfPeople,
+                            dateToGo:this.state.dateToGo,
+                            dateToReturn:this.state.dateToReturn,
+                        }
+                        localStorage.setItem("mainPageSearch"  , JSON.stringify(mainPageSearch));
+                        this.props.history.push("/searchHomePage/doSearch/1")
+                      /*  fetch('https://reqres.in/api/posts', {                     // POST
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({enterTheVillage,dateToGo,dateToReturn,numberOfPeople})
+                            body: JSON.stringify({city,dateToGo,dateToReturn,numberOfPeople})
                         })
                             .then(response => response.json())
                             .then(data =>{
                                 if(data){
-                                    console.log(enterTheVillage,dateToGo)
+                                    console.log(city,dateToGo)
                                     this.props.history.push('/searchHomePage/cheapest/1')
                                 }
-                            }) ;
+                            }) ; */
 
-                    }}/>
+                        }}/>
                     </MDBRow>
                 </MDBRow>
         </div>
@@ -229,7 +263,7 @@ class MainPage extends Datas {
                             return(
                                 <MDBCol md={3} sm={7}>
                                     <Product srcImage={`${config.webapi}/images/villas/thum/${productDetails.main_img }`}
-                                             rate={''}
+                                             rate={productDetails.score}
                                              topic={productDetails.title}
                                              location={productDetails.city}
                                              numberOfRoom={productDetails.details.bedroom}
@@ -242,7 +276,7 @@ class MainPage extends Datas {
                             return(
                                 <MDBCol md={3} sm={7}>
                                     <Product srcImage={`${config.webapi}/images/villas/thum/${productDetails.main_img }`}
-                                             rate={''}
+                                             rate={productDetails.score}
                                              topic={productDetails.title}
                                              location={productDetails.city}
                                              numberOfRoom={''}
@@ -300,7 +334,7 @@ class MainPage extends Datas {
                             <MDBCol md={3} sm={7}>
                                 <DiscountedProduct discountedAmount={discountedVilla.weekly_discount+"%"}
                                                    srcImage={`${config.webapi}/images/villas/thum/${discountedVilla.main_img }`}
-                                                   rate="5.5/5"
+                                                   rate={discountedVilla.villa.score}
                                                    topic={discountedVilla.villa.title}
                                                    location={discountedVilla.villa.city}
                                                    numberOfRoom={discountedVilla.details.bedroom}
@@ -314,7 +348,7 @@ class MainPage extends Datas {
                             <MDBCol md={3} sm={7}>
                                 <DiscountedProduct discountedAmount={discountedVilla.weekly_discount+"%"}
                                                    srcImage={`${config.webapi}/images/villas/thum/${discountedVilla.main_img }`}
-                                                   rate="5.5/5"
+                                                   rate={discountedVilla.villa.score}
                                                    topic={discountedVilla.villa.title}
                                                    location={discountedVilla.villa.city}
                                                    numberOfRoom={''}
@@ -345,7 +379,7 @@ class MainPage extends Datas {
                     return(
                         <MDBCol md={3} sm={6}>
                             <Product srcImage={`${config.webapi}/images/villas/thum/${economicVillas.main_img }`}
-                                     rate="5.5/5"
+                                     rate={economicVilla.score}
                                      topic={economicVilla.title}
                                      location={economicVilla.state}
                                      numberOfRoom={economicVilla.details.bedroom}

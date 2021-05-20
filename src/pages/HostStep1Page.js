@@ -5,6 +5,7 @@ import Footer from "../componentsPages/footer"
 import MobileLogo from "../images/MobileLogo.png"
 import HeaderSteps from "../componentsPages/HeaderSteps";
 import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt"
+import {getUserInformation} from "../services/userService";
 
 
 class HostStep1Page extends Component {
@@ -14,15 +15,35 @@ class HostStep1Page extends Component {
             accommodationTitle:'',
             accommodationKind:'title',
             number:'',
-            accommodationHistory:''
+            accommodationHistory:'',
+            nameAndFamily:'',
+            avatar:'',
+
+
         }
+    }
+    componentDidMount() {
+        getUserInformation()
+            .then(res=> this.setState({
+                nameAndFamily:res.data.fullname,
+                avatar:res.data.avatar
+            }))
+            .catch(err=>console.log(err.response))
     }
 
     render() {
+      const localStorageData={
+          title:this.state.accommodationTitle,
+          type:this.state.accommodationKind,
+          phone_number:this.state.number,
+          story:this.state.accommodationHistory,
+      }
 
         return (
             <MDBContainer className={"fv-HostStep1Page"}>
-                <HeaderSteps />
+                <HeaderSteps
+                    nameAndFamily={this.state.nameAndFamily}
+                    avatar={this.state.avatar}/>
 
                 <MDBRow className={"fv-HostStep1PageBody"}>
                     <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
@@ -31,9 +52,11 @@ class HostStep1Page extends Component {
                             <p className={"fv-hostStep2Page2Hidden"}> نوع اقامت گاه</p>
                             <select value={this.state.accommodationKind} onChange={(event)=>this.setState({accommodationKind:event.target.value})}  className={"fv-hostStep2Page2Hidden"}>
                                 <option value='title' disabled>نوع اقامت گاه</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
+                                <option value="ویلایی">ویلایی</option>
+                                <option value="آپارتمانی">آپارتمانی</option>
+                                <option value="مستقل">مستقل</option>
+                                <option value="سازمانی">سازمانی</option>
+                                <option value="سایر">سایر</option>
                             </select>
                             <p className={"fv-hostStep2Page2Hidden"}>شماره ضروری</p>
                             <input type="text" value={this.state.number} onChange={(event)=>this.setState({number:event.target.value})} className={"fv-hostStep2Page2Hidden"}/>
@@ -50,7 +73,9 @@ class HostStep1Page extends Component {
                     در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند"
                     image={MobileLogo}
                     nextLink={'../../hostStep2'}
-                    returnLink={'../../hostStep1'}/>
+                    returnLink={'../../hostStep1'}
+                    localStorageName={"step1"}
+                    localStorageData={localStorageData}/>
                 </MDBRow>
 
                 <MDBRow>

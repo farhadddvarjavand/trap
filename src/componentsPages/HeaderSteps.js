@@ -4,6 +4,7 @@ import FotterpageLogo from "../images/Logo.png"
 import "../style/HeaderSteps.scss"
 import LogoName from "../images/LogoName.png"
 import MobileLogo from "../images/MobileLogo.png"
+import config from "../services/config.json";
 
 
 class HeaderSteps extends Component {
@@ -17,9 +18,9 @@ class HeaderSteps extends Component {
             <MDBContainer className={"hostStepPage"}>
                 <MDBRow className={'footerHostStep1Page'}>
                     <MDBCol md={3} sm={6}>
-                        <img src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg"/>
+                        <img src={this.props.avatar ? `${config.webapi}/images/villas/thum/${this.props.avatar }` : ""}/>
                         <i className="fas fa-chevron-down name_mobile" />
-                        <a className={"name_desktop"}>نام و نامخانوادگی</a>
+                        <a className={"name_desktop"}>{this.props.nameAndFamily}</a>
                     </MDBCol>
                     <MDBCol md={9} sm={6} className={""}>
                         <img src={FotterpageLogo} className={"hide_mobile"}/>

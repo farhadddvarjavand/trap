@@ -38,7 +38,7 @@
     margin-top: -5%;
   }
   .fv-loginPage2 .fv-loginPageBodyOne .fv-loginPage2RightBodyButtonAndTime .fv-loginPageButton {
-    width: 155%;
+    width: 117%;
     background: #15BE29;
     border-radius: 16px;
     color: white;
@@ -52,11 +52,25 @@
   }
 
   .fv-loginPage2 .fv-loginPageBodyOne .fv-loginPage2RightBodyButtonAndTime .col-md-8 {
-    margin-top: 7%;
+    margin-top: 11%;
+    font-size: 3.5vw;
+    padding-left: 0%;
+    padding-right: 0;
   }
   .fv-loginPage2 .fv-loginPageImageLeftBody {
     margin-top: -104%;
   }
+  .fv-loginPage2 .fv-loginPageBodyOne .fv-loginPage2RightBodyButtonAndTime .col-sm-6 {
+    padding: 0;
+  }
+  .fv-loginPage2 .fv-loginPageBodyOne .fv-reloadLink {
+    color: #ffffff;
+  }
+  .fv-loginPage2 .fv-loginPageBodyOne .col-md-5, .fv-loginPage2 .fv-loginPageBodyOne .col-md-5 p a {
+    margin-right: 1%;
+    color: #32C788;
+  }
+
 }
 @media (max-width: 360px) and (min-width: 355px){
   .fv-loginPage .fv-loginPageImageLeftBody {

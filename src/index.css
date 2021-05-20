@@ -490,6 +490,7 @@ padding-top: 10%;
     width: 85%;
     padding-top: 6%;
     padding-bottom: 6%;
+    border: 1px solid #909090;
   }
   .fv-footerMenu .fv-cascadeOptionMainPageRowTop img {
     width: 69px;
@@ -519,6 +520,7 @@ padding-top: 10%;
     padding-top: 3%;
     padding-bottom: 3%;
     display: block;
+    border: 1px solid #909090;
   }
   .fv-footerMenu  .container, .fv-footerMenu  .container-lg, .fv-footerMenu  .container-md,.fv-footerMenu  .container-sm, .fv-footerMenu  .container-xl {
     max-width: 1140px;
@@ -574,6 +576,12 @@ padding-top: 10%;
     width: 92px;
     height: 108px;
     margin-top: 7%;
+  }
+}
+@media (max-width: 360px){
+  .fv-footerMenu .fv-cascadeOptionMainPageRowTop img {
+    width: 60px;
+    margin-right: 8px;
   }
 }
 

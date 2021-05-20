@@ -80,6 +80,38 @@ class SearchHomePage extends Datas {
         }
         this.postAndPushResultSearchPageVillas(data)   //   دیتای اولیه که با جدیدترین ست میکنیم توسط تابعی که در کامپوننت دیتاس میباشد
 
+
+
+        let  mainPageSearchLocal = ""
+        if(localStorage.getItem("mainPageSearch")){
+            mainPageSearchLocal= JSON.parse(localStorage.getItem("mainPageSearch"))
+            let data = ''
+            data = {
+                passengers_count:mainPageSearchLocal.numberOfPeople,
+                area:mainPageSearchLocal.city,
+                dateRange:`${mainPageSearchLocal.dateToGo},${mainPageSearchLocal.dateToReturn}`,      /* agar vared nashavad az server error migirad */
+            }
+            if(data.dateRange === ',' ){
+                delete data.dateRange
+            }
+            if(mainPageSearchLocal.numberOfPeople === null || mainPageSearchLocal.numberOfPeople === "" || mainPageSearchLocal.numberOfPeople === undefined){
+                delete data.passengers_count
+            }
+            if(mainPageSearchLocal.city === "C "){
+                delete data.area
+            }
+            if(mainPageSearchLocal.city === "C " && mainPageSearchLocal.numberOfPeople === ""  && `${mainPageSearchLocal.dateToGo},${mainPageSearchLocal.dateToReturn}` === ','){ // اگر کاربر همه را خالی فرستاد
+                this.props.history.push('/searchHomePage/Newest/1')
+                localStorage.removeItem("mainPageSearch");
+            }else {
+                this.props.history.push('/searchHomePage/doSearch/1')
+            }
+            this.postAndPushResultSearchPageVillas(data)
+            this.setState({doSearch:true})
+            localStorage.removeItem("mainPageSearch");
+
+        }
+
     }
 
     selectDayToGo = (date) =>{                                    // set date to go
@@ -94,6 +126,8 @@ class SearchHomePage extends Datas {
     }
 
     render() {
+
+
         const discountAccommodation = this.state.discountAccommodation
         const disinfectedAccommodation = this.state.disinfectedAccommodation
         const searchPageVillas = this.state.searchPageVillas      // دیتا هایی که از کامپوننت دیتاس گرفته شده و برای همه سورت ها و کلیک جستجو آپدیت میشود
@@ -127,6 +161,7 @@ class SearchHomePage extends Datas {
         {
             pages.push(i+1)
         }
+
 
 
 
@@ -277,7 +312,7 @@ class SearchHomePage extends Datas {
                             <a className={localStorage.getItem("token") ? "fv-hideButtonRegister" : ""}> <Link to={'/login'}>ورود</Link></a>
                         </MDBCol>
                         <MDBCol md={2} className={"fv-footerMenuRibbonButton"}>
-                            <input className={localStorage.getItem("token") ? "fv-hideButtonRegister" : ""} type='button' value=' میزبان شوید' onClick={()=> this.props.history.push('/login3')}/>
+                            <input className={localStorage.getItem("token") ? ""  : "fv-hideButtonRegister"} type='button' value=' میزبان شوید' onClick={()=> this.props.history.push('/hostStep1')}/>
                         </MDBCol>
                         <MDBCol md={9}>
                             <img src={FotterpageLogo} />

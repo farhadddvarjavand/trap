@@ -13,15 +13,22 @@ class HostStep2Page extends Component {
     constructor(props) {
         super(props);
         this.state={
-            accommodationTitle:'',
-            accommodationKind:'title',
-            number:'',
-            accommodationHistory:''
+            city:'title',
+            village:'',
+            postCode:'',
+            address:''
         }
 
     }
 
     render() {
+        // console.log(JSON.parse(localStorage.getItem("step1")))
+        const localStorageData={
+            city:this.state.city,
+            village:this.state.village,
+            postal_code:this.state.postCode,
+            address:this.state.address,
+        }
         return (
             <MDBContainer className={"fv-HostStep2Page"}>
                 <MDBRow>
@@ -30,19 +37,44 @@ class HostStep2Page extends Component {
 
                         <MDBRow className={"fv-HostStep1PageBody"}>
                             <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
-                                <p  className={"fv-hostStep2Page2Hidden"}>عنوان اقامت گاه</p>
-                                <input type="text" value={this.state.accommodationTitle} onChange={(event)=>this.setState({accommodationTitle:event.target.value})} className={"fv-hostStep2Page2Hidden"}/>
-                                <p className={"fv-hostStep2Page2Hidden"}> نوع اقامت گاه</p>
-                                <select value={this.state.accommodationKind} onChange={(event)=>this.setState({accommodationKind:event.target.value})}  className={"fv-hostStep2Page2Hidden"}>
-                                    <option value='title' disabled>نوع اقامت گاه</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
+                                <p  className={"fv-hostStep2Page2Hidden"}>شهر/استان</p>
+                                <select value={this.state.city} onChange={(event)=>this.setState({city:event.target.value})}  className={"fv-hostStep2Page2Hidden"}>
+                                    <option value='title' disabled>نام شهر خود را وارد کنید</option>
+                                    <option value="تهران">تهران</option>
+                                    <option value="مشهد">مشهد</option>
+                                    <option value="اصفهان">اصفهان</option>
+                                    <option value="کرج">کرج</option>
+                                    <option value="شیراز">شیراز</option>
+                                    <option value="تبریز">	تبریز</option>
+                                    <option value="قم">قم</option>
+                                    <option value="اهواز">اهواز</option>
+                                    <option value="کرمانشاه">کرمانشاه</option>
+                                    <option value="ارومیه">ارومیه</option>
+                                    <option value="رشت">رشت</option>
+                                    <option value="زاهدان">زاهدان</option>
+                                    <option value="همدان">همدان</option>
+                                    <option value="کرمان">کرمان</option>
+                                    <option value="یزد">یزد</option>
+                                    <option value="اردبیل">اردبیل</option>
+                                    <option value="اراک">اراک</option>
+                                    <option value="بندرعباس">بندرعباس</option>
+                                    <option value="زنجان">زنجان</option>
+                                    <option value="سنندج">سنندج</option>
+                                    <option value="قزوین">قزوین</option>
+                                    <option value="خرم‌آباد">خرم‌آباد</option>
+                                    <option value="گرگان">گرگان</option>
+                                    <option value="ساری">ساری</option>
+                                    <option value="بابل">بابل</option>
+                                    <option value="سبزوار">سبزوار</option>
+                                    <option value="گلستان">گلستان</option>
+                                    <option value="آمل">آمل</option>
                                 </select>
-                                <p className={"fv-hostStep2Page2Hidden"}>شماره ضروری</p>
-                                <input type="text" value={this.state.number} onChange={(event)=>this.setState({number:event.target.value})} className={"fv-hostStep2Page2Hidden"}/>
-                                <p className={"fv-hostStep2Page2Hidden"}> داستان اقامت گاه شما</p>
-                                <textarea value={this.state.accommodationHistory} onChange={(event)=>this.setState({accommodationHistory:event.target.value})} className={"fv-hostStep2Page2Hidden"}/>
+                                <p className={"fv-hostStep2Page2Hidden"}>روستا/محله</p>
+                                <input type="text" value={this.state.village} onChange={(event)=>this.setState({village:event.target.value})} className={"fv-hostStep2Page2Hidden"}/>
+                                <p className={"fv-hostStep2Page2Hidden"}>کدپستی</p>
+                                <input type="text" value={this.state.postCode} onChange={(event)=>this.setState({postCode:event.target.value})} className={"fv-hostStep2Page2Hidden"}/>
+                                <p className={"fv-hostStep2Page2Hidden"}>آدرس دقیق</p>
+                                <textarea value={this.state.address} onChange={(event)=>this.setState({address:event.target.value})} className={"fv-hostStep2Page2Hidden"}/>
                             </MDBCol>
 
                             <HostStepLeftBodyContent
@@ -54,7 +86,9 @@ class HostStep2Page extends Component {
                     در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند"
                                 image={MobileLogo}
                                 nextLink={'../../hostStep2-2'}
-                                returnLink={'../../hostStep1'}/>
+                                returnLink={'../../hostStep1'}
+                                localStorageName={"step2"}
+                                localStorageData={localStorageData}/>
                         </MDBRow>
 
                         <MDBRow>

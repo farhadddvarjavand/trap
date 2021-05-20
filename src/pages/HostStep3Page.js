@@ -68,7 +68,45 @@ class HostStep3Page extends Component {
     }
 
     render() {
+        let publicToilet = 0
+        if(this.state.publicToiletCheckbox[0]){
+            publicToilet = 1
+        }
 
+        let otherViewsCheckbox =""
+        for(let i = 0 ; i<this.state.otherViewsCheckbox.length ; i++){
+            if(i===0){
+                otherViewsCheckbox=this.state.otherViewsCheckbox[i]
+            }else {
+                otherViewsCheckbox=`${otherViewsCheckbox},${this.state.otherViewsCheckbox[i]}`
+            }
+        }
+
+        let accommodationViewsCheckbox=""
+        for (let j = 0 ; j<this.state.accommodationViewsCheckbox.length ; j++){
+            if(j===0){
+                accommodationViewsCheckbox=this.state.accommodationViewsCheckbox[j]
+            }else {
+                accommodationViewsCheckbox=`${accommodationViewsCheckbox},${this.state.accommodationViewsCheckbox[j]}`
+            }
+        }
+
+
+        console.log(accommodationViewsCheckbox)
+        const localStorageData={
+            standard_capacity:this.state.standardCapacity,
+            max_capacity:this.state.maximumCapacity,
+            rent_type:this.state.typeOfRent,
+            bedroom:this.state.numberOfBedroom,
+            ir_toilet:this.state.iranianToilet,
+            eu_toilet:this.state.Toilet,
+            shower:this.state.shower,
+            shared_bathroom:publicToilet,
+            places:otherViewsCheckbox,
+            view:accommodationViewsCheckbox,
+            area:this.state.yourAccommodationMeasure,
+        }
+       // console.log(JSON.parse(localStorage.getItem("step2-2")))
         return (
             <div className={" fv-HostStep2Page fv-hostStep2Page2 fv-hostStep3Page"}>
                 <MDBContainer className={"fv-HostStep1Page"}>
@@ -99,9 +137,10 @@ class HostStep3Page extends Component {
 
                             <h5>نوع اجاره</h5>
                             <select value={this.state.typeOfRent} onChange={(event)=>this.setState({typeOfRent:event.target.value})}>
-                                <option value='title' disabled>خانه دربست</option>
-                                <option value="1">خانه اشتراکی</option>
-                                <option value="2"> خانه اشتراکی</option>
+                                <option value='title' disabled> </option>
+                                <option value="خانه اشتراکی">خانه اشتراکی</option>
+                                <option value="خانه دربست">خانه دربست</option>
+                                <option value="خانه اجاره ای">خانه اجاره ای</option>
                             </select>
 
                             <h5 className={"fv-hostStep3BedRoom"}>اتاق خواب</h5>
@@ -163,7 +202,7 @@ class HostStep3Page extends Component {
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
                                         text="سونا"
-                                        name = "sauna"
+                                        name = "سونا"
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
@@ -175,7 +214,7 @@ class HostStep3Page extends Component {
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
                                         text="استخر"
-                                        name = "pool"
+                                        name = "استخر"
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
@@ -187,7 +226,7 @@ class HostStep3Page extends Component {
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
                                         text="آلاچیق"
-                                        name = "pergola"
+                                        name = "آلاچیق"
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
@@ -199,7 +238,7 @@ class HostStep3Page extends Component {
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
                                         text="باربیکیو"
-                                        name = "pergola"
+                                        name = "باربیکیو"
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
@@ -210,8 +249,8 @@ class HostStep3Page extends Component {
                                         smCheckbox="4"
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
-                                        text="پارکینگ"
-                                        text = "parking"
+                                        text = "پارکینگ"
+                                        name = "پارکینگ"
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
@@ -239,7 +278,7 @@ class HostStep3Page extends Component {
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
                                         text="رو به دریا"
-                                        name = "viewTheSea"
+                                        name = "رو به دریا"
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'accommodationViewsCheckbox'}/>
 
@@ -252,7 +291,7 @@ class HostStep3Page extends Component {
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
                                         text="روبه جنگل"
-                                        name = "viewTheForest"
+                                        name = "روبه جنگل"
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'accommodationViewsCheckbox'}/>
                                 </MDBCol>
@@ -264,7 +303,7 @@ class HostStep3Page extends Component {
                                         mdCheckboxText="8"
                                         smCheckboxText="8"
                                         text="روبه کوهستان"
-                                        name = "facingTheMountains"
+                                        name = "روبه کوهستان"
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'accommodationViewsCheckbox'}/>
                                 </MDBCol>
@@ -282,7 +321,9 @@ class HostStep3Page extends Component {
                             ن را در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند."
                             image={Logo}
                             nextLink={"../../hostStep4"}
-                            returnLink={"../../hostStep2-2"}/>
+                            returnLink={"../../hostStep2-2"}
+                            localStorageName={"step3"}
+                            localStorageData={localStorageData}/>
                     </MDBRow>
                     <MDBRow>
                         <Footer />

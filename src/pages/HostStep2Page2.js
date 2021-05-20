@@ -7,14 +7,63 @@ import HeaderSteps from "../componentsPages/HeaderSteps";
 import MobileLogo from "../images/MobileLogo.png";
 import Footer from "../componentsPages/footer";
 import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt"
+import Mapir from "mapir-react-component";
 
 class HostStep2Page2 extends Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            markerArray: [],
+            lat: 35.72,
+            lon: 51.42,
+            mapAddress:'',
+        }
+        this.reverseFunction = this.reverseFunction.bind(this);
     }
-
+    reverseFunction(map, e) {
+        const url = `https://map.ir/reverse/no?lat=${e.lngLat.lat}&lon=${e.lngLat.lng}`
+        fetch(url,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-api-key':
+                        'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImY1ZDU3NTg4MDA3MjQ1MGM2ZjJkMWYyNWYzNjZlMDJhMGVmNGEzYWE5NjZlYjc3YzI4MTkwZWE3Y2RjYmU2MWYzYjQ3NjdmZjNkNDAxNDU0In0.eyJhdWQiOiIxMzk2MiIsImp0aSI6ImY1ZDU3NTg4MDA3MjQ1MGM2ZjJkMWYyNWYzNjZlMDJhMGVmNGEzYWE5NjZlYjc3YzI4MTkwZWE3Y2RjYmU2MWYzYjQ3NjdmZjNkNDAxNDU0IiwiaWF0IjoxNjIwOTEwNDA2LCJuYmYiOjE2MjA5MTA0MDYsImV4cCI6MTYyMzUwMjQwNiwic3ViIjoiIiwic2NvcGVzIjpbImJhc2ljIl19.JURJHCjC_7gcpLXnXJaNjp1l9O6z4t4rqais2S8FE9GApwpdo1amHqdMMlk87m_08GLnxG8E_ADOavM9sZjJMikekrTOzc7IDBn1DN7RC75IF-lA5x8uyZs7EdSzEB7fTdVtgs0z6frjO4KYciznkPP0eSHyueV84Scsi-M1q95vQ7DU_2w216yH2sdc3aXUs_emNqNyGOuQ4q9qFmjR5nMOIGy1AP9Bb5NqFTnvFZzJ022bX7_atlxysLPQ5h1r1LwzRpHBlIT2KG3bJo1SjSiOVNxK-cUSF1yG8YKvZAwfzZHFFJ1wnViH6KnR_yPSczGi14xUUA7wCKCwqKkcVQ'
+                }
+            })
+            .then(response => response.json())
+            .then(data => { this.setState({mapAddress:data.address}) })
+        const array = [];
+        array.push(<Mapir.Marker
+            coordinates={[e.lngLat.lng, e.lngLat.lat]}
+            anchor="bottom">
+        </Mapir.Marker>);
+        this.setState({ markerArray: array, lat: e.lngLat.lat,lon: e.lngLat.lng });
+    }
     render() {
+        console.log(this.state.lat)
+        console.log(this.state.lon)
+        const Map = Mapir.setToken({
+            //factory parameters
+            hash:true,
+            logoPosition:"top-left",
+            maxZoom:[16],
+            transformRequest: (url) => {
+                return {
+                    url: url,
+                    headers: {
+                        'x-api-key':
+                            'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImY1ZDU3NTg4MDA3MjQ1MGM2ZjJkMWYyNWYzNjZlMDJhMGVmNGEzYWE5NjZlYjc3YzI4MTkwZWE3Y2RjYmU2MWYzYjQ3NjdmZjNkNDAxNDU0In0.eyJhdWQiOiIxMzk2MiIsImp0aSI6ImY1ZDU3NTg4MDA3MjQ1MGM2ZjJkMWYyNWYzNjZlMDJhMGVmNGEzYWE5NjZlYjc3YzI4MTkwZWE3Y2RjYmU2MWYzYjQ3NjdmZjNkNDAxNDU0IiwiaWF0IjoxNjIwOTEwNDA2LCJuYmYiOjE2MjA5MTA0MDYsImV4cCI6MTYyMzUwMjQwNiwic3ViIjoiIiwic2NvcGVzIjpbImJhc2ljIl19.JURJHCjC_7gcpLXnXJaNjp1l9O6z4t4rqais2S8FE9GApwpdo1amHqdMMlk87m_08GLnxG8E_ADOavM9sZjJMikekrTOzc7IDBn1DN7RC75IF-lA5x8uyZs7EdSzEB7fTdVtgs0z6frjO4KYciznkPP0eSHyueV84Scsi-M1q95vQ7DU_2w216yH2sdc3aXUs_emNqNyGOuQ4q9qFmjR5nMOIGy1AP9Bb5NqFTnvFZzJ022bX7_atlxysLPQ5h1r1LwzRpHBlIT2KG3bJo1SjSiOVNxK-cUSF1yG8YKvZAwfzZHFFJ1wnViH6KnR_yPSczGi14xUUA7wCKCwqKkcVQ', //Mapir api key
+                        'Mapir-SDK': 'reactjs'
+                    },
+                }
+            }
+        });
+
+        const localStorageData={
+            long:this.state.lon,
+            lat:this.state.lat,
+        }
+       // console.log(JSON.parse(localStorage.getItem("step2")))
         return (
             <div className={" fv-HostStep2Page fv-hostStep2Page2"}>
             <MDBContainer className={"fv-HostStep1Page"}>
@@ -25,10 +74,21 @@ class HostStep2Page2 extends Component {
                 <MDBRow className={"fv-HostStep1PageBody"}>
                     <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
                         <p className={"fv-hostStep2Page2P"}> لطفا از روی نقشه آدرس دقیق خود را پیدا کنید</p>
-                        <textarea className={"fv-hostStep2Page2Textarea"} value=" "/>
+                        <textarea className={"fv-hostStep2Page2Textarea"} value={this.state.mapAddress} disabled={true}/>
                         <MDBRow className={"fv-hostStep2Page2Map"}>
-                            <img src={MobileLogo} />
+                            <Mapir
+                                center={[this.state.lon, this.state.lat]}
+                                Map={Map}
+                                onClick={this.reverseFunction}
+                            >
+                                {this.state.markerArray}
+                            </Mapir>
                         </MDBRow>
+
+
+
+
+
 
                     </MDBCol>
 
@@ -41,7 +101,9 @@ class HostStep2Page2 extends Component {
                     در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند"
                         image={MobileLogo}
                         nextLink={"../../hostStep3"}
-                        returnLink={"../../hostStep2"}/>
+                        returnLink={"../../hostStep2"}
+                        localStorageName={"step2-2"}
+                        localStorageData={localStorageData}/>
                 </MDBRow>
                 <MDBRow>
                     <Footer />
