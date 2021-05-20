@@ -33,7 +33,7 @@ class HostStep5Page3 extends Component {
         console.log('file upload triggered');
     };
     render() {
-
+            //console.log(JSON.parse(localStorage.getItem("step5")))
         return (
             <div className={" fv-HostStep2Page fv-hostStep2Page2 fv-hostStep3Page fv-hostStep4Page fv-hostStep5Page fv-hostStep5Page2 fv-hostStep5Page3"}>
                 <MDBContainer className={"fv-HostStep1Page"}>

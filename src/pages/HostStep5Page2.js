@@ -15,10 +15,12 @@ class HostStep5Page2 extends Component {
         super(props);
         this.state={
             rules:[],
-            groupOfGuests:[],
             specialLaw:'',
             minimumNumberOfNights:'',
             maximumNumberOfNights:'',
+            groupOfGuests:[],
+            arriveTime:'title',
+            exitTime:'title',
         }
 
     }
@@ -46,6 +48,34 @@ class HostStep5Page2 extends Component {
     }
 
     render() {
+        let rules=""
+        for (let j = 0 ; j<this.state.rules.length ; j++){
+            if(j===0){
+                rules=this.state.rules[j]
+            }else {
+                rules=`${rules},${this.state.rules[j]}`
+            }
+        }
+        let groupOfGuests=""
+        for (let j = 0 ; j<this.state.groupOfGuests.length ; j++){
+            if(j===0){
+                groupOfGuests=this.state.groupOfGuests[j]
+            }else {
+                groupOfGuests=`${groupOfGuests},${this.state.groupOfGuests[j]}`
+            }
+        }
+
+        const localStorageData={
+            auth_rules:rules,
+            special_rules:this.state.specialLaw,
+            min_reserve:this.state.minimumNumberOfNights,
+            max_reserve:this.state.maximumNumberOfNights,
+            suitable_for:groupOfGuests,
+            arrival_time:this.state.arriveTime,
+            exit_time:this.state.exitTime,
+        }
+
+        //console.log(JSON.parse(localStorage.getItem("step5")))
         return (
             <div className={" fv-HostStep2Page fv-hostStep2Page2 fv-hostStep3Page fv-hostStep4Page fv-hostStep5Page fv-hostStep5Page2"}>
                 <MDBContainer className={"fv-HostStep1Page"}>
@@ -67,7 +97,7 @@ class HostStep5Page2 extends Component {
                                         mdCheckboxText="10"
                                         smCheckboxText="9"
                                         text="استعمال دخانیات"
-                                        name='smoking'
+                                        name='استعمال دخانیات'
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'rules'}/>
                                 </MDBCol>
@@ -79,7 +109,7 @@ class HostStep5Page2 extends Component {
                                         mdCheckboxText="10"
                                         smCheckboxText="9"
                                         text="امکان برگزرای جشن"
-                                        name='getParty'
+                                        name='امکان برگزرای جشن'
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'rules'}/>
                                 </MDBCol>
@@ -91,7 +121,7 @@ class HostStep5Page2 extends Component {
                                         mdCheckboxText="10"
                                         smCheckboxText="9"
                                         text="ورود حیوانات (مثل سگ,گربه,پرنده و ...)"
-                                        name='arrivalOfAnimals'
+                                        name='ورود حیوانات (مثل سگ,گربه,پرنده و ...'
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'rules'}/>
 
@@ -104,7 +134,7 @@ class HostStep5Page2 extends Component {
                                         mdCheckboxText="10"
                                         smCheckboxText="9"
                                         text="اقامت به افراد مجرد"
-                                        name='stayForSinglePeople'
+                                        name='اقامت به افراد مجرد'
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'rules'}/>
                                 </MDBCol>
@@ -146,7 +176,7 @@ class HostStep5Page2 extends Component {
                                         mdCheckboxText="10"
                                         smCheckboxText="9"
                                         text="اقامت معلولین"
-                                        name='disabledPeople'
+                                        name='اقامت معلولین'
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'groupOfGuests'}/>
 
@@ -159,7 +189,7 @@ class HostStep5Page2 extends Component {
                                         mdCheckboxText="10"
                                         smCheckboxText="9"
                                         text="اقامت سالمندان"
-                                        name='elderly'
+                                        name='اقامت سالمندان'
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'groupOfGuests'}/>
                                 </MDBCol>
@@ -171,7 +201,7 @@ class HostStep5Page2 extends Component {
                                         mdCheckboxText="10"
                                         smCheckboxText="9"
                                         text="ورود حیوانات (مثل سگ,گربه,پرنده و ...)"
-                                        name='animals'
+                                        name='ورود حیوانات (مثل سگ,گربه,پرنده و ...'
                                         setCheckbox = {this.setCheckbox}
                                         nameOfPart={'groupOfGuests'}/>
                                 </MDBCol>
@@ -186,13 +216,32 @@ class HostStep5Page2 extends Component {
                                             <p>ساعت ورود</p>
                                         </MDBCol>
                                         <MDBCol >
-                                            <select>
-                                                <option>
-                                                    1
-                                                </option>
-                                                <option>
-                                                    2
-                                                </option>
+                                            <select value={this.state.arriveTime} onChange={(event)=>this.setState({arriveTime:event.target.value})}>
+                                                <option value='title' disabled> </option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
+                                                <option value="17">17</option>
+                                                <option value="18">18</option>
+                                                <option value="19">19</option>
+                                                <option value="20">20</option>
+                                                <option value="21">21</option>
+                                                <option value="22">22</option>
+                                                <option value="23">23</option>
+                                                <option value="24">24</option>
                                             </select>
                                         </MDBCol>
                                     </MDBRow>
@@ -203,13 +252,32 @@ class HostStep5Page2 extends Component {
                                             <p>ساعت خروج</p>
                                         </MDBCol>
                                         <MDBCol>
-                                            <select>
-                                                <option>
-                                                    1
-                                                </option>
-                                                <option>
-                                                    2
-                                                </option>
+                                            <select value={this.state.exitTime} onChange={(event)=>this.setState({exitTime:event.target.value})}>
+                                                <option value='title' disabled> </option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
+                                                <option value="17">17</option>
+                                                <option value="18">18</option>
+                                                <option value="19">19</option>
+                                                <option value="20">20</option>
+                                                <option value="21">21</option>
+                                                <option value="22">22</option>
+                                                <option value="23">23</option>
+                                                <option value="24">24</option>
                                             </select>
                                         </MDBCol>
                                     </MDBRow>
@@ -229,7 +297,9 @@ class HostStep5Page2 extends Component {
                             ن را در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند."
                             image={Logo}
                             nextLink={"../../hostStep5-3"}
-                            returnLink={"../../hostStep5-1"}/>
+                            returnLink={"../../hostStep5"}
+                            localStorageName={"step5-2"}
+                            localStorageData={localStorageData}/>
 
                     </MDBRow>
                     <MDBRow>

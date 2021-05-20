@@ -23,6 +23,15 @@ class HostStep5Page extends Component {
     }
 
     render() {
+        const localStorageData={
+            normal_cost:this.state.pricesFromSaturdayToWednesday,
+            special_cost:this.state.priceFridayAndHoliday,
+            normal_extra_cost:this.state.extraPersonPricesOnNormalDays,
+            special_extra_cost:this.state.extraPersonPricesOnHolidays,
+            weekly_discount:this.state.weeklyDiscount,
+            monthly_discount:this.state.monthlyDiscount,
+        }
+        //console.log(JSON.parse(localStorage.getItem("step4")))
         return (
             <div className={" fv-HostStep2Page fv-hostStep2Page2 fv-hostStep3Page fv-hostStep4Page fv-hostStep5Page"}>
                 <MDBContainer className={"fv-HostStep1Page"}>
@@ -71,7 +80,7 @@ class HostStep5Page extends Component {
                             <p className={"fv-hostStep5P"}>تخفیف هفتگی</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" value={this.state.weeklyDiscount}
+                                    <input type="text" placeholder={"%"} value={this.state.weeklyDiscount}
                                            onChange={(e)=>this.setState({weeklyDiscount:e.target.value})}
                                     />
                                 </MDBCol>
@@ -79,7 +88,7 @@ class HostStep5Page extends Component {
                             <p className={"fv-hostStep5P"}>تخفیف ماهانه</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" value={this.state.monthlyDiscount}
+                                    <input type="text" placeholder={"%"} value={this.state.monthlyDiscount}
                                            onChange={(e)=>this.setState({monthlyDiscount:e.target.value})}
                                     />
                                 </MDBCol>
@@ -96,7 +105,9 @@ class HostStep5Page extends Component {
                             ن را در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند."
                             image={Logo}
                             nextLink={"../../hostStep5-2"}
-                            returnLink={"../../hostStep4"}/>
+                            returnLink={"../../hostStep4"}
+                            localStorageName={"step5"}
+                            localStorageData={localStorageData}/>
                     </MDBRow>
                     <MDBRow>
                         <Footer />
