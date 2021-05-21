@@ -20,6 +20,17 @@ class HostStep2Page extends Component {
         }
 
     }
+    componentDidMount() {
+        if( JSON.parse(localStorage.getItem("step2"))){
+            const prevData =  JSON.parse(localStorage.getItem("step2"))
+            this.setState({
+                city:prevData.city,
+                village:prevData.village,
+                postCode:prevData.postal_code,
+                address:prevData.address,
+            })
+        }
+    }
 
     render() {
         // console.log(JSON.parse(localStorage.getItem("step1")))
@@ -29,11 +40,12 @@ class HostStep2Page extends Component {
             postal_code:this.state.postCode,
             address:this.state.address,
         }
+
         return (
             <MDBContainer className={"fv-HostStep2Page"}>
                 <MDBRow>
                     <MDBContainer className={"fv-HostStep1Page"}>
-                        <HeaderSteps />
+                        <HeaderSteps/>
 
                         <MDBRow className={"fv-HostStep1PageBody"}>
                             <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>

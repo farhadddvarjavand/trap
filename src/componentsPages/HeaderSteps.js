@@ -5,6 +5,7 @@ import "../style/HeaderSteps.scss"
 import LogoName from "../images/LogoName.png"
 import MobileLogo from "../images/MobileLogo.png"
 import config from "../services/config.json";
+import {Link} from "react-router-dom";
 
 
 class HeaderSteps extends Component {
@@ -14,13 +15,14 @@ class HeaderSteps extends Component {
     }
 
     render() {
+        const info = JSON.parse(localStorage.getItem("info"))
         return (
             <MDBContainer className={"hostStepPage"}>
                 <MDBRow className={'footerHostStep1Page'}>
                     <MDBCol md={3} sm={6}>
-                        <img src={this.props.avatar ? `${config.webapi}/images/villas/thum/${this.props.avatar }` : ""}/>
+                        <img src={info.avatar ? `${config.webapi}/images/villas/thum/${info.avatar }` : ""}/>
                         <i className="fas fa-chevron-down name_mobile" />
-                        <a className={"name_desktop"}>{this.props.nameAndFamily}</a>
+                        <a className={"name_desktop"}>{info.nameAndFamily}</a>
                     </MDBCol>
                     <MDBCol md={9} sm={6} className={""}>
                         <img src={FotterpageLogo} className={"hide_mobile"}/>
@@ -30,9 +32,9 @@ class HeaderSteps extends Component {
                 </MDBRow>
                 <MDBRow>
                     <MDBCol sm={10} className={"fv-HostStep1Path"}>
-                        <p> صفحه اصلی </p>
+                        <Link to={'/mainPage'}><p> صفحه اصلی </p></Link>
                         <i className="fas fa-chevron-left" />
-                        <p> پنل کاربری </p>
+                        <Link to={'/Profile'}><p> پنل کاربری </p></Link>
                         <i className="fas fa-chevron-left" />
                         <p className={"fv-HostStepNow"}> ثبت اقامت گاه </p>
                     </MDBCol>

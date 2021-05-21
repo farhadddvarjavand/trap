@@ -9,6 +9,9 @@ import Logo from "../images/Logo.png";
 import Footer from "../componentsPages/footer";
 import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt"
 import HostStepCheckbox from "../componentsPages/hostStepCheckbox"
+import {Link} from "react-router-dom";
+import {getStoreVilla, storeVilla} from "../services/userService";
+import {villa} from "../services/villaService";
 
 class HostStep5Page2 extends Component {
     constructor(props) {
@@ -23,6 +26,40 @@ class HostStep5Page2 extends Component {
             exitTime:'title',
         }
 
+    }
+
+    componentDidMount() {
+
+
+        if( JSON.parse(localStorage.getItem("step5-2"))){
+            const prevrules = []
+            const prevgroupOfGuests = []
+
+            const prevData =  JSON.parse(localStorage.getItem("step5-2"))
+            if(prevData.auth_rules){
+                const rules = prevData.auth_rules.split(",")
+                for(let i = 0 ; i < rules.length ; i++){
+                    prevrules.push(rules[i])
+                }
+            }
+            if(prevData.suitable_for){
+                const groupOfGuests = prevData.suitable_for.split(",")
+                for(let i = 0 ; i < groupOfGuests.length ; i++){
+                    prevgroupOfGuests.push(groupOfGuests[i])
+                }
+            }
+
+            this.setState({
+                rules:prevrules,
+                groupOfGuests:prevgroupOfGuests,
+                specialLaw:prevData.special_rules,
+                minimumNumberOfNights:prevData.min_reserve,
+                maximumNumberOfNights:prevData.max_reserve,
+                arriveTime:prevData.arrival_time,
+                exitTime:prevData.exit_time,
+
+            })
+        }
     }
 
     setCheckbox =(event,checkboxName) =>{
@@ -99,6 +136,7 @@ class HostStep5Page2 extends Component {
                                         text="استعمال دخانیات"
                                         name='استعمال دخانیات'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.rules}
                                         nameOfPart={'rules'}/>
                                 </MDBCol>
                                 <MDBCol  md={12} sm={12} className={""}>
@@ -111,6 +149,7 @@ class HostStep5Page2 extends Component {
                                         text="امکان برگزرای جشن"
                                         name='امکان برگزرای جشن'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.rules}
                                         nameOfPart={'rules'}/>
                                 </MDBCol>
                                 <MDBCol md={12} sm={12}>
@@ -123,6 +162,7 @@ class HostStep5Page2 extends Component {
                                         text="ورود حیوانات (مثل سگ,گربه,پرنده و ...)"
                                         name='ورود حیوانات (مثل سگ,گربه,پرنده و ...'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.rules}
                                         nameOfPart={'rules'}/>
 
                                 </MDBCol>
@@ -136,6 +176,7 @@ class HostStep5Page2 extends Component {
                                         text="اقامت به افراد مجرد"
                                         name='اقامت به افراد مجرد'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.rules}
                                         nameOfPart={'rules'}/>
                                 </MDBCol>
                             </MDBRow>
@@ -144,8 +185,8 @@ class HostStep5Page2 extends Component {
                             <p className={"fv-hostStep5P"}>اگر قانون خاص دیگری دارید در کادر پایین بنویسید</p>
                             <MDBRow className={"fv-hostStep3AddPlace fv-hostStep5Page2SpaceRow"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <textarea onChange={(e)=>this.setState({specialLaw:e.target.value})}>
-                                        {this.state.specialLaw}
+                                    <textarea value={this.state.specialLaw} onChange={(e)=>this.setState({specialLaw:e.target.value})}>
+
                                     </textarea>
                                 </MDBCol>
                             </MDBRow>
@@ -178,6 +219,7 @@ class HostStep5Page2 extends Component {
                                         text="اقامت معلولین"
                                         name='اقامت معلولین'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.groupOfGuests}
                                         nameOfPart={'groupOfGuests'}/>
 
                                 </MDBCol>
@@ -191,6 +233,7 @@ class HostStep5Page2 extends Component {
                                         text="اقامت سالمندان"
                                         name='اقامت سالمندان'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.groupOfGuests}
                                         nameOfPart={'groupOfGuests'}/>
                                 </MDBCol>
                                 <MDBCol md={12} sm={12}>
@@ -203,6 +246,7 @@ class HostStep5Page2 extends Component {
                                         text="ورود حیوانات (مثل سگ,گربه,پرنده و ...)"
                                         name='ورود حیوانات (مثل سگ,گربه,پرنده و ...'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.groupOfGuests}
                                         nameOfPart={'groupOfGuests'}/>
                                 </MDBCol>
                             </MDBRow>
@@ -288,6 +332,7 @@ class HostStep5Page2 extends Component {
 
 
                         </MDBCol>
+
 
                         <HostStepLeftBodyContent
                             text="طراحان سایت هنگام طراحی قالب سایت معمولا با این موضوع رو برو هستند ک

@@ -78,10 +78,10 @@ export const userVillas = async ()=> {
 }
 
 // Get Villa data for edit  -- Use Token  --  id => villa id
-export const editVilla =id=> {
+export const editVilla =async id=> {
     return http.get(
     `${config.webapi}/api/v1/user/editVilla/${id}`, 
-    { headers:{ 'Authorization' : `Bearer USER Token` } } // USER TOKEN => User Toekn from Local Storage for Auth
+    { headers:{ 'Authorization' : await getToken() } } // USER TOKEN => User Toekn from Local Storage for Auth
     );
 }
 
@@ -213,6 +213,18 @@ export const removeFromFavorite = async  data => {
     );
 }
 
+
+// Create a new villa  --  Method = POST
+export const storeVilla = async data => {
+    return http.post(
+
+        `${config.webapi}/api/v1/villa/store`,
+        JSON.stringify(data),
+        { headers:{ 'Authorization' :  await getToken() } } // USER TOKEN => User Toekn from Local Storage for Auth
+
+    );
+}
+
 // Reserve Request  --  Method = POST
 export const reserveRequest = data => {
     return http.post(
@@ -221,5 +233,16 @@ export const reserveRequest = data => {
     JSON.stringify(data),
     { headers:{ 'Authorization' : `Bearer USER Token` } }
     
+    );
+}
+
+
+export const SetImages = async (data,villaId) => {
+    return http.post(
+
+        `${config.webapi}/api/v1/villa/store/images/${villaId}`,
+        JSON.stringify(data),
+        { headers:{ 'Authorization' : await getToken() } }
+
     );
 }

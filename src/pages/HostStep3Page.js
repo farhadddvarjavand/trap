@@ -19,7 +19,7 @@ class HostStep3Page extends Component {
             maximumCapacity:1,
             numberOfBedroom:1,
             iranianToilet:1,
-            Toilet:1,
+            Toilet:0,
             shower:1,
             publicToiletCheckbox:[],
             otherViewsCheckbox:[],
@@ -29,6 +29,46 @@ class HostStep3Page extends Component {
             yourAccommodationMeasure:''
 
 
+        }
+
+    }
+
+    componentDidMount() {
+        if( JSON.parse(localStorage.getItem("step3"))){
+            const prevsharedBathroom =[]
+            const prevPlaces = []
+            const prevSharedBathroom = []
+            const prevData =  JSON.parse(localStorage.getItem("step3"))
+            if(prevData.shared_bathroom === 1){
+                prevsharedBathroom.push("سرویس بهداشتی مشترک است")
+            }
+            if(prevData.places){
+                const shareplacesSplit = prevData.places.split(",")
+                for(let i = 0 ; i < shareplacesSplit.length ; i++){
+                    prevPlaces.push(shareplacesSplit[i])
+                }
+            }
+            if(prevData.view){
+                const shareBathroomSplit = prevData.view.split(",")
+                for(let i = 0 ; i < shareBathroomSplit.length ; i++){
+                    prevSharedBathroom.push(shareBathroomSplit[i])
+                }
+            }
+
+            this.setState({
+                standardCapacity:prevData.standard_capacity,
+                maximumCapacity:prevData.max_capacity,
+                typeOfRent:prevData.rent_type,
+                numberOfBedroom:prevData.bedroom,
+                iranianToilet:prevData.ir_toilet,
+                Toilet:prevData.eu_toilet,
+                shower:prevData.shower,
+                yourAccommodationMeasure:prevData.area,
+                publicToiletCheckbox:prevsharedBathroom,
+                otherViewsCheckbox:prevPlaces,
+                accommodationViewsCheckbox:prevSharedBathroom,
+
+            })
         }
 
     }
@@ -188,9 +228,11 @@ class HostStep3Page extends Component {
                                 mdCheckboxText="5"
                                 smCheckboxText="10"
                                 text="سرویس بهداشتی مشترک است"
-                                name='sharedBathroom'
+                                name='سرویس بهداشتی مشترک است'
                                 setCheckbox = {this.setCheckbox}
+                                setCheckedPrev = {this.state.publicToiletCheckbox} // آرایه ایی که اگر لوکال استوریج وجود داشت پر می باشد
                                 nameOfPart={'publicToiletCheckbox'}/>
+
                             <h5 className={"fv-hostStep3AnyPlace"}>سایر فضاها</h5>
 
                             <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLine"}>
@@ -204,6 +246,7 @@ class HostStep3Page extends Component {
                                         text="سونا"
                                         name = "سونا"
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.otherViewsCheckbox}
                                         nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
                                 <MDBCol  md={2} sm={6} className={"fv-hostStep3CheckBoxGroupInLineOne test"}>
@@ -216,6 +259,7 @@ class HostStep3Page extends Component {
                                         text="استخر"
                                         name = "استخر"
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.otherViewsCheckbox}
                                         nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
                                 <MDBCol md={2} sm={6} className={"fv-hostStep3CheckBoxGroupInLineTwo test"}>
@@ -228,6 +272,7 @@ class HostStep3Page extends Component {
                                         text="آلاچیق"
                                         name = "آلاچیق"
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.otherViewsCheckbox}
                                         nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
                                 <MDBCol md={2} sm={6}  className={"fv-hostStep3CheckBoxGroupInLineOneThree test"}>
@@ -240,6 +285,7 @@ class HostStep3Page extends Component {
                                         text="باربیکیو"
                                         name = "باربیکیو"
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.otherViewsCheckbox}
                                         nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
                                 <MDBCol md={2} sm={6} className={"fv-hostStep3CheckBoxGroupInLineFour test"}>
@@ -252,6 +298,7 @@ class HostStep3Page extends Component {
                                         text = "پارکینگ"
                                         name = "پارکینگ"
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.otherViewsCheckbox}
                                         nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
                             </MDBRow>
@@ -280,6 +327,7 @@ class HostStep3Page extends Component {
                                         text="رو به دریا"
                                         name = "رو به دریا"
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.accommodationViewsCheckbox}
                                         nameOfPart={'accommodationViewsCheckbox'}/>
 
                                 </MDBCol>
@@ -293,6 +341,7 @@ class HostStep3Page extends Component {
                                         text="روبه جنگل"
                                         name = "روبه جنگل"
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.accommodationViewsCheckbox}
                                         nameOfPart={'accommodationViewsCheckbox'}/>
                                 </MDBCol>
                                 <MDBCol md={3} sm={8} className={"fv-hostStep3CheckBoxGroupInLineSecondThree test"}>
@@ -305,6 +354,7 @@ class HostStep3Page extends Component {
                                         text="روبه کوهستان"
                                         name = "روبه کوهستان"
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.accommodationViewsCheckbox}
                                         nameOfPart={'accommodationViewsCheckbox'}/>
                                 </MDBCol>
                             </MDBRow>

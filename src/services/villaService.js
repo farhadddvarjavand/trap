@@ -30,7 +30,7 @@ export const villaPrice = id =>{
     return http.get(`${config.webapi}/api/v1/villa/villaPrices/${id}`);
 }
 // Create a new villa  --  Method = POST
-export const storeVilla = data => {
+/* export const storeVilla = data => {
     return http.post(
 
     `${config.webapi}/api/v1/villa/store`, 
@@ -38,4 +38,4 @@ export const storeVilla = data => {
     { headers:{ 'Authorization' : `Bearer USER Token` } } // USER TOKEN => User Toekn from Local Storage for Auth
     
     );
-}
+} */

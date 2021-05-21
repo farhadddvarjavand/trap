@@ -42,7 +42,13 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
 .fv-HostStep2Page .hostStepPage .fv-headerHomeImage .fv-hostStep2PageSelectIcon p {
   color: black;
 }
-
+.fv-hostStepPage1LeftButton {
+  z-index: 1;
+  position: relative;
+}
+.fv-hostStepPage2LeftButton.fv-hostStepPage1LeftButton {
+  z-index: 0;
+}
 
 @media (max-width: 1200px) {
   .fv-HostStep2Page.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {

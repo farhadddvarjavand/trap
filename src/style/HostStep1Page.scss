@@ -73,6 +73,21 @@
     }
 
   }
+  .fv-redBorderError{
+    border: 1px solid red;
+    background: #E88F0A;
+  }
+  .fv-alertNotErrorText{
+    display: none;
+  }
+  .fv-alertErrorText{
+    color: mediumvioletred;
+    border-bottom: 1px solid #E88F0A;
+  }
+  .fv-alertErrorTextWithoutBorder{
+    color: mediumvioletred;
+    margin-right: 3%;
+  }
 }
 
 @media (max-width: 1200px) and (min-width: 767px){

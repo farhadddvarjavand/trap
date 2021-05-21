@@ -31,7 +31,9 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
   .fv-HostStep1Path{
     display: flex;
     margin-right: -1%;
-
+    a{
+      color: black;
+    }
     .fa-chevron-left{
       margin-right: 2%;
       margin-left: 2%;
@@ -323,6 +325,7 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
         margin-left: 2%;
         margin-top: 1.5%;
       }
+
     }
     .footerHostStep1Page .col-md-9 {
       padding-left: 7%;

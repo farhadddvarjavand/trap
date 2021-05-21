@@ -49,41 +49,6 @@ ReactDOM.render(
         <BrowserRouter>
             <Switch>
                 <CookiesProvider>
-                    <div className={"LinksTest"}>
-                        <Link to={'/login'}>Login</Link>
-                        <Link to={'/login2'}>LoginPage2</Link>
-                        <Link to={'/login3'}>LoginPage3</Link>
-                        <Link to={'/factor'}>FactorPage</Link>
-                        <Link to={'/ProfileReservation2'}>ProfilePageReservation2</Link>
-                        <Link to={'/profileReservation'}>ProfilePageReservation</Link>
-                        <Link to={'/profileReservations'}>ProfilePageReservationsRequested</Link>
-                        <Link to={'/profileCalender/24'}>ProfilePageCalender</Link>
-                        <Link to={'/profileGustComments2/1'}>ProfilePageGustComments2</Link>
-                        <Link to={'/profileGustComments'}>PrfilePageGustComments</Link>
-                        <Link to={'/displayPage/1'}>DisplayPage</Link>
-                        <Link to={'/ProfileWallet3'}>ProfilePageWallet3</Link>
-                        <Link to={'/ProfileWallet2'}>ProfilePageWallet2</Link>
-                        <Link to={'/ProfileWallet'}>ProfilePageWallet</Link>
-                        <Link to={'/myAccommodation'}>MyAccommodationPage</Link>
-                        <Link to={'/ProfileTransaction3'}>ProfilePageTransaction3</Link>
-                        <Link to={'/ProfileTransaction2'}>ProfilePageTransaction2</Link>
-                        <Link to={'/ProfileTransaction'}>ProfilePageTransaction</Link>
-                        <Link to={'/hostStep5-3'}>HostStep5Page3</Link>
-                        <Link to={'/Profile'}>ProfilePage</Link>
-                        <Link to={'/hostStep5-2'}>HostStep5Page2</Link>
-                        <Link to={'/hostStep5'}>HostStep5Page</Link>
-                        <Link to={'/hostStep4'}>HostStep4Page</Link>
-                        <Link to={'/hostStep3'}>HostStep3Page</Link>
-                        <Link to={'/hostStep2'}>HostStep2Page</Link>
-                        <Link to={'/hostStep2-2'}>HostStep2Page2</Link>
-                        <Link to={'/hostStep1'}>HostStep1Page</Link>
-                        <Link to={'/searchHomePage/cheapest/1'}>SearchHomePage</Link>
-                        <Link to={'/mainPage'}>MainPage</Link>
-                        <Link to={'/notFound'}>NotFoundPage</Link>
-                        <Link to={'/addComments/24'}>AddComments</Link>
-                        <Link to={'/profileFavoritesPage'}>ProfileFavoritesPage</Link>
-
-                    </div>
 
                     <div className="App">
                         <div className={'pagecontent'}>

@@ -20,6 +20,8 @@ class HostStep2Page2 extends Component {
         }
         this.reverseFunction = this.reverseFunction.bind(this);
     }
+
+
     reverseFunction(map, e) {
         const url = `https://map.ir/reverse/no?lat=${e.lngLat.lat}&lon=${e.lngLat.lng}`
         fetch(url,
@@ -40,8 +42,6 @@ class HostStep2Page2 extends Component {
         this.setState({ markerArray: array, lat: e.lngLat.lat,lon: e.lngLat.lng });
     }
     render() {
-        console.log(this.state.lat)
-        console.log(this.state.lon)
         const Map = Mapir.setToken({
             //factory parameters
             hash:true,

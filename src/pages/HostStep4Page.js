@@ -31,6 +31,52 @@ class HostStep4Page extends Component {
         }
     }
 
+    componentDidMount() {
+
+        if( JSON.parse(localStorage.getItem("step4"))){
+            const prevGeneralFacilities = []
+            const prevKitchenFacilities = []
+            const prevCoolingAndHeatingFacilities = []
+            const prevCatering = []
+
+            const prevData =  JSON.parse(localStorage.getItem("step4"))
+            if(prevData.general_fac){
+                const GeneralFacilitiess = prevData.general_fac.split(",")
+                for(let i = 0 ; i < GeneralFacilitiess.length ; i++){
+                    prevGeneralFacilities.push(GeneralFacilitiess[i])
+                }
+            }
+            if(prevData.kitchen_fac){
+                const KitchenFacilitiess = prevData.kitchen_fac.split(",")
+                for(let i = 0 ; i < KitchenFacilitiess.length ; i++){
+                    prevKitchenFacilities.push(KitchenFacilitiess[i])
+                }
+            }
+            if(prevData.temp_fac){
+                const CoolingAndHeatingFacilitiess = prevData.temp_fac.split(",")
+                for(let i = 0 ; i < CoolingAndHeatingFacilitiess.length ; i++){
+                    prevCoolingAndHeatingFacilities.push(CoolingAndHeatingFacilitiess[i])
+                }
+            }
+            if(prevData.catering){
+                const catering = prevData.catering.split(",")
+                for(let i = 0 ; i < catering.length ; i++){
+                    prevCatering.push(catering[i])
+                }
+            }
+            this.setState({
+                generalFacilities:prevGeneralFacilities,
+                kitchenFacilities:prevKitchenFacilities,
+                coolingAndHeatingFacilities:prevCoolingAndHeatingFacilities,
+                catering:prevCatering,
+                chef:prevData.chef,
+                host:prevData.host,
+                tourLeader:prevData.tour_guide,
+                bodyguard:prevData.bodyguard,
+            })
+        }
+    }
+
     setCheckbox =(event,checkboxName) =>{
         let repeat = false
         const setData= this.state[checkboxName]
@@ -151,6 +197,7 @@ class HostStep4Page extends Component {
                                         text=" جارو برقی"
                                         name='جارو برقی'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.generalFacilities}
                                         nameOfPart={'generalFacilities'}/>
                                 </MDBCol>
                                 <MDBCol  md={6} sm={7} className={"fv-hostStep4CheckBoxGroupInColumnOne"}>
@@ -163,6 +210,7 @@ class HostStep4Page extends Component {
                                         text=" اینترنت رایگان"
                                         name='اینترنت رایگان'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.generalFacilities}
                                         nameOfPart={'generalFacilities'}/>
                                 </MDBCol>
                                 <MDBCol md={6} sm={5}>
@@ -175,6 +223,7 @@ class HostStep4Page extends Component {
                                         text="تلفن"
                                         name={'تلفن'}
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.generalFacilities}
                                         nameOfPart={'generalFacilities'}/>
                                 </MDBCol>
                                 <MDBCol  md={6} sm={7} className={"fv-hostStep4CheckBoxGroupInColumnOne"}>
@@ -187,6 +236,7 @@ class HostStep4Page extends Component {
                                         text="جعبه کمک های اولیه"
                                         name='جعبه کمک های اولیه'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.generalFacilities}
                                         nameOfPart={'generalFacilities'}/>
                                 </MDBCol>
                                 <MDBCol md={6} sm={5}>
@@ -199,6 +249,7 @@ class HostStep4Page extends Component {
                                         text="مهر و جانماز"
                                         name='مهر و جانماز'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.generalFacilities}
                                         nameOfPart={'generalFacilities'}/>
                                 </MDBCol>
                                 <MDBCol  md={6} sm={7} className={"fv-hostStep4CheckBoxGroupInColumnOne"}>
@@ -211,6 +262,7 @@ class HostStep4Page extends Component {
                                         text="تلوزیون"
                                         name='تلوزیون'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.generalFacilities}
                                         nameOfPart={'generalFacilities'}/>
                                 </MDBCol>
                                 <MDBCol md={6} sm={5}>
@@ -223,6 +275,7 @@ class HostStep4Page extends Component {
                                         text="یخچال"
                                         name='یخچال'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.generalFacilities}
                                         nameOfPart={'generalFacilities'}/>
                                 </MDBCol>
                                 <MDBCol  md={6} sm={7} className={"fv-hostStep4CheckBoxGroupInColumnOne"}>
@@ -235,6 +288,7 @@ class HostStep4Page extends Component {
                                         text="اجاق گاز"
                                         name='اجاق گاز'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.generalFacilities}
                                         nameOfPart={'generalFacilities'}/>
                                 </MDBCol>
                             </MDBRow>
@@ -251,6 +305,7 @@ class HostStep4Page extends Component {
                                         text="بشقاب"
                                         name='بشقاب'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.kitchenFacilities}
                                         nameOfPart={'kitchenFacilities'}/>
                                 </MDBCol>
                                 <MDBCol  md={6} sm={7} className={"fv-hostStep4CheckBoxGroupInColumnOne"}>
@@ -263,6 +318,7 @@ class HostStep4Page extends Component {
                                         text="قاشق-چنگال"
                                         name='قاشق-چنگال'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.kitchenFacilities}
                                         nameOfPart={'kitchenFacilities'}/>
                                 </MDBCol>
                                 <MDBCol md={6} sm={5}>
@@ -275,6 +331,7 @@ class HostStep4Page extends Component {
                                         text="لیوان"
                                         name='لیوان'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.kitchenFacilities}
                                         nameOfPart={'kitchenFacilities'}/>
                                 </MDBCol>
                                 <MDBCol  md={6} sm={7} className={"fv-hostStep4CheckBoxGroupInColumnOne"}>
@@ -287,6 +344,7 @@ class HostStep4Page extends Component {
                                         text="سماور"
                                         name='سماور'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.kitchenFacilities}
                                         nameOfPart={'kitchenFacilities'}/>
                                 </MDBCol>
                                 <MDBCol md={6} sm={5}>
@@ -299,6 +357,7 @@ class HostStep4Page extends Component {
                                         text="کتری"
                                         name='کتری'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.kitchenFacilities}
                                         nameOfPart={'kitchenFacilities'}/>
                                 </MDBCol>
                                 <MDBCol  md={6} sm={7} className={"fv-hostStep4CheckBoxGroupInColumnOne"}>
@@ -311,6 +370,7 @@ class HostStep4Page extends Component {
                                         text="استکان"
                                         name='استکان'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.kitchenFacilities}
                                         nameOfPart={'kitchenFacilities'}/>
                                 </MDBCol>
                                 <MDBCol md={6} sm={5}>
@@ -323,6 +383,7 @@ class HostStep4Page extends Component {
                                         text="قابلمه"
                                         name='قابلمه'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.kitchenFacilities}
                                         nameOfPart={'kitchenFacilities'}/>
                                 </MDBCol>
                                 <MDBCol  md={6} sm={7} className={"fv-hostStep4CheckBoxGroupInColumnOne"}>
@@ -335,6 +396,7 @@ class HostStep4Page extends Component {
                                         text="قوری"
                                         name='قوری'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.kitchenFacilities}
                                         nameOfPart={'kitchenFacilities'}/>
                                 </MDBCol>
                                 <MDBCol md={6} sm={5}>
@@ -347,6 +409,7 @@ class HostStep4Page extends Component {
                                         text="ماهیتابه"
                                         name='ماهیتابه'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.kitchenFacilities}
                                         nameOfPart={'kitchenFacilities'}/>
                                 </MDBCol>
                             </MDBRow>
@@ -363,6 +426,7 @@ class HostStep4Page extends Component {
                                         text="کولر"
                                         name='کولر'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.coolingAndHeatingFacilities}
                                         nameOfPart={'coolingAndHeatingFacilities'}/>
                                 </MDBCol>
                                 <MDBCol  md={6} sm={7} className={"fv-hostStep4CheckBoxGroupInColumnOne"}>
@@ -375,6 +439,7 @@ class HostStep4Page extends Component {
                                         text="پنکه"
                                         name='پنکه'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.coolingAndHeatingFacilities}
                                         nameOfPart={'coolingAndHeatingFacilities'}/>
                                 </MDBCol>
                                 <MDBCol md={6} sm={5}>
@@ -387,6 +452,7 @@ class HostStep4Page extends Component {
                                         text="کولر گازی"
                                         name='کولر گازی'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.coolingAndHeatingFacilities}
                                         nameOfPart={'coolingAndHeatingFacilities'}/>
                                 </MDBCol>
                                 <MDBCol  md={6} sm={7} className={"fv-hostStep4CheckBoxGroupInColumnOne"}>
@@ -399,6 +465,7 @@ class HostStep4Page extends Component {
                                         text="پکیج"
                                         name='پکیج'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.coolingAndHeatingFacilities}
                                         nameOfPart={'coolingAndHeatingFacilities'}/>
                                 </MDBCol>
                                 <MDBCol md={6} sm={5}>
@@ -411,6 +478,7 @@ class HostStep4Page extends Component {
                                         text="کرسی"
                                         name='کرسی'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.coolingAndHeatingFacilities}
                                         nameOfPart={'coolingAndHeatingFacilities'}/>
                                 </MDBCol>
                                 <MDBCol  md={6} sm={7} className={"fv-hostStep4CheckBoxGroupInColumnOne"}>
@@ -423,6 +491,7 @@ class HostStep4Page extends Component {
                                         text="شومینه"
                                         name='شومینه'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.coolingAndHeatingFacilities}
                                         nameOfPart={'coolingAndHeatingFacilities'}/>
                                 </MDBCol>
                                 <MDBCol md={6} sm={5}>
@@ -435,6 +504,7 @@ class HostStep4Page extends Component {
                                         text="بخاری گازی"
                                         name='بخاری گازی'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.coolingAndHeatingFacilities}
                                         nameOfPart={'coolingAndHeatingFacilities'}/>
                                 </MDBCol>
                                 <MDBCol  md={6} sm={7} className={"fv-hostStep4CheckBoxGroupInColumnOne"}>
@@ -447,6 +517,7 @@ class HostStep4Page extends Component {
                                         text="هیتر"
                                         name='هیتر'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.coolingAndHeatingFacilities}
                                         nameOfPart={'coolingAndHeatingFacilities'}/>
                                 </MDBCol>
                             </MDBRow>
@@ -552,6 +623,7 @@ class HostStep4Page extends Component {
                                         text="صبحانه"
                                         name='صبحانه'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.catering}
                                         nameOfPart={'catering'}/>
                                 </MDBCol>
                             </MDBRow>
@@ -566,6 +638,7 @@ class HostStep4Page extends Component {
                                         text="نهار"
                                         name='نهار'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.catering}
                                         nameOfPart={'catering'}/>
                                 </MDBCol>
                             </MDBRow>
@@ -580,6 +653,7 @@ class HostStep4Page extends Component {
                                         text="شام"
                                         name='شام'
                                         setCheckbox = {this.setCheckbox}
+                                        setCheckedPrev = {this.state.catering}
                                         nameOfPart={'catering'}/>
                                 </MDBCol>
                             </MDBRow>

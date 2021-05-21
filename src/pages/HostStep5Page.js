@@ -21,6 +21,20 @@ class HostStep5Page extends Component {
             monthlyDiscount:''
         }
     }
+    componentDidMount() {
+
+        if( JSON.parse(localStorage.getItem("step5"))){
+            const prevData =  JSON.parse(localStorage.getItem("step5"))
+            this.setState({
+                pricesFromSaturdayToWednesday:prevData.normal_cost,
+                priceFridayAndHoliday:prevData.special_cost,
+                extraPersonPricesOnNormalDays:prevData.normal_extra_cost,
+                extraPersonPricesOnHolidays:prevData.special_extra_cost,
+                weeklyDiscount:prevData.weekly_discount,
+                monthlyDiscount:prevData.monthly_discount,
+            })
+        }
+    }
 
     render() {
         const localStorageData={
