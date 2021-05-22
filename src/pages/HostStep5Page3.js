@@ -23,6 +23,7 @@ class HostStep5Page3 extends Component {
             selectedFourthPic:'',
 
 
+            fileTest:'',
             test:''
         }
 
@@ -36,6 +37,8 @@ componentDidMount() {
 }
 
     fileSelectedHandler = (event) => {
+        this.setState({fileTest: event.target.files})
+
         console.log(event.target.value)
         let files = event.target.files;
         let result = new FileReader()
@@ -76,7 +79,7 @@ componentDidMount() {
 
 
         const allData={
-            disinfected:1,
+
             phone_number: step1Info.phone_number,
             story: step1Info.story,
             title: step1Info.title,
@@ -103,6 +106,7 @@ componentDidMount() {
             shower:  step3Info.shower,
             standard_capacity: step3Info.standard_capacity,
             view:  step3Info.view,
+            disinfected:step3Info.disinfected,
 
             bodyguard: step4Info.bodyguard,
             catering: step4Info.catering,
@@ -233,6 +237,8 @@ componentDidMount() {
         if(allData.weekly_discount === ""){
             delete allData.weekly_discount
         }
+        console.log(allData)
+
             //console.log(JSON.parse(localStorage.getItem("step5")))
        // console.log(JSON.parse(localStorage.getItem("info")))
 
@@ -284,12 +290,26 @@ componentDidMount() {
 
                                     console.log(allData)
                                     storeVilla(allData)
-                                        .then(res=>console.log(res))
+                                        .then(res=>{
+                                            if(res.status===200){
+                                                localStorage.removeItem("step1")
+                                                localStorage.removeItem("step2")
+                                                localStorage.removeItem("step2-2")
+                                                localStorage.removeItem("step3")
+                                                localStorage.removeItem("step4")
+                                                localStorage.removeItem("step5")
+                                                localStorage.removeItem("step5-2")
+                                            }
+                                        })
                                         .catch(err=>console.log(err.response))
+
+                                    let fd = new FormData()
+                                    fd.append("images", this.state.fileTest);
                                    const images={
-                                        images:["test.png","test"]
+                                       img_src:"test.png",
+                                       img_title:"test"
                                     }
-                                    SetImages(images,30)
+                                    SetImages(this.state.test,30)
                                         .then(res => console.log(res))
                                         .catch(err=>console.log(err.response))
                                 }}/> </Link>

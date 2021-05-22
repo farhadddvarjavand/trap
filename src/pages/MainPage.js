@@ -33,26 +33,12 @@ class MainPage extends Datas {
             dateToReturn:'',
             numberOfPeople:'',
             hideButtonLogin:true,
-            nameAndFamily:'',
-            avatar:'',
+
 
         }
     }
 
-    componentDidMount() {
-        super.componentDidMount();
-       this.getUserInfo()
 
-
-    }
-    getUserInfo = async () =>{
-        await  getUserInformation()
-         .then(res=> this.setState({
-                nameAndFamily:res.data.fullname,
-                avatar:res.data.avatar
-            }))
-            .catch(err=>console.log(err.response))
-    }
 
     selectDayToGo = (date) =>{                                    // set date to go
         if(date) {
@@ -67,6 +53,13 @@ class MainPage extends Datas {
 
 
     render() {
+        const info = JSON.parse(localStorage.getItem("infoUser"))
+        let nameAndFamily =  ""
+        let avatar = ""
+        if(info){
+            nameAndFamily=info.userInfo.fullname
+            avatar=info.userInfo.avatar
+        }
 
         const popularVillage = this.state.popularVillas
 
@@ -121,7 +114,7 @@ class MainPage extends Datas {
 
                             <a className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" : "fv-hideButtonRegister"}  onClick={()=>{
                                 this.setState({hideButtonLogin:!this.state.hideButtonLogin})
-                            }}> <img src={this.state.avatar ? `${config.webapi}/images/villas/thum/${this.state.avatar}` : MobileLogo} /> {this.state.nameAndFamily} </a>
+                            }}> <img src={avatar ? `${config.webapi}/images/villas/thum/${avatar}` : MobileLogo} /> {nameAndFamily} </a>
                             <Link to={ "/hostStep1"} ><input type='button' value=' میزبان شوید' onClick={()=> this.props.history.push('/login3')} className={localStorage.getItem("token") ? "fv-getHostButtonMainPage" : "fv-hideButtonRegister"}  /> </Link>
                         </MDBCol>
                         <MDBCol md={9}>
@@ -153,11 +146,11 @@ class MainPage extends Datas {
                     <MDBCol md={12} sm={12}>
                         <MDBRow>
                             <MDBCol md={2} sm={2}>
-                                <img src={this.state.avatar ? `${config.webapi}/images/villas/thum/${this.state.avatar}` : MobileLogo} />
+                                <img src={avatar ? `${config.webapi}/images/villas/thum/${avatar}` : MobileLogo} />
                             </MDBCol>
                             <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={7} sm={8}>
                                 <MDBRow>
-                                    <a><h5>{this.state.nameAndFamily}</h5></a>
+                                    <a><h5>{nameAndFamily}</h5></a>
                                 </MDBRow>
                                 <MDBRow>
                                     <Link to={"/Profile"}><a>مشاهده حساب کاربری</a></Link>

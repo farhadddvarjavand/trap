@@ -49,6 +49,9 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
 .fv-hostStepPage2LeftButton.fv-hostStepPage1LeftButton {
   z-index: 0;
 }
+.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left.fv-hostStepPageSpace .fv-hostStepPage2LeftButton {
+  margin-left: -14%;
+}
 
 @media (max-width: 1200px) {
   .fv-HostStep2Page.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {

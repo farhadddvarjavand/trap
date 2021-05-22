@@ -8,6 +8,7 @@ import HeaderSteps from "../componentsPages/HeaderSteps";
 import Logo from "../images/Logo.png";
 import Footer from "../componentsPages/footer";
 import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt"
+import MobileLogo from "../images/MobileLogo.png";
 
 class HostStep5Page extends Component {
     constructor(props) {
@@ -18,13 +19,21 @@ class HostStep5Page extends Component {
             extraPersonPricesOnNormalDays:'',
             extraPersonPricesOnHolidays:'',
             weeklyDiscount:'',
-            monthlyDiscount:''
+            monthlyDiscount:'',
+
+            validNormalCost:false,
+            click:false,
+            hideUniq:false,
         }
     }
     componentDidMount() {
 
         if( JSON.parse(localStorage.getItem("step5"))){
             const prevData =  JSON.parse(localStorage.getItem("step5"))
+            let NormalCost =  false
+            if(prevData.normal_cost){
+                NormalCost=true
+            }
             this.setState({
                 pricesFromSaturdayToWednesday:prevData.normal_cost,
                 priceFridayAndHoliday:prevData.special_cost,
@@ -32,11 +41,18 @@ class HostStep5Page extends Component {
                 extraPersonPricesOnHolidays:prevData.special_extra_cost,
                 weeklyDiscount:prevData.weekly_discount,
                 monthlyDiscount:prevData.monthly_discount,
+
+                validNormalCost:NormalCost,
             })
         }
     }
 
     render() {
+        let validationInputs = false
+        if(this.state.validNormalCost){
+            validationInputs=true
+        }
+
         const localStorageData={
             normal_cost:this.state.pricesFromSaturdayToWednesday,
             special_cost:this.state.priceFridayAndHoliday,
@@ -55,13 +71,22 @@ class HostStep5Page extends Component {
 
                     <MDBRow className={"fv-HostStep1PageBody"}>
                         <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
+                            <p className={this.state.click && validationInputs===false ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>لطفا کادر های قرمز را به درستی پر کنید</p>
+                            <p className={this.state.click && this.state.validNormalCost===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}><i className="fas fa-exclamation-triangle" /> قیمت را به درستی وارد فرمایید - وارد کردن قیمت اجباریست</p>
                             <h5 className={"fv-hostStep3NumberOfCapacityMobile"}>قیمت گذاری کلی</h5>
                             <p className={"fv-hostStep5P"}>قیمت از شنبه تا چهارشنبه</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
                                     <input type="text" value={this.state.pricesFromSaturdayToWednesday}
-                                           onChange={(e)=>this.setState({pricesFromSaturdayToWednesday:e.target.value})}
-                                    />
+                                           onChange={(e)=>{
+                                               if(e.target.value && Number(e.target.value)){
+                                                   this.setState({validNormalCost:true})
+                                               }else {
+                                                   this.setState({validNormalCost:false})
+                                               }
+                                               this.setState({pricesFromSaturdayToWednesday:e.target.value})
+                                           }}
+                                           className={this.state.click && this.state.validNormalCost===false ?  "fv-redBorderError" : ""} />
                                 </MDBCol>
                             </MDBRow>
                             <p className={"fv-hostStep5P"}>قیمت پنجشنبه و جمعه و تعطیل (ایام پیک)</p>
@@ -111,7 +136,34 @@ class HostStep5Page extends Component {
 
                         </MDBCol>
 
-                        <HostStepLeftBodyContent
+
+                        <MDBCol className={"fv-hostStepPage1Left fv-hostStepPageSpace"} sm={12} md={6}>
+                            <MDBRow className={"fv-hostStepPage1LeftContentBody"}>
+                                <p>
+                                    ا این موضوع رو برو هستند که محتوای اصلی صفحات آماده نیست. در نتیجه طرح
+                                    کلی دید درستی به کار فرما نمیدهد. اگر طراح بخواهد دنبال متن های مرتبط
+                                    بگردد تمرکزش از روی کار اصلی برداشته میشود و اینکار زمان بر خواهد بو
+                                    د. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگران را
+                                </p>
+                                <img src={MobileLogo} className={"fv-hostStepPage1LeftImage"}/>
+                            </MDBRow>
+                            <MDBRow className={"fv-hostStepPage2LeftButtonBody"}>
+                                <input type="button" value="مرحله بعد"  className={"fv-hostStepPage1LeftButton"} onClick={()=>{
+                                    if(validationInputs){
+                                        localStorage.setItem(`${"step5"}`, JSON.stringify(localStorageData))
+                                        this.props.history.push('../../hostStep5-2')
+                                    }
+                                    else {
+                                        this.setState({click:true})
+                                    }
+                                }}/>
+                                <input type="button" value="مرحله قبل"  className={"fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"} onClick={()=>{
+                                    this.props.history.push('../../hostStep4')
+                                }}/>
+                            </MDBRow>
+                        </MDBCol>
+
+                        {/* <HostStepLeftBodyContent
                             text="طراحان سایت هنگام طراحی قالب سایت معمولا با این موضوع رو برو هستند ک
                             ه محتوای اصلی صفحات آماده نیست. در نتیجه طرح کلی دید درستی به کار فرما نمیدهد. اگ
                             ر طراح بخواهد دنبال متن های مرتبط بگردد تمرکزش از روی کار اصلی برداشته میشود و این
@@ -121,7 +173,7 @@ class HostStep5Page extends Component {
                             nextLink={"../../hostStep5-2"}
                             returnLink={"../../hostStep4"}
                             localStorageName={"step5"}
-                            localStorageData={localStorageData}/>
+                            localStorageData={localStorageData}/> */}
                     </MDBRow>
                     <MDBRow>
                         <Footer />

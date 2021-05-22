@@ -15,14 +15,14 @@ class HeaderSteps extends Component {
     }
 
     render() {
-        const info = JSON.parse(localStorage.getItem("info"))
+        const info = JSON.parse(localStorage.getItem("infoUser"))
         return (
             <MDBContainer className={"hostStepPage"}>
                 <MDBRow className={'footerHostStep1Page'}>
                     <MDBCol md={3} sm={6}>
-                        <img src={info.avatar ? `${config.webapi}/images/villas/thum/${info.avatar }` : ""}/>
+                        <img src={info.userInfo.avatar ? `${config.webapi}/images/villas/thum/${info.userInfo.avatar }` : ""}/>
                         <i className="fas fa-chevron-down name_mobile" />
-                        <a className={"name_desktop"}>{info.nameAndFamily}</a>
+                        <a className={"name_desktop"}>{info.userInfo.fullname}</a>
                     </MDBCol>
                     <MDBCol md={9} sm={6} className={""}>
                         <img src={FotterpageLogo} className={"hide_mobile"}/>

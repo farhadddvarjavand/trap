@@ -22,6 +22,7 @@ class HostStep3Page extends Component {
             Toilet:0,
             shower:1,
             publicToiletCheckbox:[],
+            disinfectedCheckbox:[],
             otherViewsCheckbox:[],
             accommodationViewsCheckbox:[],
             typeOfRent:'title',
@@ -37,8 +38,12 @@ class HostStep3Page extends Component {
         if( JSON.parse(localStorage.getItem("step3"))){
             const prevsharedBathroom =[]
             const prevPlaces = []
-            const prevSharedBathroom = []
+            const prevView = []
+            const prevDisinfected = []
             const prevData =  JSON.parse(localStorage.getItem("step3"))
+            if(prevData.disinfected === 1){
+                prevDisinfected.push("خانه ضدعفونی شده میباشد")
+            }
             if(prevData.shared_bathroom === 1){
                 prevsharedBathroom.push("سرویس بهداشتی مشترک است")
             }
@@ -49,11 +54,12 @@ class HostStep3Page extends Component {
                 }
             }
             if(prevData.view){
-                const shareBathroomSplit = prevData.view.split(",")
-                for(let i = 0 ; i < shareBathroomSplit.length ; i++){
-                    prevSharedBathroom.push(shareBathroomSplit[i])
+                const View = prevData.view.split(",")
+                for(let i = 0 ; i < View.length ; i++){
+                    prevView.push(View[i])
                 }
             }
+
 
             this.setState({
                 standardCapacity:prevData.standard_capacity,
@@ -65,8 +71,9 @@ class HostStep3Page extends Component {
                 shower:prevData.shower,
                 yourAccommodationMeasure:prevData.area,
                 publicToiletCheckbox:prevsharedBathroom,
+                disinfectedCheckbox:prevDisinfected,
                 otherViewsCheckbox:prevPlaces,
-                accommodationViewsCheckbox:prevSharedBathroom,
+                accommodationViewsCheckbox:prevView,
 
             })
         }
@@ -86,6 +93,7 @@ class HostStep3Page extends Component {
         }else alert('ظرفیت زیر صفر میباشد')
     }
     setCheckbox =(event,checkboxName) =>{
+
         let repeat = false
         const setData= this.state[checkboxName]
         if(event.target.checked === false){
@@ -111,6 +119,10 @@ class HostStep3Page extends Component {
         let publicToilet = 0
         if(this.state.publicToiletCheckbox[0]){
             publicToilet = 1
+        }
+        let disinfecte = 0
+        if(this.state.disinfectedCheckbox[0]){
+            disinfecte = 1
         }
 
         let otherViewsCheckbox =""
@@ -141,11 +153,13 @@ class HostStep3Page extends Component {
             ir_toilet:this.state.iranianToilet,
             eu_toilet:this.state.Toilet,
             shower:this.state.shower,
+            disinfected:disinfecte,
             shared_bathroom:publicToilet,
             places:otherViewsCheckbox,
             view:accommodationViewsCheckbox,
             area:this.state.yourAccommodationMeasure,
         }
+        console.log(localStorageData)
        // console.log(JSON.parse(localStorage.getItem("step2-2")))
         return (
             <div className={" fv-HostStep2Page fv-hostStep2Page2 fv-hostStep3Page"}>
@@ -232,6 +246,18 @@ class HostStep3Page extends Component {
                                 setCheckbox = {this.setCheckbox}
                                 setCheckedPrev = {this.state.publicToiletCheckbox} // آرایه ایی که اگر لوکال استوریج وجود داشت پر می باشد
                                 nameOfPart={'publicToiletCheckbox'}/>
+
+                            <HostStepCheckbox
+                                className="fv-hostStep3CheckBox"
+                                mdCheckbox = "1"
+                                smCheckbox="2"
+                                mdCheckboxText="5"
+                                smCheckboxText="10"
+                                text="خانه ضدعفونی شده میباشد"
+                                name="خانه ضدعفونی شده میباشد"
+                                setCheckbox = {this.setCheckbox}  // توسط این کامپوننت nameOfPart که نام آن در استیت هست را پاس میدهد به این تابع تا استیت آن عوض شود
+                                setCheckedPrev = {this.state.disinfectedCheckbox} // آرایه ایی که اگر لوکال استوریج وجود داشت پر می باشد
+                                nameOfPart={'disinfectedCheckbox'}/>
 
                             <h5 className={"fv-hostStep3AnyPlace"}>سایر فضاها</h5>
 

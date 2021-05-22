@@ -11,7 +11,7 @@ import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt
 import HostStepCheckbox from "../componentsPages/hostStepCheckbox"
 import HostStep4PageRightBody from "../componentsPages/hostStep4PageRightBody"
 import {Link} from "react-router-dom";
-import {sendPhoneNumber, verifySmsCode} from "../services/userService";
+import {getUserInformation, sendPhoneNumber, verifySmsCode} from "../services/userService";
 
 class LoginPage2 extends Component {
     constructor(props) {
@@ -82,6 +82,14 @@ class LoginPage2 extends Component {
         }
         const { status, data } = await verifySmsCode(user);
         if (status === 200 && data.data.user) {
+
+
+
+                    const info={
+                        userInfo:data.data.user
+                    }
+                    localStorage.setItem("infoUser" , JSON.stringify(info))
+
 
             // Redirect User
             this.props.history.push("/mainPage");

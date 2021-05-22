@@ -22,9 +22,16 @@
     width: 445px;
      background-color: white;
   }
+  .fv-hostStepPage1Right .fv-hostStep3InputText{
+    .fv-redBorderError{
+      border: 1px solid red ;
+      background: #E88F0A ;
+    }
+  }
   .fv-hostStepPage2LeftButtonBody {
     margin-top: 55%;
   }
+
 }
 
 
