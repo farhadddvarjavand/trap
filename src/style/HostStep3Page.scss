@@ -82,7 +82,8 @@ $backgroundColorButton:#15BE29;
       margin-right: -7%;
     }
     .fv-hostStep3CheckBoxGroupInLineTwo{
-      margin-right: -6%;
+    //  margin-right: -6%;
+      margin-right: -2%;
     }
     .fv-hostStep3CheckBoxGroupInLineOneThree{
       margin-right: -5%;
@@ -168,11 +169,27 @@ $backgroundColorButton:#15BE29;
   }
   .fv-hostStepPage1Right .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine .col-md-8 {
     padding-right: 0%;
-    margin-right: 5%;
+    // margin-right: 5%;
+    margin-right: 7%;
   }
    .fv-HostStep1PageBody .fv-hostStepPage1Right p {
     font-size: 14px;
   }
+  .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine .col-md-2 {
+    margin-right: -6%;
+  }
+  .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine{
+    margin-inline-start: auto;
+  }
+  .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLineTwo .col-md-8 {
+    margin: 0;
+    padding-right: 6%;
+  }
+  .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine.fv-hostStep3CheckBoxGroupInLineSecond .col-md-3 {
+    flex: 0 0 31%;
+    max-width: 28%;
+  }
+
 }
 
 @media (max-width: 1200px) and (min-width: 991px){
@@ -420,6 +437,19 @@ $backgroundColorButton:#15BE29;
     .fv-hostStepPage1Right .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine .fv-hostStep3CheckBoxGroupInLineOne .col-md-8 {
       margin-right: -12%;
     }
+  }
+  .fv-hostStep3Page .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine .col-md-2 {
+    margin-right: 0%;
+  }
+
+  .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLineTwo .col-sm-4 {
+    flex: 0 0 18.333333%;
+    width: 17.333333% !important;
+    margin-right: 2%;
+  }
+  .fv-hostStep3Page .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine.fv-hostStep3CheckBoxGroupInLineSecond .col-md-3 {
+    flex: 0 0 57%;
+    max-width: 61%;
   }
 }
 @media (max-width: 320px) {

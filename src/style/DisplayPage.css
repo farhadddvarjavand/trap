@@ -1224,7 +1224,7 @@ display: none;
         margin-right: -7px;
     }
     .fv-DisplayPageCalenderForMobile .Calendar {
-        margin-right: -12vw;
+        margin-right: -10vw;
     }
     .container .mapboxgl-map , .container-lg .mapboxgl-map , .container-md .mapboxgl-map , .container-sm .mapboxgl-map , .container-xl .mapboxgl-map {
         width: 251px !important;
@@ -1258,6 +1258,12 @@ display: none;
         margin-right: 12%;
     }
 
+}
+
+@media (max-width: 320px) {
+    .fv-DisplayPageCalenderForMobile .Calendar {
+        margin-right: -12vw;
+    }
 }
 @media (max-width: 280px) {
     .fv-DisplayPageLoginSignMobile {

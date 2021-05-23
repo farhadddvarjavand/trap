@@ -12,6 +12,7 @@ import Calender from "../componentsPages/calender";
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 import CalendarForProfile from "../data/CalendarForProfile";
+import CalenderProfileMobile from "../data/CalenderProfileMobile";
 import {changeDatesCost, changeDatesStatus, villaDates} from "../services/userService";
 import {villaPrice} from "../services/villaService";
 import {getToday, priceOfPerMonth} from "../componentsPages/calculationsDate";
@@ -24,6 +25,9 @@ class ProfilePageCalender extends Component {
             price:'',
             villaPrice:[],
             selectedDays : '',
+            selectedDaysMobile : '',
+
+            selectedDaysAll : ''
 
         }
 
@@ -36,7 +40,14 @@ class ProfilePageCalender extends Component {
 
     getSelectedDays = (selectedDay)=>{
         if(selectedDay && selectedDay !== this.state.selectedDays){
-            this.setState({selectedDays:selectedDay})
+            this.setState({selectedDays:selectedDay})  // فقط برای چک کردن و تکراری نشدن
+            this.setState({selectedDaysAll:selectedDay}) // روز های انتخاب شده برای دسکتاپ
+        }
+    }
+    getSelectedDaysmobile = (selectedDay)=>{
+        if(selectedDay && selectedDay !== this.state.selectedDaysMobile){
+            this.setState({selectedDaysMobile:selectedDay})   // فقط برای چک کردن و تکراری نشدن
+            this.setState({selectedDaysAll:selectedDay})// روز های انتخاب شده برای موبایل selectedDay جدید در خود کامپوننت مخصوص تقویم ایجاد میشود همراه با قبلی هایش
         }
     }
     render() {
@@ -134,11 +145,11 @@ class ProfilePageCalender extends Component {
                             </MDBRow>
                             <MDBRow className={"fv-ProfilePageWalletWalletButton"}>
                                 <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
-                                    <input type="button" value="ذخیره قیمت" onClick={()=>{
+                                    <input className={"fv-changePriceCalendar"} type="button" value="ذخیره قیمت" onClick={()=>{
                                         const setDatesArray = []
                                         let setDatesString = ''
-                                        for(let i = 0 ; i < this.state.selectedDays.length ; i++){
-                                            setDatesArray.push(`${this.state.selectedDays[i].year}/${this.state.selectedDays[i].month}/${this.state.selectedDays[i].day}`)
+                                        for(let i = 0 ; i < this.state.selectedDaysAll.length ; i++){
+                                            setDatesArray.push(`${this.state.selectedDaysAll[i].year}/${this.state.selectedDaysAll[i].month}/${this.state.selectedDaysAll[i].day}`)
                                         }
                                         for(let j = 0 ; j < setDatesArray.length ; j ++){
                                             if(j===0){
@@ -160,11 +171,11 @@ class ProfilePageCalender extends Component {
 
 
                                     }}/>
-                                    <input type="button" value="ذخیره وضعیت" onClick={()=>{
+                                    <input  className={"fv-changeStateCalendar"} type="button" value="ذخیره وضعیت" onClick={()=>{
                                         const setDatesArray = []
                                         let setDatesString = ''
-                                        for(let i = 0 ; i < this.state.selectedDays.length ; i++){
-                                            setDatesArray.push(`${this.state.selectedDays[i].year}/${this.state.selectedDays[i].month}/${this.state.selectedDays[i].day}`)
+                                        for(let i = 0 ; i < this.state.selectedDaysAll.length ; i++){
+                                            setDatesArray.push(`${this.state.selectedDaysAll[i].year}/${this.state.selectedDaysAll[i].month}/${this.state.selectedDaysAll[i].day}`)
                                         }
                                         for(let j = 0 ; j < setDatesArray.length ; j ++){
                                             if(j===0){
@@ -182,6 +193,7 @@ class ProfilePageCalender extends Component {
 
                                         if(this.state.changeStatusSelectedDays !== 'title'){           // برای تغییر دادن status میباشد
                                             changeDatesStatus(datasForStatus ,  this.props.match.params.id)
+                                                .then(res => res.status === 200 ?  window.location.reload() : '')
                                         }
 
                                     }}/>
@@ -217,17 +229,12 @@ class ProfilePageCalender extends Component {
                             </MDBRow>
 
 
-                            <MDBRow className={"fv-DisplayPageDetails"}>
-                                    <MDBCol md={8} className={"fv-DisplayPageDetailsRightBody"}>
-                                        <MDBRow className={"fv-DisplayPageCalender fv-ProfilePageCalenderBodyMobile "}>
-                                            <MDBCol md={6}>
-                                                <Calender />
-                                            </MDBCol>
-                                            <MDBCol md={6} className={"fv-calenderDisplayNonMobile"}>
-                                                <Calender />
-                                            </MDBCol>
-                                        </MDBRow>
-                                    </MDBCol>
+                            <MDBRow className={'fv-profilePageCalenderForMobile'}>                  {/*    calender-calendar     */}
+                                <MDBCol>
+                                    <CalenderProfileMobile
+                                        villaPrice={priceDaysUpdates}
+                                        getSelectedDay={this.getSelectedDaysmobile} />
+                                </MDBCol>
                             </MDBRow>
 
                             <MDBRow className={"fv-ProfilePageCalenderDayReserve"}>
@@ -240,10 +247,10 @@ class ProfilePageCalender extends Component {
                                     <MDBRow>
                                         <MDBCol>
                                             <select value={this.state.changeStatusSelectedDays} onChange={(event)=>this.setState({changeStatusSelectedDays:event.target.value})}>
-                                                <option value='title' disabled>تغییر روز</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
+                                                <option value='title' disabled>وضعیت</option>
+                                                <option value="0">قابل رزرو (فعال)</option>
+                                                <option value="1">غیر قابل رزرو(تکمیل)</option>
+                                                <option value="2">تعطیل</option>
                                             </select>
                                         </MDBCol>
                                     </MDBRow>
@@ -275,8 +282,59 @@ class ProfilePageCalender extends Component {
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow className={"fv-ProfilePageWalletWalletButton"}>
-                                <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
-                                    <input type="button" value="ذخیره پیام" onClick={()=>{
+                                <MDBCol md={3} sm={6} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
+                                    <input className={"fv-changePriceCalendar"} type="button" value="ذخیره قیمت" onClick={()=>{
+                                        const setDatesArray = []
+                                        let setDatesString = ''
+                                        for(let i = 0 ; i < this.state.selectedDaysAll.length ; i++){
+                                            setDatesArray.push(`${this.state.selectedDaysAll[i].year}/${this.state.selectedDaysAll[i].month}/${this.state.selectedDaysAll[i].day}`)
+                                        }
+                                        for(let j = 0 ; j < setDatesArray.length ; j ++){
+                                            if(j===0){
+                                                setDatesString= `${setDatesArray[j]}`
+                                            }
+                                            else {
+                                                setDatesString= `${setDatesString},${setDatesArray[j]}`
+                                            }
+                                        }
+                                        const datasForPrice = {             // برای تغییر دادن قیمت میباشد
+                                            dates : setDatesString ,
+                                            special_price : this.state.price
+                                        }
+
+                                        if(this.state.price){                                         // برای تغییر دادن قیمت میباشد
+                                            changeDatesCost(datasForPrice , this.props.match.params.id)
+                                                .then(res => res.status === 200 ?  window.location.reload() : '')
+                                        }
+
+
+                                    }}/>
+                                </MDBCol>
+                                <MDBCol md={3} sm={6} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
+                                    <input  className={"fv-changeStateCalendar"} type="button" value="ذخیره وضعیت" onClick={()=>{
+                                        const setDatesArray = []
+                                        let setDatesString = ''
+                                        for(let i = 0 ; i < this.state.selectedDaysAll.length ; i++){
+                                            setDatesArray.push(`${this.state.selectedDaysAll[i].year}/${this.state.selectedDaysAll[i].month}/${this.state.selectedDaysAll[i].day}`)
+                                        }
+                                        for(let j = 0 ; j < setDatesArray.length ; j ++){
+                                            if(j===0){
+                                                setDatesString= `${setDatesArray[j]}`
+                                            }
+                                            else {
+                                                setDatesString= `${setDatesString},${setDatesArray[j]}`
+                                            }
+                                        }
+
+                                        const datasForStatus = {             // برای تغییر دادن status میباشد
+                                            dates : setDatesString ,
+                                            status : this.state.changeStatusSelectedDays
+                                        }
+
+                                        if(this.state.changeStatusSelectedDays !== 'title'){           // برای تغییر دادن status میباشد
+                                            changeDatesStatus(datasForStatus ,  this.props.match.params.id)
+                                                .then(res => res.status === 200 ?  window.location.reload() : '')
+                                        }
 
                                     }}/>
                                 </MDBCol>

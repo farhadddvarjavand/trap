@@ -104,7 +104,7 @@
     height:100%;
     padding-right: 1.5%;
   }
-  .week-days {
+  .fv-ProfilePageUserSetInfo .week-days {
     width: 127%;
     margin-right: -13%;
   }
@@ -113,7 +113,7 @@
 
 
 
-  .Calendar {
+  .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderDayName .Calendar {
     --cl-color-black: #444444;
     --cl-color-disabled: #d4d4d4;
     --cl-color-error: #ff2929;
@@ -136,14 +136,14 @@
     box-shadow: none;
   }
 
-  .Calendar__day.-rtl {
+  .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderDayName  .Calendar__day.-rtl {
     font-size: 2.55em;
     height: 110px;
     margin-right: 0.5%;
     border-radius: 9px;
     width: 105px;
   }
-  .Calendar__sectionWrapper {
+  .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderDayName .Calendar__sectionWrapper {
     position: relative;
     min-height: 58.8em;
     overflow: hidden;
@@ -167,14 +167,14 @@
     margin-bottom: 1%;
   }
 
-  .Calendar__section.-shown {
+  .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderDayName .Calendar__section.-shown {
     opacity: 1;
     transform: translateX(0);
     padding-right: 5%;
     padding-left: 5%;
     margin-left: -2.75%;
   }
-  .Calendar__weekDays {
+  .fv-ProfilePageUserSetInfo  .fv-ProfilePageCalenderDayName .Calendar__weekDays {
     display: flex;
     justify-content: space-between;
     color: black;
@@ -195,6 +195,17 @@
   font-size: 15px;
   margin-top: 6%;
 }
+.fv-ProfilePageGustComments2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageWalletWalletButton .fv-ProfilePageUserSetInfoButton .fv-changeStateCalendar{
+  margin-top: 19%;
+  position: absolute;
+  margin-right: -140%;
+  z-index: 0;
+}
+.fv-ProfilePageGustComments2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageWalletWalletButton .fv-ProfilePageUserSetInfoButton .fv-changePriceCalendar{
+  z-index: 1;
+}
+
+
 @media (max-width: 540px) {
   .fv-ProfilePageCalender {
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo {
@@ -275,6 +286,16 @@
     .fv-footerMenuMobileTitle {
       margin-top: 44%;
     }
+     .fv-test {
+      font-size: 11px;
+    }
+   .fv-test2 {
+      margin-top: 0%;
+    }
+    .fv-profilePageCalenderForMobile .Calendar{
+      margin-right: -8%;
+      margin-top: 10%;
+    }
   }
 }
 @media (max-width: 540px) {
@@ -315,6 +336,23 @@
       padding-right: 3%;
       padding-left: 3%;
     }
+  }
+  .fv-ProfilePageGustComments2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageWalletWalletButton .fv-ProfilePageUserSetInfoButton .fv-changeStateCalendar{
+    position: absolute;
+    z-index: 0;
+    margin: 0;
+    margin-left: 55%;
+    margin-top: 5%;
+  }
+  .fv-ProfilePageWallet.fv-ProfilePageGustComments2.fv-ProfilePageCalender .Calendar__day.-rtl.-selected.fv-DaysClass .fv-test {
+    font-size: 11px;
+  }
+
+}
+@media (max-width: 417px) {
+  .fv-ProfilePageCalender .fv-profilePageCalenderForMobile .Calendar{
+    margin-right: -7%;
+    width: 113%;
   }
 }
 @media (max-width: 375px) {
@@ -412,6 +450,12 @@
   }
   .fv-ProfilePageCalender .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderMobile .fv-ProfilePageCalenderImageAndContentMobile .col-sm-7 {
     margin-right: 10%;
+  }
+  .fv-ProfilePageCalender .fv-test {
+    font-size: 9px;
+  }
+  .fv-ProfilePageWallet.fv-ProfilePageGustComments2.fv-ProfilePageCalender .Calendar__day.-rtl.-selected.fv-DaysClass .fv-test {
+    font-size: 8px;
   }
 }
 @media (max-width: 280px) {

@@ -10,6 +10,7 @@ import Logo from "../images/Logo.png";
 import Footer from "../componentsPages/footer";
 import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt"
 import HostStepCheckbox from "../componentsPages/hostStepCheckbox"
+import MobileLogo from "../images/MobileLogo.png";
 
 class HostStep3Page extends Component {
     constructor(props) {
@@ -27,8 +28,13 @@ class HostStep3Page extends Component {
             accommodationViewsCheckbox:[],
             typeOfRent:'title',
             yourSpace:'',
-            yourAccommodationMeasure:''
+            yourAccommodationMeasure:'',
+            setOtherSpace:[],
 
+
+            validRentType:false,
+            validMesure:false,
+            click:false,
 
         }
 
@@ -40,6 +46,7 @@ class HostStep3Page extends Component {
             const prevPlaces = []
             const prevView = []
             const prevDisinfected = []
+            const prevSetOtherSpace = []
             const prevData =  JSON.parse(localStorage.getItem("step3"))
             if(prevData.disinfected === 1){
                 prevDisinfected.push("خانه ضدعفونی شده میباشد")
@@ -59,6 +66,12 @@ class HostStep3Page extends Component {
                     prevView.push(View[i])
                 }
             }
+            if(prevData.setOtherSpace){
+                const SetOtherSpace = prevData.setOtherSpace
+                for(let i = 0 ; i < SetOtherSpace.length ; i++){
+                    prevSetOtherSpace.push(SetOtherSpace[i])
+                }
+            }
 
 
             this.setState({
@@ -74,6 +87,7 @@ class HostStep3Page extends Component {
                 disinfectedCheckbox:prevDisinfected,
                 otherViewsCheckbox:prevPlaces,
                 accommodationViewsCheckbox:prevView,
+                setOtherSpace:prevSetOtherSpace,
 
             })
         }
@@ -116,6 +130,12 @@ class HostStep3Page extends Component {
     }
 
     render() {
+        let validationInputs = false
+        if(this.state.otherViewsCheckbox[0] && this.state.accommodationViewsCheckbox[0]){
+            validationInputs=true
+        }
+
+
         let publicToilet = 0
         if(this.state.publicToiletCheckbox[0]){
             publicToilet = 1
@@ -158,11 +178,11 @@ class HostStep3Page extends Component {
             places:otherViewsCheckbox,
             view:accommodationViewsCheckbox,
             area:this.state.yourAccommodationMeasure,
+            setOtherSpace:this.state.setOtherSpace,
         }
-        console.log(localStorageData)
        // console.log(JSON.parse(localStorage.getItem("step2-2")))
         return (
-            <div className={" fv-HostStep2Page fv-hostStep2Page2 fv-hostStep3Page"}>
+            <MDBContainer className={" fv-HostStep2Page fv-hostStep2Page2 fv-hostStep3Page"}>
                 <MDBContainer className={"fv-HostStep1Page"}>
                     <MDBRow>
                         <HeaderSteps />
@@ -171,6 +191,10 @@ class HostStep3Page extends Component {
                     <MDBRow className={"fv-HostStep1PageBody"}>
 
                         <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
+
+                            <p className={this.state.click && validationInputs===false ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>لطفا کادر های قرمز را به درستی پر کنید</p>
+                            <p className={this.state.click && this.state.otherViewsCheckbox[0]===undefined ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}><i className="fas fa-exclamation-triangle" /> انتخاب سایر فضاها اجباریست</p>
+                            <p className={this.state.click && this.state.accommodationViewsCheckbox[0]===undefined ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}><i className="fas fa-exclamation-triangle" /> انتخاب ویوی اقامتگاه اجباریست</p>
 
                                  <h5 className={"fv-hostStep3NumberOfCapacityMobile"}>ظرفیت اقامت گاه</h5>
 
@@ -261,7 +285,7 @@ class HostStep3Page extends Component {
 
                             <h5 className={"fv-hostStep3AnyPlace"}>سایر فضاها</h5>
 
-                            <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLine"}>
+                            <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLineTwo"}>
                                 <MDBCol md={2} sm={6}>
                                     <HostStepCheckbox
                                         className=""
@@ -275,7 +299,7 @@ class HostStep3Page extends Component {
                                         setCheckedPrev = {this.state.otherViewsCheckbox}
                                         nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
-                                <MDBCol  md={2} sm={6} className={"fv-hostStep3CheckBoxGroupInLineOne test"}>
+                                <MDBCol  md={2} sm={6} className={"fv-hostStep3CheckBoxGroupInLineTwo test"}>
                                     <HostStepCheckbox
                                         className=""
                                         mdCheckbox = "4"
@@ -301,7 +325,7 @@ class HostStep3Page extends Component {
                                         setCheckedPrev = {this.state.otherViewsCheckbox}
                                         nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
-                                <MDBCol md={2} sm={6}  className={"fv-hostStep3CheckBoxGroupInLineOneThree test"}>
+                                <MDBCol md={2} sm={6}  className={"fv-hostStep3CheckBoxGroupInLineTwo test"}>
                                     <HostStepCheckbox
                                         className=""
                                         mdCheckbox = "4"
@@ -314,7 +338,7 @@ class HostStep3Page extends Component {
                                         setCheckedPrev = {this.state.otherViewsCheckbox}
                                         nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
-                                <MDBCol md={2} sm={6} className={"fv-hostStep3CheckBoxGroupInLineFour test"}>
+                                <MDBCol md={2} sm={6} className={"fv-hostStep3CheckBoxGroupInLineTwo test"}>
                                     <HostStepCheckbox
                                         className=""
                                         mdCheckbox = "4"
@@ -327,6 +351,22 @@ class HostStep3Page extends Component {
                                         setCheckedPrev = {this.state.otherViewsCheckbox}
                                         nameOfPart={'otherViewsCheckbox'}/>
                                 </MDBCol>
+                                {this.state.setOtherSpace.map(otherSpaces=>{
+                                    if(otherSpaces!=="")
+                                    return <MDBCol md={2} sm={6} className={"fv-hostStep3CheckBoxGroupInLineTwo test"}>
+                                        <HostStepCheckbox
+                                            className=""
+                                            mdCheckbox = "4"
+                                            smCheckbox="4"
+                                            mdCheckboxText="8"
+                                            smCheckboxText="8"
+                                            text ={otherSpaces}
+                                            name ={otherSpaces}
+                                            setCheckbox = {this.setCheckbox}
+                                            setCheckedPrev = {this.state.otherViewsCheckbox}
+                                            nameOfPart={'otherViewsCheckbox'}/>
+                                    </MDBCol>
+                                })}
                             </MDBRow>
                             <p className={"fv-marginRight fv-hostStep3AddNewPlace"}>اضافه کردن فضای جدید</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
@@ -335,10 +375,22 @@ class HostStep3Page extends Component {
                                     onChange={(e)=>this.setState({yourSpace:e.target.value})}/>
                                 </MDBCol>
                                 <MDBCol sm={2}  className={"fv-hostStep3InputButtonMobile"}>
-                                    <input type="button" value=" + "/>
+                                    <input type="button" value=" + " onClick={()=>{
+                                        const space = this.state.setOtherSpace
+                                        space.push(this.state.yourSpace)
+                                        if(this.state.yourSpace !== ""){
+                                            this.setState({setOtherSpace:space , yourSpace:""})
+                                        }
+                                    }}/>
                                 </MDBCol>
                                 <MDBCol md={5} sm={2}  className={"fv-hostStep3InputButton"}>
-                                    <input type="button" value="+ افزودن فضا "/>
+                                    <input type="button" value="+ افزودن فضا " onClick={()=>{
+                                        const space = this.state.setOtherSpace
+                                        space.push(this.state.yourSpace)
+                                        if(this.state.yourSpace  !== ""){
+                                            this.setState({setOtherSpace:space ,  yourSpace:""})
+                                        }
+                                    }}/>
                                 </MDBCol>
                             </MDBRow>
                             <h5 className={"fv-hostStep3View"}>ویوی اقامت گاه</h5>
@@ -370,7 +422,7 @@ class HostStep3Page extends Component {
                                         setCheckedPrev = {this.state.accommodationViewsCheckbox}
                                         nameOfPart={'accommodationViewsCheckbox'}/>
                                 </MDBCol>
-                                <MDBCol md={3} sm={8} className={"fv-hostStep3CheckBoxGroupInLineSecondThree test"}>
+                                <MDBCol md={3} sm={6} className={"fv-hostStep3CheckBoxGroupInLineSecondThree test"}>
                                     <HostStepCheckbox
                                         className=""
                                         mdCheckbox = "4"
@@ -389,7 +441,35 @@ class HostStep3Page extends Component {
                                    onChange={(e)=>this.setState({yourAccommodationMeasure:e.target.value})}/>
                         </MDBCol>
 
-                        <HostStepLeftBodyContent
+
+                        <MDBCol className={"fv-hostStepPage1Left fv-hostStepPageSpace"} sm={12} md={6}>
+                            <MDBRow className={"fv-hostStepPage1LeftContentBody"}>
+                                <p>
+                                    ا این موضوع رو برو هستند که محتوای اصلی صفحات آماده نیست. در نتیجه طرح
+                                    کلی دید درستی به کار فرما نمیدهد. اگر طراح بخواهد دنبال متن های مرتبط
+                                    بگردد تمرکزش از روی کار اصلی برداشته میشود و اینکار زمان بر خواهد بو
+                                    د. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگران را
+                                </p>
+                                <img src={MobileLogo} className={"fv-hostStepPage1LeftImage"}/>
+                            </MDBRow>
+                            <MDBRow className={"fv-hostStepPage2LeftButtonBody"}>
+                                <input type="button" value="مرحله بعد"  className={"fv-hostStepPage1LeftButton"} onClick={()=>{
+                                    if(validationInputs){
+                                        localStorage.setItem(`${"step3"}`, JSON.stringify(localStorageData))
+                                        this.props.history.push('../../hostStep4')
+                                    }
+                                    else {
+                                        this.setState({click:true})
+                                    }
+                                }}/>
+                                <input type="button" value="مرحله قبل"  className={"fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"} onClick={()=>{
+                                    this.props.history.push('../../hostStep2-2')
+                                }}/>
+                            </MDBRow>
+                        </MDBCol>
+
+
+                        {/*   <HostStepLeftBodyContent
                             text="طراحان سایت هنگام طراحی قالب سایت معمولا با این موضوع رو برو هستند ک
                             ه محتوای اصلی صفحات آماده نیست. در نتیجه طرح کلی دید درستی به کار فرما نمیدهد. اگ
                             ر طراح بخواهد دنبال متن های مرتبط بگردد تمرکزش از روی کار اصلی برداشته میشود و این
@@ -400,12 +480,13 @@ class HostStep3Page extends Component {
                             returnLink={"../../hostStep2-2"}
                             localStorageName={"step3"}
                             localStorageData={localStorageData}/>
+                     */}
                     </MDBRow>
-                    <MDBRow>
+                        <MDBRow>
                         <Footer />
                     </MDBRow>
                 </MDBContainer>
-            </div>
+            </MDBContainer>
         )
     }
 }
