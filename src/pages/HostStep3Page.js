@@ -32,9 +32,6 @@ class HostStep3Page extends Component {
             setOtherSpace:[],
 
 
-            validRentType:false,
-            validMesure:false,
-            click:false,
 
         }
 
@@ -130,10 +127,7 @@ class HostStep3Page extends Component {
     }
 
     render() {
-        let validationInputs = false
-        if(this.state.otherViewsCheckbox[0] && this.state.accommodationViewsCheckbox[0]){
-            validationInputs=true
-        }
+
 
 
         let publicToilet = 0
@@ -191,11 +185,6 @@ class HostStep3Page extends Component {
                     <MDBRow className={"fv-HostStep1PageBody"}>
 
                         <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
-
-                            <p className={this.state.click && validationInputs===false ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>لطفا کادر های قرمز را به درستی پر کنید</p>
-                            <p className={this.state.click && this.state.otherViewsCheckbox[0]===undefined ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}><i className="fas fa-exclamation-triangle" /> انتخاب سایر فضاها اجباریست</p>
-                            <p className={this.state.click && this.state.accommodationViewsCheckbox[0]===undefined ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}><i className="fas fa-exclamation-triangle" /> انتخاب ویوی اقامتگاه اجباریست</p>
-
                                  <h5 className={"fv-hostStep3NumberOfCapacityMobile"}>ظرفیت اقامت گاه</h5>
 
                             <HostStepIncreaseAndDecreaseButton
@@ -442,34 +431,8 @@ class HostStep3Page extends Component {
                         </MDBCol>
 
 
-                        <MDBCol className={"fv-hostStepPage1Left fv-hostStepPageSpace"} sm={12} md={6}>
-                            <MDBRow className={"fv-hostStepPage1LeftContentBody"}>
-                                <p>
-                                    ا این موضوع رو برو هستند که محتوای اصلی صفحات آماده نیست. در نتیجه طرح
-                                    کلی دید درستی به کار فرما نمیدهد. اگر طراح بخواهد دنبال متن های مرتبط
-                                    بگردد تمرکزش از روی کار اصلی برداشته میشود و اینکار زمان بر خواهد بو
-                                    د. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگران را
-                                </p>
-                                <img src={MobileLogo} className={"fv-hostStepPage1LeftImage"}/>
-                            </MDBRow>
-                            <MDBRow className={"fv-hostStepPage2LeftButtonBody"}>
-                                <input type="button" value="مرحله بعد"  className={"fv-hostStepPage1LeftButton"} onClick={()=>{
-                                    if(validationInputs){
-                                        localStorage.setItem(`${"step3"}`, JSON.stringify(localStorageData))
-                                        this.props.history.push('../../hostStep4')
-                                    }
-                                    else {
-                                        this.setState({click:true})
-                                    }
-                                }}/>
-                                <input type="button" value="مرحله قبل"  className={"fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"} onClick={()=>{
-                                    this.props.history.push('../../hostStep2-2')
-                                }}/>
-                            </MDBRow>
-                        </MDBCol>
 
-
-                        {/*   <HostStepLeftBodyContent
+                            <HostStepLeftBodyContent
                             text="طراحان سایت هنگام طراحی قالب سایت معمولا با این موضوع رو برو هستند ک
                             ه محتوای اصلی صفحات آماده نیست. در نتیجه طرح کلی دید درستی به کار فرما نمیدهد. اگ
                             ر طراح بخواهد دنبال متن های مرتبط بگردد تمرکزش از روی کار اصلی برداشته میشود و این
@@ -480,7 +443,6 @@ class HostStep3Page extends Component {
                             returnLink={"../../hostStep2-2"}
                             localStorageName={"step3"}
                             localStorageData={localStorageData}/>
-                     */}
                     </MDBRow>
                         <MDBRow>
                         <Footer />
