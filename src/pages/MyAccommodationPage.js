@@ -36,7 +36,7 @@ class MyAccommodationPage extends Component {
                             <i className="fas fa-chevron-left" />
                             <p> پنل کاربری </p>
                             <i className="fas fa-chevron-left" />
-                            <p className={"fv-DisplayPagePathNow"}> تراکنش های من </p>
+                            <p className={"fv-DisplayPagePathNow"}> اقامتگاه های من </p>
                         </MDBCol>
                     </MDBRow>
                 </MDBContainer>
@@ -46,7 +46,7 @@ class MyAccommodationPage extends Component {
                     <ProfilePageUserInfo />
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
-                        <h5>تراکنش های من</h5>
+                        <h5>اقامتگاه های من</h5>
                         <MDBRow>
 
                             {this.state.userVillas.map(userVilla=>{

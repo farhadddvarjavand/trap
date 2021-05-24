@@ -21,6 +21,7 @@ class HostStep5Page3 extends Component {
             selectedSecondPic:'',
             selectedThirdPic:'',
             selectedFourthPic:'',
+            clickLoader:false,
 
 
             fileTest:'',
@@ -285,27 +286,75 @@ componentDidMount() {
                                 <img src={Logo} className={"fv-hostStepPage1LeftImage"}/>
                             </MDBRow>
                             <MDBRow className={"fv-hostStepPage2LeftButtonBody"}>
-                                <input type="button" value="ثبت اقامتگاه"  className={"fv-hostStepPage1LeftButton"} onClick={()=>{
+
+                                {/*  <div className={this.state.clickLoader ? "loader" : "fv-hideLoader"}> */}
+                                <div className={this.state.clickLoader ? "loader" : "fv-hideLoader"}>
+                                    <svg className="circular" viewBox="25 25 50 50">
+                                        <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
+                                                stroke-miterlimit="10"/>
+                                    </svg>
+                                </div>
+
+                                <input type="button" value="ثبت اقامتگاه"  className={this.state.clickLoader ? "fv-hideLoader" : "fv-hostStepPage1LeftButton"} onClick={()=>{
+                                    this.setState({clickLoader:true})
 
 
                                     storeVilla(allData)
                                         .then(res=>{
                                             if(res.status===200){
-                                                alert(1)
-                                             /*   localStorage.removeItem("step1")
+                                                localStorage.removeItem("step1")
                                                 localStorage.removeItem("step2")
                                                 localStorage.removeItem("step2-2")
                                                 localStorage.removeItem("step3")
                                                 localStorage.removeItem("step4")
                                                 localStorage.removeItem("step5")
-                                                localStorage.removeItem("step5-2") */
+                                                localStorage.removeItem("step5-2")
+                                                this.props.history.push('/myAccommodation')
                                             }else {
-                                                console.log(res)
+                                                alert("لطفا مجددا اطلاعات خود را بررسی کنید - اطلاعات شما نادرست وارد شده")
+                                                this.props.history.push('../../hostStep1')
                                             }
                                         })
-                                        .catch(err=>console.log(err.response))
+                                        .catch(err=>{
+                                           const getErrors = Object.values(err.response.data.errors)
+                                            let showErrors = ""
+                                            for (let i = 0 ; i < getErrors.length ; i++){
+                                                if(i===0){
+                                                    showErrors=`${getErrors[i]}`;
+                                                }else {
+                                                    showErrors=`${showErrors} \n ${getErrors[i]}`
+                                                }
+                                            }
+                                           alert(showErrors)
+                                            if(err.response.data.errors.title || err.response.data.errors.type || err.response.data.errors.phone_number || err.response.data.errors.story){
+                                                this.props.history.push('../../hostStep1')
+                                            }
+                                            if(err.response.data.errors.city || err.response.data.errors.state || err.response.data.errors.postal_code || err.response.data.errors.address){
+                                                this.props.history.push('../../hostStep2')
+                                            }
+                                            if(err.response.data.errors.area || err.response.data.errors.places || err.response.data.errors.view){
+                                                this.props.history.push('../../hostStep3')
+                                            }
+                                            if(err.response.data.errors.general_fac || err.response.data.errors.kitchen_fac || err.response.data.errors.temp_fac){
+                                                this.props.history.push('../../hostStep4')
+                                            }
+                                            if(err.response.data.errors.normal_extra_cost || err.response.data.errors.normal_cost ||  err.response.data.errors.special_cost ||  err.response.data.errors.special_extra_cost ||  err.response.data.errors.weekly_discount ||  err.response.data.errors.monthly_discount){
+                                                this.props.history.push('../../hostStep5')
+                                            }
+                                            if(err.response.data.errors.arrival_time || err.response.data.errors.auth_rules || err.response.data.errors.exit_time || err.response.data.errors.max_reserve || err.response.data.errors.max_reserve  || err.response.data.errors.suitable_for){
+                                                this.props.history.push('../../hostStep5-2')
+                                            }
+                                        })
 
+                                    /////////////////////////////////////// err.response.data.errors.title
                                     /////////////////////////////////////// err.response.data.errors.type
+                                    /////////////////////////////////////// err.response.data.errors.phone_number
+                                    /////////////////////////////////////// err.response.data.errors.story
+
+                                    /////////////////////////////////////// err.response.data.errors.city
+                                    /////////////////////////////////////// err.response.data.errors.state
+                                    /////////////////////////////////////// err.response.data.errors.postal_code
+                                    /////////////////////////////////////// err.response.data.errors.address
 
                                     /////////////////////////////////////// err.response.data.errors.area
                                     /////////////////////////////////////// err.response.data.errors.places
@@ -336,7 +385,7 @@ componentDidMount() {
                                         .then(res => console.log(res))
                                         .catch(err=>console.log(err.response))
                                 }}/>
-                               <input type="button" value="مرحله قبل"  className={"fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"} onClick={()=>{
+                               <input type="button" value="مرحله قبل"  className={this.state.clickLoader ?  "fv-hideLoader" :  "fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"} onClick={()=>{
                                    this.props.history.push('../../hostStep5-2')
                                }}/>
                             </MDBRow>

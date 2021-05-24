@@ -64,6 +64,10 @@
   .container .fv-footerMainPage {
     padding-top: 35%;
   }
+
+  .fv-hideLoader{
+    display: none;
+  }
 }
 
 
@@ -131,7 +135,23 @@
      .fv-hostStepPage2LeftButtonBody {
       margin-top: 399%;
     }
+    .loader {
+      position: relative;
+      /* border-radius: 16px; */
+      background-color: #15BE29;
+      margin-top: 15%;
+      /* width: 195.5px; */
+      /* height: 67px; */
+      /* margin-left: 7%; */
+      border-radius: 8px;
+      margin-left: 9vw;
+      /* padding: 5.4% 13.4% 5.4% 13.4%; */
+      width: 40vw;
+      height: 16vw;
+      margin-top: 20vw;
+    }
   }
+
 }
 @media (max-width: 460px) {
   .fv-hostStep5Page3{
@@ -184,7 +204,21 @@
       direction: rtl;
       margin-top: -453%;
     }
-
+    .loader {
+      position: relative;
+      /* border-radius: 16px; */
+      background-color: #15BE29;
+      margin-top: 15%;
+      /* width: 195.5px; */
+      /* height: 67px; */
+      /* margin-left: 7%; */
+      border-radius: 8px;
+      margin-left: 9vw;
+      /* padding: 5.4% 13.4% 5.4% 13.4%; */
+      width: 40vw;
+      height: 16vw;
+      margin-top: 20vw;
+    }
   }
  }
 @media (max-width: 375px) {
