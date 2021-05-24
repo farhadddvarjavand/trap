@@ -22,17 +22,21 @@ class HostStep5Page extends Component {
             monthlyDiscount:'',
 
             validNormalCost:false,
+            validExtraCost:false,
             click:false,
-            hideUniq:false,
         }
     }
     componentDidMount() {
 
         if( JSON.parse(localStorage.getItem("step5"))){
             const prevData =  JSON.parse(localStorage.getItem("step5"))
-            let NormalCost =  false
+            let NormalCost =  false    /// اگر وجود داشت true میباشد و اگر کلیک next  را بزند باید بتواند به مرحله بعدی برود
             if(prevData.normal_cost){
-                NormalCost=true
+                NormalCost=true   /// اگر وجود داشت true میباشد و اگر کلیک next  را بزند باید بتواند به مرحله بعدی برود
+            }
+            let ExtraCost =  false    /// اگر وجود داشت true میباشد و اگر کلیک next  را بزند باید بتواند به مرحله بعدی برود
+            if(prevData.special_cost){
+                ExtraCost=true   /// اگر وجود داشت true میباشد و اگر کلیک next  را بزند باید بتواند به مرحله بعدی برود
             }
             this.setState({
                 pricesFromSaturdayToWednesday:prevData.normal_cost,
@@ -43,14 +47,15 @@ class HostStep5Page extends Component {
                 monthlyDiscount:prevData.monthly_discount,
 
                 validNormalCost:NormalCost,
+                validExtraCost:ExtraCost,
             })
         }
     }
 
     render() {
         let validationInputs = false
-        if(this.state.validNormalCost){
-            validationInputs=true
+        if(this.state.validNormalCost && this.state.validExtraCost){    //چک میکند اگر همه شرایط خاص که باید درنظر گرفته بشود تا از سرور اررور نگیرد اگر true بود آنوقت اجازه بدهد که کلیک بعدی انجام شود
+            validationInputs=true    // اجازه برای کلیک به صفحه بعد
         }
 
         const localStorageData={
@@ -72,14 +77,15 @@ class HostStep5Page extends Component {
                     <MDBRow className={"fv-HostStep1PageBody"}>
                         <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
                             <p className={this.state.click && validationInputs===false ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>لطفا کادر های قرمز را به درستی پر کنید</p>
-                            <p className={this.state.click && this.state.validNormalCost===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}><i className="fas fa-exclamation-triangle" /> قیمت را به درستی وارد فرمایید - وارد کردن قیمت اجباریست</p>
+                            <p className={this.state.click && this.state.validNormalCost===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}><i className="fas fa-exclamation-triangle" /> قیمت را به درستی وارد فرمایید - وارد کردن قیمت از شنبه تا چهارشنبه اجباریست</p>
+                            <p className={this.state.click && this.state.validExtraCost===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}><i className="fas fa-exclamation-triangle" /> قیمت را به درستی وارد فرمایید - وارد کردن قیمت پنجشنبه و جمعه و تعطیل اجباریست</p>
                             <h5 className={"fv-hostStep3NumberOfCapacityMobile"}>قیمت گذاری کلی</h5>
                             <p className={"fv-hostStep5P"}>قیمت از شنبه تا چهارشنبه</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
                                     <input type="text" value={this.state.pricesFromSaturdayToWednesday}
                                            onChange={(e)=>{
-                                               if(e.target.value && Number(e.target.value)){
+                                               if(e.target.value && Number(e.target.value)){   // اگر این شرایط بود آنگاه معتبر میباشد و true میشود
                                                    this.setState({validNormalCost:true})
                                                }else {
                                                    this.setState({validNormalCost:false})
@@ -92,9 +98,17 @@ class HostStep5Page extends Component {
                             <p className={"fv-hostStep5P"}>قیمت پنجشنبه و جمعه و تعطیل (ایام پیک)</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" value={this.state.priceFridayAndHoliday}
-                                           onChange={(e)=>this.setState({priceFridayAndHoliday:e.target.value})}
-                                    />
+                                    <input  type="text" value={this.state.priceFridayAndHoliday}
+                                           onChange={(e)=>{
+                                               if(e.target.value && Number(e.target.value)){   // اگر این شرایط بود آنگاه معتبر میباشد و true میشود (اگر وجود داشت و عدد بود)
+                                                   this.setState({validExtraCost:true})
+                                               }else {
+                                                   this.setState({validExtraCost:false})
+                                               }
+                                               this.setState({priceFridayAndHoliday:e.target.value})
+                                           }}
+                                           className={this.state.click && this.state.validExtraCost===false ?  "fv-redBorderError" : ""} />
+
                                 </MDBCol>
                             </MDBRow>
                             <p className={"fv-hostStep5P"}>قیمت نفر اضافه در روز های عادی</p>

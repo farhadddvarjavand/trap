@@ -275,7 +275,7 @@ componentDidMount() {
                         </MDBCol>
 
 
-                        <MDBCol className={"fv-hostStepPage1Left"} sm={12} md={6}>
+                        <MDBCol className={"fv-hostStepPage1Left fv-hostStepPageSpace"} sm={12} md={6}>
                             <MDBRow className={"fv-hostStepPage1LeftContentBody"}>
                                 <p>طراحان سایت هنگام طراحی قالب سایت معمولا با این موضوع رو برو هستند ک
                                     ه محتوای اصلی صفحات آماده نیست. در نتیجه طرح کلی دید درستی به کار فرما نمیدهد. اگ
@@ -285,23 +285,46 @@ componentDidMount() {
                                 <img src={Logo} className={"fv-hostStepPage1LeftImage"}/>
                             </MDBRow>
                             <MDBRow className={"fv-hostStepPage2LeftButtonBody"}>
-                                <Link to={""} > <input type="button" value="مرحله بعد"  className={"fv-hostStepPage1LeftButton"} onClick={()=>{
+                                <input type="button" value="ثبت اقامتگاه"  className={"fv-hostStepPage1LeftButton"} onClick={()=>{
 
 
-                                    console.log(allData)
                                     storeVilla(allData)
                                         .then(res=>{
                                             if(res.status===200){
-                                                localStorage.removeItem("step1")
+                                                alert(1)
+                                             /*   localStorage.removeItem("step1")
                                                 localStorage.removeItem("step2")
                                                 localStorage.removeItem("step2-2")
                                                 localStorage.removeItem("step3")
                                                 localStorage.removeItem("step4")
                                                 localStorage.removeItem("step5")
-                                                localStorage.removeItem("step5-2")
+                                                localStorage.removeItem("step5-2") */
+                                            }else {
+                                                console.log(res)
                                             }
                                         })
                                         .catch(err=>console.log(err.response))
+
+                                    /////////////////////////////////////// err.response.data.errors.type
+
+                                    /////////////////////////////////////// err.response.data.errors.area
+                                    /////////////////////////////////////// err.response.data.errors.places
+                                    /////////////////////////////////////// err.response.data.errors.view
+
+                                    /////////////////////////////////////// err.response.data.errors.general_fac
+                                    /////////////////////////////////////// err.response.data.errors.kitchen_fac
+                                    /////////////////////////////////////// err.response.data.errors.temp_fac
+
+                                    /////////////////////////////////////// err.response.data.errors.arrival_time
+                                    /////////////////////////////////////// err.response.data.errors.auth_rules
+                                    /////////////////////////////////////// err.response.data.errors.exit_time
+                                    /////////////////////////////////////// err.response.data.errors.max_reserve
+                                    /////////////////////////////////////// err.response.data.errors.min_reserve
+                                    /////////////////////////////////////// err.response.data.errors.normal_extra_cost
+                                    /////////////////////////////////////// err.response.data.errors.suitable_for
+
+                                    //if status === 500    server Error
+
 
                                     let fd = new FormData()
                                     fd.append("images", this.state.fileTest);
@@ -312,8 +335,10 @@ componentDidMount() {
                                     SetImages(this.state.test,30)
                                         .then(res => console.log(res))
                                         .catch(err=>console.log(err.response))
-                                }}/> </Link>
-                                <Link to={"../../hostStep5-2"} > <input type="button" value="مرحله قبل"  className={"fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"}/> </Link>
+                                }}/>
+                               <input type="button" value="مرحله قبل"  className={"fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"} onClick={()=>{
+                                   this.props.history.push('../../hostStep5-2')
+                               }}/>
                             </MDBRow>
                         </MDBCol>
 
