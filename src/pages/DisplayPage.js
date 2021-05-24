@@ -995,7 +995,7 @@ componentDidMount() {
                             <MDBCol md={8}>
                                     <Mapir
                                         width="636"
-                                        center={[34,55 ]}
+                                        center={[51.526770 , 35.724254 ]}
                                         Map={Map}
                                     >
                                         <Mapir.Layer
@@ -1003,7 +1003,7 @@ componentDidMount() {
                                             layout={{ "icon-image": "harbor-15" }}>
                                         </Mapir.Layer>
                                         <Mapir.Marker
-                                            coordinates={[34,55 ]}
+                                            coordinates={[51.526770 , 35.724254 ]}
                                             anchor="bottom">
                                         </Mapir.Marker>
                                     </Mapir>

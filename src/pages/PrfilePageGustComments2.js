@@ -143,10 +143,13 @@ class PrfilePageGustComments2 extends Component {
                                              <MDBRow className={comment.id === this.state.answerCommentId ? "fv-ProfilePageWalletWalletButton" : "fv-hideAnswerComments" } >
                                                  <MDBRow className={"fv-ProfilePageGustComments2SetComment"}>
                                                      <form onSubmit={(event)=>{
+                                                         event.preventDefault()
                                                          const data = {
                                                                  text:this.state.textAreaComment
                                                              }
                                                          replayComment(data,this.props.match.params.id,this.state.answerCommentId)
+                                                             .then(res=>res.status===200 ? window.location.reload() : '')
+
                                                      }}>
                                                          <label>
                                                              <textarea value={this.state.textAreaComment} onChange={(e)=>this.setState({textAreaComment:e.target.value})} />

@@ -12,14 +12,15 @@ class CalendarLinear extends React.Component{
     }
     componentDidMount() {
         if(this.props.searchData){
-            if(this.props.searchData.dayToGo){
-                const space = this.props.searchData.dayToGo.split('/');
+            if(this.props.searchData.dateToReturn){
+                const space = this.props.searchData.dateToReturn.split('/');
                 this.setState({date: {
                         year:parseInt(space[0]),
                         month:parseInt(space[1]),
                         day:parseInt(space[2]),
                     }})
             }
+
         }
     }
 

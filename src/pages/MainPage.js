@@ -223,7 +223,7 @@ class MainPage extends Datas {
                             dateToReturn:this.state.dateToReturn,
                         }
                         localStorage.setItem("mainPageSearch"  , JSON.stringify(mainPageSearch));
-                        this.props.history.push("/searchHomePage/doSearch/1")
+                        this.props.history.push({pathname:"/searchHomePage/doSearch/1",searchDatas: {city: this.state.city, dayToGo: mainPageSearch.dateToGo , dateToReturn:mainPageSearch.dateToReturn , capacity:mainPageSearch.numberOfPeople}})
                       /*  fetch('https://reqres.in/api/posts', {                     // POST
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },

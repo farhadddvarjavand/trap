@@ -15,6 +15,7 @@ import {convertNeSwToNwSe} from "google-map-react";
 /* import {doSearch} from "../services/searchService" */
 import config from "../services/config.json";
 import CalendarLinear from "../data/CalenddarLinear";
+import CalenddarLinearToReturn from "../data/CalenddarLinearToReturn";
 
 
 
@@ -74,6 +75,16 @@ class SearchHomePage extends Datas {
 
     componentDidMount() {
         super.componentDidMount();
+        if(this.props.location && this.props.location.searchDatas){
+
+            this.setState({
+                setVillage:this.props.location.searchDatas.city,
+                dateToGo:this.props.location.searchDatas.dayToGo,
+                dateToReturn:this.props.location.searchDatas.dateToReturn,
+                numberOfPeople:this.props.location.searchDatas.capacity,
+            })
+        }
+
         const data ={
             orderBy:this.props.match.params.sort,
             page:this.props.match.params.id
@@ -115,11 +126,13 @@ class SearchHomePage extends Datas {
     }
 
     selectDayToGo = (date) =>{                                    // set date to go
+        console.log(date)
         if(date) {
             this.setState({dateToGo:`${date.year}/${date.month}/${date.day}`})
         }
     }
     selectDayToReturn = (date) =>{                                    // set date to go
+        console.log(date)
         if(date) {
             this.setState({dateToReturn:`${date.year}/${date.month}/${date.day}`})
         }
@@ -326,13 +339,13 @@ class SearchHomePage extends Datas {
                                     <MDBRow className={'fv-searchMainPagePrice'}>
                                         <input type='text' placeholder={'شهر یا روستا را وارد کنید'} value={this.state.setVillage} onChange={(event)=>{this.setState({setVillage:event.target.value})}}/>
                                         <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateOut'}>
-                                            <div  className={"fv-DisplayPageDetailsLeftBodyDateOnInput"}>  <CalendarLinear dayToGo={this.selectDayToGo} text={'تاریخ رفت'}/> </div>
+                                            <div  className={"fv-DisplayPageDetailsLeftBodyDateOnInput"}>  <CalendarLinear dayToGo={this.selectDayToGo} searchData={this.props.location.searchDatas} text={'تاریخ رفت'}/> </div>
                                         </MDBCol>
                                         <MDBCol md={1} sm={1} className={'fv-searchMainPageBetweenDate'}>
 
                                         </MDBCol>
                                         <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateReturn'}>
-                                            <div  className={"fv-DisplayPageDetailsLeftBodyDateOnInput"}>  <CalendarLinear dayToGo={this.selectDayToReturn} text={'تاریخ برگشت'}/> </div>
+                                            <div  className={"fv-DisplayPageDetailsLeftBodyDateOnInput"}>  <CalenddarLinearToReturn dayToReturn={this.selectDayToReturn} searchData={this.props.location.searchDatas} text={'تاریخ برگشت'}/> </div>
                                         </MDBCol>
                                         <input type='text' placeholder='تعداد نفرات' value={this.state.numberOfPeople} onChange={(event)=>{this.setState({numberOfPeople:event.target.value})}}/>
                                         <input type='text' placeholder='تعداد خواب' value={this.state.numberOfBedroom} onChange={(event)=>{this.setState({numberOfBedroom:event.target.value})}}/>
@@ -465,6 +478,15 @@ class SearchHomePage extends Datas {
                                 }}>
                                     محبوب‌ترین
                                 </NavLink>
+                                <NavLink  to={this.props.match.params.sort === 'Discount' ? `/searchHomePage/Discount/${this.props.match.params.id}` : `/searchHomePage/Discount/1`}
+                                          name={'Discount'} exact className={'fv-unSelected'} activeClassName="fv-selected"
+                                          onClick={(event)=>{
+                                              const data = {orderBy:'Discount'}
+                                              this.postAndPushResultSearchPageVillas(data)
+                                              this.setState({sortedBy:event.target.name , doSearch:false})
+                                          }}>
+                                    پرتخفیف ها
+                                </NavLink>
                                 {/* <NavLink  to={this.props.match.params.sort === 'Nearest' ? `/searchHomePage/Nearest/${this.props.match.params.id}` : `/searchHomePage/Nearest/1`}
                                          name={'Nearest'} exact className={'fv-unSelected'} activeClassName="fv-selected"
                                          onClick={(event)=>{
@@ -478,6 +500,7 @@ class SearchHomePage extends Datas {
                             </MDBRow>
                             <MDBRow className={"fv-mainProduct fv-mainMobile"} >
                                 {searchPageVillas.map(searchPageVilla=>{
+                                    // console.log(searchPageVilla)
                                     if(searchPageVilla.details){
                                         return(
                                             <MDBCol md={4} sm={7}
