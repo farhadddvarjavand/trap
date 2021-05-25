@@ -11,24 +11,85 @@ import {Link} from "react-router-dom";
 class HeaderSteps extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            hideButtonLogin:true,
+        }
 
     }
 
     render() {
         const info = JSON.parse(localStorage.getItem("infoUser"))
+        let nameAndFamily =  ""
+        let avatar = ""
+        if(info){
+            nameAndFamily=info.userInfo.fullname
+            avatar=info.userInfo.avatar
+        }
+
         return (
             <MDBContainer className={"hostStepPage"}>
                 <MDBRow className={'footerHostStep1Page'}>
                     <MDBCol md={3} sm={6}>
-                        <img src={info.userInfo.avatar ? `${config.webapi}/images/villas/thum/${info.userInfo.avatar }` : ""}/>
+                       <a onClick={()=>{
+                           this.setState({hideButtonLogin:!this.state.hideButtonLogin})
+                       }}> <img src={info.userInfo.avatar ? `${config.webapi}/images/villas/thum/${info.userInfo.avatar }` : ""}/>
                         <i className="fas fa-chevron-down name_mobile" />
-                        <a className={"name_desktop"}>{info.userInfo.fullname}</a>
+                           <a className={"name_desktop"}>{info.userInfo.fullname}</a> </a>
                     </MDBCol>
                     <MDBCol md={9} sm={6} className={""}>
                         <img src={FotterpageLogo} className={"hide_mobile"}/>
                         <img src={LogoName} className={"hide_desktop"}/>
                         <img src={MobileLogo} className={"hide_desktop"}/>
                     </MDBCol>
+
+                    <MDBContainer className={localStorage.getItem("token") ? `fv-containerOptionMainPageRowTop ${this.state.hideButtonLogin ? "fv-displayNoneLogin" : ""}` : "fv-containerOptionMainPageRowTop fv-displayNoneLogin "}>
+                        <MDBRow className={"fv-cascadeOptionMainPageRowTop"}>
+                            <MDBCol md={12} sm={12}>
+                                <MDBRow className={"fv-cascadeOptionMainPageRowTopInner"}>
+                                    <MDBCol md={2} sm={2}>
+                                        <img src={avatar ? `${config.webapi}/images/villas/thum/${avatar}` : MobileLogo} />
+                                    </MDBCol>
+                                    <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={7} sm={8}>
+                                        <MDBRow>
+                                            <a><h5>{nameAndFamily}</h5></a>
+                                        </MDBRow>
+                                        <MDBRow>
+                                            <Link to={"/Profile"}><a>مشاهده حساب کاربری</a></Link>
+                                        </MDBRow>
+                                    </MDBCol>
+                                </MDBRow>
+                            </MDBCol>
+                        </MDBRow>
+                        <MDBRow className={"fv-cascadeOptionMainPage"}>
+                            <MDBCol md={12} sm={12}>
+                                <Link to={"/myAccommodation"}> <i className="fa fa-credit-card" />
+                                    <a><p>اقامت گاه های من</p></a> </Link>
+                            </MDBCol>
+                        </MDBRow>
+                        <MDBRow className={"fv-cascadeOptionMainPage"}>
+                            <MDBCol md={12} sm={12}>
+                                <Link to={"/ProfileReservation2"}> <i className="fa fa-receipt" />
+                                    <a><p>رزور های من</p></a> </Link>
+                            </MDBCol>
+                        </MDBRow>
+                        <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus fv-userInfoButtonCascadeMobile"}>
+                            <MDBCol md={12} sm={12}>
+                                <Link to={"/ProfileReservation2"}> <i className="fa fa-laptop-house" />
+                                    <a><p>میزبان شوید</p></a> </Link>
+                            </MDBCol>
+                        </MDBRow>
+                        <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus"}>
+                            <MDBCol md={12} sm={12}>
+                                <a onClick={()=>{
+                                    localStorage.clear()
+                                    window.location.reload();
+                                }}> <i className="fa fa-sign-out-alt" />
+                                    <p>خروج از حساب کاربری</p></a>
+                            </MDBCol>
+                        </MDBRow>
+                    </MDBContainer>
+
+
                 </MDBRow>
                 <MDBRow>
                     <MDBCol sm={10} className={"fv-HostStep1Path"}>

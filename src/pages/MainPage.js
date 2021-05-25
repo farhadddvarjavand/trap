@@ -123,15 +123,19 @@ class MainPage extends Datas {
                     </MDBRow>
 
                     <MDBRow className={'fv-footerMenuRibbonMobile'}>
-                        <MDBCol sm={8}>
+                        <MDBCol sm={8} className={localStorage.getItem("token") ? "fv-hideButtonRegister"  : "fv-userInfoButtonCascade" } >
                             <img src={MobileMenu}  onClick={()=>{
+                                this.props.history.push("/login")
+                            }}/>
+                        </MDBCol>
+                        <MDBCol sm={8} className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" :" fv-hideButtonRegister" } >
+                            <a className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" : "fv-hideButtonRegister"}  onClick={()=>{
                                 if(localStorage.getItem("token")){
                                     this.setState({hideButtonLogin:!this.state.hideButtonLogin})
                                 }else {
                                     this.props.history.push("/login")
                                 }
-
-                            }}/>
+                            }}> <img src={avatar ? `${config.webapi}/images/villas/thum/${avatar}` : MobileLogo} /></a>
                         </MDBCol>
                         <MDBCol sm={2} className={"fv-footerMenuRibbonButton"}>
                             <img src={LogoName} />
@@ -161,12 +165,6 @@ class MainPage extends Datas {
                 </MDBRow>
                 <MDBRow className={"fv-cascadeOptionMainPage"}>
                     <MDBCol md={12} sm={12}>
-                        <Link to={"/Profile"}> <i  className={"fa fa-chart-line"} />
-                            <a><p>داشبورد من</p></a> </Link>
-                    </MDBCol>
-                </MDBRow>
-                <MDBRow className={"fv-cascadeOptionMainPage"}>
-                    <MDBCol md={12} sm={12}>
                         <Link to={"/myAccommodation"}> <i className="fa fa-credit-card" />
                             <a><p>اقامت گاه های من</p></a> </Link>
                     </MDBCol>
@@ -175,6 +173,12 @@ class MainPage extends Datas {
                     <MDBCol md={12} sm={12}>
                         <Link to={"/ProfileReservation2"}> <i className="fa fa-receipt" />
                             <a><p>رزور های من</p></a> </Link>
+                    </MDBCol>
+                </MDBRow>
+                <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus fv-userInfoButtonCascadeMobile"}>
+                    <MDBCol md={12} sm={12}>
+                        <Link to={"/ProfileReservation2"}> <i className="fa fa-laptop-house" />
+                            <a><p>میزبان شوید</p></a> </Link>
                     </MDBCol>
                 </MDBRow>
                 <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus"}>
@@ -191,7 +195,6 @@ class MainPage extends Datas {
 
 
 
-
             <MDBRow className={'fv-searchMainPageTopic'}>
                 <MDBCol md={12}>
                     <p>اجاره خانه های روستایی</p>
@@ -200,6 +203,8 @@ class MainPage extends Datas {
                     <p>خانه های روستایی در رویایی ترین مناطق</p>
                 </MDBCol>
             </MDBRow>
+
+
 
                 <MDBRow>
                     <MDBRow className={'fv-searchMainPage'}>

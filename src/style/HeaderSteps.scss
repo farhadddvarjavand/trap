@@ -125,6 +125,94 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
   .hide_desktop , .fa-question-circle , .name_mobile{
     display: none;
   }
+
+
+
+  .fv-cascadeOptionMainPageRowTop {
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    /* margin-right: -15px; */
+    /* margin-left: -15px; */
+    background-color: #3EC886;
+    width: 25%;
+    margin-right: 5%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-align: start;
+    place-self: center;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+  .fv-cascadeOptionMainPage {
+    /* box-sizing: border-box; */
+    background-color: white;
+    width: 25%;
+    margin-right: 5%;
+    text-align: start;
+    font-size: 18px;
+    align-items: center;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+    display: block;
+  }
+ .fv-cascadeOptionMainPageRowTop a {
+    color: white;
+  }
+  .fv-containerOptionMainPageRowTop {
+    padding: 0;
+    margin: 0;
+    text-align: end;
+    position: absolute;
+    z-index: 2;
+    margin-top: 7.5%;
+  }
+  .fv-cascadeOptionMainPageRowTop .col-md-12 {
+    display: contents;
+  }
+  .fv-textInToCascadeOptionMainPage {
+    margin: auto;
+    text-align: center;
+    color: white;
+    margin-right: 25%;
+    padding: 0;
+  }
+  .fv-cascadeOptionMainPage .col-md-12 {
+    display: contents;
+  }
+ .fv-cascadeOptionMainPage a {
+    color: black;
+  }
+  .fv-cascadeOptionMainPage .col-md-12 p{
+    margin-right: 5%;
+    display: contents;
+  }
+  .fv-cascadeOptionMainPage .col-md-12 a{
+    color: black;
+  }
+  .fv-cascadeOptionMainPage .col-md-12 .fa {
+    margin-right: 5%;
+    margin-left: 5%;
+  }
+  .fv-cascadeOptionMainPageRowTop img {
+    width: 64px;
+    margin-right: 19px;
+  }
+  .fv-textInToCascadeOptionMainPage {
+    margin: auto;
+    text-align: center;
+    color: white;
+    margin-right: 26%;
+    padding: 0;
+    padding-right: 8%;
+  }
+   .fv-cascadeOptionMainPageRowTopInner .col-md-2 {
+    flex: 0 0 19.666667%;
+    max-width: 32.666667%;
+    margin-right: -6%;
+  }
+  .fv-displayNoneLogin{
+    display: none;
+  }
 }
 
 
@@ -276,7 +364,7 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
     }
     .footerHostStep1Page .col-md-3 {
       margin-bottom: 2%;
-      margin-top: 2%;
+      margin-top: 7%;
       text-align: initial;
       padding: 3%;
     }
@@ -295,6 +383,26 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
     }
     .footerHostStep1Page .fa-chevron-down{
       margin-top: 1%;
+    }
+
+    .fv-cascadeOptionMainPageRowTop {
+      width: 80%;
+    }
+    .fv-cascadeOptionMainPage {
+      width: 80%;
+      border: 1px solid #7788997a;
+    }
+    .fv-containerOptionMainPageRowTop {
+      z-index: 20;
+      margin-top: 21.5%;
+    }
+    .fv-textInToCascadeOptionMainPage {
+      margin: auto;
+      text-align: center;
+      color: white;
+      margin-right: 27%;
+      padding: 0;
+      padding-right: 10%;
     }
   }
 

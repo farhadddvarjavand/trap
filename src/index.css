@@ -152,7 +152,7 @@ padding-top: 10%;
   padding-left: 3%;
   color: white;
 }
-.fv-footerMenu .fv-footerMenuRibbon .fv-hideButtonRegister{
+.fv-footerMenu .fv-footerMenuRibbon .fv-hideButtonRegister , .fv-footerMenu .fv-footerMenuRibbonMobile .fv-hideButtonRegister , .fv-menuMobileLoginHide{
   display: none;
 }
 .fv-footerMenuRibbonButton input, .fv-footerMenuRibbonButton button{
@@ -398,7 +398,7 @@ padding-top: 10%;
 .fv-footerMenu .fv-cascadeOptionMainPage a{
   color: black;
 }
-.fv-footerMenu .fv-cascadeOptionMainPage .col-md-12{
+.fv-footerMenu .fv-cascadeOptionMainPage .col-md-12  {
   display: contents;
 }
 .fv-footerMenu .fv-cascadeOptionMainPage .col-md-12 p{
@@ -449,7 +449,7 @@ padding-top: 10%;
 .fv-footerMenu .fv-cascadeOptionMainPageRowTop .col-md-12{
   place-self: center;
 }
-.fv-footerMenuRibbon  .col-md-2 .fv-userInfoButtonCascade {
+.fv-footerMenuRibbon  .col-md-2 .fv-userInfoButtonCascade  {
   position: absolute;
   margin-right: -126%;
   width: 110%;
@@ -482,6 +482,18 @@ padding-top: 10%;
 .fv-footerMenuRibbon .col-md-2 .fv-userInfoButtonCascade {
   color: black ;
 }
+.fv-cascadeOptionMainPage.fv-cascadeOptionMainPageEndRadus.fv-userInfoButtonCascadeMobile{
+  display: none;
+}
+.fv-HostStep1Page .hostStepPage .footerHostStep1Page .col-md-9 {
+  margin-top: 1%;
+}
+.fv-HostStep2Page .hostStepPage .footerHostStep1Page .col-md-9 {
+  margin-top: 4%;
+}
+
+
+
 
 
 .DatePicker__calendarContainer.-top {
@@ -662,6 +674,19 @@ color {  100%, 0% {
 
 
 @media (max-width: 767px){
+  .fv-cascadeOptionMainPage.fv-cascadeOptionMainPageEndRadus.fv-userInfoButtonCascadeMobile{
+    display: block;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+  .fv-footerMenuRibbonMobile .fv-userInfoButtonCascade .col-sm-8 {
+    align-self: center;
+  }
+  .fv-footerMenuRibbonMobile .fv-userInfoButtonCascade img {
+    width: 59px;
+  }
+
+
   .fv-footerMenu .fv-cascadeOptionMainPageRowTop {
     width: 85%;
     padding-top: 6%;
