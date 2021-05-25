@@ -27,18 +27,21 @@ class HostStep5Page3 extends Component {
 
             fileTest:'',
             test:'',
-            img_title0:'تصویر',
-            img_title1:'تصویر',
+            img_title0:'',
+            img_title1:'',
+            img_title2:'',
+            img_title3:'',
+            img_title4:'',
         }
 
     }
-componentDidMount() {
-    villa(30)
-        .then(res=>console.log(res))
+    componentDidMount() {
+        villa(30)
+            .then(res=>console.log(res))
 
-    editVilla(30)
-        .then(res=>console.log(res))
-}
+        editVilla(30)
+            .then(res=>console.log(res))
+    }
 
     fileSelectedHandler = (event) => {
         this.setState({fileTest: event.target.files})
@@ -69,7 +72,7 @@ componentDidMount() {
         console.log('file upload triggered');
     };
     render() {
-       villa(30)
+        villa(30)
             .then(res=>console.log(res))
 
         editVilla(30)
@@ -81,15 +84,27 @@ componentDidMount() {
             let formData = new FormData() ;
             formData.append("image0" , event.target.image0.files[0])
             formData.append("image1" , event.target.image1.files[0])
+            formData.append("image2" , event.target.image2.files[0])
+            formData.append("image3" , event.target.image3.files[0])
+            formData.append("image4" , event.target.image4.files[0])
             formData.append("img_title0" , this.state.img_title0)
             formData.append("img_title1" , this.state.img_title1)
-            formData.append('imagesLength' , 2)
+            formData.append("img_title2" , this.state.img_title2)
+            formData.append("img_title3" , this.state.img_title3)
+            formData.append("img_title4" , this.state.img_title4)
+            formData.append('imagesLength' , 5)
 
 
             console.log(event.target.image0.files[0])
             console.log(this.state.img_title0)
             console.log(event.target.image1.files[0])
             console.log(this.state.img_title1)
+            console.log(event.target.image2.files[0])
+            console.log(this.state.img_title2)
+            console.log(event.target.image3.files[0])
+            console.log(this.state.img_title3)
+            console.log(event.target.image4.files[0])
+            console.log(this.state.img_title4)
 
             await  SetImages(formData,30)
                 .then(res => console.log(res))
@@ -272,8 +287,8 @@ componentDidMount() {
         }
         console.log(allData)
 
-            //console.log(JSON.parse(localStorage.getItem("step5")))
-       // console.log(JSON.parse(localStorage.getItem("info")))
+        //console.log(JSON.parse(localStorage.getItem("step5")))
+        // console.log(JSON.parse(localStorage.getItem("info")))
 
         return (
             <MDBContainer className={" fv-HostStep2Page fv-hostStep2Page2 fv-hostStep3Page fv-hostStep4Page fv-hostStep5Page fv-hostStep5Page2 fv-hostStep5Page3"}>
@@ -282,294 +297,250 @@ componentDidMount() {
                         <HeaderSteps />
                     </MDBRow>
 
-                    <MDBRow className={"fv-HostStep1PageBody"}>
-                        <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
-                            <h5 className={"fv-hostStep3NumberOfCapacityMobile"}>تصویر اصلی</h5>
-                            <p className={"fv-hostStep5P"}>مهمانان ابتدا این تصویر را میبینند،این تصویر معرف اقامت گاه شماست،پس تصویر با کیفیت و زیبا انتخاب کنید</p>
 
-                            <MDBRow className={"fv-hostStep5Page3TopPicImage"}>
-                                <MDBCol>
+                    <form onSubmit={e=>updateData(e)}>
+
+                        <MDBRow className={"fv-HostStep1PageBody"}>
+                            <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
+                                <h5 className={"fv-hostStep3NumberOfCapacityMobile"}>تصویر اصلی</h5>
+                                <p className={"fv-hostStep5P"}>مهمانان ابتدا این تصویر را میبینند،این تصویر معرف اقامت گاه شماست،پس تصویر با کیفیت و زیبا انتخاب کنید</p>
+
+                                <MDBRow className={"fv-hostStep5Page3TopPicImage"}>
+                                    <MDBCol>
                                         <div>
                                             <label htmlFor="myInput">
                                                 <img src={Logo}/>
-                                                <p>تصویر خود را انتخاب کنید</p>
+                                                <label htmlFor="files0" className="btn">تصویر خود را انتخاب کنید</label>
+                                                <input id="files0"   style={{display:'none'}}   type="file"   name='image0' />
                                             </label>
-                                            <input
-                                                id="myInput"
-                                                style={{display:'none'}}
-                                                type={"file"}
-                                                name={'selectedMainPic'}
-                                                onChange={this.fileSelectedHandler}
-                                            />
+
                                         </div>
-                                </MDBCol>
-                            </MDBRow>
+                                    </MDBCol>
+                                </MDBRow>
 
-                        </MDBCol>
-
-
-                        <MDBCol className={"fv-hostStepPage1Left fv-hostStepPageSpace"} sm={12} md={6}>
-                            <MDBRow className={"fv-hostStepPage1LeftContentBody"}>
-                                <p>طراحان سایت هنگام طراحی قالب سایت معمولا با این موضوع رو برو هستند ک
-                                    ه محتوای اصلی صفحات آماده نیست. در نتیجه طرح کلی دید درستی به کار فرما نمیدهد. اگ
-                                    ر طراح بخواهد دنبال متن های مرتبط بگردد تمرکزش از روی کار اصلی برداشته میشود و این
-                                    کار زمان بر خواهد بود. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگرا
-                                    ن را در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند.</p>
-                                <img src={Logo} className={"fv-hostStepPage1LeftImage"}/>
-                            </MDBRow>
-                            <MDBRow className={"fv-hostStepPage2LeftButtonBody"}>
-
-                                {/*  <div className={this.state.clickLoader ? "loader" : "fv-hideLoader"}> */}
-                                <div className={this.state.clickLoader ? "loader" : "fv-hideLoader"}>
-                                    <svg className="circular" viewBox="25 25 50 50">
-                                        <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
-                                                stroke-miterlimit="10"/>
-                                    </svg>
-                                </div>
-
-                                <input type="button" value="ثبت اقامتگاه"  className={this.state.clickLoader ? "fv-hideLoader" : "fv-hostStepPage1LeftButton"} onClick={()=>{
-                                    this.setState({clickLoader:true})
+                            </MDBCol>
 
 
-                                    storeVilla(allData)
-                                        .then(res=>{
-                                            if(res.status===200){
-                                                localStorage.removeItem("step1")
-                                                localStorage.removeItem("step2")
-                                                localStorage.removeItem("step2-2")
-                                                localStorage.removeItem("step3")
-                                                localStorage.removeItem("step4")
-                                                localStorage.removeItem("step5")
-                                                localStorage.removeItem("step5-2")
-                                                this.props.history.push('/myAccommodation')
-                                            }else {
-                                                alert("لطفا مجددا اطلاعات خود را بررسی کنید - اطلاعات شما نادرست وارد شده")
-                                                this.props.history.push('../../hostStep1')
-                                            }
-                                        })
-                                        .catch(err=>{
-                                           const getErrors = Object.values(err.response.data.errors)
-                                            let showErrors = ""
-                                            for (let i = 0 ; i < getErrors.length ; i++){
-                                                if(i===0){
-                                                    showErrors=`${getErrors[i]}`;
+                            <MDBCol className={"fv-hostStepPage1Left fv-hostStepPageSpace"} sm={12} md={6}>
+                                <MDBRow className={"fv-hostStepPage1LeftContentBody"}>
+                                    <p>طراحان سایت هنگام طراحی قالب سایت معمولا با این موضوع رو برو هستند ک
+                                        ه محتوای اصلی صفحات آماده نیست. در نتیجه طرح کلی دید درستی به کار فرما نمیدهد. اگ
+                                        ر طراح بخواهد دنبال متن های مرتبط بگردد تمرکزش از روی کار اصلی برداشته میشود و این
+                                        کار زمان بر خواهد بود. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگرا
+                                        ن را در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند.</p>
+                                    <img src={Logo} className={"fv-hostStepPage1LeftImage"}/>
+                                </MDBRow>
+                                <MDBRow className={"fv-hostStepPage2LeftButtonBody"}>
+
+                                    {/*  <div className={this.state.clickLoader ? "loader" : "fv-hideLoader"}> */}
+                                    <div className={this.state.clickLoader ? "loader" : "fv-hideLoader"}>
+                                        <svg className="circular" viewBox="25 25 50 50">
+                                            <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
+                                                    stroke-miterlimit="10"/>
+                                        </svg>
+                                    </div>
+
+                                    <button className={"fv-hostStepPage1LeftButton"} onClick={() => {
+                                        alert(1)
+                                    }}>ثبت عکس</button>
+
+                                    <input type="button" value="ثبت اقامتگاه"  className={this.state.clickLoader ? "fv-hideLoader" : "fv-hostStepPage1LeftButton"} onClick={()=>{
+                                        this.setState({clickLoader:true})
+
+
+                                        storeVilla(allData)
+                                            .then(res=>{
+                                                if(res.status===200){
+                                                    localStorage.removeItem("step1")
+                                                    localStorage.removeItem("step2")
+                                                    localStorage.removeItem("step2-2")
+                                                    localStorage.removeItem("step3")
+                                                    localStorage.removeItem("step4")
+                                                    localStorage.removeItem("step5")
+                                                    localStorage.removeItem("step5-2")
+                                                    this.props.history.push('/myAccommodation')
                                                 }else {
-                                                    showErrors=`${showErrors} \n ${getErrors[i]}`
+                                                    alert("لطفا مجددا اطلاعات خود را بررسی کنید - اطلاعات شما نادرست وارد شده")
+                                                    this.props.history.push('../../hostStep1')
                                                 }
-                                            }
-                                           alert(showErrors)
-                                            if(err.response.data.errors.title || err.response.data.errors.type || err.response.data.errors.phone_number || err.response.data.errors.story){
-                                                this.props.history.push('../../hostStep1')
-                                            }
-                                            if(err.response.data.errors.city || err.response.data.errors.state || err.response.data.errors.postal_code || err.response.data.errors.address){
-                                                this.props.history.push('../../hostStep2')
-                                            }
-                                            if(err.response.data.errors.area || err.response.data.errors.places || err.response.data.errors.view){
-                                                this.props.history.push('../../hostStep3')
-                                            }
-                                            if(err.response.data.errors.general_fac || err.response.data.errors.kitchen_fac || err.response.data.errors.temp_fac){
-                                                this.props.history.push('../../hostStep4')
-                                            }
-                                            if(err.response.data.errors.normal_extra_cost || err.response.data.errors.normal_cost ||  err.response.data.errors.special_cost ||  err.response.data.errors.special_extra_cost ||  err.response.data.errors.weekly_discount ||  err.response.data.errors.monthly_discount){
-                                                this.props.history.push('../../hostStep5')
-                                            }
-                                            if(err.response.data.errors.arrival_time || err.response.data.errors.auth_rules || err.response.data.errors.exit_time || err.response.data.errors.max_reserve || err.response.data.errors.max_reserve  || err.response.data.errors.suitable_for){
-                                                this.props.history.push('../../hostStep5-2')
-                                            }
-                                        })
+                                            })
+                                            .catch(err=>{
+                                                const getErrors = Object.values(err.response.data.errors)
+                                                let showErrors = ""
+                                                for (let i = 0 ; i < getErrors.length ; i++){
+                                                    if(i===0){
+                                                        showErrors=`${getErrors[i]}`;
+                                                    }else {
+                                                        showErrors=`${showErrors} \n ${getErrors[i]}`
+                                                    }
+                                                }
+                                                alert(showErrors)
+                                                if(err.response.data.errors.title || err.response.data.errors.type || err.response.data.errors.phone_number || err.response.data.errors.story){
+                                                    this.props.history.push('../../hostStep1')
+                                                }
+                                                if(err.response.data.errors.city || err.response.data.errors.state || err.response.data.errors.postal_code || err.response.data.errors.address){
+                                                    this.props.history.push('../../hostStep2')
+                                                }
+                                                if(err.response.data.errors.area || err.response.data.errors.places || err.response.data.errors.view){
+                                                    this.props.history.push('../../hostStep3')
+                                                }
+                                                if(err.response.data.errors.general_fac || err.response.data.errors.kitchen_fac || err.response.data.errors.temp_fac){
+                                                    this.props.history.push('../../hostStep4')
+                                                }
+                                                if(err.response.data.errors.normal_extra_cost || err.response.data.errors.normal_cost ||  err.response.data.errors.special_cost ||  err.response.data.errors.special_extra_cost ||  err.response.data.errors.weekly_discount ||  err.response.data.errors.monthly_discount){
+                                                    this.props.history.push('../../hostStep5')
+                                                }
+                                                if(err.response.data.errors.arrival_time || err.response.data.errors.auth_rules || err.response.data.errors.exit_time || err.response.data.errors.max_reserve || err.response.data.errors.max_reserve  || err.response.data.errors.suitable_for){
+                                                    this.props.history.push('../../hostStep5-2')
+                                                }
+                                            })
 
-                                    /////////////////////////////////////// err.response.data.errors.title
-                                    /////////////////////////////////////// err.response.data.errors.type
-                                    /////////////////////////////////////// err.response.data.errors.phone_number
-                                    /////////////////////////////////////// err.response.data.errors.story
+                                        /////////////////////////////////////// err.response.data.errors.title
+                                        /////////////////////////////////////// err.response.data.errors.type
+                                        /////////////////////////////////////// err.response.data.errors.phone_number
+                                        /////////////////////////////////////// err.response.data.errors.story
 
-                                    /////////////////////////////////////// err.response.data.errors.city
-                                    /////////////////////////////////////// err.response.data.errors.state
-                                    /////////////////////////////////////// err.response.data.errors.postal_code
-                                    /////////////////////////////////////// err.response.data.errors.address
+                                        /////////////////////////////////////// err.response.data.errors.city
+                                        /////////////////////////////////////// err.response.data.errors.state
+                                        /////////////////////////////////////// err.response.data.errors.postal_code
+                                        /////////////////////////////////////// err.response.data.errors.address
 
-                                    /////////////////////////////////////// err.response.data.errors.area
-                                    /////////////////////////////////////// err.response.data.errors.places
-                                    /////////////////////////////////////// err.response.data.errors.view
+                                        /////////////////////////////////////// err.response.data.errors.area
+                                        /////////////////////////////////////// err.response.data.errors.places
+                                        /////////////////////////////////////// err.response.data.errors.view
 
-                                    /////////////////////////////////////// err.response.data.errors.general_fac
-                                    /////////////////////////////////////// err.response.data.errors.kitchen_fac
-                                    /////////////////////////////////////// err.response.data.errors.temp_fac
+                                        /////////////////////////////////////// err.response.data.errors.general_fac
+                                        /////////////////////////////////////// err.response.data.errors.kitchen_fac
+                                        /////////////////////////////////////// err.response.data.errors.temp_fac
 
-                                    /////////////////////////////////////// err.response.data.errors.arrival_time
-                                    /////////////////////////////////////// err.response.data.errors.auth_rules
-                                    /////////////////////////////////////// err.response.data.errors.exit_time
-                                    /////////////////////////////////////// err.response.data.errors.max_reserve
-                                    /////////////////////////////////////// err.response.data.errors.min_reserve
-                                    /////////////////////////////////////// err.response.data.errors.normal_extra_cost
-                                    /////////////////////////////////////// err.response.data.errors.suitable_for
+                                        /////////////////////////////////////// err.response.data.errors.arrival_time
+                                        /////////////////////////////////////// err.response.data.errors.auth_rules
+                                        /////////////////////////////////////// err.response.data.errors.exit_time
+                                        /////////////////////////////////////// err.response.data.errors.max_reserve
+                                        /////////////////////////////////////// err.response.data.errors.min_reserve
+                                        /////////////////////////////////////// err.response.data.errors.normal_extra_cost
+                                        /////////////////////////////////////// err.response.data.errors.suitable_for
 
-                                    //if status === 500    server Error
+                                        //if status === 500    server Error
 
 
-                                    let fd = new FormData()
-                                    fd.append("images", this.state.fileTest);
-                                   const images={
-                                       img_src:"test.png",
-                                       img_title:"test"
-                                    }
-                                    SetImages(this.state.test,30)
-                                        .then(res => console.log(res))
-                                        .catch(err=>console.log(err.response))
-                                }}/>
-                               <input type="button" value="مرحله قبل"  className={this.state.clickLoader ?  "fv-hideLoader" :  "fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"} onClick={()=>{
-                                   this.props.history.push('../../hostStep5-2')
-                               }}/>
-                            </MDBRow>
-                        </MDBCol>
+                                        let fd = new FormData()
+                                        fd.append("images", this.state.fileTest);
+                                        const images={
+                                            img_src:"test.png",
+                                            img_title:"test"
+                                        }
+                                        SetImages(this.state.test,30)
+                                            .then(res => console.log(res))
+                                            .catch(err=>console.log(err.response))
+                                    }}/>
+                                    <input type="button" value="مرحله قبل"  className={this.state.clickLoader ?  "fv-hideLoader" :  "fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"} onClick={()=>{
+                                        this.props.history.push('../../hostStep5-2')
+                                    }}/>
+                                </MDBRow>
+                            </MDBCol>
 
-                        {/*    <HostStepLeftBodyContent
+                            {/*    <HostStepLeftBodyContent
                             text="طراحان سایت هنگام طراحی قالب سایت معمولا با این موضوع رو برو هستند ک
                             ه محتوای اصلی صفحات آماده نیست. در نتیجه طرح کلی دید درستی به کار فرما نمیدهد. اگ
                             ر طراح بخواهد دنبال متن های مرتبط بگردد تمرکزش از روی کار اصلی برداشته میشود و این
                             کار زمان بر خواهد بود. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگرا
                             ن را در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند."
                             image={Logo}/> */}
-                    </MDBRow>
+                        </MDBRow>
 
-                    <MDBContainer className={"fv-hostStep5Page3MultiImages"}>
-                        <MDBRow className={"fv-hostStep5Page3MultiImagesMobileAnotherPicP"}>
+                        <MDBContainer className={"fv-hostStep5Page3MultiImages"}>
+                            <MDBRow className={"fv-hostStep5Page3MultiImagesMobileAnotherPicP"}>
                                 <p>تصاویر قسمت های دیگر اقامت گاه خود را انتخاب کنید</p>
-                        </MDBRow>
-                        <MDBRow>
-                            <MDBCol md={3} sm={12}>
-                                <MDBRow className={"fv-hostStep5Page3Images"}>
-                                    <MDBCol>
-                                        <div>
-                                            <label htmlFor="myInput">
-                                                <img src={Logo}/>
-                                                <p>تصویر خود را انتخاب کنید</p>
-                                            </label>
-                                            <input
-                                                id="myInput"
-                                                style={{display:'none'}}
-                                                type={"file"}
-                                                name={'selectedFirstPic'}
-                                                onChange={this.fileSelectedHandler}
-                                            />
-                                        </div>
-                                    </MDBCol>
-                                </MDBRow>
-                                <MDBRow>
-                                    <MDBCol md={12} sm={12} className={"fv-hostStep5Page3ImagesComment"}>
-                                        <p>عنوان تصویر یا شرح کوتاه</p>
-                                        <input type="text" value=""/>
-                                    </MDBCol>
-                                </MDBRow>
-                            </MDBCol>
-                            <MDBCol md={3} sm={12}>
-                                <MDBRow className={"fv-hostStep5Page3Images"}>
-                                    <MDBCol>
-                                        <div>
-                                            <label htmlFor="myInput">
-                                                <img src={Logo}/>
-                                                <p>تصویر خود را انتخاب کنید</p>
-                                            </label>
-                                            <input
-                                                id="myInput"
-                                                style={{display:'none'}}
-                                                type={"file"}
-                                                name={'selectedSecondPic'}
-                                                onChange={this.fileSelectedHandler}
-                                            />
-                                        </div>
-                                    </MDBCol>
-                                </MDBRow>
-                                <MDBRow>
-                                    <MDBCol md={12} sm={12} className={"fv-hostStep5Page3ImagesComment"}>
-                                        <p>عنوان تصویر یا شرح کوتاه</p>
-                                        <input type="text" value=""/>
-                                    </MDBCol>
-                                </MDBRow>
-                            </MDBCol>
-                            <MDBCol md={3} sm={12}>
-                                <MDBRow className={"fv-hostStep5Page3Images"}>
-                                    <MDBCol>
-                                        <div>
-                                            <label htmlFor="myInput">
-                                                <img src={Logo}/>
-                                                <p>تصویر خود را انتخاب کنید</p>
-                                            </label>
-                                            <input
-                                                id="myInput"
-                                                style={{display:'none'}}
-                                                type={"file"}
-                                                name={'selectedThirdPic'}
-                                                onChange={this.fileSelectedHandler}
-                                            />
-                                        </div>
-                                    </MDBCol>
-                                </MDBRow>
-                                <MDBRow>
-                                    <MDBCol md={12} sm={12} className={"fv-hostStep5Page3ImagesComment"}>
-                                        <p>عنوان تصویر یا شرح کوتاه</p>
-                                        <input type="text" value=""/>
-                                    </MDBCol>
-                                </MDBRow>
-                            </MDBCol>
-                            <MDBCol md={3} sm={12}>
-                                <MDBRow className={"fv-hostStep5Page3Images"}>
-                                    <MDBCol>
-                                        <div>
-                                            <label htmlFor="myInput">
-                                                <img src={Logo}/>
-                                                <p>تصویر خود را انتخاب کنید</p>
-                                            </label>
-                                            <input
-                                                id="myInput"
-                                                style={{display:'none'}}
-                                                type={"file"}
-                                                name={'selectedForthPic'}
-                                                onChange={this.fileSelectedHandler}
-                                            />
-                                        </div>
-                                    </MDBCol>
-                                </MDBRow>
-                                <MDBRow>
-                                    <MDBCol md={12} sm={12} className={"fv-hostStep5Page3ImagesComment"}>
-                                        <p>عنوان تصویر یا شرح کوتاه</p>
-                                        <input type="text" value=""/>
-                                    </MDBCol>
-                                </MDBRow>
-                            </MDBCol>
-                        </MDBRow>
+                            </MDBRow>
+                            <MDBRow>
+                                <MDBCol md={3} sm={12}>
+                                    <MDBRow className={"fv-hostStep5Page3Images"}>
+                                        <MDBCol>
+                                            <div>
+                                                <label htmlFor="myInput">
+                                                    <img src={Logo}/>
+                                                    <label htmlFor="files1" className="btn">تصویر خود را انتخاب کنید</label>
+                                                    <input id="files1"   style={{display:'none'}}   type="file"   name='image1' />
+                                                </label>
+
+                                            </div>
+                                        </MDBCol>
+                                    </MDBRow>
+                                    <MDBRow>
+                                        <MDBCol md={12} sm={12} className={"fv-hostStep5Page3ImagesComment"}>
+                                            <p>عنوان تصویر یا شرح کوتاه</p>
+                                            <input type="text" name="img_title1" value={this.state.img_title1}
+                                                   onChange={(e=>this.setState({img_title1:e.target.value}))}/>
+                                        </MDBCol>
+                                    </MDBRow>
+                                </MDBCol>
+                                <MDBCol md={3} sm={12}>
+                                    <MDBRow className={"fv-hostStep5Page3Images"}>
+                                        <MDBCol>
+                                            <div>
+                                                <label htmlFor="myInput">
+                                                    <img src={Logo}/>
+                                                    <label htmlFor="files2" className="btn">تصویر خود را انتخاب کنید</label>
+                                                    <input id="files2"   style={{display:'none'}}   type="file"   name='image2' />
+                                                </label>
+
+                                            </div>
+                                        </MDBCol>
+                                    </MDBRow>
+                                    <MDBRow>
+                                        <MDBCol md={12} sm={12} className={"fv-hostStep5Page3ImagesComment"}>
+                                            <p>عنوان تصویر یا شرح کوتاه</p>
+                                            <input type="text" name="img_title2" value={this.state.img_title2}
+                                                   onChange={(e=>this.setState({img_title2:e.target.value}))}/>
+                                        </MDBCol>
+                                    </MDBRow>
+                                </MDBCol>
+                                <MDBCol md={3} sm={12}>
+                                    <MDBRow className={"fv-hostStep5Page3Images"}>
+                                        <MDBCol>
+                                            <div>
+                                                <label htmlFor="myInput">
+                                                    <img src={Logo}/>
+                                                    <label htmlFor="files3" className="btn">تصویر خود را انتخاب کنید</label>
+                                                    <input id="files3"   style={{display:'none'}}   type="file"   name='image3' />
+                                                </label>
+                                            </div>
+                                        </MDBCol>
+                                    </MDBRow>
+                                    <MDBRow>
+                                        <MDBCol md={12} sm={12} className={"fv-hostStep5Page3ImagesComment"}>
+                                            <p>عنوان تصویر یا شرح کوتاه</p>
+                                            <input type="text" name="img_title3" value={this.state.img_title3}
+                                                   onChange={(e=>this.setState({img_title3:e.target.value}))}/>
+                                        </MDBCol>
+                                    </MDBRow>
+                                </MDBCol>
+                                <MDBCol md={3} sm={12}>
+                                    <MDBRow className={"fv-hostStep5Page3Images"}>
+                                        <MDBCol>
+                                            <div>
+                                                <label htmlFor="myInput">
+                                                    <img src={Logo}/>
+                                                    <label htmlFor="files4" className="btn">تصویر خود را انتخاب کنید</label>
+                                                    <input id="files4"  style={{display:'none'}}    type="file"   name='image4' />
+                                                </label>
+                                            </div>
+                                        </MDBCol>
+                                    </MDBRow>
+                                    <MDBRow>
+                                        <MDBCol md={12} sm={12} className={"fv-hostStep5Page3ImagesComment"}>
+                                            <p>عنوان تصویر یا شرح کوتاه</p>
+                                            <input type="text" name="img_title4" value={this.state.img_title4}
+                                                   onChange={(e=>this.setState({img_title4:e.target.value}))}/>
+                                        </MDBCol>
+                                    </MDBRow>
+                                </MDBCol>
+                            </MDBRow>
 
 
-                        <form onSubmit={e=>updateData(e)}>
-                                        <label htmlFor="myInput">
-                                            <img src={Logo}/>
-                                            <p>تصویر خود را انتخاب کنید</p>
-                                        </label>
-                                        <input
-                                            type="file"
-                                            name='image0'
-                                        />
-                                        <input type="text" name="img_title0" value={this.state.img_title0}
-                                        onChange={(e=>this.setState({img_title0:e.target.value}))}/>
-
-                                        <label htmlFor="myInput">
-                                            <img src={Logo}/>
-                                            <p>تصویر خود را انتخاب کنید</p>
-                                        </label>
-                                        <input
-                                            type="file"
-                                            name='image1'
-                                        />
-                                        <input type="text" name="img_title0" value={this.state.img_title1}
-                                               onChange={(e=>this.setState({img_title1:e.target.value}))}/>
-                                        <button>upload</button>
-                        </form>
-
-
-
-
-                    </MDBContainer>
-
+                        </MDBContainer>
+                    </form>
 
                     <MDBRow>
                         <Footer />
