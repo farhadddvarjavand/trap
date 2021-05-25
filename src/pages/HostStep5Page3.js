@@ -11,6 +11,7 @@ import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt
 import {Link} from "react-router-dom";
 import {editVilla, SetImages, storeVilla} from "../services/userService";
 import {villa} from "../services/villaService";
+import axios from "axios";
 
 class HostStep5Page3 extends Component {
     constructor(props) {
@@ -25,7 +26,9 @@ class HostStep5Page3 extends Component {
 
 
             fileTest:'',
-            test:''
+            test:'',
+            img_title0:'تصویر',
+            img_title1:'تصویر',
         }
 
     }
@@ -66,6 +69,36 @@ componentDidMount() {
         console.log('file upload triggered');
     };
     render() {
+        villa(30)
+            .then(res=>console.log(res))
+
+        editVilla(30)
+            .then(res=>console.log(res))
+
+        const updateData = async (event) =>{
+            console.log(event.target)
+            event.preventDefault()
+            let formData = new FormData() ;
+            formData.append("image0" , event.target.image0.files[0])
+            formData.append("image1" , event.target.image1.files[0])
+            formData.append("img_title0" , this.state.img_title0)
+            formData.append("img_title1" , this.state.img_title1)
+            formData.append('imagesLenght' , 2)
+
+
+            console.log(event.target.image0.files[0])
+            console.log(this.state.img_title0)
+            console.log(event.target.image1.files[0])
+            console.log(this.state.img_title1)
+
+            await  SetImages(formData,30)
+                .then(res => console.log(res))
+
+
+
+        }
+
+
         const sendToServerDatas={
         }
 
@@ -506,6 +539,34 @@ componentDidMount() {
                                 </MDBRow>
                             </MDBCol>
                         </MDBRow>
+
+
+                          <form onSubmit={e=>updateData(e)}>
+                                        <label htmlFor="myInput">
+                                            <img src={Logo}/>
+                                            <p>تصویر خود را انتخاب کنید</p>
+                                        </label>
+                                        <input
+                                            type="file"
+                                            name='image0'
+                                        />
+                                        <input type="text" name="img_title0" value={this.state.img_title0}
+                                        onChange={(e=>this.setState({img_title0:e.target.value}))}/>
+
+                                        <label htmlFor="myInput">
+                                            <img src={Logo}/>
+                                            <p>تصویر خود را انتخاب کنید</p>
+                                        </label>
+                                        <input
+                                            type="file"
+                                            name='image1'
+                                        />
+                                        <input type="text" name="img_title0" value={this.state.img_title1}
+                                               onChange={(e=>this.setState({img_title1:e.target.value}))}/>
+                                        <button>upload</button>
+                        </form>
+
+
                     </MDBContainer>
 
 

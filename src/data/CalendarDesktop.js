@@ -9,16 +9,33 @@ import './style/CalendarDesktop.scss'
 import SetPrice from './Calendar/components/DaysList'
 
 const CalendarDesktop = (props) => {
-    const defaultDay =[
+    let defaultDay = ''
+    defaultDay =[
         // here we add some CSS classes
-        { year: 1400, month: 2, day: 12, className: 'orangeDay' },
+        { year: 1400, month: 1, day: 6, className: 'orangeDay' },
         { year: 1400, month: 2, day: 23, className: 'orangeDay' },
         { year: 1400, month: 2, day: 18, className: 'orangeDay' },
         { year: 1400, month: 3, day: 26, className: 'orangeDay' },
         { year: 1400, month: 3, day: 4, className: 'purpleDay' },
-        { year: 1400, month: 3, day: 18, className: 'yellowDay' },
+        { year: 1400, month: 1, day: 13, className: 'yellowDay' },
         { year: 1400, month: 3, day: 26, className: 'navyBlueDay' },
     ];
+    // className  yellowDay for disable days
+    if(props.daysReserved){
+        console.log(props.daysReserved)
+
+        let disableDaysList = []
+        for (let i = 0 ; i<props.daysReserved.daysList.length ; i++){
+            let newList =  { year: '', month: '', day: '', className: '' }
+            newList.year = parseInt(props.daysReserved.daysList[i].year)
+            newList.month = parseInt(props.daysReserved.daysList[i].month)
+            newList.day = parseInt(props.daysReserved.daysList[i].day)
+            newList.className = "yellowDay"
+            disableDaysList.push(newList)
+
+        }
+        defaultDay = disableDaysList
+    }
 
     const defaultFrom = {
         year: 1300,

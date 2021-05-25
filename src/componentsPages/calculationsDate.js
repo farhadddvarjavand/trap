@@ -13,12 +13,12 @@ export const arrayBetweenDates=(dateA , dateB , range) =>{
         moment.loadPersian();
 
         if(range>0){
-            for(let i = 0 ; i <= range ; i++){
+            for(let i = 0 ; i < range ; i++){
                 let startdate = moment(dateA, 'jYYYY/jM/jD');
                 startdate = startdate.add(i, "days");
                 startdate = startdate.format("YYYY/MM/DD");
-                let date = moment().add('months', 1).endOf('month');
-                console.log(date)
+               // let date = moment().add('months', 1).endOf('month');
+               // console.log(date)
 
                 const test=  moment(startdate, 'YYYY/M/D').format('jYYYY/jM/jD ') // today in shamsi
                 daysList.push(test)

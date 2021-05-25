@@ -239,6 +239,8 @@ componentDidMount() {
         const end   = new Date(this.state.dateToReturn.year, this.state.dateToReturn.month, this.state.dateToReturn.day);
         const range = moment.range(start, end);
 
+
+
         let rangeBetween = ' ---- '
 
         if(range.diff('days')){
@@ -247,8 +249,11 @@ componentDidMount() {
                 rangeBetween='---'
             }
             else {
-                rangeBetween = range.diff('days');
+                rangeBetween = range.diff('days') + 1;
             }
+        }
+        if(range.diff('days') === 0){
+            rangeBetween=1
         }
 
 
@@ -260,6 +265,51 @@ componentDidMount() {
 
         console.log(arrayBetweenDatesObject(daytogoGeneralFormat,daytoreturnGeneralFormat,rangeBetween)) // date object   return =>   [{ year:1400 , month: 01 , day:01  }]
         console.log('arrayBetweenDates(start,end,rangeBetween)')
+
+
+
+
+
+
+        let daysBetweenReserved = ''
+
+        if(this.state.resultReservedDates){
+            let startReservedDatearray =''
+            let endReservedDatearray   = ''
+            let startReservedDate =  ''
+            let endReservedDate   = ''
+
+            let allReservedDatesVillas = []     // خانه های رزرو شده را به ترتیب میدهد
+            for (let i = 0 ; i < this.state.resultReservedDates.length ; i++ ){   // ممکن است چد استارت دیتا و اند دیتا فرستاده شود که باید تمام تاریخ های بین آن را بگیریم
+                startReservedDatearray = this.state.resultReservedDates[i].start_date.split("/")
+
+                if(startReservedDatearray[2].length===1){
+                    startReservedDatearray[2] = `0${startReservedDatearray[2]}`
+                }
+                startReservedDate=new Date(startReservedDatearray[0], startReservedDatearray[1], startReservedDatearray[2]);
+                endReservedDatearray = this.state.resultReservedDates[i].end_date.split("/")
+                if(endReservedDatearray[2].length===1){
+                    endReservedDatearray[2] = `0${endReservedDatearray[2]}`
+                }
+                endReservedDate=new Date(endReservedDatearray[0], endReservedDatearray[1], endReservedDatearray[2]);
+                const rangeReservedDate = moment.range(startReservedDate, endReservedDate);
+                let rangeBetweenDate = rangeReservedDate.diff('days');
+                console.log(rangeBetweenDate)
+                if(rangeReservedDate.diff('days') === 0){
+                    rangeBetweenDate=1
+                }
+
+                 if(rangeBetweenDate>0){
+
+                     daysBetweenReserved = arrayBetweenDatesObject(this.state.resultReservedDates[i].start_date,this.state.resultReservedDates[i].end_date,rangeBetweenDate)
+                 }
+                allReservedDatesVillas.push(daysBetweenReserved)
+            }
+             // console.log(allReservedDatesVillas[0])   // خانه های رزرو شده را به ترتیب میدهد
+        }
+
+
+
 
         const priceDaysUpdates = []  /// مورد نظر
         let priceArrayOneMonth ={
@@ -935,7 +985,8 @@ componentDidMount() {
                             <MDBRow className={"fv-DisplayPageCalender fv-DisplayPageCalenderForDesktop"}>                  {/*    calender-calendar     */}
                                 <CalendarDesktop
                                     villaPrice={priceDaysUpdates}
-                                    getSelectedDay={this.getSelectedDays} />
+                                    getSelectedDay={this.getSelectedDays}
+                                    daysReserved={daysBetweenReserved}/>
 
                                 {/* <MDBCol md={6}>
                                     <Calender />
