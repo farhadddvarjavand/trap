@@ -69,7 +69,7 @@ componentDidMount() {
         console.log('file upload triggered');
     };
     render() {
-        villa(30)
+       villa(30)
             .then(res=>console.log(res))
 
         editVilla(30)
@@ -83,7 +83,7 @@ componentDidMount() {
             formData.append("image1" , event.target.image1.files[0])
             formData.append("img_title0" , this.state.img_title0)
             formData.append("img_title1" , this.state.img_title1)
-            formData.append('imagesLenght' , 2)
+            formData.append('imagesLength' , 2)
 
 
             console.log(event.target.image0.files[0])
@@ -93,8 +93,7 @@ componentDidMount() {
 
             await  SetImages(formData,30)
                 .then(res => console.log(res))
-
-
+                .catch(err=>console.log(err.response))
 
         }
 
@@ -541,7 +540,7 @@ componentDidMount() {
                         </MDBRow>
 
 
-                          <form onSubmit={e=>updateData(e)}>
+                        <form onSubmit={e=>updateData(e)}>
                                         <label htmlFor="myInput">
                                             <img src={Logo}/>
                                             <p>تصویر خود را انتخاب کنید</p>
@@ -565,6 +564,8 @@ componentDidMount() {
                                                onChange={(e=>this.setState({img_title1:e.target.value}))}/>
                                         <button>upload</button>
                         </form>
+
+
 
 
                     </MDBContainer>

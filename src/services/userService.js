@@ -241,7 +241,7 @@ export const SetImages = async (data,villaId) => {
     return http.post(
 
         `${config.webapi}/api/v1/villa/store/images/${villaId}`,
-        JSON.stringify(data),
+        data,
         { headers:{ 'Authorization' : await getToken() } }
 
     );
