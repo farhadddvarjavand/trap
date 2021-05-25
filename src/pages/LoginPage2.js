@@ -20,7 +20,9 @@ class LoginPage2 extends Component {
             validationCode:'',
             minutes: 3,
             seconds: 0,
-
+            errorsText:"کد وارد شده معتبر نمیباشد",
+            validCode:true,
+            clickLoader:false,
 
         }
     }
@@ -80,8 +82,11 @@ class LoginPage2 extends Component {
             phone_number ,
             sms_code:this.state.validationCode
         }
-        const { status, data } = await verifySmsCode(user);
-        if (status === 200 && data.data.user) {
+        await verifySmsCode(user)
+            .then(result => {
+                const status = result.status
+                const data = result.data
+                if (status === 200 && data.data.user) {
 
 
 
@@ -91,19 +96,34 @@ class LoginPage2 extends Component {
                     localStorage.setItem("infoUser" , JSON.stringify(info))
 
 
-            // Redirect User
-            this.props.history.push("/mainPage");
+                    // Redirect User
+                    this.props.history.push("/mainPage");
 
-            // Save api token in local storage
-            localStorage.setItem("token",data.data.token);
+                    // Save api token in local storage
+                    localStorage.setItem("token",data.data.token);
 
-            // Save user data in State
-            // ...
+                    // Save user data in State
+                    // ...
 
-        }else{
-            // If code was invalid
-            alert('کد نامعتبر میباشد.لطفا مجددا لاگین کنید')
-        }
+                }else{
+                    this.setState({validCode:false , clickLoader:false})
+                }
+            })
+            .catch(err=>{
+                if(err.response){
+                    if(err.response.status=== 422){
+                        if(err.response.data.errors.sms_code){
+                            this.setState({errorsText:err.response.data.errors.sms_code , validCode:false , clickLoader:false})
+                        }
+                    }else {
+                        alert("اررور از سمت سرور رخ داده است")
+                    }
+                }else {
+                    alert("اررور از سمت سرور رخ داده است")
+                }
+
+            })
+
     }
     render() {
 
@@ -127,6 +147,7 @@ class LoginPage2 extends Component {
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-loginPageBodyOne"}>
+                            <p className={this.state.validCode===false ? "fv-alertErrorText" : 'fv-alertNotErrorText'}><i className="fas fa-exclamation-triangle" />{this.state.errorsText}</p>
                             <MDBCol sm={12} className={"fv-loginPage2RightBody"}>
                                 <h3>ورود به حساب کاربری</h3>
                                 <MDBRow>
@@ -137,7 +158,8 @@ class LoginPage2 extends Component {
                                         <p><Link to={'/login'}>ویرایش شماره</Link></p>
                                     </MDBCol>
                                 </MDBRow>
-                                <input type="text" placeholder={'کد تایید'} value={this.state.validationCode} onChange={((e)=>this.setState({validationCode : e.target.value}))} />
+                                <input type="text" placeholder={'کد تایید'} value={this.state.validationCode} className={this.state.validCode===false ? "fv-redBorderError"  : "" }
+                                       onChange={((e)=>this.setState({validationCode : e.target.value}))} />
                                 <MDBRow className={"fv-loginPage2RightBodyButtonAndTime"}>
                                     <MDBCol md={8} sm={6}>
                                         <p> <div>
@@ -148,7 +170,15 @@ class LoginPage2 extends Component {
                                         </div></p>
                                     </MDBCol>
                                     <MDBCol md={4} sm={6}>
-                                        <input className={"fv-loginPageButton"} type="button" onClick={()=>{
+                                        <div className={this.state.clickLoader ? "loader" : "fv-hideLoader"}>
+                                            <svg className="circular" viewBox="25 25 50 50">
+                                                <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
+                                                        stroke-miterlimit="10"/>
+                                            </svg>
+                                        </div>
+
+                                        <input className={this.state.clickLoader ?  "fv-hideLoader" :"fv-loginPageButton"} type="button" onClick={()=>{
+                                            this.setState({clickLoader:true})
                                             {this.validation()}
                                             /*
                                             fetch('https://reqres.in/api/posts', {                     / POST

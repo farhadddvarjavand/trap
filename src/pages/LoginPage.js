@@ -26,6 +26,8 @@ class LoginPage extends Component {
             mobileNumber:'',
             eNumber:'',
             phone_number:'',
+            validNumber:true,
+            clickLoader:false,
 
             test:'',
         }
@@ -68,10 +70,10 @@ class LoginPage extends Component {
                  alert('پیامک برای شما ارسال شده لطفا چند دقیقه دیگر تلاش مجدد فرمایید');
              }
              else{
-                 alert('شماره نامعتبر است')
+                 this.setState({validNumber:false , clickLoader:false})
              }
          })
-             .catch(error => error.response.status === 422 ? alert('شماره مورد نظر معتبر نمیباشد') : '')
+             .catch(error => error.response.status === 422 ?  this.setState({validNumber:false ,clickLoader:false}) : '')
 
 
 
@@ -88,6 +90,8 @@ class LoginPage extends Component {
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-loginPageBodyOne"}>
+                            <p className={this.state.validNumber===false ? "fv-alertErrorText" : 'fv-alertNotErrorText'}><i className="fas fa-exclamation-triangle" />شماره مورد نظر نامعتبر میباشد</p>
+
                             <MDBCol sm={12}>
                                 <h3>ورود به حساب کاربری</h3>
                                 {/* <p>شماره موبایل خود را وارد نمایید</p> */}
@@ -99,10 +103,18 @@ class LoginPage extends Component {
                                         <Link to={"/login3"} ><p>عضو شوید</p> </Link>
                                     </MDBCol>
                                 </MDBRow>
-                                <input type="text" placeholder={'شماره موبایل'} name={'phone_number'} value={this.state.phone_number}
+                                <input type="text" placeholder={'شماره موبایل'} className={this.state.validNumber===false ? "fv-redBorderError"  : "" }  name={'phone_number'} value={this.state.phone_number}
                                        onChange={((e)=>this.setState({phone_number : e.target.value }))}/>
                                 <MDBRow>
-                                    <input className={"fv-loginPageButton"} type="button" value={"ادامه"} onClick={()=>{
+                                    <div className={this.state.clickLoader ? "loader" : "fv-hideLoader"}>
+                                        <svg className="circular" viewBox="25 25 50 50">
+                                            <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
+                                                    stroke-miterlimit="10"/>
+                                        </svg>
+                                    </div>
+
+                                    <input  className={this.state.clickLoader ?  "fv-hideLoader" :"fv-loginPageButton"} type="button" value={"ادامه"} onClick={()=>{
+                                        this.setState({clickLoader:true})
                                         {this.sendSms()}
 
 

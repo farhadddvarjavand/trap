@@ -36,6 +36,7 @@ import {arrayBetweenDates , arrayBetweenDatesObject , priceOfPerMonth} from "../
 import Mapir from "mapir-react-component";
 import {Link} from "react-router-dom";
 import {addToFavorite} from "../services/userService";
+import "../style/extra.scss"
 
 
 
@@ -69,6 +70,7 @@ class DisplayPage extends Component {
             selectedDays : '',
             error:'',
             morePics:false,
+            addToFavorites:false,
 
             date: new Date(),
             selectedPlace: '',
@@ -583,14 +585,23 @@ componentDidMount() {
                                 <p className={"fv-DisplayPageDetailsRate fv-DisplayPageDetailsRateTop"}>  /{this.state.resultVilla.score}<i className="fa fa-star" /> </p>
                         </MDBCol>
                         <MDBCol md={6} className={"fv-DisplayPageLike"}>
-                                <a onClick={()=>{
+                                <a className={this.state.addToFavorites ?"addToFavoritesTextHide" : ""} onClick={()=>{
+                                    this.setState({addToFavorites: true})
                                    const data ={
                                        villa_id:this.props.match.params.id
                                     }
                                     addToFavorite(data)
-                                        .then(res=>res.status===200 ? alert('ویلا به علاقه مندی های شما اضافه شد'):'')
+                                        .then(res=>res.status===200 ?
+                                        (
+                                            this.setState({addToFavorites: false}) ,
+                                                alert('ویلا به علاقه مندی های شما اضافه شد'))
+                                        :'')
                                 }}><p> اضافه به علاقه مندی ها <i className="fas fa-heart"/></p></a>
+                            <div className={this.state.addToFavorites ? "cssload-wave" : ""}>
+                                <span></span><span></span><span></span><span></span><span></span>
+                            </div>
                         </MDBCol>
+
                         <MDBCol md={2} className={"fv-DisplayPageTitleShare"}>
                             <a onClick={()=>this.postData('rl','data')}>
                             <p> به اشتراک گذاری <i className="fa fa-share-alt" aria-hidden="true" /></p>

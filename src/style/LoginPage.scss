@@ -58,6 +58,41 @@
   .fv-loginPageBody{
     z-index: 200;
   }
+  .fv-alertNotErrorText{
+    display: none;
+  }
+  .fv-alertErrorText{
+    color: mediumvioletred;
+    margin-right: 3%;
+  }
+  .fv-redBorderError{
+    border: 1px solid red !important;
+    background: #E88F0A !important;
+    color: black !important;
+  }
+  .fv-loginPageBodyOne .loader {
+    position: relative;
+    /* border-radius: 16px; */
+    /* width: 195.5px; */
+    /* height: 67px; */
+    /* margin-left: 7%; */
+    /* padding: 5.4% 13.4% 5.4% 13.4%; */
+    width: 22%;
+    background: #15BE29;
+    border-radius: 16px;
+    color: white;
+    height: 54px;
+    border: 1px solid #15BE29;
+    margin-left: 26%;
+    margin-top: 3%;
+    padding: 0;
+  }
+  .fv-hideLoader{
+    display: none;
+  }
+  .fv-loginPageBodyOne .row {
+    justify-content: flex-end;
+  }
 }
 @media (max-width: 540px) {
   .fv-loginPage{
@@ -84,7 +119,7 @@
       padding-top: 8%;
       color: white;
       background: #38353540;
-      backdrop-filter: blur(16px);
+      // backdrop-filter: blur(16px);
         .fv-loginPageButton {
         width: 45%;
         background: #15BE29;

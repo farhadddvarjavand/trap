@@ -12,6 +12,9 @@ class LoginPage3 extends Component {
         this.state={
             nameAndLastNAme:'',
             mobileNumber:'',
+            errorsText:"لطفا اطلاعات خود را به درستی وارد نمایید",
+            validNameAndPhoneNumber:true,
+            clickLoader:false,
         }
     }
 
@@ -32,25 +35,28 @@ class LoginPage3 extends Component {
                 this.props.history.push("/login2");
 
             }else if(status === 200 &&  data.status===1){
-                alert('پیامک برای شما ارسال شده لطفا چند دقیقه دیگر تلاش مجدد فرمایید');
+                this.setState({validNameAndPhoneNumber:false ,  clickLoader:false , errorsText:'پیامک برای شما ارسال شده لطفا چند دقیقه دیگر تلاش مجدد فرمایید'})
             }
             else{
-                alert('شماره نامعتبر است')
+                this.setState({validNameAndPhoneNumber:false ,  clickLoader:false , errorsText:'شماره نامعتبر است'})
             }
         })
             .catch(error => {
-                console.log(error.response.data.errors.fullname )
+                console.log(error.response.data.errors )
                 if(error.response.data.errors.phone_number && error.response.data.errors.fullname === undefined){
-                    if(error.response.data.errors.phone_number[0] === "The phone number has already been taken."){
+                    if(error.response.data.errors.phone_number[0] === "شماره تلفن قبلا انتخاب شده است."){
                         alert('شما قبلا ثبت نام کرده اید')
+                        this.props.history.push("/login");
                     }else {
-                        alert('لطفا شماره موبایل خود را به درستی وارد نمایید')
+                        this.setState({validNameAndPhoneNumber:false ,  clickLoader:false , errorsText:'لطفا شماره موبایل خود را به درستی وارد نمایید'})
                     }
                 }
                 if(error.response.data.errors.phone_number && error.response.data.errors.fullname){
-                    alert('لطفا اطلاعات خود را به درستی وارد نمایید')
+                    this.setState({validNameAndPhoneNumber:false ,  clickLoader:false , errorsText:'لطفا اطلاعات خود را به درستی وارد نمایید'})
                 }
-
+                if(error.response.status !== 422){
+                    alert("اررور از سمت سرور رخ داده است")
+                }
 
             } )
 
@@ -83,13 +89,21 @@ class LoginPage3 extends Component {
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-loginPageBodyOne"}>
+                            <p className={this.state.validNameAndPhoneNumber===false ? "fv-alertErrorText" : 'fv-alertNotErrorText'}><i className="fas fa-exclamation-triangle" />{this.state.errorsText}</p>
                             <MDBCol sm={12}>
                                 <h4>ثبت نام</h4>
                                 <input type="text" placeholder={"نام و نام خانوادگی"}  value={nameAndLastNAme} onChange={((e)=>this.setState({nameAndLastNAme : e.target.value}))} />
                                 <input type="text" placeholder={"شماره موبایل"} className={"fv-loginPage3MobileNumber"} value={mobileNumber} onChange={((e)=>this.setState({mobileNumber : e.target.value}))} />
                                 <MDBRow>
-                                    <input className={"fv-loginPageButton"} type="button" value={"ثبت نام"} onClick={ ()=>{
+                                    <div className={this.state.clickLoader ? "loader" : "fv-hideLoader"}>
+                                        <svg className="circular" viewBox="25 25 50 50">
+                                            <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
+                                                    stroke-miterlimit="10"/>
+                                        </svg>
+                                    </div>
 
+                                    <input className={this.state.clickLoader ?  "fv-hideLoader" :"fv-loginPageButton"} type="button" value={"ثبت نام"} onClick={ ()=>{
+                                        this.setState({clickLoader:true})
                                         { this.sendSms() }
                                      /*   fetch('https://reqres.in/api/posts', {                     // POST
                                             method: 'POST',
