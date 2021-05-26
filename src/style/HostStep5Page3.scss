@@ -30,11 +30,11 @@
     margin-top: -4%;
   }
   .fv-hostStepPage2LeftButtonBody {
-    margin-top: 100%;
+    margin-top: 80%;
   }
   .fv-hostStep5Page3MultiImages{
     direction: rtl;
-    margin-top: -54%;
+    margin-top: -51%;
   }
   .fv-hostStep5Page3MultiImages .fv-hostStep5Page3Images{
     margin-right: -6px;
@@ -48,10 +48,10 @@
     border-radius: 30px;
   }
   .fv-hostStep5Page3MultiImages .fv-hostStep5Page3ImagesComment p{
-    float: right;
     margin-right: -2%;
     margin-top: 7%;
     margin-bottom: 1%;
+    text-align: start;
   }
   .fv-hostStep5Page3MultiImages .fv-hostStep5Page3ImagesComment input{
     width: 93%;
@@ -61,10 +61,24 @@
     border-radius: 8px;
     border: 1px solid rgba(145, 145, 145, 0.5);;
   }
+  .fv-hostStep5Page3TopPicImage label {
+    display: grid;
+  }
   .container .fv-footerMainPage {
     padding-top: 35%;
   }
-
+  .fv-hostStepSetImages{
+    margin-left: 1%;
+    border-radius: 10px;
+    background-color: #15BE29;
+    border: none;
+    color: white;
+    font-size: 13px;
+    margin-top: 1%;
+    width: 140.5px;
+    height: 50px;
+    z-index: 30;
+  }
   .fv-hideLoader{
     display: none;
   }
@@ -72,20 +86,73 @@
   .fv-test{
     margin-top: 20%;
   }
-}
+  }
 
 
-@media (max-width: 986px) and (min-width: 768px){
+@media (max-width: 1200px) and (min-width: 768px){
   .fv-hostStep5Page3 .fv-hostStepPage2LeftButtonBody {
-    margin-top: 122%;
+    margin-top: 15%;
   }
   .fv-hostStep5Page3 .fv-hostStep5Page3MultiImages {
     direction: rtl;
-    margin-top: -67%;
+    margin-top: -80%;
   }
   .fv-hostStep5Page3 .fv-hostStep5Page3TopPicImage {
     width: 92%;
     height: 29%;
+  }
+  .fv-hostStep5Page3 .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage1LeftButton {
+    border-radius: 8px;
+    margin-left: 5vw;
+    /* padding: 5.4% 13.4% 5.4% 13.4%; */
+    width: 24vw;
+    height: 9vw;
+    margin-top: 49vw;
+  }
+  .fv-hostStep5Page3 .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
+    margin-left: 78%;
+    /* padding: 5% 15% 5% 15%; */
+    margin-top: -25%;
+    margin-right: -52%;
+    z-index: 2;
+  }
+  .fv-hostStep5Page3 .fv-hostStep5Page3Images .btn {
+    margin: -2.625rem;
+    color: inherit;
+    text-transform: uppercase;
+    word-wrap: break-word;
+    white-space: normal;
+    cursor: pointer;
+    border: 0;
+    border-radius: .125rem;
+    padding: .84rem 2.14rem;
+    font-size: 0.81rem;
+    padding: 0;
+    margin: 0;
+    padding: 6%;
+  }
+
+  .fv-hostStep5Page3 .fv-hostStep5Page3Images label {
+    display: inline-block;
+    margin-bottom: .5rem;
+    display: contents;
+  }
+  .fv-hostStep5Page3 .fv-hostStep5Page3MultiImages .fv-hostStep5Page3Images {
+    margin-right: -6px;
+    margin-left: 0px;
+    height: 205px;
+    /* text-align: center; */
+    align-items: center;
+    border: 1px dashed #66D448;
+    box-sizing: border-box;
+    border-radius: 30px;
+  }
+  .fv-hostStep5Page3 .fv-hostStep5Page3Images img {
+    vertical-align: middle;
+    border-style: none;
+    width: 65%;
+    margin-left: 19%;
+    margin-right: 15%;
   }
 }
 @media (max-width: 768px) and (min-width: 460px){
@@ -154,6 +221,18 @@
       height: 16vw;
       margin-top: 20vw;
     }
+    .fv-hostStepSetImages {
+      margin-left: -2%;
+      border-radius: 10px;
+      background-color: #15BE29;
+      border: none;
+      color: white;
+      font-size: 13px;
+      margin-top: 1%;
+      width: 91.5px;
+      height: 50px;
+      z-index: 30;
+    }
   }
 
 }
@@ -162,6 +241,7 @@
 
     .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage1LeftButton {
       z-index: 2;
+      margin-top: 83vw;
     }
     .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
       z-index: 2;
@@ -199,20 +279,19 @@
       font-size: 12px;
     }
     .fv-footerMenuMobileTitle {
-      margin-top: 66%;
+      margin-top: 124%;
     }
     .fv-hostStepPage2LeftButtonBody {
       margin-top: 495%;
     }
     .fv-hostStep5Page3MultiImages {
       direction: rtl;
-      margin-top: -481%;
+      margin-top: -526%;
     }
     .loader {
       position: relative;
       /* border-radius: 16px; */
       background-color: #15BE29;
-      margin-top: 15%;
       /* width: 195.5px; */
       /* height: 67px; */
       /* margin-left: 7%; */
@@ -223,6 +302,21 @@
       height: 16vw;
       margin-top: 20vw;
     }
+    .fv-hostStepSetImages {
+      margin-left: -2%;
+      border-radius: 10px;
+      background-color: #15BE29;
+      border: none;
+      color: white;
+      font-size: 13px;
+      margin-top: 1%;
+      width: 91.5px;
+      height: 50px;
+      z-index: 30;
+    }
+  }
+  .fv-hostStep5Page.fv-hostStep5Page2.fv-hostStep5Page3  .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
+    margin-top: 83vw;
   }
  }
 @media (max-width: 375px) {
@@ -231,16 +325,16 @@
     margin-top: -490%;
   }
   .fv-hostStep5Page3 .fv-hostStepPage2LeftButtonBody {
-    margin-top: 535%;
+    margin-top: 580%;
   }
 }
 @media (max-width: 370px) {
   .fv-hostStep5Page3 .fv-hostStepPage2LeftButtonBody {
-    margin-top: 565%;
+    margin-top: 647%;
   }
   .fv-hostStep5Page3 .fv-hostStep5Page3MultiImages {
     direction: rtl;
-    margin-top:-551%;
+    margin-top: -629%;
   }
 }
 @media (max-width: 340px) {
@@ -249,7 +343,7 @@
   }
   .fv-hostStep5Page3 .fv-hostStep5Page3MultiImages {
     direction: rtl;
-    margin-top: -584%;
+    margin-top: -670%;
   }
   .fv-hostStep5Page3 .fv-hostStep5Page3MultiImagesMobileAnotherPicP {
     margin-right: -3%;
@@ -258,7 +352,7 @@
 @media (max-width: 310px) {
   .fv-hostStep5Page3 .fv-hostStep5Page3MultiImages {
     direction: rtl;
-    margin-top: -750%;
+    margin-top: -797%;
   }
   .fv-hostStep5Page3 .fv-hostStepPage2LeftButtonBody {
     margin-top: 724%;
@@ -266,5 +360,11 @@
   .fv-hostStep5Page3 .fv-hostStep5Page3MultiImagesMobileAnotherPicP {
     margin-right: -7%;
     font-size: 14px;
+  }
+  .fv-hostStep5Page3 .fv-hostStepPage1Left.fv-hostStepPageSpace .fv-hostStepPage1LeftButton {
+    margin-top: 123vw ;
+  }
+  .fv-hostStep5Page3.fv-hostStep5Page.fv-hostStep5Page2  .fv-HostStep1PageBody .fv-hostStepPage1Left  .fv-hostStepPage2LeftButton{
+    margin-top: 123vw ;
   }
 }

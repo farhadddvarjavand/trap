@@ -340,9 +340,7 @@ class HostStep5Page3 extends Component {
                                         </svg>
                                     </div>
 
-                                    <button className={"fv-hostStepPage1LeftButton"} onClick={() => {
-                                        alert(1)
-                                    }}>ثبت عکس</button>
+
 
                                     <input type="button" value="ثبت اقامتگاه"  className={this.state.clickLoader ? "fv-hideLoader" : "fv-hostStepPage1LeftButton"} onClick={()=>{
                                         this.setState({clickLoader:true})
@@ -424,15 +422,15 @@ class HostStep5Page3 extends Component {
                                         //if status === 500    server Error
 
 
-                                        let fd = new FormData()
+                                        /* let fd = new FormData()
                                         fd.append("images", this.state.fileTest);
-                                        const images={
-                                            img_src:"test.png",
-                                            img_title:"test"
-                                        }
-                                        SetImages(this.state.test,30)
-                                            .then(res => console.log(res))
-                                            .catch(err=>console.log(err.response))
+                                           const images={
+                                               img_src:"test.png",
+                                               img_title:"test"
+                                           }
+                                          SetImages(this.state.test,30)
+                                               .then(res => console.log(res))
+                                               .catch(err=>console.log(err.response)) */
                                     }}/>
                                     <input type="button" value="مرحله قبل"  className={this.state.clickLoader ?  "fv-hideLoader" :  "fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"} onClick={()=>{
                                         this.props.history.push('../../hostStep5-2')
@@ -535,6 +533,13 @@ class HostStep5Page3 extends Component {
                                                    onChange={(e=>this.setState({img_title4:e.target.value}))}/>
                                         </MDBCol>
                                     </MDBRow>
+                                </MDBCol>
+                            </MDBRow>
+
+                            <MDBRow>
+                                <MDBCol>
+                                    <button  className={this.state.clickLoader ? "fv-hideLoader" : "fv-hostStepSetImages"}  onClick={() => {
+                                    }}>ثبت عکس</button>
                                 </MDBCol>
                             </MDBRow>
 

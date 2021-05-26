@@ -52,12 +52,13 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
 .fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left.fv-hostStepPageSpace .fv-hostStepPage2LeftButton {
   margin-left: -14%;
 }
-
-@media (max-width: 1200px) {
+@media (max-width: 1200px) and (min-width: 767px){
   .fv-HostStep2Page.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
-    margin-left: 150%;
+    margin-left: 78%;
     /* padding: 5% 15% 5% 15%; */
-    margin-top: -37%;
+    margin-top: -22%;
+    margin-right: -52%;
+    z-index: 2;
   }
 }
 @media (max-width: 767px) {
