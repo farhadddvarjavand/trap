@@ -36,11 +36,7 @@ class HostStep5Page3 extends Component {
 
     }
     componentDidMount() {
-        villa(30)
-            .then(res=>console.log(res))
 
-        editVilla(30)
-            .then(res=>console.log(res))
     }
 
     fileSelectedHandler = (event) => {
@@ -72,45 +68,8 @@ class HostStep5Page3 extends Component {
         console.log('file upload triggered');
     };
     render() {
-        villa(30)
-            .then(res=>console.log(res))
-
-        editVilla(30)
-            .then(res=>console.log(res))
-
-        const updateData = async (event) =>{
-            console.log(event.target)
-            event.preventDefault()
-            let formData = new FormData() ;
-            formData.append("image0" , event.target.image0.files[0])
-            formData.append("image1" , event.target.image1.files[0])
-            formData.append("image2" , event.target.image2.files[0])
-            formData.append("image3" , event.target.image3.files[0])
-            formData.append("image4" , event.target.image4.files[0])
-            formData.append("img_title0" , this.state.img_title0)
-            formData.append("img_title1" , this.state.img_title1)
-            formData.append("img_title2" , this.state.img_title2)
-            formData.append("img_title3" , this.state.img_title3)
-            formData.append("img_title4" , this.state.img_title4)
-            formData.append('imagesLength' , 5)
 
 
-            console.log(event.target.image0.files[0])
-            console.log(this.state.img_title0)
-            console.log(event.target.image1.files[0])
-            console.log(this.state.img_title1)
-            console.log(event.target.image2.files[0])
-            console.log(this.state.img_title2)
-            console.log(event.target.image3.files[0])
-            console.log(this.state.img_title3)
-            console.log(event.target.image4.files[0])
-            console.log(this.state.img_title4)
-
-            await  SetImages(formData,30)
-                .then(res => console.log(res))
-                .catch(err=>console.log(err.response))
-
-        }
 
 
         const sendToServerDatas={
@@ -290,6 +249,114 @@ class HostStep5Page3 extends Component {
         //console.log(JSON.parse(localStorage.getItem("step5")))
         // console.log(JSON.parse(localStorage.getItem("info")))
 
+
+
+
+
+        const updateData = async (event) =>{
+            this.setState({clickLoader:true})
+
+            console.log(event.target)
+            event.preventDefault()
+            let formData = new FormData() ;
+            formData.append("image0" , event.target.image0.files[0])
+            formData.append("image1" , event.target.image1.files[0])
+            formData.append("image2" , event.target.image2.files[0])
+            formData.append("image3" , event.target.image3.files[0])
+            formData.append("image4" , event.target.image4.files[0])
+            formData.append("img_title0" , this.state.img_title0)
+            formData.append("img_title1" , this.state.img_title1)
+            formData.append("img_title2" , this.state.img_title2)
+            formData.append("img_title3" , this.state.img_title3)
+            formData.append("img_title4" , this.state.img_title4)
+            formData.append('imagesLength' , 5)
+
+
+            console.log(event.target.image0.files[0])
+            console.log(this.state.img_title0)
+            console.log(event.target.image1.files[0])
+            console.log(this.state.img_title1)
+            console.log(event.target.image2.files[0])
+            console.log(this.state.img_title2)
+            console.log(event.target.image3.files[0])
+            console.log(this.state.img_title3)
+            console.log(event.target.image4.files[0])
+            console.log(this.state.img_title4)
+
+            await  SetImages(formData,30)
+                .then(res => console.log(res))
+                .catch(err=>console.log(err.response))
+
+
+            // ثبت ویلا
+
+            storeVilla(allData)
+                .then(res=>{
+                    if(res.status===200){
+                        console.log(res.data.villa_id)
+                        SetImages(formData,res.data.villa_id)
+                            .then(results => {
+                                if(results.status===200){
+                                    localStorage.removeItem("step1")
+                                    localStorage.removeItem("step2")
+                                    localStorage.removeItem("step2-2")
+                                    localStorage.removeItem("step3")
+                                    localStorage.removeItem("step4")
+                                    localStorage.removeItem("step5")
+                                    localStorage.removeItem("step5-2")
+                                    this.props.history.push('/myAccommodation')
+                                }
+                            })
+                            .catch(err=>alert("عکس معتبر نمیباشد - حجم عکس باید کمتر از 2 مگابایت باشد"))
+
+                    }else {
+                        alert("لطفا مجددا اطلاعات خود را بررسی کنید - اطلاعات شما نادرست وارد شده")
+                        this.props.history.push('../../hostStep1')
+                    }
+
+                })
+                .catch(err=>{
+                    let getErrors = ""
+                    if(err.response.data.errors) {
+                        getErrors = Object.values(err.response.data.errors)
+                        let showErrors = ""
+                        for (let i = 0; i < getErrors.length; i++) {
+                            if (i === 0) {
+                                showErrors = `${getErrors[i]}`;
+                            } else {
+                                showErrors = `${showErrors} \n ${getErrors[i]}`
+                            }
+                        }
+
+
+                        alert(showErrors)
+                        if (err.response.data.errors.title || err.response.data.errors.type || err.response.data.errors.phone_number || err.response.data.errors.story) {
+                            this.props.history.push('../../hostStep1')
+                        }
+                        if (err.response.data.errors.city || err.response.data.errors.state || err.response.data.errors.postal_code || err.response.data.errors.address) {
+                            this.props.history.push('../../hostStep2')
+                        }
+                        if (err.response.data.errors.area || err.response.data.errors.places || err.response.data.errors.view) {
+                            this.props.history.push('../../hostStep3')
+                        }
+                        if (err.response.data.errors.general_fac || err.response.data.errors.kitchen_fac || err.response.data.errors.temp_fac) {
+                            this.props.history.push('../../hostStep4')
+                        }
+                        if (err.response.data.errors.normal_extra_cost || err.response.data.errors.normal_cost || err.response.data.errors.special_cost || err.response.data.errors.special_extra_cost || err.response.data.errors.weekly_discount || err.response.data.errors.monthly_discount) {
+                            this.props.history.push('../../hostStep5')
+                        }
+                        if (err.response.data.errors.arrival_time || err.response.data.errors.auth_rules || err.response.data.errors.exit_time || err.response.data.errors.max_reserve || err.response.data.errors.max_reserve || err.response.data.errors.suitable_for) {
+                            this.props.history.push('../../hostStep5-2')
+                        }
+                    }
+                    else {
+                        alert('errors')
+                    }
+                })
+        }
+
+
+
         return (
             <MDBContainer className={" fv-HostStep2Page fv-hostStep2Page2 fv-hostStep3Page fv-hostStep4Page fv-hostStep5Page fv-hostStep5Page2 fv-hostStep5Page3"}>
                 <MDBContainer className={"fv-HostStep1Page"}>
@@ -342,8 +409,8 @@ class HostStep5Page3 extends Component {
 
 
 
-                                    <input type="button" value="ثبت اقامتگاه"  className={this.state.clickLoader ? "fv-hideLoader" : "fv-hostStepPage1LeftButton"} onClick={()=>{
-                                        this.setState({clickLoader:true})
+                                    <button className={this.state.clickLoader ? "fv-hideLoader" : "fv-hostStepPage1LeftButton"} onClick={()=>{
+                                       /* this.setState({clickLoader:true})
 
 
                                         storeVilla(allData)
@@ -393,6 +460,8 @@ class HostStep5Page3 extends Component {
                                                 }
                                             })
 
+
+                                        */
                                         /////////////////////////////////////// err.response.data.errors.title
                                         /////////////////////////////////////// err.response.data.errors.type
                                         /////////////////////////////////////// err.response.data.errors.phone_number
@@ -431,7 +500,7 @@ class HostStep5Page3 extends Component {
                                           SetImages(this.state.test,30)
                                                .then(res => console.log(res))
                                                .catch(err=>console.log(err.response)) */
-                                    }}/>
+                                    }}>ثبت اقامتگاه</button>
                                     <input type="button" value="مرحله قبل"  className={this.state.clickLoader ?  "fv-hideLoader" :  "fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"} onClick={()=>{
                                         this.props.history.push('../../hostStep5-2')
                                     }}/>
@@ -536,12 +605,6 @@ class HostStep5Page3 extends Component {
                                 </MDBCol>
                             </MDBRow>
 
-                            <MDBRow>
-                                <MDBCol>
-                                    <button  className={this.state.clickLoader ? "fv-hideLoader" : "fv-hostStepSetImages"}  onClick={() => {
-                                    }}>ثبت عکس</button>
-                                </MDBCol>
-                            </MDBRow>
 
 
                         </MDBContainer>

@@ -4,6 +4,7 @@ import "./Calendar/DatePicker.css";
 
 import './style/CalendarDesktop.scss'
 import {Calendar} from "./CalendarForMobile"
+import {getToday} from "../componentsPages/calculationsDate";
 
 const CalendarForMobilejs = (props) => {
 
@@ -15,17 +16,27 @@ const CalendarForMobilejs = (props) => {
         { year: 1400, month: 3, day: 26, className: 'orangeDay' },
     ];
 
-    const defaultFrom = {
+
+    const today = getToday()   //  تاریخ امروز را روی تقویم نشان میدهد
+    let todayInt = {
+        year:parseInt(today.year),
+        month:parseInt(today.month),
+        day:parseInt(today.day)
+    }
+    let defaultFrom = {
         year: 1400,
         month: 2,
         day: 4,
     };
 
-    const defaultTo = {
+    let defaultTo = {
         year: 1400,
         month: 2,
         day: 4,
     };
+    defaultFrom = todayInt
+    defaultTo = todayInt
+
 
     const defaultRange = {
         from: defaultFrom,
@@ -46,6 +57,33 @@ const CalendarForMobilejs = (props) => {
               console.log(selectedDayRange)
               console.log(setSelectedDayRange)*/
     }
+
+
+    let disabledDays = [
+        {
+            year: 1400,
+            month: 2,
+            day: 3,
+        },
+    ];
+
+    if(props.daysReserved){
+        console.log(props.daysReserved)
+
+        let disableDaysList = []
+        for (let i = 0 ; i<props.daysReserved.length ; i++){
+            let newList =  { year: '', month: '', day: '', className: '' }
+            newList.year = parseInt(props.daysReserved[i].year)
+            newList.month = parseInt(props.daysReserved[i].month)
+            newList.day = parseInt(props.daysReserved[i].day)
+            disableDaysList.push(newList)
+        }
+        disabledDays = disableDaysList
+
+    }
+
+
+
     return (
         <>
             <Calendar
@@ -54,6 +92,7 @@ const CalendarForMobilejs = (props) => {
                 onChange={setSelectedDayRange}
                 customDaysClassName={defaultDay}
                 shouldHighlightWeekends
+                disabledDays={disabledDays}
                 priceDays={[1,2000000,3,4]}
                 test = {testname}
                 villaPrice={props.villaPrice}

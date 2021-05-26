@@ -2,6 +2,7 @@ import React, { useState , Component} from "react";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import DatePicker from '@hassanmojab/react-modern-calendar-datepicker';
 import {tile2LatLng} from "google-map-react";
+import {Calendar} from "./Calendar";
 
 class CalendarLinear extends React.Component{
     constructor(props) {
@@ -37,7 +38,31 @@ class CalendarLinear extends React.Component{
     }
 
 
+
     render(){
+
+        let disabledDays = [
+            {
+                year: 1400,
+                month: 2,
+                day: 3,
+            },
+        ];
+
+        if(this.props.daysReserved){
+         //   console.log(this.props.daysReserved)
+
+            let disableDaysList = []
+            for (let i = 0 ; i<this.props.daysReserved.length ; i++){
+                let newList =  { year: '', month: '', day: '', className: '' }
+                newList.year = parseInt(this.props.daysReserved[i].year)
+                newList.month = parseInt(this.props.daysReserved[i].month)
+                newList.day = parseInt(this.props.daysReserved[i].day)
+                disableDaysList.push(newList)
+            }
+            disabledDays = disableDaysList
+
+        }
 
 
         return(
@@ -45,6 +70,7 @@ class CalendarLinear extends React.Component{
                 value={this.state.date}
                 onChange={data => this.setData(data)}
                 locale={'fa'}
+                disabledDays={disabledDays}
                 inputPlaceholder={this.props.text}
                 shouldHighlightWeekends
 

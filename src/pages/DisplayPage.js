@@ -35,9 +35,8 @@ import {utils} from "../data/Calendar";
 import {arrayBetweenDates , arrayBetweenDatesObject , priceOfPerMonth} from "../componentsPages/calculationsDate"
 import Mapir from "mapir-react-component";
 import {Link} from "react-router-dom";
-import {addToFavorite} from "../services/userService";
+import {addToFavorite, calculateCost} from "../services/userService";
 import "../style/extra.scss"
-
 
 
 class DisplayPage extends Component {
@@ -134,7 +133,8 @@ componentDidMount() {
         })
 
     villaPrice(this.props.match.params.id)
-        .then(res=>this.setState(res.data.data ? {villaPrice:res.data.data} : ''))
+        .then(res=>this.setState(res.data ? {villaPrice:res.data} : ''))
+        .catch(err=>console.log(err.response))
 
 }
 
@@ -249,7 +249,9 @@ componentDidMount() {
                 rangeBetween='---'
             }
             else {
+
                 rangeBetween = range.diff('days') + 1;
+
             }
         }
         if(range.diff('days') === 0){
@@ -260,6 +262,7 @@ componentDidMount() {
         const daytogoGeneralFormat = this.setDateFormat(this.state.dateToGo.year+"/"+ this.state.dateToGo.month+"/"+ this.state.dateToGo.day)
         const daytoreturnGeneralFormat = this.setDateFormat(this.state.dateToReturn.year+"/"+ this.state.dateToReturn.month+"/"+ this.state.dateToReturn.day)
 
+        const daysSelected = arrayBetweenDates(daytogoGeneralFormat,daytoreturnGeneralFormat,rangeBetween)
             console.log(arrayBetweenDates(daytogoGeneralFormat,daytoreturnGeneralFormat,rangeBetween)) // date general   return =>   1400/01/01
             console.log('arrayBetweenDates(start,end,rangeBetween)')
 
@@ -269,10 +272,28 @@ componentDidMount() {
 
 
 
+        if(daysSelected.length>0){
+            let daysCostString = ""
+            for(let i = 0 ; i < daysSelected.length ; i++){
+                if(i===0){
+                    daysCostString = daysSelected[i];
+                }else {
+                    daysCostString = `${daysCostString},${daysSelected[i]}` ;
+                }
+            }
+            const dates = {
+                dates:daysCostString
+            }
+            calculateCost(dates , this.props.match.params.id)
+                .then(res=>console.log(res))
+                .catch(err=>console.log(err.response))
+        }
 
 
         let daysBetweenReserved = ''
+        let allDaysReservedConcat = ''
 
+       // console.log(this.state.resultReservedDates)
         if(this.state.resultReservedDates){
             let startReservedDatearray =''
             let endReservedDatearray   = ''
@@ -294,7 +315,7 @@ componentDidMount() {
                 endReservedDate=new Date(endReservedDatearray[0], endReservedDatearray[1], endReservedDatearray[2]);
                 const rangeReservedDate = moment.range(startReservedDate, endReservedDate);
                 let rangeBetweenDate = rangeReservedDate.diff('days');
-                console.log(rangeBetweenDate)
+                //console.log(rangeBetweenDate)
                 if(rangeReservedDate.diff('days') === 0){
                     rangeBetweenDate=1
                 }
@@ -303,7 +324,20 @@ componentDidMount() {
 
                      daysBetweenReserved = arrayBetweenDatesObject(this.state.resultReservedDates[i].start_date,this.state.resultReservedDates[i].end_date,rangeBetweenDate)
                  }
-                allReservedDatesVillas.push(daysBetweenReserved)
+
+
+                allReservedDatesVillas.push(daysBetweenReserved.daysList)
+            }
+
+
+            if(allReservedDatesVillas){
+                for(let i = 0 ; i < allReservedDatesVillas.length ; i ++){
+                    if(i===0){
+                        allDaysReservedConcat = allReservedDatesVillas[i]
+                    } else {
+                        allDaysReservedConcat = allDaysReservedConcat.concat(allReservedDatesVillas[i]);
+                    }
+                }
             }
              // console.log(allReservedDatesVillas[0])   // خانه های رزرو شده را به ترتیب میدهد
         }
@@ -606,9 +640,7 @@ componentDidMount() {
                         tileClassName="content"
                     /> */}
 
-
-
-
+>
 
                     <HeaderSearch />
 
@@ -983,10 +1015,11 @@ componentDidMount() {
                         </MDBRow>
 
                             <MDBRow className={"fv-DisplayPageCalender fv-DisplayPageCalenderForDesktop"}>                  {/*    calender-calendar     */}
+
                                 <CalendarDesktop
                                     villaPrice={priceDaysUpdates}
                                     getSelectedDay={this.getSelectedDays}
-                                    daysReserved={daysBetweenReserved}/>
+                                    daysReserved={allDaysReservedConcat}/>
 
                                 {/* <MDBCol md={6}>
                                     <Calender />
@@ -999,7 +1032,8 @@ componentDidMount() {
                                 <MDBCol>
                                     <CalendarForMobile
                                         villaPrice={priceDaysUpdates}
-                                        getSelectedDay={this.getSelectedDays} />
+                                        getSelectedDay={this.getSelectedDays}
+                                        daysReserved={allDaysReservedConcat}/>
                                 </MDBCol>
                             </MDBRow>
                         </div>                                                             {/*         fv-facilities          */}
@@ -1315,8 +1349,8 @@ componentDidMount() {
                                 <input type='text' value=' تاریخ خروج' className={"fv-DisplayPageDetailsLeftBodyDateOutText"} />
                             </MDBRow>
                             <MDBRow className={"fv-DisplayPageDetailsLeftTextDate"}>
-                                <div  className={"fv-DisplayPageDetailsLeftBodyDateOnInput"}>  <CalendarLinear dayToGo={this.selectDayToGo} text={'انتخاب روز'}/> </div>
-                                <div  className={"fv-DisplayPageDetailsLeftBodyDateOutInput"} >  <CalendarLinear dayToReturn={this.selectDayToReturn} text={'انتخاب روز'}/> </div>
+                                <div  className={"fv-DisplayPageDetailsLeftBodyDateOnInput"}>  <CalendarLinear dayToGo={this.selectDayToGo} text={'انتخاب روز'}  daysReserved={allDaysReservedConcat}/> </div>
+                                <div  className={"fv-DisplayPageDetailsLeftBodyDateOutInput"} >  <CalendarLinear dayToReturn={this.selectDayToReturn} text={'انتخاب روز'}  daysReserved={allDaysReservedConcat}/> </div>
                             </MDBRow>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftBodyCapacityText"}>
@@ -1335,7 +1369,7 @@ componentDidMount() {
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftFactor"}>
                             <MDBCol md={6}  sm={6} className={"fv-DisplayPageDetailsLeftFactorLeft"}>
-                               <p>{rangeBetween} شب </p>
+                               <p>{rangeBetween} روز </p>
                             </MDBCol>
                             <MDBCol  md={6}  sm={6} >
                                <p>۰۰۰٫۰۰۰٫۲ تومان</p>

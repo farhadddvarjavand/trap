@@ -64,7 +64,7 @@ export const arrayBetweenDatesObject =(dateA , dateB , range) =>{
         moment.loadPersian();
 
         if(range>0){
-            for(let i = 0 ; i <= range ; i++){
+            for(let i = 0 ; i < range ; i++){
                 let startdate = moment(dateA, 'jYYYY/jM/jD');
                 startdate = startdate.add(i, "days");
                 startdate = startdate.format("YYYY/MM/DD");

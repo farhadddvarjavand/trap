@@ -35,7 +35,7 @@ class ProfilePageCalender extends Component {
 
     componentDidMount() {
         villaPrice(this.props.match.params.id)
-            .then(res=>this.setState(res.data.data ? {villaPrice:res.data.data} : ''))
+            .then(res=>this.setState(res.data ? {villaPrice:res.data} : ''))
     }
 
     getSelectedDays = (selectedDay)=>{

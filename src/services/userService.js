@@ -246,3 +246,12 @@ export const SetImages = async (data,villaId) => {
 
     );
 }
+export const calculateCost = async (data,villaId) => {
+    return http.post(
+
+        `${config.webapi}api/v1/villa/calculateCost/${villaId}`,
+        JSON.stringify(data),
+        { headers:{ 'Authorization' :  await getToken()  } }
+
+    );
+}
