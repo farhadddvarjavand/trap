@@ -20,7 +20,7 @@ export const arrayBetweenDates=(dateA , dateB , range) =>{
                // let date = moment().add('months', 1).endOf('month');
                // console.log(date)
 
-                const test=  moment(startdate, 'YYYY/M/D').format('jYYYY/jM/jD ') // today in shamsi
+                const test=  moment(startdate, 'YYYY/M/D').format('jYYYY/jM/jD') // today in shamsi
                 daysList.push(test)
             }
         }

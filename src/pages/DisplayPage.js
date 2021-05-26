@@ -37,6 +37,7 @@ import Mapir from "mapir-react-component";
 import {Link} from "react-router-dom";
 import {addToFavorite, calculateCost} from "../services/userService";
 import "../style/extra.scss"
+import axios from "axios";
 
 
 class DisplayPage extends Component {
@@ -276,17 +277,22 @@ componentDidMount() {
             let daysCostString = ""
             for(let i = 0 ; i < daysSelected.length ; i++){
                 if(i===0){
-                    daysCostString = daysSelected[i];
+                    daysCostString =daysSelected[i];
                 }else {
-                    daysCostString = `${daysCostString},${daysSelected[i]}` ;
+                    daysCostString =`${daysCostString},${daysSelected[i]}` ;
                 }
             }
+            console.log(daysCostString)
             const dates = {
                 dates:daysCostString
             }
-            calculateCost(dates , this.props.match.params.id)
+             /* axios.post(`https://mahoorapps.ir/api/v1/villa/calculateCost/${this.props.match.params.id}`,
+                { dates:daysCostString })
+                .then(response => console.log(response)) */
+
+            calculateCost({dates: daysCostString},this.props.match.params.id)
                 .then(res=>console.log(res))
-                .catch(err=>console.log(err.response))
+
         }
 
 
