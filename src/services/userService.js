@@ -226,12 +226,12 @@ export const storeVilla = async data => {
 }
 
 // Reserve Request  --  Method = POST
-export const reserveRequest = data => {
+export const reserveRequest = async data => {
     return http.post(
 
     `${config.webapi}/api/v1/reserveRequest`, 
     JSON.stringify(data),
-    { headers:{ 'Authorization' : `Bearer USER Token` } }
+    { headers:{ 'Authorization' : await getToken()  } }
     
     );
 }
@@ -250,6 +250,15 @@ export const calculateCost = async (data,villaId) => {
     return http.post(
 
         `${config.webapi}/api/v1/villa/calculateCost/${villaId}`,
+        JSON.stringify(data),
+        { headers:{ 'Authorization' :  await getToken()  } }
+
+    );
+}
+export const calculateExtraCost = async (data,villaId) => {
+    return http.post(
+
+        `${config.webapi}/api/v1/villa/calculateExtraCost/${villaId}`,
         JSON.stringify(data),
         { headers:{ 'Authorization' :  await getToken()  } }
 

@@ -35,7 +35,7 @@ import {utils} from "../data/Calendar";
 import {arrayBetweenDates , arrayBetweenDatesObject , priceOfPerMonth} from "../componentsPages/calculationsDate"
 import Mapir from "mapir-react-component";
 import {Link} from "react-router-dom";
-import {addToFavorite, calculateCost} from "../services/userService";
+import {addToFavorite, calculateCost, calculateExtraCost, reserveRequest} from "../services/userService";
 import "../style/extra.scss"
 import axios from "axios";
 
@@ -57,7 +57,7 @@ class DisplayPage extends Component {
                 year : ''
             },
             facilitiesCheckbox:[],
-            numberOfPeople:'title',
+            numberOfPeople:' ',
             displayButtonName:'',
 
             resultVilla:[],
@@ -71,7 +71,8 @@ class DisplayPage extends Component {
             error:'',
             morePics:false,
             addToFavorites:false,
-            reservedPrice:'------',
+            reservedPrice:'-',
+            extraPeopleCost:'-',
 
             date: new Date(),
             selectedPlace: '',
@@ -235,6 +236,8 @@ componentDidMount() {
 
 
     render() {
+        const resultVillaArray = []
+        resultVillaArray.push(this.state.resultVilla)
         const resultVilla = this.state.resultVilla
         console.log(resultVilla)
 
@@ -247,12 +250,12 @@ componentDidMount() {
 
 
 
-        let rangeBetween = ' ---- '
+        let rangeBetween = ' '
 
         if(range.diff('days')){
             if(range.diff('days')<0)
             {
-                rangeBetween='---'
+                rangeBetween=' '
             }
             else {
 
@@ -277,9 +280,8 @@ componentDidMount() {
 
 
 
-
+        let daysCostString = ""
         if(daysSelected.length>0){
-            let daysCostString = ""
             for(let i = 0 ; i < daysSelected.length ; i++){
                 if(i===0){
                     daysCostString =daysSelected[i];
@@ -293,7 +295,7 @@ componentDidMount() {
                 .then(response => console.log(response)) */
             calculateCost({dates: daysCostString},this.props.match.params.id)
                 .then(res=>{
-                    if(res.status === 200){
+                    if(res.status === 200 && this.state.reservedPrice !== res.data){
                         this.setState({reservedPrice:res.data})
                     }
                 })
@@ -651,7 +653,7 @@ componentDidMount() {
                         tileClassName="content"
                     /> */}
 
->
+
 
                     <HeaderSearch />
 
@@ -1368,14 +1370,38 @@ componentDidMount() {
                             <input type='text' value=' تعداد نفرات'/>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftBodyCapacityOption"}>
-                            <select value={this.state.numberOfPeople} onChange={(event)=>this.setState({numberOfPeople:event.target.value})}>
-                                <option value='title' disabled>تعداد نررات</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
+                            <select value={this.state.numberOfPeople} onChange={(event)=>{
+                                this.setState({numberOfPeople:event.target.value})
+                                if(Number(this.state.reservedPrice)){
+                                    const data = {
+                                        finalCost:this.state.reservedPrice,
+                                        dates:daysCostString,
+                                        extra_people:Number(event.target.value)
+                                    }
+                                    calculateExtraCost(data,this.props.match.params.id)
+                                        .then(res => this.setState({extraPeopleCost: res.data}) )
+                                        .catch(err=>console.log(err.response))
+                                }else {
+                                    alert("لطفا ابتدا تاریخ را اننتخاب کنید")
+                                }
+                            }}>
+                                 <option value=' ' disabled>تعداد نررات</option>
+                                   { resultVillaArray.map(extraCapacity =>{
+                                        let numberPeople = []
+                                       let options = []
+                                    console.log(extraCapacity)
+                                    if(extraCapacity.details){
+                                        for (let i = 0 ; i < extraCapacity.details.max_capacity - extraCapacity.details.standard_capacity ; i++){
+                                            numberPeople.push(i+1)
+                                        }
+                                    }
+                                       return <>
+                                           {
+                                               numberPeople.map(num => <option value={num}>{num}</option>)
+                                           }
+                                       </>
+                                   }) }
+
                             </select>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftFactor"}>
@@ -1383,15 +1409,15 @@ componentDidMount() {
                                <p>{rangeBetween} روز </p>
                             </MDBCol>
                             <MDBCol  md={6}  sm={6} >
-                               <p>{this.state.reservedPrice} تومان</p>
+                               <p>{this.state.reservedPrice ? this.state.reservedPrice : '-'} تومان</p>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftFactor fv-DisplayPageDetailsLeftFactorBorderLine"}>
                             <MDBCol  md={6}  sm={6} className={"fv-DisplayPageDetailsLeftFactorLeft"}>
-                                <p>نفر اضافه</p>
+                                <p>{this.state.numberOfPeople} نفر اضافه </p>
                             </MDBCol>
                             <MDBCol  md={6}  sm={6} >
-                                <p>{this.state.numberOfPeople * normalExtraCostRules ? normalExtraCostRules * this.state.numberOfPeople : '------------'} تومان</p>
+                                <p>{Number(this.state.extraPeopleCost) ? Number(this.state.extraPeopleCost)-Number(this.state.reservedPrice) : ' ' } تومان</p>
                             </MDBCol>
                         </MDBRow>
 
@@ -1400,12 +1426,15 @@ componentDidMount() {
                                 <p>جمع کل</p>
                             </MDBCol>
                             <MDBCol  md={6}  sm={6} >
-                                <p> {Number(this.state.reservedPrice)  ?(Number(normalExtraCostRules * this.state.numberOfPeople) ? Number(rangeBetween*(Number(normalExtraCostRules) * this.state.numberOfPeople))+this.state.reservedPrice :"------" )  : "------"} تومان </p> {/*   اگر هم نفرات وجود داشت و هم بازه زمانی قیمتش وجود داشت قیمت نفرات * تعداد روز + بازه قیمتی که از سرور آمده و در reservedPrice رزرو شده را جمع میکند   */}
+                                <p> {Number(this.state.extraPeopleCost)&&Number(this.state.reservedPrice) ? Number(this.state.extraPeopleCost) : this.state.reservedPrice} تومان </p>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftButton"}>
                             <MDBCol>
-                                <input type="button" value="درخواست رزرو" onClick={()=>this.postData('','')}/>
+                                <input type="button" value="درخواست رزرو" onClick={()=>{
+                                    console.log(this.state.resultVilla)
+
+                                }}/>
                             </MDBCol>
                         </MDBRow>
                     </MDBCol>
@@ -1422,7 +1451,7 @@ componentDidMount() {
                         console.log('this.state.resultSimilarVillas')
                         return(
                             <MDBCol md={3} sm={7} >
-                                <Product srcImage={`${config.webapi}/images/villas/thum/${resultSimilarVilla.main_img }`}
+                                <Product srcImage={`${config.webapi}/images/villas/main/${resultSimilarVilla.main_img }`}
                                          rate="5.5/5"
                                          topic={resultSimilarVilla.title}
                                          location={resultSimilarVilla.city}

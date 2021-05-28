@@ -17,16 +17,14 @@ class HostStep5Page3 extends Component {
     constructor(props) {
         super(props);
         this.state={
-            selectedMainPic:'',
-            selectedFirstPic:'',
-            selectedSecondPic:'',
-            selectedThirdPic:'',
-            selectedFourthPic:'',
+            valueMainPic:'',
+            valueFirstPic:'',
+            valueSecondPic:'',
+            valueThirdPic:'',
+            valueFourthPic:'',
             clickLoader:false,
 
 
-            fileTest:'',
-            test:'',
             img_title0:'',
             img_title1:'',
             img_title2:'',
@@ -49,14 +47,19 @@ class HostStep5Page3 extends Component {
         let formData = new FormData() ;
         formData.append("image" , event.target.files[0])
         formData.append("img_title" , this.state.img_title0)
-    //    formData.append("old_image_src" ,  "Villa-16221408668372.jpg" ) for update
+       // formData.append("img_src" , this.state.img_title0)
+       // formData.append("old_image_src" ,  "Villa-16221408668372.jpg" ) for update
 
 
         await  SetImages(formData,30)
-            .then(res => console.log(res))
+            .then(res =>{
+                console.log(res)
+                this.setState({[event.target.name] : res.data.data })
+            } )
             .catch(err=>console.log(err.response))
 
 
+        console.log(this.state.valueMainPic)
         /* this.setState({fileTest: event.target.files})
 
          console.log(event.target.value)
@@ -357,7 +360,7 @@ class HostStep5Page3 extends Component {
                                             <label htmlFor="myInput">
                                                 <img src={Logo}/>
                                                 <label htmlFor="files0" className="btn">تصویر خود را انتخاب کنید</label>
-                                                <input id="files0"   style={{display:'none'}} onChange={this.fileSelectedHandler}  type="file"   name='image' />
+                                                <input id="files0"   style={{display:'none'}} onChange={this.fileSelectedHandler}  type="file"   name={this.state.valueMainPic} />
                                             </label>
 
                                         </div>
