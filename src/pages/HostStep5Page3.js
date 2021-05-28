@@ -37,31 +37,48 @@ class HostStep5Page3 extends Component {
     }
     componentDidMount() {
 
+        editVilla(30)
+            .then(res=>console.log(res))
     }
 
-    fileSelectedHandler = (event) => {
-        this.setState({fileTest: event.target.files})
+    fileSelectedHandler = async (event) => {
+      //  this.setState({clickLoader:true})
 
-        console.log(event.target.value)
-        let files = event.target.files;
-        let result = new FileReader()
-        result.readAsDataURL(files[0]);
-        result.onload=(e)=>{
-            console.log(e.target.result)
-            this.setState({test:e.target.result})
-        }
-        if((event.target.files[0].type === "image/jpg" || event.target.files[0].type === "image/png" || event.target.files[0].type ===  "image/bmp" || event.target.files[0].type ===  "image/jpeg") && event.target.files[0].size < 2000005 ){
-            console.log(event.target.files[0]);
-            this.setState({
-                [event.target.name]: event.target.files[0]
-            }, () => this.fileUploadHandler());
-        }
-        if(event.target.files[0].size > 2000005){
-            alert("حجم فایل عکس باید حداکثر 2 مگابایت باشد")
-        }
-        if((event.target.files[0].type !== "image/jpg" && event.target.files[0].type !== "image/png" && event.target.files[0].type !==  "image/bmp" && event.target.files[0].type !==  "image/jpeg") ) {
-            alert("لطفا فایل عکس انتخواب کنید")
-        }
+        console.log(event.target)
+        event.preventDefault()
+        let formData = new FormData() ;
+        formData.append("image" , event.target.files[0])
+        formData.append("img_title" , this.state.img_title0)
+    //    formData.append("old_image_src" ,  "Villa-16221408668372.jpg" ) for update
+
+
+        await  SetImages(formData,30)
+            .then(res => console.log(res))
+            .catch(err=>console.log(err.response))
+
+
+        /* this.setState({fileTest: event.target.files})
+
+         console.log(event.target.value)
+         let files = event.target.files;
+         let result = new FileReader()
+         result.readAsDataURL(files[0]);
+         result.onload=(e)=>{
+             console.log(e.target.result)
+             this.setState({test:e.target.result})
+         }
+         if((event.target.files[0].type === "image/jpg" || event.target.files[0].type === "image/png" || event.target.files[0].type ===  "image/bmp" || event.target.files[0].type ===  "image/jpeg") && event.target.files[0].size < 2000005 ){
+             console.log(event.target.files[0]);
+             this.setState({
+                 [event.target.name]: event.target.files[0]
+             }, () => this.fileUploadHandler());
+         }
+         if(event.target.files[0].size > 2000005){
+             alert("حجم فایل عکس باید حداکثر 2 مگابایت باشد")
+         }
+         if((event.target.files[0].type !== "image/jpg" && event.target.files[0].type !== "image/png" && event.target.files[0].type !==  "image/bmp" && event.target.files[0].type !==  "image/jpeg") ) {
+             alert("لطفا فایل عکس انتخواب کنید")
+         } */
     };
     fileUploadHandler = () => {
         /* file upload triggered */
@@ -253,50 +270,15 @@ class HostStep5Page3 extends Component {
 
 
 
-        const updateData = async (event) =>{
+        const setDatas =  () =>{
             this.setState({clickLoader:true})
 
-            console.log(event.target)
-            event.preventDefault()
-            let formData = new FormData() ;
-            formData.append("image0" , event.target.image0.files[0])
-            formData.append("image1" , event.target.image1.files[0])
-            formData.append("image2" , event.target.image2.files[0])
-            formData.append("image3" , event.target.image3.files[0])
-            formData.append("image4" , event.target.image4.files[0])
-            formData.append("img_title0" , this.state.img_title0)
-            formData.append("img_title1" , this.state.img_title1)
-            formData.append("img_title2" , this.state.img_title2)
-            formData.append("img_title3" , this.state.img_title3)
-            formData.append("img_title4" , this.state.img_title4)
-            formData.append('imagesLength' , 5)
 
-
-            console.log(event.target.image0.files[0])
-            console.log(this.state.img_title0)
-            console.log(event.target.image1.files[0])
-            console.log(this.state.img_title1)
-            console.log(event.target.image2.files[0])
-            console.log(this.state.img_title2)
-            console.log(event.target.image3.files[0])
-            console.log(this.state.img_title3)
-            console.log(event.target.image4.files[0])
-            console.log(this.state.img_title4)
-
-            await  SetImages(formData,30)
-                .then(res => console.log(res))
-                .catch(err=>console.log(err.response))
-
-
-            // ثبت ویلا
 
             storeVilla(allData)
                 .then(res=>{
                     if(res.status===200){
-                        console.log(res.data.villa_id)
-                        SetImages(formData,res.data.villa_id)
-                            .then(results => {
-                                if(results.status===200){
+
                                     localStorage.removeItem("step1")
                                     localStorage.removeItem("step2")
                                     localStorage.removeItem("step2-2")
@@ -305,9 +287,6 @@ class HostStep5Page3 extends Component {
                                     localStorage.removeItem("step5")
                                     localStorage.removeItem("step5-2")
                                     this.props.history.push('/myAccommodation')
-                                }
-                            })
-                            .catch(err=>alert("عکس معتبر نمیباشد - حجم عکس باید کمتر از 2 مگابایت باشد"))
 
                     }else {
                         alert("لطفا مجددا اطلاعات خود را بررسی کنید - اطلاعات شما نادرست وارد شده")
@@ -365,7 +344,7 @@ class HostStep5Page3 extends Component {
                     </MDBRow>
 
 
-                    <form onSubmit={e=>updateData(e)}>
+
 
                         <MDBRow className={"fv-HostStep1PageBody"}>
                             <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
@@ -378,7 +357,7 @@ class HostStep5Page3 extends Component {
                                             <label htmlFor="myInput">
                                                 <img src={Logo}/>
                                                 <label htmlFor="files0" className="btn">تصویر خود را انتخاب کنید</label>
-                                                <input id="files0"   style={{display:'none'}}   type="file"   name='image0' />
+                                                <input id="files0"   style={{display:'none'}} onChange={this.fileSelectedHandler}  type="file"   name='image' />
                                             </label>
 
                                         </div>
@@ -409,8 +388,9 @@ class HostStep5Page3 extends Component {
 
 
 
-                                    <button className={this.state.clickLoader ? "fv-hideLoader" : "fv-hostStepPage1LeftButton"} onClick={()=>{
-                                       /* this.setState({clickLoader:true})
+                                    <input type="button" value="ثبت اقامتگاه"  className={this.state.clickLoader ? "fv-hideLoader" : "fv-hostStepPage1LeftButton"} onClick={()=>{
+
+                                        this.setState({clickLoader:true})
 
 
                                         storeVilla(allData)
@@ -461,7 +441,7 @@ class HostStep5Page3 extends Component {
                                             })
 
 
-                                        */
+
                                         /////////////////////////////////////// err.response.data.errors.title
                                         /////////////////////////////////////// err.response.data.errors.type
                                         /////////////////////////////////////// err.response.data.errors.phone_number
@@ -500,7 +480,7 @@ class HostStep5Page3 extends Component {
                                           SetImages(this.state.test,30)
                                                .then(res => console.log(res))
                                                .catch(err=>console.log(err.response)) */
-                                    }}>ثبت اقامتگاه</button>
+                                    }} />
                                     <input type="button" value="مرحله قبل"  className={this.state.clickLoader ?  "fv-hideLoader" :  "fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"} onClick={()=>{
                                         this.props.history.push('../../hostStep5-2')
                                     }}/>
@@ -608,7 +588,6 @@ class HostStep5Page3 extends Component {
 
 
                         </MDBContainer>
-                    </form>
 
                     <MDBRow>
                         <Footer />

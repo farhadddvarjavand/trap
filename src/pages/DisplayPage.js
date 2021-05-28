@@ -71,6 +71,7 @@ class DisplayPage extends Component {
             error:'',
             morePics:false,
             addToFavorites:false,
+            reservedPrice:'------',
 
             date: new Date(),
             selectedPlace: '',
@@ -234,6 +235,10 @@ componentDidMount() {
 
 
     render() {
+        const resultVilla = this.state.resultVilla
+        console.log(resultVilla)
+
+
         console.log(priceOfPerMonth(1400 , 2 , [1,2,3,4,"",6,7]))   // price days
         const moment = extendMoment(Moment);
         const start = new Date(this.state.dateToGo.year, this.state.dateToGo.month, this.state.dateToGo.day);
@@ -282,16 +287,16 @@ componentDidMount() {
                     daysCostString =`${daysCostString},${daysSelected[i]}` ;
                 }
             }
-            console.log(daysCostString)
-            const dates = {
-                dates:daysCostString
-            }
+           // console.log(daysCostString)
              /* axios.post(`https://mahoorapps.ir/api/v1/villa/calculateCost/${this.props.match.params.id}`,
                 { dates:daysCostString })
                 .then(response => console.log(response)) */
-
             calculateCost({dates: daysCostString},this.props.match.params.id)
-                .then(res=>console.log(res))
+                .then(res=>{
+                    if(res.status === 200){
+                        this.setState({reservedPrice:res.data})
+                    }
+                })
 
         }
 
@@ -1378,7 +1383,7 @@ componentDidMount() {
                                <p>{rangeBetween} روز </p>
                             </MDBCol>
                             <MDBCol  md={6}  sm={6} >
-                               <p>۰۰۰٫۰۰۰٫۲ تومان</p>
+                               <p>{this.state.reservedPrice} تومان</p>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftFactor fv-DisplayPageDetailsLeftFactorBorderLine"}>
@@ -1395,7 +1400,7 @@ componentDidMount() {
                                 <p>جمع کل</p>
                             </MDBCol>
                             <MDBCol  md={6}  sm={6} >
-                                <p> تومان</p>
+                                <p> {Number(this.state.reservedPrice)  ?(Number(normalExtraCostRules * this.state.numberOfPeople) ? Number(rangeBetween*(Number(normalExtraCostRules) * this.state.numberOfPeople))+this.state.reservedPrice :"------" )  : "------"} تومان </p> {/*   اگر هم نفرات وجود داشت و هم بازه زمانی قیمتش وجود داشت قیمت نفرات * تعداد روز + بازه قیمتی که از سرور آمده و در reservedPrice رزرو شده را جمع میکند   */}
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftButton"}>
