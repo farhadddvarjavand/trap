@@ -85,6 +85,7 @@ class DisplayPage extends Component {
 componentDidMount() {
 
 
+
     villa(this.props.match.params.id)
         .then(res => {
            if(res.data.status === 404){
@@ -236,6 +237,8 @@ componentDidMount() {
 
 
     render() {
+
+
         const resultVillaArray = []
         resultVillaArray.push(this.state.resultVilla)
         const resultVilla = this.state.resultVilla
@@ -255,10 +258,13 @@ componentDidMount() {
         if(range.diff('days')){
             if(range.diff('days')<0)
             {
+                if(this.state.reservedPrice){
+                    this.setState({reservedPrice:"" , extraPeopleCost:""})
+
+                }
                 rangeBetween=' '
             }
             else {
-
                 rangeBetween = range.diff('days') + 1;
 
             }
@@ -295,10 +301,17 @@ componentDidMount() {
                 .then(response => console.log(response)) */
             calculateCost({dates: daysCostString},this.props.match.params.id)
                 .then(res=>{
-                    if(res.status === 200 && this.state.reservedPrice !== res.data){
-                        this.setState({reservedPrice:res.data})
+                    console.log(res)
+                    if(res.data.data !== "Reservation failed"){
+                        if(res.status === 200 && this.state.reservedPrice !== res.data){
+                            this.setState({reservedPrice:res.data})
+                        }
+                    }else {
+                        alert("تاریخ انتخاب شده معتبر نمیباشد - شما قبلا در این تاریخ رزرو داشته اید")
                     }
+
                 })
+                .catch(err=>console.log(err.response))
 
         }
 
@@ -1432,7 +1445,49 @@ componentDidMount() {
                         <MDBRow className={"fv-DisplayPageDetailsLeftButton"}>
                             <MDBCol>
                                 <input type="button" value="درخواست رزرو" onClick={()=>{
-                                    console.log(this.state.resultVilla)
+                                    if (localStorage.getItem("token") ){
+                                        if(Number(this.state.reservedPrice )){
+                                            let cost = this.state.reservedPrice
+                                            if(Number(this.state.extraPeopleCost)&&Number(this.state.reservedPrice)){
+                                                cost = Number(this.state.extraPeopleCost)
+                                            }
+                                            const data ={
+                                                villa_title : this.state.resultVilla.title,
+                                                state : this.state.resultVilla.state,
+                                                city : this.state.resultVilla.city,
+                                                entry_date :this.state.dateToGo.year+"/"+ this.state.dateToGo.month+"/"+ this.state.dateToGo.day,
+                                                exit_date :this.state.dateToReturn.year+"/"+ this.state.dateToReturn.month+"/"+ this.state.dateToReturn.day,
+                                                cost : cost ,
+                                                villa_id : this.state.resultVilla.id ,
+                                                passengers_number : this.state.resultVilla.details.standard_capacity ,
+                                                extra_people :this.state.resultVilla.details.max_capacity-this.state.resultVilla.details.standard_capacity ,
+                                                length_stay :rangeBetween,
+                                            }
+                                            console.log(data)
+                                            reserveRequest(data)
+                                                .then(res => {
+                                                    console.log(res)
+                                                    if(res.status === 200){
+                                                    /*    const dataSave = {                       /// ezafe kardann be reserve ha dar taghvim
+                                                            end_date: data.exit_date ,
+                                                            start_date: data.exit_date,
+                                                        }
+                                                        localStorage.setItem("reservedDatas",dataSave); */
+
+                                                        this.props.history.push("/ProfileReservation2")
+                                                    }else {
+                                                        alert("اطلاعات را به درستی وارد نمایید")
+                                                    }
+                                                })
+                                                .catch(err => console.log(err.response))
+                                        }else {
+                                            alert("اطلاعات را به درستی وارد نمایید")
+                                        }
+
+                                    }else {
+                                        alert("شما ابتدا باید وارد شوید")
+                                        this.props.history.push("/mainPage")
+                                    }
 
                                 }}/>
                             </MDBCol>

@@ -197,8 +197,16 @@
         margin-left: 3%;
       }
     }
+    .col-md-7{
+      flex: 0 0 65.9%;
+    }
   }
-
+.fv-ProfilePageReservation2ImageProductContentTopOne .col-md-7 input, .fv-ProfilePageReservation2ImageProductContentTopOne .col-md-5 input, .fv-ProfilePageReservation2ImageProductContentTopOne .col-md-4 input {
+    width: 20px;
+    height: 20px;
+    background: #E88F0A;
+    margin-left: 3%;
+  }
 }
 .fv-ProfilePageReservation2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-profilePaeReservation2PayButton.fv-myAccommodationPageFinanceButton input, .fv-ProfilePageReservation2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-profilePaeReservation2PayButtonSet.fv-myAccommodationPageFinanceButton input {
   margin-left: -4%;

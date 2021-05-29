@@ -58,6 +58,23 @@
     border-radius: 14px;
     width: 444px;
   }
+  .fv-hideLoader{
+    display: none;
+  }
+  .fv-hostStepPage2LeftButtonBody .loader {
+    float: left;
+    margin-left: 18%;
+    /* padding: 3.5% 10.8% 3.5% 10.8%; */
+    border-radius: 16px;
+    background-color: #15BE29;
+    border: none;
+    color: white;
+    font-size: 13px;
+    margin-top: 15%;
+    width: 195.5px;
+    height: 67px;
+    margin-left: 7%;
+  }
 }
 @media (max-width: 1200px) and (min-width: 541px){
   .fv-hostStep5Page2 .col-md-10 {
@@ -93,6 +110,14 @@
       border: 1px solid rgba(0, 0, 0, 0.1);
       border-radius: 14px;
       width: 91vw;
+    }
+    .fv-hostStepPage2LeftButtonBody .loader {
+      border-radius: 8px;
+      margin-left: 7%;
+      /* padding: 5.4% 13.4% 5.4% 13.4%; */
+      width: 40vw;
+      height: 16vw;
+      margin-top: 52vw;
     }
   }
 }

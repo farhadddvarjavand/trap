@@ -63,6 +63,7 @@ class ProfilePageReservation2 extends Component {
 
 
     render() {
+
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
@@ -114,25 +115,31 @@ class ProfilePageReservation2 extends Component {
                             {this.state.reservesData.map(reserve=>{
                                 let className =''
                                 let md = ''
-                                if(reserve.pay_status === "در انتظار پرداخت"){
+                                let text = ""
+                                if(reserve.pay_status === "1"){   // در اتظار پرداخت
                                     className = "fv-profilePaeReservation2PayButtonSet"
                                     md="5"
+                                    text = "در اتظار پرداخت"
                                 }
-                                if(reserve.pay_status === "پرداخت شده"){
+                                if(reserve.pay_status === "2"){   // پرداخت شد
                                     className = "fv-profilePaeReservation2PayButton"
                                     md="4"
+                                    text= "پرداخت شد"
                                 }
-                                if(reserve.pay_status === "در انتظار پذیرش میزبان"){
+                                if(reserve.pay_status === "0"){  // در انتظار پذیرش مشتری
                                     className = "fv-profilePaeReservation2PayButton"
                                     md="7"
+                                    text="در انتظار پذیرش مییزبان"
                                 }
+
+
                                 console.log(reserve)
                                 return(
                                     <MDBCol md={4}>
                                         <MDBRow className={'fv-product fv-mobileProduct'}>
                                             <MDBRow className={"fv-ProfilePageReservation2ImageProductContentTopOne"}>
                                                 <MDBCol md={md}>
-                                                    <p>{reserve.pay_status}</p>
+                                                    <p>{text}</p>
                                                     <input type="text"/>
                                                 </MDBCol>
                                             </MDBRow>

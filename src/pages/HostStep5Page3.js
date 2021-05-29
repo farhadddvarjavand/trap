@@ -12,17 +12,24 @@ import {Link} from "react-router-dom";
 import {editVilla, SetImages, storeVilla} from "../services/userService";
 import {villa} from "../services/villaService";
 import axios from "axios";
+import config from "../services/config.json";
 
 class HostStep5Page3 extends Component {
     constructor(props) {
         super(props);
         this.state={
-            valueMainPic:'',
-            valueFirstPic:'',
-            valueSecondPic:'',
-            valueThirdPic:'',
-            valueFourthPic:'',
+
             clickLoader:false,
+            clickLoaderMainImage:false,
+            clickLoaderImage1:false,
+            clickLoaderImage2:false,
+            clickLoaderImage3:false,
+            clickLoaderImage4:false,
+
+            imagesDatas: [],
+            srcs:[],
+            inputNames:[],
+
 
 
             img_title0:'',
@@ -33,33 +40,143 @@ class HostStep5Page3 extends Component {
         }
 
     }
-    componentDidMount() {
+    componentDidMount () {
+         this.loadImages();
 
-        editVilla(30)
-            .then(res=>console.log(res))
     }
 
     fileSelectedHandler = async (event) => {
+
+        if(event.target.name === "mainImage"){  //////// be ezaie har name ke click shod an neveshte mahv shavad va iek charkhe neshan ddade shavad
+            this.setState({clickLoaderMainImage:true})
+        }
+        if(event.target.name === "firstImage"){
+            this.setState({clickLoaderImage1:true})
+        }
+        if(event.target.name === "secondImage"){
+            this.setState({clickLoaderImage2:true})
+        }
+        if(event.target.name === "thirdImage"){
+            this.setState({clickLoaderImage3:true})
+        }
+        if(event.target.name === "forthImage"){
+            this.setState({clickLoaderImage4:true})       ///////////////////
+        }
+
+
       //  this.setState({clickLoader:true})
 
-        console.log(event.target)
-        event.preventDefault()
-        let formData = new FormData() ;
-        formData.append("image" , event.target.files[0])
-        formData.append("img_title" , this.state.img_title0)
-       // formData.append("img_src" , this.state.img_title0)
-       // formData.append("old_image_src" ,  "Villa-16221408668372.jpg" ) for update
+
+        console.log(this.state.imagesDatas)
+
+        let setNewImage = true
+
+        if(this.state.imagesDatas ){                                  // upload قبلا وجود داشته image
+            this.state.imagesDatas.map(imagesDataPrev => {
+
+                console.log(imagesDataPrev.input_name)
+                console.log(event.target.name)
+                if(imagesDataPrev.input_name === event.target.name){
+                    setNewImage=false
+                    event.preventDefault()
+                    let formData = new FormData() ;
+                    formData.append("image" , event.target.files[0])
+                    formData.append("img_title" , this.state.img_title0)
+                     formData.append("input_name" , event.target.name)
+                    // formData.append("img_src" , this.state.img_title0)
+                    formData.append("old_image_src" ,  imagesDataPrev.img_src ) // for update
 
 
-        await  SetImages(formData,30)
-            .then(res =>{
-                console.log(res)
-                this.setState({[event.target.name] : res.data.data })
-            } )
-            .catch(err=>console.log(err.response))
+                    SetImages(formData,this.props.match.params.id)
+                        .then(res =>{
+                            console.log(res)
+                            console.log(event.target.name)
+                            console.log(res.data.data )
+                            this.setState({img_title0:""},()=>{
+                                alert(1)
+                                this.loadImages();
+                            })
 
 
-        console.log(this.state.valueMainPic)
+
+                            if(event.target.name === "mainImage"){  // dobare mahv shavad ///////////////////
+                                this.setState({clickLoaderMainImage:false})
+                            }
+                            if(event.target.name === "firstImage"){
+                                this.setState({clickLoaderImage1:false})
+                            }
+                            if(event.target.name === "secondImage"){
+                                this.setState({clickLoaderImage2:false})
+                            }
+                            if(event.target.name === "thirdImage"){
+                                this.setState({clickLoaderImage3:false})
+                            }
+                            if(event.target.name === "forthImage"){
+                                this.setState({clickLoaderImage4:false}) /////////////////
+                            }
+                        } )
+                        .catch(err=>console.log(err.response))
+                }
+            })
+
+        }
+        if(this.state.imagesDatas && setNewImage === true){
+            event.preventDefault()
+            let formData = new FormData() ;
+            formData.append("image" , event.target.files[0])
+            formData.append("img_title" , this.state.img_title0)
+            formData.append("input_name" , event.target.name)
+            // formData.append("img_src" , this.state.img_title0)
+
+
+            SetImages(formData,this.props.match.params.id)
+                .then(res =>{
+                    console.log(event.target.name)
+                    console.log(res.data.data )
+                    this.setState({img_title0:""})
+
+
+
+
+                    if(event.target.name === "mainImage"){  // dobare mahv shavad ///////////////////
+                        this.setState({clickLoaderMainImage:false})
+                    }
+                    if(event.target.name === "firstImage"){
+                        this.setState({clickLoaderImage1:false})
+                    }
+                    if(event.target.name === "secondImage"){
+                        this.setState({clickLoaderImage2:false})
+                    }
+                    if(event.target.name === "thirdImage"){
+                        this.setState({clickLoaderImage3:false})
+                    }
+                    if(event.target.name === "forthImage"){
+                        this.setState({clickLoaderImage4:false}) ///////////////////
+                    }
+                } )
+                .catch(err=>console.log(err.response))
+        }
+        /* if(this.state.imagesDatas===[]){
+            alert(3)
+            let formData = new FormData() ;
+            formData.append("image" , event.target.files[0])
+            formData.append("img_title" , this.state.img_title0)
+            formData.append("input_name" , event.target.name)
+            // formData.append("img_src" , this.state.img_title0)
+
+
+            SetImages(formData,this.props.match.params.id)
+                .then(res =>{
+                    alert(2)
+                    console.log(event.target.name)
+                    console.log(res.data.data )
+                } )
+                .catch(err=>console.log(err.response))
+        } */
+
+
+
+        //console.log(this.state.valueMainPic)
         /* this.setState({fileTest: event.target.files})
 
          console.log(event.target.value)
@@ -83,20 +200,33 @@ class HostStep5Page3 extends Component {
              alert("لطفا فایل عکس انتخواب کنید")
          } */
     };
-    fileUploadHandler = () => {
-        /* file upload triggered */
-        console.log('file upload triggered');
-    };
+    loadImages(){
+        editVilla(this.props.match.params.id)
+            .then(res=>{
+                this.setState({imagesDatas:res.data.data[0].images});
+            });
+    }
+
     render() {
+        if(this.state.imagesDatas ){
+            this.state.imagesDatas.map(srcAndInputNames=> {
+                const pushsrc = this.state.srcs.push(srcAndInputNames.img_src)
+                const pushinputNames = this.state.inputNames.push(srcAndInputNames.input_name)
+                console.log(pushsrc)
+                if(this.state.imagesDatas.img_src && this.state.imagesDatas.input_name)
+                this.setState({srcs:pushsrc , inputNames:pushinputNames})
+            })
+        }
 
 
+        console.log(this.state.imagesDatas)
 
 
         const sendToServerDatas={
         }
 
 
-        const step1Info = JSON.parse(localStorage.getItem("step1"));
+       /* const step1Info = JSON.parse(localStorage.getItem("step1"));
         const step2Info = JSON.parse(localStorage.getItem("step2"));
         const step22Info = JSON.parse(localStorage.getItem("step2-2"));
         const step3Info = JSON.parse(localStorage.getItem("step3"));
@@ -336,7 +466,7 @@ class HostStep5Page3 extends Component {
                     }
                 })
         }
-
+                                    */
 
 
         return (
@@ -358,9 +488,17 @@ class HostStep5Page3 extends Component {
                                     <MDBCol>
                                         <div>
                                             <label htmlFor="myInput">
-                                                <img src={Logo}/>
-                                                <label htmlFor="files0" className="btn">تصویر خود را انتخاب کنید</label>
-                                                <input id="files0"   style={{display:'none'}} onChange={this.fileSelectedHandler}  type="file"   name={this.state.valueMainPic} />
+                                                <img src={this.state.inputNames.indexOf("mainImage") === -1 ? Logo :`${config.webapi}/images/villas/main/${this.state.srcs[this.state.inputNames.indexOf("mainImage")] }` }/>
+
+                                                <div className={this.state.clickLoaderMainImage ? "loaderImage" : "fv-hideLoader"}>
+                                                    <svg className="circular" viewBox="25 25 50 50">
+                                                        <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
+                                                                stroke-miterlimit="10"/>
+                                                    </svg>
+                                                </div>
+
+                                                <label htmlFor="files0" className={this.state.clickLoaderMainImage ?  "fv-hideLoader" : "btn"}>تصویر خود را انتخاب کنید</label>
+                                                <input id="files0"   style={{display:'none'}} onChange={this.fileSelectedHandler}  type="file"   name={'mainImage'} />
                                             </label>
 
                                         </div>
@@ -396,7 +534,7 @@ class HostStep5Page3 extends Component {
                                         this.setState({clickLoader:true})
 
 
-                                        storeVilla(allData)
+                                        /* storeVilla(allData)
                                             .then(res=>{
                                                 if(res.status===200){
                                                     localStorage.removeItem("step1")
@@ -509,9 +647,16 @@ class HostStep5Page3 extends Component {
                                         <MDBCol>
                                             <div>
                                                 <label htmlFor="myInput">
-                                                    <img src={Logo}/>
-                                                    <label htmlFor="files1" className="btn">تصویر خود را انتخاب کنید</label>
-                                                    <input id="files1"   style={{display:'none'}}   type="file"   name='image1' />
+                                                    <img src={this.state.inputNames.indexOf("firstImage") === -1 ? Logo :`${config.webapi}/images/villas/main/${this.state.srcs[this.state.inputNames.indexOf("firstImage")] }` }/>
+                                                    <div className={this.state.clickLoaderImage1 ? "loaderImage" : "fv-hideLoader"}>
+                                                        <svg className="circular" viewBox="25 25 50 50">
+                                                            <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
+                                                                    stroke-miterlimit="10"/>
+                                                        </svg>
+                                                    </div>
+
+                                                    <label htmlFor="files1" className={this.state.clickLoaderImage1 ?  "fv-hideLoader" : "btn"}>تصویر خود را انتخاب کنید</label>
+                                                    <input id="files1"   style={{display:'none'}}  onChange={this.fileSelectedHandler}  type="file"   name={'firstImage'} />
                                                 </label>
 
                                             </div>
@@ -530,9 +675,17 @@ class HostStep5Page3 extends Component {
                                         <MDBCol>
                                             <div>
                                                 <label htmlFor="myInput">
-                                                    <img src={Logo}/>
-                                                    <label htmlFor="files2" className="btn">تصویر خود را انتخاب کنید</label>
-                                                    <input id="files2"   style={{display:'none'}}   type="file"   name='image2' />
+                                                    <img src={this.state.inputNames.indexOf("secondImage") === -1 ? Logo :`${config.webapi}/images/villas/main/${this.state.srcs[this.state.inputNames.indexOf("secondImage")] }` }/>
+
+                                                    <div className={this.state.clickLoaderImage2 ? "loaderImage" : "fv-hideLoader"}>
+                                                        <svg className="circular" viewBox="25 25 50 50">
+                                                            <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
+                                                                    stroke-miterlimit="10"/>
+                                                        </svg>
+                                                    </div>
+
+                                                    <label htmlFor="files2" className={this.state.clickLoaderImage2 ?  "fv-hideLoader" : "btn"}>تصویر خود را انتخاب کنید</label>
+                                                    <input id="files2"   style={{display:'none'}}   onChange={this.fileSelectedHandler}  type="file"   name={'secondImage'} />
                                                 </label>
 
                                             </div>
@@ -551,9 +704,17 @@ class HostStep5Page3 extends Component {
                                         <MDBCol>
                                             <div>
                                                 <label htmlFor="myInput">
-                                                    <img src={Logo}/>
-                                                    <label htmlFor="files3" className="btn">تصویر خود را انتخاب کنید</label>
-                                                    <input id="files3"   style={{display:'none'}}   type="file"   name='image3' />
+                                                    <img src={this.state.inputNames.indexOf("thirdImage") === -1 ? Logo :`${config.webapi}/images/villas/main/${this.state.srcs[this.state.inputNames.indexOf("thirdImage")] }` }/>
+
+                                                    <div className={this.state.clickLoaderImage3 ? "loaderImage" : "fv-hideLoader"}>
+                                                        <svg className="circular" viewBox="25 25 50 50">
+                                                            <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
+                                                                    stroke-miterlimit="10"/>
+                                                        </svg>
+                                                    </div>
+
+                                                    <label htmlFor="files3" className={this.state.clickLoaderImage3 ?  "fv-hideLoader" : "btn"}>تصویر خود را انتخاب کنید</label>
+                                                    <input id="files3"   style={{display:'none'}}  onChange={this.fileSelectedHandler}  type="file"   name={'thirdImage'}/>
                                                 </label>
                                             </div>
                                         </MDBCol>
@@ -571,9 +732,16 @@ class HostStep5Page3 extends Component {
                                         <MDBCol>
                                             <div>
                                                 <label htmlFor="myInput">
-                                                    <img src={Logo}/>
-                                                    <label htmlFor="files4" className="btn">تصویر خود را انتخاب کنید</label>
-                                                    <input id="files4"  style={{display:'none'}}    type="file"   name='image4' />
+                                                    <img src={this.state.inputNames.indexOf("forthImage") === -1 ? Logo :`${config.webapi}/images/villas/main/${this.state.srcs[this.state.inputNames.indexOf("forthImage")] }` }/>
+                                                    <div className={this.state.clickLoaderImage4 ? "loaderImage" : "fv-hideLoader"}>
+                                                        <svg className="circular" viewBox="25 25 50 50">
+                                                            <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
+                                                                    stroke-miterlimit="10"/>
+                                                        </svg>
+                                                    </div>
+
+                                                    <label htmlFor="files4" className={this.state.clickLoaderImage4 ?  "fv-hideLoader" : "btn"}>تصویر خود را انتخاب کنید</label>
+                                                    <input id="files4"  style={{display:'none'}}    onChange={this.fileSelectedHandler}  type="file"   name={'forthImage'} />
                                                 </label>
                                             </div>
                                         </MDBCol>

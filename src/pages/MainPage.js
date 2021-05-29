@@ -114,7 +114,7 @@ class MainPage extends Datas {
 
                             <a className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" : "fv-hideButtonRegister"}  onClick={()=>{
                                 this.setState({hideButtonLogin:!this.state.hideButtonLogin})
-                            }}> <img src={avatar ? `${config.webapi}/images/villas/thum/${avatar}` : MobileLogo} /> {nameAndFamily} </a>
+                            }}> <img src={avatar ? `${config.webapi}/images/villas/main/${avatar}` : MobileLogo} /> {nameAndFamily} </a>
                             <Link to={ "/hostStep1"} ><input type='button' value=' میزبان شوید' onClick={()=> this.props.history.push('/login3')} className={localStorage.getItem("token") ? "fv-getHostButtonMainPage" : "fv-hideButtonRegister"}  /> </Link>
                         </MDBCol>
                         <MDBCol md={9}>
@@ -135,7 +135,7 @@ class MainPage extends Datas {
                                 }else {
                                     this.props.history.push("/login")
                                 }
-                            }}> <img src={avatar ? `${config.webapi}/images/villas/thum/${avatar}` : MobileLogo} /></a>
+                            }}> <img src={avatar ? `${config.webapi}/images/villas/main/${avatar}` : MobileLogo} /></a>
                         </MDBCol>
                         <MDBCol sm={2} className={"fv-footerMenuRibbonButton"}>
                             <img src={LogoName} />
@@ -150,7 +150,7 @@ class MainPage extends Datas {
                     <MDBCol md={12} sm={12}>
                         <MDBRow>
                             <MDBCol md={2} sm={2}>
-                                <img src={avatar ? `${config.webapi}/images/villas/thum/${avatar}` : MobileLogo} />
+                                <img src={avatar ? `${config.webapi}/images/villas/main/${avatar}` : MobileLogo} />
                             </MDBCol>
                             <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={7} sm={8}>
                                 <MDBRow>
@@ -260,7 +260,7 @@ class MainPage extends Datas {
                         if(productDetails.details){
                             return(
                                 <MDBCol md={3} sm={7}>
-                                    <Product srcImage={`${config.webapi}/images/villas/thum/${productDetails.main_img }`}
+                                    <Product srcImage={`${config.webapi}/images/villas/main/${productDetails.main_img }`}
                                              rate={productDetails.score}
                                              topic={productDetails.title}
                                              location={productDetails.city}
@@ -273,7 +273,7 @@ class MainPage extends Datas {
                         }else {
                             return(
                                 <MDBCol md={3} sm={7}>
-                                    <Product srcImage={`${config.webapi}/images/villas/thum/${productDetails.main_img }`}
+                                    <Product srcImage={`${config.webapi}/images/villas/main/${productDetails.main_img }`}
                                              rate={productDetails.score}
                                              topic={productDetails.title}
                                              location={productDetails.city}
@@ -331,7 +331,7 @@ class MainPage extends Datas {
                         return(
                             <MDBCol md={3} sm={7}>
                                 <DiscountedProduct discountedAmount={discountedVilla.weekly_discount+"%"}
-                                                   srcImage={`${config.webapi}/images/villas/thum/${discountedVilla.main_img }`}
+                                                   srcImage={`${config.webapi}/images/villas/main/${discountedVilla.main_img }`}
                                                    rate={discountedVilla.villa.score}
                                                    topic={discountedVilla.villa.title}
                                                    location={discountedVilla.villa.city}
@@ -345,7 +345,7 @@ class MainPage extends Datas {
                         return (
                             <MDBCol md={3} sm={7}>
                                 <DiscountedProduct discountedAmount={discountedVilla.weekly_discount+"%"}
-                                                   srcImage={`${config.webapi}/images/villas/thum/${discountedVilla.main_img }`}
+                                                   srcImage={`${config.webapi}/images/villas/main/${discountedVilla.main_img }`}
                                                    rate={discountedVilla.villa.score}
                                                    topic={discountedVilla.villa.title}
                                                    location={discountedVilla.villa.city}
@@ -376,7 +376,7 @@ class MainPage extends Datas {
                 {economicVillas.map(economicVilla=>{
                     return(
                         <MDBCol md={3} sm={6}>
-                            <Product srcImage={`${config.webapi}/images/villas/thum/${economicVillas.main_img }`}
+                            <Product srcImage={`${config.webapi}/images/villas/main/${economicVillas.main_img }`}
                                      rate={economicVilla.score}
                                      topic={economicVilla.title}
                                      location={economicVilla.state}

@@ -608,6 +608,7 @@ display: none;
 
 .fv-DisplayPageDetailsLeftEmptyMobile {
     font-size: 14px;
+    text-align: initial;
 }
 .fv-sliderMorePics .awssld__wrapper {
     width: 120%;

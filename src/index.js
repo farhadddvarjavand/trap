@@ -70,7 +70,7 @@ ReactDOM.render(
                             <Route exact path={'/ProfileTransaction'} component={ProfilePageTransaction}/>
                             <Route exact path={'/ProfileReservation2'} component={ProfilePageReservation2}/>
                             <Route exact path={'/profileReservation'} component={ProfilePageReservation}/>
-                            <Route exact path={'/hostStep5-3'} component={HostStep5Page3}/>
+                            <Route exact path={'/hostStep5-3/:id'} component={HostStep5Page3}/>
                             <Route exact path={'/profile'} component={ProfilePage}/>
                             <Route exact path={'/hostStep5-2'} component={HostStep5Page2}/>
                             <Route exact path={'/hostStep5'} component={HostStep5Page}/>
