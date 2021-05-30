@@ -18,8 +18,16 @@ class ProfilePageTransaction2 extends Component {
 
     }
     componentDidMount() {
+        this.transactionDatas()
+
+    }
+    transactionDatas = () =>{
         userTransactions()
-            .then(res=>res.status===200 ? this.setState({transactionDatas:res.data.data}) : '')
+            .then(res=>{
+                if (res.status===200){
+                    this.setState({transactionDatas:res.data.data})
+                }
+            })
     }
 
     render() {

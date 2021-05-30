@@ -9,13 +9,32 @@ import Footer from "../componentsPages/footer"
 import MobileLogo from "../images/MobileLogo.png"
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
+import {getFinancialReports, villaIncome} from "../services/userService";
+import axios from "axios";
+import config from "../services/config.json";
 
 class ProfilePageWallet extends Component {
     constructor(props) {
         super(props);
-
+        this.state={
+            getFinancialReports:[]
+        }
+    }
+    componentDidMount() {
+        this.villaIncome()
+        this.getFinancialReports()
     }
 
+    getFinancialReports = ()=>{
+        getFinancialReports()
+            .then(res=>console.log(res))
+            .catch(err=>console.log(err.response))
+    }
+    villaIncome = ()  =>{
+        villaIncome(30)
+            .then(res=>console.log(res))
+            .catch(err=>console.log(err.response))
+    }
     render() {
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageWallet"}>
@@ -123,7 +142,10 @@ class ProfilePageWallet extends Component {
                         </table>
                         <MDBRow className={"fv-ProfilePageWalletWalletButton"}>
                             <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
-                                <input type="button" value="ثبت تراکنش جدید"/>
+                                <input type="button" value="ثبت تراکنش جدید" onClick={()=>{
+
+                                    this.props.history.push('/ProfileWallet2')
+                                }}/>
                             </MDBCol>
                         </MDBRow>
                     </MDBCol>

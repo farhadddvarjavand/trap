@@ -50,6 +50,7 @@ class MyAccommodationPage extends Component {
                         <MDBRow>
 
                             {this.state.userVillas.map(userVilla=>{
+                                console.log(userVilla)
                                 let md = ''
                                 let classNameActiveTopRightIn=""
                                 let classNameActiveTopLeftIn=""
@@ -83,7 +84,8 @@ class MyAccommodationPage extends Component {
                                         classNameActiveTopLeft={classNameActiveTopLeftIn}
                                         classNameActiveBottonRight={classNameActiveBottonRightIn}
                                         classNameActiveBottonLeft={classNameActiveBottonLeftIn}
-                                        classNameActiveButton={classNameActiveButtonIn}/>
+                                        classNameActiveButton={classNameActiveButtonIn}
+                                        {...this.props}/>
                                 )
                             })}
 
@@ -93,9 +95,10 @@ class MyAccommodationPage extends Component {
                     </MDBCol>
                 </MDBRow>
 
-                <MDBRow>
+                {/* <MDBRow>
                     <Footer />
                 </MDBRow>
+                    */}
 
             </MDBContainer>
         )}

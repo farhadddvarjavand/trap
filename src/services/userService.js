@@ -147,10 +147,26 @@ export const changeDatesStatus = async (data,id) => {
 }
 
 // Get All Reservations Requested  -- Use Token
-export const allReservationsRequested = () => {
+export const allReservationsRequested = async () => {
     return http.get(
-    `${config.webapi}/api/v1/user/allReservationsRequested`, 
-    { headers:{ 'Authorization' : `Bearer USER Token` } }
+    `${config.webapi}/api/v1/user/allReservationsRequested`,
+    { headers:{ 'Authorization' :  await getToken() } }
+    );
+}
+
+
+export const getFinancialReports = async () => {
+    return http.get(
+        `${config.webapi}/api/v1/user/getFinancialReports`,
+        { headers:{ 'Authorization' :  await getToken() } }
+    );
+}
+
+
+export const villaIncome =async id => {
+    return http.get(
+        `${config.webapi}/api/v1/user/villaIncome/${id}`,
+        { headers:{ 'Authorization' : await getToken() } }
     );
 }
 

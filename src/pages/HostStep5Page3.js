@@ -27,8 +27,6 @@ class HostStep5Page3 extends Component {
             clickLoaderImage4:false,
 
             imagesDatas: [],
-            srcs:[],
-            inputNames:[],
 
 
 
@@ -46,116 +44,125 @@ class HostStep5Page3 extends Component {
     }
 
     fileSelectedHandler = async (event) => {
+        if((event.target.files[0].type === "image/jpg" || event.target.files[0].type === "image/png" || event.target.files[0].type ===  "image/bmp" || event.target.files[0].type ===  "image/jpeg") && event.target.files[0].size < 2000005 ){
 
-        if(event.target.name === "mainImage"){  //////// be ezaie har name ke click shod an neveshte mahv shavad va iek charkhe neshan ddade shavad
-            this.setState({clickLoaderMainImage:true})
-        }
-        if(event.target.name === "firstImage"){
-            this.setState({clickLoaderImage1:true})
-        }
-        if(event.target.name === "secondImage"){
-            this.setState({clickLoaderImage2:true})
-        }
-        if(event.target.name === "thirdImage"){
-            this.setState({clickLoaderImage3:true})
-        }
-        if(event.target.name === "forthImage"){
-            this.setState({clickLoaderImage4:true})       ///////////////////
-        }
-
-
-      //  this.setState({clickLoader:true})
+            if(event.target.name === "mainImage"){  //////// be ezaie har name ke click shod an neveshte mahv shavad va iek charkhe neshan ddade shavad
+                this.setState({clickLoaderMainImage:true})
+            }
+            if(event.target.name === "firstImage"){
+                this.setState({clickLoaderImage1:true})
+            }
+            if(event.target.name === "secondImage"){
+                this.setState({clickLoaderImage2:true})
+            }
+            if(event.target.name === "thirdImage"){
+                this.setState({clickLoaderImage3:true})
+            }
+            if(event.target.name === "forthImage"){
+                this.setState({clickLoaderImage4:true})       ///////////////////
+            }
 
 
-        console.log(this.state.imagesDatas)
-
-        let setNewImage = true
-
-        if(this.state.imagesDatas ){                                  // upload قبلا وجود داشته image
-            this.state.imagesDatas.map(imagesDataPrev => {
-
-                console.log(imagesDataPrev.input_name)
-                console.log(event.target.name)
-                if(imagesDataPrev.input_name === event.target.name){
-                    setNewImage=false
-                    event.preventDefault()
-                    let formData = new FormData() ;
-                    formData.append("image" , event.target.files[0])
-                    formData.append("img_title" , this.state.img_title0)
-                     formData.append("input_name" , event.target.name)
-                    // formData.append("img_src" , this.state.img_title0)
-                    formData.append("old_image_src" ,  imagesDataPrev.img_src ) // for update
+            //  this.setState({clickLoader:true})
 
 
-                    SetImages(formData,this.props.match.params.id)
-                        .then(res =>{
-                            console.log(res)
-                            console.log(event.target.name)
-                            console.log(res.data.data )
-                            this.setState({img_title0:""},()=>{
-                                alert(1)
-                                this.loadImages();
-                            })
+            console.log(this.state.imagesDatas)
 
+            let setNewImage = true
 
+            if(this.state.imagesDatas ){                                  // upload قبلا وجود داشته image
+                this.state.imagesDatas.map(imagesDataPrev => {
 
-                            if(event.target.name === "mainImage"){  // dobare mahv shavad ///////////////////
-                                this.setState({clickLoaderMainImage:false})
-                            }
-                            if(event.target.name === "firstImage"){
-                                this.setState({clickLoaderImage1:false})
-                            }
-                            if(event.target.name === "secondImage"){
-                                this.setState({clickLoaderImage2:false})
-                            }
-                            if(event.target.name === "thirdImage"){
-                                this.setState({clickLoaderImage3:false})
-                            }
-                            if(event.target.name === "forthImage"){
-                                this.setState({clickLoaderImage4:false}) /////////////////
-                            }
-                        } )
-                        .catch(err=>console.log(err.response))
-                }
-            })
-
-        }
-        if(this.state.imagesDatas && setNewImage === true){
-            event.preventDefault()
-            let formData = new FormData() ;
-            formData.append("image" , event.target.files[0])
-            formData.append("img_title" , this.state.img_title0)
-            formData.append("input_name" , event.target.name)
-            // formData.append("img_src" , this.state.img_title0)
-
-
-            SetImages(formData,this.props.match.params.id)
-                .then(res =>{
+                    console.log(imagesDataPrev.input_name)
                     console.log(event.target.name)
-                    console.log(res.data.data )
-                    this.setState({img_title0:""})
+                    if(imagesDataPrev.input_name === event.target.name){
+                        setNewImage=false
+                        event.preventDefault()
+                        let formData = new FormData() ;
+                        formData.append("image" , event.target.files[0])
+                        formData.append("img_title" , this.state.img_title0)
+                        formData.append("input_name" , event.target.name)
+                        // formData.append("img_src" , this.state.img_title0)
+                        formData.append("old_image_src" ,  imagesDataPrev.img_src ) // for update
+
+
+                        SetImages(formData,this.props.match.params.id)
+                            .then(res =>{
+                                console.log(res)
+                                console.log(event.target.name)
+                                console.log(res.data.data )
+                                this.setState({img_title0:""},()=>{
+                                    this.loadImages();
+                                })
+
+
+
+                                if(event.target.name === "mainImage"){  // dobare mahv shavad ///////////////////
+                                    this.setState({clickLoaderMainImage:false})
+                                }
+                                if(event.target.name === "firstImage"){
+                                    this.setState({clickLoaderImage1:false})
+                                }
+                                if(event.target.name === "secondImage"){
+                                    this.setState({clickLoaderImage2:false})
+                                }
+                                if(event.target.name === "thirdImage"){
+                                    this.setState({clickLoaderImage3:false})
+                                }
+                                if(event.target.name === "forthImage"){
+                                    this.setState({clickLoaderImage4:false}) /////////////////
+                                }
+                            } )
+                            .catch(err=>console.log(err.response))
+                    }
+                })
+
+            }
+            if(this.state.imagesDatas && setNewImage === true){
+                event.preventDefault()
+                let formData = new FormData() ;
+                formData.append("image" , event.target.files[0])
+                formData.append("img_title" , this.state.img_title0)
+                formData.append("input_name" , event.target.name)
+                // formData.append("img_src" , this.state.img_title0)
+
+
+                SetImages(formData,this.props.match.params.id)
+                    .then(res =>{
+                        console.log(event.target.name)
+                        console.log(res.data.data )
+                        this.setState({img_title0:""})
 
 
 
 
-                    if(event.target.name === "mainImage"){  // dobare mahv shavad ///////////////////
-                        this.setState({clickLoaderMainImage:false})
-                    }
-                    if(event.target.name === "firstImage"){
-                        this.setState({clickLoaderImage1:false})
-                    }
-                    if(event.target.name === "secondImage"){
-                        this.setState({clickLoaderImage2:false})
-                    }
-                    if(event.target.name === "thirdImage"){
-                        this.setState({clickLoaderImage3:false})
-                    }
-                    if(event.target.name === "forthImage"){
-                        this.setState({clickLoaderImage4:false}) ///////////////////
-                    }
-                } )
-                .catch(err=>console.log(err.response))
+                        if(event.target.name === "mainImage"){  // dobare mahv shavad ///////////////////
+                            this.setState({clickLoaderMainImage:false})
+                        }
+                        if(event.target.name === "firstImage"){
+                            this.setState({clickLoaderImage1:false})
+                        }
+                        if(event.target.name === "secondImage"){
+                            this.setState({clickLoaderImage2:false})
+                        }
+                        if(event.target.name === "thirdImage"){
+                            this.setState({clickLoaderImage3:false})
+                        }
+                        if(event.target.name === "forthImage"){
+                            this.setState({clickLoaderImage4:false}) ///////////////////
+                        }
+                    } )
+                    .catch(err=>console.log(err.response))
+            }
         }
+        if(event.target.files[0].size > 2000005){
+            alert("حجم فایل عکس باید حداکثر 2 مگابایت باشد")
+        }
+        if((event.target.files[0].type !== "image/jpg" && event.target.files[0].type !== "image/png" && event.target.files[0].type !==  "image/bmp" && event.target.files[0].type !==  "image/jpeg") ) {
+            alert("لطفا فایل عکس انتخواب کنید")
+        }
+
+
         /* if(this.state.imagesDatas===[]){
             alert(3)
             let formData = new FormData() ;
@@ -203,26 +210,30 @@ class HostStep5Page3 extends Component {
     loadImages(){
         editVilla(this.props.match.params.id)
             .then(res=>{
+              //  console.log(res.data.data[0].images)
                 this.setState({imagesDatas:res.data.data[0].images});
             });
     }
 
     render() {
+        const pushsrc = []
+        const pushinputNames = []
         if(this.state.imagesDatas ){
+           // console.log(this.state.imagesDatas)
             this.state.imagesDatas.map(srcAndInputNames=> {
-                const pushsrc = this.state.srcs.push(srcAndInputNames.img_src)
-                const pushinputNames = this.state.inputNames.push(srcAndInputNames.input_name)
-                console.log(pushsrc)
-                if(this.state.imagesDatas.img_src && this.state.imagesDatas.input_name)
-                this.setState({srcs:pushsrc , inputNames:pushinputNames})
+                pushsrc.push(srcAndInputNames.img_src)
+                pushinputNames.push(srcAndInputNames.input_name)
+               // console.log(pushsrc)
+               // if(this.state.imagesDatas.img_src && this.state.imagesDatas.input_name)
+               // this.setState({srcs:pushsrc , inputNames:pushinputNames})
             })
         }
 
 
-        console.log(this.state.imagesDatas)
 
 
-        const sendToServerDatas={
+
+            const sendToServerDatas={
         }
 
 
@@ -488,7 +499,7 @@ class HostStep5Page3 extends Component {
                                     <MDBCol>
                                         <div>
                                             <label htmlFor="myInput">
-                                                <img src={this.state.inputNames.indexOf("mainImage") === -1 ? Logo :`${config.webapi}/images/villas/main/${this.state.srcs[this.state.inputNames.indexOf("mainImage")] }` }/>
+                                                <img src={pushinputNames.indexOf("mainImage") === -1 ? Logo :`${config.webapi}/images/villas/main/${pushsrc[pushinputNames.indexOf("mainImage")] }` }/>
 
                                                 <div className={this.state.clickLoaderMainImage ? "loaderImage" : "fv-hideLoader"}>
                                                     <svg className="circular" viewBox="25 25 50 50">
@@ -533,7 +544,14 @@ class HostStep5Page3 extends Component {
 
                                         this.setState({clickLoader:true})
 
-
+                                        localStorage.removeItem("step1")
+                                        localStorage.removeItem("step2")
+                                        localStorage.removeItem("step2-2")
+                                        localStorage.removeItem("step3")
+                                        localStorage.removeItem("step4")
+                                        localStorage.removeItem("step5")
+                                        localStorage.removeItem("step5-2")
+                                        this.props.history.push('/myAccommodation')
                                         /* storeVilla(allData)
                                             .then(res=>{
                                                 if(res.status===200){
@@ -647,7 +665,7 @@ class HostStep5Page3 extends Component {
                                         <MDBCol>
                                             <div>
                                                 <label htmlFor="myInput">
-                                                    <img src={this.state.inputNames.indexOf("firstImage") === -1 ? Logo :`${config.webapi}/images/villas/main/${this.state.srcs[this.state.inputNames.indexOf("firstImage")] }` }/>
+                                                    <img src={pushinputNames.indexOf("firstImage") === -1 ? Logo :`${config.webapi}/images/villas/main/${pushsrc[pushinputNames.indexOf("firstImage")] }` }/>
                                                     <div className={this.state.clickLoaderImage1 ? "loaderImage" : "fv-hideLoader"}>
                                                         <svg className="circular" viewBox="25 25 50 50">
                                                             <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
@@ -675,7 +693,7 @@ class HostStep5Page3 extends Component {
                                         <MDBCol>
                                             <div>
                                                 <label htmlFor="myInput">
-                                                    <img src={this.state.inputNames.indexOf("secondImage") === -1 ? Logo :`${config.webapi}/images/villas/main/${this.state.srcs[this.state.inputNames.indexOf("secondImage")] }` }/>
+                                                    <img src={pushinputNames.indexOf("secondImage") === -1 ? Logo :`${config.webapi}/images/villas/main/${pushsrc[pushinputNames.indexOf("secondImage")] }` }/>
 
                                                     <div className={this.state.clickLoaderImage2 ? "loaderImage" : "fv-hideLoader"}>
                                                         <svg className="circular" viewBox="25 25 50 50">
@@ -704,7 +722,7 @@ class HostStep5Page3 extends Component {
                                         <MDBCol>
                                             <div>
                                                 <label htmlFor="myInput">
-                                                    <img src={this.state.inputNames.indexOf("thirdImage") === -1 ? Logo :`${config.webapi}/images/villas/main/${this.state.srcs[this.state.inputNames.indexOf("thirdImage")] }` }/>
+                                                    <img src={pushinputNames.indexOf("thirdImage") === -1 ? Logo :`${config.webapi}/images/villas/main/${pushsrc[pushinputNames.indexOf("thirdImage")] }` }/>
 
                                                     <div className={this.state.clickLoaderImage3 ? "loaderImage" : "fv-hideLoader"}>
                                                         <svg className="circular" viewBox="25 25 50 50">
@@ -732,7 +750,7 @@ class HostStep5Page3 extends Component {
                                         <MDBCol>
                                             <div>
                                                 <label htmlFor="myInput">
-                                                    <img src={this.state.inputNames.indexOf("forthImage") === -1 ? Logo :`${config.webapi}/images/villas/main/${this.state.srcs[this.state.inputNames.indexOf("forthImage")] }` }/>
+                                                    <img src={pushinputNames.indexOf("forthImage") === -1 ? Logo :`${config.webapi}/images/villas/main/${pushsrc[pushinputNames.indexOf("forthImage")] }` }/>
                                                     <div className={this.state.clickLoaderImage4 ? "loaderImage" : "fv-hideLoader"}>
                                                         <svg className="circular" viewBox="25 25 50 50">
                                                             <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"

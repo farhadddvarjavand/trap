@@ -544,6 +544,7 @@ class HostStep5Page2 extends Component {
                                                 localStorage.removeItem("step3")
                                                 localStorage.removeItem("step4")
                                                 localStorage.removeItem("step5") */
+                                                localStorage.setItem("step5-2", JSON.stringify(step52Info))
                                                 this.props.history.push(`/hostStep5-3/${res.data.villa_id}`)
                                             }else {
                                                 alert("لطفا مجددا اطلاعات خود را بررسی کنید - اطلاعات شما نادرست وارد شده")
@@ -628,7 +629,6 @@ class HostStep5Page2 extends Component {
                             </MDBRow>
                         </MDBCol>
 
-
                         {/*   <HostStepLeftBodyContent
                             text="طراحان سایت هنگام طراحی قالب سایت معمولا با این موضوع رو برو هستند ک
                             ه محتوای اصلی صفحات آماده نیست. در نتیجه طرح کلی دید درستی به کار فرما نمیدهد. اگ
@@ -639,7 +639,7 @@ class HostStep5Page2 extends Component {
                             nextLink={"../../hostStep5-3"}
                             returnLink={"../../hostStep5"}
                             localStorageName={"step5-2"}
-                            localStorageData={localStorageData}/> */}
+                            localStorageData={step52Info}/> */}
 
                     </MDBRow>
                     <MDBRow>
