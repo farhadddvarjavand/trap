@@ -182,7 +182,7 @@ class ProfilePageReservation2 extends Component {
                                                     <input type="button" value="پرداخت"/> :
 
                                                     <input type="button" value="پرداخت2" onClick={()=> {
-                                                        this.props.history.push("/ProfileTransaction2");
+                                                        this.props.history.push(`/factor/${reserve.id}`);
                                                     }}/>
                                                 }
 

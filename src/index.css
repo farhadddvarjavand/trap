@@ -426,7 +426,7 @@ padding-top: 10%;
   color: white;
 }
 .fv-cascadeOptionMainPageRowTop .col-md-12{
-  display: contents;
+  display: flow-root;
 }
 .fv-cascadeOptionMainPageEndRadus{
   border-bottom-left-radius: 15px;
@@ -443,8 +443,9 @@ padding-top: 10%;
   margin: auto;
   text-align: center;
   color: white;
-  margin-right: 25%;
+  margin-right: 5%;
   padding: 0;
+  margin-top: -7%;
 }
 .fv-footerMenu .fv-cascadeOptionMainPageRowTop .col-md-12{
   place-self: center;
@@ -670,10 +671,48 @@ color {  100%, 0% {
 }
 
 
+@media (max-width: 1200px) {
+  .fv-centerImage img {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border-radius: 15px;
+    width: 106%;
+    height: 264px;
+  }
+  .container, .container-md, .container-sm {
+    max-width: 813px;
+    margin-right: -4%;
+  }
+}
 
 
+@media (max-width: 769px){
+  .fv-product .row {
+    padding-top: 4%;
+    width: 126%;
+  }
+  .fv-footerMenuRibbon .col-md-9 {
+    flex: 0 0 65%;
+    max-width: 65%;
+  }
+  .fv-searchMainPage.row {
+    margin-top: 1%;
+    width: 42%;
+    margin-right: 53%;
+    border-radius: 20px;
+    padding-right: 17px;
+    padding-left: 18px;
+    padding-top: 7px;
+    padding-bottom: 9px;
+    box-shadow: 1px 1px 11px #88888836;
+  }
+  .fv-aboutUsMobile .col-sm-9 {
+    flex: 0 0 64%;
+    max-width: 75%;
+    margin-top: 4%;
+  }
 
-@media (max-width: 767px){
+
   .fv-cascadeOptionMainPage.fv-cascadeOptionMainPageEndRadus.fv-userInfoButtonCascadeMobile{
     display: block;
     border-bottom-left-radius: 0px;
@@ -732,7 +771,6 @@ color {  100%, 0% {
 
 
 
-
   .fv-aboutUs.row{
     display: none;
   }
@@ -778,11 +816,21 @@ color {  100%, 0% {
     height: 108px;
     margin-top: 7%;
   }
+
+
 }
 @media (max-width: 360px){
   .fv-footerMenu .fv-cascadeOptionMainPageRowTop img {
     width: 60px;
     margin-right: 8px;
+  }
+  .fv-searchMainPage p {
+    text-align: initial;
+    font-size: 4vw;
+  }
+  .fv-typesAccommodation.fv-mobileProduct {
+    width: 105%;
+    direction: ltr;
   }
 }
 
@@ -796,4 +844,32 @@ color {  100%, 0% {
     width: 53px;
     margin-right: 6px;
   }
+  .fv-popularVillageTitle.fv-typesAccommodationTopic.col-11 {
+    flex: 0 0 141.666667%;
+    max-width: 91.666667%;
+    margin-top: -4%;
+  }
+
+  .fv-aboutUsMobile .col-sm-9 {
+    flex: 0 0 55.333333%;
+    width: 60.666667% !important;
+    text-align: right;
+    /* margin: 0; */
+    /* padding: 0; */
+    margin-left: 3%;
+  }
+
+  .fv-topicMainPageTopic h4 {
+    font-size: 4.2vw;
+    font-weight: 450;
+    margin: auto;
+  }
+  .fv-footerMenu .fv-searchMainPage [type=button]:not(:disabled), .fv-footerMenu .fv-searchMainPage [type=reset]:not(:disabled), .fv-footerMenu .fv-searchMainPage [type=submit]:not(:disabled), .fv-footerMenu .fv-searchMainPage button:not(:disabled) {
+    cursor: pointer;
+    margin-left: 0;
+    margin-right: auto;
+    font-size: 4vw;
+  }
+
+
 }

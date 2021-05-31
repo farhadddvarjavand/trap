@@ -17,21 +17,28 @@ class ProfilePageWallet extends Component {
     constructor(props) {
         super(props);
         this.state={
-            getFinancialReports:[]
+            getFinancialReportsTopPage:[],
+            getFinancialReports:[],
         }
     }
     componentDidMount() {
-        this.villaIncome()
         this.getFinancialReports()
+     //   this.villaIncome()
+
     }
 
     getFinancialReports = ()=>{
         getFinancialReports()
-            .then(res=>console.log(res))
+            .then(res=>{
+                let getFinancialReportsTop = []
+                getFinancialReportsTop.push(res.data.income)
+                console.log(res)
+                this.setState({getFinancialReports : res.data.data , getFinancialReportsTopPage:getFinancialReportsTop})
+            })
             .catch(err=>console.log(err.response))
     }
     villaIncome = ()  =>{
-        villaIncome(30)
+        villaIncome(24)
             .then(res=>console.log(res))
             .catch(err=>console.log(err.response))
     }
@@ -75,70 +82,69 @@ class ProfilePageWallet extends Component {
                             </MDBCol>
                         </MDBRow>
 
-                        <MDBRow className={"fv-ProfilePageWalletWalletImage"}>
-                            <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
-                                <MDBRow className={"fv-ProfilePageWalletWalletImageP"}>
-                                    <MDBCol md={12}>
-                                        <p>در آمد شما از ترپ</p>
+
+                            { this.state.getFinancialReportsTopPage.map(getFinancialReportsTopPages=>{
+                              return  <MDBRow className={"fv-ProfilePageWalletWalletImage"}>
+                                    <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
+                                        <MDBRow className={"fv-ProfilePageWalletWalletImageP"}>
+                                            <MDBCol md={12}>
+                                                <p>در آمد شما از ترپ</p>
+                                            </MDBCol>
+                                            <MDBCol md={12}>
+                                                <p>{getFinancialReportsTopPages.trappIncome} تومان</p>
+                                            </MDBCol>
+                                        </MDBRow>
+                                        <img src={MobileLogo} />
                                     </MDBCol>
-                                    <MDBCol md={12}>
-                                        <p>۰۰۰۵۴۲ تومان</p>
+                                    <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
+                                        <MDBRow className={"fv-ProfilePageWalletWalletImageP"}>
+                                            <MDBCol md={12} className={"fv-ProfilePageWalletWalletImagePWhiteColor"}>
+                                                <p>در آمد شما از سایر منابع</p>
+                                            </MDBCol>
+                                            <MDBCol md={12}>
+                                                <p>{getFinancialReportsTopPages.otherIncome} تومان</p>
+                                            </MDBCol>
+                                        </MDBRow>
+                                        <img src={MobileLogo} />
+                                    </MDBCol>
+                                    <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
+                                        <MDBRow className={"fv-ProfilePageWalletWalletImageP fv-ProfilePageWalletWalletImagePWhiteColor"}>
+                                            <MDBCol md={12}>
+                                                <p>کل درآمد شما از اجاره ویلا</p>
+                                            </MDBCol>
+                                            <MDBCol md={12}>
+                                                <p>{getFinancialReportsTopPages.totalIncome} تومان</p>
+                                            </MDBCol>
+                                        </MDBRow>
+                                        <img src={MobileLogo} />
                                     </MDBCol>
                                 </MDBRow>
-                                <img src={MobileLogo} />
-                            </MDBCol>
-                            <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
-                                <MDBRow className={"fv-ProfilePageWalletWalletImageP"}>
-                                    <MDBCol md={12} className={"fv-ProfilePageWalletWalletImagePWhiteColor"}>
-                                        <p>در آمد شما از ترپ</p>
-                                    </MDBCol>
-                                    <MDBCol md={12}>
-                                        <p>۰۰۰۵۴۲ تومان</p>
-                                    </MDBCol>
-                                </MDBRow>
-                                <img src={MobileLogo} />
-                            </MDBCol>
-                            <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
-                                <MDBRow className={"fv-ProfilePageWalletWalletImageP fv-ProfilePageWalletWalletImagePWhiteColor"}>
-                                    <MDBCol md={12}>
-                                        <p>در آمد شما از ترپ</p>
-                                    </MDBCol>
-                                    <MDBCol md={12}>
-                                        <p>۰۰۰۵۴۲ تومان</p>
-                                    </MDBCol>
-                                </MDBRow>
-                                <img src={MobileLogo} />
-                            </MDBCol>
-                        </MDBRow>
+                            })}
+
+
                         <MDBRow>
                             <MDBCol>
-                                <h5>تراکنش های من</h5>
+                                <h5>ریز گزارشات مالی</h5>
                             </MDBCol>
                         </MDBRow>
 
 
                         <table>
                             <tr className={"fv-tableTitle"}>
-                                <th className={"fv-tableTitleRightOne"}>نوع تراکنش</th>
                                 <th>تاریخ تراکنش</th>
+                                <th>منبع تراکنش</th>
+                                <th className={"fv-tableDiscriptions"}>شرح تراکنش</th>
                                 <th>مبلغ</th>
-                                <th className={"fv-tableTitleContent"}>شرح تراکنش</th>
-                                <th className={"fv-tableTitleLeftOne"}>وضعیت</th>
                             </tr>
-                            <tr>
-                                <td>برداشت</td>
-                                <td>99/10/01</td>
-                                <td>2000000</td>
-                                <td>برداشت از کیف پول</td>
-                                <td>پرداخت شد</td>
-                            </tr>
-                            <tr>
-                                <td>واریز</td>
-                                <td>99/10/01</td>
-                                <td>2000000</td>
-                                <td>اجرا اقامتگاه کلبه سبز</td>
-                                <td className={"fv-test"}>پرداخت شد</td>
-                            </tr>
+                            {this.state.getFinancialReports.map(getFinancialReport=>{
+                                return      <tr>
+                                                <td>{getFinancialReport.date}</td>
+                                                <td>{getFinancialReport.src}</td>
+                                                <td>{getFinancialReport.description}</td>
+                                                <td>{getFinancialReport.amount}</td>
+                                            </tr>
+                            })}
+
                         </table>
                         <MDBRow className={"fv-ProfilePageWalletWalletButton"}>
                             <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>

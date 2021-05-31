@@ -7,6 +7,8 @@ import "../style/ProfilePageWallet2.scss"
 import Footer from "../componentsPages/footer"
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
+import CalendarLinear from "../data/CalenddarLinear";
+import {setFinancialReports} from "../services/userService";
 
 class ProfilePageWallet2 extends Component {
     constructor(props) {
@@ -14,13 +16,32 @@ class ProfilePageWallet2 extends Component {
         this.state={
             sourceOfTransaction:'',
             transactionAmount:'',
-            transactionDate:'',
-            transactionDescription:''
+            transactionDescription:'',
+            date: {
+                day:1400,
+                month:'',
+                year : ''
+            },
+
+            validTransactionAmount:false,
 
         }
     }
-
+    selectDay = (date) =>{                                    // set date to go
+        if(date) {this.setState(prevstate =>({
+            date: {
+                ...prevstate.day,
+                ...prevstate.month,
+                ...prevstate.year,
+                day: date.day,
+                month: date.month,
+                year: date.year
+            }
+        }))
+        }
+    }
     render() {
+        console.log(this.state.date)
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageWallet2"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
@@ -48,8 +69,8 @@ class ProfilePageWallet2 extends Component {
                         <input type="text"  value={this.state.transactionAmount}
                                onChange={(event)=>{this.setState({transactionAmount:event.target.value})}}/>
                         <p>تاریخ تراکنش</p>
-                        <input type="text"  value={this.state.transactionDate}
-                               onChange={(event)=>{this.setState({transactionDate:event.target.value})}}/>
+
+                        <div className={"fv-calendarInProfilePageWallet2"}> <CalendarLinear dayToGo={this.selectDay} text={'انتخاب روز'} /></div>
                         <p>شرح تراکنش</p>
                         <MDBRow className={"fv-ProfilePageWallet2TextArea"}>
                             <MDBCol>
@@ -61,7 +82,22 @@ class ProfilePageWallet2 extends Component {
 
                         <MDBRow>
                             <MDBCol md={12} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
-                                <input type="button" value="ذخیره تراکنش"/>
+                                <input type="button" value="ذخیره تراکنش" onClick={()=>{
+                                    const setDate = this.state.date.year+"/"+this.state.date.month+"/"+this.state.date.day
+                                    const data = {
+                                        date : setDate ,
+                                        src : this.state.sourceOfTransaction ,
+                                        description : this.state.transactionDescription ,
+                                        amount : this.state.transactionAmount,
+                                    }
+                                    setFinancialReports(data)
+                                        .then(res=>{
+                                            if(res.status){
+                                                this.props.history.push('/ProfileWallet')
+                                            }
+                                        })
+                                        .catch(err=>alert("لطفا اطلاعات را به درستی وارد کنید"))
+                                }}/>
                             </MDBCol>
                         </MDBRow>
                     </MDBCol>

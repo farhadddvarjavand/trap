@@ -41,6 +41,7 @@ html .col-md-3{
 .fv-product .row{
     width: -webkit-fill-available;
     padding-top: 4%;
+    width: 115%;
 }
 .fv-productLocation .col-md-9{
     border-bottom: 1px solid #400a0a;
@@ -540,6 +541,55 @@ html .col-md-3{
         padding-left: 0%;
         padding-right: 8%;
     }
+    .fv-productPriceBox .col-md-10 {
+        flex: 0 0 100.333333%;
+        max-width: 100.333333%;
+        font-size: 1.5vw;
+    }
+
+    .fv-product .row {
+        width: -webkit-fill-available;
+        padding-top: 4%;
+        width: 125%;
+    }
+    .fv-aboutUsSecondImage {
+        /* padding-left: 1%; */
+        /* padding-top: 1%; */
+        margin-left: 1%;
+        border-radius: 15px;
+        width: 201px;
+        height: 243px;
+        margin-left: -7px;
+    }
+
+    .fv-aboutUsFirstImage {
+        /* margin-left: 1%; */
+        /* margin-top: 1%; */
+        border-radius: 15px;
+        width: 168px;
+        height: 248px;
+        margin-right: -13px;
+    }
+    .fv-aboutUsThirdImage {
+        margin-top: -4%;
+        border-radius: 15px;
+        width: 193px;
+        height: 277px;
+        margin-top: 3%;
+        border-radius: 15px;
+        width: 139px;
+        height: 238px;
+        margin-right: 43px;
+    }
+    .fv-aboutUsFourthImage {
+        /* padding-left: 1%; */
+        /* padding-top: 1%; */
+        margin-top: 3%;
+        margin-left: -26%;
+        border-radius: 15px;
+        width: 232px;
+        height: 273px;
+    }
 }
 @media (max-width: 766px) and  (min-width: 508px){
     .fv-aboutUsFourthImage {
@@ -572,6 +622,55 @@ html .col-md-3{
     .fv-mobileProduct .fv-trapMagazineImageTitle {
         /* width: 109%; */
         /*direction: rtl;*/
+    }
+    .fv-productPriceBox .col-md-10 {
+        flex: 0 0 100.333333%;
+        max-width: 100.333333%;
+        font-size: 1.5vw;
+    }
+
+    .fv-product .row {
+        width: -webkit-fill-available;
+        padding-top: 4%;
+        width: 125%;
+    }
+    .fv-aboutUsSecondImage {
+        /* padding-left: 1%; */
+        /* padding-top: 1%; */
+        margin-left: 1%;
+        border-radius: 15px;
+        width: 201px;
+        height: 243px;
+        margin-left: -7px;
+    }
+
+    .fv-aboutUsFirstImage {
+        /* margin-left: 1%; */
+        /* margin-top: 1%; */
+        border-radius: 15px;
+        width: 168px;
+        height: 248px;
+        margin-right: -13px;
+    }
+    .fv-aboutUsThirdImage {
+        margin-top: -4%;
+        border-radius: 15px;
+        width: 193px;
+        height: 277px;
+        margin-top: 3%;
+        border-radius: 15px;
+        width: 139px;
+        height: 238px;
+        margin-right: 43px;
+    }
+    .fv-aboutUsFourthImage {
+        /* padding-left: 1%; */
+        /* padding-top: 1%; */
+        margin-top: 3%;
+        margin-left: -26%;
+        border-radius: 15px;
+        width: 232px;
+        height: 273px;
     }
 }
 
@@ -610,16 +709,34 @@ html .col-md-3{
     .fv-product .row {
         font-size: 15px;
     }
-}
-@media (max-width: 280px) {
-    .fv-product .row {
-        font-size: 13px;
+    .fv-mobileProduct {
+        width: 115%;
+        direction: ltr;
+    }
+    .fv-product .fv-productTopic {
+        padding-right: 12.5%;
+        font-size: 5vw;
+        color: #15BE29;
+        margin-bottom: 4%;
+    }
+    .fv-product .fv-productLocation .col-md-9 {
+        border-bottom: 1px solid #909090;
+        margin-top: -7px;
+        padding-bottom: 9px;
+    }
+    .fv-product .fv-productCapacityBox .fv-numberOfBedBody {
+        display: flex;
+        justify-content: flex-end;
+        margin-left: 4.5%;
+        margin-top: -38%;
     }
     .fv-topicMainPageTopic h4 {
-        font-size: 13px;
-        font-weight: 450;
+        font-size: 4.2vw;
         margin: auto;
     }
+
+}
+@media (max-width: 280px) {
 
     .fv-topicMainPageTopic {
         text-align: end;
@@ -653,5 +770,18 @@ html .col-md-3{
 
     .fv-searchMainPage .fv-searchMainPageBetweenDate.col-sm-1 {
         margin-right: 9%;
+    }
+
+    .fv-product .fv-productCapacityBox .fv-maximumNumber, .fv-product .fv-productCapacityBox .fv-capacityBody {
+        margin-top: 8%;
+        font-size: 4vw;
+    }
+    .fv-topicMainPageTopic h4 {
+        font-size: 4.2vw;
+        margin: auto;
+    }
+    .fv-product .fv-topicMainPage .row {
+        padding-top: 4%;
+        width: 132%;
     }
 }

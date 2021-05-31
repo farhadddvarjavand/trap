@@ -55,7 +55,7 @@ ReactDOM.render(
                             <Route exact path={'/login'} component={LoginPage}/>
                             <Route exact path={'/login2'} component={LoginPage2}/>
                             <Route exact path={'/login3'} component={LoginPage3}/>
-                            <Route exact path={'/factor'} component={FactorPage}/>
+                            <Route exact path={'/factor/:id'} component={FactorPage}/>
                             <Route exact path={'/profileReservations'} component={ProfilePageReservationsRequested}/>
                             <Route exact path={'/profileCalender/:id'} component={ProfilePageCalender}/>
                             <Route exact path={'/profileGustComments2/:id'} component={ProfilePageGustComments2}/>

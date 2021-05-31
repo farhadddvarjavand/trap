@@ -51,6 +51,9 @@
   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo select {
     padding-right: 3%;
   }
+  .fv-tableDiscriptions{
+    width: 40%;
+  }
 }
 
 @media (max-width: 991px) and (min-width: 764px){
@@ -59,6 +62,10 @@
   }
   .fv-ProfilePageWallet .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageWalletWalletButton .fv-ProfilePageUserSetInfoButton input {
     width: 84.5%;
+  }
+
+  .fv-ProfilePageWallet .fv-ProfilePageLeftBody .fv-ProfilePageWalletWalletImage p {
+    font-size: 11px ;
   }
 }
 
@@ -137,6 +144,9 @@
     }
     .fv-footerMenuMobileTitle {
       margin-top: 170%;
+    }
+   .fv-ProfilePageLeftBody .fv-ProfilePageWalletWalletImage p {
+      font-size: 11px ;
     }
   }
 

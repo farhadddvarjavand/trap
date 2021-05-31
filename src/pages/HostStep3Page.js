@@ -19,6 +19,8 @@ class HostStep3Page extends Component {
             standardCapacity:1,
             maximumCapacity:1,
             numberOfBedroom:1,
+            numberOfBed:1,
+            numberOfMattress:1,
             iranianToilet:1,
             Toilet:0,
             shower:1,
@@ -221,6 +223,21 @@ class HostStep3Page extends Component {
                                     nameOfSection={'numberOfBedroom'}
                                 />
                             </div>
+
+                            <HostStepIncreaseAndDecreaseButton
+                                text="تعداد تخت"
+                                incrementFunction={this.setStandardCapacityIncrement}
+                                decrementFunction={this.setStandardCapacityDecrement}
+                                numberValue = {this.state.numberOfBed}
+                                nameOfSection={'numberOfBed'}
+                            />
+                            <HostStepIncreaseAndDecreaseButton
+                                text="تعداد تشک"
+                                incrementFunction={this.setStandardCapacityIncrement}
+                                decrementFunction={this.setStandardCapacityDecrement}
+                                numberValue = {this.state.numberOfMattress}
+                                nameOfSection={'numberOfMattress'}
+                            />
 
                             <h5>حمام/سرویس بهداشتی</h5>
 

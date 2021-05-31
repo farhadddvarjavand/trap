@@ -1451,6 +1451,10 @@ componentDidMount() {
                                             if(Number(this.state.extraPeopleCost)&&Number(this.state.reservedPrice)){
                                                 cost = Number(this.state.extraPeopleCost)
                                             }
+                                            let extraCost = 0
+                                            if(Number(this.state.extraPeopleCost)){
+                                                extraCost = Number(this.state.extraPeopleCost)-Number(this.state.reservedPrice)
+                                            }
                                             const data ={
                                                 villa_title : this.state.resultVilla.title,
                                                 state : this.state.resultVilla.state,
@@ -1462,6 +1466,7 @@ componentDidMount() {
                                                 passengers_number : this.state.resultVilla.details.standard_capacity ,
                                                 extra_people :this.state.resultVilla.details.max_capacity-this.state.resultVilla.details.standard_capacity ,
                                                 length_stay :rangeBetween,
+                                                extra_cost:extraCost,
                                             }
                                             console.log(data)
                                             reserveRequest(data)

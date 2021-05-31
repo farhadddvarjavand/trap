@@ -163,6 +163,15 @@ export const getFinancialReports = async () => {
 }
 
 
+export const setFinancialReports = async (data) => {
+    return http.post(
+        `${config.webapi}/api/v1/user/setFinancialReports`,
+        JSON.stringify(data),
+        { headers:{ 'Authorization' : await getToken() } }
+    );
+}
+
+
 export const villaIncome =async id => {
     return http.get(
         `${config.webapi}/api/v1/user/villaIncome/${id}`,

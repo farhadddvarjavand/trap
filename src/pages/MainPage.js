@@ -152,13 +152,20 @@ class MainPage extends Datas {
                             <MDBCol md={2} sm={2}>
                                 <img src={avatar ? `${config.webapi}/images/villas/main/${avatar}` : MobileLogo} />
                             </MDBCol>
-                            <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={7} sm={8}>
+                            <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={12} sm={12}>
                                 <MDBRow>
-                                    <a><h5>{nameAndFamily}</h5></a>
+                                    <MDBCol>
+                                        <a><h5>{nameAndFamily}</h5></a>
+                                    </MDBCol>
+
                                 </MDBRow>
                                 <MDBRow>
-                                    <Link to={"/Profile"}><a>مشاهده حساب کاربری</a></Link>
+                                    <MDBCol>
+                                        <Link to={"/Profile"}><a>مشاهده حساب کاربری</a></Link>
+                                    </MDBCol>
+
                                 </MDBRow>
+
                             </MDBCol>
                         </MDBRow>
                     </MDBCol>

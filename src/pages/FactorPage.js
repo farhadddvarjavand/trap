@@ -4,12 +4,33 @@ import Footer from "../componentsPages/footer"
 import Logo from "../images/Logo.png";
 import "../style/FactorPage.scss"
 import HeaderSearch from "../componentsPages/HeaderSearch";
+import {factor, requestPay} from "../services/payService";
+import {calculateCost} from "../services/userService";
+import {arrayBetweenDates} from "../componentsPages/calculationsDate";
+import {extendMoment} from "moment-range";
+import Moment from "moment";
 
 class FactorPage extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            factorInfo:[] ,
+            villaInfo:[],
 
+        }
     }
+    componentDidMount() {
+        this.factor()
+    }
+
+    factor =()=>{
+        factor(this.props.match.params.id)
+            .then(res=>{
+                this.setState({factorInfo:res.data.data , villaInfo:res.data.data.villa})
+            })
+            .catch(err=>console.log(err.response))
+    }
+
 
     render() {
         return(
@@ -28,13 +49,13 @@ class FactorPage extends Component {
                 <MDBRow className={"fv-ProfilePageLeftBody desktop"}>
 
                     <MDBCol md={3} className={"fv-factorPageRightInfo"}>
-                        <h4 className={"fv-factorPageRightInfoRightPaddingTitle"}>کلبه باغ سبز</h4>
+                        <h4 className={"fv-factorPageRightInfoRightPaddingTitle"}>{this.state.villaInfo.title}</h4>
                         <MDBRow>
                             <MDBCol md={6}>
-                                <h5 className={"fv-factorPageRightInfoRightPaddingTitle2"}>اردبیل-خلخال</h5>
+                                <h5 className={"fv-factorPageRightInfoRightPaddingTitle2"}>{this.state.villaInfo.city}</h5>
                             </MDBCol>
                             <MDBCol md={3} className={"fv-factorPageRightRate"}>
-                                <i className="fas fa-star fv-factorPageRightRateStar" /> <p>۴.۸</p> <p className={"fv-factorPageRightRateNumber"}>/۵</p>
+                                <i className="fas fa-star fv-factorPageRightRateStar" /> <p>{this.state.villaInfo.score }</p> <p className={"fv-factorPageRightRateNumber"}>/۵</p>
                             </MDBCol>
                         </MDBRow>
                         <img src={Logo}/>
@@ -43,15 +64,15 @@ class FactorPage extends Component {
                                 <p className={"fv-factorPageRightInfoRightPadding"}>کد آگهی</p>
                             </MDBCol>
                             <MDBCol md={3}>
-                                <h5>123654</h5>
+                                <h5>{this.state.villaInfo.id}</h5>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
                             <MDBCol className={"fv-ProfilePageUserInfoDetailsBodyColumn"}>
-                                <p><i className="fas fa-home"/>خانه دربست</p>
-                                <p><i className="fa fa-user-friends" />ظرفیت استاندار 4 نفر+4 نفر اضافه</p>
-                                <p><i className='fas fa-boxes' />2 اتاق خواب+یک حمام+یک دست شویی</p>
-                                <p><i className="fas fa-bed" />1 تخت یک نفره+8 تشک معمولی</p>
+                                <p><i className="fas fa-home"/>{this.state.villaInfo.rent_type}</p>
+                                <p><i className="fa fa-user-friends" />ظرفیت استاندارد {this.state.villaInfo.standard_capacity} نفر+{this.state.villaInfo.max_capacity ? Number(this.state.villaInfo.max_capacity - this.state.villaInfo.standard_capacity) : ''} نفر اضافه</p>
+                                <p><i className='fas fa-boxes' />{this.state.villaInfo.bedroom} اتاق خواب+{this.state.villaInfo.shower} حمام+{this.state.villaInfo.ir_toilet} دست شویی ایرانی+{this.state.villaInfo.eu_toilet} دست شویی فرنگی</p>
+                                <p><i className="fas fa-bed" />؟؟؟؟؟؟ تخت یک نفره+؟؟؟؟؟؟ تشک معمولی</p>
                             </MDBCol>
                         </MDBRow>
                     </MDBCol>
@@ -59,10 +80,10 @@ class FactorPage extends Component {
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo"}>
                         <MDBRow className={"fv-factorPageRightInfoLeftTop"}>
                             <MDBCol className={"fv-factorPageRightInfoLeftInnerTop"} md={3}>
-                                <h5> 123654 </h5><p> : کد رزرو</p>
+                                <h5> {this.state.factorInfo.id} </h5><p> : کد رزرو</p>
                             </MDBCol>
                             <MDBCol className={"fv-factorPageRightInfoLeftInnerTop"} md={3}>
-                                <h5> 123654 </h5><p> : تاریخ صدور</p>
+                                <h5> {this.state.factorInfo.issue_date} </h5><p> : تاریخ صدور</p>
                             </MDBCol>
                             <MDBCol className={"fv-factorPageRightInfoLeftInnerTopButton"}>
                                 <input type="button" value={"در انتظار پذیرش میزبان"}/>
@@ -72,10 +93,10 @@ class FactorPage extends Component {
                         <MDBContainer className={"fv-factorPageRightInfoLeftBody"}>
                             <MDBRow className={"fv-factorPageRightInfoLeftTopInnerSecond"}>
                                 <MDBCol className={"fv-factorPageRightInfoLeftInnerTop"} md={3}>
-                                    <h5> 123654 </h5><p> کد رزرو</p><i className="fas fa-calendar-alt" />
+                                    <h5> {this.state.factorInfo.entry_date} </h5><p>تاریخ رفت</p><i className="fas fa-calendar-alt" />
                                 </MDBCol>
                                 <MDBCol className={"fv-factorPageRightInfoLeftInnerTop"} md={3}>
-                                    <h5> 123654 </h5><p> کد رزرو</p><i className="fas fa-calendar-alt" />
+                                    <h5> {this.state.factorInfo.exit_date} </h5><p>تاریخ برگشت</p><i className="fas fa-calendar-alt" />
                                 </MDBCol>
                                 <MDBCol className={"fv-factorPageRightInfoLeftInnerTopButton fv-factorPageRightInfoLeftInnerChangeCalender"}>
                                     <p><i className="fas fa-chevron-left" />تغییر تاریخ</p>
@@ -83,8 +104,7 @@ class FactorPage extends Component {
                             </MDBRow>
                             <MDBRow className={"fv-factorPageRightInfoLeftBodyInner"}>
                                 <MDBCol md={6}>
-                                    <h5>اطلاعات کاربری</h5>
-                                    <p>نام و نام خانوادگی</p>
+                                    <p>کد تخفیف</p>
                                     <MDBRow>
                                         <MDBCol md={6}>
                                             <input type="text" value=""/>
@@ -96,66 +116,84 @@ class FactorPage extends Component {
 
                                 </MDBCol>
                                 <MDBCol md={6} className={"fv-factorPageRightInfoLeftBodyInnerLeft"}>
-                                    <h5>اطلاعات کاربری</h5>
-                                    <MDBRow>
-                                        <MDBCol md={4}>
+                                    <h5>اطلاعات صورت حساب</h5>
+                                    <MDBRow className={"fv-factorPageRightInfoLeftBodyInnerLeftInner"}>
+                                        <MDBCol md={4} className={"fv-factorPageRightInfoLeftBodyInnerLeftP"}>
                                             <p>مدت کل اقامت</p>
                                         </MDBCol>
                                         <MDBCol md={4}>
-                                            <h5>3 شب</h5>
+                                            <h5>{this.state.factorInfo.length_stay} روز </h5>
                                         </MDBCol>
                                         <MDBCol md={4}>
-                                             <h5>36000</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
+                                             <h5>{this.state.factorInfo.cost ? Number(this.state.factorInfo.cost - this.state.factorInfo.extra_cost) : ''}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
                                         </MDBCol>
                                     </MDBRow>
 
-                                    <MDBRow>
-                                        <MDBCol md={4}>
-                                            <p>مدت کل اقامت</p>
+                                    <MDBRow className={"fv-factorPageRightInfoLeftBodyInnerLeftInner"}>
+                                        <MDBCol md={4} className={"fv-factorPageRightInfoLeftBodyInnerLeftP"}>
+                                            <p>نفرات اضافه</p>
                                         </MDBCol>
                                         <MDBCol md={4}>
-                                            <h5>3 شب</h5>
+                                            <h5>{this.state.factorInfo.extra_people} نفر</h5>
                                         </MDBCol>
                                         <MDBCol md={4}>
-                                            <h5>36000</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
+                                            <h5>{this.state.factorInfo.extra_cost}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBRow className={"fv-factorPageRightInfoLeftBodyOrderLastColumn"}>
 
                                     </MDBRow>
-                                    <MDBRow>
-                                        <MDBCol md={4}>
-                                            <p>مدت کل اقامت</p>
+                                    <MDBRow className={"fv-factorPageRightInfoLeftBodyInnerLeftInner"}>
+                                        <MDBCol md={4} className={"fv-factorPageRightInfoLeftBodyInnerLeftP"}>
+                                            <p>جمع کل</p>
                                         </MDBCol>
                                         <MDBCol md={4}>
                                         </MDBCol>
                                         <MDBCol md={4}>
-                                            <h5>36000</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
-                                        </MDBCol>
-                                    </MDBRow>
-                                    <MDBRow>
-                                        <MDBCol md={4}>
-                                            <p>مدت کل اقامت</p>
-                                        </MDBCol>
-                                        <MDBCol md={4}>
-                                        </MDBCol>
-                                        <MDBCol md={4}>
-                                            <h5>36000</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
+                                            <h5>{this.state.factorInfo.cost}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
                                         </MDBCol>
                                     </MDBRow>
-                                    <MDBRow className={"fv-factorPageRightInfoLeftBodyOrderThatPay"}>
-                                        <MDBCol md={4}>
-                                            <p>مدت کل اقامت</p>
+                                    <MDBRow className={"fv-factorPageRightInfoLeftBodyInnerLeftInner"}>
+                                        <MDBCol md={4} className={"fv-factorPageRightInfoLeftBodyInnerLeftP"}>
+                                            <p>تخفیف ها</p>
                                         </MDBCol>
                                         <MDBCol md={4}>
                                         </MDBCol>
                                         <MDBCol md={4}>
-                                            <h5>36000</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
+                                            <h5>----</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
+                                        </MDBCol>
+                                    </MDBRow>
+                                    <MDBRow className={"fv-factorPageRightInfoLeftBodyOrderThatPay fv-factorPageRightInfoLeftBodyInnerLeftInner"}>
+                                        <MDBCol md={5}>
+                                            <p>مبلغ قابل پرداخت</p>
+                                        </MDBCol>
+                                        <MDBCol md={3}>
+                                        </MDBCol>
+                                        <MDBCol md={4}>
+                                            <h5>{this.state.factorInfo.cost}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBRow>
                                         <MDBCol md={12} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
-                                            <input type="button" value="ذخیره"/>
+                                            <input type="button" value="پرداخت" onClick={()=>{
+                                                const data ={
+                                                    amount : Number(this.state.factorInfo.cost)*10,
+                                                    reservation_id : this.state.factorInfo.id,
+                                                    villa_id :this.state.villaInfo.id,
+                                                }
+                                                console.log(data)
+                                                requestPay(data)
+                                                    .then(res=>{
+                                                        if(res.data.status === 0){
+                                                            alert(res.data.data)
+                                                        }
+                                                        else  {
+                                                            console.log(res)
+                                                            window.location.replace(res.data.payment_url);
+                                                        }
+                                                    })
+                                                    .catch(err=>console.log(err.response))
+                                            }}/>
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCol>
@@ -172,11 +210,11 @@ class FactorPage extends Component {
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo"}>
                         <MDBRow className={"fv-factorPageRightInfoLeftTop"}>
-                            <MDBCol className={"fv-factorPageRightInfoLeftInnerTop"} md={3} sm={12}>
-                                <h5> 123654 </h5><p> : کد رزرو</p>
+                            <MDBCol className={"fv-factorPageRightInfoLeftInnerTop"} md={3}>
+                                <h5> {this.state.factorInfo.id} </h5><p> : کد رزرو</p>
                             </MDBCol>
-                            <MDBCol className={"fv-factorPageRightInfoLeftInnerTop"} md={3} sm={12}>
-                                <h5> 123654 </h5><p> : تاریخ صدور</p>
+                            <MDBCol className={"fv-factorPageRightInfoLeftInnerTop"} md={3}>
+                                <h5> {this.state.factorInfo.issue_date} </h5><p> : تاریخ صدور</p>
                             </MDBCol>
                             <MDBCol className={"fv-factorPageRightInfoLeftInnerTopButton1"} >
                                 <input type="button" value={"در انتظار پذیرش میزبان"}/>
@@ -186,10 +224,10 @@ class FactorPage extends Component {
                         <MDBContainer className={"fv-factorPageRightInfoLeftBody"}>
                             <MDBRow className={"fv-factorPageRightInfoLeftTopInnerSecond"}>
                                 <MDBCol className={"fv-factorPageRightInfoLeftInnerTop"} md={3} sm={5}>
-                                    <div><p className={"fv-factorPageRightInfoLeftInnerTopReserveCodeMobileP"}>کد رزرو</p> <h5> 123654 </h5></div><i className="fas fa-calendar-alt fv-factorPageRightInfoLeftInnerTopReserveCodeMobileIcon" />
+                                    <div><p className={"fv-factorPageRightInfoLeftInnerTopReserveCodeMobileP"}>تاریخ رفت</p> <h5> {this.state.factorInfo.entry_date} </h5></div><i className="fas fa-calendar-alt fv-factorPageRightInfoLeftInnerTopReserveCodeMobileIcon" />
                                 </MDBCol>
                                 <MDBCol className={"fv-factorPageRightInfoLeftInnerTop fv-factorPageRightInfoLeftInnerTop2Mobile"} md={3} sm={5}>
-                                    <div><p className={"fv-factorPageRightInfoLeftInnerTopReserveCodeMobileP"}>کد رزرو</p> <h5> 123654 </h5></div><i className="fas fa-calendar-alt fv-factorPageRightInfoLeftInnerTopReserveCodeMobileIcon" />
+                                    <div><p className={"fv-factorPageRightInfoLeftInnerTopReserveCodeMobileP"}>تاریخ برگشت</p> <h5> {this.state.factorInfo.exit_date} </h5></div><i className="fas fa-calendar-alt fv-factorPageRightInfoLeftInnerTopReserveCodeMobileIcon" />
                                 </MDBCol>
                                 <MDBCol className={"fv-factorPageRightInfoLeftInnerTopButton fv-factorPageRightInfoLeftInnerChangeCalender"}>
                                     <p><i className="fa fa-user-friends" />تغییر تاریخ</p>
@@ -203,25 +241,25 @@ class FactorPage extends Component {
                                             <img src={Logo}/>
                                         </MDBCol>
                                         <MDBCol md={6} sm={6}>
-                                            <h5 className={"fv-factorPageRightInfoRightPaddingTitle2"}>اردبیل-خلخال</h5>
+                                            <h5 className={"fv-factorPageRightInfoRightPaddingTitle2"}>{this.state.villaInfo.title}</h5>
                                         </MDBCol>
                                     </MDBRow>
-                                    <h5 className={"fv-factorPageRightInfoRightPaddingTitle2"}>اردبیل-خلخال</h5>
+                                    <h5 className={"fv-factorPageRightInfoRightPaddingTitle2"}>{this.state.villaInfo.city}</h5>
 
                                     <MDBRow className={"fv-factorPageRightInfoRightCodeTitleMobile"}>
                                         <MDBCol md={3} sm={2}>
                                             <p className={"fv-factorPageRightInfoRightPadding"}>کد آگهی</p>
                                         </MDBCol>
                                         <MDBCol md={3} sm={3}>
-                                            <h5>123654</h5>
+                                            <h5>{this.state.villaInfo.id}</h5>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
                                         <MDBCol className={"fv-ProfilePageUserInfoDetailsBodyColumn"}>
-                                            <p><i className="fas fa-home"/>خانه دربست</p>
-                                            <p><i className="fa fa-user-friends" />ظرفیت استاندار 4 نفر+4 نفر اضافه</p>
-                                            <p><i className='fas fa-boxes' />2 اتاق خواب+یک حمام+یک دست شویی</p>
-                                            <p><i className="fas fa-bed" />1 تخت یک نفره+8 تشک معمولی</p>
+                                            <p><i className="fas fa-home"/>{this.state.villaInfo.rent_type}</p>
+                                            <p><i className="fa fa-user-friends" />ظرفیت استاندارد {this.state.villaInfo.standard_capacity} نفر+{this.state.villaInfo.max_capacity ? Number(this.state.villaInfo.max_capacity - this.state.villaInfo.standard_capacity) : ''} نفر اضافه</p>
+                                            <p><i className='fas fa-boxes' />{this.state.villaInfo.bedroom} اتاق خواب+{this.state.villaInfo.shower} حمام+{this.state.villaInfo.ir_toilet} دست شویی ایرانی+{this.state.villaInfo.eu_toilet} دست شویی فرنگیی</p>
+                                            <p><i className="fas fa-bed" />؟؟؟؟ تخت یک نفره+؟؟؟؟ تشک معمولی</p>
                                             <p className={"fv-FactorPageIconGreenColorMobile"}><i className="fas fa-chevron-left fv-FactorPageIconSeeDetailsMobile" />مشاهده مجدد جزییات</p>
                                         </MDBCol>
                                     </MDBRow>
@@ -230,28 +268,28 @@ class FactorPage extends Component {
                             <MDBRow className={"fv-factorPageRightInfoLeftBodyInner fv-factorPageRightInfoLeftBodyInnerMobile"}>
 
                                 <MDBCol md={6} className={"fv-factorPageRightInfoLeftBodyInnerLeft"}>
-                                    <h5>اطلاعات کاربری</h5>
+                                    <h5>اطلاعات صورت حساب</h5>
                                     <MDBRow>
                                         <MDBCol md={4} sm={5}>
                                             <p>مدت کل اقامت</p>
                                         </MDBCol>
                                         <MDBCol md={4} sm={3}>
-                                            <h5>3 شب</h5>
+                                            <h5>{this.state.factorInfo.length_stay} روز </h5>
                                         </MDBCol>
                                         <MDBCol md={4} sm={4}>
-                                            <h5>36000</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
+                                            <h5>{this.state.factorInfo.cost ? Number(this.state.factorInfo.cost - this.state.factorInfo.extra_cost) : ''}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
                                         </MDBCol>
                                     </MDBRow>
 
                                     <MDBRow>
                                         <MDBCol md={4} sm={5}>
-                                            <p>مدت کل اقامت</p>
+                                            <p>نفرات اضافه</p>
                                         </MDBCol>
                                         <MDBCol md={4} sm={3}>
-                                            <h5>3 شب</h5>
+                                            <h5>{this.state.factorInfo.extra_people} نفر</h5>
                                         </MDBCol>
                                         <MDBCol md={4} sm={4}>
-                                            <h5>36000</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
+                                            <h5>{this.state.factorInfo.extra_cost}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBRow className={"fv-factorPageRightInfoLeftBodyOrderLastColumn"}>
@@ -259,38 +297,37 @@ class FactorPage extends Component {
                                     </MDBRow>
                                     <MDBRow>
                                         <MDBCol md={4} sm={5}>
-                                            <p>مدت کل اقامت</p>
+                                            <p>جمع کل</p>
                                         </MDBCol>
                                         <MDBCol md={4} sm={3}>
                                         </MDBCol>
                                         <MDBCol md={4} sm={4}>
-                                            <h5>36000</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
+                                            <h5>{this.state.factorInfo.cost}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBRow>
                                         <MDBCol md={4} sm={5}>
-                                            <p>مدت کل اقامت</p>
+                                            <p>تخفیف ها</p>
                                         </MDBCol>
                                         <MDBCol md={4} sm={3}>
                                         </MDBCol>
                                         <MDBCol md={4} sm={4}>
-                                            <h5>36000</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"} >تومان</p>
+                                            <h5>----</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"} >تومان</p>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBRow className={"fv-factorPageRightInfoLeftBodyOrderThatPay"}>
                                         <MDBCol md={4} sm={5} className={"fv-factorPageRightInfoLeftBodyOrderThatPayTitleMobile"}>
-                                            <p>مدت کل اقامت</p>
+                                            <p>مبلغ قابل پرداخت</p>
                                         </MDBCol>
                                         <MDBCol md={4} sm={3}>
                                         </MDBCol>
                                         <MDBCol md={4} sm={4} className={"fv-factorPageRightInfoLeftBodyOrderThatPayPriceMobile"}>
-                                            <h5>36000</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
+                                            <h5>{this.state.factorInfo.cost}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCol>
                                 <MDBCol md={6}>
-                                    <h5>اطلاعات کاربری</h5>
-                                    <p>نام و نام خانوادگی</p>
+                                    <p>کد تخفیف</p>
                                     <MDBRow>
                                         <MDBCol md={6} sm={9}>
                                             <input type="text" value=""/>
@@ -301,7 +338,7 @@ class FactorPage extends Component {
                                     </MDBRow>
                                     <MDBRow className={"fv-FactorPageButtonMobile"}>
                                         <MDBCol md={12} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
-                                            <input type="button" value="ذخیره"/>
+                                            <input type="button" value="پرداخت"/>
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCol>

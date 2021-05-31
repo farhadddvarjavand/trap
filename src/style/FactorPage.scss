@@ -114,7 +114,7 @@
     border-radius: 15px;
   }
   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo h5 {
-    margin-top: 5%;
+    margin-top: 3%;
   }
  .fv-factorPageRightInfoLeftInnerTop {
     align-self: center;
@@ -143,21 +143,22 @@
        place-content: center;
      }
      .fv-factorPageRightInfoLeftBodyOrderLastColumn{
-       width: 96%;
+       width: 105%;
        border-bottom: 1px solid rgba(145, 145, 145, 0.5);
-       margin-right: 3%;
+       margin-right: -3%;
        margin-top: 2%;
        margin-bottom: 2%;
      }
      .fv-factorPageRightInfoLeftBodyOrderThatPay{
        background: #F4F4F4;
        border-radius: 15px;
-       padding-top: 3%;
-       padding-bottom: 3%;
+       padding-top: 6%;
+       padding-bottom: 6%;
      }
      .fv-factorPageRightInfoLeftBodyInnerLeft{
        h5{
-         margin-right: 4%;
+         margin-right: 0%;
+         margin-bottom: 7%;
        }
        .fv-ProfilePageUserSetInfoButton input {
          margin-right: -4%;
@@ -172,7 +173,7 @@
          margin-right: 10%;
          color: #919191;
          font-size: 13px;
-         padding-top: 5%;
+         padding-top: 2%;
        }
      }
    }
@@ -180,7 +181,21 @@
   .fv-FactorPageForMobile{
     display: none;
   }
+   .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond .col-md-3 {
+    flex: 0 0 35%;
+    max-width: 34%;
+  }
+  .fv-factorPageRightInfoLeftBodyInnerLeft .fv-factorPageRightInfoLeftBodyInnerLeftInner{
+    margin-bottom: 4%;
+  }
+  .fv-factorPageRightInfoLeftBodyInnerLeft .fv-factorPageRightInfoLeftBodyInnerLeftInner .fv-factorPageRightInfoLeftBodyInnerLeftP p{
+    font-size: 15px;
+  }
 }
+.fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyInnerLeftP {
+  place-content: end;
+}
+
 
 
 @media (max-width: 540px) {
@@ -417,9 +432,12 @@
       margin-top: 3%;
       margin-left: -12%;
     }
-
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo h5 {
+      margin-top: 3%;
+    }
   }
 }
+
 @media (max-width: 375px) {
   .fv-FactorPage .fv-factorPageRightInfoRightCodeTitleMobile .col-sm-2 {
     flex: 0 0 21.666667%;
