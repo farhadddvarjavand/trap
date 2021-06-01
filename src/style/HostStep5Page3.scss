@@ -369,8 +369,13 @@
     direction: rtl;
     margin-top: -670%;
   }
+  .fv-hostStep5Page3 .fv-hostStep5Page3TopPicImage label {
+    display: grid;
+    margin-right: -1%;
+  }
   .fv-hostStep5Page3 .fv-hostStep5Page3MultiImagesMobileAnotherPicP {
     margin-right: -3%;
+    text-align: initial;
   }
 }
 @media (max-width: 310px) {
@@ -390,5 +395,26 @@
   }
   .fv-hostStep5Page3.fv-hostStep5Page.fv-hostStep5Page2  .fv-HostStep1PageBody .fv-hostStepPage1Left  .fv-hostStepPage2LeftButton{
     margin-top: 123vw ;
+  }
+  .fv-hostStep5Page3 .fv-hostStep5Page3TopPicImage img {
+    margin-bottom: 2%;
+    width: 218px;
+    height: 200px;
+    border-radius: 10px;
+  }
+  .fv-hostStep5Page3 .fv-hostStep5Page3TopPicImage img {
+    margin-bottom: 2%;
+    width: 218px;
+    height: 200px;
+    border-radius: 10px;
+    margin-right: -3%;
+  }
+  .fv-hostStep5Page3 .fv-hostStep5Page3TopPicImage label {
+    display: grid;
+    margin-right: -1%;
+  }
+  .fv-hostStep5Page3 .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage1LeftButton {
+    z-index: 2;
+    margin-top: 123vw;
   }
 }

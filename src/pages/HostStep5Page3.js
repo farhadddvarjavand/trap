@@ -40,7 +40,6 @@ class HostStep5Page3 extends Component {
     }
     componentDidMount () {
          this.loadImages();
-
     }
 
     fileSelectedHandler = async (event) => {
@@ -129,10 +128,12 @@ class HostStep5Page3 extends Component {
 
                 SetImages(formData,this.props.match.params.id)
                     .then(res =>{
+                        console.log(res)
                         console.log(event.target.name)
                         console.log(res.data.data )
-                        this.setState({img_title0:""})
-
+                        this.setState({img_title0:""},()=>{
+                            this.loadImages();
+                        })
 
 
 
@@ -163,7 +164,7 @@ class HostStep5Page3 extends Component {
         }
 
 
-        /* if(this.state.imagesDatas===[]){
+       /*  if(this.state.imagesDatas===[]){
             alert(3)
             let formData = new FormData() ;
             formData.append("image" , event.target.files[0])

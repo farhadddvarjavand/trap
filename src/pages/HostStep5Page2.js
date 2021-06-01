@@ -154,6 +154,8 @@ class HostStep5Page2 extends Component {
             standard_capacity: step3Info.standard_capacity,
             view:  step3Info.view,
             disinfected:step3Info.disinfected,
+            mattress_count:step3Info. mattress_count,
+            bed_count:step3Info.bed_count,
 
             bodyguard: step4Info.bodyguard,
             catering: step4Info.catering,

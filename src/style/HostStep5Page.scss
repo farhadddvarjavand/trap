@@ -33,12 +33,21 @@
   }
 
 }
-
+@media (max-width: 1200px) and  (min-width: 765px) {
+  .fv-hostStep3Page.fv-hostStep4Page.fv-hostStep5Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
+    margin-left: 71%;
+    /* padding: 5% 15% 5% 15%; */
+    margin-top: -21.5%;
+    margin-right: -41%;
+    z-index: 2;
+  }
+}
 
 @media (max-width: 967px) and  (min-width: 539px) {
   .fv-hostStep5Page .fv-hostStepPage1Right .fv-hostStep3InputText input {
     width: 200%;
   }
+
 }
 @media (max-width: 540px) {
   .fv-hostStep5Page .fv-hostStepPage1Right .fv-hostStep3InputText input {
@@ -46,6 +55,9 @@
   }
   .fv-hostStep5Page .fv-hostStepPage2LeftButtonBody {
     margin-top: -12%;
+  }
+  .fv-hostStep2Page2.fv-HostStep2Page.fv-hostStep5Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
+    margin-left: 0%;
   }
 }
 @media (max-width: 280px){

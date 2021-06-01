@@ -35,7 +35,7 @@ class ProfilePageTransaction2 extends Component {
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction fv-ProfilePageTransaction2"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch />
+                    <HeaderSearch  {...this.props}/>
                     <MDBRow className={"fv-DisplayPageRotePathMobile"}>
                         <MDBCol>
                             <p> صفحه اصلی </p>
@@ -72,7 +72,7 @@ class ProfilePageTransaction2 extends Component {
                                 <th className={"fv-tableTitleRightOne"}>نوع تراکنش</th>
                                 <th>تاریخ تراکنش</th>
                                 <th>مبلغ</th>
-                                <th className={"fv-tableTitleContent"}>شرح تراکنش</th>
+                                <th className={"fv-tableTitleContents"}>شرح تراکنش</th>
                                 <th className={"fv-tableTitleLeftOne"}>وضعیت</th>
                             </tr>
                             {this.state.transactionDatas.map(transactionData=>{

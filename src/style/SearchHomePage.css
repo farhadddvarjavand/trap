@@ -266,6 +266,40 @@
 }
 
 
+@media (max-width: 1200px) and (min-width: 991px){
+    .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-product.fv-mobileProduct .col-md-5 {
+        font-size: 10px;
+    }
+    .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox .col-md-5 {
+        padding-left: 7px;
+    }
+}
+
+@media (max-width: 991px) and (min-width: 766px){
+    .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product {
+        margin-bottom: 11%;
+        width: 120%;
+    }
+    .fv-SearchHomePage.container ,.fv-SearchHomePage.container-md ,.fv-SearchHomePage.container-sm {
+        max-width: 846px ;
+    }
+    .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox .col-md-5 {
+        padding-left: 0px;
+    }
+    .fv-product .col-md-5 {
+        text-align: end;
+        margin-right: -32px;
+        padding: 0;
+        padding-left: 0%;
+        padding-right: 8%;
+    }
+    .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox {
+        font-size: 9.5px;
+    }
+
+}
+
+
 
 @media (max-width: 766px) {
     .fv-searchMobileSearchPageHide , .fv-searchMobileSearchPageHide2{
@@ -544,6 +578,17 @@
         display: block;
     }
 
+    .fv-searchMainPageBodyLeft .fv-product {
+        background-color: white;
+        width: 100%;
+        padding-right: -15%;
+        padding-bottom: 0%;
+        padding-top: 7%;
+        border: 4px solid #88888817;
+        border-radius: 15px;
+        box-shadow: none;
+        /* box-shadow: 1px 1px 11px #88888830; */
+    }
 }
 @media (max-width: 320px) {
     .fv-searchMainPage.fv-searchMainPageDateReturn input {
@@ -565,5 +610,20 @@
         margin-bottom: 11%;
         width: 215%;
         margin-right: -26%;
+    }
+}
+@media (max-width: 280px) {
+     .fv-footerMenu .fv-searchMainPage button:not(:disabled) {
+        cursor: pointer;
+        margin-left: 0;
+        margin-right: auto;
+        font-size: 3.2vw;
+    }
+    .fv-SearchHomePage .fv-footerMenuRibbonMobile .col-sm-2 {
+        flex: 0 0 27.666667%;
+        width: 60.666667% !important;
+        margin: auto;
+        margin-right: -16vw;
+        margin-top: 12px;
     }
 }

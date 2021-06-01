@@ -42,6 +42,7 @@ import TopicMainPage from "./componentsPages/topicsMainPage"
 import Api from "./components/Api";
 import {withCookies, Cookies, CookiesProvider} from 'react-cookie';
 import {Link, Route, Switch,NavLink,BrowserRouter} from "react-router-dom"
+import headerSearchPage from "./componentsPages/HeaderSearch"
 
 
 ReactDOM.render(
@@ -84,6 +85,7 @@ ReactDOM.render(
                             <Route exact path={'/notFound'} component={NotFoundPage}/>
                             <Route exact path={'/addComments/:id'} component={AddComments}/>
                             <Route exact path={'/profileFavoritesPage'} component={ProfileFavoritesPage}/>
+                            <Route exact path={'/headerSearchPage'} component={headerSearchPage}/>
                         </div>
                     </div>
 

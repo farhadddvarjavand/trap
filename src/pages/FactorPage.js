@@ -9,6 +9,7 @@ import {calculateCost} from "../services/userService";
 import {arrayBetweenDates} from "../componentsPages/calculationsDate";
 import {extendMoment} from "moment-range";
 import Moment from "moment";
+import {Link} from "react-router-dom";
 
 class FactorPage extends Component {
     constructor(props) {
@@ -26,6 +27,7 @@ class FactorPage extends Component {
     factor =()=>{
         factor(this.props.match.params.id)
             .then(res=>{
+                console.log(res)
                 this.setState({factorInfo:res.data.data , villaInfo:res.data.data.villa})
             })
             .catch(err=>console.log(err.response))
@@ -36,12 +38,12 @@ class FactorPage extends Component {
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-FactorPage"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch />
+                    <HeaderSearch  {...this.props}/>
                     <MDBRow className={"fv-DisplayPageRotePathMobile"}>
                         <MDBCol>
-                            <p> صفحه اصلی </p>
+                            <Link to={ "/mainPage"} ><p> صفحه اصلی </p></Link>
                             <i className="fas fa-chevron-left" />
-                            <p className={"fv-DisplayPagePathNow"}> پنل کاربری </p>
+                            <Link to={ "/Profile"} ><p className={"fv-DisplayPagePathNow"}> پنل کاربری </p></Link>
                         </MDBCol>
                     </MDBRow>
                 </MDBContainer>
@@ -72,7 +74,7 @@ class FactorPage extends Component {
                                 <p><i className="fas fa-home"/>{this.state.villaInfo.rent_type}</p>
                                 <p><i className="fa fa-user-friends" />ظرفیت استاندارد {this.state.villaInfo.standard_capacity} نفر+{this.state.villaInfo.max_capacity ? Number(this.state.villaInfo.max_capacity - this.state.villaInfo.standard_capacity) : ''} نفر اضافه</p>
                                 <p><i className='fas fa-boxes' />{this.state.villaInfo.bedroom} اتاق خواب+{this.state.villaInfo.shower} حمام+{this.state.villaInfo.ir_toilet} دست شویی ایرانی+{this.state.villaInfo.eu_toilet} دست شویی فرنگی</p>
-                                <p><i className="fas fa-bed" />؟؟؟؟؟؟ تخت یک نفره+؟؟؟؟؟؟ تشک معمولی</p>
+                                <p><i className="fas fa-bed" />{this.state.villaInfo.bed_count} تخت یک نفره+{this.state.villaInfo.mattress_count} تشک معمولی</p>
                             </MDBCol>
                         </MDBRow>
                     </MDBCol>
@@ -259,7 +261,7 @@ class FactorPage extends Component {
                                             <p><i className="fas fa-home"/>{this.state.villaInfo.rent_type}</p>
                                             <p><i className="fa fa-user-friends" />ظرفیت استاندارد {this.state.villaInfo.standard_capacity} نفر+{this.state.villaInfo.max_capacity ? Number(this.state.villaInfo.max_capacity - this.state.villaInfo.standard_capacity) : ''} نفر اضافه</p>
                                             <p><i className='fas fa-boxes' />{this.state.villaInfo.bedroom} اتاق خواب+{this.state.villaInfo.shower} حمام+{this.state.villaInfo.ir_toilet} دست شویی ایرانی+{this.state.villaInfo.eu_toilet} دست شویی فرنگیی</p>
-                                            <p><i className="fas fa-bed" />؟؟؟؟ تخت یک نفره+؟؟؟؟ تشک معمولی</p>
+                                            <p><i className="fas fa-bed" />{this.state.villaInfo.bed_count} تخت یک نفره+{this.state.villaInfo.mattress_count} تشک معمولی</p>
                                             <p className={"fv-FactorPageIconGreenColorMobile"}><i className="fas fa-chevron-left fv-FactorPageIconSeeDetailsMobile" />مشاهده مجدد جزییات</p>
                                         </MDBCol>
                                     </MDBRow>

@@ -54,28 +54,44 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
 }
 @media (max-width: 1200px) and (min-width: 767px){
   .fv-HostStep2Page.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
-    margin-left: 78%;
+    margin-left: 131%;
     /* padding: 5% 15% 5% 15%; */
-    margin-top: -22%;
-    margin-right: -52%;
+    margin-top: -38%;
+    margin-right: -51%;
+    z-index: 2;
+  }
+  .fv-HostStep2PageOnly.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
+    margin-left: 71%;
+    /* padding: 5% 15% 5% 15%; */
+    margin-top: -21.5%;
+    margin-right: -41%;
     z-index: 2;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 767px) and (min-width: 500px) {
+  .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage1LeftButton {
+    border-radius: 8px;
+    margin-left: 0vw;
+    /* padding: 5.4% 13.4% 5.4% 13.4%; */
+    width: 28vw;
+    height: 11vw;
+    margin-top: 52vw;
+  }
   .fv-HostStep2Page.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
     display: flex;
     border-radius: 8px;
-    margin-left: 2vw;
+    margin-left: 13vw;
     /* padding: 5.4% 13.4% 5.4% 13.4%; */
-    width: 40vw;
-    height: 16vw;
+    width: 28vw;
+    height: 11vw;
     margin-top: 52vw;
     z-index: 1;
   }
+
 }
 @media (max-width: 500px) {
-  .fv-HostStep2Page.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
-
+  .fv-hostStep2Page2.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
+    margin-left: 6%;
   }
 }
 @media (max-width: 320px) {

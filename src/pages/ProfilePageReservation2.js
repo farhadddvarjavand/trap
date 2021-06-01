@@ -9,6 +9,7 @@ import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 import ReservationProduct from "../componentsPages/ReservatioonProduct";
 import CalendarLinear from "../data/CalenddarLinear";
 import {getUserInformation, userReserves} from "../services/userService";
+import {Link} from "react-router-dom";
 
 
 class ProfilePageReservation2 extends Component {
@@ -64,15 +65,17 @@ class ProfilePageReservation2 extends Component {
 
     render() {
 
+
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch />
+                    <HeaderSearch
+                        {...this.props}/>
                     <MDBRow className={"fv-DisplayPageRotePathMobile"}>
                         <MDBCol>
-                            <p> صفحه اصلی </p>
+                            <Link to={"./mainPage"} ><p> صفحه اصلی </p> </Link>
                             <i className="fas fa-chevron-left" />
-                            <p> پنل کاربری </p>
+                            <Link to={"./Profile"} ><p> پنل کاربری </p></Link>
                             <i className="fas fa-chevron-left" />
                             <p className={"fv-DisplayPagePathNow"}> رزروهای من </p>
                         </MDBCol>

@@ -257,7 +257,7 @@ class MainPage extends Datas {
         <MDBContainer className={"fv-MainBody"}>
             <MDBRow className={"fv-topicFirstMainPage"}>
                 <TopicsMainPage topic="اقامتگاه های پر بازدید"
-                                linkToPage={"/searchHomePage/Newest/1"}/>
+                                linkToPage={"/searchHomePage/Popular/1"}/>
             </MDBRow>
             <MDBRow className={"fv-mainProduct fv-mainMobile"} >
 
@@ -298,7 +298,7 @@ class MainPage extends Datas {
             </MDBRow>
             <MDBRow className={"fv-topicMainPage"}>
                 <TopicsMainPage topic="روستاهای پر بازدید"
-                                linkToPage={"/searchHomePage/Newest/1"}/>
+                                linkToPage={"/searchHomePage/Popular/1"}/>
             </MDBRow>
             <MDBRow className={"fv-mainMobileVillage"}>
 
@@ -327,7 +327,7 @@ class MainPage extends Datas {
 
             <MDBRow className={"fv-topicMainPage"}>
                 <TopicsMainPage topic="اقامت گاه های تخفیف دار"
-                                linkToPage={"./searchHomePage/1"}/>
+                                linkToPage={"./searchHomePage/Discount/1"}/>
             </MDBRow>
 
             <MDBRow className={'fv-mainMobile'}>
@@ -377,7 +377,7 @@ class MainPage extends Datas {
             </MDBRow>
             <MDBRow className={"fv-topicMainPage"}>
                 <TopicsMainPage topic="اقامتگاه های اقتصادی"
-                                linkToPage={"/searchHomePage/Newest/1"}/>
+                                linkToPage={"/searchHomePage/Cheapest/1"}/>
             </MDBRow>
             <MDBRow className={'fv-mainMobile'}>
                 {economicVillas.map(economicVilla=>{

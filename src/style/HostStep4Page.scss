@@ -72,10 +72,21 @@
       margin-bottom: 5%;
     }
   }
+  .fv-hostStep4Page  .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage1LeftButton {
+    border-radius: 8px;
+    margin-left: 7vw;
+    /* padding: 5.4% 13.4% 5.4% 13.4%; */
+    width: 40vw;
+    height: 16vw;
+    margin-top: 52vw;
+  }
 }
 @media (max-width: 320px) {
   .fv-hostStep4Page .fv-hostStepPage1Right .fv-hostStep3CheckBox {
     font-size: 15px;
+  }
+  .fv-hostStep4Page.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
+    margin-top: 52vw;
   }
 }
 @media (max-width: 280px) {

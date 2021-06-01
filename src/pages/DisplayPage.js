@@ -238,6 +238,13 @@ componentDidMount() {
 
     render() {
 
+        const info = JSON.parse(localStorage.getItem("infoUser"))
+        let nameAndFamily =  ""
+        let avatar = ""
+        if(info){
+            nameAndFamily=info.userInfo.fullname
+            avatar=info.userInfo.avatar
+        }
 
         const resultVillaArray = []
         resultVillaArray.push(this.state.resultVilla)
@@ -668,11 +675,11 @@ componentDidMount() {
 
 
 
-                    <HeaderSearch />
+                    <HeaderSearch avatar={avatar}  {...this.props}/>
 
                     <MDBRow className={"fv-DisplayPageRotePathMobile"}>
                         <MDBCol>
-                            <p> صفحه اصلی </p>
+                            <Link to={ "/mainPage"} ><p> صفحه اصلی </p></Link>
                             <i className="fas fa-chevron-left" />
                             <p className={"fv-DisplayPagePathNow"}> نمایش اقامتگاه </p>
                         </MDBCol>
@@ -801,15 +808,15 @@ componentDidMount() {
                     <MDBCol md={8} className={"fv-DisplayPageDetailsRightBody"}>
                         <MDBRow>
                             <MDBCol md={2} sm={2}>
-                               <img src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg"/>
+                                <img src={avatar ? `${config.webapi}/images/villas/main/${avatar}` : MobileLogo} />
                             </MDBCol>
                             <MDBCol sm={10} className={"fv-DisplayPageDetailsPersonInformation fv-DisplayPageDetailsPersonInfo"}>
                                 <MDBRow>
                                     <MDBCol md={1} sm={4}>
-                                         <p>میزبان</p>
+                                         <p>{nameAndFamily ?"میزبان" : "میهمان" }</p>
                                     </MDBCol>
                                     <MDBCol sm={6}>
-                                        <h5> لیدا بابایی</h5>
+                                        <h5>{nameAndFamily}</h5>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow className={"fv-DisplayPageDetailsCode"}>
@@ -817,7 +824,7 @@ componentDidMount() {
                                         <p>کد آگهی</p>
                                     </MDBCol>
                                     <MDBCol  md={10} sm={3}>
-                                        <h5>22344</h5>
+                                        <h5>{this.state.resultVilla.id}</h5>
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCol>
@@ -834,7 +841,7 @@ componentDidMount() {
                                 <p><i className="fa fa-building" /> {bedroom} اتاق خواب+{shower} حمام+{irToilet} دست شویی ایرانی + {euToilet} دستشویی فرنگی </p>
                             </MDBRow>
                             <MDBRow className={"pMobile"}>
-                                <p><i className="fa fa-bed" aria-hidden="true" /> ???? تخت یک نفره + ????? تشک معمولی </p>
+                                <p><i className="fa fa-bed" aria-hidden="true" /> {this.state.resultVilla.details?this.state.resultVilla.details.bed_count:''} تخت یک نفره + {this.state.resultVilla.details?this.state.resultVilla.details.mattress_count:''} تشک معمولی </p>
                             </MDBRow>
                         <MDBRow className={"h4Mobile"}>
                             <h4>درباره اقامت گاه</h4>
@@ -1354,17 +1361,18 @@ componentDidMount() {
                              }
                          })}  */}
                      </div>
-                        <MDBRow className={"fv-SearchHomePagePagination fv-displayPageCommentPagination"}>
-                            <input type='button' value='1'/>
-                            <input type='button' value='2'/>
-                        </MDBRow>
+                            { /* <MDBRow className={"fv-SearchHomePagePagination fv-displayPageCommentPagination"}>             pagination for mobile comments
+                                    <input type='button' value='1'/>
+                                    <input type='button' value='2'/>
+                                 </MDBRow>
+                        */}
 
                         </div>                                                              {/*        fv-Comments     */}
 
                     </MDBCol>
                     <MDBCol md={4} className={"fv-DisplayPageDetailsLeftBody"}>
                         <MDBRow>
-                            <p>قیمت از شبی ۲۰۰۰۰ تومان</p>
+                            <p>قیمت از شبی {this.state.resultVilla.rules ? this.state.resultVilla.rules.normal_cost : ''} تومان</p>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftEmptyMobile"}>
                             <p><i className="fa fa-calendar" aria-hidden="true" /> اولین تاریخ خالی این اقامت گاه ۱۸ اردیبهشت میباشد </p>

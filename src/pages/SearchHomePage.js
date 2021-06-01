@@ -75,27 +75,40 @@ class SearchHomePage extends Datas {
 
     componentDidMount() {
         super.componentDidMount();
-        if(this.props.location && this.props.location.searchDatas){
+        if(!JSON.parse(localStorage.getItem("mainPageSearch"))){
+            const data ={
+                orderBy:this.props.match.params.sort,
+                page:this.props.match.params.id
+            }
+            this.postAndPushResultSearchPageVillas(data)   //   دیتای اولیه که با جدیدترین ست میکنیم توسط تابعی که در کامپوننت دیتاس میباشد
 
-            this.setState({
-                setVillage:this.props.location.searchDatas.city,
-                dateToGo:this.props.location.searchDatas.dayToGo,
-                dateToReturn:this.props.location.searchDatas.dateToReturn,
-                numberOfPeople:this.props.location.searchDatas.capacity,
-            })
         }
-
-        const data ={
-            orderBy:this.props.match.params.sort,
-            page:this.props.match.params.id
-        }
-        this.postAndPushResultSearchPageVillas(data)   //   دیتای اولیه که با جدیدترین ست میکنیم توسط تابعی که در کامپوننت دیتاس میباشد
-
 
 
         let  mainPageSearchLocal = ""
         if(localStorage.getItem("mainPageSearch")){
+            if(this.props.location && this.props.location.searchDatas){
+                let splitSearchPageCity =""
+                if (this.props.location.searchDatas.city){
+                    splitSearchPageCity = this.props.location.searchDatas.city.split(" ")
+                }
+
+                this.setState({
+                    setVillage:splitSearchPageCity[1],
+                    dateToGo:this.props.location.searchDatas.dayToGo,
+                    dateToReturn:this.props.location.searchDatas.dateToReturn,
+                    numberOfPeople:this.props.location.searchDatas.capacity,
+                })
+            }
             mainPageSearchLocal= JSON.parse(localStorage.getItem("mainPageSearch"))
+
+            if(mainPageSearchLocal.city){                      /*  */
+                let splitSearchPageCity = mainPageSearchLocal.city.split(" ")
+                this.setState({
+                    setVillage:splitSearchPageCity[1],
+                })
+            }
+
             let data = ''
             data = {
                 passengers_count:mainPageSearchLocal.numberOfPeople,

@@ -46,7 +46,7 @@ class ProfilePageWallet extends Component {
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageWallet"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch />
+                    <HeaderSearch  {...this.props}/>
                     <MDBRow className={"fv-DisplayPageRotePathMobile"}>
                         <MDBCol>
                             <p> صفحه اصلی </p>

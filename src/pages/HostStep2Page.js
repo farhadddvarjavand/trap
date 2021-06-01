@@ -75,7 +75,7 @@ class HostStep2Page extends Component {
         }
 
         return (
-            <MDBContainer className={"fv-HostStep2Page"}>
+            <MDBContainer className={"fv-HostStep2Page fv-HostStep2PageOnly"}>
                 <MDBRow>
                     <MDBContainer className={"fv-HostStep1Page"}>
                         <HeaderSteps/>

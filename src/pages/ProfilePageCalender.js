@@ -73,7 +73,7 @@ class ProfilePageCalender extends Component {
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageGustComments2 fv-ProfilePageCalender"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch />
+                    <HeaderSearch  {...this.props}/>
                     <MDBRow className={"fv-DisplayPageRotePathMobile"}>
                         <MDBCol>
                             <p> صفحه اصلی </p>

@@ -19,8 +19,8 @@ class HostStep3Page extends Component {
             standardCapacity:1,
             maximumCapacity:1,
             numberOfBedroom:1,
-            numberOfBed:1,
-            numberOfMattress:1,
+            numberOfBed:0,
+            numberOfMattress:0,
             iranianToilet:1,
             Toilet:0,
             shower:1,
@@ -46,6 +46,8 @@ class HostStep3Page extends Component {
             const prevView = []
             const prevDisinfected = []
             const prevSetOtherSpace = []
+            let mattressCount = 0
+            let bedCount = 0
             const prevData =  JSON.parse(localStorage.getItem("step3"))
             if(prevData.disinfected === 1){
                 prevDisinfected.push("خانه ضدعفونی شده میباشد")
@@ -71,6 +73,12 @@ class HostStep3Page extends Component {
                     prevSetOtherSpace.push(SetOtherSpace[i])
                 }
             }
+            if(prevData. mattress_count){
+                mattressCount = prevData. mattress_count
+            }
+            if(prevData.bed_count){
+                bedCount = prevData.bed_count
+            }
 
 
             this.setState({
@@ -87,6 +95,8 @@ class HostStep3Page extends Component {
                 otherViewsCheckbox:prevPlaces,
                 accommodationViewsCheckbox:prevView,
                 setOtherSpace:prevSetOtherSpace,
+                numberOfMattress:mattressCount,
+                numberOfBed:bedCount,
 
             })
         }
@@ -99,7 +109,7 @@ class HostStep3Page extends Component {
             })
     }
     setStandardCapacityDecrement = (nameOfSection) =>{
-        if(this.state[nameOfSection] >1){
+        if(this.state[nameOfSection] >0){
             this.setState(prevstate => {
                 return {[nameOfSection]: prevstate[nameOfSection] - 1}
             })
@@ -175,6 +185,8 @@ class HostStep3Page extends Component {
             view:accommodationViewsCheckbox,
             area:this.state.yourAccommodationMeasure,
             setOtherSpace:this.state.setOtherSpace,
+            mattress_count:this.state.numberOfMattress,
+            bed_count:this.state.numberOfBed,
         }
        // console.log(JSON.parse(localStorage.getItem("step2-2")))
         return (

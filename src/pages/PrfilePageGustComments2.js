@@ -36,7 +36,7 @@ class PrfilePageGustComments2 extends Component {
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageGustComments2"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch />
+                    <HeaderSearch  {...this.props}/>
                     <MDBRow className={"fv-DisplayPageRotePathMobile"}>
                         <MDBCol>
                             <p> صفحه اصلی </p>
@@ -174,9 +174,10 @@ class PrfilePageGustComments2 extends Component {
 
 
 
+                {/*
                 <MDBRow>
                     <Footer />
-                </MDBRow>
+                </MDBRow>   */}
 
             </MDBContainer>
         )}

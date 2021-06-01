@@ -496,7 +496,7 @@ html .col-md-3{
 
 
 }
-@media (max-width: 1193px) and (min-width: 991px){
+@media (max-width: 1200px) and (min-width: 991px){
     .fv-product .fv-discountedProductAmount.col-md-2 {
         margin-left: 12px;
     }
@@ -510,6 +510,12 @@ html .col-md-3{
         display: inherit;
     }
     .fv-product .fv-productCapacityBox{
+        font-size: 11px;
+    }
+    .fv-product .col-md-5 {
+        font-size: 11px;
+    }
+    .fv-product .fv-productCapacityBox .col-md-2 {
         font-size: 11px;
     }
 }

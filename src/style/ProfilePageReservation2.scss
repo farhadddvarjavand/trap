@@ -220,7 +220,16 @@
 }
 
 
-
+@media (max-width: 1200px) {
+  .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ImageProductContentTopOne .col-md-4 {
+    color: #3EC886;
+    max-width: 36.666667%;
+  }
+  .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ImageProductContentTopOne .col-md-5 {
+    color: #2F80ED;
+    max-width: 46.666667%;
+  }
+}
 @media (max-width: 991px) and (min-width: 764px){
   .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ProductLocaton a, .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ProductDate a {
     font-size: 11px;
@@ -316,6 +325,14 @@
 @media (max-width: 320px) {
   .fv-ProfilePageReservation2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo {
     padding-bottom: 51%;
+  }
+  .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ImageProductContentTopOne .col-md-4 {
+    color: #3EC886;
+    max-width: 38.666667%;
+  }
+  .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ImageProductContentTopOne .col-md-5 {
+    color: #2F80ED;
+    max-width: 49.666667%;
   }
 }
 @media (max-width: 280px) {

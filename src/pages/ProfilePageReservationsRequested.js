@@ -31,7 +31,7 @@ class ProfilePageReservationsRequested extends Component {
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageReservationsRequested"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch />
+                    <HeaderSearch  {...this.props}/>
                     <MDBRow className={"fv-DisplayPageRotePathMobile"}>
                         <MDBCol>
                             <p> صفحه اصلی </p>
@@ -73,7 +73,7 @@ class ProfilePageReservationsRequested extends Component {
                                 <th className={"fv-tableTitleRightSecond"}>نام مهمان</th>
                                 <th>تعداد نفرات</th>
                                 <th>از تاریخ</th>
-                                <th className={"fv-tableTitleContent"}>تا تاریخ</th>
+                                <th className={"fv-tableTitleContents"}>تا تاریخ</th>
                                 <th className={"fv-tableTitleLeftOne"}>وضعیت</th>
                             </tr>
                             {this.state.allReservationsRequested.map(allReservationsRequest=>{

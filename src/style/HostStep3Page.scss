@@ -451,6 +451,17 @@ $backgroundColorButton:#15BE29;
     flex: 0 0 57%;
     max-width: 61%;
   }
+  .fv-hostStep3Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage1LeftButton {
+    border-radius: 8px;
+    margin-left: 3vw;
+    /* padding: 5.4% 13.4% 5.4% 13.4%; */
+    width: 40vw;
+    height: 16vw;
+    margin-top: 52vw;
+  }
+  .fv-hostStep2Page2.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
+    margin-left: 13%;
+  }
 }
 @media (max-width: 320px) {
   .fv-hostStep3Page .hostStepIncreaseAndDecreaseBody .col-sm-3 {

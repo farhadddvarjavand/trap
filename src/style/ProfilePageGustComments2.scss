@@ -100,6 +100,7 @@
     margin-left: -6%;
   }
 
+
 }
 @media (max-width: 763px) {
   .fv-ProfilePageGustComments2{
@@ -137,7 +138,16 @@
   .fv-ProfilePageGustComments2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageWalletWalletButton .fv-ProfilePageUserSetInfoButton input {
     width: 47.5%;
     margin-top: 15px;
-    margin-left: 5%;
+    margin-left: 9%;
+  }
+
+  .fv-ProfilePageGustComments2 .fv-ProfilePageGustComments2CommentOne .fv-ProfilePageGustComments2CommentOneAnswer {
+    font-size: 2.5vw;
+  }
+  .fv-ProfilePageGustComments2 .fv-ProfilePageGustComments2CommentOne .fv-ProfilePageGustComments2CommentOneAnswer .fv-ProfilePageGustComments2CommentOneAnswerComment p {
+    margin-top: 14%;
+    margin-bottom: 9%;
+    font-size: 3vw;
   }
 }
 @media (max-width: 560px) {
@@ -169,6 +179,15 @@
       margin-right: -5%;
     }
   }
+  .fv-ProfilePageGustComments2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo h5 {
+    margin-bottom: 0%;
+    font-size: 4vw;
+  }
+  .fv-ProfilePageGustComments2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo {
+    padding-bottom: 27%;
+    margin-bottom: 6%;
+  }
+
 }
 @media (max-width: 280px) {
   .fv-ProfilePageGustComments2 .fv-ProfilePageGustComments2CommentOne .fv-ProfilePageGustComments2CommentOneAnswer .fv-ProfilePageGustComments2CommentOneAnswerCommentDate p {
@@ -208,5 +227,12 @@
   .fv-ProfilePageGustComments2 .fv-ProfilePageGustComments2CommentOne .col-md-7 h5, .fv-ProfilePageGustComments2 .fv-ProfilePageGustComments2CommentOne .col-md-7 p {
     margin: 0;
     margin-right: 13%;
+  }
+  .fv-ProfilePageTransaction2.fv-ProfilePageWallet.fv-ProfilePageGustComments2 .fv-ProfilePageGustComments2CommentOneAnswer .fv-ProfilePageGustComments2CommentOneAnswerCommentDate p{
+    font-size: 2vw ;
+  }
+  .fv-ProfilePageGustComments2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo {
+    padding-bottom: 33%;
+    margin-bottom: 6%;
   }
 }

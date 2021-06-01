@@ -401,7 +401,7 @@
     margin-right: 5%;
 }
 .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo h5{
-    margin-right: 0;
+    margin-right:  26px;
 }
 .fv-DisplayPageDetailsRateTop {
     margin-right: -16px;
@@ -647,6 +647,17 @@ display: none;
     border-top: none;
     border-left: none;
 }
+.fv-SearchHomePage .fv-product .col-md-5 {
+    text-align: end;
+    margin-right: -44px;
+    font-size: 12px;
+}
+.fv-SearchHomePage .fv-product .fv-productCapacityBox .col-md-2 {
+    margin-left: 22px;
+    /* padding: 0; */
+    display: flex;
+    font-size: 12px;
+}
 
 
 @media (max-width: 1200px) {
@@ -668,8 +679,79 @@ display: none;
     .fv-DisplayPageDetailsScore {
         font-size: 1.2vw;
     }
+    .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo h5 {
+        margin-right: 25px;
+    }
+
+    .fv-DisplayPageDetailsRateTop {
+        margin-right: -3px;
+        font-size: 16px;
+    }
+
+    .fv-DisplayPageDetailsRatingTop.fv-DisplayPageDetailsRating {
+        font-size: 12px;
+        margin-top: -1%;
+        color: #909090;
+        margin-bottom: -17%;
+        margin-right: -14%;
+    }
+    .fv-DisplayPageMenu.row .col-md-2 {
+        flex: 0 0 16.666667%;
+        max-width: 17.666667%;
+    }
+
+    .fv-DisplayPageDetailsLeftTextDate {
+        width: 100%;
+        z-index: 1;
+    }
+    .fv-DisplayPageDetailsLeftSelectedDate {
+        width: 108.6%;
+    }
+    .fv-DisplayPageDetailsRateNumberPerson p {
+        margin-right: -73%;
+    }
+    .fv-DisplayPageDetailsRightingComment .col-md-2 {
+        flex: 0 0 34.666667%;
+        max-width: 25.666667%;
+    }
+    .fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageCalenderForDesktop {
+        display: none;
+    }
+    .fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageCalenderForMobile {
+        display: block;
+    }
+
+
 }
 
+@media (max-width: 1200px) and (min-width: 760px) {
+    .fv-SearchHomePage.fv-DisplayPage .Calendar {
+        --cl-color-black: #444444;
+        --cl-color-disabled: #d4d4d4;
+        --cl-color-error: #ff2929;
+        font-size: 9.5px;
+        background: #fff;
+        border-radius: 1em;
+        position: relative;
+        -webkit-user-select: none;
+        user-select: none;
+        display: flex;
+        flex-direction: column;
+        width: 43em;
+        z-index: 10;
+        max-width: 90vw;
+        min-height: 36.7em;
+        height: 53em;
+        padding-top: 0%;
+        margin-bottom: 8%;
+        border: 1px solid #d4d4d4;
+    }
+    .fv-SearchHomePage .fv-product .col-md-5 {
+        text-align: end;
+        margin-right: -44px;
+        font-size: 11px;
+    }
+}
 @media (max-width: 989px) and (min-width: 760px){
     .fv-DisplayPageDetailsLeftEmptyMobile{
         font-size: 1.5vw;
@@ -775,6 +857,12 @@ display: none;
     }
     .fv-DisplayPageDetailsRightBody h4 {
         font-size: 17px;
+    }
+    .fv-SearchHomePage .fv-product .col-md-5 {
+        font-size: 9px;
+    }
+    .fv-SearchHomePage .fv-product .fv-productCapacityBox .col-md-2 {
+        font-size: 9px;
     }
 }
 
@@ -1080,9 +1168,7 @@ display: none;
     .fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageCalenderForMobile{
         display: block;
     }
-    .fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageCalenderForDesktop {
-        display: none;
-    }
+
     .fv-DisplayPage .fv-displayPageCommentOne {
         margin-bottom: 5%;
     }
@@ -1142,7 +1228,12 @@ display: none;
     .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo .col-sm-6 {
         width: 64% !important;
     }
-
+    .fv-DisplayPageRotePathMobile a{
+        color: black;
+    }
+    .fv-DisplayPageDetailsRightBody .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo h5, .fv-DisplayPageDetailsRightBody .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo p {
+        font-size: 4vw;
+    }
 
 }
 
@@ -1176,6 +1267,24 @@ display: none;
         width: 428px;
         height: 259px;
         border-radius: 15px;
+    }
+
+    .fv-SearchHomePage .fv-product .fv-productCapacityBox .fv-maximumNumber, .fv-SearchHomePage .fv-product .fv-productCapacityBox .fv-capacityBody {
+        margin-top: 0%;
+        font-size: 3vw;
+    }
+    .fv-DisplayPage .fv-product .fv-productCapacityBox .fv-numberOfBedBody {
+        display: flex;
+        justify-content: flex-end;
+        margin-left: 6px;
+        margin-top: -11%;
+        font-size: 2vw;
+    }
+
+    .fv-DisplayPage .fv-product .fv-productPriceBox .col-md-10 {
+        margin-left: -6%;
+        margin-top: 8%;
+        font-size: 3.5vw;
     }
 }
 @media (max-width: 360px) {
@@ -1265,6 +1374,12 @@ display: none;
     .fv-DisplayPageCalenderForMobile .Calendar {
         margin-right: -12vw;
     }
+    .fv-DisplayPage .fv-product .fv-productCapacityBox .fv-numberOfBedBody {
+        display: flex;
+        justify-content: flex-end;
+        margin-left: 6px;
+        margin-top: -19%;
+    }
 }
 @media (max-width: 280px) {
     .fv-DisplayPageLoginSignMobile {
@@ -1341,6 +1456,32 @@ display: none;
         width: 100%;
         height: 100%;
         border-radius: 0px;
+    }
+    .fv-DisplayPage .fv-product .fv-productCapacityBox .fv-numberOfBedBody {
+        display: flex;
+        justify-content: flex-end;
+        margin-left: 6px;
+        margin-top: -23%;
+    }
+    .fv-SearchHomePage .fv-product .fv-productCapacityBox .fv-maximumNumber, .fv-SearchHomePage .fv-product .fv-productCapacityBox .fv-capacityBody {
+        margin-top: 0%;
+        font-size: 3vw;
+    }
+    .fv-DisplayPage .fv-mobileProduct {
+        width: 126%;
+        direction: ltr;
+    }
+    .fv-SearchHomePage.fv-DisplayPage .row {
+        font-size: 4vw;
+        margin-right: -3px;
+        margin-left: -10px;
+    }
+    .fv-DisplayPage .fv-product .fv-productCapacityBox .fv-numberOfBedBody {
+        display: flex;
+        justify-content: flex-end;
+        margin-left: 6px;
+        margin-top: -17%;
+        font-size: 3vw;
     }
 }
 @media (max-width: 1200px) and (min-width: 1114px) {

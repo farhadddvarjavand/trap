@@ -85,6 +85,8 @@ const AccommmodationProduct =(props) =>{
                                                         standard_capacity: allDataVilla.detail.standard_capacity,
                                                         view:  allDataVilla.detail.view,
                                                         disinfected:allDataVilla.disinfected,
+                                                        mattress_count:allDataVilla.mattress_count,
+                                                        bed_count:allDataVilla.bed_count,
                                                     }
                                                     const step4Data = {
                                                         bodyguard: allDataVilla.info.bodyguard,
