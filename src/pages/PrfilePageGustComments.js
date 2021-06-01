@@ -35,7 +35,7 @@ class PrfilePageGustComments extends Component {
                     <ProfilePageUserInfo />
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
-                        <h5>پاسخ به نظرات</h5>
+                        {/*  <h5>پاسخ به نظرات</h5> */}
 
                         <MDBRow className={"fv-ProfilePageReservationImage"}>
                             <MDBCol md={12}>
