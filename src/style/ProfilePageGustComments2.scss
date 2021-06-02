@@ -99,7 +99,13 @@
   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageWalletWalletButton .fv-ProfilePageUserSetInfoButton input {
     margin-left: -6%;
   }
-
+  .fv-commentsLoaderHide{
+    display: none;
+  }
+  .cssload-wave, .cssload-wave * {
+    margin: auto;
+    margin-top: 28%;
+  }
 
 }
 @media (max-width: 763px) {
@@ -128,7 +134,7 @@
       text-align: end;
     }
     .fv-ProfilePageWallet .fv-footerMenuMobileTitle {
-      margin-top: 190%;
+      margin-top: 33%;
     }
   }
   .fv-ProfilePageGustComments2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageGustComments2SetComment textarea {
@@ -172,7 +178,7 @@
       margin-right: 3%;
     }
     .fv-footerMenuMobileTitle {
-      margin-top: 220%;
+      // margin-top: 220%;
     }
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageGustComments2SetComment textarea {
       width: 71vw;
@@ -208,7 +214,7 @@
     padding-bottom: 4%;
   }
   .fv-ProfilePageGustComments2 .fv-footerMenuMobileTitle {
-    margin-top: 249%;
+    // margin-top: 249%;
   }
   .fv-ProfilePageGustComments2 .fv-ProfilePageGustComments2CommentOne img {
     height: 108%;

@@ -289,3 +289,32 @@ export const calculateExtraCost = async (data,villaId) => {
 
     );
 }
+
+export const reservationsSearch = async (data) => {
+    return http.post(
+        `${config.webapi}/api/v1/user/reservationsSearch`,
+        JSON.stringify(data),
+        { headers:{ 'Authorization' : await getToken() } }
+    );
+}
+export const transactionsSearch = async (data) => {
+    return http.post(
+        `${config.webapi}/api/v1/user/transactionsSearch`,
+        JSON.stringify(data),
+        { headers:{ 'Authorization' : await getToken() } }
+    );
+}
+export const financialReportsSearch = async (data) => {
+    return http.post(
+        `${config.webapi}/api/v1/user/financialReportsSearch`,
+        JSON.stringify(data),
+        { headers:{ 'Authorization' : await getToken() } }
+    );
+}
+export const requestedReservationsSearch = async (data) => {
+    return http.post(
+        `${config.webapi}/api/v1/user/requestedReservationsSearch`,
+        JSON.stringify(data),
+        { headers:{ 'Authorization' : await getToken() } }
+    );
+}

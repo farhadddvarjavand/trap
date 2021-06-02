@@ -42,13 +42,14 @@
   .fv-reservedColor{
     color: #15BE29;
   }
+
 }
 
 
 @media (max-width: 764px) {
   .fv-ProfilePageReservationsRequested{
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo {
-      padding-bottom: 53%;
+      padding-bottom: 58%;
       margin-right: -5%;
       margin-left: -6%;
     }
@@ -62,13 +63,13 @@
       margin-right: -0.5%;
     }
     .fv-footerMenuMobileTitle {
-      margin-top: 120%;
+     // margin-top: 120%;
     }
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo .col-md-2 {
       padding: 0;
       margin-left: 1%;
       margin-right: 1.5%;
-      margin-top: 2%;
+      margin-top: -28%;
       margin-bottom: -65%;
     }
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo  .fv-ProfilePageReservationSetInfo .col-sm-5 {
@@ -81,19 +82,22 @@
     .fv-tableTitleContent {
       width: 15%;
     }
-
   }
 }
+
+
+
+
 @media (max-width: 280px) {
   .fv-ProfilePageReservationsRequested{
     .fv-footerMenuMobileTitle {
-      margin-top: 150%;
+     // margin-top: 150%;
     }
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo .col-md-2 {
       padding: 0;
       margin-left: 1%;
       margin-right: 1.5%;
-      margin-top: 2%;
+      margin-top: -48%;
       margin-bottom: -79%;
     }
 

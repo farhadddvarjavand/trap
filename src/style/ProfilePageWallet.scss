@@ -1,7 +1,7 @@
 .fv-ProfilePageWallet{
 
   .fv-ProfilePageWalletWalletImage{
-      height: 35%;
+      // height: 35%;
     img{
       width: 100%;
       height: 56%;
@@ -59,6 +59,7 @@
 @media (max-width: 991px) and (min-width: 764px){
   .fv-ProfilePageWallet .fv-ProfilePageWalletWalletImage img {
     margin-top: -38%;
+    height: 134px;
   }
   .fv-ProfilePageWallet .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageWalletWalletButton .fv-ProfilePageUserSetInfoButton input {
     width: 84.5%;
@@ -73,7 +74,7 @@
   .fv-ProfilePageWallet {
 
     .fv-ProfilePageWalletWalletImage {
-      height: 100%;
+     // height: 100%;
       width: 100%;
       /* overflow-x: auto; */
       /* border-collapse: collapse; */
@@ -113,6 +114,7 @@
     }
     .fv-ProfilePageWalletWalletImage img {
       margin-top: -33%;
+      height: 111px;
     }
     .fv-ProfilePageLeftBody{
       .fv-ProfilePageUserSetInfo h5 {
@@ -143,7 +145,7 @@
       }
     }
     .fv-footerMenuMobileTitle {
-      margin-top: 170%;
+      // margin-top: 170%;
     }
    .fv-ProfilePageLeftBody .fv-ProfilePageWalletWalletImage p {
       font-size: 11px ;
@@ -154,5 +156,6 @@
 @media (max-width: 320px) {
   .fv-ProfilePageWallet .fv-ProfilePageWalletWalletImage img {
     margin-top: -52%;
+    height: 102px;
   }
 }

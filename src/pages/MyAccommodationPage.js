@@ -11,6 +11,7 @@ import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 import AccommmodationProduct from "../componentsPages/AccomodationProduct";
 import {userVillas} from "../services/userService";
 import config from "../services/config.json";
+import "../style/scroolBodyProfilePages.scss"
 
 class MyAccommodationPage extends Component {
     constructor(props) {
@@ -95,10 +96,10 @@ class MyAccommodationPage extends Component {
                     </MDBCol>
                 </MDBRow>
 
-                {/* <MDBRow>
+                 <MDBRow>
                     <Footer />
                 </MDBRow>
-                    */}
+
 
             </MDBContainer>
         )}

@@ -8,7 +8,7 @@ import Logo from "../images/Logo.png";
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 
-class PrfilePageGustComments extends Component {
+class ProfilePageCalendarEmpty extends Component {
     constructor(props) {
         super(props);
 
@@ -16,7 +16,7 @@ class PrfilePageGustComments extends Component {
 
     render() {
         return(
-            <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageTransaction fv-ProfilePageGustComments"}>
+            <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageTransaction"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
                     <HeaderSearch  {...this.props}/>
                     <MDBRow className={"fv-DisplayPageRotePathMobile"}>
@@ -25,7 +25,7 @@ class PrfilePageGustComments extends Component {
                             <i className="fas fa-chevron-left" />
                             <p> پنل کاربری </p>
                             <i className="fas fa-chevron-left" />
-                            <p className={"fv-DisplayPagePathNow"}>رزروهای من</p>
+                            <p className={"fv-DisplayPagePathNow"}> تراکنش های من </p>
                         </MDBCol>
                     </MDBRow>
                 </MDBContainer>
@@ -35,11 +35,11 @@ class PrfilePageGustComments extends Component {
                     <ProfilePageUserInfo />
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
-                        <h5>نظرات مهمان ها</h5>
+                        <h5>تقویم من</h5>
 
                         <MDBRow className={"fv-ProfilePageReservationImage"}>
                             <MDBCol md={12}>
-                                <p>شما نظری ندارید</p>
+                                <p>شما تاکنون تراکنشی نداشته اید</p>
                                 <img src={Logo}/>
                             </MDBCol>
                         </MDBRow>
@@ -53,4 +53,4 @@ class PrfilePageGustComments extends Component {
             </MDBContainer>
         )}
 }
-export default PrfilePageGustComments
+export default ProfilePageCalendarEmpty

@@ -15,14 +15,16 @@ import {fas} from "@fortawesome/free-solid-svg-icons";
 import ProfilePageGustComments2 from "./PrfilePageGustComments2"
 import PrfilePageGustComments from "./PrfilePageGustComments";
 import "../style/profilePageCommentsHandler.scss"
+import {villaPrice} from "../services/villaService";
 
-class ProfilePageCommentsHandle extends Component {
+class ProfilePageCalendarHandle extends Component {
     constructor(props) {
         super(props);
         this.state={
             userVillas:[],
             villaId:'',
             comment:false,
+            villaPrice:[],
 
         }
     }
@@ -38,28 +40,19 @@ class ProfilePageCommentsHandle extends Component {
                 this.setState({userVillas:result.data.data} , ()=>{
                     if(this.state.userVillas){ /// agar villaeii vojod dasht
                         this.state.userVillas.map(userVilla => {
-                            getUserVillaComments(userVilla.id)    // برای هر ویلا که طرف دارد چک کن
-                                .then(res=>{    // اگر ویلایی کامنت داشت برو داخل
-                                    console.log(res)  // آی دی ویلایی که کامنت دارد را باید پاس بدهیم به مرحله بعد
-                                    if(res.data.data && res.data.data !== "Something went wrong!"){
-                                        // avalin vilaie por
-                                        if(Object.values(res.data.data).length !== 0){ /// agar vojod dasht commenti baraie villa haie sabt shode
-                                            this.setState({comments: Object.values(res.data.data) , villaId:userVilla.id } , () =>{
-                                                this.props.history.push(`/profileGustComments2/${userVilla.id}`)
-                                            })
-                                        }
-
-                                        // console.log(res.data.data)
-                                    }else {
-                                        this.props.history.push("/profileGustComments")
-                                        // this.props.history.push("/profileGustComments") /// صفحه ای پیدا نشده است
+                            villaPrice(userVilla.id)
+                                .then(res=>{
+                                    console.log(Object.values(res.data).length)
+                                   if( Object.values(res.data)[0] !== null){
+                                       this.setState({villaPrice: Object.values(res.data) , villaId:userVilla.id } , () =>{
+                                              this.props.history.push(`/profileCalender/${userVilla.id}`)
+                                       })
                                     }
                                 })
-                                .catch(err=>this.props.history.push("/profileGustComments"))
-
+                                .catch(err=>this.props.history.push("/ProfilePageCalendarEmpty"))
                         })
                     }else {
-                        this.props.history.push("/profileGustComments")
+                        this.props.history.push("/ProfilePageCalendarEmpty")
                         // empty
                     }
 
@@ -108,4 +101,4 @@ class ProfilePageCommentsHandle extends Component {
 
     }
 }
-export default ProfilePageCommentsHandle
+export default ProfilePageCalendarHandle

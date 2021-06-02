@@ -13,7 +13,13 @@ import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 import CalendarForProfile from "../data/CalendarForProfile";
 import CalenderProfileMobile from "../data/CalenderProfileMobile";
-import {changeDatesCost, changeDatesStatus, villaDates} from "../services/userService";
+import {
+    changeDatesCost,
+    changeDatesStatus,
+    getUserVillaComments,
+    userVillas,
+    villaDates
+} from "../services/userService";
 import {villaPrice} from "../services/villaService";
 import {getToday, priceOfPerMonth} from "../componentsPages/calculationsDate";
 
@@ -26,6 +32,9 @@ class ProfilePageCalender extends Component {
             villaPrice:[],
             selectedDays : '',
             selectedDaysMobile : '',
+            villasUsertitle:props.match.params.id,
+            clickHandlerLoading:false,
+            villasUser:[],
 
             selectedDaysAll : ''
 
@@ -33,9 +42,24 @@ class ProfilePageCalender extends Component {
 
     }
 
+    componentWillReceiveProps(nextProps) {
+        const currentId = this.props.id
+        const nextId = nextProps.id
+
+        if (currentId !== nextId) {
+            this.props.fetchPost(nextId)
+        }
+    }
+
     componentDidMount() {
-        villaPrice(this.props.match.params.id)
+        villaPrice(this.state.villasUsertitle)
             .then(res=>this.setState(res.data ? {villaPrice:res.data} : ''))
+
+        userVillas()
+            .then(res=>{
+                if(res.data.data)
+                    this.setState({villasUser:res.data.data})
+            })
     }
 
     getSelectedDays = (selectedDay)=>{
@@ -91,19 +115,43 @@ class ProfilePageCalender extends Component {
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo fv-ProfilePageCalenderBody"}>
 
+                        <h5 className={"fv-ProfilePageCalenderTextMobile"}>تقویم من</h5>
+                            <MDBRow className={"fv-ProfilePageReservationSetInfo"}>
+                                <MDBCol md={4} sm={12} className={""}>
+                                    <select value={this.state.villasUsertitle} onChange={(e)=>{
+                                        this.setState({villasUsertitle:e.target.value ,clickHandlerLoading:true} , ()=>{
+                                            villaPrice(e.target.value)
+                                                .then(res=>{
+                                                    if(res.data){
+                                                        this.setState({villaPrice:res.data , clickHandlerLoading:false})
+                                                    }
+                                                })
+                                        })
+                                    }}>
+                                        <option value='title' disabled>نام اقامت گاه</option>
+                                        {this.state.villasUser.map(vilauser=>{
+                                            return  <option value={vilauser.id}>{vilauser.title}</option>
+                                        })}
+
+                                    </select>
+                                </MDBCol>
+                            </MDBRow>
+
                         <MDBRow className={"fv-ProfilePageCalenderImageAndContent"}>
-                            <MDBCol md={2} sm={3}>
-                                <img src={MobileLogo}/>
-                            </MDBCol>
-                            <MDBCol md={7} sm={7}>
-                                <MDBRow>
-                                    <h5>بهار</h5>
-                                </MDBRow>
-                                <MDBRow>
-                                    <p>۳۱ مهرماه ۸۹۳۱</p>
-                                </MDBRow>
-                            </MDBCol>
-                        </MDBRow>
+                                <MDBCol md={2} sm={3}>
+                                    <img src={MobileLogo}/>
+                                </MDBCol>
+                                <MDBCol md={7} sm={7}>
+                                    <MDBRow>
+                                        <h5>بهار</h5>
+                                    </MDBRow>
+                                    <MDBRow>
+                                        <p>۳۱ مهرماه ۸۹۳۱</p>
+                                    </MDBRow>
+                                </MDBCol>
+                            </MDBRow>
+
+
                         <MDBRow className={"fv-ProfilePageCalenderSelectContentMobile"}>
                             <MDBCol>
                                 <h5 className={"fv-ProfilePageCalenderChoseCommentsText"}>با انتخاب روزهای مورد نظر تغییر مورد نظر خود را اعمال کنید</h5>
@@ -165,8 +213,8 @@ class ProfilePageCalender extends Component {
                                         }
 
                                         if(this.state.price){                                         // برای تغییر دادن قیمت میباشد
-                                            changeDatesCost(datasForPrice , this.props.match.params.id)
-                                                .then(res => res.status === 200 ?  window.location.reload() : '')
+                                            changeDatesCost(datasForPrice , this.state.villasUsertitle)
+                                                .then(res => res.status === 200 ?  window.location.replace(`/profileCalender/${this.state.villasUsertitle}`) : '')
                                         }
 
 
@@ -192,8 +240,8 @@ class ProfilePageCalender extends Component {
                                         }
 
                                         if(this.state.changeStatusSelectedDays !== 'title'){           // برای تغییر دادن status میباشد
-                                            changeDatesStatus(datasForStatus ,  this.props.match.params.id)
-                                                .then(res => res.status === 200 ?  window.location.reload() : '')
+                                            changeDatesStatus(datasForStatus ,  this.state.villasUsertitle)
+                                                .then(res => res.status === 200 ?  window.location.replace(`/profileCalender/${this.state.villasUsertitle}`) : '')
                                         }
 
                                     }}/>
@@ -202,9 +250,10 @@ class ProfilePageCalender extends Component {
                         </MDBContainer>
 
                         <MDBContainer className={"fv-ProfilePageCalenderMobile"}>
-                            <h5 className={"fv-ProfilePageCalenderTextMobile"}>تقویم من</h5>
 
-                            <MDBRow className={"fv-ProfilePageReservationSetInfo"}>
+
+                            {/*
+                              <MDBRow className={"fv-ProfilePageReservationSetInfo"}>
                                 <MDBCol md={4} sm={12} className={""}>
                                     <select>
                                         <option>
@@ -216,6 +265,7 @@ class ProfilePageCalender extends Component {
                                     <input type="button" value="جستجو"/>
                                 </MDBCol>
                             </MDBRow>
+                            */}
 
                             <MDBRow className={"fv-ProfilePageCalenderImageAndContentMobile"}>
                                 <MDBCol md={2} sm={2}>
@@ -303,8 +353,8 @@ class ProfilePageCalender extends Component {
                                         }
 
                                         if(this.state.price){                                         // برای تغییر دادن قیمت میباشد
-                                            changeDatesCost(datasForPrice , this.props.match.params.id)
-                                                .then(res => res.status === 200 ?  window.location.reload() : '')
+                                            changeDatesCost(datasForPrice , this.state.villasUsertitle)
+                                                .then(res => res.status === 200 ?  window.location.replace(`/profileCalender/${this.state.villasUsertitle}`) : '')
                                         }
 
 
@@ -332,8 +382,8 @@ class ProfilePageCalender extends Component {
                                         }
 
                                         if(this.state.changeStatusSelectedDays !== 'title'){           // برای تغییر دادن status میباشد
-                                            changeDatesStatus(datasForStatus ,  this.props.match.params.id)
-                                                .then(res => res.status === 200 ?  window.location.reload() : '')
+                                            changeDatesStatus(datasForStatus ,  this.state.villasUsertitle)
+                                                .then(res => res.status === 200 ?  window.location.replace(`/profileCalender/${this.state.villasUsertitle}`) : '')
                                         }
 
                                     }}/>

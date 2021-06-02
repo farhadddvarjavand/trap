@@ -9,9 +9,10 @@ import Footer from "../componentsPages/footer"
 import MobileLogo from "../images/MobileLogo.png"
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
-import {getFinancialReports, villaIncome} from "../services/userService";
+import {financialReportsSearch, getFinancialReports, userVillas, villaIncome} from "../services/userService";
 import axios from "axios";
 import config from "../services/config.json";
+import CalendarLinear from "../data/CalenddarLinear";
 
 class ProfilePageWallet extends Component {
     constructor(props) {
@@ -19,11 +20,28 @@ class ProfilePageWallet extends Component {
         this.state={
             getFinancialReportsTopPage:[],
             getFinancialReports:[],
+            villasUser:[],
+            villasUsertitle:'title',
+            dateToGo: {
+                day:'',
+                month:'',
+                year : ''
+            },
+            dateToReturn: {
+                day:'',
+                month:'',
+                year : ''
+            },
         }
     }
     componentDidMount() {
         this.getFinancialReports()
      //   this.villaIncome()
+        userVillas()
+            .then(res=>{
+                if(res.data.data)
+                this.setState({villasUser:res.data.data})
+            })
 
     }
 
@@ -41,6 +59,31 @@ class ProfilePageWallet extends Component {
         villaIncome(24)
             .then(res=>console.log(res))
             .catch(err=>console.log(err.response))
+    }
+
+    selectDayToGo = (date) =>{                                    // set date to go
+        if(date) {this.setState(prevstate =>({
+            dateToGo: {
+                ...prevstate.day,
+                ...prevstate.month,
+                ...prevstate.year,
+                day: date.day,
+                month: date.month,
+                year: date.year
+            }
+        }))}
+    }
+    selectDayToReturn = (date) =>{                               // set date to return
+        if(date) {this.setState(prevState => ({
+            dateToReturn:{
+                ...prevState.day ,
+                ...prevState.month ,
+                ...prevState.year ,
+                day: date.day,
+                month: date.month,
+                year: date.year
+            }
+        }))}
     }
     render() {
         return(
@@ -65,20 +108,57 @@ class ProfilePageWallet extends Component {
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
                         <MDBRow className={"fv-ProfilePageReservationSetInfo"}>
                             <MDBCol md={4} sm={12} className={""}>
-                                <select>
-                                    <option>
-                                        نام اقامت گاه
-                                    </option>
+                                <select value={this.state.villasUsertitle} onChange={(e)=>{
+                                    this.setState({villasUsertitle:e.target.value})
+                                }}>
+                                    <option value='title' disabled>نام اقامتگاه را وارد کنید</option>
+                                    {this.state.villasUser.map(vilauser=>{
+                                        return  <option value={vilauser.title}>{vilauser.title}</option>
+                                    })}
+
                                 </select>
                             </MDBCol>
                             <MDBCol md={2} sm={5} className={""}>
-                                <input type="text" value="از تاریخ"/>
+                                <CalendarLinear dayToReturn={this.selectDayToGo} text={'از تاریخ'}/>
                             </MDBCol>
-                            <MDBCol md={2} sm={5} className={""}>
-                                <input type="text" value="تا تاریخ"/>
+                            <MDBCol md={2} sm={5} className={""}> <CalendarLinear dayToReturn={this.selectDayToReturn} text={'تا تاریخ'} />
                             </MDBCol>
                             <MDBCol md={2} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
-                                <input type="button" value="جستجو"/>
+                                <input type="button" value="جستجو" onClick={()=>{
+                                    let setTitle = ''
+                                    let setDateToGo = ''
+                                    let setDateToreturn = ''
+                                    if(this.state.villasUsertitle === "title" ){
+                                        setTitle = ''
+                                    }else {
+                                        setTitle =this.state.villasUsertitle
+                                    }
+
+                                    if(this.state.dateToGo.year){
+                                        setDateToGo =  this.state.dateToGo.year+"/"+this.state.dateToGo.month+"/"+this.state.dateToGo.day
+                                    }else {
+                                        setDateToGo = ''
+                                    }
+
+                                    if(this.state.dateToReturn.year){
+                                        setDateToreturn =  this.state.dateToReturn.year+"/"+this.state.dateToReturn.month+"/"+this.state.dateToReturn.day
+                                    }else {
+                                        setDateToreturn = ''
+                                    }
+                                    const data ={
+                                        villa_title :setTitle,
+                                        start_date : setDateToGo ,
+                                        end_date : setDateToreturn ,
+                                    }
+                                    console.log(data)
+                                    financialReportsSearch(data)
+                                        .then(res=>{
+                                            console.log(res)
+                                            let getFinancialReportsTop = []
+                                            getFinancialReportsTop.push(res.data.income)
+                                            this.setState({getFinancialReports : res.data.data , getFinancialReportsTopPage:getFinancialReportsTop})
+                                        })
+                                }}/>
                             </MDBCol>
                         </MDBRow>
 

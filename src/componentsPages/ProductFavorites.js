@@ -1,7 +1,7 @@
 import React from "react"
 import {MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import {removeFromFavorite} from "../services/userService";
-
+import "../style/scroolBodyProfilePages.scss"
 
 class ProductFavorites extends React.Component{
     constructor(props) {

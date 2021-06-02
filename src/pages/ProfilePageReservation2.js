@@ -8,7 +8,7 @@ import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 import ReservationProduct from "../componentsPages/ReservatioonProduct";
 import CalendarLinear from "../data/CalenddarLinear";
-import {getUserInformation, userReserves} from "../services/userService";
+import {getUserInformation, reservationsSearch, userReserves} from "../services/userService";
 import {Link} from "react-router-dom";
 
 
@@ -18,12 +18,12 @@ class ProfilePageReservation2 extends Component {
         this.state={
             city:'title',
             dateToGo: {
-                day:'انتخاب تاریخ',
+                day:'',
                 month:'',
                 year : ''
             },
             dateToReturn: {
-                day:'انتخاب تاریخ',
+                day:'',
                 month:'',
                 year : ''
             },
@@ -92,24 +92,77 @@ class ProfilePageReservation2 extends Component {
                             <MDBCol md={4} sm={12} className={""}>
                                     <select value={this.state.city} onChange={(event)=>this.setState({city:event.target.value})}>
                                         <option value='title' disabled>شهر یا روستا را انتخاب کنید</option>
-                                        <option value="1">تهران</option>
-                                        <option value="2">یزد</option>
-                                        <option value="3">شیراز</option>
-                                        <option value="4">مراغه</option>
-                                        <option value="5">مازندران</option>
-                                        <option value="6">ساری</option>
+                                        <option value="تهران">تهران</option>
+                                        <option value="مشهد">مشهد</option>
+                                        <option value="اصفهان">اصفهان</option>
+                                        <option value="کرج">کرج</option>
+                                        <option value="شیراز">شیراز</option>
+                                        <option value="تبریز">	تبریز</option>
+                                        <option value="قم">قم</option>
+                                        <option value="اهواز">اهواز</option>
+                                        <option value="کرمانشاه">کرمانشاه</option>
+                                        <option value="ارومیه">ارومیه</option>
+                                        <option value="رشت">رشت</option>
+                                        <option value="زاهدان">زاهدان</option>
+                                        <option value="همدان">همدان</option>
+                                        <option value="کرمان">کرمان</option>
+                                        <option value="یزد">یزد</option>
+                                        <option value="اردبیل">اردبیل</option>
+                                        <option value="اراک">اراک</option>
+                                        <option value="بندرعباس">بندرعباس</option>
+                                        <option value="زنجان">زنجان</option>
+                                        <option value="سنندج">سنندج</option>
+                                        <option value="قزوین">قزوین</option>
+                                        <option value="خرم‌آباد">خرم‌آباد</option>
+                                        <option value="گرگان">گرگان</option>
+                                        <option value="ساری">ساری</option>
+                                        <option value="بابل">بابل</option>
+                                        <option value="سبزوار">سبزوار</option>
+                                        <option value="گلستان">گلستان</option>
+                                        <option value="آمل">آمل</option>
                                     </select>
                             </MDBCol>
 
                             <MDBCol md={2} sm={5} className={""}>
-                                <CalendarLinear dayToReturn={this.selectDayToGo} text={'تاریخ رفت'}/>
+                                <CalendarLinear dayToReturn={this.selectDayToGo} text={'از تاریخ'}/>
                             </MDBCol>
                             <MDBCol md={2} sm={5} className={""}>
-                                <CalendarLinear dayToReturn={this.selectDayToReturn} text={'تاریخ برگشت'} />
+                                <CalendarLinear dayToReturn={this.selectDayToReturn} text={'تا تاریخ'} />
                             </MDBCol>
                             <MDBCol md={2} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
                                 <input type="button" value="جستجو " onClick={()=>{
-                                    console.log(this.state.reservesData)
+                                    let setCity = ''
+                                    let setDateToGo = ''
+                                    let setDateToreturn = ''
+                                    if(this.state.city === "title" ){
+                                        setCity = ''
+                                    }else {
+                                        setCity =this.state.city
+                                    }
+
+                                    if(this.state.dateToGo.year){
+                                        setDateToGo =  this.state.dateToGo.year+"/"+this.state.dateToGo.month+"/"+this.state.dateToGo.day
+                                    }else {
+                                        setDateToGo = ''
+                                    }
+
+                                    if(this.state.dateToReturn.year){
+                                        setDateToreturn =  this.state.dateToReturn.year+"/"+this.state.dateToReturn.month+"/"+this.state.dateToReturn.day
+                                    }else {
+                                        setDateToreturn = ''
+                                    }
+                                    const data={
+                                        city : setCity ,
+                                        start_date : setDateToGo ,
+                                        end_date : setDateToreturn ,
+                                    }
+                                    console.log(data)
+                                    reservationsSearch(data)
+                                        .then(res =>{
+                                            console.log(res.data.data)
+                                            this.setState({reservesData:res.data.data})
+                                        })
+                                        .catch(err=>console.log(err.response))
                                 }}/>
                             </MDBCol>
                         </MDBRow>

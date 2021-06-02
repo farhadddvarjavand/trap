@@ -8,24 +8,68 @@ import "../style/ProfilePageReservationsRequested.scss"
 import Footer from "../componentsPages/footer"
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
-import {allReservationsRequested} from "../services/userService";
+import {allReservationsRequested, requestedReservationsSearch, userVillas} from "../services/userService";
+import "../style/scroolBodyProfilePages.scss"
+import CalendarLinear from "../data/CalenddarLinear";
 
 class ProfilePageReservationsRequested extends Component {
     constructor(props) {
         super(props);
         this.state={
-            allReservationsRequested:[]
+            allReservationsRequested:[],
+            villasUser:[],
+            villasUsertitle:'title',
+            dateToGo: {
+                day:'',
+                month:'',
+                year : ''
+            },
+            dateToReturn: {
+                day:'',
+                month:'',
+                year : ''
+            },
         }
     }
+
     componentDidMount() {
         this.allReservationsRequested()
-
+        userVillas()
+            .then(res=>{
+                if(res.data.data)
+                    this.setState({villasUser:res.data.data})
+            })
     }
 
     allReservationsRequested = () =>{
         allReservationsRequested()
             .then(res=>this.setState({allReservationsRequested:res.data.data}))
             .catch(err=>console.log(err.response))
+    }
+
+    selectDayToGo = (date) =>{                                    // set date to go
+        if(date) {this.setState(prevstate =>({
+            dateToGo: {
+                ...prevstate.day,
+                ...prevstate.month,
+                ...prevstate.year,
+                day: date.day,
+                month: date.month,
+                year: date.year
+            }
+        }))}
+    }
+    selectDayToReturn = (date) =>{                               // set date to return
+        if(date) {this.setState(prevState => ({
+            dateToReturn:{
+                ...prevState.day ,
+                ...prevState.month ,
+                ...prevState.year ,
+                day: date.day,
+                month: date.month,
+                year: date.year
+            }
+        }))}
     }
     render() {
         return(
@@ -47,22 +91,68 @@ class ProfilePageReservationsRequested extends Component {
 
                     <ProfilePageUserInfo />
 
-                    <MDBCol md={8} sm={12} style={{height: `${35+5*this.state.allReservationsRequested.length}vw`}} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
+                    <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
                         <h5>تراکنش های من</h5>
                         <p className={"fv-ProfilePageReservationsRequestedPTitle"}>جهت تایید یا عدم تایید رزرو مهمان هر سطر را انتخاب کنید و تایید یا عدم تایید کنید</p>
                         <MDBRow className={"fv-ProfilePageReservationSetInfo"}>
 
-                            <MDBCol md={2} sm={5} className={""}>
-                                <input type="text" value="از تاریخ"/>
-                            </MDBCol>
-                            <MDBCol md={2} sm={5} className={""}>
-                                <input type="text" value="تا تاریخ"/>
-                            </MDBCol>
+
                             <MDBCol md={3} sm={12} className={"fv-ProfilePageReservationRequestedAccommodation"}>
-                                <input type="text" value="نام اقامت گاه"/>
+                                <select value={this.state.villasUsertitle} onChange={(e)=>{
+                                    this.setState({villasUsertitle:e.target.value})
+                                }}>
+                                    <option value='title' disabled>نام اقامت گاه</option>
+                                    {this.state.villasUser.map(vilauser=>{
+                                        return  <option value={vilauser.id}>{vilauser.title}</option>
+                                    })}
+
+                                </select>
                             </MDBCol>
+                            <MDBCol md={2} sm={5} className={"fv-ProfilePageReservationRightCalendar"}>
+                                <CalendarLinear dayToReturn={this.selectDayToGo} text={'از تاریخ'}/>
+                            </MDBCol>
+                            <MDBCol md={2} sm={5} className={"fv-ProfilePageReservationLeftCalendar"}>
+                                <CalendarLinear dayToReturn={this.selectDayToReturn} text={'تا تاریخ'} />
+                            </MDBCol>
+
                             <MDBCol md={3} sm={10} className={"fv-ProfilePageUserSetInfoButton"}>
-                                <input type="button" value="جست و جو"/>
+                                <input type="button" value="جست و جو" onClick={()=>{
+                                    let villaId = ""
+                                    let setDateToGo = ''
+                                    let setDateToreturn = ''
+
+                                    if(this.state.villasUsertitle === "title"){
+                                        villaId = null
+                                    }else {
+                                        villaId = this.state.villasUsertitle
+                                    }
+
+                                    if(this.state.dateToGo.year){
+                                        setDateToGo =  this.state.dateToGo.year+"/"+this.state.dateToGo.month+"/"+this.state.dateToGo.day
+                                    }else {
+                                        setDateToGo = null
+                                    }
+
+                                    if(this.state.dateToReturn.year){
+                                        setDateToreturn =  this.state.dateToReturn.year+"/"+this.state.dateToReturn.month+"/"+this.state.dateToReturn.day
+                                    }else {
+                                        setDateToreturn = null
+                                    }
+                                    let datas ={
+                                        villa_id : villaId ,
+                                        start_date : setDateToGo ,
+                                        end_date : setDateToreturn ,
+                                    }
+
+
+                                    console.log(datas)
+                                    requestedReservationsSearch(datas)
+                                        .then(res=>{
+                                            console.log(res)
+                                            this.setState({allReservationsRequested:res.data.data})
+                                        })
+                                        .catch(err=>console.log(err.response))
+                                }}/>
                             </MDBCol>
                         </MDBRow>
 
@@ -109,10 +199,10 @@ class ProfilePageReservationsRequested extends Component {
 
                     </MDBCol>
                 </MDBRow>
-                {/*  <MDBRow>
+                <MDBRow>
                     <Footer />
                 </MDBRow>
-                */}
+
             </MDBContainer>
         )}
 }

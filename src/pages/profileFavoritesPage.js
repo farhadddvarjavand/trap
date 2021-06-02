@@ -54,7 +54,7 @@ class ProfilePageWallet2 extends Component {
                     <ProfilePageUserInfo />
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
-                        <h5>رزورو های من</h5>
+                        <h5>علاقه مندی های من</h5>
 
 
                         <MDBRow>

@@ -96,7 +96,7 @@ componentDidMount() {
 
                    <ProfilePageUserInfo />
 
-                    <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo"}>
+                    <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-profilePageInner"}>
                         <p className={this.state.errorField ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>لطفا کادر های قرمز را به درستی پر کنید</p>
                         <h5>اطلاعات کاربری</h5>
                         <p>نام و نام خانوادگی</p>

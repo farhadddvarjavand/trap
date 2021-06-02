@@ -43,6 +43,8 @@ import Api from "./components/Api";
 import {withCookies, Cookies, CookiesProvider} from 'react-cookie';
 import {Link, Route, Switch,NavLink,BrowserRouter} from "react-router-dom"
 import ProfilePageCommentsHandle from "./pages/ProfilePageCommentsHandle"
+import ProfilePageCalendarEmpty from "./pages/ProfilePageCalendarEmpty";
+import ProfilePageCalendarHandle from "./pages/ProfilePageCalendarHandle";
 
 
 ReactDOM.render(
@@ -86,6 +88,8 @@ ReactDOM.render(
                             <Route exact path={'/addComments/:id'} component={AddComments}/>
                             <Route exact path={'/profileFavoritesPage'} component={ProfileFavoritesPage}/>
                             <Route exact path={'/ProfilePageCommentsHandle'} component={ProfilePageCommentsHandle}/>
+                            <Route exact path={'/ProfilePageCalendarEmpty'} component={ProfilePageCalendarEmpty}/>
+                            <Route exact path={'/ProfilePageCalendarHandle'} component={ProfilePageCalendarHandle}/>
 
                         </div>
                     </div>

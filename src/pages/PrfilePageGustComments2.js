@@ -10,7 +10,8 @@ import Footer from "../componentsPages/footer"
 import MobileLogo from "../images/MobileLogo.png"
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
-import {getUserVillaComments , replayComment} from "../services/userService";
+import {getUserVillaComments, replayComment, userVillas} from "../services/userService";
+import "../style/scroolBodyProfilePages.scss"
 
 class PrfilePageGustComments2 extends Component {
     constructor(props) {
@@ -18,17 +19,26 @@ class PrfilePageGustComments2 extends Component {
         this.state={
             comments:[],
             answerCommentId:'',
-            textAreaComment:''
+            textAreaComment:'',
+            villasUser:[],
+            villasUsertitle:props.match.params.id,
+            clickHandlerLoading:false,
 
         }
     }
 
     componentDidMount() {
-        getUserVillaComments(this.props.match.params.id)
+        getUserVillaComments(this.state.villasUsertitle)
             .then(res=>{
                 if(res.data.data && res.data.data !== "Something went wrong!")
                 this.setState({comments: Object.values(res.data.data)})
                 console.log(res.data.data)
+            })
+
+        userVillas()
+            .then(res=>{
+                if(res.data.data)
+                    this.setState({villasUser:res.data.data})
             })
     }
 
@@ -55,17 +65,29 @@ class PrfilePageGustComments2 extends Component {
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
                         <MDBRow className={"fv-ProfilePageReservationSetInfo"}>
                             <MDBCol md={4} sm={12} className={""}>
-                                <select>
-                                    <option>
-                                        نام اقامت گاه
-                                    </option>
+                                <select value={this.state.villasUsertitle} onChange={(e)=>{
+                                    this.setState({villasUsertitle:e.target.value ,clickHandlerLoading:true} , ()=>{
+                                        getUserVillaComments(e.target.value)
+                                            .then(res=>{
+                                                if(res.data.data && res.data.data !== "Something went wrong!")
+                                                    this.setState({comments: Object.values(res.data.data) , clickHandlerLoading:false})
+                                                console.log(res.data.data)
+                                            })
+                                    })
+                                }}>
+                                    <option value='title' disabled>نام اقامت گاه</option>
+                                    {this.state.villasUser.map(vilauser=>{
+                                        return  <option value={vilauser.id}>{vilauser.title}</option>
+                                    })}
+
                                 </select>
                             </MDBCol>
-                            <MDBCol md={2} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
+                            {/*  <MDBCol md={2} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
                                 <input type="button" value="جستجو"/>
-                            </MDBCol>
+                            </MDBCol>  */}
                         </MDBRow>
 
+                        <div className={this.state.clickHandlerLoading ?  "fv-commentsLoaderHide" : ""}>
                         {console.log(this.state.comments)}
                         {this.state.comments.map(comment => {
                             console.log(comment)
@@ -147,8 +169,8 @@ class PrfilePageGustComments2 extends Component {
                                                          const data = {
                                                                  text:this.state.textAreaComment
                                                              }
-                                                         replayComment(data,this.props.match.params.id,this.state.answerCommentId)
-                                                             .then(res=>res.status===200 ? window.location.reload() : '')
+                                                         replayComment(data,this.state.villasUsertitle,this.state.answerCommentId)
+                                                             .then(res=>res.status===200 ? window.location.replace(`/profileGustComments2/${this.state.villasUsertitle}`) : '')
 
                                                      }}>
                                                          <label>
@@ -163,10 +185,18 @@ class PrfilePageGustComments2 extends Component {
                                                  </MDBRow>
                                              </MDBRow>
                                         </MDBContainer>
+
                             }
 
                         })}
-
+                        </div>
+                        <div  className={this.state.clickHandlerLoading ?  ""  : "fv-commentsLoaderHide"}>
+                                <MDBRow className={"fv-loaderComments"}>
+                                    <div className={ "cssload-wave" }>
+                                        <span></span><span></span><span></span><span></span><span></span>
+                                    </div>
+                                </MDBRow>
+                        </div>
 
                     </MDBCol>
 
@@ -174,11 +204,10 @@ class PrfilePageGustComments2 extends Component {
 
 
 
-                {/*
+
                 <MDBRow>
                     <Footer />
-                </MDBRow>   */}
-
+                </MDBRow>
             </MDBContainer>
         )}
 }

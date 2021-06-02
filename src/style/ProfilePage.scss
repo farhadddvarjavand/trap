@@ -20,6 +20,7 @@
       border-radius: 15px;
       border-top: none;;
       padding-bottom: 3%;
+      // height: 1000px;
       h5{
         margin-top: 2%;
         font-size: 18px;
@@ -126,7 +127,16 @@
      text-align: end;
      display: contents;
   }
-
+  .container .fv-footerMainPage {
+    padding-top: 0%;
+    padding-right: 6%;
+    padding-left: 6%;
+    margin-left: -7%;
+    margin-right: -7%;
+  }
+  .fv-profilePageInner{
+    height: 1000px;
+  }
 
 }
 
