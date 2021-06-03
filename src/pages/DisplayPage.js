@@ -1083,10 +1083,10 @@ componentDidMount() {
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
                             <MDBCol md={4} sm={12}>
-                                <p> <i className="fas fa-clock" /> ساعت ورود </p>
+                                <p> <i className="fas fa-clock" /> ساعت ورود : {this.state.resultVilla.rules ? this.state.resultVilla.rules.arrival_time : ""}</p>
                             </MDBCol>
                             <MDBCol md={8} sm={12}>
-                                <p>  <i className="fas fa-clock" /> ساعت خروج </p>
+                                <p>  <i className="fas fa-clock" /> ساعت خروج : {this.state.resultVilla.rules ? this.state.resultVilla.rules.exit_time : ""} </p>
                             </MDBCol>
                         </MDBRow>
 

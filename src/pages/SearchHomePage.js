@@ -16,6 +16,7 @@ import {convertNeSwToNwSe} from "google-map-react";
 import config from "../services/config.json";
 import CalendarLinear from "../data/CalenddarLinear";
 import CalenddarLinearToReturn from "../data/CalenddarLinearToReturn";
+import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 
 
 
@@ -45,6 +46,7 @@ class SearchHomePage extends Datas {
             mobileSearchClass:"fv-searchMobileSearchPageHide2",
 
             test:[],
+            onclickHandelMobileMenu:false,
 
 
         }
@@ -152,6 +154,13 @@ class SearchHomePage extends Datas {
     }
 
     render() {
+        const info = JSON.parse(localStorage.getItem("infoUser"))
+        let nameAndFamily =  ""
+        let avatar = ""
+        if(info){
+            nameAndFamily=info.userInfo.fullname
+            avatar=info.userInfo.avatar
+        }
 
 
         const discountAccommodation = this.state.discountAccommodation
@@ -273,9 +282,11 @@ class SearchHomePage extends Datas {
                         </MDBRow>
                     </MDBRow> */}
 
-                    <MDBRow className={'fv-footerMenuRibbonMobile'}>
-                        <MDBCol sm={8}>
-                            <img src={MobileMenu} />
+                    <MDBRow className={'fv-footerMenuRibbonMobile'}>   {/* mobile menu */}
+                        <MDBCol sm={8} className={'fv-footerMenuImageMobile'}>
+                            <img src={avatar ? `${config.webapi}/images/villas/main/${this.props.avatar}` : MobileMenu} onClick={()=>{
+                                this.setState({onclickHandelMobileMenu:!this.state.onclickHandelMobileMenu})
+                            }}/>
                         </MDBCol>
                         <MDBCol sm={2} className={"fv-footerMenuRibbonButton"}>
                             <img src={LogoName} />
@@ -284,6 +295,84 @@ class SearchHomePage extends Datas {
                             <img src={MobileLogo} />
                         </MDBCol>
                     </MDBRow>
+
+                    <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage"}>     {/* mobile menu  gust or host  display menu*/}
+
+                        <MDBRow className={this.state.onclickHandelMobileMenu && localStorage.getItem("token") ?  "fv-ProfilePageLeftBody fv-hostUsersMenuSearchPage" : "fv-hideMenuSearchPageMobile"}> {/* profile info for mobile             if user*/}
+
+                            <MDBContainer className={ `fv-containerOptionMainPageRowTop `}>
+                                <MDBRow className={"fv-cascadeOptionMainPageRowTop"}>
+                                    <MDBCol md={12} sm={12}>
+                                        <MDBRow>
+                                            <MDBCol md={2} sm={2}>
+                                                <img src={avatar ? `${config.webapi}/images/villas/main/${avatar}` : MobileLogo} />
+                                            </MDBCol>
+                                            <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={12} sm={12}>
+                                                <MDBRow>
+                                                    <MDBCol>
+                                                        <a><h5>{nameAndFamily}</h5></a>
+                                                    </MDBCol>
+
+                                                </MDBRow>
+                                                <MDBRow>
+                                                    <MDBCol>
+                                                        <Link to={"/Profile"}><a>مشاهده حساب کاربری</a></Link>
+                                                    </MDBCol>
+
+                                                </MDBRow>
+
+                                            </MDBCol>
+                                        </MDBRow>
+                                    </MDBCol>
+                                </MDBRow>
+                                <MDBRow className={"fv-cascadeOptionMainPage"}>
+                                    <MDBCol md={12} sm={12}>
+                                        <Link to={"/myAccommodation"}> <i className="fa fa-credit-card" />
+                                            <a><p>اقامت گاه های من</p></a> </Link>
+                                    </MDBCol>
+                                </MDBRow>
+                                <MDBRow className={"fv-cascadeOptionMainPage"}>
+                                    <MDBCol md={12} sm={12}>
+                                        <Link to={"/ProfileReservation2"}> <i className="fa fa-receipt" />
+                                            <a><p>رزور های من</p></a> </Link>
+                                    </MDBCol>
+                                </MDBRow>
+                                <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus fv-userInfoButtonCascadeMobile"}>
+                                    <MDBCol md={12} sm={12}>
+                                        <Link to={"/ProfileReservation2"}> <i className="fa fa-laptop-house" />
+                                            <a><p>میزبان شوید</p></a> </Link>
+                                    </MDBCol>
+                                </MDBRow>
+                                <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus"}>
+                                    <MDBCol md={12} sm={12}>
+                                        <a onClick={()=>{
+                                            localStorage.clear()
+                                            window.location.reload();
+                                        }}> <i className="fa fa-sign-out-alt" />
+                                            <p>خروج از حساب کاربری</p></a>
+                                    </MDBCol>
+                                </MDBRow>
+                            </MDBContainer>
+
+                        </MDBRow>
+
+                        <MDBRow className={this.state.onclickHandelMobileMenu && !localStorage.getItem("token") ? "fv-ProfilePageLeftBody fv-gustUsersMenuSearchPage": "fv-hideMenuSearchPageMobile"}> {/* profile info for mobile            if gust*/}
+                            <MDBCol md={3} className={"fv-ProfilePageUserInfoBody"}>
+                                <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
+                                    <MDBCol className={"fv-ProfilePageUserInfoDetailsBodyColumn"}>
+                                        <Link to={'/login'}><p className={ window.location.href.match(/\blogin\b/) ? "fv-reservationActive" : ''}  ><i className="fa fa-door-open" />ورود</p></Link>
+                                        <Link to={'/login3'}> <p className={ window.location.href.match(/\blogin3\b/) ? "fv-transaction" : ''}  ><i className="fa fa-address-card" />ثبت نام</p> </Link>
+                                    </MDBCol>
+                                </MDBRow>
+                            </MDBCol>
+                        </MDBRow>
+                    </MDBContainer>
+
+
+
+
+
+
                     <MDBRow>
                         <MDBCol>
                             <MDBRow className={'fv-searchMainPage'}>

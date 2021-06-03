@@ -40,6 +40,8 @@
 .fv-SearchHomePage .fv-footerMenuRibbonButton input, .fv-footerMenuRibbonButton button{
     background-color: rgba(102, 212, 72, 0.31);
     color: #3EC886;
+    position: absolute;  /* ezafe shod */
+    margin-right: -125%;  /* ezafe shod */
 }
 .fv-searchMainPage.fv-searchMainPageDateReturn input, .fv-searchMainPage.fv-searchMainPageDateOut input {
     width: 145%;
@@ -589,6 +591,41 @@
         box-shadow: none;
         /* box-shadow: 1px 1px 11px #88888830; */
     }
+
+    .fv-SearchHomePage .fv-ProfilePageLeftBody.fv-gustUsersMenuSearchPage .fv-ProfilePageUserInfoBody  ,   .fv-SearchHomePage .fv-ProfilePageLeftBody.fv-hostUsersMenuSearchPage .fv-ProfilePageUserInfoBody{
+        background: rgba(145, 145, 145, 0.1);
+        border-radius: 30px;
+        margin-left: 1.5%;
+        margin-bottom: 8%;
+        text-align: center;
+        height: 100%;
+    }
+
+    .fv-SearchHomePage .fv-ProfilePageLeftBody.fv-gustUsersMenuSearchPage .fv-ProfilePageUserInfoBody {
+        height: 135px;
+    }
+    .fv-SearchHomePage .fv-ProfilePageLeftBody.fv-gustUsersMenuSearchPage .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn p {
+        /* font-size: 14px; */
+        font-size: 20px;
+    }
+
+    .fv-SearchHomePage .fv-ProfilePageLeftBody.fv-hostUsersMenuSearchPage .fv-ProfilePageUserInfoBody .fv-ProfilePageUserHoldingInfo {
+        width: 90%;
+        /* height: 11%; */
+        background: rgba(145, 145, 145, 0.2);
+        border-radius: 30px;
+        margin: auto;
+        align-items: center;
+        height: 87px;
+        padding-top: 4%;
+        padding-bottom: 4%;
+    }
+    .fv-SearchHomePage .fv-hideMenuSearchPageMobile{
+        display: none;
+    }
+
+
+
 }
 @media (max-width: 320px) {
     .fv-searchMainPage.fv-searchMainPageDateReturn input {

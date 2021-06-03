@@ -170,6 +170,13 @@
     margin-left: 20px !important;
     padding-left: 20px !important;
   }
+  .fv-ProfilePageWallet .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo .col-md-4 {
+    margin-left: 0%;
+    margin-right: 33px;
+    width: 103%;
+    margin-left: -7%;
+  }
+
 }
 @media (max-width: 376px) {
   .fv-ProfilePageWallet .fv-ProfilePageReservationRightCalendar .DatePicker__calendarContainer.-top {
@@ -201,5 +208,11 @@
     position: absolute !important;
     margin-left: 10px !important;
     padding-left: 10px !important;
+  }
+  .fv-ProfilePageWallet .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo .col-md-4 {
+    margin-left: 0%;
+    margin-right: 33px;
+    width: 103%;
+    margin-left: -3%;
   }
 }

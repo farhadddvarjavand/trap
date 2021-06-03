@@ -21,7 +21,7 @@ class ProfilePageWallet extends Component {
             getFinancialReportsTopPage:[],
             getFinancialReports:[],
             villasUser:[],
-            villasUsertitle:'title',
+            villasUsertitle:'',
             dateToGo: {
                 day:'',
                 month:'',
@@ -34,6 +34,7 @@ class ProfilePageWallet extends Component {
             },
         }
     }
+    //villasUsertitle:'title'   bod,
     componentDidMount() {
         this.getFinancialReports()
      //   this.villaIncome()
@@ -108,7 +109,10 @@ class ProfilePageWallet extends Component {
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
                         <MDBRow className={"fv-ProfilePageReservationSetInfo"}>
                             <MDBCol md={4} sm={12} className={""}>
-                                <select value={this.state.villasUsertitle} onChange={(e)=>{
+                                <input type={"text"} placeholder={"نام اقامتگاه"} value={this.state.villasUsertitle}
+                                onChange={(e)=>this.setState({villasUsertitle:e.target.value})}/>
+                                {/*
+                                 <select value={this.state.villasUsertitle} onChange={(e)=>{
                                     this.setState({villasUsertitle:e.target.value})
                                 }}>
                                     <option value='title' disabled>نام اقامتگاه را وارد کنید</option>
@@ -117,6 +121,7 @@ class ProfilePageWallet extends Component {
                                     })}
 
                                 </select>
+                                */}
                             </MDBCol>
                             <MDBCol md={2} sm={5} className={"fv-ProfilePageReservationRightCalendar"}>
                                 <CalendarLinear dayToReturn={this.selectDayToGo} text={'از تاریخ'}/>
@@ -147,7 +152,7 @@ class ProfilePageWallet extends Component {
                                         setDateToreturn = ''
                                     }
                                     const data ={
-                                        villa_title :setTitle,
+                                        villa_title :this.state.villasUsertitle,
                                         start_date : setDateToGo ,
                                         end_date : setDateToreturn ,
                                     }

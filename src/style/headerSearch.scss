@@ -1,0 +1,44 @@
+
+.fv-footerMenu.fv-footerDisplayPage.fv-DisplayPage.fv-profilePageUserInfo .fv-ProfilePageUserInfoBody{
+  display: none;
+}
+.fv-footerMenu.fv-footerDisplayPage.fv-DisplayPage.fv-profilePageUserInfo  .fv-footerDisplayPageBody .fv-DisplayPageLoginSignMobile ,.fv-footerMenu.fv-footerDisplayPage.fv-DisplayPage.fv-profilePageUserInfo  .fv-footerDisplayPageBody .fv-hideMenu {
+  display: none;
+}
+
+
+@media (max-width: 763px) {
+
+  .fv-footerMenu.fv-footerDisplayPage.fv-DisplayPage.fv-profilePageUserInfo  .fv-footerDisplayPageBody .fv-DisplayPageLoginSignMobile{
+    display: block;
+  }
+  .fv-footerMenu.fv-footerDisplayPage.fv-DisplayPage.fv-profilePageUserInfo .fv-footerMenu.fv-footerDisplayPage{
+    margin-right: -9%;
+    margin-top: 8%;
+  }
+  .fv-footerMenu.fv-footerDisplayPage.fv-DisplayPage.fv-profilePageUserInfo .fv-hideMenu{
+    display: none;
+  }
+  .fv-footerMenu.fv-footerDisplayPage.fv-DisplayPage.fv-profilePageUserInfo .fv-ProfilePageUserInfoBody {
+    display: block;
+    margin-bottom: 7%;
+  }
+  .fv-footerMenu.fv-footerDisplayPage.fv-DisplayPage.fv-profilePageUserInfo .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoBody {
+    height: 660px;
+    height: 881px;
+    margin-top: 0%;
+    z-index: 62;
+    margin-right: -7%;
+    width: 518px;
+    margin-left: -4%;
+  }
+
+  .fv-footerMenu.fv-footerDisplayPage.fv-DisplayPage.fv-profilePageUserInfo .fv-ProfilePageLeftBody.fv-gustUsersMenu{
+    .fv-ProfilePageUserInfoDetailsBodyColumn p {
+      font-size: 21px;
+    }
+     .fv-ProfilePageUserInfoBody {
+      height: 143px;
+    }
+  }
+}

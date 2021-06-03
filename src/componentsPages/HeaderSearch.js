@@ -1,8 +1,12 @@
 import React, {Component} from "react";
-import {MDBCol, MDBRow} from "mdbreact";
+import {MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import LogoName from "../images/LogoName.png";
 import MobileLogo from "../images/MobileLogo.png";
 import config from "../services/config.json";
+import Logo from "../images/Logo.png";
+import {Link} from "react-router-dom";
+import "../style/headerSearch.scss"
+import ProfilePageUserInfo from "./ProfilePageUserInfo";
 
 class HeaderSearch extends Component {
     constructor(props) {
@@ -12,6 +16,8 @@ class HeaderSearch extends Component {
             ...this.state,
             ...this.props,
             searchResult:'',
+            onclickHandel:false,
+
         }
     }
 
@@ -24,7 +30,7 @@ class HeaderSearch extends Component {
             avatar=info.userInfo.avatar
         }
         return (
-            <div className={"fv-footerMenu fv-footerDisplayPage fv-DisplayPage"}>
+            <div className={"fv-footerMenu fv-footerDisplayPage fv-DisplayPage fv-profilePageUserInfo"}>
             <MDBRow className={' fv-footerDisplayPageBody'}>
                 <MDBCol md={2}>
                     <i className="fa fa-user-alt" />
@@ -48,16 +54,55 @@ class HeaderSearch extends Component {
                   </MDBCol>
 
                   <MDBCol sm={2}  sm={2} className={"fv-DisplayPageLoginImageMobile"} >
-                      <img src={avatar ? `${config.webapi}/images/villas/main/${this.props.avatar}` : MobileLogo} />
+                      <img src={avatar ? `${config.webapi}/images/villas/main/${this.props.avatar}` : MobileLogo} onClick={()=>{
+                          this.setState({onclickHandel:!this.state.onclickHandel})
+                      }}/>
                   </MDBCol>
-                  <MDBCol sm={1} className={"fv-DisplayPageLoginSignMobile"} >
-                      <i className="fas fa-chevron-down" />
+                  <MDBCol sm={1} className={this.state.onclickHandel ? "fv-DisplayPageLoginSignMobile": "fv-hideMenu"} >
+                      <i className="fas fa-caret-down" onClick={()=>{
+                          this.setState({onclickHandel:!this.state.onclickHandel})
+                      }}/>
                   </MDBCol>
+                <MDBCol sm={1} className={this.state.onclickHandel ? "fv-hideMenu" : "fv-DisplayPageLoginSignMobile"} >
+                    <i className="fas fa-caret-right" onClick={()=>{
+                        this.setState({onclickHandel:!this.state.onclickHandel})
+                    }}/>
+                </MDBCol>
                   <MDBCol md={6} sm={9} className={"menuMobile"}>
                       <img src={LogoName} className={"fv-DisplayPageSearchName"}/>
                       <img src={MobileLogo} className={"fv-DisplayPageSearchLogo"}/>
                   </MDBCol>
               </MDBRow>
+
+
+                <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage"}>
+
+                    <MDBRow className={this.state.onclickHandel && localStorage.getItem("token") ? "fv-ProfilePageLeftBody" : "fv-hideMenu"}> {/* profile info for mobile             if user*/}
+                       <ProfilePageUserInfo />
+                    </MDBRow>
+
+                    <MDBRow className={this.state.onclickHandel && !localStorage.getItem("token") ? "fv-ProfilePageLeftBody fv-gustUsersMenu"  : "fv-hideMenu"}> {/* profile info for mobile            if gust*/}
+                        <MDBCol md={3} className={"fv-ProfilePageUserInfoBody"}>
+                            <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
+                                <MDBCol className={"fv-ProfilePageUserInfoDetailsBodyColumn"}>
+                                    <Link to={'/login'}><p className={ window.location.href.match(/\blogin\b/) ? "fv-reservationActive" : ''}  ><i className="fa fa-door-open" />ورود</p></Link>
+                                    <Link to={'/login3'}> <p className={ window.location.href.match(/\blogin3\b/) ? "fv-transaction" : ''}  ><i className="fa fa-address-card" />ثبت نام</p> </Link>
+                                </MDBCol>
+                            </MDBRow>
+                        </MDBCol>
+                    </MDBRow>
+
+                    <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
+
+                        <MDBRow className={"fv-DisplayPageRotePathMobile"}>
+                            <MDBCol>
+                                <p > صفحه اصلی </p>
+                                <i className="fas fa-chevron-left" />
+                                <p className={"fv-DisplayPagePathNow"}> پنل کاربری </p>
+                            </MDBCol>
+                        </MDBRow>
+                    </MDBContainer>
+                </MDBContainer>
               </div>
           )
       }
