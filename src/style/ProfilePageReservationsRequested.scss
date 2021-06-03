@@ -38,20 +38,28 @@
     background: #FBFBFB;
     box-shadow: 0px 1px 14px rgba(14, 15, 15, 0.08);
     border: 1px solid white;
+    position: relative;
+    z-index: 2;
   }
   .fv-reservedColor{
     color: #15BE29;
   }
-
+  .fv-selected{
+    background: #dee6e9 ;
+  }
 }
 
 
 @media (max-width: 764px) {
   .fv-ProfilePageReservationsRequested{
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo {
-      padding-bottom: 58%;
-      margin-right: -5%;
-      margin-left: -6%;
+      //padding-bottom: 58%;
+      //margin-right: -5%;
+      //margin-left: -6%;
+
+      padding-bottom: 80%;
+      margin-right: -2%;
+      margin-left: -1%;
     }
     .fv-ProfilePageUserSetInfo.fv-ProfilePageReservationUserInfo .fv-ProfilePageReservationsRequestedButton {
       margin-right: -6%;
@@ -83,10 +91,59 @@
       width: 15%;
     }
   }
+  .fv-ProfilePageReservationsRequested .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo .fv-ProfilePageUserSetInfoButton input {
+    width: 80%;
+    margin-right: 13%;
+    padding: 0;
+    margin-left: 29%;
+    margin-top: 39%;
+  }
+  .fv-ProfilePageReservationRightCalendar .DatePicker__calendarContainer.-top {
+    z-index: 100 !important;
+    position: absolute !important;
+    margin-right: 60px !important;
+    padding-right: 60px !important;
+  }
+  .fv-ProfilePageReservationLeftCalendar .DatePicker__calendarContainer.-top {
+    z-index: 100 !important;
+    position: absolute !important;
+    margin-left: 20px !important;
+    padding-left: 20px !important;
+  }
 }
 
-
-
+@media (max-width: 375px) {
+  .fv-ProfilePageReservationsRequested{
+    .fv-ProfilePageReservationRightCalendar .DatePicker__calendarContainer.-top {
+      z-index: 100 !important;
+      position: absolute !important;
+      margin-right: 50px !important;
+      padding-right: 50px !important;
+    }
+    .fv-ProfilePageReservationLeftCalendar .DatePicker__calendarContainer.-top {
+      z-index: 100 !important;
+      position: absolute !important;
+      margin-left: 15px !important;
+      padding-left: 15px !important;
+    }
+  }
+}
+@media (max-width: 360px) {
+  .fv-ProfilePageReservationsRequested{
+    .fv-ProfilePageReservationRightCalendar .DatePicker__calendarContainer.-top {
+      z-index: 100 !important;
+      position: absolute !important;
+      margin-right: 40px !important;
+      padding-right: 40px !important;
+    }
+    .fv-ProfilePageReservationLeftCalendar .DatePicker__calendarContainer.-top {
+      z-index: 100 !important;
+      position: absolute !important;
+      margin-left: 10px !important;
+      padding-left: 10px !important;
+    }
+  }
+}
 
 @media (max-width: 280px) {
   .fv-ProfilePageReservationsRequested{
@@ -102,9 +159,13 @@
     }
 
    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo {
-      padding-bottom: 64%;
-      margin-right: -5%;
-      margin-left: -6%;
+     // padding-bottom: 64%;
+     // margin-right: -5%;
+     // margin-left: -6%;
+
+     padding-bottom: 98%;
+     margin-right: -5%;
+     margin-left: -6%;
     }
   }
 }

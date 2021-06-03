@@ -302,29 +302,62 @@
       margin-right: 0;
     }
     .fv-ProfilePageUserSetInfoButton{
-      display: none;
+     // display: none;
     }
+  }
+  .fv-ProfilePageReservation2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo .fv-ProfilePageUserSetInfoButton input {
+    width: 65%;
+    margin-right: -4%;
+    margin-left: 22%;
+    margin-top: 2%;
+  }
+  .fv-ProfilePageReservation2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo {
+    padding-bottom: 56%;
+  }
+  .fv-ProfilePageReservation2 .fv-ProfilePageReservationRightCalendar .DatePicker__calendarContainer.-top {
+    z-index: 100 !important;
+    position: absolute !important;
+    margin-right: 60px !important;
+    padding-right: 60px !important;
+  }
+  .fv-ProfilePageReservation2 .fv-ProfilePageReservationLeftCalendar .DatePicker__calendarContainer.-top {
+    z-index: 100 !important;
+    position: absolute !important;
+    margin-left: 20px !important;
+    padding-left: 20px !important;
   }
 }
 
 @media (max-width: 411px) {
   .fv-ProfilePageReservation2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo {
-    padding-bottom: 39%;
+    padding-bottom: 66%;
   }
 }
 @media (max-width: 380px) {
   .fv-ProfilePageReservation2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo {
-    padding-bottom: 43%;
+   // padding-bottom: 43%;
+  }
+  .fv-ProfilePageReservation2 .fv-ProfilePageReservationRightCalendar .DatePicker__calendarContainer.-top {
+    z-index: 100 !important;
+    position: absolute !important;
+    margin-right: 40px !important;
+    padding-right: 40px !important;
+  }
+  .fv-ProfilePageReservation2 .fv-ProfilePageReservationLeftCalendar .DatePicker__calendarContainer.-top {
+    z-index: 100 !important;
+    position: absolute !important;
+    margin-left: 15px !important;
+    padding-left: 15px !important;
   }
 }
 @media (max-width: 360px) {
   .fv-ProfilePageReservation2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo {
-    padding-bottom: 46%;
+   // padding-bottom: 46%;
   }
 }
 @media (max-width: 320px) {
   .fv-ProfilePageReservation2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo {
-    padding-bottom: 51%;
+    padding-bottom: 75%;
   }
   .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ImageProductContentTopOne .col-md-4 {
     color: #3EC886;
@@ -337,7 +370,7 @@
 }
 @media (max-width: 280px) {
   .fv-ProfilePageReservation2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo {
-    padding-bottom: 58%;
+    padding-bottom: 85%;
   }
   .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ImageProductContentTopOne .col-md-7, .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ImageProductContentTopOne .col-md-5, .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ImageProductContentTopOne .col-md-4 {
     font-size: 11.5px;
@@ -348,5 +381,11 @@
   }
   .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ProductLocaton .fa, .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ProductLocaton .fas {
     font-size: 14px;
+  }
+  .fv-ProfilePageReservation2 .fv-ProfilePageReservationLeftCalendar .DatePicker__calendarContainer.-top {
+    z-index: 100 !important;
+    position: absolute !important;
+    margin-left: 10px !important;
+    padding-left: 10px !important;
   }
 }

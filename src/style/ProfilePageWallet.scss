@@ -151,11 +151,55 @@
       font-size: 11px ;
     }
   }
+  .fv-ProfilePageWallet .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo .fv-ProfilePageUserSetInfoButton input {
+    width: 64%;
+    margin-right: 0%;
+    margin-left: 26%;
+    margin-top: 2%;
+  }
 
+  .fv-ProfilePageWallet .fv-ProfilePageReservationRightCalendar .DatePicker__calendarContainer.-top {
+    z-index: 100 !important;
+    position: absolute !important;
+    margin-right: 60px !important;
+    padding-right: 60px !important;
+  }
+  .fv-ProfilePageWallet  .fv-ProfilePageReservationLeftCalendar .DatePicker__calendarContainer.-top {
+    z-index: 100 !important;
+    position: absolute !important;
+    margin-left: 20px !important;
+    padding-left: 20px !important;
+  }
+}
+@media (max-width: 376px) {
+  .fv-ProfilePageWallet .fv-ProfilePageReservationRightCalendar .DatePicker__calendarContainer.-top {
+    z-index: 100 !important;
+    position: absolute !important;
+    margin-right: 30px !important;
+    padding-right: 30px !important;
+  }
+  .fv-ProfilePageWallet .fv-ProfilePageReservationLeftCalendar .DatePicker__calendarContainer.-top {
+    z-index: 100 !important;
+    position: absolute !important;
+    margin-left: 10px !important;
+    padding-left: 10px !important;
+  }
 }
 @media (max-width: 320px) {
   .fv-ProfilePageWallet .fv-ProfilePageWalletWalletImage img {
     margin-top: -52%;
     height: 102px;
+  }
+  .fv-ProfilePageWallet .fv-ProfilePageReservationRightCalendar .DatePicker__calendarContainer.-top {
+    z-index: 100 !important;
+    position: absolute !important;
+    margin-right: 40px !important;
+    padding-right: 40px !important;
+  }
+  .fv-ProfilePageWallet .fv-ProfilePageReservationLeftCalendar .DatePicker__calendarContainer.-top {
+    z-index: 100 !important;
+    position: absolute !important;
+    margin-left: 10px !important;
+    padding-left: 10px !important;
   }
 }

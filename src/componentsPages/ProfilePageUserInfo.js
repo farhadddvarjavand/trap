@@ -2,29 +2,47 @@ import {MDBCol, MDBRow} from "mdbreact";
 import Logo from "../images/Logo.png";
 import React from "react";
 import {Link} from "react-router-dom";
+import {getUserStock} from "../services/userService";
 
 class ProfilePageUserInfo extends React.Component{
     constructor() {
         super();
         this.state={
             activeClassChevron:true,
-            activeClass:''
+            activeClass:'',
+            stock:"",
 
         }
     }
+    componentDidMount() {
+        getUserStock()
+            .then(res=>{
+                this.setState({stock:res.data.data})
+            })
+            .catch(err=>console.log(err.response))
+    }
+
     setClassName = () =>{
         this.setState({activeClass:"fv-Active"})
     }
+
     render() {
+        const info = JSON.parse(localStorage.getItem("infoUser"))
+        let nameAndFamily =  ""
+        let avatar = ""
+        if(info){
+            nameAndFamily=info.userInfo.fullname
+            avatar=info.userInfo.avatar
+        }
         return(
             <MDBCol md={3} className={"fv-ProfilePageUserInfoBody"}>
                 <img src={Logo}/>
-                <p>نام و نام خانوادگی</p>
+                <p>{nameAndFamily}</p>
                 <h5>اطلاعات کاربری</h5>
                 <MDBRow className={"fv-ProfilePageUserHoldingInfo"}>
                     <MDBCol md={12}>
                         <p>موجودی حساب شما</p>
-                        <h5>تومان ۵۴۲۰۰۰ </h5>
+                        <h5>{this.state.stock}</h5>
                     </MDBCol>
                 </MDBRow>
                 <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
@@ -51,6 +69,7 @@ class ProfilePageUserInfo extends React.Component{
                             </div>
                         }
                         <Link to={'/ProfileWallet'}><p className={ window.location.href.match(/\bProfileWallet\b/) ? "fv-walletActive" : ''}  ><i className="fas fa-wallet"/>کیف پول</p></Link>
+                        <Link to={'/ProfileWallet3'}><p className={ window.location.href.match(/\bProfileWallet3\b/) ? "fv-walletActive" : ''}  ><i className="fas fa-chart-bar" />درخواست برداشت</p></Link>
                         <Link to={'/Profile'}><p  className={ window.location.href.match(/\bProfile\b/) ? "fv-updateProfileActive" : ''} ><i className="fas fa-user" />ویرایش پروفایل</p></Link>
                         <Link to={'/profileFavoritesPage'}><p  className={ window.location.href.match(/\bprofileFavoritesPage\b/) ? "fv-myFavoritesActive" : ''} ><i className="fa fa-heart" />علاقه مندی ها</p></Link>
                     </MDBCol>

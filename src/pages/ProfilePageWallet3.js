@@ -54,12 +54,22 @@ class ProfilePageWallet3 extends Component {
                             <MDBCol md={12} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
                                 <input type="button" value="ارسال درخواست" onClick={()=>{
 
-                                    if(this.state.amountRequested){
-                                        withdrawal(this.state.amountRequested)
+                                    const withdrow  = {
+                                        requested_amount:this.state.amountRequested
+                                    }
+                                        withdrawal(withdrow)
+                                            .then(res=>{
+                                                if(res.data.status === 1){
+                                                    alert("درخواست بررداشت با موفقیت ثبت شد")
+                                                    window.location.reload();
+                                                    console.log(res)  //s درخواست بررداشت باید فرستاده بشود  // "Withdrawal request created"
+                                                }else {
+                                                    alert(res.data.data)
+                                                }
+                                            })
                                             .catch(err=>{if(err.response.data.errors.requested_amount[0]){
                                                 return alert('مقدار نامعتبر میباشد')
                                             }})
-                                    }
                                 }}/>
                             </MDBCol>
                         </MDBRow>

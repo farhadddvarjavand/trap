@@ -123,10 +123,10 @@ class ProfilePageReservation2 extends Component {
                                     </select>
                             </MDBCol>
 
-                            <MDBCol md={2} sm={5} className={""}>
+                            <MDBCol md={2} sm={5} className={"fv-ProfilePageReservationRightCalendar"}>
                                 <CalendarLinear dayToReturn={this.selectDayToGo} text={'از تاریخ'}/>
                             </MDBCol>
-                            <MDBCol md={2} sm={5} className={""}>
+                            <MDBCol md={2} sm={5} className={"fv-ProfilePageReservationLeftCalendar"}>
                                 <CalendarLinear dayToReturn={this.selectDayToReturn} text={'تا تاریخ'} />
                             </MDBCol>
                             <MDBCol md={2} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>

@@ -188,12 +188,12 @@ export const reservationsRequested = id => {
 }
 
 // Change Reserve Status  --  Method = POST -- id => villa id
-export const changeReserveStatus = (data,id) => {
+export const changeReserveStatus =async (data) => {
     return http.post(
 
-    `${config.webapi}/api/v1/user/changeReserveStatus/${id}`, 
+    `${config.webapi}/api/v1/user/changeReserveStatus`,
     JSON.stringify(data),
-    { headers:{ 'Authorization' : `Bearer USER Token` } }
+    { headers:{ 'Authorization' : await getToken() } }
     
     );
 }
@@ -315,6 +315,13 @@ export const requestedReservationsSearch = async (data) => {
     return http.post(
         `${config.webapi}/api/v1/user/requestedReservationsSearch`,
         JSON.stringify(data),
+        { headers:{ 'Authorization' : await getToken() } }
+    );
+}
+
+export const getUserStock = async () => {
+    return http.get(
+        `${config.webapi}/api/v1/user/getUserStock`,
         { headers:{ 'Authorization' : await getToken() } }
     );
 }

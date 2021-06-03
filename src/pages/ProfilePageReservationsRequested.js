@@ -8,7 +8,14 @@ import "../style/ProfilePageReservationsRequested.scss"
 import Footer from "../componentsPages/footer"
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
-import {allReservationsRequested, requestedReservationsSearch, userVillas} from "../services/userService";
+import config from "../services/config.json";
+
+import {
+    allReservationsRequested,
+    changeReserveStatus,
+    requestedReservationsSearch,
+    userVillas
+} from "../services/userService";
 import "../style/scroolBodyProfilePages.scss"
 import CalendarLinear from "../data/CalenddarLinear";
 
@@ -29,11 +36,14 @@ class ProfilePageReservationsRequested extends Component {
                 month:'',
                 year : ''
             },
+            reservationsIdSelected : [],
+
         }
     }
 
     componentDidMount() {
         this.allReservationsRequested()
+
         userVillas()
             .then(res=>{
                 if(res.data.data)
@@ -43,7 +53,10 @@ class ProfilePageReservationsRequested extends Component {
 
     allReservationsRequested = () =>{
         allReservationsRequested()
-            .then(res=>this.setState({allReservationsRequested:res.data.data}))
+            .then(res=>{
+                console.log(res)
+                this.setState({allReservationsRequested:res.data.data})
+            })
             .catch(err=>console.log(err.response))
     }
 
@@ -71,6 +84,30 @@ class ProfilePageReservationsRequested extends Component {
             }
         }))}
     }
+    selectedRow =(reservationsId) =>{
+
+        const prevId =  this.state.reservationsIdSelected
+        let add = ""
+        if( this.state.reservationsIdSelected.indexOf(reservationsId) === -1){
+            add = true
+        }else {
+            add = false
+        }
+
+        if(add &&  this.state.reservationsIdSelected.indexOf(reservationsId) === -1){   // یعنی انتخاب کرده است
+            prevId.push(reservationsId)
+            this.setState({reservationsIdSelected:prevId })
+        }
+        if(add === false && this.state.reservationsIdSelected.indexOf(reservationsId) !== -1){  // nnot selected this part
+                const index = prevId.indexOf(reservationsId)
+                if (index !== -1) {
+                    prevId.splice(index, 1);
+                    this.setState({reservationsIdSelected:prevId })
+                }
+
+        }
+    }
+
     render() {
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageReservationsRequested"}>
@@ -98,7 +135,7 @@ class ProfilePageReservationsRequested extends Component {
 
 
                             <MDBCol md={3} sm={12} className={"fv-ProfilePageReservationRequestedAccommodation"}>
-                                <select value={this.state.villasUsertitle} onChange={(e)=>{
+                                <select value={this.state.villasUsertitle} onChange={(e)=>{  // villasUsertitle == همان آی دی ویلا میباشد
                                     this.setState({villasUsertitle:e.target.value})
                                 }}>
                                     <option value='title' disabled>نام اقامت گاه</option>
@@ -122,7 +159,7 @@ class ProfilePageReservationsRequested extends Component {
                                     let setDateToreturn = ''
 
                                     if(this.state.villasUsertitle === "title"){
-                                        villaId = null
+                                        villaId = ""
                                     }else {
                                         villaId = this.state.villasUsertitle
                                     }
@@ -130,13 +167,13 @@ class ProfilePageReservationsRequested extends Component {
                                     if(this.state.dateToGo.year){
                                         setDateToGo =  this.state.dateToGo.year+"/"+this.state.dateToGo.month+"/"+this.state.dateToGo.day
                                     }else {
-                                        setDateToGo = null
+                                        setDateToGo = ""
                                     }
 
                                     if(this.state.dateToReturn.year){
                                         setDateToreturn =  this.state.dateToReturn.year+"/"+this.state.dateToReturn.month+"/"+this.state.dateToReturn.day
                                     }else {
-                                        setDateToreturn = null
+                                        setDateToreturn = ""
                                     }
                                     let datas ={
                                         villa_id : villaId ,
@@ -177,23 +214,57 @@ class ProfilePageReservationsRequested extends Component {
                                 if(allReservationsRequest.satus === "2"){
                                     state="پرداخت شده"
                                 }
-                               return <tr>
-                                    <td>{allReservationsRequest.title}</td>
-                                    <td>{allReservationsRequest.guest_name}</td>
-                                    <td>{allReservationsRequest.passengers_number}</td>
-                                    <td>{allReservationsRequest.start_date}</td>
-                                    <td>{allReservationsRequest.end_date}</td>
-                                    <td className={allReservationsRequest.satus === "2" ? "fv-reservedColor" : ""}>{state}</td>
+                               return <tr onClick={()=>this.selectedRow(allReservationsRequest.id)} className={ this.state.reservationsIdSelected.indexOf(allReservationsRequest.id) !== -1   ? "fv-selected" : ""} >
+                                   <td> <a >{allReservationsRequest.title}</a></td>
+                                   <td><a >{allReservationsRequest.guest_name}</a></td>
+                                   <td> <a >{allReservationsRequest.passengers_number}</a></td>
+                                   <td><a >{allReservationsRequest.start_date}</a></td>
+                                   <td><a>{allReservationsRequest.end_date}</a></td>
+                                   <td className={allReservationsRequest.satus === "2" ? "fv-reservedColor" : ""}><a >{state}</a></td>
                                 </tr>
                             })}
                         </table>
 
                         <MDBRow className={"fv-ProfilePageReservationSetInfo fv-ProfilePageReservationsRequestedButton"}>
-                            <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageUserSetInfoButtonRight"}>
-                               <a> <input type="button" value="جستجو"/></a>
+                            <MDBCol md={3} sm={6} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageUserSetInfoButtonRight"}>
+                               <a> <input type="button" value="عدم تایید رزرو" onClick={()=>{
+                                   if(this.state.reservationsIdSelected.length === 0){
+                                       alert("لطفا سطر مورد نظر خود را انتخاب کنید")
+                                   }else {
+                                       const data={
+                                           ids:this.state.reservationsIdSelected,
+                                           status:0 ,
+                                       }
+
+                                       console.log(data)
+                                       changeReserveStatus(data)
+                                           .then(res=>{
+                                               window.location.reload()
+                                           })
+                                           .catch(err=>alert("لطفا سطر مورد نظر خود را انتخاب کنید"))
+                                   }
+
+                               }}/></a>
                             </MDBCol>
-                            <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton "}>
-                               <a> <input type="button" value="جستجو"/></a>
+                            <MDBCol md={3} sm={6} className={"fv-ProfilePageUserSetInfoButton "}>
+                               <a> <input type="button" value="تایید رزرو" onClick={()=>{
+
+                                   if(this.state.reservationsIdSelected.length === 0){
+                                       alert("لطفا سطر مورد نظر خود را انتخاب کنید")
+                                   }else {
+                                       const data={
+                                           ids:this.state.reservationsIdSelected,
+                                           status:1 ,
+                                       }
+
+                                       console.log(data)
+                                       changeReserveStatus(data)
+                                           .then(res=>{
+                                               window.location.reload()
+                                           })
+                                           .catch(err=>alert("لطفا سطر مورد نظر خود را انتخاب کنید"))
+                                   }
+                               }}/></a>
                             </MDBCol>
                         </MDBRow>
 

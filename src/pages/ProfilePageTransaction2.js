@@ -80,7 +80,7 @@ class ProfilePageTransaction2 extends Component {
                             <MDBCol md={3} sm={7} className={""}>
                                 <input type="text" placeholder="مبلغ تراکنش" onChange={(e)=>this.setState({transactionPrice:e.target.value})}/>
                             </MDBCol>
-                            <MDBCol md={2} sm={5} className={""}>
+                            <MDBCol md={2} sm={5} className={"fv-ProfilePageReservationRightCalendar"}>
                                 <CalendarLinear dayToReturn={this.selectDay} text={'تاریخ تراکنش'} />
                             </MDBCol>
                             <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
