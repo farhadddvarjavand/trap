@@ -6,10 +6,11 @@ import "../style/ProfilePage.scss"
 import Footer from "../componentsPages/footer"
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
-import { updateUserInfo ,getUserInformation} from "../services/userService";
+import {updateUserInfo, getUserInformation, SetImages} from "../services/userService";
 import axios from "axios";
 import config from "../services/config.json"
 import http from "../services/httpService";
+import Logo from "../images/Logo.png";
 
 
 class ProfilePage extends Component {
@@ -26,6 +27,9 @@ class ProfilePage extends Component {
             cardNumber:'',
             shabaNumber:'',
             errorField:'',
+
+            clickLoaderAvatar:false,
+            avatarImageData:'',
 
             UserInfo:'',
 
@@ -75,7 +79,33 @@ componentDidMount() {
         this.setState({errorField:errors})
     }
 
+    fileSelectedHandler = (event) => {
+        console.log(event)
+        event.preventDefault()
+        if((event.target.files[0].type === "image/jpg" || event.target.files[0].type === "image/png" || event.target.files[0].type ===  "image/bmp" || event.target.files[0].type ===  "image/jpeg") && event.target.files[0].size < 2000005 ){
+
+            //  this.setState({clickLoader:true})
+            console.log( event.target.files[0])
+            console.log(  event.target.name)
+
+                let formData = new FormData() ;
+                formData.append("image" , event.target.files[0])
+                formData.append("input_name" , event.target.name)
+                 formData.append("img_title" , "")
+                // formData.append("img_src" , this.state.img_title0)
+            this.setState({avatarImageData:formData} )
+
+        }
+        if(event.target.files[0].size > 2000005){
+            alert("حجم فایل عکس باید حداکثر 2 مگابایت باشد")
+        }
+        if((event.target.files[0].type !== "image/jpg" && event.target.files[0].type !== "image/png" && event.target.files[0].type !==  "image/bmp" && event.target.files[0].type !==  "image/jpeg") ) {
+            alert("لطفا فایل عکس انتخواب کنید")
+        }
+    };
+
     render() {
+        console.log(this.state.avatarImageData)
         const   {nameAndFamily,  mobileNumber , emailAddress , job, nationalCode , education, foreignTab, cardNumber ,shabaNumber }  = this.state
 
 
@@ -119,6 +149,22 @@ componentDidMount() {
                         <p>شماره شبا</p>
                         <input type="text" value={this.state.shabaNumber} className={this.state.errorField.includes('shabaNumber')===true ? "fv-redBorderError" : ''}
                                onChange={(e)=>this.setState({shabaNumber:e.target.value})}/>
+
+                        <div className={this.state.clickLoaderAvatar ? "loaderImage" : "fv-hideLoader"}>
+                            <svg className="circular" viewBox="25 25 50 50">
+                                <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
+                                        stroke-miterlimit="10"/>
+                            </svg>
+                        </div>
+                        <MDBRow md={3} sm={12}>
+                            <MDBContainer className={"fv-hostStep5Page3Images"}>
+                                        <label htmlFor="myInput">
+                                            <label htmlFor="files2" className={this.state.clickLoaderAvatar ?  "fv-hideLoader" : "btn"}>تصویر خود را انتخاب کنید</label>
+                                            <input id="files2"   style={{display:'none'}}   onChange={this.fileSelectedHandler}  type="file"   name={'avatar'} />
+                                        </label>
+                            </MDBContainer>
+                        </MDBRow>
+
                         <MDBRow>
                             <MDBCol md={12} sm={12} className={'fv-ProfilePageUserSetInfoButton fv-profilePageEnButton'} >
                                 <input type="button" value="ذخیره" onClick={()=>{
@@ -132,6 +178,7 @@ componentDidMount() {
                                         foreign_language:foreignTab,
                                         card_number:cardNumber,
                                         shaba_number:shabaNumber,
+                                        avatar:this.state.avatarImageData,
                                     }
                                     console.log(data)
                                     updateUserInfo(data)

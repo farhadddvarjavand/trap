@@ -54,7 +54,7 @@ class HeaderSearch extends Component {
                   </MDBCol>
 
                   <MDBCol sm={2}  sm={2} className={"fv-DisplayPageLoginImageMobile"} >
-                      <img src={avatar ? `${config.webapi}/images/villas/main/${this.props.avatar}` : MobileLogo} onClick={()=>{
+                      <img src={avatar ? `${config.webapi}/images/user//${avatar}` : MobileLogo} onClick={()=>{
                           this.setState({onclickHandel:!this.state.onclickHandel})
                       }}/>
                   </MDBCol>

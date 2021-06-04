@@ -137,7 +137,7 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
     width: 25%;
     margin-right: 5%;
     padding-top: 3%;
-    padding-bottom: 6%;
+    padding-bottom: 3%;
     text-align: start;
     place-self: center;
     border-top-left-radius: 15px;
@@ -194,8 +194,10 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
     margin-left: 5%;
   }
   .fv-cascadeOptionMainPageRowTop img {
-    width: 64px;
+    width: 65px;
     margin-right: 19px;
+    height: 54px;
+    border-radius: 15px;
   }
   .fv-textInToCascadeOptionMainPage {
     margin: auto;
@@ -304,7 +306,7 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
       width: 32%;
       margin-right: 5%;
       padding-top: 2%;
-      padding-bottom: 5%;
+      padding-bottom: 2%;
       text-align: start;
       place-self: center;
       border-top-left-radius: 15px;
@@ -325,7 +327,47 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
   }
 }
 
-@media (max-width: 767px){
+@media (max-width: 991px) and  (min-width: 768px){
+  .hostStepPage .fv-cascadeOptionMainPage {
+    /* box-sizing: border-box; */
+    background-color: white;
+    width: 55%;
+    margin-right: 5%;
+    text-align: start;
+    font-size: 18px;
+    align-items: center;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+    display: block;
+  }
+  .hostStepPage .fv-textInToCascadeOptionMainPage {
+    margin: auto;
+    text-align: center;
+    color: white;
+    margin-right: 0;
+    padding: 0;
+    padding-right: 20%;
+    position: absolute;
+  }
+  .hostStepPage .fv-cascadeOptionMainPageRowTop {
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    /* margin-right: -15px; */
+    /* margin-left: -15px; */
+    background-color: #3EC886;
+    width: 55%;
+    margin-right: 5%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-align: start;
+    place-self: center;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+
+}
+
+@media (max-width: 768px){
   .fv-headerHomeImage.row {
     display: flex;
     flex-wrap: wrap;
@@ -441,7 +483,7 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
       width: 80%;
       margin-right: 5%;
       padding-top: 5%;
-      padding-bottom: 13%;
+      padding-bottom: 5%;
       text-align: start;
       place-self: center;
       border-top-left-radius: 15px;

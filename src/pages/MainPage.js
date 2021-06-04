@@ -64,6 +64,7 @@ class MainPage extends Datas {
             avatar=info.userInfo.avatar
         }
 
+        console.log(avatar)
         const popularVillage = this.state.popularVillas
 
         const bannersvillages = this.state.bannersVillage
@@ -118,7 +119,7 @@ class MainPage extends Datas {
 
                             <a className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" : "fv-hideButtonRegister"}  onClick={()=>{ // agar login bod ba click roie dokme in karo kon
                                 this.setState({onclickButtonHandle:!this.state.onclickButtonHandle})
-                            }}> <img src={avatar ? `${config.webapi}/images/villas/main/${avatar}` : MobileLogo} /> {nameAndFamily} </a>
+                            }}> <img src={avatar ? `${config.webapi}/images/user/${avatar}` : MobileLogo} /> {nameAndFamily} </a>
                             <Link to={ "/hostStep1"} ><input type='button' value=' میزبان شوید' onClick={()=> this.props.history.push('/login3')} className={localStorage.getItem("token") ? "fv-getHostButtonMainPage" : "fv-hideButtonRegister"}  /> </Link>
                         </MDBCol>
                         <MDBCol md={9}>
@@ -135,7 +136,7 @@ class MainPage extends Datas {
                         <MDBCol sm={8} className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" :" fv-hideButtonRegister" } >   {/* agar login bod ino neshon bede */}
                             <a className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" : "fv-hideButtonRegister"}  onClick={()=>{   // agar login bod ba klick ro ax in kar ro bokon
                                     this.setState({onclickButtonHandle:!this.state.onclickButtonHandle})
-                            }}> <img src={avatar ? `${config.webapi}/images/villas/main/${avatar}` : MobileLogo} /></a>
+                            }}> <img src={avatar ? `${config.webapi}/images/user/${avatar}` : MobileLogo} /></a>
                         </MDBCol>
                         <MDBCol sm={2} className={"fv-footerMenuRibbonButton"}>
                             <img src={LogoName} />
@@ -150,7 +151,7 @@ class MainPage extends Datas {
                     <MDBCol md={12} sm={12}>
                         <MDBRow>
                             <MDBCol md={2} sm={2}>
-                                <img src={avatar ? `${config.webapi}/images/villas/main/${avatar}` : MobileLogo} />
+                                <img src={avatar ? `${config.webapi}/images/user/${avatar}` : MobileLogo} />
                             </MDBCol>
                             <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={12} sm={12}>
                                 <MDBRow>

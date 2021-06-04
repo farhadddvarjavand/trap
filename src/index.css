@@ -443,6 +443,9 @@ padding-top: 10%;
 .fv-footerMenu .fv-cascadeOptionMainPageRowTop img {
   width: 64px;
   margin-right: 19px;
+  height: 58px;
+  margin-bottom: -33px;
+  border-radius: 15px;
 }
 .fv-textInToCascadeOptionMainPage{
   margin: auto;
@@ -467,6 +470,7 @@ padding-top: 10%;
   margin-left: 5%;
   width: 69px;
   height: 69px;
+  border-radius: 15px;
 }
 .fv-getHostButtonMainPage{
   margin-right: 5%;
@@ -502,6 +506,11 @@ padding-top: 10%;
 }
 .fv-SearchHomePage .fv-searchMainPage.row [type=button]:not(:disabled), .fv-SearchHomePage .fv-searchMainPage.row [type=reset]:not(:disabled), .fv-SearchHomePage .fv-searchMainPage.row [type=submit]:not(:disabled), .fv-SearchHomePage .fv-searchMainPage.row button:not(:disabled) {
   margin-left: 7%;
+}
+.fv-footerMenuRibbonMobile .col-sm-8 img {
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
 }
 
 

@@ -3,6 +3,8 @@ import Logo from "../images/Logo.png";
 import React from "react";
 import {Link} from "react-router-dom";
 import {getUserStock} from "../services/userService";
+import config from "../services/config.json";
+import MobileMenu from "../images/MobileMenu.png";
 
 class ProfilePageUserInfo extends React.Component{
     constructor() {
@@ -36,7 +38,7 @@ class ProfilePageUserInfo extends React.Component{
         }
         return(
             <MDBCol md={3} className={"fv-ProfilePageUserInfoBody"}>
-                <img src={Logo}/>
+                <img src={avatar ? `${config.webapi}/images/user/${avatar}` : Logo}/>
                 <p>{nameAndFamily}</p>
                 <h5>اطلاعات کاربری</h5>
                 <MDBRow className={"fv-ProfilePageUserHoldingInfo"}>

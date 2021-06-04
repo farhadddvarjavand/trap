@@ -31,7 +31,7 @@ class HeaderLoginMenu extends React.Component{
             <MDBContainer className={'fv-SearchHomePageBodyMobile fv-footerMenu main'}>
             <MDBRow className={'fv-footerMenuRibbonMobile'}>   {/* mobile menu */}
                 <MDBCol sm={8} className={'fv-footerMenuImageMobile'}>
-                    <img src={avatar ? `${config.webapi}/images/villas/main/${this.props.avatar}` : MobileMenu} onClick={()=>{
+                    <img src={avatar ? `${config.webapi}/images/user/${avatar}` : MobileMenu} onClick={()=>{
                         this.setState({onclickHandelMobileMenu:!this.state.onclickHandelMobileMenu})
                     }}/>
                 </MDBCol>
@@ -52,7 +52,7 @@ class HeaderLoginMenu extends React.Component{
                             <MDBCol md={12} sm={12}>
                                 <MDBRow>
                                     <MDBCol md={2} sm={2}>
-                                        <img src={avatar ? `${config.webapi}/images/villas/main/${avatar}` : MobileLogo} />
+                                        <img src={avatar ? `${config.webapi}/images/user/${avatar}` : MobileLogo} />
                                     </MDBCol>
                                     <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={12} sm={12}>
                                         <MDBRow>

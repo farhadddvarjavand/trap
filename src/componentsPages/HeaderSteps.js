@@ -32,7 +32,7 @@ class HeaderSteps extends Component {
                     <MDBCol md={3} sm={6}>
                        <a onClick={()=>{
                            this.setState({hideButtonLogin:!this.state.hideButtonLogin})
-                       }}> <img src={info.userInfo.avatar ? `${config.webapi}/images/villas/thum/${info.userInfo.avatar }` : ""}/>
+                       }}> <img src={info.userInfo.avatar ? `${config.webapi}/images/user/${info.userInfo.avatar }` : ""}/>
                         <i className="fas fa-chevron-down name_mobile" />
                            <a className={"name_desktop"}>{info.userInfo.fullname}</a> </a>
                     </MDBCol>
@@ -47,7 +47,7 @@ class HeaderSteps extends Component {
                             <MDBCol md={12} sm={12}>
                                 <MDBRow className={"fv-cascadeOptionMainPageRowTopInner"}>
                                     <MDBCol md={2} sm={2}>
-                                        <img src={avatar ? `${config.webapi}/images/villas/thum/${avatar}` : MobileLogo} />
+                                        <img src={avatar ? `${config.webapi}/images/user/${avatar}` : MobileLogo} />
                                     </MDBCol>
                                     <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={7} sm={8}>
                                         <MDBRow>

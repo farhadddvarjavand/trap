@@ -67,7 +67,11 @@
       text-align: center;
       height: 100%;
       img{
-       margin-top: 15%;
+        margin-top: 15%;
+        width: 185px;
+        height: 179px;
+        border-radius: 117px;
+        margin-bottom: 5%;
       }
       .fv-ProfilePageUserHoldingInfo{
         width: 90%;
@@ -138,9 +142,12 @@
     height: 1000px;
   }
   .fv-footerMenu {
-    margin-bottom: 14%;
+    margin-bottom: 5%;
   }
 
+  .fv-hideLoader{
+    display: none;
+  }
 }
 
 

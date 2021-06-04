@@ -713,7 +713,7 @@ componentDidMount() {
 
                     <MDBRow className={'fv-footerMenuRibbonMobile'}>   {/ mobile menu /}
                         <MDBCol sm={8} className={'fv-footerMenuImageMobile'}>
-                            <img src={avatar ? `${config.webapi}/images/villas/main/${this.props.avatar}` : MobileMenu} onClick={()=>{
+                            <img src={avatar ? `${config.webapi}/images/user//${this.props.avatar}` : MobileMenu} onClick={()=>{
                                 this.setState({onclickHandelMobileMenu:!this.state.onclickHandelMobileMenu})
                             }}/>
                         </MDBCol>
@@ -921,7 +921,7 @@ componentDidMount() {
                     <MDBCol md={8} className={"fv-DisplayPageDetailsRightBody"}>
                         <MDBRow>
                             <MDBCol md={2} sm={2}>
-                                <img src={avatar ? `${config.webapi}/images/villas/main/${avatar}` : MobileLogo} />
+                                <img src={avatar ? `${config.webapi}/images/user//${avatar}` : MobileLogo} />
                             </MDBCol>
                             <MDBCol sm={10} className={"fv-DisplayPageDetailsPersonInformation fv-DisplayPageDetailsPersonInfo"}>
                                 <MDBRow>
@@ -1636,8 +1636,8 @@ componentDidMount() {
                                          rate="5.5/5"
                                          topic={resultSimilarVilla.title}
                                          location={resultSimilarVilla.city}
-                                         numberOfRoom={resultSimilarVilla.details.bedroom}
-                                         capacity={resultSimilarVilla.details.max_capacity}
+                                         numberOfRoom={resultSimilarVilla.details ? resultSimilarVilla.details.bedroom : "0"}
+                                         capacity={resultSimilarVilla.details ? resultSimilarVilla.details.max_capacity : "0"}
                                          price="20000"/>
                             </MDBCol>
                         )
