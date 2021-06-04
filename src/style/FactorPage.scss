@@ -198,7 +198,7 @@
 
 
 
-@media (max-width: 540px) {
+@media (max-width: 756px) {
 
   .fv-FactorPage{
     .desktop{
@@ -259,7 +259,7 @@
       width: 40%;
       margin-top: -1%;
       font-size: 15px;
-      margin-left: 6%;
+      margin-left: 14%;
     }
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody {
       box-shadow: none;
@@ -362,6 +362,7 @@
       padding-left: 9%;
       padding-right: 4%;
       margin-left: -2%;
+      font-size: 4vw;
     }
 
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner input {
@@ -423,9 +424,11 @@
       margin-left: -9%;
       font-size: 14px;
       color: #919191;
+      text-align-last: end;
+       margin-right: 20%;
     }
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond .fv-factorPageRightInfoLeftInnerTop {
-      margin-right: 6%;
+      margin-right: 10%;
       margin-left: -5%;
     }
      .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond .fv-factorPageRightInfoLeftInnerTop .fas, .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond .fv-factorPageRightInfoLeftInnerTop .fas {
@@ -460,6 +463,12 @@
   .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftInnerTopButton1 input {
     font-size: 12px;
   }
+  .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyInnerLeft h5 {
+    font-size: 5vw;
+  }
+  .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyOrderThatPay {
+    font-size: 3.5vw;
+  }
 }
 @media (max-width: 280px) {
 
@@ -480,10 +489,10 @@
     margin-left: -11%;
   }
   .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo p {
-    font-size: 12px;
+    font-size: 11px;
   }
   .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyInnerLeft h5 {
-    font-size: 14px;
+    font-size: 5vw
   }
   .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftInnerTopButton1 input {
     font-size: 10px;

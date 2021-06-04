@@ -137,6 +137,9 @@
   .fv-profilePageInner{
     height: 1000px;
   }
+  .fv-footerMenu {
+    margin-bottom: 14%;
+  }
 
 }
 
@@ -193,6 +196,13 @@
     margin-top: 12%;
     width: 50%;
   }
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoBody{
+      display: none;
+    }
+  .fv-ProfilePage .fv-footerMenu.fv-footerDisplayPage.fv-DisplayPage.fv-profilePageUserInfo .fv-ProfilePageLeftBody.fv-gustUsersMenu .fv-ProfilePageUserInfoBody {
+    height: 123px;
+  }
+
 }
 
 @media (max-width: 450px) {

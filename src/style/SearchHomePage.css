@@ -267,6 +267,23 @@
     line-height: 45px;
 }
 
+.fv-SearchHomePageBodyMobile.fv-footerMenu.main .fv-widthHeaderLoginMenuForSearchHomePage {
+
+}
+.fv-widthHeaderLoginMenuForSearchHomePage .headerLoginMenu .fv-footerMenuRibbonMobile .col-sm-2 {
+    flex: 0 0 21.666667%;
+    width: 16.666667% !important;
+    margin: auto;
+    margin-right: -21vw;
+    margin-top: 12px;
+}
+.fv-widthHeaderLoginMenuForSearchHomePage .fv-footerMenuRibbon {
+    text-align: center;
+    margin-left: -30%;
+    width: 142%;
+    margin-right: -8%;
+}
+
 
 @media (max-width: 1200px) and (min-width: 991px){
     .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-product.fv-mobileProduct .col-md-5 {
@@ -275,6 +292,16 @@
     .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox .col-md-5 {
         padding-left: 7px;
     }
+    .fv-widthHeaderLoginMenuForSearchHomePage .fv-footerMenuRibbon {
+        width: 150%;
+    }
+}
+@media (max-width: 768px) and (min-width: 540px){
+
+    .fv-widthHeaderLoginMenuForSearchHomePage .fv-footerMenuRibbon {
+        width: 135%;
+    }
+
 }
 
 @media (max-width: 991px) and (min-width: 766px){
@@ -509,11 +536,15 @@
     .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct {
         direction: ltr;
         margin-left: 9%;
-        margin-right: -8%;
+        margin-right: -10%;
         padding-right: 2%;
         padding-top: 2%;
         direction: ltr;
     }
+    .fv-SearchHomePage .fv-searchMainPageBodyLeft p {
+        text-align: initial;
+    }
+
     .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox {
         font-size: 12px;
         direction: ltr;
@@ -620,10 +651,42 @@
         padding-top: 4%;
         padding-bottom: 4%;
     }
-    .fv-SearchHomePage .fv-hideMenuSearchPageMobile{
+    .fv-SearchHomePage.fv-DisplayPage .fv-hideMenuSearchPageMobile{
         display: none;
     }
 
+
+    .fv-SearchHomePage.fv-DisplayPage  .fv-ProfilePageLeftBody.fv-gustUsersMenuSearchPage.fv-ProfilePageUserInfoBodySearchPage{
+        margin-left: -26px;
+        position: absolute;
+        z-index: 9;
+        background: #ffffff;
+        width: 75%;
+        margin-right: 1%;
+        margin-top: 5%;
+        border-radius: 15px;
+        text-align: initial;
+    }
+    .fv-SearchHomePage.fv-DisplayPage  .fv-ProfilePageLeftBody.fv-gustUsersMenuSearchPage.fv-ProfilePageUserInfoBodySearchPage a{
+        color: black;
+    }
+    .fv-SearchHomePage.fv-DisplayPage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody {
+        margin-right: 3%;
+        margin-top: 5%;
+    }
+    .fv-SearchHomePage.fv-DisplayPage .fv-ProfilePageLeftBody.fv-gustUsersMenuSearchPage .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn p {
+        /* font-size: 14px; */
+        font-size: 20px;
+    }
+    .fv-SearchHomePage.fv-DisplayPage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fa, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fas {
+        margin-left: 4%;
+    }
+
+    .fv-SearchHomePage.fv-DisplayPage .fv-footerMenu .fv-containerOptionMainPageRowTop {
+        max-width: 1140px;
+        z-index: 3;
+        margin-top: 4%;
+    }
 
 
 }
@@ -648,6 +711,15 @@
         width: 215%;
         margin-right: -26%;
     }
+
+    .fv-widthHeaderLoginMenuForSearchHomePage .headerLoginMenu .fv-footerMenuRibbonMobile .col-sm-2 {
+        flex: 0 0 25.666667%;
+        width: 16.666667% !important;
+        margin: auto;
+        margin-right: -26vw;
+        margin-top: 12px;
+    }
+
 }
 @media (max-width: 280px) {
      .fv-footerMenu .fv-searchMainPage button:not(:disabled) {
@@ -663,4 +735,12 @@
         margin-right: -16vw;
         margin-top: 12px;
     }
+    .fv-widthHeaderLoginMenuForSearchHomePage .headerLoginMenu .fv-footerMenuRibbonMobile .col-sm-2 {
+        flex: 0 0 31.666667%;
+        width: 16.666667% !important;
+        margin: auto;
+        margin-right: -32vw;
+        margin-top: 12px;
+    }
+
 }

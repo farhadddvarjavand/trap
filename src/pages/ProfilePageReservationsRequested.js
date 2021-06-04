@@ -112,16 +112,8 @@ class ProfilePageReservationsRequested extends Component {
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageReservationsRequested"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props}/>
-                    <MDBRow className={"fv-DisplayPageRotePathMobile"}>
-                        <MDBCol>
-                            <p> صفحه اصلی </p>
-                            <i className="fas fa-chevron-left" />
-                            <p> پنل کاربری </p>
-                            <i className="fas fa-chevron-left" />
-                            <p className={"fv-DisplayPagePathNow"}> تراکنش های من </p>
-                        </MDBCol>
-                    </MDBRow>
+                    <HeaderSearch  {...this.props}
+                                   thisPageName = "رزروهای درخواستی"/>
                 </MDBContainer>
 
                 <MDBRow className={"fv-ProfilePageLeftBody"}>
@@ -129,7 +121,7 @@ class ProfilePageReservationsRequested extends Component {
                     <ProfilePageUserInfo />
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
-                        <h5>تراکنش های من</h5>
+                        <h5>رزروهای درخواستی</h5>
                         <p className={"fv-ProfilePageReservationsRequestedPTitle"}>جهت تایید یا عدم تایید رزرو مهمان هر سطر را انتخاب کنید و تایید یا عدم تایید کنید</p>
                         <MDBRow className={"fv-ProfilePageReservationSetInfo"}>
 

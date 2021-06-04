@@ -45,7 +45,7 @@ import {Link, Route, Switch,NavLink,BrowserRouter} from "react-router-dom"
 import ProfilePageCommentsHandle from "./pages/ProfilePageCommentsHandle"
 import ProfilePageCalendarEmpty from "./pages/ProfilePageCalendarEmpty";
 import ProfilePageCalendarHandle from "./pages/ProfilePageCalendarHandle";
-
+import ScrollToTop from "./componentsPages/ScrollToTop"
 
 ReactDOM.render(
     <React.StrictMode>
@@ -53,6 +53,7 @@ ReactDOM.render(
             <Switch>
                 <CookiesProvider>
 
+                    <ScrollToTop />
                     <div className="App">
                         <div className={'pagecontent'}>
                             <Route exact path={'/login'} component={LoginPage}/>

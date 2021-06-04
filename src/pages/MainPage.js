@@ -17,6 +17,9 @@ import Datas from "../data/Datas";
 import config from "../services/config.json"
 import CalendarLinear from "../data/CalenddarLinear";
 import {getUserInformation} from "../services/userService";
+import Footer from "../componentsPages/footer";
+import HeadeerLoginMenu from "../componentsPages/HeaderLoginMenu"
+
 
 
 
@@ -32,7 +35,7 @@ class MainPage extends Datas {
             dateToGo:'',
             dateToReturn:'',
             numberOfPeople:'',
-            hideButtonLogin:true,
+            onclickButtonHandle:true,
 
 
         }
@@ -99,10 +102,11 @@ class MainPage extends Datas {
        const {city,dateToGo,dateToReturn,numberOfPeople} = this.state
         return(
             <div className={"main"}>
-        <div className={'fv-footerMenu'}>
+        <div className={'fv-footerMenu MainPage'}>
             <MDBRow className={'fv-footerMenuImage'}>
                 <img src={FotterpageImage} alt="Trulli" />
             </MDBRow>
+
                     <MDBRow className={'fv-footerMenuRibbon'}>
 
                         <MDBCol md={1}>
@@ -112,8 +116,8 @@ class MainPage extends Datas {
                         </MDBCol>
                         <MDBCol md={2} className={"fv-footerMenuRibbonButton"}>
 
-                            <a className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" : "fv-hideButtonRegister"}  onClick={()=>{
-                                this.setState({hideButtonLogin:!this.state.hideButtonLogin})
+                            <a className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" : "fv-hideButtonRegister"}  onClick={()=>{ // agar login bod ba click roie dokme in karo kon
+                                this.setState({onclickButtonHandle:!this.state.onclickButtonHandle})
                             }}> <img src={avatar ? `${config.webapi}/images/villas/main/${avatar}` : MobileLogo} /> {nameAndFamily} </a>
                             <Link to={ "/hostStep1"} ><input type='button' value=' میزبان شوید' onClick={()=> this.props.history.push('/login3')} className={localStorage.getItem("token") ? "fv-getHostButtonMainPage" : "fv-hideButtonRegister"}  /> </Link>
                         </MDBCol>
@@ -123,18 +127,14 @@ class MainPage extends Datas {
                     </MDBRow>
 
                     <MDBRow className={'fv-footerMenuRibbonMobile'}>
-                        <MDBCol sm={8} className={localStorage.getItem("token") ? "fv-hideButtonRegister"  : "fv-userInfoButtonCascade" } >
-                            <img src={MobileMenu}  onClick={()=>{
-                                this.props.history.push("/login")
+                        <MDBCol sm={8} className={localStorage.getItem("token") ? "fv-hideButtonRegister"  : "fv-userInfoButtonCascade" } >  {/* agar login nabod ino neshon bede */}
+                            <img src={MobileMenu}  onClick={()=>{                                           // agar login nabod ba klick ro ax in kar ro bokon
+                                this.setState({onclickButtonHandle:!this.state.onclickButtonHandle})
                             }}/>
                         </MDBCol>
-                        <MDBCol sm={8} className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" :" fv-hideButtonRegister" } >
-                            <a className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" : "fv-hideButtonRegister"}  onClick={()=>{
-                                if(localStorage.getItem("token")){
-                                    this.setState({hideButtonLogin:!this.state.hideButtonLogin})
-                                }else {
-                                    this.props.history.push("/login")
-                                }
+                        <MDBCol sm={8} className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" :" fv-hideButtonRegister" } >   {/* agar login bod ino neshon bede */}
+                            <a className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" : "fv-hideButtonRegister"}  onClick={()=>{   // agar login bod ba klick ro ax in kar ro bokon
+                                    this.setState({onclickButtonHandle:!this.state.onclickButtonHandle})
                             }}> <img src={avatar ? `${config.webapi}/images/villas/main/${avatar}` : MobileLogo} /></a>
                         </MDBCol>
                         <MDBCol sm={2} className={"fv-footerMenuRibbonButton"}>
@@ -145,7 +145,7 @@ class MainPage extends Datas {
                         </MDBCol>
                     </MDBRow>
 
-            <MDBContainer className={localStorage.getItem("token") ? `fv-containerOptionMainPageRowTop ${this.state.hideButtonLogin ? "fv-displayNoneLogin" : ""}` : "fv-containerOptionMainPageRowTop fv-displayNoneLogin "}>
+            <MDBContainer className={localStorage.getItem("token") && this.state.onclickButtonHandle===false ? `fv-containerOptionMainPageRowTop ` : "fv-containerOptionMainPageRowTop fv-displayNoneLogin "}>
                 <MDBRow className={"fv-cascadeOptionMainPageRowTop"}>
                     <MDBCol md={12} sm={12}>
                         <MDBRow>
@@ -192,14 +192,26 @@ class MainPage extends Datas {
                     <MDBCol md={12} sm={12}>
                         <a onClick={()=>{
                             localStorage.clear()
-                            window.location.reload();
+                            this.props.history.push("/mainPage")
                         }}> <i className="fa fa-sign-out-alt" />
                             <p>خروج از حساب کاربری</p></a>
                     </MDBCol>
                 </MDBRow>
             </MDBContainer>
 
+            <MDBContainer className={"fv-mobileMenuGustMainPage"}>
+            <MDBRow className={!localStorage.getItem("token") &&  this.state.onclickButtonHandle===false ? "fv-ProfilePageLeftBody fv-gustUsersMenu"  : "fv-displayNoneLogin"}> {/* profile info for mobile            if gust*/}
+                <MDBCol md={3} className={"fv-ProfilePageUserInfoBody"}>
+                    <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
+                        <MDBCol className={"fv-ProfilePageUserInfoDetailsBodyColumn"}>
+                            <Link to={'/login'}><p className={ window.location.href.match(/\blogin\b/) ? "fv-reservationActive" : ''}  ><i className="fa fa-door-open" />ورود</p></Link>
+                            <Link to={'/login3'}> <p className={ window.location.href.match(/\blogin3\b/) ? "fv-transaction" : ''}  ><i className="fa fa-address-card" />ثبت نام</p> </Link>
+                        </MDBCol>
+                    </MDBRow>
+                </MDBCol>
+            </MDBRow>
 
+            </MDBContainer>
 
 
             <MDBRow className={'fv-searchMainPageTopic'}>
@@ -536,25 +548,9 @@ class MainPage extends Datas {
                 </MDBRow>
         </MDBContainer>
 
-            <MDBRow className={"fv-footerMainPage"}>
-                <MDBCol md={5}>
-                    <img className={"fv-footerMainPageBigger"} src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg" width="50" height="50" />
-                    <img className={"fv-footerMainPageBigger"} src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg" width="50" height="50" />
-                    <img className={"fv-footerMainPageSmaller"} src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg" width="15" height="15" />
-                    <img className={"fv-footerMainPageSmaller"} src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg" width="15" height="15" />
-                    <img className={"fv-footerMainPageSmaller"} src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg" width="15" height="15" />
-                    <img className={"fv-footerMainPageSmaller"} src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg" width="15" height="15" />
-                </MDBCol>
-                <MDBCol md={7}>
-                    <a onClick={()=>{
-                        const a = 'test'
-                     this.postDataAndPush('https://reqres.in/api/posts',a,'/login2')
-                    }}>قوق کاربران</a>
-                    <a>قوانین ترپ</a>
-                    <a>تماس با پشتیبانی</a>
-                    <a>درباره ترپ</a>
-                </MDBCol>
-            </MDBRow>
+                <MDBRow>
+                    <Footer />
+                </MDBRow>
 
 
             </div>

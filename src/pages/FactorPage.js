@@ -38,14 +38,8 @@ class FactorPage extends Component {
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-FactorPage"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props}/>
-                    <MDBRow className={"fv-DisplayPageRotePathMobile"}>
-                        <MDBCol>
-                            <Link to={ "/mainPage"} ><p> صفحه اصلی </p></Link>
-                            <i className="fas fa-chevron-left" />
-                            <Link to={ "/Profile"} ><p className={"fv-DisplayPagePathNow"}> پنل کاربری </p></Link>
-                        </MDBCol>
-                    </MDBRow>
+                    <HeaderSearch  {...this.props}
+                                   thisPageName = "فاکتور" />
                 </MDBContainer>
 
                 <MDBRow className={"fv-ProfilePageLeftBody desktop"}>
@@ -232,7 +226,7 @@ class FactorPage extends Component {
                                     <div><p className={"fv-factorPageRightInfoLeftInnerTopReserveCodeMobileP"}>تاریخ برگشت</p> <h5> {this.state.factorInfo.exit_date} </h5></div><i className="fas fa-calendar-alt fv-factorPageRightInfoLeftInnerTopReserveCodeMobileIcon" />
                                 </MDBCol>
                                 <MDBCol className={"fv-factorPageRightInfoLeftInnerTopButton fv-factorPageRightInfoLeftInnerChangeCalender"}>
-                                    <p><i className="fa fa-user-friends" />تغییر تاریخ</p>
+                                    <p><i className="fa fa-chevron-left" />تغییر تاریخ</p>
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow>
@@ -262,7 +256,7 @@ class FactorPage extends Component {
                                             <p><i className="fa fa-user-friends" />ظرفیت استاندارد {this.state.villaInfo.standard_capacity} نفر+{this.state.villaInfo.max_capacity ? Number(this.state.villaInfo.max_capacity - this.state.villaInfo.standard_capacity) : ''} نفر اضافه</p>
                                             <p><i className='fas fa-boxes' />{this.state.villaInfo.bedroom} اتاق خواب+{this.state.villaInfo.shower} حمام+{this.state.villaInfo.ir_toilet} دست شویی ایرانی+{this.state.villaInfo.eu_toilet} دست شویی فرنگیی</p>
                                             <p><i className="fas fa-bed" />{this.state.villaInfo.bed_count} تخت یک نفره+{this.state.villaInfo.mattress_count} تشک معمولی</p>
-                                            <p className={"fv-FactorPageIconGreenColorMobile"}><i className="fas fa-chevron-left fv-FactorPageIconSeeDetailsMobile" />مشاهده مجدد جزییات</p>
+                                            {/* <p className={"fv-FactorPageIconGreenColorMobile"}><i className="fas fa-chevron-left fv-FactorPageIconSeeDetailsMobile" />مشاهده مجدد جزییات</p> */}
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCol>

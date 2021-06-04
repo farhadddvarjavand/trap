@@ -18,16 +18,8 @@ class ProfilePageTransaction3 extends Component {
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageTransaction"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props}/>
-                    <MDBRow className={"fv-DisplayPageRotePathMobile"}>
-                        <MDBCol>
-                            <p> صفحه اصلی </p>
-                            <i className="fas fa-chevron-left" />
-                            <p> پنل کاربری </p>
-                            <i className="fas fa-chevron-left" />
-                            <p className={"fv-DisplayPagePathNow"}> اقامت گاه های من </p>
-                        </MDBCol>
-                    </MDBRow>
+                    <HeaderSearch  {...this.props}
+                                   thisPageName = "تراکنش های من"/>
                 </MDBContainer>
 
                 <MDBRow className={"fv-ProfilePageLeftBody"}>
@@ -35,7 +27,7 @@ class ProfilePageTransaction3 extends Component {
                     <ProfilePageUserInfo />
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
-                        <h5>رزورو های من</h5>
+                        <h5>تراکنش های من</h5>
 
                         <MDBRow className={"fv-ProfilePageReservationImage"}>
                             <MDBCol md={12}>

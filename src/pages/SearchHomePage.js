@@ -17,6 +17,7 @@ import config from "../services/config.json";
 import CalendarLinear from "../data/CalenddarLinear";
 import CalenddarLinearToReturn from "../data/CalenddarLinearToReturn";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
+import HeaderLoginMenu from "../componentsPages/HeaderLoginMenu";
 
 
 
@@ -206,6 +207,11 @@ class SearchHomePage extends Datas {
 
         return(
             <MDBContainer className={"fv-SearchHomePage"}>
+
+                <MDBContainer className={"fv-widthHeaderLoginMenuForSearchHomePage fv-footerMenu main"}>  {/* mobile menu */}
+                    <HeaderLoginMenu  {...this.props}/>
+                </MDBContainer>
+
                 <MDBContainer className={'fv-SearchHomePageBodyMobile fv-footerMenu main'}>
 
                     {/* <MDBRow>
@@ -281,8 +287,8 @@ class SearchHomePage extends Datas {
 
                         </MDBRow>
                     </MDBRow> */}
-
-                    <MDBRow className={'fv-footerMenuRibbonMobile'}>   {/* mobile menu */}
+                    {/*
+                    <MDBRow className={'fv-footerMenuRibbonMobile'}>   {/ mobile menu /}
                         <MDBCol sm={8} className={'fv-footerMenuImageMobile'}>
                             <img src={avatar ? `${config.webapi}/images/villas/main/${this.props.avatar}` : MobileMenu} onClick={()=>{
                                 this.setState({onclickHandelMobileMenu:!this.state.onclickHandelMobileMenu})
@@ -296,9 +302,9 @@ class SearchHomePage extends Datas {
                         </MDBCol>
                     </MDBRow>
 
-                    <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage"}>     {/* mobile menu  gust or host  display menu*/}
+                    <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage"}>     {/ mobile menu  gust or host  display menu/}
 
-                        <MDBRow className={this.state.onclickHandelMobileMenu && localStorage.getItem("token") ?  "fv-ProfilePageLeftBody fv-hostUsersMenuSearchPage" : "fv-hideMenuSearchPageMobile"}> {/* profile info for mobile             if user*/}
+                        <MDBRow className={this.state.onclickHandelMobileMenu && localStorage.getItem("token") ?  "fv-ProfilePageLeftBody fv-hostUsersMenuSearchPage" : "fv-hideMenuSearchPageMobile"}> {/ profile info for mobile             if user/}
 
                             <MDBContainer className={ `fv-containerOptionMainPageRowTop `}>
                                 <MDBRow className={"fv-cascadeOptionMainPageRowTop"}>
@@ -356,8 +362,8 @@ class SearchHomePage extends Datas {
 
                         </MDBRow>
 
-                        <MDBRow className={this.state.onclickHandelMobileMenu && !localStorage.getItem("token") ? "fv-ProfilePageLeftBody fv-gustUsersMenuSearchPage": "fv-hideMenuSearchPageMobile"}> {/* profile info for mobile            if gust*/}
-                            <MDBCol md={3} className={"fv-ProfilePageUserInfoBody"}>
+                        <MDBRow className={this.state.onclickHandelMobileMenu && !localStorage.getItem("token") ? "fv-ProfilePageLeftBody fv-gustUsersMenuSearchPage fv-ProfilePageUserInfoBodySearchPage": "fv-hideMenuSearchPageMobile"}> {/ profile info for mobile            if gust/}
+                            <MDBCol md={3} className={""}>
                                 <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
                                     <MDBCol className={"fv-ProfilePageUserInfoDetailsBodyColumn"}>
                                         <Link to={'/login'}><p className={ window.location.href.match(/\blogin\b/) ? "fv-reservationActive" : ''}  ><i className="fa fa-door-open" />ورود</p></Link>
@@ -367,7 +373,7 @@ class SearchHomePage extends Datas {
                             </MDBCol>
                         </MDBRow>
                     </MDBContainer>
-
+*/}
 
 
 
@@ -421,6 +427,7 @@ class SearchHomePage extends Datas {
                 {/*                                   Desktop                                               */}
 
                 <MDBContainer className={'fv-footerMenu fv-SearchHomePageBody'}>
+                    {/*
                     <MDBRow className={'fv-footerMenuRibbon'}>
                         <MDBCol md={1}>
                             <i className={localStorage.getItem("token") ? "" : "fa fa-user-alt"}/>
@@ -433,6 +440,7 @@ class SearchHomePage extends Datas {
                             <img src={FotterpageLogo} />
                         </MDBCol>
                     </MDBRow>
+                    */}
                     <MDBRow >
 
                         <MDBCol md={4} className={`${this.state.mobileSearchClass} fv-searchMainPageBody`}>
@@ -706,9 +714,9 @@ class SearchHomePage extends Datas {
 
                 </MDBContainer>
 
-<MDBRow>
-  <Footer />
-</MDBRow>
+                <MDBRow>
+                  <Footer />
+                </MDBRow>
 
             </MDBContainer>
         )}

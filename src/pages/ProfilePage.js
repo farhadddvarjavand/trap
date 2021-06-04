@@ -82,14 +82,7 @@ componentDidMount() {
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props}/>
-                    <MDBRow className={"fv-DisplayPageRotePathMobile"}>
-                        <MDBCol>
-                            <p > صفحه اصلی </p>
-                            <i className="fas fa-chevron-left" />
-                            <p className={"fv-DisplayPagePathNow"}> پنل کاربری </p>
-                        </MDBCol>
-                    </MDBRow>
+                    <HeaderSearch  {...this.props}  />
                 </MDBContainer>
 
                 <MDBRow className={"fv-ProfilePageLeftBody"}>

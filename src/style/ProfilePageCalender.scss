@@ -221,6 +221,7 @@
   z-index: 1;
 }
 
+
 @media (max-width: 1200px) and (min-width: 992px){
   .fv-ProfilePageCalender .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderDayName .Calendar__day.-rtl {
     font-size: 2.55em;
@@ -229,6 +230,10 @@
     border-radius: 9px;
     width: 89px;
   }
+  .fv-ProfilePageCalender .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderImageAndContent .col-md-7 {
+    margin-right: 1%;
+  }
+
 }
 @media (max-width: 992px) and (min-width: 765px){
   .fv-ProfilePageCalender .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderDayName .Calendar__day.-rtl {
@@ -238,6 +243,10 @@
     border-radius: 9px;
     width: 72px;
   }
+  .fv-ProfilePageCalender .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderImageAndContent .col-md-7 {
+    margin-right: 1%;
+  }
+
 }
 @media (max-width: 765px) and (min-width: 541px){
   .fv-ProfilePageCalender .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderDayName .Calendar__day.-rtl {
@@ -296,6 +305,7 @@
   .fv-ProfilePageCalender .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageCalenderDayReserve .col-md-7 p {
     margin-right: -9%;
   }
+
 
 }
 

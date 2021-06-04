@@ -5,6 +5,9 @@
 .fv-footerMenu.fv-footerDisplayPage.fv-DisplayPage.fv-profilePageUserInfo  .fv-footerDisplayPageBody .fv-DisplayPageLoginSignMobile ,.fv-footerMenu.fv-footerDisplayPage.fv-DisplayPage.fv-profilePageUserInfo  .fv-footerDisplayPageBody .fv-hideMenu {
   display: none;
 }
+.fv-footerMenu.fv-footerDisplayPage.fv-DisplayPage.fv-profilePageUserInfo .fv-footerDisplayPageBody a{
+  color: black;
+}
 
 
 @media (max-width: 763px) {
@@ -13,8 +16,10 @@
     display: block;
   }
   .fv-footerMenu.fv-footerDisplayPage.fv-DisplayPage.fv-profilePageUserInfo .fv-footerMenu.fv-footerDisplayPage{
+    display: inline;
+  }
+  .fv-footerMenu.fv-footerDisplayPage.fv-DisplayPage.fv-profilePageUserInfo .fv-footerMenu.fv-footerDisplayPage .fv-DisplayPageRotePathMobile{
     margin-right: -9%;
-    margin-top: 8%;
   }
   .fv-footerMenu.fv-footerDisplayPage.fv-DisplayPage.fv-profilePageUserInfo .fv-hideMenu{
     display: none;

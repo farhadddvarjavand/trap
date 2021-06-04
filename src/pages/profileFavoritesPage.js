@@ -37,16 +37,9 @@ class ProfilePageWallet2 extends Component {
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageWallet2 fv-profileFavoritesPage"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props}/>
-                    <MDBRow className={"fv-DisplayPageRotePathMobile"}>
-                        <MDBCol>
-                            <p> صفحه اصلی </p>
-                            <i className="fas fa-chevron-left" />
-                            <p> پنل کاربری </p>
-                            <i className="fas fa-chevron-left" />
-                            <p className={"fv-DisplayPagePathNow"}> علاقه مندی های من </p>
-                        </MDBCol>
-                    </MDBRow>
+                    <HeaderSearch  {...this.props}
+                                   thisPageName = "علاقه مندی های من"/>
+
                 </MDBContainer>
 
                 <MDBRow className={"fv-ProfilePageLeftBody"}>

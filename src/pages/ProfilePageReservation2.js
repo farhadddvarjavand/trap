@@ -70,16 +70,9 @@ class ProfilePageReservation2 extends Component {
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
                     <HeaderSearch
-                        {...this.props}/>
-                    <MDBRow className={"fv-DisplayPageRotePathMobile"}>
-                        <MDBCol>
-                            <Link to={"./mainPage"} ><p> صفحه اصلی </p> </Link>
-                            <i className="fas fa-chevron-left" />
-                            <Link to={"./Profile"} ><p> پنل کاربری </p></Link>
-                            <i className="fas fa-chevron-left" />
-                            <p className={"fv-DisplayPagePathNow"}> رزروهای من </p>
-                        </MDBCol>
-                    </MDBRow>
+                        {...this.props}
+                        thisPageName = "رزورو های من"/>
+
                 </MDBContainer>
 
                 <MDBRow className={"fv-ProfilePageLeftBody"}>
