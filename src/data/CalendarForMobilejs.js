@@ -5,6 +5,7 @@ import "./Calendar/DatePicker.css";
 import './style/CalendarDesktop.scss'
 import {Calendar} from "./CalendarForMobile"
 import {getToday} from "../componentsPages/calculationsDate";
+import DatePicker from "@hassanmojab/react-modern-calendar-datepicker";
 
 const CalendarForMobilejs = (props) => {
 
@@ -83,6 +84,21 @@ const CalendarForMobilejs = (props) => {
     }
 
 
+    let minimumDate = {
+        year: todayInt.year,
+        month: todayInt.month,
+        day: todayInt.day,
+    };
+    let maximumDate = {
+        year: todayInt.year,
+        month: todayInt.month,
+        day: todayInt.day,
+    }
+    if(props.minimumDate && props.maximumDate){    // اگر مینیموم روزز و آخرین روز که از روی قیمت های روز ها میگیریم تعیین شده باشد
+        minimumDate = props.minimumDate
+        maximumDate=props.maximumDate
+    }
+
 
     return (
         <>
@@ -93,6 +109,8 @@ const CalendarForMobilejs = (props) => {
                 customDaysClassName={defaultDay}
                 shouldHighlightWeekends
                 disabledDays={disabledDays}
+                minimumDate={minimumDate}
+                maximumDate={maximumDate}
                 priceDays={[1,2000000,3,4]}
                 test = {testname}
                 villaPrice={props.villaPrice}

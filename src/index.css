@@ -743,6 +743,34 @@ color {  100%, 0% {
 
 }
 
+@media (max-width: 1200px) and  (min-width: 768px){
+  .fv-footerMenu .fv-cascadeOptionMainPageRowTop .col-md-12 {
+    place-self: center;
+    font-size: 11px;
+  }
+  .fv-footerMenu .fv-cascadeOptionMainPageRowTop {
+    background-color: #3EC886;
+    width: 35%;
+    margin-right: 5%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-align: start;
+    place-self: center;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+  .fv-footerMenu .fv-cascadeOptionMainPage {
+    background-color: white;
+    width: 35%;
+    margin-right: 5%;
+    text-align: start;
+    font-size: 18px;
+    align-items: center;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+    display: block;
+  }
+}
 
 @media (max-width: 769px){
   .fv-product .row {
@@ -961,6 +989,12 @@ color {  100%, 0% {
   }
   .fv-footerMenuMobileTitle {
     font-size: 4vw;
+  }
+  .fv-footerMenu .fv-cascadeOptionMainPageRowTop .col-md-12 h5 {
+    font-size: 5vw;
+  }
+  .fv-SearchHomePage .fv-searchMainPage.row [type=button]:not(:disabled), .fv-SearchHomePage .fv-searchMainPage.row [type=reset]:not(:disabled), .fv-SearchHomePage .fv-searchMainPage.row [type=submit]:not(:disabled), .fv-SearchHomePage .fv-searchMainPage.row button:not(:disabled) {
+    margin-left: 2%;
   }
 
 }

@@ -11,7 +11,7 @@
 .fv-SearchHomePagePaginationSelected , .fv-SearchHomePagePaginationDefault{
     margin-top: 0%;
     margin-left: 1%;
-    margin-right: 0;
+    margin-right: 1%;
     border: 1px solid #15BE29;
     text-align: start;
     border-radius: 15px;
@@ -283,6 +283,22 @@
     width: 142%;
     margin-right: -8%;
 }
+.fv-SearchHomePagePagination [type=button]:not(:disabled),.fv-SearchHomePagePagination [type=reset]:not(:disabled),.fv-SearchHomePagePagination [type=submit]:not(:disabled),.fv-SearchHomePagePagination button:not(:disabled) {
+    margin: 0;
+    background: white;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+    padding-top: 1%;
+    padding-bottom: 0.5%;
+}
+.fv-SearchHomePagePagination {
+    place-content: center;
+}
+.fv-SearchHomePagePagination .fv-hideforwardAndBackwardButton{
+    display: none;
+}
+
+
 
 
 @media (max-width: 1200px) and (min-width: 991px){
@@ -688,6 +704,29 @@
         margin-top: 4%;
     }
 
+    .fv-SearchHomePagePaginationSelected, .fv-SortMenu .fv-selected {
+        background-color: #15BE29;
+        color: white;
+        padding: 4%;
+    }
+    .fv-SearchHomePagePaginationSelected, .fv-SearchHomePagePaginationDefault {
+        margin-top: 0%;
+        margin-left: 1%;
+        margin-right: 1%;
+        border: 1px solid #15BE29;
+        text-align: start;
+        border-radius: 15px;
+        padding: 1%;
+        padding-left: 2%;
+        padding-right: 2%;
+        font-size: 15px;
+        padding: 4%;
+    }
+    .fv-searchMainPageBodyLeft .fv-SearchHomePagePagination{
+        margin-left: 9%;
+        margin-right: 0%;
+    }
+
 
 }
 @media (max-width: 320px) {
@@ -743,4 +782,10 @@
         margin-top: 12px;
     }
 
+    .fv-widthHeaderLoginMenuForSearchHomePage .headerLoginMenu .fv-footerMenuRibbonMobile .col-sm-8 {
+        flex: 0 0 56.333333%;
+        width: 66.666667% !important;
+        text-align: initial;
+        margin-right: 1vw;
+    }
 }

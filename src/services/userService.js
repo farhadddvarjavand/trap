@@ -325,3 +325,11 @@ export const getUserStock = async () => {
         { headers:{ 'Authorization' : await getToken() } }
     );
 }
+
+export const updateUserAvatar = async (data) => {
+    return http.post(
+        `${config.webapi}/api/v1/user/updateUserAvatar`,
+        (data),
+        { headers:{ 'Authorization' : await getToken() } }
+    );
+}

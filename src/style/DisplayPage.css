@@ -1543,6 +1543,12 @@ display: none;
         margin-right: -29vw;
         margin-top: 12px;
     }
+    .fv-widthHeaderLoginMenuForDisplayPage .fv-footerMenuRibbonMobile .col-sm-8 {
+        flex: 0 0 58.333333%;
+        width: 66.666667% !important;
+        text-align: initial;
+        margin-right: -2vw;
+    }
 }
 @media (max-width: 1200px) and (min-width: 1114px) {
     .fv-DisplayPageDetailsScoreBody .col-md-3 {

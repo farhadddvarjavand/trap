@@ -43,7 +43,7 @@ class HostStep5Page3 extends Component {
     }
 
     fileSelectedHandler = async (event) => {
-        if((event.target.files[0].type === "image/jpg" || event.target.files[0].type === "image/png" || event.target.files[0].type ===  "image/bmp" || event.target.files[0].type ===  "image/jpeg") && event.target.files[0].size < 2000005 ){
+        if((event.target.files[0].type === "image/jpg" || event.target.files[0].type === "image/png" || event.target.files[0].type ===  "image/bmp" || event.target.files[0].type ===  "image/jpeg") && event.target.files[0].size < 3000000 ){
 
             if(event.target.name === "mainImage"){  //////// be ezaie har name ke click shod an neveshte mahv shavad va iek charkhe neshan ddade shavad
                 this.setState({clickLoaderMainImage:true})
@@ -156,7 +156,7 @@ class HostStep5Page3 extends Component {
                     .catch(err=>console.log(err.response))
             }
         }
-        if(event.target.files[0].size > 2000005){
+        if(event.target.files[0].size > 3000000){
             alert("حجم فایل عکس باید حداکثر 2 مگابایت باشد")
         }
         if((event.target.files[0].type !== "image/jpg" && event.target.files[0].type !== "image/png" && event.target.files[0].type !==  "image/bmp" && event.target.files[0].type !==  "image/jpeg") ) {

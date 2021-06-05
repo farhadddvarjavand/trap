@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "./Calendar/DatePicker.css";
-import { Calendar2 } from '@hassanmojab/react-modern-calendar-datepicker';
+import DatePicker, { Calendar2 } from '@hassanmojab/react-modern-calendar-datepicker';
 import {Calendar,utils } from "./Calendar";
 import moment from "moment-jalaali";
 
 
 import './style/CalendarDesktop.scss'
 import SetPrice from './Calendar/components/DaysList'
+import {getToday} from "../componentsPages/calculationsDate";
 
 const CalendarDesktop = (props) => {
 
@@ -73,6 +74,29 @@ const CalendarDesktop = (props) => {
 
     }
 
+    const today = getToday()   //  تاریخ امروز را روی تقویم نشان میدهد
+    let todayInt = {
+        year:parseInt(today.year),
+        month:parseInt(today.month),
+        day:parseInt(today.day)
+    }
+
+    let minimumDate = {
+        year: todayInt.year,
+        month: todayInt.month,
+        day: todayInt.day,
+    };
+    let maximumDate = {
+        year: todayInt.year,
+        month: todayInt.month,
+        day: todayInt.day,
+    }
+    if(props.minimumDate && props.maximumDate){    // اگر مینیموم روزز و آخرین روز که از روی قیمت های روز ها میگیریم تعیین شده باشد
+        minimumDate = props.minimumDate
+        maximumDate=props.maximumDate
+    }
+
+
 
     const setData = (data) =>{
         setSelectedDayRange(data)
@@ -92,6 +116,8 @@ const CalendarDesktop = (props) => {
                 customDaysClassName={defaultDay}
                 shouldHighlightWeekends
                 disabledDays={disabledDays}
+                minimumDate={minimumDate}
+                maximumDate={maximumDate}
                 priceDays={dayOfMonth}
                 PriceMonth={monthOfYear}
                 PriceYear={year}

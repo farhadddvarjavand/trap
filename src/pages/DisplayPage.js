@@ -39,6 +39,7 @@ import {addToFavorite, calculateCost, calculateExtraCost, reserveRequest} from "
 import "../style/extra.scss"
 import axios from "axios";
 import HeaderLoginMenu from "../componentsPages/HeaderLoginMenu";
+import CalendarLinearLimitedDays from "../data/CalendarLinearLimitedDays";
 
 
 class DisplayPage extends Component {
@@ -239,7 +240,6 @@ componentDidMount() {
 
 
     render() {
-
         const info = JSON.parse(localStorage.getItem("infoUser"))
         let nameAndFamily =  ""
         let avatar = ""
@@ -376,6 +376,7 @@ componentDidMount() {
             }
              // console.log(allReservedDatesVillas[0])   // خانه های رزرو شده را به ترتیب میدهد
         }
+        console.log(this.state.resultReservedDates)
 
 
 
@@ -399,6 +400,67 @@ componentDidMount() {
                 priceDaysUpdates.push(this.state.villaPrice[i])
             }
         }
+         // mohasebe avalin roze faal va akharin roze faal
+        let indexOfMinimumDay = ""
+        let indexOfMinimumMonth = ""
+        let indexOfMinimumYear = ""
+        let minimumDayFixed = false
+
+        let indexOfMaxDay = ""
+        let indexOfMaxMonth = ""
+        let indexOfMaxYear = ""
+
+        if(priceDaysUpdates.length > 0){        // چندمین خونه از آرایه قیمت ها پر هست که میشود اولین روز که باید فعال باشد
+            for (let i = 0 ; i < 31 ; i++){   // بگرد و اولین روزی که عدد وارد شده بود رو برگردون
+                if(Number(priceDaysUpdates[0].daysPrice[i]) && !minimumDayFixed){
+                    indexOfMinimumDay = i+1
+                    indexOfMinimumMonth = priceDaysUpdates[0].month
+                    indexOfMinimumYear= priceDaysUpdates[0].year
+                    minimumDayFixed = true
+                }
+            }
+            if(indexOfMinimumDay === ""  && !minimumDayFixed){               // اگر در آخر ماه قبلی روز ها غیر فعال ثبت شده بود و تایپ آن استرینگ بود در ماه بعد باید بگردیم دنبال روز فعال
+                for (let i = 0 ; i < 31 ; i++){
+                    console.log(priceDaysUpdates[1].daysPrice[i])
+                    if(Number(priceDaysUpdates[1].daysPrice[i])  && !minimumDayFixed){
+                        indexOfMinimumDay = i+1
+                        indexOfMinimumMonth = priceDaysUpdates[1].month
+                        indexOfMinimumYear= priceDaysUpdates[1].year
+                        minimumDayFixed = true
+                    }
+                }
+            }
+            if(indexOfMinimumDay === ""  && !minimumDayFixed){               // اگر در آخر ماه قبلی روز ها غیر فعال ثبت شده بود و تایپ آن استرینگ بود در ماه بعد باید بگردیم دنبال روز فعال
+                for (let i = 0 ; i < 31 ; i++){
+                    console.log(priceDaysUpdates[2].daysPrice[i])
+                    if(Number(priceDaysUpdates[2].daysPrice[i])  && !minimumDayFixed){
+                        indexOfMinimumDay = i+1
+                        indexOfMinimumMonth = priceDaysUpdates[2].month
+                        indexOfMinimumYear= priceDaysUpdates[2].year
+                        minimumDayFixed = true
+                    }
+                }
+            }
+
+
+            indexOfMaxDay = priceDaysUpdates[priceDaysUpdates.length-1].daysPrice.length   //  mohasebe akharin roz ke meghdar vared karde
+            indexOfMaxMonth =  priceDaysUpdates[priceDaysUpdates.length-1].month
+            indexOfMaxYear =  priceDaysUpdates[priceDaysUpdates.length-1].year
+
+        }
+        const minimumDate ={     // اولین روز فعال که به قبل آن باید غیر فعال شود
+            day:indexOfMinimumDay ,
+            month : indexOfMinimumMonth,
+            year: indexOfMinimumYear,
+        }
+        const maximumDate ={     // اولین روز فعال که به قبل آن باید غیر فعال شود
+            day:indexOfMaxDay ,
+            month : indexOfMaxMonth,
+            year: indexOfMaxYear,
+        }
+       // console.log(minimumDate)  // avalin roze faal
+        // console.log(maximumDate)   // akharin roze faal
+
 
       /*  let enddate=""
         let startdate=""
@@ -1163,6 +1225,8 @@ componentDidMount() {
                             <MDBRow className={"fv-DisplayPageCalender fv-DisplayPageCalenderForDesktop"}>                  {/*    calender-calendar     */}
 
                                 <CalendarDesktop
+                                    minimumDate={minimumDate}
+                                    maximumDate={maximumDate}
                                     villaPrice={priceDaysUpdates}
                                     getSelectedDay={this.getSelectedDays}
                                     daysReserved={allDaysReservedConcat}/>
@@ -1177,6 +1241,8 @@ componentDidMount() {
                             <MDBRow className={'fv-DisplayPageCalenderForMobile'}>                  {/*    calender-calendar     */}
                                 <MDBCol>
                                     <CalendarForMobile
+                                        minimumDate={minimumDate}
+                                        maximumDate={maximumDate}
                                         villaPrice={priceDaysUpdates}
                                         getSelectedDay={this.getSelectedDays}
                                         daysReserved={allDaysReservedConcat}/>
@@ -1488,7 +1554,7 @@ componentDidMount() {
                             <p>قیمت از شبی {this.state.resultVilla.rules ? this.state.resultVilla.rules.normal_cost : ''} تومان</p>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftEmptyMobile"}>
-                            <p><i className="fa fa-calendar" aria-hidden="true" /> اولین تاریخ خالی این اقامت گاه ۱۸ اردیبهشت میباشد </p>
+                            <p><i className="fa fa-calendar" aria-hidden="true" /> اولین تاریخ خالی این اقامت گاه {`${minimumDate.year}/${minimumDate.month}/${minimumDate.day}`} میباشد </p>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftBodyDate"}>
                             <MDBRow className={"fv-DisplayPageDetailsLeftSelectedDate"}>
@@ -1496,8 +1562,8 @@ componentDidMount() {
                                 <input type='text' value=' تاریخ خروج' className={"fv-DisplayPageDetailsLeftBodyDateOutText"} />
                             </MDBRow>
                             <MDBRow className={"fv-DisplayPageDetailsLeftTextDate"}>
-                                <div  className={"fv-DisplayPageDetailsLeftBodyDateOnInput"}>  <CalendarLinear dayToGo={this.selectDayToGo} text={'انتخاب روز'}  daysReserved={allDaysReservedConcat}/> </div>
-                                <div  className={"fv-DisplayPageDetailsLeftBodyDateOutInput"} >  <CalendarLinear dayToReturn={this.selectDayToReturn} text={'انتخاب روز'}  daysReserved={allDaysReservedConcat}/> </div>
+                                <div  className={"fv-DisplayPageDetailsLeftBodyDateOnInput"}>  <CalendarLinearLimitedDays minimumDate={minimumDate} maximumDate={maximumDate} dayToGo={this.selectDayToGo} text={'انتخاب روز'}  daysReserved={allDaysReservedConcat}/> </div>
+                                <div  className={"fv-DisplayPageDetailsLeftBodyDateOutInput"} >  <CalendarLinearLimitedDays  minimumDate={minimumDate} maximumDate={maximumDate} dayToReturn={this.selectDayToReturn} text={'انتخاب روز'}  daysReserved={allDaysReservedConcat}/> </div>
                             </MDBRow>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftBodyCapacityText"}>

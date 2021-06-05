@@ -45,9 +45,12 @@ class SearchHomePage extends Datas {
             maxCost:'',
             mobileSortClass:"fv-searchMobileSearchPageHide",
             mobileSearchClass:"fv-searchMobileSearchPageHide2",
+            addNumber:false,
 
             test:[],
             onclickHandelMobileMenu:false,
+            paginationLimit: 4 ,     //   تعداد صفحات که نمایش داده شود را وارد میکنیم
+            pagination : [],
 
 
         }
@@ -139,6 +142,11 @@ class SearchHomePage extends Datas {
 
         }
 
+        const paginationsShow = []
+        for (let i = 0 ; i< this.state.paginationLimit ; i++){
+            paginationsShow.push(i+1)
+        }
+        this.setState({pagination:paginationsShow})
     }
 
     selectDayToGo = (date) =>{                                    // set date to go
@@ -155,6 +163,9 @@ class SearchHomePage extends Datas {
     }
 
     render() {
+
+
+
         const info = JSON.parse(localStorage.getItem("infoUser"))
         let nameAndFamily =  ""
         let avatar = ""
@@ -199,6 +210,55 @@ class SearchHomePage extends Datas {
         }
 
 
+       const getDataPagination= (pageNumberChange) =>{
+                let data = ''
+                data = {
+                    page:pageNumberChange,
+                    orderBy:this.props.match.params.sort,
+                }
+                return data
+        }
+        const getDataPaginationForewardAndBackwardForSearch = (pageNumber)=>{
+            let data = ''
+            data = {
+                passengers_count:this.state.numberOfPeople,
+                area:setAreaCity,
+                bedroom:this.state.numberOfBedroom,
+                dateRange:setDateToGoAndDateToReturn,      /* agar vared nashavad az server error migirad */
+                costRange:setCostRange,                    /* agar vared nashavad az server error migirad */
+                type:setAccommodationGroupToString,
+                discount:setDiscountAccommodation,
+                disinfected:setDisinfectedAccommodation,
+                page:pageNumber,
+                orderBy:this.props.match.params.sort,
+            }
+
+            if(setCostRange ===','){
+                delete data.costRange
+            }
+            if(setDateToGoAndDateToReturn === ',' ){
+                delete data.dateRange
+            }
+            if(data.passengers_count === null || data.passengers_count === "" || data.passengers_count === undefined){
+                delete data.passengers_count
+            }
+            if(data.area === "C "){
+                delete data.area
+            }
+            if(data.bedroom === null || data.bedroom === "" || data.bedroom === undefined){
+                delete data.bedroom
+            }
+            if(data.type === null || data.type === "" || data.type === undefined){
+                delete data.type
+            }
+            if(setDiscountAccommodation===0){
+                delete data.discount
+            }
+            if(setDisinfectedAccommodation===0){
+                delete data.disinfected
+            }
+            return data
+        }
 
 
 
@@ -214,170 +274,6 @@ class SearchHomePage extends Datas {
 
                 <MDBContainer className={'fv-SearchHomePageBodyMobile fv-footerMenu main'}>
 
-                    {/* <MDBRow>
-                        <MDBRow className={'fv-searchMainPage fv-searchMainPageForMobile'}>
-                            <MDBRow className={'fv-searchMainPagePrice'}>
-                                <input type='text' placeholder={'شهر یا روستا را وارد کنید'} value={this.state.setVillage} onChange={(event)=>{this.setState({setVillage:event.target.value})}}/>
-                                <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateOut'}>
-                                    <input type='text' placeholder='تاریخ رفت' value={this.state.dateToGo} onChange={(event)=>{this.setState({dateToGo:event.target.value})}}/>
-                                </MDBCol>
-                                <MDBCol md={1} sm={1} className={'fv-searchMainPageBetweenDate'}>
-
-                                </MDBCol>
-                                <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateReturn'}>
-                                    <input type='text' placeholder='تاریخ برگشت' value={this.state.dateToReturn} onChange={(event)=>{this.setState({dateToReturn:event.target.value})}}/>
-                                </MDBCol>
-                                <input type='text' placeholder='تعداد نفرات' value={this.state.numberOfPeople} onChange={(event)=>{this.setState({numberOfPeople:event.target.value})}}/>
-                                <input type='text' placeholder='تعداد خواب' value={this.state.numberOfBedroom} onChange={(event)=>{this.setState({numberOfBedroom:event.target.value})}}/>
-                            </MDBRow>
-                            <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
-                                <p>قیمت</p>
-                                <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateOut'}>
-                                    <input type='text' placeholder='از' value={this.state.dateIn} onChange={(event)=>{this.setState({dateIn:event.target.value})}}/>
-                                </MDBCol>
-                                <MDBCol md={1} sm={1} className={'fv-searchMainPageBetweenDate'}>
-
-                                </MDBCol>
-                                <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateReturn'}>
-                                    <input type='text' placeholder='تا' value={this.state.dateOut} onChange={(event)=>{this.setState({dateOut:event.target.value})}}/>
-                                </MDBCol>
-                            </MDBRow>
-                            <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
-                                <p>دسته بندی اقامتگاه</p>
-                                <MDBCol md={12}>
-                                    <input type="checkbox" name="استخردار" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>استخردار</p>
-                                </MDBCol>
-                                <MDBCol md={12}>
-                                    <input type="checkbox" name="ساحلی" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>ساحلی</p>
-                                </MDBCol>
-                                <MDBCol md={12}>
-                                    <input type="checkbox" name="ییلاقی" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p>ییلاقی</p>
-                                </MDBCol>
-                                <MDBCol md={12}>
-                                    <input type="checkbox" name="کلبه جنگلی" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p> کلبه جنگلی</p>
-                                </MDBCol>
-                                <MDBCol md={12}>
-                                    <input type="checkbox" name="خانه قدیمی" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p>خانه قدیمی</p>
-                                </MDBCol>
-                            </MDBRow>
-                            <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
-                                <MDBCol md={12}>
-                                    <input type="checkbox" name="اقامت گاه های دارای تخفیف"
-                                           onChange={()=>{ this.setState({discountAccommodation: !discountAccommodation})}}/> <p>اقامت گاه های دارای تخفیف</p>
-                                </MDBCol>
-                                <MDBCol md={12}>
-                                    <input type="checkbox" name="اقامت گاه های ضدعفونی شده"
-                                           onChange={()=>{ this.setState({disinfectedAccommodation: !disinfectedAccommodation})}}/> <p>اقامت گاه های ضدعفونی شده</p>
-                                </MDBCol>
-                            </MDBRow>
-                            <input type='button' value='جستجو اقامتگاه' className={'fv-searchMainPagesSearchButton'} onClick={()=>{
-
-                                const data = {
-                                    passengers_count:this.state.numberOfPeople,
-                                    area:setAreaCity,
-                                    bedroom:this.state.numberOfBedroom,
-                                    dateRange:setDateToGoAndDateToReturn,    // agar vared nashavad az server error migirad
-                                    costRange:setCostRange,                   // agar vared nashavad az server error migirad
-                                    type:setAccommodationGroupToString,
-                                    discount:setDiscountAccommodation,
-                                    disinfected:setDisinfectedAccommodation,
-                                }
-                                return this.postAndPushResultSearchPageVillas(data)
-                            }}/>
-
-                        </MDBRow>
-                    </MDBRow> */}
-                    {/*
-                    <MDBRow className={'fv-footerMenuRibbonMobile'}>   {/ mobile menu /}
-                        <MDBCol sm={8} className={'fv-footerMenuImageMobile'}>
-                            <img src={avatar ? `${config.webapi}/images/villas/main/${this.props.avatar}` : MobileMenu} onClick={()=>{
-                                this.setState({onclickHandelMobileMenu:!this.state.onclickHandelMobileMenu})
-                            }}/>
-                        </MDBCol>
-                        <MDBCol sm={2} className={"fv-footerMenuRibbonButton"}>
-                            <img src={LogoName} />
-                        </MDBCol>
-                        <MDBCol sm={2}>
-                            <img src={MobileLogo} />
-                        </MDBCol>
-                    </MDBRow>
-
-                    <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage"}>     {/ mobile menu  gust or host  display menu/}
-
-                        <MDBRow className={this.state.onclickHandelMobileMenu && localStorage.getItem("token") ?  "fv-ProfilePageLeftBody fv-hostUsersMenuSearchPage" : "fv-hideMenuSearchPageMobile"}> {/ profile info for mobile             if user/}
-
-                            <MDBContainer className={ `fv-containerOptionMainPageRowTop `}>
-                                <MDBRow className={"fv-cascadeOptionMainPageRowTop"}>
-                                    <MDBCol md={12} sm={12}>
-                                        <MDBRow>
-                                            <MDBCol md={2} sm={2}>
-                                                <img src={avatar ? `${config.webapi}/images/villas/main/${avatar}` : MobileLogo} />
-                                            </MDBCol>
-                                            <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={12} sm={12}>
-                                                <MDBRow>
-                                                    <MDBCol>
-                                                        <a><h5>{nameAndFamily}</h5></a>
-                                                    </MDBCol>
-
-                                                </MDBRow>
-                                                <MDBRow>
-                                                    <MDBCol>
-                                                        <Link to={"/Profile"}><a>مشاهده حساب کاربری</a></Link>
-                                                    </MDBCol>
-
-                                                </MDBRow>
-
-                                            </MDBCol>
-                                        </MDBRow>
-                                    </MDBCol>
-                                </MDBRow>
-                                <MDBRow className={"fv-cascadeOptionMainPage"}>
-                                    <MDBCol md={12} sm={12}>
-                                        <Link to={"/myAccommodation"}> <i className="fa fa-credit-card" />
-                                            <a><p>اقامت گاه های من</p></a> </Link>
-                                    </MDBCol>
-                                </MDBRow>
-                                <MDBRow className={"fv-cascadeOptionMainPage"}>
-                                    <MDBCol md={12} sm={12}>
-                                        <Link to={"/ProfileReservation2"}> <i className="fa fa-receipt" />
-                                            <a><p>رزور های من</p></a> </Link>
-                                    </MDBCol>
-                                </MDBRow>
-                                <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus fv-userInfoButtonCascadeMobile"}>
-                                    <MDBCol md={12} sm={12}>
-                                        <Link to={"/ProfileReservation2"}> <i className="fa fa-laptop-house" />
-                                            <a><p>میزبان شوید</p></a> </Link>
-                                    </MDBCol>
-                                </MDBRow>
-                                <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus"}>
-                                    <MDBCol md={12} sm={12}>
-                                        <a onClick={()=>{
-                                            localStorage.clear()
-                                            window.location.reload();
-                                        }}> <i className="fa fa-sign-out-alt" />
-                                            <p>خروج از حساب کاربری</p></a>
-                                    </MDBCol>
-                                </MDBRow>
-                            </MDBContainer>
-
-                        </MDBRow>
-
-                        <MDBRow className={this.state.onclickHandelMobileMenu && !localStorage.getItem("token") ? "fv-ProfilePageLeftBody fv-gustUsersMenuSearchPage fv-ProfilePageUserInfoBodySearchPage": "fv-hideMenuSearchPageMobile"}> {/ profile info for mobile            if gust/}
-                            <MDBCol md={3} className={""}>
-                                <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
-                                    <MDBCol className={"fv-ProfilePageUserInfoDetailsBodyColumn"}>
-                                        <Link to={'/login'}><p className={ window.location.href.match(/\blogin\b/) ? "fv-reservationActive" : ''}  ><i className="fa fa-door-open" />ورود</p></Link>
-                                        <Link to={'/login3'}> <p className={ window.location.href.match(/\blogin3\b/) ? "fv-transaction" : ''}  ><i className="fa fa-address-card" />ثبت نام</p> </Link>
-                                    </MDBCol>
-                                </MDBRow>
-                            </MDBCol>
-                        </MDBRow>
-                    </MDBContainer>
-*/}
-
-
-
-
 
                     <MDBRow>
                         <MDBCol>
@@ -391,56 +287,13 @@ class SearchHomePage extends Datas {
                             </MDBRow>
                         </MDBCol>
                     </MDBRow>
-                    {/* <MDBRow>
-                        <MDBRow className={"fv-SearchHomePageMobileProduct"} >
-                            {searchPageVillas.slice( (this.state.pageNum - 1) * this.state.villasInPerPage , this.state.pageNum * this.state.villasInPerPage ).map(searchPageVilla=>{
-                                if(searchPageVilla.details){
-                                    return(
-                                        <MDBCol md={4} sm={7} >
-                                            <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                                     rate="5.5/5"
-                                                     topic={searchPageVilla.title}
-                                                     location={searchPageVilla.state}
-                                                     numberOfRoom={searchPageVilla.details.bedroom}
-                                                     capacity={searchPageVilla.details.max_capacity}
-                                                     price={searchPageVilla.normal_cost}/>
-                                        </MDBCol>
-                                    )
-                                }else {
-                                    return(
-                                        <MDBCol md={4} sm={7} >
-                                            <Product srcImage="https://www.w3schools.com/html/pic_trulli.jpg"
-                                                     rate="5.5/5"
-                                                     topic={searchPageVilla.title}
-                                                     location={searchPageVilla.state}
-                                                     numberOfRoom="2"
-                                                     capacity="2"
-                                                     price={searchPageVilla.normal_cost}/>
-                                        </MDBCol>
-                                    )
-                                }
-                            })}
-                        </MDBRow>
-                    </MDBRow> */}
+
                 </MDBContainer>
 
                 {/*                                   Desktop                                               */}
 
                 <MDBContainer className={'fv-footerMenu fv-SearchHomePageBody'}>
-                    {/*
-                    <MDBRow className={'fv-footerMenuRibbon'}>
-                        <MDBCol md={1}>
-                            <i className={localStorage.getItem("token") ? "" : "fa fa-user-alt"}/>
-                            <a className={localStorage.getItem("token") ? "fv-hideButtonRegister" : ""}> <Link to={'/login'}>ورود</Link></a>
-                        </MDBCol>
-                        <MDBCol md={2} className={"fv-footerMenuRibbonButton"}>
-                            <input className={localStorage.getItem("token") ? ""  : "fv-hideButtonRegister"} type='button' value=' میزبان شوید' onClick={()=> this.props.history.push('/hostStep1')}/>
-                        </MDBCol>
-                        <MDBCol md={9}>
-                            <img src={FotterpageLogo} />
-                        </MDBCol>
-                    </MDBRow>
-                    */}
+
                     <MDBRow >
 
                         <MDBCol md={4} className={`${this.state.mobileSearchClass} fv-searchMainPageBody`}>
@@ -557,7 +410,7 @@ class SearchHomePage extends Datas {
                                          onClick={(event)=>{
                                              const data = {orderBy:'Newest'}
                                              this.postAndPushResultSearchPageVillas(data)
-                                             this.setState({sortedBy:event.target.name , doSearch:false})
+                                             this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:""}) // agar bad az search karbar in ra zad hame pak shavad ke tasir migozarad bar search
                                 }}>
                                     جدیدترین
                                 </NavLink>
@@ -566,7 +419,7 @@ class SearchHomePage extends Datas {
                                           onClick={(event)=>{
                                               const data = {orderBy:'Expensive'}
                                               this.postAndPushResultSearchPageVillas(data)
-                                              this.setState({sortedBy:event.target.name , doSearch:false})
+                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" })
                                 }}>
                                     گران‌ترین
                                 </NavLink>
@@ -575,7 +428,7 @@ class SearchHomePage extends Datas {
                                           onClick={(event)=>{
                                               const data = {orderBy:'Cheapest'}
                                               this.postAndPushResultSearchPageVillas(data)
-                                              this.setState({sortedBy:event.target.name , doSearch:false})
+                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:""})
                                 }}>
                                     ارزان‌ترین
                                 </NavLink>
@@ -584,7 +437,7 @@ class SearchHomePage extends Datas {
                                           onClick={(event)=>{
                                               const data = {orderBy:'Popular'}
                                               this.postAndPushResultSearchPageVillas(data)
-                                              this.setState({sortedBy:event.target.name , doSearch:false})
+                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:""})
                                 }}>
                                     محبوب‌ترین
                                 </NavLink>
@@ -593,7 +446,7 @@ class SearchHomePage extends Datas {
                                           onClick={(event)=>{
                                               const data = {orderBy:'Discount'}
                                               this.postAndPushResultSearchPageVillas(data)
-                                              this.setState({sortedBy:event.target.name , doSearch:false})
+                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:""})
                                           }}>
                                     پرتخفیف ها
                                 </NavLink>
@@ -649,52 +502,64 @@ class SearchHomePage extends Datas {
 
                             </MDBRow>
                             <MDBRow className={"fv-SearchHomePagePagination"}>
-                                {pages.map(pagenumber => {
+
+
+                                <button className={this.props.match.params.sort  === "doSearch" ? "fv-hideforwardAndBackwardButton" : 'fv-SearchHomePagePaginationDefault'} disabled={pages.length < this.state.paginationLimit ? true : false} onClick={()=>{  // agar tedad safahat kamtarz 2ta bod
+                                    let newPagination = []
+                                    for(let i = 0 ; i < this.state.pagination.length ; i ++){
+                                        newPagination.push(i+1)
+                                    }
+                                    const datas = getDataPagination(1)
+                                    this.postAndPushResultSearchPageVillas(datas)
+                                    this.setState({ pagination:newPagination})
+
+                                    this.props.history.push(`/searchHomePage/${this.props.match.params.sort}/1`)
+                                }}><i className="fas fa-angle-double-right" /></button>
+
+
+
+                                <button className={'fv-SearchHomePagePaginationDefault'} disabled={pages.length < this.state.paginationLimit ? true : false} onClick={()=>{  // agar tedad safahat kamtarz 2ta bod
+                                   if(this.props.match.params.id>1){  // hadeaghal 2 bashad ke manfi nashavad
+
+                                       if(Number(this.props.match.params.id) === Number(this.state.pagination[0])){
+                                           let newPagination = []
+                                           for (let i =0 ; i < this.state.pagination.length ; i ++){
+                                               newPagination.push(this.state.pagination[i]-1)
+                                           }
+                                           this.setState({ pagination:newPagination })
+                                       }
+
+                                       if(this.props.match.params.sort  === "doSearch" ){ // اگر سرچ کرده بود و بعد زد فقط یکی اضهفه شود به آن
+
+                                           const data =getDataPaginationForewardAndBackwardForSearch(Number(this.props.match.params.id)-1)
+                                           console.log(data)
+                                           this.postAndPushResultSearchPageVillas(data)
+
+                                           this.setState({pageNumber:this.props.match.params.id+1 , pageNum:this.props.match.params.id-1})
+                                           this.props.history.push(`/searchHomePage/doSearch/${Number(this.props.match.params.id)-1}`)
+                                       }
+                                       else {
+
+                                           const datas = getDataPagination(Number(this.props.match.params.id)-1)
+                                           this.postAndPushResultSearchPageVillas(datas)
+                                           this.setState({ pageNum:Number(this.props.match.params.id)-1})
+
+                                           this.props.history.push(`/searchHomePage/${this.props.match.params.sort}/${Number(this.props.match.params.id)-1}`)
+                                       }
+
+
+                                   }
+                                }}><i className="fas fa-caret-right" /></button>
+
+
+
+                                {pages.length<this.state.paginationLimit ? pages.map(pagenumber => {
                                     return(
 
                                         <NavLink to={`/searchHomePage/${this.props.match.params.sort}/${pagenumber}`} exact name={pagenumber}
                                                  className={'fv-SearchHomePagePaginationDefault'} activeClassName="fv-SearchHomePagePaginationSelected"
                                                  onClick={(event)=>{
-
-                                                     let data = ''
-                                                     data = {
-                                                         passengers_count:this.state.numberOfPeople,
-                                                         area:setAreaCity,
-                                                         bedroom:this.state.numberOfBedroom,
-                                                         dateRange:setDateToGoAndDateToReturn,      /* agar vared nashavad az server error migirad */
-                                                         costRange:setCostRange,                    /* agar vared nashavad az server error migirad */
-                                                         type:setAccommodationGroupToString,
-                                                         discount:setDiscountAccommodation,
-                                                         disinfected:setDisinfectedAccommodation,
-                                                         page:pagenumber,
-                                                     }
-
-                                                     if(setCostRange ===','){
-                                                         delete data.costRange
-                                                     }
-                                                     if(setDateToGoAndDateToReturn === ',' ){
-                                                         delete data.dateRange
-                                                     }
-                                                     if(data.passengers_count === null || data.passengers_count === "" || data.passengers_count === undefined){
-                                                         delete data.passengers_count
-                                                     }
-                                                     if(data.area === "C "){
-                                                         delete data.area
-                                                     }
-                                                     if(data.bedroom === null || data.bedroom === "" || data.bedroom === undefined){
-                                                         delete data.bedroom
-                                                     }
-                                                     if(data.type === null || data.type === "" || data.type === undefined){
-                                                         delete data.type
-                                                     }
-                                                     if(setDiscountAccommodation===0){
-                                                         delete data.discount
-                                                     }
-                                                     if(setDisinfectedAccommodation===0){
-                                                         delete data.disinfected
-                                                     }
-
-
+                                                     const data =getDataPaginationForewardAndBackwardForSearch(pagenumber)
                                                      this.postAndPushResultSearchPageVillas(data)
                                                      this.setState({pageNumber:event.target.name , pageNum:pagenumber})
                                                  }}>
@@ -702,8 +567,73 @@ class SearchHomePage extends Datas {
                                         </NavLink>
 
                                     )
-                                })}
+                                })
+                                :
+                                   this.state.pagination.map(paginations => {
+                                       return(
 
+                                           <NavLink to={`/searchHomePage/${this.props.match.params.sort}/${paginations}`} exact name={paginations}
+                                                    className={'fv-SearchHomePagePaginationDefault'} activeClassName="fv-SearchHomePagePaginationSelected"
+                                                    onClick={(event)=>{
+                                                        const data =getDataPaginationForewardAndBackwardForSearch(paginations)
+                                                        this.postAndPushResultSearchPageVillas(data)
+                                                            this.setState({pageNumber:event.target.name , pageNum:paginations})
+                                                    }}>
+                                               { paginations}
+                                           </NavLink>
+
+                                       )
+                                   })
+                                }
+
+
+                                <button className={'fv-SearchHomePagePaginationDefault'} disabled={pages.length<this.state.paginationLimit ? true : false} onClick={()=>{    // agar tedad safahat kamtarz 2ta bod
+                                    if(this.props.match.params.id<pages.length){  // kamtarz kole safahat bashad ke agar ezafe shod balataraz safahat nashavad
+                                        if(this.props.match.params.id >= this.state.pagination.length  && Number(this.props.match.params.id) === Number(this.state.pagination[this.state.pagination.length-1])){
+                                            let newPagination = []
+                                            for (let i =0 ; i < this.state.pagination.length ; i ++){
+                                                newPagination.push(this.state.pagination[i]+1)
+                                            }
+                                            this.setState({ pagination:newPagination})
+                                        }
+
+                                        if(this.props.match.params.sort  === "doSearch" ){ // اگر سرچ کرده بود و بعد زد فقط یکی اضهفه شود به آن
+
+                                           const data =getDataPaginationForewardAndBackwardForSearch(Number(this.props.match.params.id)+1)
+                                            console.log(data)
+                                            this.postAndPushResultSearchPageVillas(data)
+
+                                            this.setState({pageNumber:this.props.match.params.id+1 , pageNum:this.props.match.params.id+1})
+                                            this.props.history.push(`/searchHomePage/doSearch/${Number(this.props.match.params.id)+1}`)
+                                        }
+                                        else { // به صورت عای
+                                            const datas = getDataPagination(Number(this.props.match.params.id)+1)
+                                            this.postAndPushResultSearchPageVillas(datas)
+                                            this.setState({ pageNum:Number(this.props.match.params.id)+1 , addNumber:true})
+
+                                            this.props.history.push(`/searchHomePage/${this.props.match.params.sort}/${Number(this.props.match.params.id)+1}`)
+                                        }
+
+
+
+
+                                    }
+                                }}><i className="fas fa-caret-left" /></button>
+
+                                <button className={this.props.match.params.sort  === "doSearch" ? "fv-hideforwardAndBackwardButton" : 'fv-SearchHomePagePaginationDefault'} disabled={pages.length<this.state.paginationLimit ? true : false} onClick={()=>{  // agar tedad safahat kamtarz 2ta bod
+                                    let newPagination = []
+                                    let endNumberOfPagesLimit = this.state.lastPageOfSearchPage  // akharin khane + 1
+                                    let j = 1
+                                    for(let i = (endNumberOfPagesLimit - this.state.pagination.length) ; i < endNumberOfPagesLimit ; i ++){
+                                        newPagination.push((endNumberOfPagesLimit - this.state.pagination.length) + j)
+                                        j = j +1
+                                    }
+                                    const datas = getDataPagination(endNumberOfPagesLimit)
+                                    this.postAndPushResultSearchPageVillas(datas)
+                                    this.setState({ pagination:newPagination})
+
+                                    this.props.history.push(`/searchHomePage/${this.props.match.params.sort}/${endNumberOfPagesLimit}`)
+                                }}><i className="fas fa-angle-double-left" /></button>
 
                             </MDBRow>
                         </MDBCol>

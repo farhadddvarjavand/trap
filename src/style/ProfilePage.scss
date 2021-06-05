@@ -139,7 +139,7 @@
     margin-right: -7%;
   }
   .fv-profilePageInner{
-    height: 1000px;
+    height: 1064px;
   }
   .fv-footerMenu {
     margin-bottom: 5%;
@@ -147,6 +147,27 @@
 
   .fv-hideLoader{
     display: none;
+  }
+  .loaderAvatar .circular {
+    /* animation: rotate 2s linear infinite; */
+    height: 47%;
+    /* transform-origin: center center; */
+    width: 46%;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  .loaderAvatar {
+    padding: 0;
+    margin-top: 7%;
+    margin-bottom: -36%;
+    margin-right: 23%;
+  }
+  .fv-inputProfilePageAvatar{
+    margin-top: 2%;
   }
 }
 
@@ -209,7 +230,9 @@
   .fv-ProfilePage .fv-footerMenu.fv-footerDisplayPage.fv-DisplayPage.fv-profilePageUserInfo .fv-ProfilePageLeftBody.fv-gustUsersMenu .fv-ProfilePageUserInfoBody {
     height: 123px;
   }
-
+  .fv-ProfilePage .fv-inputProfilePageAvatar {
+    margin-top: 9%;
+  }
 }
 
 @media (max-width: 450px) {

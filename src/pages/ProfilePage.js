@@ -6,7 +6,7 @@ import "../style/ProfilePage.scss"
 import Footer from "../componentsPages/footer"
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
-import {updateUserInfo, getUserInformation, SetImages} from "../services/userService";
+import {updateUserInfo, getUserInformation, SetImages, updateUserAvatar} from "../services/userService";
 import axios from "axios";
 import config from "../services/config.json"
 import http from "../services/httpService";
@@ -42,19 +42,22 @@ componentDidMount() {
 
     authentication = async () =>{
         getUserInformation()
-            .then(res=>this.setState({
-                nameAndFamily:res.data.fullname,
-                mobileNumber:res.data.phone_number,
-                emailAddress:res.data.email,
-                nationalCode:res.data.national_code,
-                job:res.data.job,
-                education: res.data.education,
-                foreignTab:res.data.foreign_language,
-                cardNumber:res.data.card_number,
-                shabaNumber:res.data.shaba_number,
+            .then(res=>{
+                console.log(res)
+                this.setState({
+                    nameAndFamily:res.data.fullname,
+                    mobileNumber:res.data.phone_number,
+                    emailAddress:res.data.email,
+                    nationalCode:res.data.national_code,
+                    job:res.data.job,
+                    education: res.data.education,
+                    foreignTab:res.data.foreign_language,
+                    cardNumber:res.data.card_number,
+                    shabaNumber:res.data.shaba_number,
 
-                UserInfo : res.data,
-            }))
+                    UserInfo : res.data,
+                })
+            })
     }
     handleError = (errorData) =>{
         const errors = []
@@ -67,7 +70,7 @@ componentDidMount() {
             if(errorData.fullname){
                 errors.push('fullname')
             }
-            if(errorData.notional_code){
+            if(errorData.national_code){
                 errors.push('notionalCode')
             }
             if(errorData.phone_number){
@@ -80,23 +83,30 @@ componentDidMount() {
     }
 
     fileSelectedHandler = (event) => {
-        console.log(event)
-        event.preventDefault()
-        if((event.target.files[0].type === "image/jpg" || event.target.files[0].type === "image/png" || event.target.files[0].type ===  "image/bmp" || event.target.files[0].type ===  "image/jpeg") && event.target.files[0].size < 2000005 ){
 
+        if((event.target.files[0].type === "image/jpg" || event.target.files[0].type === "image/png" || event.target.files[0].type ===  "image/bmp" || event.target.files[0].type ===  "image/jpeg") && event.target.files[0].size < 3000000 ){
+            this.setState({clickLoaderAvatar:true})
+            console.log(event)
+            event.preventDefault()
             //  this.setState({clickLoader:true})
             console.log( event.target.files[0])
             console.log(  event.target.name)
 
                 let formData = new FormData() ;
-                formData.append("image" , event.target.files[0])
-                formData.append("input_name" , event.target.name)
-                 formData.append("img_title" , "")
-                // formData.append("img_src" , this.state.img_title0)
+            formData.append("avatar" , event.target.files[0])
+            updateUserAvatar(formData)
+                .then(res=>{
+                    if(res.data.avatar_count !== 0){
+                        this.setState({avatarImageData:res.data.avatar} , ()=>{
+                            this.setState({clickLoaderAvatar:false})
+                        })
+                    }
+                })
+
             this.setState({avatarImageData:formData} )
 
         }
-        if(event.target.files[0].size > 2000005){
+        if(event.target.files[0].size > 3000000){
             alert("حجم فایل عکس باید حداکثر 2 مگابایت باشد")
         }
         if((event.target.files[0].type !== "image/jpg" && event.target.files[0].type !== "image/png" && event.target.files[0].type !==  "image/bmp" && event.target.files[0].type !==  "image/jpeg") ) {
@@ -105,6 +115,13 @@ componentDidMount() {
     };
 
     render() {
+        const info = JSON.parse(localStorage.getItem("infoUser"))
+        // let fullName =  ""
+        let avatar = ""
+        if(info){
+          //  fullName=info.userInfo.fullname
+            avatar=info.userInfo.avatar
+        }
         console.log(this.state.avatarImageData)
         const   {nameAndFamily,  mobileNumber , emailAddress , job, nationalCode , education, foreignTab, cardNumber ,shabaNumber }  = this.state
 
@@ -150,44 +167,79 @@ componentDidMount() {
                         <input type="text" value={this.state.shabaNumber} className={this.state.errorField.includes('shabaNumber')===true ? "fv-redBorderError" : ''}
                                onChange={(e)=>this.setState({shabaNumber:e.target.value})}/>
 
-                        <div className={this.state.clickLoaderAvatar ? "loaderImage" : "fv-hideLoader"}>
-                            <svg className="circular" viewBox="25 25 50 50">
-                                <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
-                                        stroke-miterlimit="10"/>
-                            </svg>
-                        </div>
+
                         <MDBRow md={3} sm={12}>
-                            <MDBContainer className={"fv-hostStep5Page3Images"}>
+                            <MDBContainer className={"fv-hostStep5Page3Images fv-inputProfilePageAvatar"}>
+
+
                                         <label htmlFor="myInput">
                                             <label htmlFor="files2" className={this.state.clickLoaderAvatar ?  "fv-hideLoader" : "btn"}>تصویر خود را انتخاب کنید</label>
                                             <input id="files2"   style={{display:'none'}}   onChange={this.fileSelectedHandler}  type="file"   name={'avatar'} />
+
+                                            <MDBRow>
+                                                <div className={this.state.clickLoaderAvatar ? "loaderAvatar" : "fv-hideLoader"}>
+                                                    <svg className="circular" viewBox="25 25 50 50">
+                                                        <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
+                                                                stroke-miterlimit="10"/>
+                                                    </svg>
+                                                </div>
+                                            </MDBRow>
                                         </label>
                             </MDBContainer>
                         </MDBRow>
 
+
                         <MDBRow>
                             <MDBCol md={12} sm={12} className={'fv-ProfilePageUserSetInfoButton fv-profilePageEnButton'} >
-                                <input type="button" value="ذخیره" onClick={()=>{
-                                    const data ={
-                                        fullname:nameAndFamily,
-                                        phone_number:mobileNumber,
-                                        email:emailAddress,
-                                        notional_code:nationalCode,
-                                        job:job,
-                                        education:education,
-                                        foreign_language:foreignTab,
-                                        card_number:cardNumber,
-                                        shaba_number:shabaNumber,
-                                        avatar:this.state.avatarImageData,
-                                    }
-                                    console.log(data)
-                                    updateUserInfo(data)
-                                        .then(result =>{
-                                            if(result.status === 200){
-                                                return(window.location.reload())
-                                            }
-                                        })
-                                        .catch(error => this.handleError(error.response.data.errors))
+                                <input type="button" value="ذخیره"  onClick={()=>{
+
+                                   if(this.state.clickLoaderAvatar ) {  // agar karbar zamani ke ax dar hale upload ast click konad
+                                       alert("لطفا منتظر بمانید تا عکس آپلود شود")
+                                   }else {
+
+                                       const data ={
+                                           fullname:nameAndFamily,
+                                           phone_number:mobileNumber,
+                                           email:emailAddress,
+                                           national_code:nationalCode,
+                                           job:job,
+                                           education:education,
+                                           foreign_language:foreignTab,
+                                           card_number:cardNumber,
+                                           shaba_number:shabaNumber,
+                                           avatar:this.state.avatarImageData,
+                                       }
+
+
+                                       let setAvatar = ""
+                                       if(this.state.avatarImageData){
+                                           setAvatar = this.state.avatarImageData
+                                       }else {
+                                           setAvatar = avatar
+                                       }
+                                       const userInfo={
+                                           avatar: setAvatar,
+                                           fullname: data.fullname,
+                                       }
+
+                                       const dataInfoUpdate ={
+                                           userInfo:userInfo
+                                       }
+
+
+                                       console.log(userInfo)
+                                       updateUserInfo(data)
+                                           .then(result =>{
+                                               console.log(result)
+                                               if(result.status === 200){
+                                                   localStorage.setItem("infoUser" , JSON.stringify(dataInfoUpdate))
+                                                   window.location.reload();
+                                               }
+                                           })
+                                           .catch(error => this.handleError(error.response.data.errors))
+
+
+                                   }
 
                                 }}/>
                             </MDBCol>
