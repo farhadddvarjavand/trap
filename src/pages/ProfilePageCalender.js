@@ -35,6 +35,7 @@ class ProfilePageCalender extends Component {
             villasUsertitle:props.match.params.id,
             clickHandlerLoading:false,
             villasUser:[],
+            clickLoaderCalendar:false,
 
             selectedDaysAll : ''
 
@@ -112,11 +113,12 @@ class ProfilePageCalender extends Component {
                             <MDBRow className={"fv-ProfilePageReservationSetInfo"}>
                                 <MDBCol md={4} sm={12} className={""}>
                                     <select value={this.state.villasUsertitle} onChange={(e)=>{
-                                        this.setState({villasUsertitle:e.target.value ,clickHandlerLoading:true} , ()=>{
+
+                                        this.setState({villasUsertitle:e.target.value ,clickHandlerLoading:true , clickLoaderCalendar:true} , ()=>{
                                             villaPrice(e.target.value)
                                                 .then(res=>{
                                                     if(res.data){
-                                                        this.setState({villaPrice:res.data , clickHandlerLoading:false})
+                                                        this.setState({villaPrice:res.data , clickHandlerLoading:false , clickLoaderCalendar:false})
                                                     }
                                                 })
                                         })
@@ -150,9 +152,18 @@ class ProfilePageCalender extends Component {
                                 <h5 className={"fv-ProfilePageCalenderChoseCommentsText"}>با انتخاب روزهای مورد نظر تغییر مورد نظر خود را اعمال کنید</h5>
                             </MDBCol>
                         </MDBRow>
-                        <MDBContainer className={"fv-profilePageCalenderInnerMobile"}>
+                        <MDBContainer className={"fv-profilePageCalenderInnerMobile "}>
 
-                            <MDBRow className={"fv-ProfilePageCalenderDayName"}>
+                            <MDBRow className={this.state.clickLoaderCalendar ?"fv-ProfilePageCalenderDayName fv-ProfilePageCalenderLoader" : "fv-hideLoader"}>
+                                <div className={ "loaderAvatar" }>
+                                    <svg className="circular" viewBox="25 25 50 50">
+                                        <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
+                                                stroke-miterlimit="10"/>
+                                    </svg>
+                                </div>
+                            </MDBRow>
+
+                            <MDBRow className={this.state.clickLoaderCalendar ?  "fv-hideLoader" :  "fv-ProfilePageCalenderDayName"}>
 
 
                                 <CalendarForProfile
@@ -271,6 +282,15 @@ class ProfilePageCalender extends Component {
                                 </MDBCol>
                             </MDBRow>
 
+
+                            <MDBRow className={this.state.clickLoaderCalendar ?"fv-ProfilePageCalenderDayName fv-ProfilePageCalenderLoader" : "fv-hideLoader"}>
+                                <div className={ "loaderAvatar" }>
+                                    <svg className="circular" viewBox="25 25 50 50">
+                                        <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
+                                                stroke-miterlimit="10"/>
+                                    </svg>
+                                </div>
+                            </MDBRow>
 
                             <MDBRow className={'fv-profilePageCalenderForMobile'}>                  {/*    calender-calendar     */}
                                 <MDBCol>

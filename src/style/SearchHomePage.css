@@ -297,6 +297,28 @@
 .fv-SearchHomePagePagination .fv-hideforwardAndBackwardButton{
     display: none;
 }
+ .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile .col {
+    display: contents;
+}
+ .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile{
+     margin-top: 5%;
+     margin-bottom: -5%;
+     z-index: 5;
+     position: relative;
+}
+ .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile a{
+    color: black;
+}
+ .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile .fa-chevron-left {
+    margin-top: 0.5%;
+    margin-right: 2%;
+    margin-left: 2%;
+    font-size: 13px;
+}
+ .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile .fv-DisplayPagePathNow{
+    color: #15BE29;
+}
+
 
 
 
@@ -310,6 +332,27 @@
     }
     .fv-widthHeaderLoginMenuForSearchHomePage .fv-footerMenuRibbon {
         width: 150%;
+    }
+    .fv-SearchHomePage .fv-footerMenu .fv-footerMenuRibbon .col-md-9 {
+        flex: 0 0 75%;
+        max-width: 75%;
+        flex: 0 0 57%;
+        max-width: 67%;
+        z-index: 0;
+        margin-right: -2%;
+        margin-top: 0.5%;
+    }
+
+}
+@media (max-width: 991px) and (min-width: 769px){
+    .fv-SearchHomePage .fv-footerMenu .fv-footerMenuRibbon .col-md-9 {
+        flex: 0 0 75%;
+        max-width: 75%;
+        flex: 0 0 57%;
+        max-width: 67%;
+        z-index: 0;
+        margin-right: 7%;
+        margin-top: 0.5%;
     }
 }
 @media (max-width: 768px) and (min-width: 540px){
@@ -725,6 +768,21 @@
     .fv-searchMainPageBodyLeft .fv-SearchHomePagePagination{
         margin-left: 9%;
         margin-right: 0%;
+    }
+
+    .fv-SearchHomePage .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile {
+        margin-top: 9%;
+        z-index: 1;
+    }
+    .fv-SearchHomePage .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile .fa-chevron-left {
+        margin-top: 1%;
+        margin-right: 2%;
+        margin-left: 2%;
+        font-size: 13px;
+    }
+    .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile .col {
+        display: contents;
+        font-size: 3vw;
     }
 
 

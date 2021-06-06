@@ -756,6 +756,21 @@ componentDidMount() {
                             {...this.props}/>
                     </MDBContainer>
 
+                    <MDBContainer className={'fv-footerMenu fv-footerDisplayPage fv-searchHomePagePathTop'}>
+
+                        <MDBRow className={"fv-DisplayPageRotePathMobile "}>
+                            <MDBCol>
+                                <Link to={"/mainPage"}> <p> صفحه اصلی </p> </Link>
+                                <i className="fas fa-chevron-left" />
+                                <Link to={"/searchHomePage/Newest/1"}><p> صفحه جستجو </p> </Link> {/* اگر مقدار سوم وجود داشت کلاس رنگ سبز غیر فعال شود */}
+                                <i className="fas fa-chevron-left" />
+                                <p className={ "fv-DisplayPagePathNow"}> صفحه نمایش </p>
+                                {/* <i className={this.props.thisPageName ? "fas fa-chevron-left" : ""} />
+                                <p className={this.props.thisPageName ? "fv-DisplayPagePathNow" : ""}> {this.props.thisPageName} </p>  */}
+                            </MDBCol>
+                        </MDBRow>
+                    </MDBContainer>
+
                     {/*
 
                     <MDBContainer className={'fv-footerMenu fv-SearchHomePageBody'}>
@@ -1642,6 +1657,10 @@ componentDidMount() {
                                             if(Number(this.state.extraPeopleCost)){
                                                 extraCost = Number(this.state.extraPeopleCost)-Number(this.state.reservedPrice)
                                             }
+                                            let extraPeople = 0
+                                            if(this.state.numberOfPeople){
+                                                extraPeople = this.state.numberOfPeople
+                                            }
                                             const data ={
                                                 villa_title : this.state.resultVilla.title,
                                                 state : this.state.resultVilla.state,
@@ -1651,7 +1670,7 @@ componentDidMount() {
                                                 cost : cost ,
                                                 villa_id : this.state.resultVilla.id ,
                                                 passengers_number : this.state.resultVilla.details.standard_capacity ,
-                                                extra_people :this.state.resultVilla.details.max_capacity-this.state.resultVilla.details.standard_capacity ,
+                                                extra_people :extraPeople,   //this.state.resultVilla.details.max_capacity-this.state.resultVilla.details.standard_capacity ,
                                                 length_stay :rangeBetween,
                                                 extra_cost:extraCost,
                                             }

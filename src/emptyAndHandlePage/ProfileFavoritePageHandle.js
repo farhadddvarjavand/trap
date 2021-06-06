@@ -10,14 +10,22 @@ import Footer from "../componentsPages/footer"
 import MobileLogo from "../images/MobileLogo.png"
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
-import {getUserVillaComments, replayComment, userVillas} from "../services/userService";
+import {
+    favorites,
+    getFinancialReports,
+    getUserVillaComments,
+    replayComment,
+    userReserves,
+    userTransactions,
+    userVillas
+} from "../services/userService";
 import {fas} from "@fortawesome/free-solid-svg-icons";
-import ProfilePageGustComments2 from "./PrfilePageGustComments2"
-import PrfilePageGustComments from "./PrfilePageGustComments";
+import ProfilePageGustComments2 from "../pages/PrfilePageGustComments2"
+import PrfilePageGustComments from "../pages/PrfilePageGustComments";
 import "../style/profilePageCommentsHandler.scss"
 import {villaPrice} from "../services/villaService";
 
-class ProfilePageCalendarHandle extends Component {
+class ProfileFavoritePageHandle extends Component {
     constructor(props) {
         super(props);
         this.state={
@@ -31,41 +39,19 @@ class ProfilePageCalendarHandle extends Component {
 
     componentDidMount() {
 
-
-
-
-        userVillas()
-            .then(result=>{
-                console.log(result.data.data)
-                this.setState({userVillas:result.data.data} , ()=>{
-                    if(this.state.userVillas){ /// agar villaeii vojod dasht
-                        this.state.userVillas.map(userVilla => {
-                            villaPrice(userVilla.id)
-                                .then(res=>{
-                                    console.log(Object.values(res.data).length)
-                                   if( Object.values(res.data)[0] !== null){
-                                       this.setState({villaPrice: Object.values(res.data) , villaId:userVilla.id } , () =>{
-                                              this.props.history.push(`/profileCalender/${userVilla.id}`)
-                                       })
-                                    }
-                                })
-                                .catch(err=>this.props.history.push("/ProfilePageCalendarEmpty"))
-                        })
-                    }else {
-                        this.props.history.push("/ProfilePageCalendarEmpty")
-                        // empty
-                    }
-
-                })
+        favorites()
+            .then(res=>{
+                if (res.data.data){
+                    this.props.history.push(`/profileFavoritesPage`)
+                }else {
+                    this.props.history.push("/AnotherPagesEmpty")
+                }
             })
-
-
+            .catch(err=>console.log(err.response))
 
     }
 
     render() {
-        console.log(this.state.comments)
-        console.log(this.state.villaId)
 
 
         return(
@@ -88,9 +74,9 @@ class ProfilePageCalendarHandle extends Component {
                     </MDBCol>
                 </MDBRow>
             </MDBContainer>
-                    )
+        )
 
 
     }
 }
-export default ProfilePageCalendarHandle
+export default ProfileFavoritePageHandle

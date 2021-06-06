@@ -120,7 +120,17 @@ class MainPage extends Datas {
                             <a className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" : "fv-hideButtonRegister"}  onClick={()=>{ // agar login bod ba click roie dokme in karo kon
                                 this.setState({onclickButtonHandle:!this.state.onclickButtonHandle})
                             }}> <img src={avatar ? `${config.webapi}/images/user/${avatar}` : MobileLogo} /> {nameAndFamily} </a>
-                            <Link to={ "/hostStep1"} ><input type='button' value=' میزبان شوید' onClick={()=> this.props.history.push('/login3')} className={localStorage.getItem("token") ? "fv-getHostButtonMainPage" : "fv-hideButtonRegister"}  /> </Link>
+                            <Link to={ "/hostStep1"} ><input type='button' value=' میزبان شوید' onClick={()=>{
+                                localStorage.removeItem("step1")
+                                localStorage.removeItem("step2")
+                                localStorage.removeItem("step2-2")
+                                localStorage.removeItem("step3")
+                                localStorage.removeItem("step4")
+                                localStorage.removeItem("step5")
+                                localStorage.removeItem("step5-2")
+                                this.props.history.push('/login3')
+
+                            } } className={localStorage.getItem("token") ? "fv-getHostButtonMainPage" : "fv-hideButtonRegister"}  /> </Link>
                         </MDBCol>
                         <MDBCol md={9}>
                             <img src={FotterpageLogo} />
@@ -185,8 +195,16 @@ class MainPage extends Datas {
                 </MDBRow>
                 <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus fv-userInfoButtonCascadeMobile"}>
                     <MDBCol md={12} sm={12}>
-                        <Link to={"/ProfileReservation2"}> <i className="fa fa-laptop-house" />
-                            <a><p>میزبان شوید</p></a> </Link>
+                        <Link to={"/hostStep1"}>
+                            <a onClick={()=>{
+                                localStorage.removeItem("step1")
+                                localStorage.removeItem("step2")
+                                localStorage.removeItem("step2-2")
+                                localStorage.removeItem("step3")
+                                localStorage.removeItem("step4")
+                                localStorage.removeItem("step5")
+                                localStorage.removeItem("step5-2")
+                            }}><i className="fa fa-laptop-house" />   <p>میزبان شوید</p></a> </Link>
                     </MDBCol>
                 </MDBRow>
                 <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus"}>
@@ -277,29 +295,34 @@ class MainPage extends Datas {
 
 
                 {popularVillage.map(productDetails=>{
+                    console.log(productDetails)
                         if(productDetails.details){
                             return(
-                                <MDBCol md={3} sm={7}>
-                                    <Product srcImage={`${config.webapi}/images/villas/main/${productDetails.main_img }`}
+                                <MDBCol md={3} sm={7} onClick={()=>{
+                                    this.props.history.push(`/displayPage/${productDetails.id}`)
+                                }}>
+                                   <a> <Product srcImage={`${config.webapi}/images/villas/main/${productDetails.main_img }`}
                                              rate={productDetails.score}
                                              topic={productDetails.title}
                                              location={productDetails.city}
                                              numberOfRoom={productDetails.details.bedroom}
                                              capacity={productDetails.details.max_capacity}
-                                             price={''}/>
+                                             price={''}/> </a>
 
                                 </MDBCol>
                             )
                         }else {
                             return(
-                                <MDBCol md={3} sm={7}>
-                                    <Product srcImage={`${config.webapi}/images/villas/main/${productDetails.main_img }`}
+                                <MDBCol md={3} sm={7} onClick={()=>{
+                                    this.props.history.push(`/displayPage/${productDetails.id}`)
+                                }}>
+                                    <a> <Product srcImage={`${config.webapi}/images/villas/main/${productDetails.main_img }`}
                                              rate={productDetails.score}
                                              topic={productDetails.title}
                                              location={productDetails.city}
                                              numberOfRoom={''}
                                              capacity={''}
-                                             price={''}/>
+                                                 price={''}/> </a>
 
                                 </MDBCol>
                             )
@@ -349,22 +372,26 @@ class MainPage extends Datas {
                     discountPrice = (discountedVilla.normal_cost * discountedVilla.weekly_discount) / 100
                     if(discountedVilla.details){
                         return(
-                            <MDBCol md={3} sm={7}>
-                                <DiscountedProduct discountedAmount={discountedVilla.weekly_discount+"%"}
-                                                   srcImage={`${config.webapi}/images/villas/main/${discountedVilla.main_img }`}
+                            <MDBCol md={3} sm={7} onClick={()=>{
+                                this.props.history.push(`/displayPage/${discountedVilla.villa.id}`)
+                            }}>
+                                <a>   <DiscountedProduct discountedAmount={discountedVilla.weekly_discount+"%"}
+                                                   srcImage={`${config.webapi}/images/villas/main/${discountedVilla.villa.main_img }`}
                                                    rate={discountedVilla.villa.score}
                                                    topic={discountedVilla.villa.title}
                                                    location={discountedVilla.villa.city}
                                                    numberOfRoom={discountedVilla.details.bedroom}
                                                    capacity={discountedVilla.details.max_capacity}
                                                    price={discountedVilla.normal_cost - discountPrice}
-                                                   PreventPrice={discountedVilla.normal_cost}/>
+                                                         PreventPrice={discountedVilla.normal_cost}/> </a>
 
                             </MDBCol>
                         ) }else {
                         return (
-                            <MDBCol md={3} sm={7}>
-                                <DiscountedProduct discountedAmount={discountedVilla.weekly_discount+"%"}
+                            <MDBCol md={3} sm={7} onClick={()=>{
+                                this.props.history.push(`/displayPage/${discountedVilla.villa.id}`)
+                            }}>
+                                <a>   <DiscountedProduct discountedAmount={discountedVilla.weekly_discount+"%"}
                                                    srcImage={`${config.webapi}/images/villas/main/${discountedVilla.main_img }`}
                                                    rate={discountedVilla.villa.score}
                                                    topic={discountedVilla.villa.title}
@@ -372,7 +399,7 @@ class MainPage extends Datas {
                                                    numberOfRoom={''}
                                                    capacity={''}
                                                    price={discountedVilla.normal_cost - discountPrice}
-                                                   PreventPrice={discountedVilla.normal_cost}/>
+                                                         PreventPrice={discountedVilla.normal_cost}/> </a>
 
                             </MDBCol>
                         )
@@ -395,14 +422,16 @@ class MainPage extends Datas {
             <MDBRow className={'fv-mainMobile'}>
                 {economicVillas.map(economicVilla=>{
                     return(
-                        <MDBCol md={3} sm={6}>
-                            <Product srcImage={`${config.webapi}/images/villas/main/${economicVillas.main_img }`}
+                        <MDBCol md={3} sm={6} onClick={()=>{
+                            this.props.history.push(`/displayPage/${economicVilla.id}`)
+                        }}>
+                          <a>  <Product srcImage={`${config.webapi}/images/villas/main/${economicVilla.main_img }`}
                                      rate={economicVilla.score}
                                      topic={economicVilla.title}
                                      location={economicVilla.state}
                                      numberOfRoom={economicVilla.details.bedroom}
                                      capacity={economicVilla.details.max_capacity}
-                                     price={economicVilla.normal_cost}/>
+                                     price={economicVilla.normal_cost}/> </a>
                         </MDBCol>
                     )
                 })}

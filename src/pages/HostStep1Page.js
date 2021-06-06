@@ -55,10 +55,12 @@ class HostStep1Page extends Component {
             }
             if(prevData.phone_number){
                 validPhoneNumber=true
-                hideUniq=true
             }
             if(prevData.story){
                 validStory=true
+            }
+            if(prevData.phoneNumberDisable){   // agar az safhe eddit rafte bashad bayad gheire faal bashad postalcode
+                hideUniq=true
             }
             this.setState({
                 accommodationTitle:prevData.title,
@@ -83,13 +85,18 @@ class HostStep1Page extends Component {
             validationInputs=true
         }
 
+        const localStorageData={
+            title:this.state.accommodationTitle,
+            type:this.state.accommodationKind,
+            phone_number:this.state.number,
+            story:this.state.accommodationHistory,
+            phoneNumberDisable:true
+        }
 
-      const localStorageData={
-          title:this.state.accommodationTitle,
-          type:this.state.accommodationKind,
-          phone_number:this.state.number,
-          story:this.state.accommodationHistory,
-      }
+        if(this.state.hideUniq === false){           // yani dar halate eddit nistim
+            delete localStorageData.phoneNumberDisable
+        }
+
 
 
 

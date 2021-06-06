@@ -49,8 +49,8 @@ class ProfilePageUserInfo extends React.Component{
                 </MDBRow>
                 <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
                     <MDBCol className={"fv-ProfilePageUserInfoDetailsBodyColumn"}>
-                        <Link to={'/ProfileReservation2'}><p className={ window.location.href.match(/\bProfileReservation2\b/) ? "fv-reservationActive" : ''}  ><i className="fas fa-book" />رزرو های من</p></Link>
-                        <Link to={'/ProfileTransaction2'}> <p className={ window.location.href.match(/\bProfileTransaction2\b/) ? "fv-transaction" : ''}  > <i className="fas fa-chart-bar" />تراکنش های من</p> </Link>
+                        <Link to={'/ProfilePageReservationHandle'}><p className={ window.location.href.match(/\bProfileReservation2\b/) ? "fv-reservationActive" : ''}  ><i className="fas fa-book" />رزرو های من</p></Link>
+                        <Link to={'/ProfilePageTransactionHandle'}> <p className={ window.location.href.match(/\bProfileTransaction2\b/) ? "fv-transaction" : ''}  > <i className="fas fa-chart-bar" />تراکنش های من</p> </Link>
                         <MDBRow className={"fv-ProfilePageFacilitiesMobile"}>
                             <MDBCol md={8} sm={8}>
                                 <a onClick={()=>this.setState({activeClassChevron: !this.state.activeClassChevron})}><i className="fa fa-file-invoice" />امکانات میزبان</a>
@@ -64,16 +64,17 @@ class ProfilePageUserInfo extends React.Component{
                         </MDBRow>
                         {this.state.activeClassChevron ? '' :
                             <div>
-                                <Link to={'/myAccommodation'}><p className={ window.location.href.match(/\bmyAccommodation\b/) ? "fv-ProfilePageUserInfoDetailsOption fv-AccomoddationActive" : 'fv-ProfilePageUserInfoDetailsOption'}>اقامت گاه های من</p></Link>
-                                <Link to={'/profileReservations'}><p className={ window.location.href.match(/\bprofileReservations\b/) ? "fv-ProfilePageUserInfoDetailsOption fv-RequestedReservationActive" : 'fv-ProfilePageUserInfoDetailsOption'}>رزرو های درخواستی</p></Link>
+                                <Link to={'/MyAccomodationProfilePageHandle'}><p className={ window.location.href.match(/\bmyAccommodation\b/) ? "fv-ProfilePageUserInfoDetailsOption fv-AccomoddationActive" : 'fv-ProfilePageUserInfoDetailsOption'}>اقامت گاه های من</p></Link>
+                                <Link to={'/ProfilePageReservationRequestedHandle'}><p className={ window.location.href.match(/\bprofileReservations\b/) ? "fv-ProfilePageUserInfoDetailsOption fv-RequestedReservationActive" : 'fv-ProfilePageUserInfoDetailsOption'}>رزرو های درخواستی</p></Link>
                                 <Link to={'/ProfilePageCommentsHandle'}> <p className={ window.location.href.match(/\bprofileGustComments2\b/) ? "fv-ProfilePageUserInfoDetailsOption fv-myCalenderActive" : 'fv-ProfilePageUserInfoDetailsOption'}> نظرات مهمان ها</p></Link>
                                 <Link to={'/ProfilePageCalendarHandle'}><p className={ window.location.href.match(/\bprofileCalender\b/) ? "fv-ProfilePageUserInfoDetailsOption fv-gustCommentsActive" : 'fv-ProfilePageUserInfoDetailsOption'}>تقویم من</p></Link>
                             </div>
                         }
-                        <Link to={'/ProfileWallet'}><p className={ window.location.href.match(/\bProfileWallet\b/) ? "fv-walletActive" : ''}  ><i className="fas fa-wallet"/>کیف پول</p></Link>
+                        <Link to={'/ProfileWalletPageHandle'}><p className={ window.location.href.match(/\bProfileWallet\b/) ? "fv-walletActive" : ''}  ><i className="fas fa-wallet"/>کیف پول</p></Link>
                         <Link to={'/ProfileWallet3'}><p className={ window.location.href.match(/\bProfileWallet3\b/) ? "fv-walletActive" : ''}  ><i className="fas fa-chart-bar" />درخواست برداشت</p></Link>
                         <Link to={'/Profile'}><p  className={ window.location.href.match(/\bProfile\b/) ? "fv-updateProfileActive" : ''} ><i className="fas fa-user" />ویرایش پروفایل</p></Link>
                         <Link to={'/profileFavoritesPage'}><p  className={ window.location.href.match(/\bprofileFavoritesPage\b/) ? "fv-myFavoritesActive" : ''} ><i className="fa fa-heart" />علاقه مندی ها</p></Link>
+                        <Link to={'/mainPage'}><p><i className="fas fa-home" />صفحه اصلی</p></Link>
                     </MDBCol>
                 </MDBRow>
             </MDBCol>

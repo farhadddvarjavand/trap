@@ -34,7 +34,7 @@ import FactorPage from "./pages/FactorPage";
 import LoginPage from "./pages/LoginPage";
 import LoginPage2 from "./pages/LoginPage2";
 import LoginPage3 from "./pages/LoginPage3";
-import NotFoundPage from "./pages/NotFoundPage"
+import NotFoundPage from "./emptyAndHandlePage/NotFoundPage"
 import AddComments from "./pages/addComments"
 import ProfileFavoritesPage from "./pages/profileFavoritesPage"
 import ReservationProduct from "./componentsPages/ReservatioonProduct";
@@ -42,10 +42,20 @@ import TopicMainPage from "./componentsPages/topicsMainPage"
 import Api from "./components/Api";
 import {withCookies, Cookies, CookiesProvider} from 'react-cookie';
 import {Link, Route, Switch,NavLink,BrowserRouter} from "react-router-dom"
-import ProfilePageCommentsHandle from "./pages/ProfilePageCommentsHandle"
-import ProfilePageCalendarEmpty from "./pages/ProfilePageCalendarEmpty";
-import ProfilePageCalendarHandle from "./pages/ProfilePageCalendarHandle";
+import ProfilePageCommentsHandle from "./emptyAndHandlePage/ProfilePageCommentsHandle"
+import ProfilePageCalendarEmpty from "./emptyAndHandlePage/ProfilePageCalendarEmpty";
+import ProfilePageCalendarHandle from "./emptyAndHandlePage/ProfilePageCalendarHandle";
 import ScrollToTop from "./componentsPages/ScrollToTop"
+import ProfilePageTransactionHandle from "./emptyAndHandlePage/ProfilePageTransactionHandle"
+import ProfilePageCommentsEmpty from "./emptyAndHandlePage/ProfilePageCommentsEmpty";
+import ProfilePageTransactionEmpty  from "./emptyAndHandlePage/ProfilePageTransactionEmpty"
+import ProfilePageReservationHandle from "./emptyAndHandlePage/ProfilePageReservationHandle";
+import ProfilePageReservationEmpty from "./emptyAndHandlePage/ProfilePageReservationEmpty"
+import ProfilePageReservationRequestedHandle from "./emptyAndHandlePage/ProfilePageReservationRequestedHandle";
+import MyAccomodationProfilePageHandle from "./emptyAndHandlePage/MyAccomodationProfilePageHandle";
+import AnotherPagesEmpty from "./emptyAndHandlePage/anotherPagesEmpty";
+import ProfileWalletPageHandle from "./emptyAndHandlePage/ProfileWalletPageHandle";
+import ProfileFavoritePageHandle from "./emptyAndHandlePage/ProfileFavoritePageHandle";
 
 ReactDOM.render(
     <React.StrictMode>
@@ -89,8 +99,22 @@ ReactDOM.render(
                             <Route exact path={'/addComments/:id'} component={AddComments}/>
                             <Route exact path={'/profileFavoritesPage'} component={ProfileFavoritesPage}/>
                             <Route exact path={'/ProfilePageCommentsHandle'} component={ProfilePageCommentsHandle}/>
+                            <Route exact path={'/ProfilePageCommentsEmpty'} component={ProfilePageCommentsEmpty}/>
                             <Route exact path={'/ProfilePageCalendarEmpty'} component={ProfilePageCalendarEmpty}/>
                             <Route exact path={'/ProfilePageCalendarHandle'} component={ProfilePageCalendarHandle}/>
+                            <Route exact path={'/ProfilePageTransactionHandle'} component={ProfilePageTransactionHandle}/>
+                            <Route exact path={'/ProfilePageTransactionEmpty'} component={ProfilePageTransactionEmpty}/>
+                            <Route exact path={'/ProfilePageReservationHandle'} component={ProfilePageReservationHandle}/>
+                            <Route exact path={'/ProfilePageReservationEmpty'} component={ProfilePageReservationEmpty}/>
+                            <Route exact path={'/ProfilePageReservationRequestedHandle'} component={ProfilePageReservationRequestedHandle}/>
+                            <Route exact path={'/MyAccomodationProfilePageHandle'} component={MyAccomodationProfilePageHandle}/>
+                            <Route exact path={'/AnotherPagesEmpty'} component={AnotherPagesEmpty}/>
+                            <Route exact path={'/ProfileWalletPageHandle'} component={ProfileWalletPageHandle}/>
+                            <Route exact path={'/ProfileFavoritePageHandle'} component={ProfileFavoritePageHandle}/>
+
+
+
+
 
                         </div>
                     </div>

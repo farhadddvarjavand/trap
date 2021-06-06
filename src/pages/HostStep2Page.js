@@ -38,10 +38,12 @@ class HostStep2Page extends Component {
             }
             if(prevData.postal_code){
                 validPostCode=true
-                hideUniq=true
             }
             if(prevData.address){
                 validAddress=true
+            }
+            if(prevData.postalCodeDisable){ // agar az safhe eddit rafte bashad bayad gheire faal bashad
+                hideUniq=true
             }
 
 
@@ -72,7 +74,14 @@ class HostStep2Page extends Component {
             village:this.state.village,
             postal_code:this.state.postCode,
             address:this.state.address,
+            postalCodeDisable:true
         }
+
+        if(this.state.hideUniq === false){           // yani dar halate eddit nistim
+            delete localStorageData.postalCodeDisable
+        }
+
+
 
         return (
             <MDBContainer className={"fv-HostStep2Page fv-HostStep2PageOnly"}>

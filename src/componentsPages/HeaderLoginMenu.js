@@ -86,8 +86,16 @@ class HeaderLoginMenu extends React.Component{
                         </MDBRow>
                         <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus fv-userInfoButtonCascadeMobile"}>
                             <MDBCol md={12} sm={12}>
-                                <Link to={"/ProfileReservation2"}> <i className="fa fa-laptop-house" />
-                                    <a><p>میزبان شوید</p></a> </Link>
+                                <Link to={"/hostStep1"}>
+                                    <a onClick={()=>{
+                                        localStorage.removeItem("step1")
+                                        localStorage.removeItem("step2")
+                                        localStorage.removeItem("step2-2")
+                                        localStorage.removeItem("step3")
+                                        localStorage.removeItem("step4")
+                                        localStorage.removeItem("step5")
+                                        localStorage.removeItem("step5-2")
+                                    }}> <i className="fa fa-laptop-house" />  <p>میزبان شوید</p></a> </Link>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus"}>
@@ -124,7 +132,16 @@ class HeaderLoginMenu extends React.Component{
                     <a className={localStorage.getItem("token") ? "fv-hideButtonRegister" : ""}> <Link to={'/login'}>ورود</Link></a>
                 </MDBCol>
                 <MDBCol md={2} className={"fv-footerMenuRibbonButton"}>
-                    <input className={localStorage.getItem("token") ? ""  : "fv-hideButtonRegister"} type='button' value=' میزبان شوید' onClick={()=> this.props.history.push('/hostStep1')}/>
+                    <input className={localStorage.getItem("token") ? ""  : "fv-hideButtonRegister"} type='button' value=' میزبان شوید' onClick={()=>{
+                        localStorage.removeItem("step1")
+                        localStorage.removeItem("step2")
+                        localStorage.removeItem("step2-2")
+                        localStorage.removeItem("step3")
+                        localStorage.removeItem("step4")
+                        localStorage.removeItem("step5")
+                        localStorage.removeItem("step5-2")
+                        this.props.history.push('/hostStep1')
+                    } }/>
                 </MDBCol>
                 <MDBCol md={9}>
                     <img src={FotterpageLogo} />

@@ -86,6 +86,8 @@
     text-align: initial;
     color: #3EC886;
     font-size: 25px;
+    flex: 0 0 26.666667%;
+    max-width: 25.666667%;
 }
 .fv-DisplayPageTitle .col-md-2 {
     text-align: initial;

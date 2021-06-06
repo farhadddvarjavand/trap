@@ -7,8 +7,9 @@ import Footer from "../componentsPages/footer"
 import Logo from "../images/Logo.png";
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
+import {EmptyImagesPage} from "./emptyImages"
 
-class ProfilePageCalendarEmpty extends Component {
+class ProfilePageCommentsEmpty extends Component {
     constructor(props) {
         super(props);
 
@@ -19,24 +20,15 @@ class ProfilePageCalendarEmpty extends Component {
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageTransaction"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
                     <HeaderSearch  {...this.props}
-                                   thisPageName = "تقویم من"/>
-
+                                   thisPageName = "پاسخ به نظرات"/>
                 </MDBContainer>
-
                 <MDBRow className={"fv-ProfilePageLeftBody"}>
-
                     <ProfilePageUserInfo />
 
-                    <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
-                        <h5>تقویم من</h5>
-
-                        <MDBRow className={"fv-ProfilePageReservationImage"}>
-                            <MDBCol md={12}>
-                                <p>شما تاکنون تراکنشی نداشته اید</p>
-                                <img src={Logo}/>
-                            </MDBCol>
-                        </MDBRow>
-                    </MDBCol>
+                    <EmptyImagesPage
+                    title ="پاسخ به نظرات"
+                    text={"شما نظری ندارید"}
+                    image={Logo}/>
                 </MDBRow>
 
                 <MDBRow>
@@ -46,4 +38,4 @@ class ProfilePageCalendarEmpty extends Component {
             </MDBContainer>
         )}
 }
-export default ProfilePageCalendarEmpty
+export default ProfilePageCommentsEmpty

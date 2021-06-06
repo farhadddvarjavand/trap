@@ -272,6 +272,18 @@ class SearchHomePage extends Datas {
                     <HeaderLoginMenu  {...this.props}/>
                 </MDBContainer>
 
+
+                <MDBContainer className={'fv-footerMenu fv-footerDisplayPage fv-searchHomePagePathTop'}>
+
+                    <MDBRow className={"fv-DisplayPageRotePathMobile "}>
+                        <MDBCol>
+                            <Link to={"/mainPage"}> <p> صفحه اصلی </p> </Link>
+                            <i className="fas fa-chevron-left" />
+                            <p className={ "fv-DisplayPagePathNow"}> صفحه جستجو </p>  {/* اگر مقدار سوم وجود داشت کلاس رنگ سبز غیر فعال شود */}
+                        </MDBCol>
+                    </MDBRow>
+                </MDBContainer>
+
                 <MDBContainer className={'fv-SearchHomePageBodyMobile fv-footerMenu main'}>
 
 
@@ -471,7 +483,7 @@ class SearchHomePage extends Datas {
                                             >  {/* میرستیم برای صفحه شخصی ویلا که displaypage هست با همان id */}
 
                                                 <a>
-                                                    <Product srcImage={`${config.webapi}/images/villas/thum/${searchPageVilla.main_img }`}
+                                                    <Product srcImage={`${config.webapi}/images/villas/main/${searchPageVilla.main_img }`}
                                                              rate={searchPageVilla.score}
                                                              topic={searchPageVilla.title}
                                                              location={searchPageVilla.state}
@@ -487,7 +499,7 @@ class SearchHomePage extends Datas {
                                             <MDBCol md={4} sm={7}
                                                     onClick={()=>this.props.history.push(`/displayPage/${searchPageVilla.id}`) }>
                                                 <a>
-                                                    <Product srcImage={`${config.webapi}/images/villas/thum/${searchPageVilla.main_img }`}
+                                                    <Product srcImage={`${config.webapi}/images/villas/main/${searchPageVilla.main_img }`}
                                                              rate={searchPageVilla.score}
                                                              topic={searchPageVilla.title}
                                                              location={searchPageVilla.state}

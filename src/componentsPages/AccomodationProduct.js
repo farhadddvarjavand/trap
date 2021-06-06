@@ -60,6 +60,7 @@ const AccommmodationProduct =(props) =>{
                                                         story: allDataVilla.story,
                                                         title: allDataVilla.title,
                                                         type: allDataVilla.type,
+                                                        phoneNumberDisable:true, // baraye eddit bayad phoneNumber gheire faal shavad - agar vojod dasht gheirefaal mikonim
                                                     }
                                                     const step2Data = {
                                                         address: allDataVilla.address,
@@ -67,6 +68,7 @@ const AccommmodationProduct =(props) =>{
                                                         state: allDataVilla.city,
                                                         postal_code: allDataVilla.postal_code,
                                                         village: allDataVilla.village,
+                                                        postalCodeDisable:true,    // baraye eddit bayad postalCode gheire faal shavad - agar vojod dasht gheirefaal mikonim
                                                     }
                                                     const step22Data = {
                                                         lat: allDataVilla.lat,
