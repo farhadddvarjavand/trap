@@ -40,7 +40,7 @@ class ProfilePageReservationRequestedHandle extends Component {
 
         allReservationsRequested()
             .then(res=>{
-                if (res.data.data){
+                if (res.data.data.length>0){
                     this.props.history.push(`/profileReservations`)
                 }else {
                     this.props.history.push("/ProfilePageReservationEmpty")

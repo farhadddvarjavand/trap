@@ -33,7 +33,7 @@ class HeaderSteps extends Component {
                        <a onClick={()=>{
                            this.setState({hideButtonLogin:!this.state.hideButtonLogin})
                        }}> <img src={info.userInfo.avatar ? `${config.webapi}/images/user/${info.userInfo.avatar }` : ""}/>
-                        <i className="fas fa-chevron-down name_mobile" />
+
                            <a className={"name_desktop"}>{info.userInfo.fullname}</a> </a>
                     </MDBCol>
                     <MDBCol md={9} sm={6} className={""}>
@@ -100,7 +100,7 @@ class HeaderSteps extends Component {
                         <p className={"fv-HostStepNow"}> ثبت اقامت گاه </p>
                     </MDBCol>
                     <MDBCol sm={2} className={"fv-HostStep1Path"}>
-                        <i className="fa fa-question-circle" aria-hidden="true" />
+                        {/* <i className="fa fa-question-circle" aria-hidden="true" /> */}
                     </MDBCol>
                 </MDBRow>
 

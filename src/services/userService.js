@@ -280,6 +280,14 @@ export const calculateCost = async (data,villaId) => {
 
     );
 }
+export const calculateFacilitiesCost = async (data) => {
+    return http.post(
+
+        `${config.webapi}/api/v1/villa/calculateFacilitiesCost`,
+        JSON.stringify(data),
+
+    );
+}
 export const calculateExtraCost = async (data,villaId) => {
     return http.post(
 

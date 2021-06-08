@@ -3,6 +3,7 @@ import {MDBAlert, MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import "../style/HostStep1Page.scss"
 import Footer from "../componentsPages/footer"
 import MobileLogo from "../images/MobileLogo.png"
+import HostStepImage1 from "../images/home_miz1 png.png"
 import HeaderSteps from "../componentsPages/HeaderSteps";
 import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt"
 import {getUserInformation, storeVilla} from "../services/userService";
@@ -161,7 +162,7 @@ class HostStep1Page extends Component {
                                 بگردد تمرکزش از روی کار اصلی برداشته میشود و اینکار زمان بر خواهد بو
                                 د. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگران را
                             </p>
-                            <img src={MobileLogo} className={"fv-hostStepPage1LeftImage"}/>
+                            <img src={HostStepImage1} className={"fv-hostStepPage1LeftImage"}/>
                         </MDBRow>
                         <MDBRow className={"fv-hostStepPage2LeftButtonBody"}>
                             <input type="button" value="مرحله بعد"  className={"fv-hostStepPage1LeftButton"} onClick={()=>{

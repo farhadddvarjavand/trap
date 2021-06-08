@@ -53,8 +53,9 @@ class Product extends React.Component{
                </MDBRow>
                 <MDBRow className={'fv-productPriceBox'}>
                     <MDBCol md={10}>
-                        <a className={'fv-productPriceBoxPriceText'}>قیمت از شبی</a>
                         {this.props.price}
+                        <a className={'fv-productPriceBoxPriceText'}>قیمت از شبی</a>
+
                     </MDBCol>
                 </MDBRow>
            </MDBRow>

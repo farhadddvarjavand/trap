@@ -516,7 +516,7 @@ class SearchHomePage extends Datas {
                             <MDBRow className={"fv-SearchHomePagePagination"}>
 
 
-                                <button className={this.props.match.params.sort  === "doSearch" ? "fv-hideforwardAndBackwardButton" : 'fv-SearchHomePagePaginationDefault'} disabled={pages.length < this.state.paginationLimit ? true : false} onClick={()=>{  // agar tedad safahat kamtarz 2ta bod
+                                <button className={this.props.match.params.sort  === "doSearch" ? "fv-hideforwardAndBackwardButton fv-hideMobile" : 'fv-SearchHomePagePaginationDefault fv-hideMobile'} disabled={pages.length < this.state.paginationLimit ? true : false} onClick={()=>{  // agar tedad safahat kamtarz 2ta bod
                                     let newPagination = []
                                     for(let i = 0 ; i < this.state.pagination.length ; i ++){
                                         newPagination.push(i+1)
@@ -632,7 +632,7 @@ class SearchHomePage extends Datas {
                                     }
                                 }}><i className="fas fa-caret-left" /></button>
 
-                                <button className={this.props.match.params.sort  === "doSearch" ? "fv-hideforwardAndBackwardButton" : 'fv-SearchHomePagePaginationDefault'} disabled={pages.length<this.state.paginationLimit ? true : false} onClick={()=>{  // agar tedad safahat kamtarz 2ta bod
+                                <button className={this.props.match.params.sort  === "doSearch" ? "fv-hideforwardAndBackwardButton fv-hideMobile" : 'fv-SearchHomePagePaginationDefault fv-hideMobile'} disabled={pages.length<this.state.paginationLimit ? true : false} onClick={()=>{  // agar tedad safahat kamtarz 2ta bod
                                     let newPagination = []
                                     let endNumberOfPagesLimit = this.state.lastPageOfSearchPage  // akharin khane + 1
                                     let j = 1

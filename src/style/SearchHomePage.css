@@ -121,7 +121,7 @@
 .fv-SortMenu p {
     margin-top: auto;
     margin-bottom: auto;
-   /* margin-left: 7%; */
+    /* margin-left: 7%; */
 }
 .fv-SortMenu{
     border: 1px solid #88888836;
@@ -233,11 +233,11 @@
 }
 .fv-productPriceBox a:not([href]):not([tabindex]), .fv-productPriceBox a:not([href]):not([tabindex]):focus, .fv-productPriceBox a:not([href]):not([tabindex]):hover {
     color: #15BE29;
-    font-size: 1.5vw;
+    font-size: 15px;
 }
 
 .fv-SearchHomePage .fv-product .fv-productPriceBox .col-md-10 {
-    flex: 0 0 110.333333%;
+    flex: 0 0 113.333333%;
     max-width: 118.333333%;
     margin-left: -10%;
     margin-top: 4%;
@@ -297,25 +297,25 @@
 .fv-SearchHomePagePagination .fv-hideforwardAndBackwardButton{
     display: none;
 }
- .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile .col {
+.fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile .col {
     display: contents;
 }
- .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile{
-     margin-top: 5%;
-     margin-bottom: -5%;
-     z-index: 5;
-     position: relative;
+.fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile{
+    margin-top: 5%;
+    margin-bottom: -5%;
+    z-index: 5;
+    position: relative;
 }
- .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile a{
+.fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile a{
     color: black;
 }
- .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile .fa-chevron-left {
+.fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile .fa-chevron-left {
     margin-top: 0.5%;
     margin-right: 2%;
     margin-left: 2%;
     font-size: 13px;
 }
- .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile .fv-DisplayPagePathNow{
+.fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile .fv-DisplayPagePathNow{
     color: #15BE29;
 }
 
@@ -342,6 +342,25 @@
         margin-right: -2%;
         margin-top: 0.5%;
     }
+    .fv-SearchHomePage .fv-widthHeaderLoginMenuForSearchHomePage .fv-footerMenuRibbon .col-md-9 {
+        flex: 0 0 75%;
+        max-width: 75%;
+        flex: 0 0 57%;
+        max-width: 67%;
+        z-index: 0;
+        margin-right: 5%;
+        margin-top: 0.5%;
+    }
+    .fv-SearchHomePage .fv-widthHeaderLoginMenuForDisplayPage .fv-footerMenuRibbon .col-md-9 {
+        flex: 0 0 75%;
+        max-width: 75%;
+        flex: 0 0 57%;
+        max-width: 67%;
+        z-index: 0;
+        margin-right: 5%;
+        margin-top: 0.5%;
+    }
+
 
 }
 @media (max-width: 991px) and (min-width: 769px){
@@ -359,6 +378,46 @@
 
     .fv-widthHeaderLoginMenuForSearchHomePage .fv-footerMenuRibbon {
         width: 135%;
+    }
+    .fv-mobileProduct .fv-trapMagazineImageTitle {
+        /* width: 109%; */
+        /* direction: rtl; */
+        /* width: 109%; */
+        /* direction: rtl; */
+        width: 104%;
+        /* direction: rtl; */
+        height: 165px;
+        white-space: break-spaces;
+    }
+    .fv-trapMagazine .col-sm-6 {
+        margin-inline-start: auto;
+        margin-left: 41px;
+        margin-right: 2%;
+    }
+
+    .fv-aboutUsFourthImage {
+        /* padding-left: 1%; */
+        /* padding-top: 1%; */
+        margin-top: 3%;
+        margin-left: 11%;
+        border-radius: 15px;
+        width: 232px;
+        height: 273px;
+    }
+
+    .fv-searchMainPage fv-searchMainPageDateOut .col-sm-4 {
+        flex: 0 0 27.333333%;
+        max-width: 33.333333%;
+        margin-right: 4%;
+    }
+
+    .fv-aboutUsMobile .col-sm-9 {
+        flex: 0 0 62.333333%;
+        width: 58.666667% !important;
+        text-align: right;
+        /* margin: 0; */
+        /* padding: 0; */
+        margin-left: -3%;
     }
 
 }
@@ -390,6 +449,12 @@
 
 
 @media (max-width: 766px) {
+    .fv-SearchHomePage .fv-productPriceBoxPriceText {
+        margin-top: 0vw;
+    }
+    .fv-SearchHomePage .fv-hideMobile{
+        display: none;
+    }
     .fv-searchMobileSearchPageHide , .fv-searchMobileSearchPageHide2{
         display: none !important;
     }
@@ -438,6 +503,7 @@
     }
     .fv-productPriceBox a:not([href]):not([tabindex]), .fv-productPriceBox a:not([href]):not([tabindex]):focus, .fv-productPriceBox a:not([href]):not([tabindex]):hover {
         font-size: 3.5vw;
+        margin-left: 4%;
     }
     .fv-footerMainPage .fv-footerMainPageSmaller img {
         margin-right: 1.5vw;
@@ -486,8 +552,11 @@
         margin-right: 14%;
     }
     .fv-SearchHomePage .fv-product .fv-productPriceBox .col-md-10 {
-        margin-left: 0%;
+        margin-left: -54%;
         margin-top: 2%;
+        text-align: end;
+        display: inherit;
+        direction: ltr;
     }
     .fv-SearchHomePage .fv-searchMainPage.row {
         margin-left: 6%;
@@ -581,10 +650,10 @@
         /* text-align: center; */
         padding: 1vw 0vw 10vw 0vw;
         overflow-x: hidden;
-         overflow: auto;
+        overflow: auto;
         display: block;
         /* overflow: auto; */
-       /* white-space: normal; */
+        /* white-space: normal; */
         /* height: 387px; */
     }
     .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product {
@@ -616,8 +685,10 @@
         margin-top: -12%;
     }
     .fv-SearchHomePage .fv-product .fv-productPriceBox .col-md-10 {
-        margin-left: -73%;
-        margin-top: 11%;
+        margin-left: 1%;
+        margin-top: 2%;
+        text-align: end;
+        font-size: 4vw;
     }
     .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox .col-md-5 {
         padding-left: 10px;
@@ -758,7 +829,7 @@
         margin-right: 1%;
         border: 1px solid #15BE29;
         text-align: start;
-        border-radius: 15px;
+        border-radius: 7px;
         padding: 1%;
         padding-left: 2%;
         padding-right: 2%;
@@ -775,7 +846,7 @@
         z-index: 1;
     }
     .fv-SearchHomePage .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile .fa-chevron-left {
-        margin-top: 1%;
+        margin-top: 0.5%;
         margin-right: 2%;
         margin-left: 2%;
         font-size: 13px;
@@ -784,8 +855,38 @@
         display: contents;
         font-size: 3vw;
     }
+    .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile {
+        margin-right: 9%;
+    }
+    .fv-footerMenuRibbonMobile .col-sm-8 {
+        flex: 0 0 58.333333%;
+        width: 66.666667% !important;
+        text-align: initial;
+        margin-right: 0vw;
+    }
+    .fv-widthHeaderLoginMenuForSearchHomePage .headerLoginMenu .fv-footerMenuRibbonMobile .col-sm-2 {
+        flex: 0 0 10.666667%;
+        width: 12.666667% !important;
+        margin: auto;
+        margin-right: -10vw;
+        margin-top: 12px;
+    }
 
-
+}
+@media (max-width: 766px) and (min-width: 478px) {
+    .fv-widthHeaderLoginMenuForSearchHomePage .headerLoginMenu .fv-footerMenuRibbonMobile .col-sm-2 {
+        flex: 0 0 10.666667%;
+        width: 12.666667% !important;
+        margin: auto;
+        margin-right: -10vw;
+        margin-top: 12px;
+        flex: 0 0 7.666667%;
+        width: 22.666667% !important;
+        /* margin: inherit; */
+        margin-right: 5vw;
+        margin-top: 11px;
+        margin-left: -8%;
+    }
 }
 @media (max-width: 320px) {
     .fv-searchMainPage.fv-searchMainPageDateReturn input {
@@ -817,9 +918,24 @@
         margin-top: 12px;
     }
 
+    .fv-SearchHomePage .fv-footerMenu .fv-cascadeOptionMainPageRowTop .col-md-12 {
+        place-self: center;
+        text-align: end;
+        margin-right: -6%;
+    }
+    .fv-widthHeaderLoginMenuForSearchHomePage .headerLoginMenu .fv-footerMenuRibbonMobile .col-sm-2 {
+        flex: 0 0 22.666667%;
+        width: 16.666667% !important;
+        margin: auto;
+        margin-right: -16vw;
+        margin-top: 12px;
+    }
 }
 @media (max-width: 280px) {
-     .fv-footerMenu .fv-searchMainPage button:not(:disabled) {
+    .fv-productPriceBox a:not([href]):not([tabindex]), .fv-productPriceBox a:not([href]):not([tabindex]):focus, .fv-productPriceBox a:not([href]):not([tabindex]):hover {
+        display: contents;
+    }
+    .fv-footerMenu .fv-searchMainPage button:not(:disabled) {
         cursor: pointer;
         margin-left: 0;
         margin-right: auto;

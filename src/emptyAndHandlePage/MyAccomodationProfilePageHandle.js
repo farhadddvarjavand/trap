@@ -33,7 +33,7 @@ class MyAccomodationProfilePageHandle extends Component {
 
         userVillas()
             .then(res=>{
-                if (res.data.data){
+                if (res.data.data.length>0){
                     this.props.history.push(`/myAccommodation`)
                 }else {
                     this.props.history.push("/AnotherPagesEmpty")

@@ -121,7 +121,7 @@ class FactorPage extends Component {
                                             <h5>{this.state.factorInfo.length_stay} روز </h5>
                                         </MDBCol>
                                         <MDBCol md={4}>
-                                             <h5>{this.state.factorInfo.cost ? Number(this.state.factorInfo.cost - this.state.factorInfo.extra_cost) : ''}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
+                                             <h5>{this.state.factorInfo.cost ? Number(this.state.factorInfo.cost - this.state.factorInfo.extra_cost - this.state.factorInfo.facilities_cost) : ''}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
                                         </MDBCol>
                                     </MDBRow>
 
@@ -273,7 +273,7 @@ class FactorPage extends Component {
                                             <h5>{this.state.factorInfo.length_stay} روز </h5>
                                         </MDBCol>
                                         <MDBCol md={4} sm={4}>
-                                            <h5>{this.state.factorInfo.cost ? Number(this.state.factorInfo.cost - this.state.factorInfo.extra_cost) : ''}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
+                                            <h5>{this.state.factorInfo.cost ? Number(this.state.factorInfo.cost - this.state.factorInfo.extra_cost - this.state.factorInfo.facilities_cost) : ''}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
                                         </MDBCol>
                                     </MDBRow>
 

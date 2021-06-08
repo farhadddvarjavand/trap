@@ -126,7 +126,7 @@ body{
   margin-top: 7%;
 }
 .fv-topicFirstMainPage{
-padding-top: 10%;
+  padding-top: 10%;
 }
 .fv-topicFirstMainPage a  , .fv-topicMainPage a{
   padding-top: 10%;
@@ -169,8 +169,8 @@ padding-top: 10%;
   border-radius: 15px;
 }
 .fv-footerMenuRibbon img{
- /* width: 152px; */
- /* height: 152px; */
+  /* width: 152px; */
+  /* height: 152px; */
   /* padding: 0; */
   /* margin: 0; */
   /* margin: -34px; */
@@ -572,14 +572,14 @@ padding-top: 10%;
   box-shadow: none;
   filter: none;
 }
- .Calendar > :not(.Calendar__footer) button {
-   /* font-family: inherit; */
-   background: #ffffff00;
-   /* cursor: pointer; */
-   /* -webkit-tap-highlight-color: transparent; */
-   /* outline: none; */
-   border: none;
- }
+.Calendar > :not(.Calendar__footer) button {
+  /* font-family: inherit; */
+  background: #ffffff00;
+  /* cursor: pointer; */
+  /* -webkit-tap-highlight-color: transparent; */
+  /* outline: none; */
+  border: none;
+}
 
 .loader {
   position: relative;
@@ -776,16 +776,54 @@ color {  100%, 0% {
     margin-left: 2%;
   }
   .fv-footerMenu .fv-footerMenuRibbon .col-md-9 {
-      flex: 0 0 75%;
-      max-width: 75%;
-      flex: 0 0 57%;
-      max-width: 67%;
-      z-index: 0;
-      margin-right:12%;
-    }
+    flex: 0 0 75%;
+    max-width: 75%;
+    flex: 0 0 57%;
+    max-width: 67%;
+    z-index: 0;
+    margin-right:12%;
+  }
+  .fv-aboutUs .col-md-6 {
+    flex: 0 0 53%;
+    max-width: 50%;
+    padding-left: 1%;
+  }
+  .fv-aboutUsThirdImage {
+    margin-top: -4%;
+    border-radius: 15px;
+    width: 193px;
+    height: 277px;
+    margin-top: 3%;
+    border-radius: 15px;
+    width: 181px;
+    height: 277px;
+    margin-right: 43px;
+  }
+  .fv-aboutUsFirstImage {
+    margin-left: 1%;
+    margin-top: 1%;
+    border-radius: 15px;
+    width: 230px;
+    height: 261px;
+    margin-right: -10px;
+  }
 }
 
+
 @media (max-width: 769px){
+  .fv-comment .fv-commentLeft ,  .fv-commentSvgRight , .fv-gustNameAndInfoLeft{
+    display: none;
+  }
+  .fv-gustComment .col-md-6 {
+    text-align: center;
+    margin-right: 1%;
+    margin-left: -2%;
+    margin-top: 4%;
+  }
+  .fv-gustNameAndInfoRight img {
+    margin-right: 2%;
+  }
+
   .fv-product .row {
     padding-top: 4%;
     width: 126%;
@@ -937,6 +975,16 @@ color {  100%, 0% {
   .main .fv-mobileMenuGustMainPage .fv-ProfilePageUserInfoDetailsBody .fa {
     margin-left: 8%;
   }
+  .fv-MainBody .fv-topicMainPage .col-sm-9 {
+    flex: 0 0 51.333333%;
+    width: 75% !important;
+  }
+
+  .fv-MainBody .fv-topicMainPage .col-sm-3 {
+    flex: 0 0 30%;
+    width: 25% !important;
+  }
+
 }
 @media (max-width: 360px){
   .fv-footerMenu .fv-cascadeOptionMainPageRowTop img {
@@ -961,6 +1009,13 @@ color {  100%, 0% {
     float: right;
     /* margin: 4%; */
     margin-top: 7%;
+  }
+  .fv-mainProduct.fv-mainMobile .fv-productPriceBoxPriceText {
+    /* background-color: #aaaaaa; */
+    float: right;
+    margin-top: -5vw;
+    font-size: 14px;
+    margin-right: 3vw;
   }
 }
 
@@ -1010,4 +1065,11 @@ color {  100%, 0% {
     margin-left: 2%;
   }
 
+  .fv-mainProduct.fv-mainMobile .fv-productPriceBoxPriceText {
+    /* background-color: #aaaaaa; */
+    float: right;
+    margin-top: -12vw;
+    font-size: 14px;
+    margin-right: -2vw;
+  }
 }

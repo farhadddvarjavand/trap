@@ -487,7 +487,7 @@ display: none;
     text-align: center;
 }
 .fv-DisplayPageDetailsRightStayInHome h4 {
-    margin-right: -5%;
+    margin-right: 0%;
 }
 .fv-displayPageMap{
     margin-bottom: 4%;
@@ -689,6 +689,14 @@ display: none;
     margin-right: 0%;
 }
 
+.fv-DisplayPageDetailsLeftBodyMobileReservation {
+    display: none ;
+}
+.fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop.fv-displayPath .fv-DisplayPageRotePathMobile {
+    margin-right: -2%;
+}
+
+
 
 @media (max-width: 1200px) {
     .fv-DisplayPage .fv-footerDisplayPageBody button, .fv-DisplayPage .fv-footerDisplayPageBody input {
@@ -755,6 +763,9 @@ display: none;
     }
 
 
+    .fv-DisplayPageDetailsLeftFactorLeftMobile{
+        text-align: end;
+    }
 }
 @media (max-width: 768px) and (min-width: 540px){
 
@@ -788,8 +799,20 @@ display: none;
     }
     .fv-SearchHomePage .fv-product .col-md-5 {
         text-align: end;
-        margin-right: -44px;
+        margin-right: -29px;
         font-size: 11px;
+    }
+    .fv-SearchHomePage .fv-product .fv-productPriceBox .col-md-10 {
+        flex: 0 0 131.333333%;
+        max-width: 130.333333%;
+        margin-left: -12%;
+        margin-top: 4%;
+    }
+    .fv-SearchHomePage .fv-productRateBox {
+        font-size: 10px;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        direction: ltr;
     }
 }
 @media (max-width: 989px) and (min-width: 760px){
@@ -904,6 +927,15 @@ display: none;
     .fv-SearchHomePage .fv-product .fv-productCapacityBox .col-md-2 {
         font-size: 9px;
     }
+    .fv-SearchHomePage .fv-widthHeaderLoginMenuForDisplayPage .fv-footerMenuRibbon .col-md-9 {
+        flex: 0 0 75%;
+        max-width: 75%;
+        flex: 0 0 57%;
+        max-width: 67%;
+        z-index: 0;
+        margin-right: 12%;
+        margin-top: 0.5%;
+    }
 }
 
 
@@ -950,12 +982,25 @@ display: none;
 
 
 @media (max-width: 766px) {
+    .fv-widthHeaderLoginMenuForDisplayPage .headerLoginMenu .fv-footerMenuRibbonMobile .col-sm-2 {
+        flex: 0 0 15.666667%;
+        width: 16.666667% !important;
+        margin: auto;
+        margin-right: -6vw;
+        margin-top: 12px;
+    }
+    .fv-DisplayPageDetailsّFacilities .col-sm-6{
+        padding: 0 !important;
+        font-size: 4vw;
+    }
     .fv-footerDisplayPageBody .col-md-2,.fv-DisplayPageSearchProductImage .fv-aboutUsThirdImageRight,.fv-DisplayPageSearchProductImage .fv-aboutUsThirdImageLeftFirst , .fv-DisplayPageSearchProductImage .fv-aboutUsThirdImageLeftSecond, .fv-DisplayPageMenuRows , .fv-DisplayPageDisplayMoreImage .col , .fv-DisplayPageDetailsRightBody .col-md-2 h4{
         display: none;
     }
-    .fv-DisplayPageSearchName .fv-DisplayPageDetailsRate, .fv-DisplayPageDetailsRatingTop.fv-DisplayPageDetailsRating ,.fv-DisplayPageSearchName .fv-DisplayPageLike,.fv-DisplayPageSearchName .fv-DisplayPageTitleShare ,.fv-DisplayPageDetailsLeftBody {
+    .fv-DisplayPageSearchName .fv-DisplayPageDetailsRate, .fv-DisplayPageDetailsRatingTop.fv-DisplayPageDetailsRating ,.fv-DisplayPageSearchName .fv-DisplayPageTitleShare ,.fv-DisplayPageDetailsLeftBody {
         display: none;
     }
+    /* ,.fv-DisplayPageSearchName .fv-DisplayPageLike { display: none;
+    }*/
     .fv-footerMenu .col-md-6 {
         padding: 0;
         margin-top: 4%;
@@ -993,7 +1038,7 @@ display: none;
     .fv-DisplayPageRotePathMobile{
         margin-top: 3%;
         display: flex;
-        padding-right: 5%;
+        padding-right: 0%;
     }
     .fv-DisplayPageRotePathMobile .col{
         display: contents;
@@ -1100,8 +1145,8 @@ display: none;
     }
     .fv-DisplayPageDetailsّFacilities .col-sm-2 {
         font-size: 19px;
-        margin-right: -3%;
-        margin-left: 3%;
+        margin-right: -14%;
+        margin-left: 12%;
     }
     .fv-DisplayPageMenu.fv-DisplayPageRent .row .slider_pagination_btn {
         padding: 4px;
@@ -1157,7 +1202,7 @@ display: none;
         margin-bottom: 0%;
     }
     .fv-DisplayPageDetailsّFacilities.fv-DisplayPageTomanTitle .col-md-4 {
-        margin-right: 14%;
+        margin-right: 3%;
     }
     .fv-DisplayPageDetails .fv-SearchHomePagePagination input[type=button] {
         color: #15BE29;
@@ -1194,7 +1239,7 @@ display: none;
         margin-right: 0%;
     }
     .fv-DisplayPageDetailsScore .fv-DisplayPageDetailsScoreBody .col-md-3 {
-        flex: 0 0 34%;
+        flex: 0 0 42%;
         max-width: 35%;
         font-size: 4.2vw;
     }
@@ -1249,7 +1294,7 @@ display: none;
     .fv-DisplayPage .fv-productPriceBoxPriceText {
         /* background-color: #aaaaaa; */
         float: right;
-        margin-top: 0vw;
+        margin-top: -4vw;
         font-size: 14px;
         margin-right: 11vw;
     }
@@ -1274,6 +1319,13 @@ display: none;
     .fv-DisplayPageDetailsRightBody .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo h5, .fv-DisplayPageDetailsRightBody .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo p {
         font-size: 4vw;
     }
+    .fv-DisplayPageTitle .fv-DisplayPageTitleTopic .col-md-2 {
+        text-align: initial;
+        color: #3EC886;
+        font-size: 25px;
+        flex: 0 0 71.666667%;
+        max-width: 73.666667%;
+    }
 
 
 
@@ -1291,7 +1343,7 @@ display: none;
     }
     .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo .col-sm-4 {
         text-align: end;
-        margin-right: -3%;
+        margin-right:  1%;
     }
     .fv-DisplayPageDetailsRate {
         margin-right: -30px;
@@ -1328,6 +1380,86 @@ display: none;
         margin-top: 8%;
         font-size: 3.5vw;
     }
+    .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo .col-sm-5 {
+        text-align: center;
+        margin-right: 5%;
+    }
+    .fv-DisplayPageDetailsRightBody .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo h5, .fv-DisplayPageDetailsRightBody .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo p {
+        font-size: 2vw;
+    }
+
+
+    .fv-DisplayPageDetailsLeftBodyMobileReservation {
+        text-align: center;
+        margin-top: 26%;
+        direction: rtl;
+        display: block;
+        box-shadow: 1px 1px 11px #88888830;
+        margin-top: 18%;
+        margin-bottom: 15%;
+    }
+    .fv-DisplayPageDetailsLeftBodyMobileReservation .fv-DisplayPageDetailsLeftTextDate {
+        width: 94.7%;
+        z-index: 1;
+    }
+    .fv-DisplayPageDetailsLeftBodyMobileReservation .fv-DisplayPageDetailsLeftBodyCapacityText input, .fv-DisplayPageDetailsLeftBodyMobileReservation .fv-DisplayPageDetailsLeftBodyCapacityOption select {
+        width: 95%;
+        margin-right: -1%;
+    }
+    .fv-DisplayPageDetailsLeftBodyMobileReservation .fv-DisplayPageTitle {
+        text-align: end;
+    }
+    .fv-DisplayPageDetailsLeftBodyCapacityText input, .fv-DisplayPageDetailsLeftBodyCapacityOption select {
+        width: 96%;
+        margin-right: -1%;
+    }
+
+    .fv-footerDisplayPageBody .fv-DisplayPageSearchName {
+        padding-top: 6px;
+        margin-left: 4%;
+    }
+    .fv-widthHeaderLoginMenuForDisplayPage .headerLoginMenu .fv-footerMenuRibbonMobile .col-sm-2 {
+        flex: 0 0 15.666667%;
+        width: 16.666667% !important;
+        margin: auto;
+        margin-right: -6vw;
+        margin-top: 12px;
+        flex: 0 0 7.666667%;
+        width: 22.666667% !important;
+        /* margin: inherit; */
+        margin-right: 9vw;
+        margin-top: 12px;
+        margin-left: -13%;
+    }
+}
+
+@media (max-width: 478px) {
+    .fv-footerDisplayPageBody .fv-DisplayPageSearchName {
+        padding-top: 6px;
+        margin-left: 4%;
+    }
+    .fv-DisplayPageDetailsLeftBodyCapacityText input, .fv-DisplayPageDetailsLeftBodyCapacityOption select {
+        width: 96%;
+        margin-right: -1%;
+    }
+    .fv-DisplayPageDetailsLeftBodyMobileReservation .fv-DisplayPageDetailsLeftTextDate {
+        width: 95.5%;
+        z-index: 1;
+    }
+    .fv-DisplayPageDetailsLeftBodyMobileReservation {
+        direction: rtl;
+        display: block;
+        box-shadow: 1px 1px 11px #88888830;
+        margin-top: 18%;
+        margin-bottom: 15%;
+    }
+}
+
+@media (max-width: 375px) {
+    .fv-DisplayPageDetailsLeftBodyMobileReservation .fv-DisplayPageDetailsLeftTextDate {
+        width: 96%;
+        z-index: 1;
+    }
 }
 @media (max-width: 360px) {
     .fv-DisplayPageMenu .row .slider_pagination_btn {
@@ -1340,13 +1472,11 @@ display: none;
     }
 
 
-    .fv-SearchHomePage .fv-product .col-md-5 {
-        margin-left: -48px;
-    }
+
     .fv-SearchHomePage .fv-productPriceBoxPriceText {
         /* background-color: #aaaaaa; */
         float: right;
-        margin-top: 0vw;
+        margin-top: -2vw;
         font-size: 14px;
         margin-right: 6vw;
     }
@@ -1409,7 +1539,19 @@ display: none;
     .fv-footerMenu .col-md-6 {
         margin-right: 12%;
     }
-
+    .fv-DisplayPageDetailsLeftBodyMobileReservation .fv-DisplayPageDetailsLeftTextDate {
+        width: 96.5%;
+        z-index: 1;
+    }
+    .fv-DisplayPageDetailsLeftBodyCapacityText input {
+        border: 1px solid gray;
+        border-bottom: none;
+        padding-right: 3%;
+    }
+    .fv-DisplayPage .fv-product .row .col-md-2 {
+        margin-left: 8px;
+        margin-right: 5%;
+    }
 }
 
 @media (max-width: 320px) {
@@ -1434,6 +1576,53 @@ display: none;
         width: 66.666667% !important;
         text-align: initial;
         margin-right: 1vw;
+    }
+    .fv-DisplayPageDetailsLeftBodyMobileReservation .fv-DisplayPageDetailsLeftTextDate {
+        width: 96.5%;
+        z-index: 1;
+    }
+    .fv-DisplayPageDetailsLeftSelectedDate {
+        width: 105%;
+    }
+    .Calendar__day.-rtl .fv-test {
+        /* background: #2F80ED; */
+        color: #15BE29;
+        font-size: 9px;
+    }
+    .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop  .fv-DisplayPageRotePathMobile p {
+        font-size: 11px;
+    }
+    .fv-DisplayPage .fv-product .col-md-5 {
+        margin-left: -54px;
+        font-size: 2.5vw;
+    }
+    .fv-DisplayPage .fv-product .row .col-md-2 {
+        margin-left: 8px;
+        margin-right: 5%;
+        font-size: 3vw;
+    }
+    .fv-DisplayPage .fv-product .fv-productCapacityBox .fv-numberOfBedBody {
+        display: flex;
+        justify-content: flex-end;
+        margin-left: 6px;
+        margin-top: -16%;
+    }
+    .fv-widthHeaderLoginMenuForDisplayPage .headerLoginMenu .fv-footerMenuRibbonMobile .col-sm-2 {
+        flex: 0 0 23.666667%;
+        width: 16.666667% !important;
+        margin: auto;
+        margin-right: -13vw;
+        margin-top: 12px;
+    }
+    .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo .col-sm-6 {
+        width: 65% !important;
+        padding-right: 15%;
+    }
+    .fv-widthHeaderLoginMenuForDisplayPage .fv-footerMenuRibbonMobile .col-sm-8 {
+        flex: 0 0 58.333333%;
+        width: 66.666667% !important;
+        text-align: initial;
+        margin-right: -4vw;
     }
 }
 @media (max-width: 280px) {
@@ -1469,7 +1658,7 @@ display: none;
     }
     .fv-DisplayPageDetailsّFacilities .col-sm-2 {
         font-size: 19px;
-        margin-right: -11%;
+        margin-right: -14%;
         margin-left: 12%;
     }
     .fv-DisplayPageDetailsّFacilities.fv-DisplayPageTomanTitle .col-md-4 {
@@ -1487,7 +1676,7 @@ display: none;
         margin-top: 4%;
     }
     .fv-DisplayPageDetailsّFacilities.fv-DisplayPageTomanTitle .col-md-4 {
-        margin-right: 7%;
+        margin-right: 3%;
     }
     .calenderBody .week-days {
         padding: 17px 0px !important;
@@ -1551,6 +1740,14 @@ display: none;
         text-align: initial;
         margin-right: -2vw;
     }
+    .fv-DisplayPageDetailsLeftBodyMobileReservation .fv-DisplayPageDetailsLeftTextDate {
+        width: 96.5%;
+        z-index: 1;
+    }
+    .fv-DisplayPageDetailsLeftSelectedDate {
+        width: 104.6%;
+    }
+
 }
 @media (max-width: 1200px) and (min-width: 1114px) {
     .fv-DisplayPageDetailsScoreBody .col-md-3 {

@@ -307,7 +307,7 @@ class MainPage extends Datas {
                                              location={productDetails.city}
                                              numberOfRoom={productDetails.details.bedroom}
                                              capacity={productDetails.details.max_capacity}
-                                             price={''}/> </a>
+                                             price={productDetails.rules.normal_cost}/> </a>
 
                                 </MDBCol>
                             )
@@ -524,11 +524,11 @@ class MainPage extends Datas {
             </div>
             <MDBRow className={"fv-gustComment"}>
                 {pagination.slice(1,1)}
-                <MDBCol md={6}>
+                <MDBCol md={6}  className={"fv-gustNameAndInfoLeft"}>
                     <img src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg" width="50" height="50" />
                    نظرات مهمان ها
                 </MDBCol>
-                <MDBCol md={6}>
+                <MDBCol md={6}   className={"fv-gustNameAndInfoRight"}>
                     <img src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg" width="50" height="50" />
                     نظرات مهمان ها
                 </MDBCol>

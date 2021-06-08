@@ -8,6 +8,7 @@ import MobileLogo from "../images/MobileLogo.png";
 import Footer from "../componentsPages/footer";
 import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt"
 import Mapir from "mapir-react-component";
+import HostStepImage1 from "../images/home_miz1 png.png"
 
 class HostStep2Page2 extends Component {
     constructor(props) {
@@ -99,7 +100,7 @@ class HostStep2Page2 extends Component {
                     بگردد تمرکزش از روی کار اصلی برداشته میشود و اینکار زمان بر خواهد بو
                     د. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگران را
                     در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند"
-                        image={MobileLogo}
+                        image={HostStepImage1}
                         nextLink={"../../hostStep3"}
                         returnLink={"../../hostStep2"}
                         localStorageName={"step2-2"}

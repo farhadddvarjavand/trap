@@ -35,7 +35,13 @@ import {utils} from "../data/Calendar";
 import {arrayBetweenDates , arrayBetweenDatesObject , priceOfPerMonth} from "../componentsPages/calculationsDate"
 import Mapir from "mapir-react-component";
 import {Link} from "react-router-dom";
-import {addToFavorite, calculateCost, calculateExtraCost, reserveRequest} from "../services/userService";
+import {
+    addToFavorite,
+    calculateCost,
+    calculateExtraCost,
+    calculateFacilitiesCost,
+    reserveRequest
+} from "../services/userService";
 import "../style/extra.scss"
 import axios from "axios";
 import HeaderLoginMenu from "../componentsPages/HeaderLoginMenu";
@@ -73,14 +79,20 @@ class DisplayPage extends Component {
             error:'',
             morePics:false,
             addToFavorites:false,
-            reservedPrice:'-',
-            extraPeopleCost:'-',
+            reservedPrice:'',
+            reservedFacilitiesPrice:0,
+            reservedTotalPrice:'',
+            extraPeopleCost:'',
             onclickHandelMobileMenu:false,
+            daysCostString:'',
+
 
             date: new Date(),
             selectedPlace: '',
             lat:35.72,
             lon:51.42,
+            errors:false,
+
         }
     }
 
@@ -142,6 +154,9 @@ componentDidMount() {
     villaPrice(this.props.match.params.id)
         .then(res=>this.setState(res.data ? {villaPrice:res.data} : ''))
         .catch(err=>console.log(err.response))
+
+
+
 
 }
 
@@ -233,10 +248,22 @@ componentDidMount() {
     }
 
     getSelectedDays = (selectedDay)=>{
+
         if(selectedDay && selectedDay !== this.state.selectedDays){
-            this.setState({selectedDays:selectedDay})
+            if(selectedDay.from && selectedDay.to){ // agar 2 meghdar vared shode bod
+
+                 //   this.selectDayToGo(selectedDay.from)
+                  //  this.selectDayToReturn(selectedDay.from)
+                    console.log(selectedDay)
+
+                this.setState({selectedDays:selectedDay})
+            }
         }
     }
+    getSelectedDaysCalendar = (data) =>{
+               this.selectDayToGo(data.from)
+              this.selectDayToReturn(data.to)
+        }
 
 
     render() {
@@ -295,6 +322,57 @@ componentDidMount() {
 
 
 
+        console.log(this.state.reservedTotalPrice)
+        console.log(this.state.extraPeopleCost)
+        let chef = 0
+        let host = 0
+        let tour_guide = 0
+        let bodyguard = 0
+        if(this.state.facilitiesCheckbox.includes("chef")){
+            if(this.state.resultVilla.info){
+                if(this.state.resultVilla.info.chef){
+                    chef=this.state.resultVilla.info.chef
+                }else {
+                    chef = 0
+                }
+            }else {
+                chef = 0
+            }
+        }
+        if(this.state.facilitiesCheckbox.includes("host")){
+            if(this.state.resultVilla.info){
+                if(this.state.resultVilla.info.chef){
+                    host=this.state.resultVilla.info.host
+                }else {
+                    host = 0
+                }
+            }else {
+                host = 0
+            }
+        }
+        if(this.state.facilitiesCheckbox.includes("tour_guide")){
+            if(this.state.resultVilla.info){
+                if(this.state.resultVilla.info.chef){
+                    tour_guide=this.state.resultVilla.info.tour_guide
+                }else {
+                    tour_guide = 0
+                }
+            }else {
+                tour_guide = 0
+            }
+        }
+        if(this.state.facilitiesCheckbox.includes("bodyguard")){
+            if(this.state.resultVilla.info){
+                if(this.state.resultVilla.info.chef){
+                    bodyguard=this.state.resultVilla.info.bodyguard
+                }else {
+                    bodyguard = 0
+                }
+            }else {
+                bodyguard = 0
+            }
+        }
+
         let daysCostString = ""
         if(daysSelected.length>0){
             for(let i = 0 ; i < daysSelected.length ; i++){
@@ -308,23 +386,66 @@ componentDidMount() {
              /* axios.post(`https://mahoorapps.ir/api/v1/villa/calculateCost/${this.props.match.params.id}`,
                 { dates:daysCostString })
                 .then(response => console.log(response)) */
-            calculateCost({dates: daysCostString},this.props.match.params.id)
-                .then(res=>{
-                    console.log(res)
-                    if(res.data.data !== "Reservation failed"){
-                        if(res.status === 200 && this.state.reservedPrice !== res.data){
-                            this.setState({reservedPrice:res.data})
+
+                calculateFacilitiesCost({dates: daysCostString , chef:chef , host:host ,tour_guide:tour_guide , bodyguard:bodyguard })
+                    .then(res=>{
+                        if(res.status === 200 && this.state.reservedFacilitiesPrice !== res.data ){
+                            this.setState({reservedFacilitiesPrice:res.data })
                         }
-                    }else {
-                        alert("تاریخ انتخاب شده معتبر نمیباشد - شما قبلا در این تاریخ رزرو داشته اید")
-                    }
+                    })
+                    .catch(err=>{
+                        this.setState({reservedPrice: '', numberOfPeople: ' ', extraPeopleCost: ''})
+                        console.log(err.response)
+                    })
 
-                })
-                .catch(err=>console.log(err.response))
 
+            if(this.state.daysCostString !== daysCostString){
+
+                calculateCost({dates: daysCostString},this.props.match.params.id )
+                    .then(res=>{
+                        console.log(res)
+                        if(res.data.data !== "Reservation failed" && res.status === 200){
+
+                            if(res.status === 200 && this.state.reservedPrice !== res.data){
+                                /*
+                                if(this.state.extraPeopleCost){
+                                    const data = {
+                                        finalCost:this.state.reservedTotalPrice, // قیمت کل بدون در نظر گرفتن افراد اضافه
+                                        dates:daysCostString,
+                                        extra_people:this.state.numberOfPeople
+                                    }
+                                    calculateExtraCost(data,this.props.match.params.id)
+                                        .then(res =>{
+                                            console.log(res.data)
+                                            this.setState({extraPeopleCost: res.data})
+                                        }  )
+                                        .catch(err=>console.log(err.response))
+                                } */
+                                this.setState({reservedPrice:res.data , numberOfPeople: ' ', extraPeopleCost: '' , daysCostString:daysCostString  , reservedFacilitiesPrice:0})  // لقیمت روز های رزرو شده فقط
+                            }
+                        }else {
+                            if(this.state.reservedPrice || this.state.numberOfPeople !== ' ' || this.state.extraPeopleCost){
+                                alert("تاریخ انتخاب شده معتبر نمیباشد - شما قبلا در این تاریخ رزرو داشته اید")
+                                this.setState({reservedPrice:'' , numberOfPeople:' ' , extraPeopleCost:'' , reservedFacilitiesPrice:0})
+                            }
+                        }
+
+                    })
+                    .catch(err=>{
+                        if(this.state.reservedPrice || this.state.numberOfPeople !== ' ' || this.state.extraPeopleCost) {
+                            alert("تاریخ انتخاب شده معتبر نمیباشد ")
+                            this.setState({reservedPrice: '', numberOfPeople: ' ', extraPeopleCost: ''  , reservedFacilitiesPrice:0 })
+                        }
+                    })
+
+            }
+
+
+        }else { //  daysCostString // اگر خالی باشد (ممکن است کاربر  تاریخ قبل وارد کرده باشد)
+            if(this.state.daysCostString !== daysCostString){
+                this.setState({reservedPrice: '', numberOfPeople: ' ', extraPeopleCost: ''  , reservedFacilitiesPrice:0 , daysCostString:''})
+            }
         }
-
-
         let daysBetweenReserved = ''
         let allDaysReservedConcat = ''
 
@@ -646,9 +767,9 @@ componentDidMount() {
 
         const Map = Mapir.setToken({
             //factory parameters
-            hash:true,
-            logoPosition:"top-left",
-            maxZoom:[16],
+           // hash:true,
+           // logoPosition:"top-left",
+            maxZoom:[15],
             transformRequest: (url) => {
                 return {
                     url: url,
@@ -741,6 +862,7 @@ componentDidMount() {
 
                     {/*
                     <HeaderSearch avatar={avatar}  {...this.props}/>
+                     console.log(priceDaysUpdates) gheimat haie 30 roz 30 roz dar araye
 
 
                     <MDBRow className={"fv-DisplayPageRotePathMobile"}>
@@ -756,7 +878,7 @@ componentDidMount() {
                             {...this.props}/>
                     </MDBContainer>
 
-                    <MDBContainer className={'fv-footerMenu fv-footerDisplayPage fv-searchHomePagePathTop'}>
+                    <MDBContainer className={'fv-footerMenu fv-footerDisplayPage fv-searchHomePagePathTop fv-displayPath'}>
 
                         <MDBRow className={"fv-DisplayPageRotePathMobile "}>
                             <MDBCol>
@@ -886,10 +1008,16 @@ componentDidMount() {
                             <p><i className="fa fa-map-marker-alt" /> {this.state.resultVilla.state} </p>
                         </MDBCol>
                         <MDBCol md={2}>
+                        {this.state.resultVilla.score ?
+                              <div>
                                 <p className={"fv-DisplayPageDetailsRating  fv-DisplayPageDetailsRatingTop"}> 5 </p>
                                 <p className={"fv-DisplayPageDetailsRate fv-DisplayPageDetailsRateTop"}>  /{this.state.resultVilla.score}<i className="fa fa-star" /> </p>
+                              </div>
+                        :
+                        ''}
                         </MDBCol>
-                        <MDBCol md={6} className={"fv-DisplayPageLike"}>
+
+                        <MDBCol md={8} className={"fv-DisplayPageLike"}>
                                 <a className={this.state.addToFavorites ?"addToFavoritesTextHide" : ""} onClick={()=>{
                                     this.setState({addToFavorites: true})
                                    const data ={
@@ -907,11 +1035,10 @@ componentDidMount() {
                             </div>
                         </MDBCol>
 
-                        <MDBCol md={2} className={"fv-DisplayPageTitleShare"}>
+                        {/* <MDBCol md={2} className={"fv-DisplayPageTitleShare"}>
                             <a onClick={()=>this.postData('rl','data')}>
-                            <p> به اشتراک گذاری <i className="fa fa-share-alt" aria-hidden="true" /></p>
                             </a>
-                        </MDBCol>
+                        </MDBCol>  */}
                     </MDBRow>
 
 
@@ -952,6 +1079,7 @@ componentDidMount() {
                         <a onClick={()=> this.setState({morePics:true})}> مشاهده تصویر بیشتر <i className="fas fa-angle-left" /></a>
                     </MDBCol>
                 </MDBRow>
+
 
                 </div>                                              {/*        fv-Pictures     */}
 
@@ -994,7 +1122,8 @@ componentDidMount() {
                         </MDBRow>
                     </MDBCol>
                 </MDBRow>
-                <MDBRow className={"fv-DisplayPageDetails"}>
+
+                    <MDBRow className={"fv-DisplayPageDetails"}>
                     <MDBCol md={8} className={"fv-DisplayPageDetailsRightBody"}>
                         <MDBRow>
                             <MDBCol md={2} sm={2}>
@@ -1019,6 +1148,155 @@ componentDidMount() {
                                 </MDBRow>
                             </MDBCol>
                         </MDBRow>
+
+
+
+                        <div className={"fv-DisplayPageDetailsLeftBodyMobile"}>                             {/*     Reservation For Mobile     */}
+                            <MDBCol md={4} className={"fv-DisplayPageDetailsLeftBodyMobileReservation"}>
+                                <MDBRow>
+                                    <p>قیمت از شبی {this.state.resultVilla.rules ? this.state.resultVilla.rules.normal_cost : ''} تومان</p>
+                                </MDBRow>
+                                <MDBRow className={"fv-DisplayPageDetailsLeftEmptyMobile"}>
+                                    <p><i className="fa fa-calendar" aria-hidden="true" /> اولین تاریخ خالی این اقامت گاه {`${minimumDate.year}/${minimumDate.month}/${minimumDate.day}`} میباشد </p>
+                                </MDBRow>
+                                <MDBRow className={"fv-DisplayPageDetailsLeftBodyDate"}>
+                                    <MDBRow className={"fv-DisplayPageDetailsLeftSelectedDate"}>
+                                        <input type='text' value=' تاریخ ورود' className={"fv-DisplayPageDetailsLeftBodyDateOnText"} />
+                                        <input type='text' value=' تاریخ خروج' className={"fv-DisplayPageDetailsLeftBodyDateOutText"} />
+                                    </MDBRow>
+                                    <MDBRow className={"fv-DisplayPageDetailsLeftTextDate"}>
+                                        <div  className={"fv-DisplayPageDetailsLeftBodyDateOnInput"}>  <CalendarLinearLimitedDays minimumDate={minimumDate} maximumDate={maximumDate} dayToGo={this.selectDayToGo} text={'انتخاب روز'}  daysReserved={allDaysReservedConcat}/> </div>
+                                        <div  className={"fv-DisplayPageDetailsLeftBodyDateOutInput"} >  <CalendarLinearLimitedDays  minimumDate={minimumDate} maximumDate={maximumDate} dayToReturn={this.selectDayToReturn} text={'انتخاب روز'}  daysReserved={allDaysReservedConcat}/> </div>
+                                    </MDBRow>
+                                </MDBRow>
+                                <MDBRow className={"fv-DisplayPageDetailsLeftBodyCapacityText"}>
+                                    <input type='text' value=' تعداد نفرات'/>
+                                </MDBRow>
+                                <MDBRow className={"fv-DisplayPageDetailsLeftBodyCapacityOption"}>
+                                    <select value={this.state.numberOfPeople} onChange={(event)=>{
+                                        this.setState({numberOfPeople:event.target.value})
+                                        if(Number(this.state.reservedPrice)){
+                                            const data = {
+                                                dates:daysCostString,
+                                                extra_people:Number(event.target.value)
+                                            }
+                                            console.log(data)
+                                            calculateExtraCost(data,this.props.match.params.id)
+                                                .then(res => this.setState({extraPeopleCost: res.data}) )
+                                                .catch(err=>console.log(err.response))
+                                        }else {
+                                            this.setState({numberOfPeople:' '})
+                                            alert("لطفا ابتدا تاریخ را اننتخاب کنید")
+                                        }
+                                    }}>
+                                        <option value=' ' disabled>تعداد نفرات</option>
+                                        { resultVillaArray.map(extraCapacity =>{
+                                            let numberPeople = []
+                                            let options = []
+                                            console.log(extraCapacity)
+                                            if(extraCapacity.details){
+                                                for (let i = 0 ; i < extraCapacity.details.max_capacity - extraCapacity.details.standard_capacity ; i++){
+                                                    numberPeople.push(i+1)
+                                                }
+                                            }
+                                            return <>
+                                                {
+                                                    numberPeople.map(num => <option value={num}>{num}</option>)
+                                                }
+                                            </>
+                                        }) }
+
+                                    </select>
+                                </MDBRow>
+                                <MDBRow className={"fv-DisplayPageDetailsLeftFactor"}>
+                                    <MDBCol md={6}  sm={6} className={"fv-DisplayPageDetailsLeftFactorLeft"}>
+                                        <p>{rangeBetween} روز </p>
+                                    </MDBCol>
+                                    <MDBCol  md={6}  sm={6} className={"fv-DisplayPageDetailsLeftFactorLeftMobile"}>
+                                        <p>{this.state.reservedPrice ? this.state.reservedPrice : '-'} تومان</p>
+                                    </MDBCol>
+                                </MDBRow>
+                                <MDBRow className={"fv-DisplayPageDetailsLeftFactor fv-DisplayPageDetailsLeftFactorBorderLine"}>
+                                    <MDBCol  md={6}  sm={6} className={"fv-DisplayPageDetailsLeftFactorLeft"}>
+                                        <p>{this.state.numberOfPeople} نفر اضافه </p>
+                                    </MDBCol>
+                                    <MDBCol  md={6}  sm={6} className={"fv-DisplayPageDetailsLeftFactorLeftMobile"} >
+                                        <p>{Number(this.state.extraPeopleCost) ? Number(this.state.extraPeopleCost) : ' ' } تومان</p>
+                                    </MDBCol>
+                                </MDBRow>
+
+                                <MDBRow className={"fv-DisplayPageDetailsLeftFactor"}>
+                                    <MDBCol  md={6}  sm={6} className={"fv-DisplayPageDetailsLeftFactorLeft"}>
+                                        <p>جمع کل</p>
+                                    </MDBCol>
+                                    <MDBCol  md={6}  sm={6} className={"fv-DisplayPageDetailsLeftFactorLeftMobile"} >
+                                        <p>{Number(this.state.reservedPrice) ? (Number(this.state.extraPeopleCost) ? Number(this.state.extraPeopleCost)+Number(this.state.reservedPrice)+Number(this.state.reservedFacilitiesPrice)  :  this.state.reservedPrice+this.state.reservedFacilitiesPrice ) : '' } تومان</p> {/* agar meghdare kol ba afrade ezafe vojod dasht ono dar nazar migirim dar gheire in sorat bedone jame bedone afrade ezafe ro dar nazar migirim */}
+                                    </MDBCol>
+                                </MDBRow>
+                                <MDBRow className={"fv-DisplayPageDetailsLeftButton"}>
+                                    <MDBCol>
+                                        <input type="button" value="درخواست رزرو" onClick={()=>{
+                                            if (localStorage.getItem("token") ){
+                                                if(Number(this.state.reservedPrice )){
+                                                    let cost = this.state.reservedPrice+Number(this.state.reservedFacilitiesPrice)
+                                                    if(Number(this.state.extraPeopleCost)&&Number(this.state.reservedPrice)){
+                                                        cost = Number(this.state.extraPeopleCost)+Number(this.state.reservedPrice)+Number(this.state.reservedFacilitiesPrice)
+                                                    }
+                                                    let extraCost = 0
+                                                    if(Number(this.state.extraPeopleCost)){
+                                                        extraCost = Number(this.state.extraPeopleCost)
+                                                    }
+                                                    let extraPeople = 0
+                                                    if(this.state.numberOfPeople && Number(this.state.extraPeopleCost)){
+                                                        extraPeople = this.state.numberOfPeople
+                                                    }
+                                                    const data ={
+                                                        villa_title : this.state.resultVilla.title,
+                                                        state : this.state.resultVilla.state,
+                                                        city : this.state.resultVilla.city,
+                                                        entry_date :this.state.dateToGo.year+"/"+ this.state.dateToGo.month+"/"+ this.state.dateToGo.day,
+                                                        exit_date :this.state.dateToReturn.year+"/"+ this.state.dateToReturn.month+"/"+ this.state.dateToReturn.day,
+                                                        cost : cost ,
+                                                        villa_id : this.state.resultVilla.id ,
+                                                        passengers_number : this.state.resultVilla.details.standard_capacity ,
+                                                        extra_people :extraPeople,   //this.state.resultVilla.details.max_capacity-this.state.resultVilla.details.standard_capacity ,
+                                                        length_stay :rangeBetween,
+                                                        extra_cost:extraCost,
+                                                        facilities_cost:this.state.reservedFacilitiesPrice
+                                                    }
+                                                    console.log(data)
+                                                    reserveRequest(data)
+                                                        .then(res => {
+                                                            console.log(res)
+                                                            if(res.status === 200){
+                                                                /*    const dataSave = {                       /// ezafe kardann be reserve ha dar taghvim
+                                                                        end_date: data.exit_date ,
+                                                                        start_date: data.exit_date,
+                                                                    }
+                                                                    localStorage.setItem("reservedDatas",dataSave); */
+
+                                                                this.props.history.push("/ProfileReservation2")
+                                                            }else {
+                                                                alert("اطلاعات را به درستی وارد نمایید")
+                                                            }
+                                                        })
+                                                        .catch(err => console.log(err.response))
+                                                }else {
+                                                    alert("اطلاعات را به درستی وارد نمایید")
+                                                }
+
+                                            }else {
+                                                alert("شما ابتدا باید وارد شوید")
+                                                this.props.history.push("/mainPage")
+                                            }
+
+                                        }}/>
+                                    </MDBCol>
+                                </MDBRow>
+                            </MDBCol>
+                        </div>
+
+
 
                         <div id="facilities" className={''}>                                            {/*    fv-facilities      */}
                             <MDBRow className={"fv-DisplayPageDetailsRightHomeImage pMobile"}>
@@ -1049,15 +1327,22 @@ componentDidMount() {
                                 </MDBRow>
                             }) : ''}
 
+
                         <MDBRow className={"fv-DisplayPageDetailsRightStayInHome"}>
-                            <MDBCol md={5} sm={11}>
-                                <h4> حداقل تعداد روز اقامت </h4>
-                            </MDBCol>
+                            {this.state.resultVilla.rules && this.state.resultVilla.rules.min_reserve?
+                                <MDBCol md={5} sm={11}>
+                                    <h4> حداقل تعداد روز اقامت </h4>
+                                    <p>{this.state.resultVilla.rules.min_reserve} روز </p>
+                                </MDBCol>
+                             :
+                            ''}
+                            {this.state.resultVilla.rules && this.state.resultVilla.rules.max_reserve ?
                             <MDBCol md={7} sm={11}>
                                 <h4> حداکثر تعداد روز اقامت </h4>
+                                <p>{this.state.resultVilla.rules.max_reserve} روز </p>
                             </MDBCol>
-                        </MDBRow>
-                        <MDBRow>
+                                :
+                                ''}
                             <h4> امکانات </h4>
                         </MDBRow>
 
@@ -1096,80 +1381,93 @@ componentDidMount() {
                                 </MDBRow>
                             </div>
 
-                        <MDBRow  className={"fv-DisplayPageّMoreFacilities"}>
-                            {/*<p>مشاهده امکانات بیشتر</p>  */}
-                        </MDBRow>
-                        <MDBRow  className={"fv-DisplayPageّMoreFacilities"}>
-                            <h4>امکانات ویژه</h4>
-                        </MDBRow>
-                        <MDBRow className={"fv-DisplayPageDetailsRightParagraph"}>
-                            <h5>هر کدام از امکانات زیر که دوست دارید انتخاب کنید تا به شما در سفر حس بهتری بدهد </h5>
-                        </MDBRow>
-                        <MDBRow className={"fv-DisplayPageDetailsّFacilities fv-DisplayPageTomanTitle"}>
+                            {chefPrice || hostPrice || tourGuidePrice || bodyguardPrice ?
+                                <div>
+                                    <MDBRow  className={"fv-DisplayPageّMoreFacilities"}>
+                                        {/*<p>مشاهده امکانات بیشتر</p>  */}
+                                    </MDBRow>
+                                    <MDBRow  className={"fv-DisplayPageّMoreFacilities"}>
+                                        <h4>امکانات ویژه</h4>
+                                    </MDBRow>
+                                    <MDBRow className={"fv-DisplayPageDetailsRightParagraph"}>
+                                        <h5>هر کدام از امکانات زیر که دوست دارید انتخاب کنید تا به شما در سفر حس بهتری بدهد </h5>
+                                    </MDBRow>
+                                </div>
+                                : ''}
+                            <MDBRow className={"fv-DisplayPageDetailsّFacilities fv-DisplayPageTomanTitle"}>
+                            {chefPrice ?
+                                <MDBCol sm={12} md={12}>
+                                    <MDBRow>
+                                        <MDBCol md={1} sm={1}>
+                                            <input type="checkbox"  name={"chef"} onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
+                                        </MDBCol>
+                                        <MDBCol  md={3} sm={5}>
+                                            <p>آشپز</p>
+                                        </MDBCol>
+                                        <MDBCol  md={2} sm={2}>
+                                            <p> {chefPrice} </p>
+                                        </MDBCol>
+                                        <MDBCol  md={4} sm={2}>
+                                            <p> ریال </p>
+                                        </MDBCol>
+                                    </MDBRow>
+                                </MDBCol>
+                                : ''}
+
+                            {hostPrice ?
                             <MDBCol sm={12} md={12}>
                                 <MDBRow>
                                     <MDBCol md={1} sm={1}>
-                                        <input type="checkbox"  name="chef" onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
+                                        <input type="checkbox"  name={"host"} onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
                                     </MDBCol>
-                                    <MDBCol  md={3} sm={3}>
-                                        <p>آشپز</p>
-                                    </MDBCol>
-                                    <MDBCol  md={2} sm={2}>
-                                        <p> {chefPrice} </p>
-                                    </MDBCol>
-                                    <MDBCol  md={4} sm={4}>
-                                        <p> ریال </p>
-                                    </MDBCol>
-                                </MDBRow>
-                            </MDBCol>
-                            <MDBCol sm={12} md={12}>
-                                <MDBRow>
-                                    <MDBCol md={1} sm={1}>
-                                        <input type="checkbox"  name="host" onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
-                                    </MDBCol>
-                                    <MDBCol  md={3} sm={3}>
+                                    <MDBCol  md={3} sm={5}>
                                         <p>مهماندار</p>
                                     </MDBCol>
                                     <MDBCol  md={2} sm={2}>
                                         <p> {hostPrice}  </p>
                                     </MDBCol>
-                                    <MDBCol  md={4} sm={4}>
+                                    <MDBCol  md={4} sm={2}>
                                         <p> ریال </p>
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCol>
+                                : ''}
+                            {tourGuidePrice ?
                             <MDBCol sm={12} md={12}>
                                 <MDBRow>
                                     <MDBCol md={1} sm={1}>
-                                        <input type="checkbox"  name="tour_guide" onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
+                                        <input type="checkbox"  name={"tour_guide"} onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
                                     </MDBCol>
-                                    <MDBCol  md={3} sm={3}>
+                                    <MDBCol  md={3} sm={5}>
                                         <p>راهنمای سفر</p>
                                     </MDBCol>
                                     <MDBCol  md={2} sm={2}>
                                         <p> {tourGuidePrice} </p>
                                     </MDBCol>
-                                    <MDBCol  md={4} sm={4}>
+                                    <MDBCol  md={4} sm={2}>
                                         <p> ریال </p>
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCol>
+                                : ''}
+                            {bodyguardPrice ?
                             <MDBCol sm={12} md={12}>
                                 <MDBRow>
                                     <MDBCol md={1} sm={1}>
-                                        <input type="checkbox"  name="bodyguard" onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
+                                        <input type="checkbox"  name={"bodyguard"} onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
                                     </MDBCol>
-                                    <MDBCol  md={3} sm={3}>
+                                    <MDBCol  md={3} sm={5}>
                                         <p>بادیگارد</p>
                                     </MDBCol>
                                     <MDBCol  md={2} sm={2}>
                                         <p> {bodyguardPrice} </p>
                                     </MDBCol>
-                                    <MDBCol  md={4} sm={4}>
+                                    <MDBCol  md={4} sm={2}>
                                         <p> ریال </p>
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCol>
+                                : ''}
 
                         </MDBRow>
                         <MDBRow>
@@ -1244,7 +1542,8 @@ componentDidMount() {
                                     maximumDate={maximumDate}
                                     villaPrice={priceDaysUpdates}
                                     getSelectedDay={this.getSelectedDays}
-                                    daysReserved={allDaysReservedConcat}/>
+                                    daysReserved={allDaysReservedConcat}
+                                    getSelectedDaysCalendar={this.getSelectedDaysCalendar}/>
 
                                 {/* <MDBCol md={6}>
                                     <Calender />
@@ -1260,7 +1559,8 @@ componentDidMount() {
                                         maximumDate={maximumDate}
                                         villaPrice={priceDaysUpdates}
                                         getSelectedDay={this.getSelectedDays}
-                                        daysReserved={allDaysReservedConcat}/>
+                                        daysReserved={allDaysReservedConcat}
+                                        getSelectedDaysCalendar={this.getSelectedDaysCalendar}/>
                                 </MDBCol>
                             </MDBRow>
                         </div>                                                             {/*         fv-facilities          */}
@@ -1315,10 +1615,11 @@ componentDidMount() {
 
 
                         <MDBRow className={"fv-displayPageMap"}>
-                            <MDBCol md={8}>
+                            {this.state.resultVilla.long !== undefined && this.state.resultVilla.lat !== undefined && this.state.resultVilla.long  && this.state.resultVilla.lat ? // agar lat and long vojod dasht
+                                <MDBCol md={8}>
                                     <Mapir
                                         width="636"
-                                        center={[51.526770 , 35.724254 ]}
+                                        center={[ this.state.resultVilla.long ? Number(this.state.resultVilla.long) : 51.526770 , this.state.resultVilla.lat ? Number(this.state.resultVilla.lat)  : 35.724254 ]}
                                         Map={Map}
                                     >
                                         <Mapir.Layer
@@ -1326,11 +1627,13 @@ componentDidMount() {
                                             layout={{ "icon-image": "harbor-15" }}>
                                         </Mapir.Layer>
                                         <Mapir.Marker
-                                            coordinates={[51.526770 , 35.724254 ]}
+                                            coordinates={[ this.state.resultVilla.long ? Number(this.state.resultVilla.long)  : 51.526770 , this.state.resultVilla.lat ? Number(this.state.resultVilla.lat) : 35.724254 ]}
                                             anchor="bottom">
                                         </Mapir.Marker>
                                     </Mapir>
-                            </MDBCol>
+                                </MDBCol>
+                                : ''}
+
 
                         </MDBRow>
 
@@ -1348,17 +1651,22 @@ componentDidMount() {
                                 <Link to={`/addComments/${this.props.match.params.id}`}><h4> نوشتن نظر<i className="fas fa-chevron-left" /> </h4></Link>
                             </MDBCol>
                         </MDBRow>
-                        <MDBRow>
-                            <MDBCol md={1} sm={1}>
-                                <p className={"fv-DisplayPageDetailsRating"}> 5 </p>
-                            </MDBCol>
-                            <MDBCol md={2} sm={3}>
-                            <p className={"fv-DisplayPageDetailsRate"}>  /{(cleaningRate+adComplianceRate+hospitalityRate+hostingQualityRate)/5} <i className="fa fa-star" /> </p>
-                            </MDBCol >
-                            <MDBCol md={2} sm={4} className={"fv-DisplayPageDetailsRateNumberPerson"}>
-                                <p> ({this.state.resultComments.length} نظر) </p>
-                            </MDBCol>
-                        </MDBRow>
+                            {cleaningRate || adComplianceRate || hospitalityRate || hostingQualityRate ?
+                                <MDBRow>
+                                    <MDBCol md={1} sm={1}>
+                                        <p className={"fv-DisplayPageDetailsRating"}> 5 </p>
+                                    </MDBCol>
+                                    <MDBCol md={2} sm={3}>
+                                        <p className={"fv-DisplayPageDetailsRate"}>  /{(cleaningRate+adComplianceRate+hospitalityRate+hostingQualityRate)/5} <i className="fa fa-star" /> </p>
+                                    </MDBCol >
+                                    <MDBCol md={2} sm={4} className={"fv-DisplayPageDetailsRateNumberPerson"}>
+                                        <p> ({this.state.resultComments.length} نظر) </p>
+                                    </MDBCol>
+                                </MDBRow>
+                                :
+                                ''
+                            }
+
                         <MDBRow className={"fv-DisplayPageDetailsScore"}>
                             <MDBCol md={5} sm={12}>
                                 <MDBRow className={"fv-DisplayPageDetailsScoreBody"}>
@@ -1589,7 +1897,6 @@ componentDidMount() {
                                 this.setState({numberOfPeople:event.target.value})
                                 if(Number(this.state.reservedPrice)){
                                     const data = {
-                                        finalCost:this.state.reservedPrice,
                                         dates:daysCostString,
                                         extra_people:Number(event.target.value)
                                     }
@@ -1597,34 +1904,35 @@ componentDidMount() {
                                         .then(res => this.setState({extraPeopleCost: res.data}) )
                                         .catch(err=>console.log(err.response))
                                 }else {
+                                    this.setState({numberOfPeople:' '})
                                     alert("لطفا ابتدا تاریخ را اننتخاب کنید")
                                 }
                             }}>
-                                 <option value=' ' disabled>تعداد نررات</option>
-                                   { resultVillaArray.map(extraCapacity =>{
-                                        let numberPeople = []
-                                       let options = []
+                                <option value=' ' disabled>تعداد نفرات</option>
+                                { resultVillaArray.map(extraCapacity =>{
+                                    let numberPeople = []
+                                    let options = []
                                     console.log(extraCapacity)
                                     if(extraCapacity.details){
                                         for (let i = 0 ; i < extraCapacity.details.max_capacity - extraCapacity.details.standard_capacity ; i++){
                                             numberPeople.push(i+1)
                                         }
                                     }
-                                       return <>
-                                           {
-                                               numberPeople.map(num => <option value={num}>{num}</option>)
-                                           }
-                                       </>
-                                   }) }
+                                    return <>
+                                        {
+                                            numberPeople.map(num => <option value={num}>{num}</option>)
+                                        }
+                                    </>
+                                }) }
 
                             </select>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftFactor"}>
                             <MDBCol md={6}  sm={6} className={"fv-DisplayPageDetailsLeftFactorLeft"}>
-                               <p>{rangeBetween} روز </p>
+                                <p>{rangeBetween} روز </p>
                             </MDBCol>
                             <MDBCol  md={6}  sm={6} >
-                               <p>{this.state.reservedPrice ? this.state.reservedPrice : '-'} تومان</p>
+                                <p>{this.state.reservedPrice ? this.state.reservedPrice : '-'} تومان</p>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftFactor fv-DisplayPageDetailsLeftFactorBorderLine"}>
@@ -1632,7 +1940,7 @@ componentDidMount() {
                                 <p>{this.state.numberOfPeople} نفر اضافه </p>
                             </MDBCol>
                             <MDBCol  md={6}  sm={6} >
-                                <p>{Number(this.state.extraPeopleCost) ? Number(this.state.extraPeopleCost)-Number(this.state.reservedPrice) : ' ' } تومان</p>
+                                <p>{Number(this.state.extraPeopleCost) ? Number(this.state.extraPeopleCost) : ' ' } تومان</p>
                             </MDBCol>
                         </MDBRow>
 
@@ -1641,7 +1949,7 @@ componentDidMount() {
                                 <p>جمع کل</p>
                             </MDBCol>
                             <MDBCol  md={6}  sm={6} >
-                                <p> {Number(this.state.extraPeopleCost)&&Number(this.state.reservedPrice) ? Number(this.state.extraPeopleCost) : this.state.reservedPrice} تومان </p>
+                                <p>{Number(this.state.reservedPrice) ? (Number(this.state.extraPeopleCost) ? Number(this.state.extraPeopleCost)+Number(this.state.reservedPrice)+Number(this.state.reservedFacilitiesPrice)  :  this.state.reservedPrice+this.state.reservedFacilitiesPrice ) : '' } تومان</p> {/* agar meghdare kol ba afrade ezafe vojod dasht ono dar nazar migirim dar gheire in sorat bedone jame bedone afrade ezafe ro dar nazar migirim */}
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftButton"}>
@@ -1649,16 +1957,16 @@ componentDidMount() {
                                 <input type="button" value="درخواست رزرو" onClick={()=>{
                                     if (localStorage.getItem("token") ){
                                         if(Number(this.state.reservedPrice )){
-                                            let cost = this.state.reservedPrice
+                                            let cost = this.state.reservedPrice+Number(this.state.reservedFacilitiesPrice)
                                             if(Number(this.state.extraPeopleCost)&&Number(this.state.reservedPrice)){
-                                                cost = Number(this.state.extraPeopleCost)
+                                                cost = Number(this.state.extraPeopleCost)+Number(this.state.reservedPrice)+Number(this.state.reservedFacilitiesPrice)
                                             }
                                             let extraCost = 0
                                             if(Number(this.state.extraPeopleCost)){
-                                                extraCost = Number(this.state.extraPeopleCost)-Number(this.state.reservedPrice)
+                                                extraCost = Number(this.state.extraPeopleCost)
                                             }
                                             let extraPeople = 0
-                                            if(this.state.numberOfPeople){
+                                            if(this.state.numberOfPeople && Number(this.state.extraPeopleCost)){
                                                 extraPeople = this.state.numberOfPeople
                                             }
                                             const data ={
@@ -1673,17 +1981,18 @@ componentDidMount() {
                                                 extra_people :extraPeople,   //this.state.resultVilla.details.max_capacity-this.state.resultVilla.details.standard_capacity ,
                                                 length_stay :rangeBetween,
                                                 extra_cost:extraCost,
+                                                facilities_cost:this.state.reservedFacilitiesPrice
                                             }
                                             console.log(data)
                                             reserveRequest(data)
                                                 .then(res => {
                                                     console.log(res)
                                                     if(res.status === 200){
-                                                    /*    const dataSave = {                       /// ezafe kardann be reserve ha dar taghvim
-                                                            end_date: data.exit_date ,
-                                                            start_date: data.exit_date,
-                                                        }
-                                                        localStorage.setItem("reservedDatas",dataSave); */
+                                                        /*    const dataSave = {                       /// ezafe kardann be reserve ha dar taghvim
+                                                                end_date: data.exit_date ,
+                                                                start_date: data.exit_date,
+                                                            }
+                                                            localStorage.setItem("reservedDatas",dataSave); */
 
                                                         this.props.history.push("/ProfileReservation2")
                                                     }else {
@@ -1714,16 +2023,19 @@ componentDidMount() {
                 </MDBRow>
                 <MDBRow className={"fv-mainProduct fv-mainMobile"} >
                     {this.state.resultSimilarVillas.map(resultSimilarVilla =>{
-                        console.log('this.state.resultSimilarVillas')
+                        console.log(this.state.resultSimilarVillas)
                         return(
-                            <MDBCol md={3} sm={7} >
-                                <Product srcImage={`${config.webapi}/images/villas/main/${resultSimilarVilla.main_img }`}
-                                         rate="5.5/5"
+                            <MDBCol md={3} sm={7} onClick={()=>{
+
+                                this.props.history.push(`/displayPage/${resultSimilarVilla.id}`)
+                            }}>
+                              <a>  <Product srcImage={`${config.webapi}/images/villas/main/${resultSimilarVilla.main_img }`}
+                                         rate={resultSimilarVilla.score}
                                          topic={resultSimilarVilla.title}
                                          location={resultSimilarVilla.city}
                                          numberOfRoom={resultSimilarVilla.details ? resultSimilarVilla.details.bedroom : "0"}
                                          capacity={resultSimilarVilla.details ? resultSimilarVilla.details.max_capacity : "0"}
-                                         price="20000"/>
+                                         price={resultSimilarVilla.rules.normal_cost}/> </a>
                             </MDBCol>
                         )
                     })}

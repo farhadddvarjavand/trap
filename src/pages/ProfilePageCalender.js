@@ -20,8 +20,9 @@ import {
     userVillas,
     villaDates
 } from "../services/userService";
-import {villaPrice} from "../services/villaService";
+import {reservedDates, villa, villaPrice} from "../services/villaService";
 import {getToday, priceOfPerMonth} from "../componentsPages/calculationsDate";
+import config from "../services/config.json";
 
 class ProfilePageCalender extends Component {
     constructor(props) {
@@ -37,7 +38,9 @@ class ProfilePageCalender extends Component {
             villasUser:[],
             clickLoaderCalendar:false,
 
-            selectedDaysAll : ''
+            selectedDaysAll : '',
+            resultReservedDates:[],
+            finalCost:[],
 
         }
 
@@ -58,9 +61,22 @@ class ProfilePageCalender extends Component {
 
         userVillas()
             .then(res=>{
+                console.log(res)
                 if(res.data.data)
                     this.setState({villasUser:res.data.data})
             })
+
+        reservedDates(this.state.villasUsertitle)
+            .then(res => {
+                if(res.data.data)
+                    console.log(Object.values(res.data.data))
+                this.setState({resultReservedDates: Object.values(res.data.data)});
+            })
+            .catch(error =>{
+
+            })
+
+
     }
 
     getSelectedDays = (selectedDay)=>{
@@ -95,6 +111,42 @@ class ProfilePageCalender extends Component {
                 priceDaysUpdates.push(this.state.villaPrice[i])
             }
         }
+
+        console.log(priceDaysUpdates) // araye gheimat ha 30 ta 30 ta ie mah
+        // this.state.resultReservedDates // rozhaie gheire faal
+
+        let finalCost=[]
+        let finalCostArrays = []
+        let isset = false
+
+        for (let i = 0 ; i < priceDaysUpdates.length ; i++){ // 2 ta
+            for (let j = 0 ; j < priceDaysUpdates[i].daysPrice.length ; j++){ // 30 ta  => dar majmo in halghe 60 bar
+                for (let k = 0 ; k < this.state.resultReservedDates.length ; k ++){ // agar in halat bod gheire faal
+                    let sspliteReservedDays =  this.state.resultReservedDates[k].start_date.split("/")
+                    if ( j === Number(sspliteReservedDays[2]) &&  priceDaysUpdates[i].month === Number(sspliteReservedDays[1]) &&  priceDaysUpdates[i].year === Number(sspliteReservedDays[0])){
+                        finalCostArrays.push("غیر فعال")
+                        console.log(1)
+                        isset = true
+                    }
+                }
+                if(isset === false){
+                    finalCostArrays.push(priceDaysUpdates[i].daysPrice[j])
+                }
+                if(isset){
+                    isset = false
+                }
+
+                if(priceDaysUpdates[i].daysPrice.length === j+1){
+                    finalCost.push(finalCostArrays)
+                    finalCostArrays=[]
+                }
+
+            }
+        }
+
+        console.log(finalCost)
+
+
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageGustComments2 fv-ProfilePageCalender"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
@@ -132,19 +184,26 @@ class ProfilePageCalender extends Component {
                                 </MDBCol>
                             </MDBRow>
 
-                        <MDBRow className={"fv-ProfilePageCalenderImageAndContent"}>
-                                <MDBCol md={2} sm={3}>
-                                    <img src={MobileLogo}/>
-                                </MDBCol>
-                                <MDBCol md={7} sm={7}>
-                                    <MDBRow>
-                                        <h5>بهار</h5>
+
+                            {this.state.villasUser.map(villasUser=>{
+                                if(Number(villasUser.id) === Number(this.state.villasUsertitle)){
+
+                                    return  <MDBRow className={"fv-ProfilePageCalenderImageAndContent"}>
+                                        <MDBCol md={2} sm={3}>
+                                            <img src={`${config.webapi}/images/villas/main/${villasUser.main_img }`}/>
+                                        </MDBCol>
+                                        <MDBCol md={7} sm={7}>
+                                            <MDBRow>
+                                                <h5>{villasUser.title}</h5>
+                                            </MDBRow>
+                                            <MDBRow>
+                                                <p></p>
+                                            </MDBRow>
+                                        </MDBCol>
                                     </MDBRow>
-                                    <MDBRow>
-                                        <p>۳۱ مهرماه ۸۹۳۱</p>
-                                    </MDBRow>
-                                </MDBCol>
-                            </MDBRow>
+
+                                }
+                            })}
 
 
                         <MDBRow className={"fv-ProfilePageCalenderSelectContentMobile"}>
@@ -271,16 +330,25 @@ class ProfilePageCalender extends Component {
                             </MDBRow>
                             */}
 
-                            <MDBRow className={"fv-ProfilePageCalenderImageAndContentMobile"}>
-                                <MDBCol md={2} sm={2}>
-                                    <img src={MobileLogo}/>
-                                </MDBCol>
-                                <MDBCol md={7} sm={7}>
-                                        <h5>بهار</h5>
+                            {this.state.villasUser.map(villasUser=>{
+                                if(Number(villasUser.id) === Number(this.state.villasUsertitle)){
 
-                                        <p>۳۱ مهرماه ۸۹۳۱</p>
-                                </MDBCol>
-                            </MDBRow>
+                                    return  <MDBRow className={"fv-ProfilePageCalenderImageAndContentMobile"}>
+                                        <MDBCol md={2} sm={3}>
+                                            <img src={`${config.webapi}/images/villas/main/${villasUser.main_img }`}/>
+                                        </MDBCol>
+                                        <MDBCol md={7} sm={7}>
+                                            <MDBRow>
+                                                <h5>{villasUser.title}</h5>
+                                            </MDBRow>
+                                            <MDBRow>
+                                                <p></p>
+                                            </MDBRow>
+                                        </MDBCol>
+                                    </MDBRow>
+
+                                }
+                            })}
 
 
                             <MDBRow className={this.state.clickLoaderCalendar ?"fv-ProfilePageCalenderDayName fv-ProfilePageCalenderLoader" : "fv-hideLoader"}>
@@ -331,7 +399,7 @@ class ProfilePageCalender extends Component {
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCol>
-                                <MDBCol sm={12}>
+                                {/*   <MDBCol sm={12}>
                                     <MDBRow>
                                         <MDBCol>
                                             <p>تغییر وضعیت روزهای انتخاب شده</p>
@@ -342,7 +410,7 @@ class ProfilePageCalender extends Component {
                                             <input type="textarea" placeholder={'تغییر وضعیت روزهای انتخاب شده'}/>
                                         </MDBCol>
                                     </MDBRow>
-                                </MDBCol>
+                                </MDBCol>  */}
                             </MDBRow>
                             <MDBRow className={"fv-ProfilePageWalletWalletButton"}>
                                 <MDBCol md={3} sm={6} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>

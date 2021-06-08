@@ -99,13 +99,23 @@ const CalendarForMobilejs = (props) => {
         maximumDate=props.maximumDate
     }
 
+    const setData = (data) =>{
+        if(data.from && data.to){
+            // props.getSelectedDays(data)
+            props.getSelectedDaysCalendar(data)
+        }
+        setSelectedDayRange(data)
+        // console.log(data)
+        //  console.log('props.dateToGo')
+    }
+
 
     return (
         <>
             <Calendar
                 locale={'fa'}
                 value={selectedDayRange}
-                onChange={setSelectedDayRange}
+                onChange={data=>setData(data)}
                 customDaysClassName={defaultDay}
                 shouldHighlightWeekends
                 disabledDays={disabledDays}

@@ -53,7 +53,7 @@ class ProfilePageWallet3 extends Component {
                                             .then(res=>{
                                                 if(res.data.status === 1){
                                                     alert("درخواست بررداشت با موفقیت ثبت شد")
-                                                    window.location.reload();
+                                                    this.props.history.push(`/ProfileTransaction2`)
                                                     console.log(res)  //s درخواست بررداشت باید فرستاده بشود  // "Withdrawal request created"
                                                 }else {
                                                     alert(res.data.data)

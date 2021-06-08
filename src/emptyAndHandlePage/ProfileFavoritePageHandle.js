@@ -41,7 +41,7 @@ class ProfileFavoritePageHandle extends Component {
 
         favorites()
             .then(res=>{
-                if (res.data.data){
+                if (res.data.data.length>0){
                     this.props.history.push(`/profileFavoritesPage`)
                 }else {
                     this.props.history.push("/AnotherPagesEmpty")
