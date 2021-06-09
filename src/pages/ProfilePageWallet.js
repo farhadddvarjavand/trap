@@ -7,12 +7,16 @@ import "../style/ProfilePageReservation.scss"
 import "../style/ProfilePageWallet.scss"
 import Footer from "../componentsPages/footer"
 import MobileLogo from "../images/MobileLogo.png"
+import WalletPic1 from "../images/03.png"
+import WalletPic2 from "../images/02.png"
+import WalletPic3 from "../images/01.png"
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 import {financialReportsSearch, getFinancialReports, userVillas, villaIncome} from "../services/userService";
 import axios from "axios";
 import config from "../services/config.json";
 import CalendarLinear from "../data/CalenddarLinear";
+const commaNumber = require('comma-number')
 
 class ProfilePageWallet extends Component {
     constructor(props) {
@@ -169,10 +173,10 @@ class ProfilePageWallet extends Component {
                                                 <p>در آمد شما از ترپ</p>
                                             </MDBCol>
                                             <MDBCol md={12}>
-                                                <p>{getFinancialReportsTopPages.trappIncome} تومان</p>
+                                                <p>{commaNumber(getFinancialReportsTopPages.trappIncome)} تومان</p>
                                             </MDBCol>
                                         </MDBRow>
-                                        <img src={MobileLogo} />
+                                        <img src={WalletPic1} />
                                     </MDBCol>
                                     <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
                                         <MDBRow className={"fv-ProfilePageWalletWalletImageP"}>
@@ -180,10 +184,10 @@ class ProfilePageWallet extends Component {
                                                 <p>در آمد شما از سایر منابع</p>
                                             </MDBCol>
                                             <MDBCol md={12}>
-                                                <p>{getFinancialReportsTopPages.otherIncome} تومان</p>
+                                                <p>{commaNumber(getFinancialReportsTopPages.otherIncome)} تومان</p>
                                             </MDBCol>
                                         </MDBRow>
-                                        <img src={MobileLogo} />
+                                        <img src={WalletPic2} />
                                     </MDBCol>
                                     <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
                                         <MDBRow className={"fv-ProfilePageWalletWalletImageP fv-ProfilePageWalletWalletImagePWhiteColor"}>
@@ -191,10 +195,10 @@ class ProfilePageWallet extends Component {
                                                 <p>کل درآمد شما از اجاره ویلا</p>
                                             </MDBCol>
                                             <MDBCol md={12}>
-                                                <p>{getFinancialReportsTopPages.totalIncome} تومان</p>
+                                                <p>{commaNumber(getFinancialReportsTopPages.totalIncome)} تومان</p>
                                             </MDBCol>
                                         </MDBRow>
-                                        <img src={MobileLogo} />
+                                        <img src={WalletPic3} />
                                     </MDBCol>
                                 </MDBRow>
                             })}
@@ -219,7 +223,7 @@ class ProfilePageWallet extends Component {
                                                 <td>{getFinancialReport.date}</td>
                                                 <td>{getFinancialReport.src}</td>
                                                 <td>{getFinancialReport.description}</td>
-                                                <td>{getFinancialReport.amount}</td>
+                                                <td>{commaNumber(getFinancialReport.amount)}</td>
                                             </tr>
                             })}
 

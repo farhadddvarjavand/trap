@@ -40,7 +40,7 @@ class ProfilePageCalender extends Component {
 
             selectedDaysAll : '',
             resultReservedDates:[],
-            finalCost:[],
+            finallyPrice:[],
 
         }
 
@@ -57,7 +57,13 @@ class ProfilePageCalender extends Component {
 
     componentDidMount() {
         villaPrice(this.state.villasUsertitle)
-            .then(res=>this.setState(res.data ? {villaPrice:res.data} : ''))
+            .then(res=>{
+                if(res.data){
+                    this.setState({villaPrice:res.data} , ()=>{
+                        this.villaReservedDates()
+                    })
+                }
+            })
 
         userVillas()
             .then(res=>{
@@ -66,18 +72,102 @@ class ProfilePageCalender extends Component {
                     this.setState({villasUser:res.data.data})
             })
 
+
+
+    }
+    villaReservedDates = ()=>{
+
+
         reservedDates(this.state.villasUsertitle)
             .then(res => {
-                if(res.data.data)
-                    console.log(Object.values(res.data.data))
-                this.setState({resultReservedDates: Object.values(res.data.data)});
+                this.setState({resultReservedDates: Object.values(res.data.data)} , () =>{
+                        this.calculatePricesWithString()
+                });
+
             })
             .catch(error =>{
 
             })
 
+    }
+    calculatePricesWithString = ()=>{
+        const priceDaysUpdates = []  /// مورد نظر
+        let priceArrayOneMonth ={
+            daysPrice: [] ,
+            month: '',
+            year: ''
+        }
+        if(this.state.villaPrice[0]){
+            priceArrayOneMonth.daysPrice = priceOfPerMonth(this.state.villaPrice[0].year , this.state.villaPrice[0].month , this.state.villaPrice[0].daysPrice)
+            priceArrayOneMonth.month=this.state.villaPrice[0].month
+            priceArrayOneMonth.year=this.state.villaPrice[0].year
+        }
+        for(let i = 0 ; i<this.state.villaPrice.length ; i++){
+            if(i===0){
+                priceDaysUpdates.push(priceArrayOneMonth)
+            }
+            else {
+                priceDaysUpdates.push(this.state.villaPrice[i])
+            }
+        }
+
+        console.log(priceDaysUpdates) // araye gheimat ha 30 ta 30 ta ie mah
+        // this.state.resultReservedDates // rozhaie gheire faal
+        console.log(this.state.resultReservedDates)
+
+        let finalCost=[]
+        let finalCostArrays = []
+        let finalCostMonth = []
+        let finalCostYear = []
+        let isset = false
+
+        for (let i = 0 ; i < priceDaysUpdates.length ; i++){ // 2 ta
+            for (let j = 0 ; j < priceDaysUpdates[i].daysPrice.length ; j++){ // 30 ta  => dar majmo in halghe 60 bar
+                for (let k = 0 ; k < this.state.resultReservedDates.length ; k ++){ // agar in halat bod gheire faal
+                    let sspliteReservedDays =  this.state.resultReservedDates[k].start_date.split("/")
+                    if ( j+1 === Number(sspliteReservedDays[2]) &&  priceDaysUpdates[i].month === Number(sspliteReservedDays[1]) &&  priceDaysUpdates[i].year === Number(sspliteReservedDays[0])){
+                        finalCostArrays.push("غیر فعال")
+                        isset = true
+                    }
+                }
+                if(isset === false){
+                    finalCostArrays.push(priceDaysUpdates[i].daysPrice[j])
+                }
+                if(isset === true){
+                    isset = false
+                }
+
+                if(priceDaysUpdates[i].daysPrice.length === j+1){
+                    finalCost.push(finalCostArrays)
+                    finalCostArrays=[]
+                    console.log(finalCost)
+                }
+
+            }
+        }
+
+        console.log(finalCost)
+
+        let finalCosts=[]
+
+        for (let i = 0 ; i < this.state.villaPrice.length ; i++){
+            let finalCostObject= {
+                daysPrice:'',
+                month: '',
+                year: ''
+            }
+            finalCostObject.daysPrice=finalCost[i]
+            finalCostObject.month=priceDaysUpdates[i].month
+            finalCostObject.year=priceDaysUpdates[i].year
+            console.log(finalCostObject)
+            console.log('ssssssssssssssssssss')
+            finalCosts.push(finalCostObject)
+        }
+        console.log(finalCosts)
+            this.setState({finallyPrice:finalCosts})
 
     }
+
 
     getSelectedDays = (selectedDay)=>{
         if(selectedDay && selectedDay !== this.state.selectedDays){
@@ -92,6 +182,7 @@ class ProfilePageCalender extends Component {
         }
     }
     render() {
+
         const priceDaysUpdates = []  /// مورد نظر
         let priceArrayOneMonth ={
             daysPrice: [] ,
@@ -123,7 +214,7 @@ class ProfilePageCalender extends Component {
             for (let j = 0 ; j < priceDaysUpdates[i].daysPrice.length ; j++){ // 30 ta  => dar majmo in halghe 60 bar
                 for (let k = 0 ; k < this.state.resultReservedDates.length ; k ++){ // agar in halat bod gheire faal
                     let sspliteReservedDays =  this.state.resultReservedDates[k].start_date.split("/")
-                    if ( j === Number(sspliteReservedDays[2]) &&  priceDaysUpdates[i].month === Number(sspliteReservedDays[1]) &&  priceDaysUpdates[i].year === Number(sspliteReservedDays[0])){
+                    if ( j+1 === Number(sspliteReservedDays[2]) &&  priceDaysUpdates[i].month === Number(sspliteReservedDays[1]) &&  priceDaysUpdates[i].year === Number(sspliteReservedDays[0])){
                         finalCostArrays.push("غیر فعال")
                         console.log(1)
                         isset = true
@@ -170,7 +261,9 @@ class ProfilePageCalender extends Component {
                                             villaPrice(e.target.value)
                                                 .then(res=>{
                                                     if(res.data){
-                                                        this.setState({villaPrice:res.data , clickHandlerLoading:false , clickLoaderCalendar:false})
+                                                        this.setState({villaPrice:res.data , clickHandlerLoading:false , clickLoaderCalendar:false , finallyPrice:[]} ,()=>{
+                                                                this.villaReservedDates()
+                                                        })
                                                     }
                                                 })
                                         })
@@ -226,7 +319,7 @@ class ProfilePageCalender extends Component {
 
 
                                 <CalendarForProfile
-                                 villaPrice={priceDaysUpdates}
+                                 villaPrice={this.state.finallyPrice}
                                 getSelectedDay={this.getSelectedDays} />
                             </MDBRow>
 
@@ -236,7 +329,7 @@ class ProfilePageCalender extends Component {
                                         <p>تغییر وضعیت روزهای انتخاب شده</p>
                                     </MDBRow>
                                     <MDBRow>
-                                        <select value={this.state.changeStatusSelectedDays} onChange={(event)=>this.setState({changeStatusSelectedDays:event.target.value})}>
+                                        <select value={this.state.changeStatusSelectedDays} onChange={(event)=>this.setState({changeStatusSelectedDays:event.target.value} , ()=>{this.calculatePricesWithString()})}>
                                             <option value='title' disabled>وضعیت</option>
                                             <option value="0">قابل رزرو (فعال)</option>
                                             <option value="1">غیر قابل رزرو(تکمیل)</option>
@@ -296,16 +389,30 @@ class ProfilePageCalender extends Component {
                                                 setDatesString= `${setDatesString},${setDatesArray[j]}`
                                             }
                                         }
+                                        let datasForStatus = ""
 
-                                        const datasForStatus = {             // برای تغییر دادن status میباشد
-                                            dates : setDatesString ,
-                                            status : this.state.changeStatusSelectedDays
+                                        if(Number(this.state.changeStatusSelectedDays) === 0){
+                                            datasForStatus = {             // برای تغییر دادن status میباشد
+                                                dates : setDatesString ,
+                                                special_price : "0000"
+                                            }
+                                                                                 // برای تغییر دادن قیمت میباشد
+                                                changeDatesCost(datasForStatus , this.state.villasUsertitle)
+                                                    .then(res => res.status === 200 ?  window.location.replace(`/profileCalender/${this.state.villasUsertitle}`) : '')
+
+                                        }else {
+                                            datasForStatus = {             // برای تغییر دادن status میباشد
+                                                dates : setDatesString ,
+                                                status : this.state.changeStatusSelectedDays
+                                            }
+                                            if(this.state.changeStatusSelectedDays !== 'title'){           // برای تغییر دادن status میباشد
+                                                changeDatesStatus(datasForStatus ,  this.state.villasUsertitle)
+                                                    .then(res => res.status === 200 ?  window.location.replace(`/profileCalender/${this.state.villasUsertitle}`) : '')
+                                            }
                                         }
 
-                                        if(this.state.changeStatusSelectedDays !== 'title'){           // برای تغییر دادن status میباشد
-                                            changeDatesStatus(datasForStatus ,  this.state.villasUsertitle)
-                                                .then(res => res.status === 200 ?  window.location.replace(`/profileCalender/${this.state.villasUsertitle}`) : '')
-                                        }
+
+
 
                                     }}/>
                                 </MDBCol>
@@ -363,7 +470,7 @@ class ProfilePageCalender extends Component {
                             <MDBRow className={'fv-profilePageCalenderForMobile'}>                  {/*    calender-calendar     */}
                                 <MDBCol>
                                     <CalenderProfileMobile
-                                        villaPrice={priceDaysUpdates}
+                                        villaPrice={this.state.finallyPrice}
                                         getSelectedDay={this.getSelectedDaysmobile} />
                                 </MDBCol>
                             </MDBRow>
@@ -377,7 +484,7 @@ class ProfilePageCalender extends Component {
                                     </MDBRow>
                                     <MDBRow>
                                         <MDBCol>
-                                            <select value={this.state.changeStatusSelectedDays} onChange={(event)=>this.setState({changeStatusSelectedDays:event.target.value})}>
+                                            <select value={this.state.changeStatusSelectedDays} onChange={(event)=>this.setState({changeStatusSelectedDays:event.target.value} , ()=>{this.calculatePricesWithString()})}>
                                                 <option value='title' disabled>وضعیت</option>
                                                 <option value="0">قابل رزرو (فعال)</option>
                                                 <option value="1">غیر قابل رزرو(تکمیل)</option>
@@ -457,15 +564,28 @@ class ProfilePageCalender extends Component {
                                             }
                                         }
 
-                                        const datasForStatus = {             // برای تغییر دادن status میباشد
-                                            dates : setDatesString ,
-                                            status : this.state.changeStatusSelectedDays
+                                        let datasForStatus = ""
+
+                                        if(Number(this.state.changeStatusSelectedDays) === 0){
+                                            datasForStatus = {             // برای تغییر دادن status میباشد
+                                                dates : setDatesString ,
+                                                special_price : "0000"
+                                            }
+                                            // برای تغییر دادن قیمت میباشد
+                                            changeDatesCost(datasForStatus , this.state.villasUsertitle)
+                                                .then(res => res.status === 200 ?  window.location.replace(`/profileCalender/${this.state.villasUsertitle}`) : '')
+
+                                        }else {
+                                            datasForStatus = {             // برای تغییر دادن status میباشد
+                                                dates : setDatesString ,
+                                                status : this.state.changeStatusSelectedDays
+                                            }
+                                            if(this.state.changeStatusSelectedDays !== 'title'){           // برای تغییر دادن status میباشد
+                                                changeDatesStatus(datasForStatus ,  this.state.villasUsertitle)
+                                                    .then(res => res.status === 200 ?  window.location.replace(`/profileCalender/${this.state.villasUsertitle}`) : '')
+                                            }
                                         }
 
-                                        if(this.state.changeStatusSelectedDays !== 'title'){           // برای تغییر دادن status میباشد
-                                            changeDatesStatus(datasForStatus ,  this.state.villasUsertitle)
-                                                .then(res => res.status === 200 ?  window.location.replace(`/profileCalender/${this.state.villasUsertitle}`) : '')
-                                        }
 
                                     }}/>
                                 </MDBCol>

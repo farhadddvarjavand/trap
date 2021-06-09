@@ -814,8 +814,13 @@ display: none;
         padding-bottom: 2%;
         direction: ltr;
     }
+    .fv-DisplayPageDetailsScore .fv-DisplayPageDetailsScoreBody .col-md-3 {
+        flex: 0 0 37%;
+        max-width: 36%;
+        font-size: 15px;
+    }
 }
-@media (max-width: 989px) and (min-width: 760px){
+@media (max-width: 989px) and (min-width: 768px){
     .fv-DisplayPageDetailsLeftEmptyMobile{
         font-size: 1.5vw;
     }
@@ -891,10 +896,6 @@ display: none;
         margin-right: 0%;
         color: #909090;
     }
-    .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo .col-md-2 {
-        flex: 0 0 19.666667%;
-        max-width: 21.666667%;
-    }
     .fv-DisplayPageDetailsScore .col-md-3 {
         flex: 0 0 34%;
         max-width: 32%;
@@ -933,8 +934,26 @@ display: none;
         flex: 0 0 57%;
         max-width: 67%;
         z-index: 0;
-        margin-right: 12%;
+        margin-right: 3%;
         margin-top: 0.5%;
+    }
+    .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo .col-md-1 {
+        flex: 0 0 8.333333%;
+        max-width: 8.333333%;
+        margin-left: 6%;
+    }
+    .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo .col-md-2 {
+        flex: 0 0 26.666667%;
+        max-width: 21.666667%;
+    }
+    .fv-DisplayPageDetailsLeftBodyDate.row {
+        margin-right: 0px;
+        margin-left: -7%;
+    }
+    .fv-DisplayPageDetailsRightBody .fv-DisplayPageDetailsScore .fv-DisplayPageDetailsScoreBody .col-md-3 {
+        flex: 0 0 44%;
+        max-width: 42%;
+        font-size: 15px;
     }
 }
 
@@ -1119,10 +1138,10 @@ display: none;
         margin-top: 12%;
     }
     .fv-DisplayPageDetails .pMobile{
-        font-size: 20px;
+        font-size: 4vw;
     }
     .fv-DisplayPageDetails .h4Mobile h4 {
-        font-size: 29px;
+        font-size: 21px;
         font-weight: 499;
     }
     .fv-DisplayPageDetailsRightParagraph {

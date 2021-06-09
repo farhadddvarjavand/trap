@@ -6,6 +6,7 @@ import HostStep1Page from "./HostStep1Page";
 import HeaderSteps from "../componentsPages/HeaderSteps";
 import Logo from "../images/Logo.png";
 import MobileLogo from "../images/MobileLogo.png"
+import LoginPageImage from "../images/simon-haslett-BSkXuvmSHLA-unsplash 1.png"
 import Footer from "../componentsPages/footer";
 import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt"
 import HostStepCheckbox from "../componentsPages/hostStepCheckbox"
@@ -200,7 +201,7 @@ class LoginPage2 extends Component {
                         </MDBRow>
                     </MDBCol>
                     <MDBCol md={6} className={"fv-loginPageImageLeftBody"}>
-                        <img src={MobileLogo}/>
+                        <img src={LoginPageImage}/>
                     </MDBCol>
                 </MDBRow>
 

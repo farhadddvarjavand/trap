@@ -13,6 +13,7 @@ import config from "../services/config.json";
 import ProductFavorites from "../componentsPages/ProductFavorites";
 import {favorites} from "../services/userService";
 import CalendarLinear from "../data/CalenddarLinear";
+const commaNumber = require('comma-number')
 
 class ProfilePageWallet2 extends Component {
     constructor(props) {
@@ -62,7 +63,7 @@ class ProfilePageWallet2 extends Component {
                                                           location={favoritedatas.city}
                                                           numberOfRoom={favoritedatas.details.bedroom}
                                                           capacity={favoritedatas.details.max_capacity}
-                                                          price={favoritedatas.details.normal_cost}
+                                                          price={commaNumber(favoritedatas.rules.normal_cost)}
                                                           id={favoritedatas.id}
 
                                         />

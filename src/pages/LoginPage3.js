@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {MDBAlert, MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import "../style/LoginPage3.scss"
 import MobileLogo from "../images/MobileLogo.png"
+import LoginPageImage from "../images/simon-haslett-BSkXuvmSHLA-unsplash 1.png"
 import {Link} from "react-router-dom";
 import {registerUser, sendPhoneNumber} from "../services/userService"
 import axios from "axios";
@@ -123,7 +124,7 @@ class LoginPage3 extends Component {
                         </MDBRow>
                     </MDBCol>
                     <MDBCol md={6} className={"fv-loginPageImageLeftBody"}>
-                        <img src={MobileLogo}/>
+                        <img src={LoginPageImage}/>
                     </MDBCol>
                 </MDBRow>
 

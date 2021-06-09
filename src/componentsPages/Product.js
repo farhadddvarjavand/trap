@@ -9,10 +9,16 @@ class Product extends React.Component{
            <MDBRow className={'fv-product fv-mobileProduct'}>
                 <img src={this.props.srcImage} className={'fv-productImage'}/>
                 <MDBRow  >
-                    <MDBCol md={4} sm={5} className={'fv-productRateBox'}>
-                        <i className="fa fa-star" aria-hidden="true" />
-                        {this.props.rate}
-                    </MDBCol>
+                    {this.props.rate ?
+                        <MDBCol md={4} sm={5} className={'fv-productRateBox'}>
+                            <i className="fa fa-star" aria-hidden="true" />
+                            {this.props.rate}
+                        </MDBCol>
+                     : <MDBCol md={4} sm={5} className={'fv-productRateBox fv-productRateBoxNewScore'}>
+                           جدید
+                        </MDBCol>
+                    }
+
                 </MDBRow>
                <MDBRow>
                <MDBCol className={'fv-productTopic'}>

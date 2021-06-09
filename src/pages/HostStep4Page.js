@@ -541,8 +541,8 @@ class HostStep4Page extends Component {
                             </MDBRow>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" name={'chef'} placeholder="تومان" disabled={this.state.chefDisableTextbox} value={this.state.chef}
-                                           onChange={(e)=>this.setState({chef:e.target.value})}/>
+                                    <input type="text" name={'chef'} placeholder="تومان" disabled={this.state.chefDisableTextbox} value={this.state.chef.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                           onChange={(e)=>this.setState({chef:e.target.value.replace(/,/g, "")})}/>
                                 </MDBCol>
 
                             </MDBRow>
@@ -564,8 +564,8 @@ class HostStep4Page extends Component {
                             </MDBRow>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" placeholder="تومان" name={'host'} disabled={this.state.hostDisableTextbox} value={this.state.host}
-                                           onChange={(e)=>this.setState({host:e.target.value})}/>
+                                    <input type="text" placeholder="تومان" name={'host'} disabled={this.state.hostDisableTextbox} value={this.state.host.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                           onChange={(e)=>this.setState({host:e.target.value.replace(/,/g, "")})}/>
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLine"}>
@@ -585,8 +585,8 @@ class HostStep4Page extends Component {
                             </MDBRow>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" placeholder="تومان" name={'tourLeader'} disabled={this.state.tourLeaderDisableTextbox} value={this.state.tourLeader}
-                                           onChange={(e)=>this.setState({tourLeader:e.target.value})}/>
+                                    <input type="text" placeholder="تومان" name={'tourLeader'} disabled={this.state.tourLeaderDisableTextbox} value={this.state.tourLeader.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                           onChange={(e)=>this.setState({tourLeader:e.target.value.replace(/,/g, "")})}/>
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLine"}>
@@ -606,8 +606,8 @@ class HostStep4Page extends Component {
                             </MDBRow>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" placeholder="تومان" name={'bodyguard'} disabled={this.state.bodyguardDisableTextbox} value={this.state.bodyguard}
-                                           onChange={(e)=>this.setState({bodyguard:e.target.value})}/>
+                                    <input type="text" placeholder="تومان" name={'bodyguard'} disabled={this.state.bodyguardDisableTextbox} value={this.state.bodyguard.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                           onChange={(e)=>this.setState({bodyguard:e.target.value.replace(/,/g, "")})}/>
                                 </MDBCol>
                             </MDBRow>
 

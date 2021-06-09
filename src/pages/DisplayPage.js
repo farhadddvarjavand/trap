@@ -46,7 +46,7 @@ import "../style/extra.scss"
 import axios from "axios";
 import HeaderLoginMenu from "../componentsPages/HeaderLoginMenu";
 import CalendarLinearLimitedDays from "../data/CalendarLinearLimitedDays";
-
+const commaNumber = require('comma-number')
 
 class DisplayPage extends Component {
     constructor(props) {
@@ -92,6 +92,7 @@ class DisplayPage extends Component {
             lat:35.72,
             lon:51.42,
             errors:false,
+            finallyPrice:[],
 
         }
     }
@@ -152,13 +153,104 @@ componentDidMount() {
         })
 
     villaPrice(this.props.match.params.id)
-        .then(res=>this.setState(res.data ? {villaPrice:res.data} : ''))
+        .then(res=>{
+            if(res.data){
+                this.setState({villaPrice:res.data} , ()=>{
+                    this.villaReservedDates()
+                })
+            }
+        })
         .catch(err=>console.log(err.response))
 
 
-
-
 }
+    villaReservedDates = ()=>{
+        reservedDates(this.props.match.params.id)
+            .then(res => {
+                this.setState({resultReservedDates: Object.values(res.data.data)} , () =>{
+                    this.calculatePricesWithString()
+                });
+            })
+            .catch(error =>{
+            })
+    }
+    calculatePricesWithString = ()=>{
+        const priceDaysUpdates = []  /// مورد نظر
+        let priceArrayOneMonth ={
+            daysPrice: [] ,
+            month: '',
+            year: ''
+        }
+        if(this.state.villaPrice[0]){
+            priceArrayOneMonth.daysPrice = priceOfPerMonth(this.state.villaPrice[0].year , this.state.villaPrice[0].month , this.state.villaPrice[0].daysPrice)
+            priceArrayOneMonth.month=this.state.villaPrice[0].month
+            priceArrayOneMonth.year=this.state.villaPrice[0].year
+        }
+        for(let i = 0 ; i<this.state.villaPrice.length ; i++){
+            if(i===0){
+                priceDaysUpdates.push(priceArrayOneMonth)
+            }
+            else {
+                priceDaysUpdates.push(this.state.villaPrice[i])
+            }
+        }
+
+        console.log(priceDaysUpdates) // araye gheimat ha 30 ta 30 ta ie mah
+        // this.state.resultReservedDates // rozhaie gheire faal
+        console.log(this.state.resultReservedDates)
+
+        let finalCost=[]
+        let finalCostArrays = []
+        let finalCostMonth = []
+        let finalCostYear = []
+        let isset = false
+
+        for (let i = 0 ; i < priceDaysUpdates.length ; i++){ // 2 ta
+            for (let j = 0 ; j < priceDaysUpdates[i].daysPrice.length ; j++){ // 30 ta  => dar majmo in halghe 60 bar
+                for (let k = 0 ; k < this.state.resultReservedDates.length ; k ++){ // agar in halat bod gheire faal
+                    let sspliteReservedDays =  this.state.resultReservedDates[k].start_date.split("/")
+                    if ( j+1 === Number(sspliteReservedDays[2]) &&  priceDaysUpdates[i].month === Number(sspliteReservedDays[1]) &&  priceDaysUpdates[i].year === Number(sspliteReservedDays[0])){
+                        finalCostArrays.push("غیر فعال")
+                        isset = true
+                    }
+                }
+                if(isset === false){
+                    finalCostArrays.push(priceDaysUpdates[i].daysPrice[j])
+                }
+                if(isset === true){
+                    isset = false
+                }
+
+                if(priceDaysUpdates[i].daysPrice.length === j+1){
+                    finalCost.push(finalCostArrays)
+                    finalCostArrays=[]
+                    console.log(finalCost)
+                }
+
+            }
+        }
+
+        console.log(finalCost)
+
+        let finalCosts=[]
+
+        for (let i = 0 ; i < this.state.villaPrice.length ; i++){
+            let finalCostObject= {
+                daysPrice:'',
+                month: '',
+                year: ''
+            }
+            finalCostObject.daysPrice=finalCost[i]
+            finalCostObject.month=priceDaysUpdates[i].month
+            finalCostObject.year=priceDaysUpdates[i].year
+            console.log(finalCostObject)
+            console.log('ssssssssssssssssssss')
+            finalCosts.push(finalCostObject)
+        }
+        console.log(finalCosts)
+        this.setState({finallyPrice:finalCosts})
+
+    }
 
     /*weekdayshort = moment.weekdaysShort();
     weekmonthshort = moment.monthsShort();
@@ -261,8 +353,8 @@ componentDidMount() {
         }
     }
     getSelectedDaysCalendar = (data) =>{
-               this.selectDayToGo(data.from)
-              this.selectDayToReturn(data.to)
+            //   this.selectDayToGo(data.from)
+           //   this.selectDayToReturn(data.to)
         }
 
 
@@ -1154,7 +1246,7 @@ componentDidMount() {
                         <div className={"fv-DisplayPageDetailsLeftBodyMobile"}>                             {/*     Reservation For Mobile     */}
                             <MDBCol md={4} className={"fv-DisplayPageDetailsLeftBodyMobileReservation"}>
                                 <MDBRow>
-                                    <p>قیمت از شبی {this.state.resultVilla.rules ? this.state.resultVilla.rules.normal_cost : ''} تومان</p>
+                                    <p>قیمت از شبی {this.state.resultVilla.rules ? commaNumber(this.state.resultVilla.rules.normal_cost) : ''} تومان</p>
                                 </MDBRow>
                                 <MDBRow className={"fv-DisplayPageDetailsLeftEmptyMobile"}>
                                     <p><i className="fa fa-calendar" aria-hidden="true" /> اولین تاریخ خالی این اقامت گاه {`${minimumDate.year}/${minimumDate.month}/${minimumDate.day}`} میباشد </p>
@@ -1213,7 +1305,7 @@ componentDidMount() {
                                         <p>{rangeBetween} روز </p>
                                     </MDBCol>
                                     <MDBCol  md={6}  sm={6} className={"fv-DisplayPageDetailsLeftFactorLeftMobile"}>
-                                        <p>{this.state.reservedPrice ? this.state.reservedPrice : '-'} تومان</p>
+                                        <p>{this.state.reservedPrice ? commaNumber(this.state.reservedPrice) : '-'} تومان</p>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow className={"fv-DisplayPageDetailsLeftFactor fv-DisplayPageDetailsLeftFactorBorderLine"}>
@@ -1221,7 +1313,7 @@ componentDidMount() {
                                         <p>{this.state.numberOfPeople} نفر اضافه </p>
                                     </MDBCol>
                                     <MDBCol  md={6}  sm={6} className={"fv-DisplayPageDetailsLeftFactorLeftMobile"} >
-                                        <p>{Number(this.state.extraPeopleCost) ? Number(this.state.extraPeopleCost) : ' ' } تومان</p>
+                                        <p>{Number(this.state.extraPeopleCost) ? commaNumber(Number(this.state.extraPeopleCost)) : ' ' } تومان</p>
                                     </MDBCol>
                                 </MDBRow>
 
@@ -1230,7 +1322,7 @@ componentDidMount() {
                                         <p>جمع کل</p>
                                     </MDBCol>
                                     <MDBCol  md={6}  sm={6} className={"fv-DisplayPageDetailsLeftFactorLeftMobile"} >
-                                        <p>{Number(this.state.reservedPrice) ? (Number(this.state.extraPeopleCost) ? Number(this.state.extraPeopleCost)+Number(this.state.reservedPrice)+Number(this.state.reservedFacilitiesPrice)  :  this.state.reservedPrice+this.state.reservedFacilitiesPrice ) : '' } تومان</p> {/* agar meghdare kol ba afrade ezafe vojod dasht ono dar nazar migirim dar gheire in sorat bedone jame bedone afrade ezafe ro dar nazar migirim */}
+                                        <p>{Number(this.state.reservedPrice) ? (Number(this.state.extraPeopleCost) ? commaNumber(Number(this.state.extraPeopleCost)+Number(this.state.reservedPrice)+Number(this.state.reservedFacilitiesPrice))  :  commaNumber(this.state.reservedPrice+this.state.reservedFacilitiesPrice )) : '' } تومان</p> {/* agar meghdare kol ba afrade ezafe vojod dasht ono dar nazar migirim dar gheire in sorat bedone jame bedone afrade ezafe ro dar nazar migirim */}
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow className={"fv-DisplayPageDetailsLeftButton"}>
@@ -1405,7 +1497,7 @@ componentDidMount() {
                                             <p>آشپز</p>
                                         </MDBCol>
                                         <MDBCol  md={2} sm={2}>
-                                            <p> {chefPrice} </p>
+                                            <p> {commaNumber(chefPrice)} </p>
                                         </MDBCol>
                                         <MDBCol  md={4} sm={2}>
                                             <p> ریال </p>
@@ -1424,7 +1516,7 @@ componentDidMount() {
                                         <p>مهماندار</p>
                                     </MDBCol>
                                     <MDBCol  md={2} sm={2}>
-                                        <p> {hostPrice}  </p>
+                                        <p> {commaNumber(hostPrice)}  </p>
                                     </MDBCol>
                                     <MDBCol  md={4} sm={2}>
                                         <p> ریال </p>
@@ -1442,7 +1534,7 @@ componentDidMount() {
                                         <p>راهنمای سفر</p>
                                     </MDBCol>
                                     <MDBCol  md={2} sm={2}>
-                                        <p> {tourGuidePrice} </p>
+                                        <p> {commaNumber(tourGuidePrice)} </p>
                                     </MDBCol>
                                     <MDBCol  md={4} sm={2}>
                                         <p> ریال </p>
@@ -1460,7 +1552,7 @@ componentDidMount() {
                                         <p>بادیگارد</p>
                                     </MDBCol>
                                     <MDBCol  md={2} sm={2}>
-                                        <p> {bodyguardPrice} </p>
+                                        <p> {commaNumber(bodyguardPrice)} </p>
                                     </MDBCol>
                                     <MDBCol  md={4} sm={2}>
                                         <p> ریال </p>
@@ -1481,7 +1573,7 @@ componentDidMount() {
                                     </MDBRow>
                                 </MDBCol>
                                 <MDBCol md={11} sm={11}>
-                                    <p>ایام عادی : </p> <h5> {normalCostRules} </h5>
+                                    <p>ایام عادی : </p> <h5> {commaNumber(normalCostRules)} </h5>
                                 </MDBCol>
                             </MDBRow>
                         <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
@@ -1491,7 +1583,7 @@ componentDidMount() {
                                 </MDBRow>
                             </MDBCol>
                             <MDBCol md={11} sm={11}>
-                                <p> هزینه هر نفر اضافه به ازای هر شب :  </p> <h5>{normalExtraCostRules}</h5>
+                                <p> هزینه هر نفر اضافه به ازای هر شب :  </p> <h5>{commaNumber(normalExtraCostRules)}</h5>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
@@ -1501,7 +1593,7 @@ componentDidMount() {
                                 </MDBRow>
                             </MDBCol>
                             <MDBCol md={11} sm={11}>
-                                <p>ایام پیک : </p> <h5> {specialCostRules} </h5>
+                                <p>ایام پیک : </p> <h5> {commaNumber(specialCostRules)} </h5>
                             </MDBCol>
                         </MDBRow>
                             <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
@@ -1511,7 +1603,7 @@ componentDidMount() {
                                     </MDBRow>
                                 </MDBCol>
                                 <MDBCol md={11} sm={11}>
-                                    <p>نفر اضافه در ایام پیک : </p> <h5> {specialExtraCostRules} </h5>
+                                    <p>نفر اضافه در ایام پیک : </p> <h5> {commaNumber(specialExtraCostRules)} </h5>
                                 </MDBCol>
                             </MDBRow>
                         <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
@@ -1540,7 +1632,7 @@ componentDidMount() {
                                 <CalendarDesktop
                                     minimumDate={minimumDate}
                                     maximumDate={maximumDate}
-                                    villaPrice={priceDaysUpdates}
+                                    villaPrice={this.state.finallyPrice}
                                     getSelectedDay={this.getSelectedDays}
                                     daysReserved={allDaysReservedConcat}
                                     getSelectedDaysCalendar={this.getSelectedDaysCalendar}/>
@@ -1557,7 +1649,7 @@ componentDidMount() {
                                     <CalendarForMobile
                                         minimumDate={minimumDate}
                                         maximumDate={maximumDate}
-                                        villaPrice={priceDaysUpdates}
+                                        villaPrice={this.state.finallyPrice}
                                         getSelectedDay={this.getSelectedDays}
                                         daysReserved={allDaysReservedConcat}
                                         getSelectedDaysCalendar={this.getSelectedDaysCalendar}/>
@@ -1874,7 +1966,7 @@ componentDidMount() {
                     </MDBCol>
                     <MDBCol md={4} className={"fv-DisplayPageDetailsLeftBody"}>
                         <MDBRow>
-                            <p>قیمت از شبی {this.state.resultVilla.rules ? this.state.resultVilla.rules.normal_cost : ''} تومان</p>
+                            <p>قیمت از شبی {this.state.resultVilla.rules ? commaNumber(this.state.resultVilla.rules.normal_cost) : ''} تومان</p>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftEmptyMobile"}>
                             <p><i className="fa fa-calendar" aria-hidden="true" /> اولین تاریخ خالی این اقامت گاه {`${minimumDate.year}/${minimumDate.month}/${minimumDate.day}`} میباشد </p>
@@ -1932,7 +2024,7 @@ componentDidMount() {
                                 <p>{rangeBetween} روز </p>
                             </MDBCol>
                             <MDBCol  md={6}  sm={6} >
-                                <p>{this.state.reservedPrice ? this.state.reservedPrice : '-'} تومان</p>
+                                <p>{this.state.reservedPrice ? commaNumber(this.state.reservedPrice) : '-'} تومان</p>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftFactor fv-DisplayPageDetailsLeftFactorBorderLine"}>
@@ -1940,7 +2032,7 @@ componentDidMount() {
                                 <p>{this.state.numberOfPeople} نفر اضافه </p>
                             </MDBCol>
                             <MDBCol  md={6}  sm={6} >
-                                <p>{Number(this.state.extraPeopleCost) ? Number(this.state.extraPeopleCost) : ' ' } تومان</p>
+                                <p>{Number(this.state.extraPeopleCost) ? commaNumber(Number(this.state.extraPeopleCost)) : ' ' } تومان</p>
                             </MDBCol>
                         </MDBRow>
 
@@ -1949,7 +2041,7 @@ componentDidMount() {
                                 <p>جمع کل</p>
                             </MDBCol>
                             <MDBCol  md={6}  sm={6} >
-                                <p>{Number(this.state.reservedPrice) ? (Number(this.state.extraPeopleCost) ? Number(this.state.extraPeopleCost)+Number(this.state.reservedPrice)+Number(this.state.reservedFacilitiesPrice)  :  this.state.reservedPrice+this.state.reservedFacilitiesPrice ) : '' } تومان</p> {/* agar meghdare kol ba afrade ezafe vojod dasht ono dar nazar migirim dar gheire in sorat bedone jame bedone afrade ezafe ro dar nazar migirim */}
+                                <p>{Number(this.state.reservedPrice) ? (Number(this.state.extraPeopleCost) ? commaNumber(Number(this.state.extraPeopleCost)+Number(this.state.reservedPrice)+Number(this.state.reservedFacilitiesPrice))  :  commaNumber(this.state.reservedPrice+this.state.reservedFacilitiesPrice )) : '' } تومان</p> {/* agar meghdare kol ba afrade ezafe vojod dasht ono dar nazar migirim dar gheire in sorat bedone jame bedone afrade ezafe ro dar nazar migirim */}
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftButton"}>
@@ -2035,7 +2127,7 @@ componentDidMount() {
                                          location={resultSimilarVilla.city}
                                          numberOfRoom={resultSimilarVilla.details ? resultSimilarVilla.details.bedroom : "0"}
                                          capacity={resultSimilarVilla.details ? resultSimilarVilla.details.max_capacity : "0"}
-                                         price={resultSimilarVilla.rules.normal_cost}/> </a>
+                                         price={commaNumber(resultSimilarVilla.rules.normal_cost)}/> </a>
                             </MDBCol>
                         )
                     })}

@@ -9,6 +9,7 @@ import Logo from "../images/Logo.png";
 import Footer from "../componentsPages/footer";
 import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt"
 import MobileLogo from "../images/MobileLogo.png";
+const commaNumber = require('comma-number')
 
 class HostStep5Page extends Component {
     constructor(props) {
@@ -67,12 +68,14 @@ class HostStep5Page extends Component {
             monthly_discount:this.state.monthlyDiscount,
         }
         //console.log(JSON.parse(localStorage.getItem("step4")))
+
         return (
             <div className={" fv-HostStep2Page fv-hostStep2Page2 fv-hostStep3Page fv-hostStep4Page fv-hostStep5Page"}>
                 <MDBContainer className={"fv-HostStep1Page"}>
                     <MDBRow>
                         <HeaderSteps />
                     </MDBRow>
+
 
                     <MDBRow className={"fv-HostStep1PageBody"}>
                         <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
@@ -83,14 +86,14 @@ class HostStep5Page extends Component {
                             <p className={"fv-hostStep5P"}>قیمت از شنبه تا چهارشنبه</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" value={this.state.pricesFromSaturdayToWednesday}
+                                    <input type="text" value={this.state.pricesFromSaturdayToWednesday.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                            onChange={(e)=>{
-                                               if(e.target.value && Number(e.target.value)){   // اگر این شرایط بود آنگاه معتبر میباشد و true میشود
+                                               if(this.state.pricesFromSaturdayToWednesday && Number(this.state.pricesFromSaturdayToWednesday)){   // اگر این شرایط بود آنگاه معتبر میباشد و true میشود
                                                    this.setState({validNormalCost:true})
                                                }else {
                                                    this.setState({validNormalCost:false})
                                                }
-                                               this.setState({pricesFromSaturdayToWednesday:e.target.value})
+                                               this.setState({pricesFromSaturdayToWednesday:e.target.value.replace(/,/g, "")})
                                            }}
                                            className={this.state.click && this.state.validNormalCost===false ?  "fv-redBorderError" : ""} />
                                 </MDBCol>
@@ -98,32 +101,32 @@ class HostStep5Page extends Component {
                             <p className={"fv-hostStep5P"}>قیمت پنجشنبه و جمعه و تعطیل (ایام پیک)</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input  type="text" value={this.state.priceFridayAndHoliday}
-                                           onChange={(e)=>{
-                                               if(e.target.value && Number(e.target.value)){   // اگر این شرایط بود آنگاه معتبر میباشد و true میشود (اگر وجود داشت و عدد بود)
-                                                   this.setState({validExtraCost:true})
-                                               }else {
-                                                   this.setState({validExtraCost:false})
-                                               }
-                                               this.setState({priceFridayAndHoliday:e.target.value})
-                                           }}
-                                           className={this.state.click && this.state.validExtraCost===false ?  "fv-redBorderError" : ""} />
+                                    <input  type="text" value={this.state.priceFridayAndHoliday.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                            onChange={(e)=>{
+                                                if(this.state.priceFridayAndHoliday && Number(this.state.priceFridayAndHoliday)){   // اگر این شرایط بود آنگاه معتبر میباشد و true میشود (اگر وجود داشت و عدد بود)
+                                                    this.setState({validExtraCost:true})
+                                                }else {
+                                                    this.setState({validExtraCost:false})
+                                                }
+                                                this.setState({priceFridayAndHoliday:e.target.value.replace(/,/g, "")})
+                                            }}
+                                            className={this.state.click && this.state.validExtraCost===false ?  "fv-redBorderError" : ""} />
 
                                 </MDBCol>
                             </MDBRow>
                             <p className={"fv-hostStep5P"}>قیمت نفر اضافه در روز های عادی</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" value={this.state.extraPersonPricesOnNormalDays}
-                                           onChange={(e)=>this.setState({extraPersonPricesOnNormalDays:e.target.value})}
+                                    <input type="text" value={this.state.extraPersonPricesOnNormalDays.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                           onChange={(e)=>this.setState({extraPersonPricesOnNormalDays:e.target.value.replace(/,/g, "")})}
                                     />
                                 </MDBCol>
                             </MDBRow>
                             <p className={"fv-hostStep5P"}>قیمت نفر اضافه در روز های پیک</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" value={this.state.extraPersonPricesOnHolidays}
-                                           onChange={(e)=>this.setState({extraPersonPricesOnHolidays:e.target.value})}
+                                    <input type="text" value={this.state.extraPersonPricesOnHolidays.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                           onChange={(e)=>this.setState({extraPersonPricesOnHolidays:e.target.value.replace(/,/g, "")})}
                                     />
                                 </MDBCol>
                             </MDBRow>

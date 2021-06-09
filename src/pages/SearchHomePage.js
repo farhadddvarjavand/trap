@@ -18,7 +18,7 @@ import CalendarLinear from "../data/CalenddarLinear";
 import CalenddarLinearToReturn from "../data/CalenddarLinearToReturn";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 import HeaderLoginMenu from "../componentsPages/HeaderLoginMenu";
-
+const commaNumber = require('comma-number')
 
 
 
@@ -489,7 +489,7 @@ class SearchHomePage extends Datas {
                                                              location={searchPageVilla.state}
                                                              numberOfRoom={searchPageVilla.details.bedroom}
                                                              capacity={searchPageVilla.details.max_capacity}
-                                                             price={searchPageVilla.normal_cost}
+                                                             price={commaNumber(searchPageVilla.normal_cost)}
                                                     />
                                                 </a>
                                             </MDBCol>

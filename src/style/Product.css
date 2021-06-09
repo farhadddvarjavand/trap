@@ -240,6 +240,9 @@ html .col-md-3{
 .fv-product .fv-productCapacityBox .fv-capacityBody p {
     margin-left: 8%;
 }
+.fv-productRateBoxNewScore{
+    color: #FEA801;
+}
 
 
 
@@ -472,7 +475,7 @@ html .col-md-3{
         text-align: right;
         /* margin: 0; */
         /* padding: 0; */
-        margin-left: -6%;
+        margin-left: 0%;
     }
 
     .fv-aboutUsMobile .col-sm-2 {
@@ -808,5 +811,9 @@ html .col-md-3{
     .fv-product .fv-topicMainPage .row {
         padding-top: 4%;
         width: 132%;
+    }
+    .fv-popularVillageTitle.fv-typesAccommodationTopic.col-11 {
+        flex: 0 0 146.666667%;
+        max-width: 89.666667%;
     }
 }

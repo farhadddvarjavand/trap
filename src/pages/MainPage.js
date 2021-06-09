@@ -19,6 +19,7 @@ import CalendarLinear from "../data/CalenddarLinear";
 import {getUserInformation} from "../services/userService";
 import Footer from "../componentsPages/footer";
 import HeadeerLoginMenu from "../componentsPages/HeaderLoginMenu"
+const commaNumber = require('comma-number')
 
 
 
@@ -307,7 +308,7 @@ class MainPage extends Datas {
                                              location={productDetails.city}
                                              numberOfRoom={productDetails.details.bedroom}
                                              capacity={productDetails.details.max_capacity}
-                                             price={productDetails.rules.normal_cost}/> </a>
+                                             price={commaNumber(productDetails.rules.normal_cost)}/> </a>
 
                                 </MDBCol>
                             )
@@ -382,8 +383,8 @@ class MainPage extends Datas {
                                                    location={discountedVilla.villa.city}
                                                    numberOfRoom={discountedVilla.details.bedroom}
                                                    capacity={discountedVilla.details.max_capacity}
-                                                   price={discountedVilla.normal_cost - discountPrice}
-                                                         PreventPrice={discountedVilla.normal_cost}/> </a>
+                                                   price={commaNumber(discountedVilla.normal_cost - discountPrice)}
+                                                         PreventPrice={commaNumber(discountedVilla.normal_cost)}/> </a>
 
                             </MDBCol>
                         ) }else {
@@ -398,8 +399,8 @@ class MainPage extends Datas {
                                                    location={discountedVilla.villa.city}
                                                    numberOfRoom={''}
                                                    capacity={''}
-                                                   price={discountedVilla.normal_cost - discountPrice}
-                                                         PreventPrice={discountedVilla.normal_cost}/> </a>
+                                                   price={commaNumber(discountedVilla.normal_cost - discountPrice)}
+                                                         PreventPrice={commaNumber(discountedVilla.normal_cost)}/> </a>
 
                             </MDBCol>
                         )
@@ -431,7 +432,7 @@ class MainPage extends Datas {
                                      location={economicVilla.state}
                                      numberOfRoom={economicVilla.details.bedroom}
                                      capacity={economicVilla.details.max_capacity}
-                                     price={economicVilla.normal_cost}/> </a>
+                                     price={commaNumber(economicVilla.normal_cost)}/> </a>
                         </MDBCol>
                     )
                 })}

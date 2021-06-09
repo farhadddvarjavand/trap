@@ -241,6 +241,7 @@
     max-width: 118.333333%;
     margin-left: -10%;
     margin-top: 4%;
+    direction: ltr;
 }
 .fv-SearchHomePage .fv-footerMenuRibbon {
     margin-left: -7%;
@@ -682,7 +683,7 @@
         display: flex;
         justify-content: flex-end;
         margin-left: -6px;
-        margin-top: -12%;
+        margin-top: -10%;
     }
     .fv-SearchHomePage .fv-product .fv-productPriceBox .col-md-10 {
         margin-left: 1%;
@@ -871,6 +872,30 @@
         margin-right: -10vw;
         margin-top: 12px;
     }
+    .fv-SearchHomePage.fv-DisplayPage .fv-topicMainPageTopic {
+        text-align: end;
+        margin-right: -2px;
+    }
+    .fv-SearchHomePage .fv-product .col-md-5 {
+        text-align: end;
+        margin-right: -44px;
+        font-size: 3vw;
+    }
+    .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox .col-md-5 {
+        padding-left: 40px;
+        text-align: initial;
+        margin-left: -9%;
+    }
+
+    .fv-SearchHomePage .fv-product .fv-productCapacityBox .fv-numberOfBedBody {
+        display: flex;
+        justify-content: flex-end;
+        margin-left: -6px;
+        margin-top: -6%;
+        display: contents;
+    }
+
+
 
 }
 @media (max-width: 766px) and (min-width: 478px) {

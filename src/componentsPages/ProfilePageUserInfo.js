@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import {getUserStock} from "../services/userService";
 import config from "../services/config.json";
 import MobileMenu from "../images/MobileMenu.png";
+const commaNumber = require('comma-number')
 
 class ProfilePageUserInfo extends React.Component{
     constructor() {
@@ -44,7 +45,7 @@ class ProfilePageUserInfo extends React.Component{
                 <MDBRow className={"fv-ProfilePageUserHoldingInfo"}>
                     <MDBCol md={12}>
                         <p>موجودی حساب شما</p>
-                        <h5>{this.state.stock}</h5>
+                        <h5>{commaNumber(this.state.stock)}</h5>
                     </MDBCol>
                 </MDBRow>
                 <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>

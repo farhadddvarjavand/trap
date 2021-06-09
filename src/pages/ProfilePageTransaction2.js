@@ -10,6 +10,7 @@ import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 import {transactionsSearch, userTransactions} from "../services/userService";
 import "../style/scroolBodyProfilePages.scss"
 import CalendarLinear from "../data/CalenddarLinear";
+const commaNumber = require('comma-number')
 
 class ProfilePageTransaction2 extends Component {
     constructor(props) {
@@ -112,7 +113,7 @@ class ProfilePageTransaction2 extends Component {
                                     <tr>
                                         <td>{transactionData.type}</td>
                                         <td>{transactionData.date}</td>
-                                        <td>{transactionData.amount}</td>
+                                        <td>{commaNumber(transactionData.amount)}</td>
                                         <td>{transactionData.description}</td>
                                         <td className={transactionData.status === "پرداخت شد"  ? "fv-test" :''}>{transactionData.status}</td>
                                     </tr>
