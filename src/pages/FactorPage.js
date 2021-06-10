@@ -10,6 +10,7 @@ import {arrayBetweenDates} from "../componentsPages/calculationsDate";
 import {extendMoment} from "moment-range";
 import Moment from "moment";
 import {Link} from "react-router-dom";
+import config from "../services/config.json";
 const commaNumber = require('comma-number')
 
 class FactorPage extends Component {
@@ -58,7 +59,7 @@ class FactorPage extends Component {
                             :
                             ''}
                         </MDBRow>
-                        <img src={Logo}/>
+                        <img src={this.state.villaInfo && this.state.villaInfo.main_img ? `${config.webapi}/images/villas/main/${this.state.villaInfo.main_img}` : Logo}/>
                         <MDBRow>
                             <MDBCol md={3}>
                                 <p className={"fv-factorPageRightInfoRightPadding"}>کد آگهی</p>
@@ -238,7 +239,7 @@ class FactorPage extends Component {
                                 <MDBCol md={3} className={"fv-factorPageRightInfo"}>
                                     <MDBRow className={"fv-factorPageRightInfoTitleMobile"}>
                                         <MDBCol md={3} sm={4} className={"fv-factorPageRightRate"}>
-                                            <img src={Logo}/>
+                                            <img src={this.state.villaInfo && this.state.villaInfo.main_img ? `${config.webapi}/images/villas/main/${this.state.villaInfo.main_img}` : Logo}/>
                                         </MDBCol>
                                         <MDBCol md={6} sm={6}>
                                             <h5 className={"fv-factorPageRightInfoRightPaddingTitle2"}>{this.state.villaInfo.title}</h5>

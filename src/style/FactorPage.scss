@@ -10,6 +10,7 @@
       width: 92%;
       margin-right: 4%;
       margin-bottom: 2%;
+      border-radius: 3px;
     }
     .fv-factorPageRightInfoRightPadding{
       margin-right: 27%;
@@ -191,9 +192,66 @@
   .fv-factorPageRightInfoLeftBodyInnerLeft .fv-factorPageRightInfoLeftBodyInnerLeftInner .fv-factorPageRightInfoLeftBodyInnerLeftP p{
     font-size: 15px;
   }
+   .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn p {
+    /* font-size: 14px; */
+    font-size: 14px;
+    margin-top: 5%;
+  }
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fa,  .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fas{
+    font-size: 14px;
+  }
+
 }
 .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyInnerLeftP {
   place-content: end;
+}
+
+
+
+@media (max-width: 767px) and (min-width: 560px){
+  .fv-ProfilePageWallet.fv-ProfilePageWallet2.fv-profileFavoritesPage {
+     .fv-product .row .col-md-2 {
+      margin-left: 35px;
+    }
+
+     .fv-product .row .col-md-2 {
+      font-size: 3vw !important;
+    }
+
+     .fv-product .col-md-5 {
+      text-align: end;
+      margin-right: -41px;
+      font-size: 3.5vw;
+      margin-left: -31%;
+    }
+
+     .fv-productFavorites .fv-productCapacityBoxFavorites .col-md-11 {
+      margin-right: 0%;
+      font-size: 3vw;
+    }
+
+     .fv-product .col-md-5 {
+      text-align: end;
+      margin-right: -41px;
+      font-size: 3vw;
+      margin-left: -35%;
+    }
+  }
+}
+@media (max-width: 560px) and (min-width: 480px){
+  .fv-ProfilePageWallet.fv-ProfilePageWallet2.fv-profileFavoritesPage {
+     .fv-product .col-md-5 {
+      text-align: end;
+      margin-right: -69px;
+      font-size: 3.5vw;
+      margin-left: -23%;
+    }
+
+     .fv-product .row .col-md-2 {
+      margin-left: 51px;
+    }
+  }
+
 }
 
 
@@ -450,6 +508,7 @@
   }
 
 }
+
 
 @media (max-width: 375px) {
   .fv-FactorPage .fv-factorPageRightInfoRightCodeTitleMobile .col-sm-2 {

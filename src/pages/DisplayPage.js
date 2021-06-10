@@ -1398,7 +1398,7 @@ componentDidMount() {
                                 <p> <i className="fa fa-users" />  ظرفیت استاندارد {standardCapacity }  نفر+{maxCapacity} نفر اضافه </p>
                             </MDBRow>
                             <MDBRow className={"pMobile"}>
-                                <p><i className="fa fa-building" /> {bedroom} اتاق خواب+{shower} حمام+{irToilet} دست شویی ایرانی + {euToilet} دستشویی فرنگی </p>
+                                <p><i className="fa fa-building" /> {bedroom} اتاق خواب+{shower} حمام+{irToilet} دست شویی ایرانی{Number(euToilet) !== 0 ? `+${euToilet} دستشویی فرنگی`  : ''}</p>
                             </MDBRow>
                             <MDBRow className={"pMobile"}>
                                 <p><i className="fa fa-bed" aria-hidden="true" /> {this.state.resultVilla.details?this.state.resultVilla.details.bed_count:''} تخت یک نفره + {this.state.resultVilla.details?this.state.resultVilla.details.mattress_count:''} تشک معمولی </p>
@@ -1606,26 +1606,31 @@ componentDidMount() {
                                     <p>نفر اضافه در ایام پیک : </p> <h5> {commaNumber(specialExtraCostRules)} </h5>
                                 </MDBCol>
                             </MDBRow>
-                        <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
-                            <MDBCol md={1} sm={1}>
-                                <MDBRow>
-                                    <button className="slider_pagination_btn" />
+                            {Number(weeklyDiscountRules) !== 0 ?
+                                <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
+                                    <MDBCol md={1} sm={1}>
+                                        <MDBRow>
+                                            <button className="slider_pagination_btn" />
+                                        </MDBRow>
+                                    </MDBCol>
+                                    <MDBCol md={11} sm={11}>
+                                        <p>تخفیف هفتگی :  </p> <h5> {weeklyDiscountRules} درصد </h5>
+                                    </MDBCol>
                                 </MDBRow>
-                            </MDBCol>
-                            <MDBCol md={11} sm={11}>
-                                <p>تخفیف هفتگی :  </p> <h5> {weeklyDiscountRules} درصد </h5>
-                            </MDBCol>
-                        </MDBRow>
-                        <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
-                            <MDBCol md={1} sm={1}>
-                                <MDBRow>
-                                    <button className="slider_pagination_btn" />
+                            : ''}
+                            {Number(monthlyDiscountRules)!==0 ?
+                                <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
+                                    <MDBCol md={1} sm={1}>
+                                        <MDBRow>
+                                            <button className="slider_pagination_btn" />
+                                        </MDBRow>
+                                    </MDBCol>
+                                    <MDBCol md={11} sm={11}>
+                                        <p>تخفیف ماهانه : </p> <h5> {monthlyDiscountRules} درصد </h5>
+                                    </MDBCol>
                                 </MDBRow>
-                            </MDBCol>
-                            <MDBCol md={11} sm={11}>
-                                <p>تخفیف ماهانه : </p> <h5> {monthlyDiscountRules} درصد </h5>
-                            </MDBCol>
-                        </MDBRow>
+                            : ''}
+
 
                             <MDBRow className={"fv-DisplayPageCalender fv-DisplayPageCalenderForDesktop"}>                  {/*    calender-calendar     */}
 
@@ -1668,12 +1673,19 @@ componentDidMount() {
                             <h4> قوانین </h4>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
-                            <MDBCol md={4} sm={12}>
-                                <p> <i className="fas fa-clock" /> ساعت ورود : {this.state.resultVilla.rules ? this.state.resultVilla.rules.arrival_time : ""}</p>
-                            </MDBCol>
-                            <MDBCol md={8} sm={12}>
-                                <p>  <i className="fas fa-clock" /> ساعت خروج : {this.state.resultVilla.rules ? this.state.resultVilla.rules.exit_time : ""} </p>
-                            </MDBCol>
+                            {this.state.resultVilla.rules && this.state.resultVilla.rules.arrival_time ?
+                                <MDBCol md={4} sm={12}>
+                                    <p> <i className="fas fa-clock" /> ساعت ورود : {this.state.resultVilla.rules ? this.state.resultVilla.rules.arrival_time : ""}</p>
+                                </MDBCol>
+                            : ''
+                            }
+                            {this.state.resultVilla.rules && this.state.resultVilla.rules.exit_time ?
+                                <MDBCol md={8} sm={12}>
+                                    <p>  <i className="fas fa-clock" /> ساعت خروج : {this.state.resultVilla.rules ? this.state.resultVilla.rules.exit_time : ""} </p>
+                                </MDBCol>
+                            :
+                            ''}
+
                         </MDBRow>
 
                             {this.state.resultVilla.rules ? this.state.resultVilla.rules.auth_rules.map(authRule =>{

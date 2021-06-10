@@ -13,6 +13,10 @@ import HostStepImage1 from "../images/home_miz1 png.png"
 class HostStep2Page2 extends Component {
     constructor(props) {
         super(props);
+
+        if(!JSON.parse(localStorage.getItem("info"))){
+            this.props.history.push('login');
+        }
         this.state = {
             markerArray: [],
             lat: 35.72,
@@ -21,7 +25,19 @@ class HostStep2Page2 extends Component {
         }
         this.reverseFunction = this.reverseFunction.bind(this);
     }
-
+    componentDidMount() {
+        const prevData =  JSON.parse(localStorage.getItem("step2-2"))
+        if (prevData) {
+            if(prevData.long>0)
+            {
+                const previousLocation=[<Mapir.Marker
+                    coordinates={[prevData.long, prevData.lat]}
+                    anchor="bottom">
+                </Mapir.Marker>]
+                this.setState({markerArray:previousLocation});
+            }
+        }
+    }
 
     reverseFunction(map, e) {
         const url = `https://map.ir/reverse/no?lat=${e.lngLat.lat}&lon=${e.lngLat.lng}`
@@ -43,6 +59,7 @@ class HostStep2Page2 extends Component {
         this.setState({ markerArray: array, lat: e.lngLat.lat,lon: e.lngLat.lng });
     }
     render() {
+        // console.log(this.state.markerArray);
         const Map = Mapir.setToken({
             //factory parameters
             hash:true,

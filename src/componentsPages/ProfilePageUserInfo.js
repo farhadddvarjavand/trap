@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import {getUserStock} from "../services/userService";
 import config from "../services/config.json";
 import MobileMenu from "../images/MobileMenu.png";
+import UserImage from "../images/user.png"
 const commaNumber = require('comma-number')
 
 class ProfilePageUserInfo extends React.Component{
@@ -39,7 +40,7 @@ class ProfilePageUserInfo extends React.Component{
         }
         return(
             <MDBCol md={3} className={"fv-ProfilePageUserInfoBody"}>
-                <img src={avatar ? `${config.webapi}/images/user/${avatar}` : Logo}/>
+                <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage}/>
                 <p>{nameAndFamily}</p>
                 <h5>اطلاعات کاربری</h5>
                 <MDBRow className={"fv-ProfilePageUserHoldingInfo"}>

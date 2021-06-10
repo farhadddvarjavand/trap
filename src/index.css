@@ -5,11 +5,11 @@
   width: 100%;
 }
 @font-face {
-  font-family: "IRANSans";
-  src: url("font/fonts/ttf/IRANSansWeb.ttf");
+  font-family: 'IRANSansWeb(FaNum)';
+  src: local('IRANSans'), url(font/fonts/ttf/IRANSansWeb.ttf) format('truetype');
 }
 body{
-  font-family: "IRANSans" !important;
+  font-family: "IRANSansMobile(FaNum)" !important;
 }
 .h4, h4 {
   font-size: 1.2rem ;
@@ -511,6 +511,9 @@ body{
   height: 50px;
   border-radius: 15px;
 }
+.fv-gustNameAndInfoRight img  , .fv-gustNameAndInfoLeft img{
+  margin-right: 2%;
+}
 
 
 
@@ -985,7 +988,17 @@ color {  100%, 0% {
     flex: 0 0 30%;
     width: 25% !important;
   }
-
+  .fv-mainMobileDiscountedVillas .fv-product .row {
+    width: 122%;
+  }
+  .fv-mainMobileDiscountedVillas .fv-product .row {
+    width: 112%;
+  }
+}
+@media (max-width: 540px){
+  .fv-mainMobileDiscountedVillas .fv-product .row {
+    width: 112%;
+  }
 }
 @media (max-width: 360px){
   .fv-footerMenu .fv-cascadeOptionMainPageRowTop img {
@@ -1027,8 +1040,14 @@ color {  100%, 0% {
     flex: 0 0 138.666667%;
     max-width: 91.666667%;
   }
+  .fv-mainProductsSimilar .fv-productPriceBoxPriceText {
+    position: absolute;
+  }
+  .fv-mainMobileDiscountedVillas .fv-product .row {
+    width: 122%;
+  }
 
-}
+  }
 
 @media (max-width: 280px){
   .fv-footerMenu .fv-cascadeOptionMainPage .col-sm-8 {
@@ -1082,6 +1101,9 @@ color {  100%, 0% {
     margin-top: -12vw;
     font-size: 14px;
     margin-right: -2vw;
+  }
+  .fv-mainMobileDiscountedVillas .fv-product .row {
+    width: 129%;
   }
 
 }

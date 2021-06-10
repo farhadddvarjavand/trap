@@ -694,6 +694,7 @@ display: none;
 }
 .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop.fv-displayPath .fv-DisplayPageRotePathMobile {
     margin-right: -2%;
+
 }
 
 .fv-DisplayPageDetailsRightStayInHome .col-md-5 {
@@ -1393,6 +1394,11 @@ display: none;
     .fv-mainProduct.fv-mainMobile.fv-displayPageSimillarProducts .fv-product .fv-productCapacityBox .fv-numberOfBedBody .fa,.fv-mainProduct.fv-mainMobile.fv-displayPageSimillarProducts .fv-product .fv-productCapacityBox .fv-numberOfBedBody .fas {
         margin-top: 0.5%;
     }
+    .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop.fv-displayPath .fv-DisplayPageRotePathMobile {
+        margin-right: -2%;
+        margin-top: 8%;
+    }
+
 }
 
 

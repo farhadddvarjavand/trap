@@ -41,7 +41,8 @@ class HostStep3Page extends Component {
     }
 
     componentDidMount() {
-        if( JSON.parse(localStorage.getItem("step3"))){
+        const prevData =  JSON.parse(localStorage.getItem("step3"))
+        if(prevData){
             const prevsharedBathroom =[]
             const prevPlaces = []
             const prevView = []
@@ -49,7 +50,6 @@ class HostStep3Page extends Component {
             const prevSetOtherSpace = []
             let mattressCount = 0
             let bedCount = 0
-            const prevData =  JSON.parse(localStorage.getItem("step3"))
             if(prevData.disinfected === 1){
                 prevDisinfected.push("خانه ضدعفونی شده میباشد")
             }

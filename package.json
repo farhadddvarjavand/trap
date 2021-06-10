@@ -36,6 +36,7 @@
     "file-loader": "^6.2.0",
     "google-map-react": "^2.1.9",
     "google-maps-react": "^2.0.6",
+    "iransans-fontface": "^0.1.1",
     "jalali-moment": "^3.3.10",
     "mapir-react-component": "^1.8.1",
     "mdbreact": "^5.0.1",

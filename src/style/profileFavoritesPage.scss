@@ -123,7 +123,7 @@
       display: block;
     }
     .fv-ProfilePageWallet2 .fv-footerMenuMobileTitle {
-      margin-top: 550%;
+     // margin-top: 550%;
     }
     .fv-product.fv-mobileProduct.fv-productFavorites .fv-trashFavorites {
       text-align: inherit;
@@ -148,7 +148,26 @@
       margin-left: -14px;
     }
     .fv-footerMenuMobileTitle {
-      margin-top: 550%;
+     // margin-top: 550%;
+    }
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo h5 {
+      margin-bottom: 4%;
+    }
+     .fv-productFavorites .fv-productCapacityBoxFavorites .col-md-11 {
+      margin-right: 0%;
+      font-size: 3.5vw;
+    }
+     .fv-product .row .col-md-2 {
+      font-size: 3.5vw;
+    }
+     .fv-productFavorites .fv-productCapacityBoxFavorites .fa-bed {
+      margin-left: 3%;
+      margin-top: -3%;
+    }
+     .fv-product .col-md-5 {
+      text-align: end;
+      margin-right: -44px;
+      font-size: 3.5vw;
     }
   }
 }
@@ -162,6 +181,12 @@
       width: 33.333333% !important;
       margin-top: -1%;
     }
+  }
+  .fv-profileFavoritesPage .fv-productFavorites .fv-productCapacityBoxFavorites .col-md-11 {
+    margin-right: -2%;
+  }
+  .fv-profileFavoritesPage .fv-productCapacityBoxFavorites .col-md-5 {
+    margin-left: -63px;
   }
 }
 

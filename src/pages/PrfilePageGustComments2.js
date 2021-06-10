@@ -50,10 +50,13 @@ class PrfilePageGustComments2 extends Component {
                                    thisPageName = "نظرات مهمان ها"/>
                 </MDBContainer>
 
+                {/*display: table; width:100%*/}
+                {/*phone: flex-direction:column;*/}
                 <MDBRow className={"fv-ProfilePageLeftBody"}>
 
+                    {/*display: table-cell; */}
                     <ProfilePageUserInfo />
-
+                    {/*display: table-cell; */}
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
                         <MDBRow className={"fv-ProfilePageReservationSetInfo"}>
                             <MDBCol md={4} sm={12} className={""}>

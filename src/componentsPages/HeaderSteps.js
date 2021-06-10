@@ -6,6 +6,7 @@ import LogoName from "../images/LogoName.png"
 import MobileLogo from "../images/MobileLogo.png"
 import config from "../services/config.json";
 import {Link} from "react-router-dom";
+import UserImage from "../images/user.png"
 
 
 class HeaderSteps extends Component {
@@ -32,7 +33,7 @@ class HeaderSteps extends Component {
                     <MDBCol md={3} sm={6}>
                        <a onClick={()=>{
                            this.setState({hideButtonLogin:!this.state.hideButtonLogin})
-                       }}> <img src={info.userInfo.avatar ? `${config.webapi}/images/user/${info.userInfo.avatar }` : ""}/>
+                       }}> <img src={info.userInfo.avatar ? `${config.webapi}/images/user/${info.userInfo.avatar }` : UserImage}/>
 
                            <a className={"name_desktop"}>{info.userInfo.fullname}</a> </a>
                     </MDBCol>
@@ -47,7 +48,7 @@ class HeaderSteps extends Component {
                             <MDBCol md={12} sm={12}>
                                 <MDBRow className={"fv-cascadeOptionMainPageRowTopInner"}>
                                     <MDBCol md={2} sm={2}>
-                                        <img src={avatar ? `${config.webapi}/images/user/${avatar}` : MobileLogo} />
+                                        <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage} />
                                     </MDBCol>
                                     <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={7} sm={8}>
                                         <MDBRow>

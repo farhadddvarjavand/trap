@@ -11,6 +11,7 @@ import FotterpageLogo from "../images/Logo.png"
 import LogoName from "../images/LogoName.png"
 import MobileLogo from "../images/MobileLogo.png"
 import MobileMenu from "../images/MobileMenu.png"
+import UserImage from "../images/user.png"
 import Image1 from "../images/image1.png"
 import Image2 from "../images/image2.png"
 import Image3 from "../images/image3.png"
@@ -124,7 +125,7 @@ class MainPage extends Datas {
 
                             <a className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" : "fv-hideButtonRegister"}  onClick={()=>{ // agar login bod ba click roie dokme in karo kon
                                 this.setState({onclickButtonHandle:!this.state.onclickButtonHandle})
-                            }}> <img src={avatar ? `${config.webapi}/images/user/${avatar}` : MobileLogo} /> {nameAndFamily} </a>
+                            }}> <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage} /> {nameAndFamily} </a>
                             <Link to={ "/hostStep1"} ><input type='button' value=' میزبان شوید' onClick={()=>{
                                 localStorage.removeItem("step1")
                                 localStorage.removeItem("step2")
@@ -151,7 +152,7 @@ class MainPage extends Datas {
                         <MDBCol sm={8} className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" :" fv-hideButtonRegister" } >   {/* agar login bod ino neshon bede */}
                             <a className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" : "fv-hideButtonRegister"}  onClick={()=>{   // agar login bod ba klick ro ax in kar ro bokon
                                     this.setState({onclickButtonHandle:!this.state.onclickButtonHandle})
-                            }}> <img src={avatar ? `${config.webapi}/images/user/${avatar}` : MobileLogo} /></a>
+                            }}> <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage} /></a>
                         </MDBCol>
                         <MDBCol sm={2} className={"fv-footerMenuRibbonButton"}>
                             <img src={LogoName} />
@@ -166,7 +167,7 @@ class MainPage extends Datas {
                     <MDBCol md={12} sm={12}>
                         <MDBRow>
                             <MDBCol md={2} sm={2}>
-                                <img src={avatar ? `${config.webapi}/images/user/${avatar}` : MobileLogo} />
+                                <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage} />
                             </MDBCol>
                             <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={12} sm={12}>
                                 <MDBRow>
@@ -290,7 +291,7 @@ class MainPage extends Datas {
                 </MDBRow>
         </div>
 
-        <MDBContainer className={"fv-MainBody"}>
+        <MDBContainer className={"fv-MainBody fv-mainProductsSimilar"}>
             <MDBRow className={"fv-topicFirstMainPage"}>
                 <TopicsMainPage topic="اقامتگاه های پر بازدید"
                                 linkToPage={"/searchHomePage/Popular/1"}/>
@@ -371,7 +372,7 @@ class MainPage extends Datas {
                                 linkToPage={"./searchHomePage/Discount/1"}/>
             </MDBRow>
 
-            <MDBRow className={'fv-mainMobile'}>
+            <MDBRow className={'fv-mainMobile fv-mainMobileDiscountedVillas'}>
                 {discountedVillas.map(discountedVilla=>{
                     let discountPrice = ''
                     discountPrice = (discountedVilla.normal_cost * discountedVilla.weekly_discount) / 100
@@ -506,16 +507,14 @@ class MainPage extends Datas {
             </MDBRow>
             <MDBRow className={"fv-comment"}>
                 <MDBCol md={5}  className={"fv-commentLeft"}>
-                    <p> ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ
-                        ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ
-                        ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ
-                        ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ</p>
+                    <p> قالب سایت معمولا با این موضوع رو برو هستند که م</p>
                 </MDBCol>
                 <MDBCol md={5}>
-                    <p> ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ
-                        ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ
-                        ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ
-                        ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ ﯽﺣاﺮﻃ مﺎﮕﻨ</p>
+                    <p> با این موضوع رو برو هستند که محتوای اصلی صفحات آم
+                        اده نیست. در نتیجه طرح کلی دید درستی
+                        به کار فرما نمیدهد. اگر طراح بخواهد
+                        دنبال متن های مرتبط بگردد تمرکزش از روی کار اصلی برداشته
+                        میشود و اینکار زمان بر خواهد بود. همچنین طراح به دنبال این است</p>
                 </MDBCol>
 
             </MDBRow>
@@ -526,11 +525,11 @@ class MainPage extends Datas {
             <MDBRow className={"fv-gustComment"}>
                 {pagination.slice(1,1)}
                 <MDBCol md={6}  className={"fv-gustNameAndInfoLeft"}>
-                    <img src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg" width="50" height="50" />
+                    <img src={UserImage} width="50" height="50" />
                    نظرات مهمان ها
                 </MDBCol>
                 <MDBCol md={6}   className={"fv-gustNameAndInfoRight"}>
-                    <img src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg" width="50" height="50" />
+                    <img src={UserImage} width="50" height="50" />
                     نظرات مهمان ها
                 </MDBCol>
             </MDBRow>
