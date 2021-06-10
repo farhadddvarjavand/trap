@@ -56,14 +56,19 @@ import MyAccomodationProfilePageHandle from "./emptyAndHandlePage/MyAccomodation
 import AnotherPagesEmpty from "./emptyAndHandlePage/anotherPagesEmpty";
 import ProfileWalletPageHandle from "./emptyAndHandlePage/ProfileWalletPageHandle";
 import ProfileFavoritePageHandle from "./emptyAndHandlePage/ProfileFavoritePageHandle";
+import PersianNumber from "./componentsPages/PersianNumber";
+import './font/fonts/css.css';
+
 
 ReactDOM.render(
+
     <React.StrictMode>
         <BrowserRouter>
             <Switch>
                 <CookiesProvider>
 
                     <ScrollToTop />
+                    <PersianNumber number={12365}/>
                     <div className="App">
                         <div className={'pagecontent'}>
                             <Route exact path={'/login'} component={LoginPage}/>

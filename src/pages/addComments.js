@@ -166,7 +166,12 @@ class ProfilePageWallet2 extends Component {
                                        hosting_quality :this.state.hostingQuality,
                                    }
                                     addComment(data , this.props.match.params.id)
-                                        .then(res => res.status === 200 ? alert('پیام شما با موفقیت ثبت گردید') :'')
+                                        .then(res =>{
+                                            if(res.status === 200){
+                                                alert('پیام شما با موفقیت ثبت گردید')
+                                                this.props.history.push(`/displayPage/${this.props.match.params.id}`)
+                                            }
+                                        } )
                                         .catch(err => err.response ?  alert('لطفا مقادیر را به درستی پر کنید') : '' )
                                 }}/>
                             </MDBCol>

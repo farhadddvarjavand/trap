@@ -460,7 +460,10 @@ $backgroundColorButton:#15BE29;
     margin-top: 52vw;
   }
   .fv-hostStep2Page2.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
-    margin-left: 13%;
+    margin-left: -3%;
+  }
+  .fv-hostStep2Page2.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButtonBodySharedButton .fv-hostStepPage2LeftButton {
+    margin-left: 10%;
   }
 }
 @media (max-width: 320px) {

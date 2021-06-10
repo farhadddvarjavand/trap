@@ -10,6 +10,7 @@ import ReservationProduct from "../componentsPages/ReservatioonProduct";
 import CalendarLinear from "../data/CalenddarLinear";
 import {getUserInformation, reservationsSearch, userReserves} from "../services/userService";
 import {Link} from "react-router-dom";
+import config from "../services/config.json";
 
 
 class ProfilePageReservation2 extends Component {
@@ -192,7 +193,7 @@ class ProfilePageReservation2 extends Component {
                                                     <input type="text"/>
                                                 </MDBCol>
                                             </MDBRow>
-                                            <img src={"https://www.w3schools.com/html/pic_trulli.jpg"} className={'fv-productImage'}/>
+                                            <img src={`${config.webapi}/images/villas/main/${reserve.img_src }`} className={'fv-productImage'}/>
 
                                             <MDBRow>
                                                 <MDBCol className={'fv-productTopic'}>
@@ -230,7 +231,7 @@ class ProfilePageReservation2 extends Component {
                                                 {className === "fv-profilePaeReservation2PayButton" ?
                                                     <input type="button" value="پرداخت"/> :
 
-                                                    <input type="button" value="پرداخت2" onClick={()=> {
+                                                    <input type="button" value="پرداخت" onClick={()=> {
                                                         this.props.history.push(`/factor/${reserve.id}`);
                                                     }}/>
                                                 }

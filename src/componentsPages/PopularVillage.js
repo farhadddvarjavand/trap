@@ -11,7 +11,7 @@ class PopularVillage extends React.Component{
                 <img src={this.props.srcImage} className={'fv-productImage fv-popularVillageImage fv-popularVillageTitle'}/>
 
                         <h3>{this.props.location}</h3>
-                        <h6>{this.props.capacity}خانه</h6>
+                        <h6> {this.props.capacity}<p>خانه</p> </h6>
 
             </MDBContainer>
         )

@@ -6,6 +6,7 @@ import "../style/HostStep1Page.scss"
 import "../style/HostStep4Page.scss"
 import HeaderSteps from "../componentsPages/HeaderSteps";
 import Logo from "../images/Logo.png";
+import HostStepImage1 from "../images/home_miz1 png.png"
 import Footer from "../componentsPages/footer";
 import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt"
 import HostStep4PageRightBody from "../componentsPages/hostStep4PageRightBody"
@@ -541,7 +542,7 @@ class HostStep4Page extends Component {
                             </MDBRow>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" name={'chef'} placeholder="تومان" disabled={this.state.chefDisableTextbox} value={this.state.chef.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                    <input type="text" name={'chef'} className={this.state.chefDisableTextbox? "fv-disableTextbox" : "fv-enabledTextbox"} placeholder="تومان" disabled={this.state.chefDisableTextbox} value={this.state.chef ? this.state.chef.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}
                                            onChange={(e)=>this.setState({chef:e.target.value.replace(/,/g, "")})}/>
                                 </MDBCol>
 
@@ -564,7 +565,7 @@ class HostStep4Page extends Component {
                             </MDBRow>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" placeholder="تومان" name={'host'} disabled={this.state.hostDisableTextbox} value={this.state.host.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                    <input type="text" placeholder="تومان" name={'host'} className={this.state.hostDisableTextbox? "fv-disableTextbox" : "fv-enabledTextbox"} disabled={this.state.hostDisableTextbox} value={this.state.host ? this.state.host.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}
                                            onChange={(e)=>this.setState({host:e.target.value.replace(/,/g, "")})}/>
                                 </MDBCol>
                             </MDBRow>
@@ -585,7 +586,7 @@ class HostStep4Page extends Component {
                             </MDBRow>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" placeholder="تومان" name={'tourLeader'} disabled={this.state.tourLeaderDisableTextbox} value={this.state.tourLeader.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                    <input type="text" placeholder="تومان" name={'tourLeader'} className={this.state.tourLeaderDisableTextbox? "fv-disableTextbox" : "fv-enabledTextbox"} disabled={this.state.tourLeaderDisableTextbox} value={this.state.tourLeader ? this.state.tourLeader.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}
                                            onChange={(e)=>this.setState({tourLeader:e.target.value.replace(/,/g, "")})}/>
                                 </MDBCol>
                             </MDBRow>
@@ -606,7 +607,7 @@ class HostStep4Page extends Component {
                             </MDBRow>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" placeholder="تومان" name={'bodyguard'} disabled={this.state.bodyguardDisableTextbox} value={this.state.bodyguard.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                    <input type="text" placeholder="تومان" name={'bodyguard'} className={this.state.bodyguardDisableTextbox? "fv-disableTextbox" : "fv-enabledTextbox"} disabled={this.state.bodyguardDisableTextbox} value={this.state.bodyguard ? this.state.bodyguard.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}
                                            onChange={(e)=>this.setState({bodyguard:e.target.value.replace(/,/g, "")})}/>
                                 </MDBCol>
                             </MDBRow>
@@ -668,7 +669,7 @@ class HostStep4Page extends Component {
                             ر طراح بخواهد دنبال متن های مرتبط بگردد تمرکزش از روی کار اصلی برداشته میشود و این
                             کار زمان بر خواهد بود. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگرا
                             ن را در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند."
-                            image={Logo}
+                            image={HostStepImage1}
                             nextLink={'../../hostStep5'}
                             returnLink={'../../hostStep3'}
                             localStorageName={"step4"}

@@ -10,7 +10,7 @@ const hostStepLeftBodyContent=(props)=>{
                 <p>{props.text}</p>
                 <img src={props.image} className={"fv-hostStepPage1LeftImage"}/>
             </MDBRow>
-            <MDBRow className={"fv-hostStepPage2LeftButtonBody"}>
+            <MDBRow className={"fv-hostStepPage2LeftButtonBody fv-hostStepPage2LeftButtonBodySharedButton"}>
                 <Link to={props.nextLink} ><input type="button" value="مرحله بعد"  className={"fv-hostStepPage1LeftButton"} onClick={()=>{
                     localStorage.setItem(`${props.localStorageName}`, JSON.stringify(props.localStorageData))
                 }}/> </Link>

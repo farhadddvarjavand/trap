@@ -6,9 +6,7 @@
 }
 @font-face {
   font-family: "IRANSans";
-  src: url("./font/font.woff");
-  src: url("./font/font2.woff");
-  src: url("./font/Iranian Sans.ttf");
+  src: url("font/fonts/ttf/IRANSansWeb.ttf");
 }
 body{
   font-family: "IRANSans" !important;
@@ -227,6 +225,7 @@ body{
 }
 .fv-aboutUs h1 , .fv-aboutUs p{
   padding-top: 14%;
+  padding-left: 9%;
 }
 .fv-aboutUs .col-md-12{
   text-align: initial;

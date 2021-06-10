@@ -43,7 +43,7 @@ class MyAccommodationPage extends Component {
                         <MDBRow>
 
                             {this.state.userVillas.map(userVilla=>{
-                                console.log(userVilla)
+                               // console.log(userVilla)
                                 let md = ''
                                 let classNameActiveTopRightIn=""
                                 let classNameActiveTopLeftIn=""

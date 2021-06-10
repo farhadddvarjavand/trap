@@ -987,4 +987,8 @@
         text-align: initial;
         margin-right: 1vw;
     }
+    .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox p , .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox i {
+        font-size: 11px;
+    }
+
 }

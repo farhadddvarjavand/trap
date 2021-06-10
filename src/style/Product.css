@@ -243,7 +243,14 @@ html .col-md-3{
 .fv-productRateBoxNewScore{
     color: #FEA801;
 }
-
+.fv-product.fv-popularVillage h6 {
+    direction: rtl;
+    text-align: initial;
+    display: flex;
+}
+.fv-product.fv-popularVillage h6 p{
+    margin-right: 3%;
+}
 
 
 

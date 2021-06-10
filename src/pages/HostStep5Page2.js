@@ -124,169 +124,176 @@ class HostStep5Page2 extends Component {
         const step5Info = JSON.parse(localStorage.getItem("step5"));
 
 
+        let allData = ""
 
-        const allData={
+        if(step1Info && step2Info && step3Info && step4Info && step5Info){
+            allData={
 
-            phone_number: step1Info.phone_number,
-            story: step1Info.story,
-            title: step1Info.title,
-            type: step1Info.type,
+                phone_number: step1Info.phone_number,
+                story: step1Info.story,
+                title: step1Info.title,
+                type: step1Info.type,
 
-            address: step2Info.address,
-            city: step2Info.city,
-            state: step2Info.city,
-            postal_code: step2Info.postal_code,
-            village: step2Info.village,
-
-
-            lat: step22Info.lat,
-            long:  step22Info.long,
-
-            area: step3Info.area,
-            bedroom:  step3Info.bedroom,
-            eu_toilet:  step3Info.eu_toilet,
-            ir_toilet:  step3Info.ir_toilet,
-            max_capacity:  step3Info.max_capacity,
-            places:  step3Info.places,
-            rent_type:  step3Info.rent_type,
-            shared_bathroom:  step3Info.shared_bathroom,
-            shower:  step3Info.shower,
-            standard_capacity: step3Info.standard_capacity,
-            view:  step3Info.view,
-            disinfected:step3Info.disinfected,
-            mattress_count:step3Info. mattress_count,
-            bed_count:step3Info.bed_count,
-
-            bodyguard: step4Info.bodyguard,
-            catering: step4Info.catering,
-            chef: step4Info.chef,
-            general_fac: step4Info.general_fac,
-            host: step4Info.host,
-            kitchen_fac: step4Info.kitchen_fac,
-            temp_fac: step4Info.temp_fac,
-            tour_guide: step4Info.tour_guide,
+                address: step2Info.address,
+                city: step2Info.city,
+                state: step2Info.city,
+                postal_code: step2Info.postal_code,
+                village: step2Info.village,
 
 
-            monthly_discount: step5Info.monthly_discount,
-            normal_cost: step5Info.normal_cost,
-            normal_extra_cost:  step5Info.normal_extra_cost,
-            special_cost:  step5Info.special_cost,
-            special_extra_cost: step5Info.special_extra_cost,
-            weekly_discount:  step5Info.weekly_discount,
+                lat: step22Info.lat,
+                long:  step22Info.long,
+
+                area: step3Info.area,
+                bedroom:  step3Info.bedroom,
+                eu_toilet:  step3Info.eu_toilet,
+                ir_toilet:  step3Info.ir_toilet,
+                max_capacity:  step3Info.max_capacity,
+                places:  step3Info.places,
+                rent_type:  step3Info.rent_type,
+                shared_bathroom:  step3Info.shared_bathroom,
+                shower:  step3Info.shower,
+                standard_capacity: step3Info.standard_capacity,
+                view:  step3Info.view,
+                disinfected:step3Info.disinfected,
+                mattress_count:step3Info. mattress_count,
+                bed_count:step3Info.bed_count,
+
+                bodyguard: step4Info.bodyguard,
+                catering: step4Info.catering,
+                chef: step4Info.chef,
+                general_fac: step4Info.general_fac,
+                host: step4Info.host,
+                kitchen_fac: step4Info.kitchen_fac,
+                temp_fac: step4Info.temp_fac,
+                tour_guide: step4Info.tour_guide,
 
 
-            arrival_time: step52Info.arrival_time,
-            auth_rules: step52Info.auth_rules,
-            exit_time: step52Info.exit_time,
-            max_reserve: step52Info.max_reserve,
-            min_reserve: step52Info.min_reserve,
-            special_rules: step52Info.special_rules,
-            suitable_for: step52Info.suitable_for,
-        }
+                monthly_discount: step5Info.monthly_discount,
+                normal_cost: step5Info.normal_cost,
+                normal_extra_cost:  step5Info.normal_extra_cost,
+                special_cost:  step5Info.special_cost,
+                special_extra_cost: step5Info.special_extra_cost,
+                weekly_discount:  step5Info.weekly_discount,
 
-        if(allData.address === ""){
-            delete allData.address
+
+                arrival_time: step52Info.arrival_time,
+                auth_rules: step52Info.auth_rules,
+                exit_time: step52Info.exit_time,
+                max_reserve: step52Info.max_reserve,
+                min_reserve: step52Info.min_reserve,
+                special_rules: step52Info.special_rules,
+                suitable_for: step52Info.suitable_for,
+            }
+
+            if(allData.address === ""){
+                delete allData.address
+            }
+            if(allData.area === ""){
+                delete allData.area
+            }
+            if(allData.arrival_time === "title"){
+                delete allData.arrival_time
+            }
+            if(allData.auth_rules === ""){
+                delete allData.auth_rules
+            }
+            if(allData.bodyguard === ""){
+                delete allData.bodyguard
+            }
+            if(allData.catering === ""){
+                delete allData.catering
+            }
+            if(allData.chef === ""){
+                delete allData.chef
+            }
+            if(allData.city === "title"){
+                delete allData.city
+            }
+            if(allData.state === "title"){
+                delete allData.city
+            }
+            if(allData.exit_time === "title"){
+                delete allData.exit_time
+            }
+            if(allData.general_fac === ""){
+                delete allData.general_fac
+            }
+            if(allData.host === ""){
+                delete allData.host
+            }
+            if(allData.kitchen_fac === ""){
+                delete allData.kitchen_fac
+            }
+            if(allData.max_reserve === ""){
+                delete allData.max_reserve
+            }
+            if(allData.min_reserve === ""){
+                delete allData.min_reserve
+            }
+            if(allData.monthly_discount === ""){
+                delete allData.monthly_discount
+            }
+            if(allData.normal_cost === ""){
+                delete allData.normal_cost
+            }
+            if(allData.normal_extra_cost === ""){
+                delete allData.normal_extra_cost
+            }
+            if(allData.phone_number === ""){
+                delete allData.phone_number
+            }
+            if(allData.places === ""){
+                delete allData.places
+            }
+            if(allData.postal_code === ""){
+                delete allData.postal_code
+            }
+            if(allData.rent_type === "title"){
+                delete allData.rent_type
+            }
+            if(allData.special_cost === ""){
+                delete allData.special_cost
+            }
+            if(allData.special_extra_cost === ""){
+                delete allData.special_extra_cost
+            }
+            if(allData.special_rules === ""){
+                delete allData.special_rules
+            }
+            if(allData.story === ""){
+                delete allData.story
+            }
+            if(allData.suitable_for === ""){
+                delete allData.suitable_for
+            }
+            if(allData.temp_fac === ""){
+                delete allData.temp_fac
+            }
+            if(allData.title === ""){
+                delete allData.title
+            }
+            if(allData.tour_guide === ""){
+                delete allData.tour_guide
+            }
+            if(allData.type === "title"){
+                delete allData.type
+            }
+            if(allData.view === ""){
+                delete allData.view
+            }
+            if(allData.village === ""){
+                delete allData.village
+            }
+            if(allData.weekly_discount === ""){
+                delete allData.weekly_discount
+            }
+            console.log(allData)
+
+        }else {
+            alert("لطفا اطلاعات را به درستی وارد نمایید")
+            this.props.history.push(`/hostStep1`)
         }
-        if(allData.area === ""){
-            delete allData.area
-        }
-        if(allData.arrival_time === "title"){
-            delete allData.arrival_time
-        }
-        if(allData.auth_rules === ""){
-            delete allData.auth_rules
-        }
-        if(allData.bodyguard === ""){
-            delete allData.bodyguard
-        }
-        if(allData.catering === ""){
-            delete allData.catering
-        }
-        if(allData.chef === ""){
-            delete allData.chef
-        }
-        if(allData.city === "title"){
-            delete allData.city
-        }
-        if(allData.state === "title"){
-            delete allData.city
-        }
-        if(allData.exit_time === "title"){
-            delete allData.exit_time
-        }
-        if(allData.general_fac === ""){
-            delete allData.general_fac
-        }
-        if(allData.host === ""){
-            delete allData.host
-        }
-        if(allData.kitchen_fac === ""){
-            delete allData.kitchen_fac
-        }
-        if(allData.max_reserve === ""){
-            delete allData.max_reserve
-        }
-        if(allData.min_reserve === ""){
-            delete allData.min_reserve
-        }
-        if(allData.monthly_discount === ""){
-            delete allData.monthly_discount
-        }
-        if(allData.normal_cost === ""){
-            delete allData.normal_cost
-        }
-        if(allData.normal_extra_cost === ""){
-            delete allData.normal_extra_cost
-        }
-        if(allData.phone_number === ""){
-            delete allData.phone_number
-        }
-        if(allData.places === ""){
-            delete allData.places
-        }
-        if(allData.postal_code === ""){
-            delete allData.postal_code
-        }
-        if(allData.rent_type === "title"){
-            delete allData.rent_type
-        }
-        if(allData.special_cost === ""){
-            delete allData.special_cost
-        }
-        if(allData.special_extra_cost === ""){
-            delete allData.special_extra_cost
-        }
-        if(allData.special_rules === ""){
-            delete allData.special_rules
-        }
-        if(allData.story === ""){
-            delete allData.story
-        }
-        if(allData.suitable_for === ""){
-            delete allData.suitable_for
-        }
-        if(allData.temp_fac === ""){
-            delete allData.temp_fac
-        }
-        if(allData.title === ""){
-            delete allData.title
-        }
-        if(allData.tour_guide === ""){
-            delete allData.tour_guide
-        }
-        if(allData.type === "title"){
-            delete allData.type
-        }
-        if(allData.view === ""){
-            delete allData.view
-        }
-        if(allData.village === ""){
-            delete allData.village
-        }
-        if(allData.weekly_discount === ""){
-            delete allData.weekly_discount
-        }
-        console.log(allData)
 
         //console.log(JSON.parse(localStorage.getItem("step5")))
         // console.log(JSON.parse(localStorage.getItem("info")))

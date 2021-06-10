@@ -10,6 +10,7 @@ import {arrayBetweenDates} from "../componentsPages/calculationsDate";
 import {extendMoment} from "moment-range";
 import Moment from "moment";
 import {Link} from "react-router-dom";
+const commaNumber = require('comma-number')
 
 class FactorPage extends Component {
     constructor(props) {
@@ -50,9 +51,12 @@ class FactorPage extends Component {
                             <MDBCol md={6}>
                                 <h5 className={"fv-factorPageRightInfoRightPaddingTitle2"}>{this.state.villaInfo.city}</h5>
                             </MDBCol>
-                            <MDBCol md={3} className={"fv-factorPageRightRate"}>
-                                <i className="fas fa-star fv-factorPageRightRateStar" /> <p>{this.state.villaInfo.score }</p> <p className={"fv-factorPageRightRateNumber"}>/۵</p>
-                            </MDBCol>
+                            {this.state.villaInfo.score ?
+                                <MDBCol md={3} className={"fv-factorPageRightRate"}>
+                                    <i className="fas fa-star fv-factorPageRightRateStar" /> <p>{this.state.villaInfo.score }</p> <p className={"fv-factorPageRightRateNumber"}>/۵</p>
+                                </MDBCol>
+                            :
+                            ''}
                         </MDBRow>
                         <img src={Logo}/>
                         <MDBRow>
@@ -82,7 +86,7 @@ class FactorPage extends Component {
                                 <h5> {this.state.factorInfo.issue_date} </h5><p> : تاریخ صدور</p>
                             </MDBCol>
                             <MDBCol className={"fv-factorPageRightInfoLeftInnerTopButton"}>
-                                <input type="button" value={"در انتظار پذیرش میزبان"}/>
+                                <input type="button" value={"در انتظار پرداخت"}/>
                             </MDBCol>
                         </MDBRow>
 
@@ -94,9 +98,9 @@ class FactorPage extends Component {
                                 <MDBCol className={"fv-factorPageRightInfoLeftInnerTop"} md={3}>
                                     <h5> {this.state.factorInfo.exit_date} </h5><p>تاریخ برگشت</p><i className="fas fa-calendar-alt" />
                                 </MDBCol>
-                                <MDBCol className={"fv-factorPageRightInfoLeftInnerTopButton fv-factorPageRightInfoLeftInnerChangeCalender"}>
+                                {/*   <MDBCol className={"fv-factorPageRightInfoLeftInnerTopButton fv-factorPageRightInfoLeftInnerChangeCalender"}>
                                     <p><i className="fas fa-chevron-left" />تغییر تاریخ</p>
-                                </MDBCol>
+                                </MDBCol> */}
                             </MDBRow>
                             <MDBRow className={"fv-factorPageRightInfoLeftBodyInner"}>
                                 <MDBCol md={6}>
@@ -121,7 +125,7 @@ class FactorPage extends Component {
                                             <h5>{this.state.factorInfo.length_stay} روز </h5>
                                         </MDBCol>
                                         <MDBCol md={4}>
-                                             <h5>{this.state.factorInfo.cost ? Number(this.state.factorInfo.cost - this.state.factorInfo.extra_cost - this.state.factorInfo.facilities_cost) : ''}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
+                                             <h5>{this.state.factorInfo.cost ? commaNumber(Number(this.state.factorInfo.cost - this.state.factorInfo.extra_cost - this.state.factorInfo.facilities_cost)) : ''}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
                                         </MDBCol>
                                     </MDBRow>
 
@@ -133,7 +137,7 @@ class FactorPage extends Component {
                                             <h5>{this.state.factorInfo.extra_people} نفر</h5>
                                         </MDBCol>
                                         <MDBCol md={4}>
-                                            <h5>{this.state.factorInfo.extra_cost}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
+                                            <h5>{commaNumber(this.state.factorInfo.extra_cost)}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBRow className={"fv-factorPageRightInfoLeftBodyOrderLastColumn"}>
@@ -146,7 +150,7 @@ class FactorPage extends Component {
                                         <MDBCol md={4}>
                                         </MDBCol>
                                         <MDBCol md={4}>
-                                            <h5>{this.state.factorInfo.cost}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
+                                            <h5>{commaNumber(this.state.factorInfo.cost)}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBRow className={"fv-factorPageRightInfoLeftBodyInnerLeftInner"}>
@@ -166,7 +170,7 @@ class FactorPage extends Component {
                                         <MDBCol md={3}>
                                         </MDBCol>
                                         <MDBCol md={4}>
-                                            <h5>{this.state.factorInfo.cost}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
+                                            <h5>{commaNumber(this.state.factorInfo.cost)}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBRow>
@@ -225,9 +229,9 @@ class FactorPage extends Component {
                                 <MDBCol className={"fv-factorPageRightInfoLeftInnerTop fv-factorPageRightInfoLeftInnerTop2Mobile"} md={3} sm={5}>
                                     <div><p className={"fv-factorPageRightInfoLeftInnerTopReserveCodeMobileP"}>تاریخ برگشت</p> <h5> {this.state.factorInfo.exit_date} </h5></div><i className="fas fa-calendar-alt fv-factorPageRightInfoLeftInnerTopReserveCodeMobileIcon" />
                                 </MDBCol>
-                                <MDBCol className={"fv-factorPageRightInfoLeftInnerTopButton fv-factorPageRightInfoLeftInnerChangeCalender"}>
+                                {/*  <MDBCol className={"fv-factorPageRightInfoLeftInnerTopButton fv-factorPageRightInfoLeftInnerChangeCalender"}>
                                     <p><i className="fa fa-chevron-left" />تغییر تاریخ</p>
-                                </MDBCol>
+                                </MDBCol> */}
                             </MDBRow>
                             <MDBRow>
 
@@ -273,7 +277,7 @@ class FactorPage extends Component {
                                             <h5>{this.state.factorInfo.length_stay} روز </h5>
                                         </MDBCol>
                                         <MDBCol md={4} sm={4}>
-                                            <h5>{this.state.factorInfo.cost ? Number(this.state.factorInfo.cost - this.state.factorInfo.extra_cost - this.state.factorInfo.facilities_cost) : ''}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
+                                            <h5>{this.state.factorInfo.cost ? commaNumber(Number(this.state.factorInfo.cost - this.state.factorInfo.extra_cost - this.state.factorInfo.facilities_cost)) : ''}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
                                         </MDBCol>
                                     </MDBRow>
 
@@ -285,7 +289,7 @@ class FactorPage extends Component {
                                             <h5>{this.state.factorInfo.extra_people} نفر</h5>
                                         </MDBCol>
                                         <MDBCol md={4} sm={4}>
-                                            <h5>{this.state.factorInfo.extra_cost}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
+                                            <h5>{commaNumber(this.state.factorInfo.extra_cost)}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBRow className={"fv-factorPageRightInfoLeftBodyOrderLastColumn"}>
@@ -298,7 +302,7 @@ class FactorPage extends Component {
                                         <MDBCol md={4} sm={3}>
                                         </MDBCol>
                                         <MDBCol md={4} sm={4}>
-                                            <h5>{this.state.factorInfo.cost}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
+                                            <h5>{commaNumber(this.state.factorInfo.cost)}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBRow>
@@ -318,7 +322,7 @@ class FactorPage extends Component {
                                         <MDBCol md={4} sm={3}>
                                         </MDBCol>
                                         <MDBCol md={4} sm={4} className={"fv-factorPageRightInfoLeftBodyOrderThatPayPriceMobile"}>
-                                            <h5>{this.state.factorInfo.cost}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
+                                            <h5>{commaNumber(this.state.factorInfo.cost)}</h5><p className={"fv-factorPageRightInfoLeftBodyOrderThatPayToman"}>تومان</p>
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCol>

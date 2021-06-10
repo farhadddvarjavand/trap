@@ -360,7 +360,7 @@
 }
 .fv-DisplayPageDetailsRightBody .col-md-2 .fa,.fv-DisplayPageDetailsRightBody .col-md-2 .fas {
     font-weight: 900;
-    padding-right: 10px;
+    padding-right: 0px;
 }
 .fv-displayPageComments{
     border:1px solid rgba(102, 212, 72, 0.13);
@@ -696,6 +696,12 @@ display: none;
     margin-right: -2%;
 }
 
+.fv-DisplayPageDetailsRightStayInHome .col-md-5 {
+    padding: 0;
+}
+.fv-DisplayPageDetailsRightStayInHome .col-md-7 {
+    padding: 0;
+}
 
 
 @media (max-width: 1200px) {
@@ -1346,8 +1352,47 @@ display: none;
         max-width: 73.666667%;
     }
 
-
-
+    .fv-mainProduct.fv-mainMobile.fv-displayPageSimillarProducts .fv-productCapacityBox {
+        margin-top: 0;
+        font-size: 3vw;
+        display: contents;
+    }
+    .fv-mainProduct.fv-mainMobile.fv-displayPageSimillarProducts .fv-product .fv-productCapacityBox .fv-numberOfBedBody {
+        /* display: flex; */
+        /* justify-content: flex-end; */
+        margin-left: -3px;
+        margin-top: -15%;
+    }
+    .fv-mainProduct.fv-mainMobile.fv-displayPageSimillarProducts .fv-product .fv-productCapacityBox .fv-numberOfBedBody {
+        /* display: flex; */
+        /* justify-content: flex-end; */
+        margin-left: 27px;
+        margin-top: 3%;
+        font-size: 3vw;
+        display: contents;
+    }
+    .fv-mainProduct.fv-mainMobile.fv-displayPageSimillarProducts .fv-product .col-md-5 {
+        text-align: end;
+        margin-right: -6px;
+        font-size: 2.5vw;
+        margin-left: -54px;
+    }
+    .fv-mainProduct.fv-mainMobile.fv-displayPageSimillarProducts .fv-productCapacityBox p{
+       font-size: 2.5vw;
+    }
+    .fv-mainProduct.fv-mainMobile.fv-displayPageSimillarProducts .fv-productLocation .col-md-9 {
+        border-bottom: 1px solid #400a0a;
+        text-align: end;
+        padding-right: 0;
+        margin: auto;
+        font-size: 15px;
+        direction: ltr;
+        padding-bottom: 6%;
+        margin-bottom: 4%;
+    }
+    .fv-mainProduct.fv-mainMobile.fv-displayPageSimillarProducts .fv-product .fv-productCapacityBox .fv-numberOfBedBody .fa,.fv-mainProduct.fv-mainMobile.fv-displayPageSimillarProducts .fv-product .fv-productCapacityBox .fv-numberOfBedBody .fas {
+        margin-top: 0.5%;
+    }
 }
 
 
@@ -1471,6 +1516,11 @@ display: none;
         box-shadow: 1px 1px 11px #88888830;
         margin-top: 18%;
         margin-bottom: 15%;
+    }
+    .fv-footerDisplayPageBody .fv-test {
+        /* background: #2F80ED; */
+        color: #15BE29;
+        font-size: 9px;
     }
 }
 

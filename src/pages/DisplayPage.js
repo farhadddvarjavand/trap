@@ -1705,9 +1705,8 @@ componentDidMount() {
                              <h5> {phoneNumber} </h5>
                          </MDBRow>
 
-
                         <MDBRow className={"fv-displayPageMap"}>
-                            {this.state.resultVilla.long !== undefined && this.state.resultVilla.lat !== undefined && this.state.resultVilla.long  && this.state.resultVilla.lat ? // agar lat and long vojod dasht
+                            {Number(this.state.resultVilla.long) !== 51.42 && Number(this.state.resultVilla.lat) !== 35.72 && this.state.resultVilla.long !== undefined && this.state.resultVilla.lat !== undefined && this.state.resultVilla.long  && this.state.resultVilla.lat ? // agar lat and long vojod dasht
                                 <MDBCol md={8}>
                                     <Mapir
                                         width="636"
@@ -2113,13 +2112,12 @@ componentDidMount() {
                     <TopicsMainPage topic="اقامتگاه های مشابه"
                                     linkToPage={"/searchHomePage/Newest/1"}/>
                 </MDBRow>
-                <MDBRow className={"fv-mainProduct fv-mainMobile"} >
+                <MDBRow className={"fv-mainProduct fv-mainMobile fv-displayPageSimillarProducts"} >
                     {this.state.resultSimilarVillas.map(resultSimilarVilla =>{
                         console.log(this.state.resultSimilarVillas)
                         return(
                             <MDBCol md={3} sm={7} onClick={()=>{
-
-                                this.props.history.push(`/displayPage/${resultSimilarVilla.id}`)
+                                window.location.replace(`/displayPage/${resultSimilarVilla.id}`)
                             }}>
                               <a>  <Product srcImage={`${config.webapi}/images/villas/main/${resultSimilarVilla.main_img }`}
                                          rate={resultSimilarVilla.score}

@@ -7,6 +7,7 @@ import "../style/HostStep3Page.scss"
 import HostStepIncreaseAndDecreaseButton from "../componentsPages/hostStepIncreaseAndDecreaseButton"
 import HeaderSteps from "../componentsPages/HeaderSteps";
 import Logo from "../images/Logo.png";
+import HostStepImage1 from "../images/home_miz1 png.png"
 import Footer from "../componentsPages/footer";
 import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt"
 import HostStepCheckbox from "../componentsPages/hostStepCheckbox"
@@ -467,7 +468,7 @@ class HostStep3Page extends Component {
                             ر طراح بخواهد دنبال متن های مرتبط بگردد تمرکزش از روی کار اصلی برداشته میشود و این
                             کار زمان بر خواهد بود. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگرا
                             ن را در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند."
-                            image={Logo}
+                            image={HostStepImage1}
                             nextLink={"../../hostStep4"}
                             returnLink={"../../hostStep2-2"}
                             localStorageName={"step3"}

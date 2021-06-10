@@ -11,6 +11,10 @@ import FotterpageLogo from "../images/Logo.png"
 import LogoName from "../images/LogoName.png"
 import MobileLogo from "../images/MobileLogo.png"
 import MobileMenu from "../images/MobileMenu.png"
+import Image1 from "../images/image1.png"
+import Image2 from "../images/image2.png"
+import Image3 from "../images/image3.png"
+import Image4 from "../images/image4.png"
 import {Link} from "react-router-dom";
 import {productData} from "../data/testData"
 import Datas from "../data/Datas";
@@ -343,7 +347,7 @@ class MainPage extends Datas {
                    return( <MDBCol md={3} sm={7}>
                         <PopularVillage srcImage={banners.link}
                                         location={banners.title}
-                                        capacity="2"/>
+                                        capacity={banners.count}/>
                     </MDBCol>)
                 })}
             </MDBRow>
@@ -441,59 +445,55 @@ class MainPage extends Datas {
                 <MDBCol md={6}>
                     <MDBRow className={'fv-aboutUsImage'}>
                         <MDBCol md={6} sm={1}>
-                            <img className={"fv-aboutUsFirstImage"} src="https://www.w3schools.com/html/pic_trulli.jpg" />
+                            <img className={"fv-aboutUsFirstImage"} src={Image1} />
                         </MDBCol>
                         <MDBCol md={6} sm={1}>
-                            <img className={"fv-aboutUsSecondImage"} src="https://www.w3schools.com/html/pic_trulli.jpg" />
+                            <img className={"fv-aboutUsSecondImage"} src={Image2} />
                         </MDBCol>
                         <MDBCol md={6} sm={1}>
-                            <img className={"fv-aboutUsThirdImage"} src="https://www.w3schools.com/html/pic_trulli.jpg" />
+                            <img className={"fv-aboutUsThirdImage"} src={Image3} />
                         </MDBCol>
                         <MDBCol md={6} sm={1}>
-                            <img className={"fv-aboutUsFourthImage"} src="https://www.w3schools.com/html/pic_trulli.jpg" />
+                            <img className={"fv-aboutUsFourthImage"} src={Image4} />
                         </MDBCol>
                     </MDBRow>
                 </MDBCol>
                 <MDBCol md={6} sm={4}>
                     <h1>درباره ما</h1>
-                   <p>
-                       ناﺮﮕﯾد ﺮﻈﻧ رﺎﮐ ﻪﯾارا زا ﺲﭘ ﻪﮐ ﺖﺳا ﻦﯾا لﺪﻫاﻮﺨﺑ حاﻟﺎﻗ ﯽﺣاﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ.
-                       ﻦﺘﻣ یور داﺮﻓا ﺪﻫاﻮﺧ‌ﯽﻤﻧ و دﻮﺷ ﺎﺴﻫﯾﺎﺳ ﺐﻟﺎﻗ ﯽﺣاﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ
-                       ناﺮﮕﯾد ﺮﻈﻧ رﺎﮐ ﻪﯾارا زا ﺲﭘ ﻪﮐ ﺖﺳا ﻦﯾا لﺪﻫاﻮﺨﺑ حاﻟﺎﻗ ﯽﺣاﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ.
-                       ﻦﺘﻣ یور داﺮﻓا ﺪﻫاﻮﺧ‌ﯽﻤﻧ و دﻮﺷ ﺎﺴﻫﯾﺎﺳ ﺐﻟﺎﻗ ﯽﺣاﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ
-                       ﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ
-                       ﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮ
-                   </p>
+                    <p>
+                        طراحان سایت هنگام طراحی قالب سایت معمولا با این موضوع رو برو هستند که محتوای اصلی صفحات آماد
+                        ه نیست. در نتیجه طرح کلی دید درستی به کار فرما نمیدهد. اگر طراح بخواهد دنبال متن های مرتبط بگر
+                        دد تمرکزش از روی کار اصلی برداشته میشود و اینکار زمان بر خواهد بود. همچنین طراح به دنبال این است ک
+                        ه پس از ارایه کار نظر دیگران را در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند.
+                    </p>
                 </MDBCol>
             </MDBRow>
 
             <MDBRow className={"fv-aboutUsMobile"}>
                 <MDBCol sm={3} className={'fv-aboutUsImage'}>
-                    <img className={"fv-aboutUsFirstImage"} src="https://www.w3schools.com/html/pic_trulli.jpg" />
+                    <img className={"fv-aboutUsFirstImage"} src={Image1} />
                     <MDBRow>
                         <MDBCol>
-                            <img className={"fv-aboutUsSecondImage"} src="https://www.w3schools.com/html/pic_trulli.jpg" />
+                            <img className={"fv-aboutUsSecondImage"} src={Image2} />
                         </MDBCol>
                     </MDBRow>
                     <MDBRow>
                         <MDBCol>
-                            <img className={"fv-aboutUsThirdImage"} src="https://www.w3schools.com/html/pic_trulli.jpg" />
+                            <img className={"fv-aboutUsThirdImage"} src={Image3} />
                         </MDBCol>
                     </MDBRow>
                 </MDBCol>
                 <MDBCol sm={9}>
                     <h1>درباره ما</h1>
                     <p>
-                        ناﺮﮕﯾد ﺮﻈﻧ رﺎﮐ ﻪﯾارا زا ﺲﭘ ﻪﮐ ﺖﺳا ﻦﯾا لﺪﻫاﻮﺨﺑ حاﻟﺎﻗ ﯽﺣاﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ.
-                        ﻦﺘﻣ یور داﺮﻓا ﺪﻫاﻮﺧ‌ﯽﻤﻧ و دﻮﺷ ﺎﺴﻫﯾﺎﺳ ﺐﻟﺎﻗ ﯽﺣاﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ
-                        ناﺮﮕﯾد ﺮﻈﻧ رﺎﮐ ﻪﯾارا زا ﺲﭘ ﻪﮐ ﺖﺳا ﻦﯾا لﺪﻫاﻮﺨﺑ حاﻟﺎﻗ ﯽﺣاﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ.
-                        ﻦﺘﻣ یور داﺮﻓا ﺪﻫاﻮﺧ‌ﯽﻤﻧ و دﻮﺷ ﺎﺴﻫﯾﺎﺳ ﺐﻟﺎﻗ ﯽﺣاﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ
-                        ﺮﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮﻃ
-                        ﻃ مﺎﮕﻨﻫ ﺖﯾﺎﺳ نﺎﺣاﺮ
+                        طراحان سایت هنگام طراحی قالب سایت معمولا با این موضوع رو برو هستند که محتوای اصلی صفحات آماد
+                        ه نیست. در نتیجه طرح کلی دید درستی به کار فرما نمیدهد. اگر طراح بخواهد دنبال متن های مرتبط بگر
+                        دد تمرکزش از روی کار اصلی برداشته میشود و اینکار زمان بر خواهد بود. همچنین طراح به دنبال این است ک
+                        ه پس از ارایه کار نظر دیگران را در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند.
                     </p>
                     <MDBRow>
                         <MDBCol sm={8}  className={"fv-aboutUsFourthImage"}>
-                        <img className={"fv-aboutUsFourthImage"} src="https://www.w3schools.com/html/pic_trulli.jpg" />
+                        <img className={"fv-aboutUsFourthImage"} src={Image4} />
                         </MDBCol>
                     </MDBRow>
                 </MDBCol>
