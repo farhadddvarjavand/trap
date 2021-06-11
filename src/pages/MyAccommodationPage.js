@@ -16,6 +16,9 @@ import "../style/scroolBodyProfilePages.scss"
 class MyAccommodationPage extends Component {
     constructor(props) {
         super(props);
+        if(!JSON.parse(localStorage.getItem("info"))){
+            this.props.history.push('login');
+        }
         this.state={
             userVillas:[]
         }
@@ -39,7 +42,26 @@ class MyAccommodationPage extends Component {
                     <ProfilePageUserInfo />
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
-                        <h5>اقامتگاه های من</h5>
+
+                        <MDBRow className={"fv-addMyAccommodation"}>
+                            <MDBCol md={10} sm={6} >
+                                <h5 className={"fv-ProfilePageCalenderTextMobile"}>اقامتگاه های من</h5>
+                            </MDBCol>
+                            <MDBCol md ={1} sm={6}>
+                                <input type={"button"} value={"+"} onClick={()=>{
+                                    localStorage.removeItem("step1")
+                                    localStorage.removeItem("step2")
+                                    localStorage.removeItem("step2-2")
+                                    localStorage.removeItem("step3")
+                                    localStorage.removeItem("step4")
+                                    localStorage.removeItem("step5")
+                                    localStorage.removeItem("step5-2")
+                                    localStorage.removeItem("editCode")
+                                    this.props.history.push('/hostStepBasicInformation')
+                                }}/>
+
+                            </MDBCol>
+                        </MDBRow>
                         <MDBRow>
 
                             {this.state.userVillas.map(userVilla=>{

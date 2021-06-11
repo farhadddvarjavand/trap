@@ -17,6 +17,9 @@ import {withdrawal} from "../services/userService";
 class ProfilePageWallet3 extends Component {
     constructor(props) {
         super(props);
+        if(!JSON.parse(localStorage.getItem("info"))){
+            this.props.history.push('login');
+        }
         this.state={
             amountRequested:'',
         }
@@ -53,7 +56,7 @@ class ProfilePageWallet3 extends Component {
                                             .then(res=>{
                                                 if(res.data.status === 1){
                                                     alert("درخواست بررداشت با موفقیت ثبت شد")
-                                                    this.props.history.push(`/ProfileTransaction2`)
+                                                    this.props.history.push(`/ProfileMyTransaction`)
                                                     console.log(res)  //s درخواست بررداشت باید فرستاده بشود  // "Withdrawal request created"
                                                 }else {
                                                     alert(res.data.data)

@@ -13,6 +13,9 @@ import Footer from "../componentsPages/footer";
 class HostStep2Page extends Component {
     constructor(props) {
         super(props);
+        if(!JSON.parse(localStorage.getItem("info"))){
+            this.props.history.push('login');
+        }
         this.state={
             city:'title',
             village:'',
@@ -20,7 +23,6 @@ class HostStep2Page extends Component {
             address:'',
 
             validCity:false,
-            validPostCode:false,
             validAddress:false,
             click:false,
             hideUniq:false,
@@ -31,14 +33,10 @@ class HostStep2Page extends Component {
         if( JSON.parse(localStorage.getItem("step2"))){
             const prevData =  JSON.parse(localStorage.getItem("step2"))
             let validCity = false
-            let validPostCode = false
             let validAddress =  false
             let hideUniq = false
             if(prevData.city !== "title"){
                 validCity=true
-            }
-            if(prevData.postal_code){
-                validPostCode=true
             }
             if(prevData.address){
                 validAddress=true
@@ -55,7 +53,6 @@ class HostStep2Page extends Component {
                 address:prevData.address,
 
                 validCity:validCity,
-                validPostCode:validPostCode,
                 validAddress:validAddress,
                 hideUniq:hideUniq
             })
@@ -65,7 +62,7 @@ class HostStep2Page extends Component {
     render() {
 
         let validationInputs = false
-        if(this.state.validCity  && this.state.validPostCode && this.state.validAddress){
+        if(this.state.validCity  && this.state.validAddress){
             validationInputs=true
         }
 
@@ -94,7 +91,7 @@ class HostStep2Page extends Component {
                             <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
                                 <p className={this.state.click && validationInputs===false ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>لطفا کادر های قرمز را به درستی پر کنید</p>
                                 <p className={this.state.click && this.state.validCity===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}><i className="fas fa-exclamation-triangle" />  پر کردن شهر اجباریست</p>
-                                <p className={this.state.click && this.state.validPostCode===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}> <i className="fas fa-exclamation-triangle" />کد پستی معتبر نمی باشد</p>
+                                {/*  <p className={this.state.click && this.state.validPostCode===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}> <i className="fas fa-exclamation-triangle" />کد پستی معتبر نمی باشد</p> */}
                                 <p className={this.state.click && this.state.validAddress===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}> <i className="fas fa-exclamation-triangle" />نوشتن آدرس اجباریس</p>
                                 <p  className={"fv-hostStep2Page2Hidden"}>شهر/استان</p>
                                 <select value={this.state.city} onChange={(event)=>{
@@ -138,14 +135,14 @@ class HostStep2Page extends Component {
                                 <p className={"fv-hostStep2Page2Hidden"}>روستا/محله</p>
                                 <input type="text" value={this.state.village} onChange={(event)=>{ this.setState({village:event.target.value})} } className={"fv-hostStep2Page2Hidden"}/>
                                 <p className={"fv-hostStep2Page2Hidden"}>کدپستی</p>
-                                <input type="text" value={this.state.postCode} disabled={this.state.hideUniq ? true : false} onChange={(event)=>{
-                                    if(event.target.value.length === 10 &&  Number(event.target.value)){
+                                <input type="text" value={this.state.postCode} onChange={(event)=>{
+                                    {/* if(event.target.value.length === 10 &&  Number(event.target.value)){
                                         this.setState({validPostCode:true})
                                     }else {
                                         this.setState({validPostCode:false})
-                                    }
+                                    } */}
                                     this.setState({postCode:event.target.value})
-                                }}  className={this.state.click && this.state.validPostCode===false ?  "fv-hostStep2Page2Hidden fv-redBorderError" : "fv-hostStep2Page2Hidden"}/>
+                                }}  className={"fv-hostStep2Page2Hidden"}/>
                                 <p className={"fv-hostStep2Page2Hidden"}>آدرس دقیق</p>
                                 <textarea value={this.state.address} onChange={(event)=>{
                                     if(event.target.value){
@@ -172,14 +169,14 @@ class HostStep2Page extends Component {
                                     <input type="button" value="مرحله بعد"  className={"fv-hostStepPage1LeftButton"} onClick={()=>{
                                         if(validationInputs){
                                             localStorage.setItem(`${"step2"}`, JSON.stringify(localStorageData))
-                                            this.props.history.push('../../hostStep2-2')
+                                            this.props.history.push('../../hostStepSetMapLocation')
                                         }
                                         else {
                                             this.setState({click:true})
                                         }
                                     }}/>
                                     <input type="button" value="مرحله قبل"  className={"fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"} onClick={()=>{
-                                        this.props.history.push('../../hostStep1')
+                                        this.props.history.push('../../hostStepBasicInformation')
                                     }}/>
                                 </MDBRow>
                             </MDBCol>
@@ -192,7 +189,7 @@ class HostStep2Page extends Component {
                                     د. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگران را
                                     در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند"
                                 image={MobileLogo}
-                                nextLink={'../../hostStep2-2'}
+                                nextLink={'../../hostStepSetMapLocation'}
                                 returnLink={'../../hostStep1'}
                                 localStorageName={"step2"}
                                 localStorageData={localStorageData}/>  */}

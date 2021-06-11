@@ -126,7 +126,7 @@ class MainPage extends Datas {
                             <a className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" : "fv-hideButtonRegister"}  onClick={()=>{ // agar login bod ba click roie dokme in karo kon
                                 this.setState({onclickButtonHandle:!this.state.onclickButtonHandle})
                             }}> <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage} /> {nameAndFamily} </a>
-                            <Link to={ "/hostStep1"} ><input type='button' value=' میزبان شوید' onClick={()=>{
+                            <Link to={ "/hostStepBasicInformation"} ><input type='button' value=' میزبان شوید' onClick={()=>{
                                 localStorage.removeItem("step1")
                                 localStorage.removeItem("step2")
                                 localStorage.removeItem("step2-2")
@@ -134,7 +134,8 @@ class MainPage extends Datas {
                                 localStorage.removeItem("step4")
                                 localStorage.removeItem("step5")
                                 localStorage.removeItem("step5-2")
-                                this.props.history.push('/login3')
+                                localStorage.removeItem("editCode")
+                                this.props.history.push('/registration')
 
                             } } className={localStorage.getItem("token") ? "fv-getHostButtonMainPage" : "fv-hideButtonRegister"}  /> </Link>
                         </MDBCol>
@@ -195,13 +196,13 @@ class MainPage extends Datas {
                 </MDBRow>
                 <MDBRow className={"fv-cascadeOptionMainPage"}>
                     <MDBCol md={12} sm={12}>
-                        <Link to={"/ProfileReservation2"}> <i className="fa fa-receipt" />
+                        <Link to={"/ProfileMyReservation"}> <i className="fa fa-receipt" />
                             <a><p>رزور های من</p></a> </Link>
                     </MDBCol>
                 </MDBRow>
                 <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus fv-userInfoButtonCascadeMobile"}>
                     <MDBCol md={12} sm={12}>
-                        <Link to={"/hostStep1"}>
+                        <Link to={"/hostStepBasicInformation"}>
                             <a onClick={()=>{
                                 localStorage.removeItem("step1")
                                 localStorage.removeItem("step2")
@@ -210,6 +211,7 @@ class MainPage extends Datas {
                                 localStorage.removeItem("step4")
                                 localStorage.removeItem("step5")
                                 localStorage.removeItem("step5-2")
+                                localStorage.removeItem("editCode")
                             }}><i className="fa fa-laptop-house" />   <p>میزبان شوید</p></a> </Link>
                     </MDBCol>
                 </MDBRow>
@@ -217,7 +219,7 @@ class MainPage extends Datas {
                     <MDBCol md={12} sm={12}>
                         <a onClick={()=>{
                             localStorage.clear()
-                            this.props.history.push("/mainPage")
+                            this.props.history.push("/")
                         }}> <i className="fa fa-sign-out-alt" />
                             <p>خروج از حساب کاربری</p></a>
                     </MDBCol>
@@ -230,7 +232,7 @@ class MainPage extends Datas {
                     <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
                         <MDBCol className={"fv-ProfilePageUserInfoDetailsBodyColumn"}>
                             <Link to={'/login'}><p className={ window.location.href.match(/\blogin\b/) ? "fv-reservationActive" : ''}  ><i className="fa fa-door-open" />ورود</p></Link>
-                            <Link to={'/login3'}> <p className={ window.location.href.match(/\blogin3\b/) ? "fv-transaction" : ''}  ><i className="fa fa-address-card" />ثبت نام</p> </Link>
+                            <Link to={'/registration'}> <p className={ window.location.href.match(/\bregistration\b/) ? "fv-transaction" : ''}  ><i className="fa fa-address-card" />ثبت نام</p> </Link>
                         </MDBCol>
                     </MDBRow>
                 </MDBCol>

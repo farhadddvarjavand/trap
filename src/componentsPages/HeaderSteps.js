@@ -69,13 +69,13 @@ class HeaderSteps extends Component {
                         </MDBRow>
                         <MDBRow className={"fv-cascadeOptionMainPage"}>
                             <MDBCol md={12} sm={12}>
-                                <Link to={"/ProfileReservation2"}> <i className="fa fa-receipt" />
+                                <Link to={"/ProfileMyReservation"}> <i className="fa fa-receipt" />
                                     <a><p>رزور های من</p></a> </Link>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus fv-userInfoButtonCascadeMobile"}>
                             <MDBCol md={12} sm={12}>
-                                <Link to={"/ProfileReservation2"}> <i className="fa fa-laptop-house" />
+                                <Link to={"/ProfileMyReservation"}> <i className="fa fa-laptop-house" />
                                     <a><p>میزبان شوید</p></a> </Link>
                             </MDBCol>
                         </MDBRow>
@@ -94,7 +94,7 @@ class HeaderSteps extends Component {
                 </MDBRow>
                 <MDBRow>
                     <MDBCol sm={10} className={"fv-HostStep1Path"}>
-                        <Link to={'/mainPage'}><p> صفحه اصلی </p></Link>
+                        <Link to={'/'}><p> صفحه اصلی </p></Link>
                         <i className="fas fa-chevron-left" />
                         <Link to={'/Profile'}><p> پنل کاربری </p></Link>
                         <i className="fas fa-chevron-left" />

@@ -17,6 +17,9 @@ import config from "../services/config.json";
 class HostStep5Page3 extends Component {
     constructor(props) {
         super(props);
+        if(!JSON.parse(localStorage.getItem("info"))){
+            this.props.history.push('login');
+        }
         this.state={
 
             clickLoader:false,
@@ -458,19 +461,19 @@ class HostStep5Page3 extends Component {
                             this.props.history.push('../../hostStep1')
                         }
                         if (err.response.data.errors.city || err.response.data.errors.state || err.response.data.errors.postal_code || err.response.data.errors.address) {
-                            this.props.history.push('../../hostStep2')
+                            this.props.history.push('../../hostStepAddress')
                         }
                         if (err.response.data.errors.area || err.response.data.errors.places || err.response.data.errors.view) {
-                            this.props.history.push('../../hostStep3')
+                            this.props.history.push('../../hostStepAccommodationDetails')
                         }
                         if (err.response.data.errors.general_fac || err.response.data.errors.kitchen_fac || err.response.data.errors.temp_fac) {
-                            this.props.history.push('../../hostStep4')
+                            this.props.history.push('../../hostStepFacilities')
                         }
                         if (err.response.data.errors.normal_extra_cost || err.response.data.errors.normal_cost || err.response.data.errors.special_cost || err.response.data.errors.special_extra_cost || err.response.data.errors.weekly_discount || err.response.data.errors.monthly_discount) {
-                            this.props.history.push('../../hostStep5')
+                            this.props.history.push('../../hostStepSetPrice')
                         }
                         if (err.response.data.errors.arrival_time || err.response.data.errors.auth_rules || err.response.data.errors.exit_time || err.response.data.errors.max_reserve || err.response.data.errors.max_reserve || err.response.data.errors.suitable_for) {
-                            this.props.history.push('../../hostStep5-2')
+                            this.props.history.push('../../hostStepRules')
                         }
                     }
                     else {
@@ -552,6 +555,7 @@ class HostStep5Page3 extends Component {
                                         localStorage.removeItem("step4")
                                         localStorage.removeItem("step5")
                                         localStorage.removeItem("step5-2")
+                                        localStorage.removeItem("editCode")
                                         this.props.history.push('/myAccommodation')
                                         /* storeVilla(allData)
                                             .then(res=>{
@@ -584,19 +588,19 @@ class HostStep5Page3 extends Component {
                                                     this.props.history.push('../../hostStep1')
                                                 }
                                                 if(err.response.data.errors.city || err.response.data.errors.state || err.response.data.errors.postal_code || err.response.data.errors.address){
-                                                    this.props.history.push('../../hostStep2')
+                                                    this.props.history.push('../../hostStepAddress')
                                                 }
                                                 if(err.response.data.errors.area || err.response.data.errors.places || err.response.data.errors.view){
-                                                    this.props.history.push('../../hostStep3')
+                                                    this.props.history.push('../../hostStepAccommodationDetails')
                                                 }
                                                 if(err.response.data.errors.general_fac || err.response.data.errors.kitchen_fac || err.response.data.errors.temp_fac){
-                                                    this.props.history.push('../../hostStep4')
+                                                    this.props.history.push('../../hostStepFacilities')
                                                 }
                                                 if(err.response.data.errors.normal_extra_cost || err.response.data.errors.normal_cost ||  err.response.data.errors.special_cost ||  err.response.data.errors.special_extra_cost ||  err.response.data.errors.weekly_discount ||  err.response.data.errors.monthly_discount){
-                                                    this.props.history.push('../../hostStep5')
+                                                    this.props.history.push('../../hostStepSetPrice')
                                                 }
                                                 if(err.response.data.errors.arrival_time || err.response.data.errors.auth_rules || err.response.data.errors.exit_time || err.response.data.errors.max_reserve || err.response.data.errors.max_reserve  || err.response.data.errors.suitable_for){
-                                                    this.props.history.push('../../hostStep5-2')
+                                                    this.props.history.push('../../hostStepRules')
                                                 }
                                             })
 
@@ -642,7 +646,7 @@ class HostStep5Page3 extends Component {
                                                .catch(err=>console.log(err.response)) */
                                     }} />
                                     <input type="button" value="مرحله قبل"  className={this.state.clickLoader ?  "fv-hideLoader" :  "fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"} onClick={()=>{
-                                        this.props.history.push('../../hostStep5-2')
+                                        this.props.history.push('../../hostStepRules')
                                     }}/>
                                 </MDBRow>
                             </MDBCol>

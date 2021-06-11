@@ -93,7 +93,8 @@ class HostStep2Page2 extends Component {
                     <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
                         <p className={"fv-hostStep2Page2P"}> لطفا از روی نقشه آدرس دقیق خود را پیدا کنید</p>
                         <textarea className={"fv-hostStep2Page2Textarea"} value={this.state.mapAddress} disabled={true}/>
-                        <MDBRow className={"fv-hostStep2Page2Map"}>
+
+                        <MDBRow>
                             <Mapir
                                 center={[this.state.lon, this.state.lat]}
                                 Map={Map}
@@ -101,7 +102,9 @@ class HostStep2Page2 extends Component {
                             >
                                 {this.state.markerArray}
                             </Mapir>
+
                         </MDBRow>
+
 
 
 
@@ -118,8 +121,8 @@ class HostStep2Page2 extends Component {
                     د. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگران را
                     در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند"
                         image={HostStepImage1}
-                        nextLink={"../../hostStep3"}
-                        returnLink={"../../hostStep2"}
+                        nextLink={"../../hostStepAccommodationDetails"}
+                        returnLink={"../../hostStepAddress"}
                         localStorageName={"step2-2"}
                         localStorageData={localStorageData}/>
                 </MDBRow>

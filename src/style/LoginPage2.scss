@@ -13,7 +13,7 @@
         margin-top: 4%;
       }
 
-     .fv-loginPageButton {
+      .fv-loginPageButton {
         width: 110%;
         background: #15BE29;
         border-radius: 16px;
@@ -91,7 +91,26 @@
     margin-right: -4%;
     margin-top: -15%;
   }
-
+  .fv-loginPage2 .fv-loginPageBodyOne .loader {
+    position: relative;
+    /* border-radius: 16px; */
+    /* width: 195.5px; */
+    /* height: 67px; */
+    /* margin-left: 7%; */
+    /* padding: 5.4% 13.4% 5.4% 13.4%; */
+    width: 110%;
+    background: #15BE29;
+    border-radius: 16px;
+    color: white;
+    height: 54px;
+    /* border: 1px solid white; */
+    margin-left: 26%;
+    margin-top: 3%;
+    padding: 0;
+    border: none;
+    margin-right: 46%;
+    margin-bottom: 30%;
+  }
 }
 @media (max-width: 360px) and (min-width: 355px){
   .fv-loginPage .fv-loginPageImageLeftBody {

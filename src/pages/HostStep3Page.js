@@ -16,6 +16,9 @@ import MobileLogo from "../images/MobileLogo.png";
 class HostStep3Page extends Component {
     constructor(props) {
         super(props);
+        if(!JSON.parse(localStorage.getItem("info"))){
+            this.props.history.push('login');
+        }
         this.state={
             standardCapacity:1,
             maximumCapacity:1,
@@ -469,8 +472,8 @@ class HostStep3Page extends Component {
                             کار زمان بر خواهد بود. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگرا
                             ن را در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند."
                             image={HostStepImage1}
-                            nextLink={"../../hostStep4"}
-                            returnLink={"../../hostStep2-2"}
+                            nextLink={"../../hostStepFacilities"}
+                            returnLink={"../../hostStepSetMapLocation"}
                             localStorageName={"step3"}
                             localStorageData={localStorageData}/>
                     </MDBRow>

@@ -65,7 +65,7 @@ class LoginPage extends Component {
                  // Phone number have to save in local storage for use it, in the next step
                  localStorage.setItem('phone_number', (phone_number.phone_number));
                  alert('پیامک اعتبارسنجی ارسال شد');
-                 this.props.history.push("/login2");
+                 this.props.history.push("/loginMembership");
 
              }else if(status === 200 &&  data.status===1){
                  alert('پیامک برای شما ارسال شده لطفا چند دقیقه دیگر تلاش مجدد فرمایید');
@@ -87,7 +87,7 @@ class LoginPage extends Component {
                     <MDBCol md={6} sm={12} className={"fv-loginPageBody"}>
                         <MDBRow className={"fv-LoginPageHeader"}>
                             <MDBCol>
-                                <i className="fas fa-chevron-right" /><p><Link to={'/mainPage'}>صفحه اصلی</Link></p>
+                                <i className="fas fa-chevron-right" /><p><Link to={'/'}>صفحه اصلی</Link></p>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-loginPageBodyOne"}>
@@ -101,7 +101,7 @@ class LoginPage extends Component {
                                         <p>شماره موبایل خود را وارد نمایید</p>
                                     </MDBCol>
                                     <MDBCol >
-                                        <Link to={"/login3"} ><p>عضو شوید</p> </Link>
+                                        <Link to={"/registration"} ><p>عضو شوید</p> </Link>
                                     </MDBCol>
                                 </MDBRow>
                                 <input type="text" placeholder={'شماره موبایل'} className={this.state.validNumber===false ? "fv-redBorderError"  : "" }  name={'phone_number'} value={this.state.phone_number}
@@ -156,7 +156,7 @@ class LoginPage extends Component {
                                             .then(response => response.json())
                                             .then(json => {
                                                 this.setState({mobileNumber:json.support.text});
-                                                this.props.history.push('/login2');
+                                                this.props.history.push('/loginMembership');
                                             });
 
                                         fetch('https://reqres.in/api/posts', {                     //POST
@@ -169,7 +169,7 @@ class LoginPage extends Component {
                                                 if(data){
                                                     console.log(PostData)
                                                     this.setState({PostData:"Successful" })
-                                                    this.props.history.push('/login2');
+                                                    this.props.history.push('/loginMembership');
                                                 } else this.setState({PostData:"UnSuccessful"})
                                             }) ;
                                         */}

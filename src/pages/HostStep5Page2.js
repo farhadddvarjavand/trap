@@ -10,12 +10,15 @@ import Footer from "../componentsPages/footer";
 import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt"
 import HostStepCheckbox from "../componentsPages/hostStepCheckbox"
 import {Link} from "react-router-dom";
-import {getStoreVilla, storeVilla} from "../services/userService";
+import {getStoreVilla, storeVilla, updateVilla} from "../services/userService";
 import {villa} from "../services/villaService";
 
 class HostStep5Page2 extends Component {
     constructor(props) {
         super(props);
+        if(!JSON.parse(localStorage.getItem("info"))){
+            this.props.history.push('login');
+        }
         this.state={
             rules:[],
             specialLaw:'',
@@ -292,7 +295,7 @@ class HostStep5Page2 extends Component {
 
         }else {
             alert("لطفا اطلاعات را به درستی وارد نمایید")
-            this.props.history.push(`/hostStep1`)
+            this.props.history.push(`/hostStepBasicInformation`)
         }
 
         //console.log(JSON.parse(localStorage.getItem("step5")))
@@ -543,53 +546,106 @@ class HostStep5Page2 extends Component {
 
                                     this.setState({clickLoader:true})
 
+                                    const editOrUpdateStatus = JSON.parse(localStorage.getItem("editCode"))
+                                   if(editOrUpdateStatus){
+                                       console.log(allData)
+                                       console.log(editOrUpdateStatus.editCode)
+                                       updateVilla(allData,editOrUpdateStatus.editCode)
+                                           .then(res=>{
+                                               if(res.status===200){
+                                                   /* localStorage.removeItem("step1")
+                                                   localStorage.removeItem("step2")
+                                                   localStorage.removeItem("step2-2")
+                                                   localStorage.removeItem("step3")
+                                                   localStorage.removeItem("step4")
+                                                   localStorage.removeItem("step5") */
+                                                   localStorage.setItem("step5-2", JSON.stringify(step52Info))
+                                                   this.props.history.push(`/hostStepSetImage/${res.data.villa_id}`)
+                                               }else {
+                                                   alert("لطفا مجددا اطلاعات خود را بررسی کنید - اطلاعات شما نادرست وارد شده")
+                                                   this.props.history.push('/hostStepBasicInformation')
+                                               }
+                                           })
+                                           .catch(err=>{
+                                               const getErrors = Object.values(err.response.data.errors)
+                                               let showErrors = ""
+                                               for (let i = 0 ; i < getErrors.length ; i++){
+                                                   if(i===0){
+                                                       showErrors=`${getErrors[i]}`;
+                                                   }else {
+                                                       showErrors=`${showErrors} \n ${getErrors[i]}`
+                                                   }
+                                               }
+                                               alert(showErrors)
+                                               if(err.response.data.errors.title || err.response.data.errors.type || err.response.data.errors.phone_number || err.response.data.errors.story){
+                                                   this.props.history.push('/hostStepBasicInformation')
+                                               }
+                                               if(err.response.data.errors.city || err.response.data.errors.state || err.response.data.errors.postal_code || err.response.data.errors.address){
+                                                   this.props.history.push('/hostStepAddress')
+                                               }
+                                               if(err.response.data.errors.area || err.response.data.errors.places || err.response.data.errors.view){
+                                                   this.props.history.push('/hostStepAccommodationDetails')
+                                               }
+                                               if(err.response.data.errors.general_fac || err.response.data.errors.kitchen_fac || err.response.data.errors.temp_fac){
+                                                   this.props.history.push('/hostStepFacilities')
+                                               }
+                                               if(err.response.data.errors.normal_extra_cost || err.response.data.errors.normal_cost ||  err.response.data.errors.special_cost ||  err.response.data.errors.special_extra_cost ||  err.response.data.errors.weekly_discount ||  err.response.data.errors.monthly_discount){
+                                                   this.props.history.push('/hostStepSetPrice')
+                                               }
+                                               if(err.response.data.errors.arrival_time || err.response.data.errors.auth_rules || err.response.data.errors.exit_time || err.response.data.errors.max_reserve || err.response.data.errors.max_reserve  || err.response.data.errors.suitable_for){
+                                                   window.location.reload();
+                                               }
+                                           })
+                                           .catch(err=>console.log(err.response))
+                                   }else {
+                                       storeVilla(allData)
+                                           .then(res=>{
+                                               if(res.status===200){
+                                                   /* localStorage.removeItem("step1")
+                                                   localStorage.removeItem("step2")
+                                                   localStorage.removeItem("step2-2")
+                                                   localStorage.removeItem("step3")
+                                                   localStorage.removeItem("step4")
+                                                   localStorage.removeItem("step5") */
+                                                   localStorage.setItem("step5-2", JSON.stringify(step52Info))
+                                                   this.props.history.push(`/hostStepSetImage/${res.data.villa_id}`)
+                                               }else {
+                                                   alert("لطفا مجددا اطلاعات خود را بررسی کنید - اطلاعات شما نادرست وارد شده")
+                                                   this.props.history.push('/hostStepBasicInformation')
+                                               }
+                                           })
+                                           .catch(err=>{
+                                               const getErrors = Object.values(err.response.data.errors)
+                                               let showErrors = ""
+                                               for (let i = 0 ; i < getErrors.length ; i++){
+                                                   if(i===0){
+                                                       showErrors=`${getErrors[i]}`;
+                                                   }else {
+                                                       showErrors=`${showErrors} \n ${getErrors[i]}`
+                                                   }
+                                               }
+                                               alert(showErrors)
+                                               if(err.response.data.errors.title || err.response.data.errors.type || err.response.data.errors.phone_number || err.response.data.errors.story){
+                                                   this.props.history.push('/hostStepBasicInformation')
+                                               }
+                                               if(err.response.data.errors.city || err.response.data.errors.state || err.response.data.errors.postal_code || err.response.data.errors.address){
+                                                   this.props.history.push('/hostStepAddress')
+                                               }
+                                               if(err.response.data.errors.area || err.response.data.errors.places || err.response.data.errors.view){
+                                                   this.props.history.push('/hostStepAccommodationDetails')
+                                               }
+                                               if(err.response.data.errors.general_fac || err.response.data.errors.kitchen_fac || err.response.data.errors.temp_fac){
+                                                   this.props.history.push('/hostStepFacilities')
+                                               }
+                                               if(err.response.data.errors.normal_extra_cost || err.response.data.errors.normal_cost ||  err.response.data.errors.special_cost ||  err.response.data.errors.special_extra_cost ||  err.response.data.errors.weekly_discount ||  err.response.data.errors.monthly_discount){
+                                                   this.props.history.push('/hostStepSetPrice')
+                                               }
+                                               if(err.response.data.errors.arrival_time || err.response.data.errors.auth_rules || err.response.data.errors.exit_time || err.response.data.errors.max_reserve || err.response.data.errors.max_reserve  || err.response.data.errors.suitable_for){
+                                                   window.location.reload();
+                                               }
+                                           })
 
-                                    storeVilla(allData)
-                                        .then(res=>{
-                                            if(res.status===200){
-                                                /* localStorage.removeItem("step1")
-                                                localStorage.removeItem("step2")
-                                                localStorage.removeItem("step2-2")
-                                                localStorage.removeItem("step3")
-                                                localStorage.removeItem("step4")
-                                                localStorage.removeItem("step5") */
-                                                localStorage.setItem("step5-2", JSON.stringify(step52Info))
-                                                this.props.history.push(`/hostStep5-3/${res.data.villa_id}`)
-                                            }else {
-                                                alert("لطفا مجددا اطلاعات خود را بررسی کنید - اطلاعات شما نادرست وارد شده")
-                                                this.props.history.push('/hostStep1')
-                                            }
-                                        })
-                                        .catch(err=>{
-                                            const getErrors = Object.values(err.response.data.errors)
-                                            let showErrors = ""
-                                            for (let i = 0 ; i < getErrors.length ; i++){
-                                                if(i===0){
-                                                    showErrors=`${getErrors[i]}`;
-                                                }else {
-                                                    showErrors=`${showErrors} \n ${getErrors[i]}`
-                                                }
-                                            }
-                                            alert(showErrors)
-                                            if(err.response.data.errors.title || err.response.data.errors.type || err.response.data.errors.phone_number || err.response.data.errors.story){
-                                                this.props.history.push('/hostStep1')
-                                            }
-                                            if(err.response.data.errors.city || err.response.data.errors.state || err.response.data.errors.postal_code || err.response.data.errors.address){
-                                                this.props.history.push('/hostStep2')
-                                            }
-                                            if(err.response.data.errors.area || err.response.data.errors.places || err.response.data.errors.view){
-                                                this.props.history.push('/hostStep3')
-                                            }
-                                            if(err.response.data.errors.general_fac || err.response.data.errors.kitchen_fac || err.response.data.errors.temp_fac){
-                                                this.props.history.push('/hostStep4')
-                                            }
-                                            if(err.response.data.errors.normal_extra_cost || err.response.data.errors.normal_cost ||  err.response.data.errors.special_cost ||  err.response.data.errors.special_extra_cost ||  err.response.data.errors.weekly_discount ||  err.response.data.errors.monthly_discount){
-                                                this.props.history.push('/hostStep5')
-                                            }
-                                            if(err.response.data.errors.arrival_time || err.response.data.errors.auth_rules || err.response.data.errors.exit_time || err.response.data.errors.max_reserve || err.response.data.errors.max_reserve  || err.response.data.errors.suitable_for){
-                                                window.location.reload();
-                                            }
-                                        })
+                                   }
 
 
 
@@ -633,7 +689,7 @@ class HostStep5Page2 extends Component {
                                            .catch(err=>console.log(err.response)) */
                                 }} />
                                 <input type="button" value="مرحله قبل"  className={this.state.clickLoader ?  "fv-hideLoader" :  "fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"} onClick={()=>{
-                                    this.props.history.push('../../hostStep5')
+                                    this.props.history.push('../../hostStepSetPrice')
                                 }}/>
                             </MDBRow>
                         </MDBCol>
@@ -645,7 +701,7 @@ class HostStep5Page2 extends Component {
                             کار زمان بر خواهد بود. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگرا
                             ن را در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند."
                             image={Logo}
-                            nextLink={"../../hostStep5-3"}
+                            nextLink={"../../hostStepSetImage"}
                             returnLink={"../../hostStep5"}
                             localStorageName={"step5-2"}
                             localStorageData={step52Info}/> */}

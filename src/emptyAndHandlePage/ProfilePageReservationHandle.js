@@ -36,7 +36,7 @@ class ProfilePageReservationHandle extends Component {
             .then(res=>{
                 console.log(res)
                 if (res.data.data.length>0){
-                    this.props.history.push(`/ProfileReservation2`)
+                    this.props.history.push(`/ProfileMyReservation`)
                 }else {
                     this.props.history.push("/ProfilePageReservationEmpty")
                 }

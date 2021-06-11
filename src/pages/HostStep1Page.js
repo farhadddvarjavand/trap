@@ -13,6 +13,9 @@ import {Link} from "react-router-dom";
 class HostStep1Page extends Component {
     constructor(props) {
         super(props);
+        if(!JSON.parse(localStorage.getItem("info"))){
+            this.props.history.push('login');
+        }
         this.state={
             accommodationTitle:'',
             accommodationKind:'title',
@@ -24,7 +27,6 @@ class HostStep1Page extends Component {
 
             validTitle:false,
             validPhoneNumber:false,
-            validStory:false,
             click:false,
             hideUniq:false,
         }
@@ -49,16 +51,12 @@ class HostStep1Page extends Component {
             const prevData =  JSON.parse(localStorage.getItem("step1"))
             let validTitle = false
             let validPhoneNumber = false
-            let validStory =  false
             let hideUniq = false
             if(prevData.title){
                 validTitle=true
             }
             if(prevData.phone_number){
                 validPhoneNumber=true
-            }
-            if(prevData.story){
-                validStory=true
             }
             if(prevData.phoneNumberDisable){   // agar az safhe eddit rafte bashad bayad gheire faal bashad postalcode
                 hideUniq=true
@@ -71,7 +69,6 @@ class HostStep1Page extends Component {
 
                 validTitle:validTitle,
                 validPhoneNumber:validPhoneNumber,
-                validStory:validStory,
                 hideUniq:hideUniq
             })
         }
@@ -82,7 +79,7 @@ class HostStep1Page extends Component {
 
     render() {
         let validationInputs = false
-        if(this.state.validTitle && this.state.validPhoneNumber && this.state.validStory){
+        if(this.state.validTitle && this.state.validPhoneNumber ){
             validationInputs=true
         }
 
@@ -114,7 +111,6 @@ class HostStep1Page extends Component {
                         <p className={this.state.click && validationInputs===false ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>لطفا کادر های قرمز را به درستی پر کنید</p>
                         <p className={this.state.click && this.state.validTitle===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}><i className="fas fa-exclamation-triangle" />  پر کردن عنوان اقامتگاه اجباریست</p>
                         <p className={this.state.click && this.state.validPhoneNumber===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}> <i className="fas fa-exclamation-triangle" /> شماره تلفن معتبر نمی باشد</p>
-                        <p className={this.state.click && this.state.validStory===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}> <i className="fas fa-exclamation-triangle" /> پر کردن داستان اقامتگاه اجباریست</p>
                             <p  className={"fv-hostStep2Page2Hidden"}>عنوان اقامت گاه</p>
                             <input type="text" value={this.state.accommodationTitle} onChange={(event)=>{
                                 if(event.target.value){
@@ -145,12 +141,7 @@ class HostStep1Page extends Component {
                             <p className={"fv-hostStep2Page2Hidden"}> داستان اقامت گاه شما</p>
                             <textarea value={this.state.accommodationHistory} onChange={(event)=>{
                                 this.setState({accommodationHistory:event.target.value})
-                                if(event.target.value){
-                                    this.setState({validStory:true})
-                                }else {
-                                    this.setState({validStory:false})
-                                }
-                            }} className={this.state.click && this.state.validStory===false ?  "fv-hostStep2Page2Hidden fv-redBorderError" : "fv-hostStep2Page2Hidden"}/>
+                            }} className={"fv-hostStep2Page2Hidden"}/>
                     </MDBCol>
 
 
@@ -168,7 +159,7 @@ class HostStep1Page extends Component {
                             <input type="button" value="مرحله بعد"  className={"fv-hostStepPage1LeftButton"} onClick={()=>{
                                 if(validationInputs){
                                     localStorage.setItem(`${"step1"}`, JSON.stringify(localStorageData))
-                                    this.props.history.push('../../hostStep2')
+                                    this.props.history.push('../../hostStepAddress')
                                 }
                                 else {
                                     this.setState({click:true})
@@ -176,7 +167,7 @@ class HostStep1Page extends Component {
 
                             }}/>
                             <input type="button" value="مرحله قبل"  className={"fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"} onClick={()=>{
-                                this.props.history.push('../../hostStep1')
+                                this.props.history.push('../../hostStepBasicInformation')
                             }}/>
                         </MDBRow>
                     </MDBCol>
@@ -205,7 +196,7 @@ class HostStep1Page extends Component {
                     در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند"
                     image={MobileLogo}
                     nextLink={'../../hostStep2'}
-                    returnLink={'../../hostStep1'}
+                    returnLink={'../../hostStepBasicInformation'}
                     localStorageName={"step1"}
                     localStorageData={localStorageData}
                      click = {this.click}

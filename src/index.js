@@ -41,7 +41,7 @@ import ReservationProduct from "./componentsPages/ReservatioonProduct";
 import TopicMainPage from "./componentsPages/topicsMainPage"
 import Api from "./components/Api";
 import {withCookies, Cookies, CookiesProvider} from 'react-cookie';
-import {Link, Route, Switch,NavLink,BrowserRouter} from "react-router-dom"
+import {Link, Route, Switch, NavLink, BrowserRouter, Redirect} from "react-router-dom"
 import ProfilePageCommentsHandle from "./emptyAndHandlePage/ProfilePageCommentsHandle"
 import ProfilePageCalendarEmpty from "./emptyAndHandlePage/ProfilePageCalendarEmpty";
 import ProfilePageCalendarHandle from "./emptyAndHandlePage/ProfilePageCalendarHandle";
@@ -69,41 +69,35 @@ ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
             <Switch>
-                <CookiesProvider>
-
-                    <ScrollToTop />
-                    {/* <PersianNumber number={"12365sdasd31435"}/>    */}
-                    <div className="App">
-                        <div className={'pagecontent'}>
                             <Route exact path={'/login'} component={LoginPage}/>
-                            <Route exact path={'/login2'} component={LoginPage2}/>
-                            <Route exact path={'/login3'} component={LoginPage3}/>
+                            <Route exact path={'/loginMembership'} component={LoginPage2}/> {/* loginpage2 */}
+                            <Route exact path={'/registration'} component={LoginPage3}/> {/* loginpage3 */}
                             <Route exact path={'/factor/:id'} component={FactorPage}/>
                             <Route exact path={'/profileReservations'} component={ProfilePageReservationsRequested}/>
                             <Route exact path={'/profileCalender/:id'} component={ProfilePageCalender}/>
-                            <Route exact path={'/profileGustComments2/:id'} component={ProfilePageGustComments2}/>
-                            <Route exact path={'/profileGustComments'} component={PrfilePageGustComments}/>
+                            <Route exact path={'/profileShowGuestComments/:id'} component={ProfilePageGustComments2}/> {/* profileGustComments2 */}
+                            <Route exact path={'/profileGuestComments'} component={PrfilePageGustComments}/> {/* profileGustComments */}
                             <Route exact path={'/displayPage/:id'} component={DisplayPage}/>
-                            <Route exact path={'/profileWallet3'} component={ProfilePageWallet3}/>
-                            <Route exact path={'/ProfileWallet2'} component={ProfilePageWallet2}/>
+                            <Route exact path={'/profileWalletRequestWithdraw'} component={ProfilePageWallet3}/> {/* profileWallet3 */}
+                            <Route exact path={'/ProfileWalletTransactionRegistration'} component={ProfilePageWallet2}/> {/* ProfileWallet2 */}
                             <Route exact path={'/ProfileWallet'} component={ProfilePageWallet}/>
                             <Route exact path={'/myAccommodation'} component={MyAccommodationPage}/>
-                            <Route exact path={'/profileTransaction3'} component={ProfilePageTransaction3}/>
-                            <Route exact path={'/ProfileTransaction2'} component={ProfilePageTransaction2}/>
+                            <Route exact path={'/profileTransactionNotFound'} component={ProfilePageTransaction3}/> {/* profileTransaction3 */}
+                            <Route exact path={'/ProfileMyTransaction'} component={ProfilePageTransaction2}/> {/* ProfileTransaction2 */}
                             <Route exact path={'/ProfileTransaction'} component={ProfilePageTransaction}/>
-                            <Route exact path={'/ProfileReservation2'} component={ProfilePageReservation2}/>
+                            <Route exact path={'/ProfileMyReservation'} component={ProfilePageReservation2}/>{/* ProfileReservation2 */}
                             <Route exact path={'/profileReservation'} component={ProfilePageReservation}/>
-                            <Route exact path={'/hostStep5-3/:id'} component={HostStep5Page3}/>
+                            <Route exact path={'/hostStepSetImage/:id'} component={HostStep5Page3}/> {/* hostStep5-3  */}
                             <Route exact path={'/profile'} component={ProfilePage}/>
-                            <Route exact path={'/hostStep5-2'} component={HostStep5Page2}/>
-                            <Route exact path={'/hostStep5'} component={HostStep5Page}/>
-                            <Route exact path={'/hostStep4'} component={HostStep4Page}/>
-                            <Route exact path={'/hostStep3'} component={HostStep3Page}/>
-                            <Route exact path={'/hostStep2-2'} component={HostStep2Page2}/>
-                            <Route exact path={'/hostStep2'} component={HostStep2Page}/>
-                            <Route exact path={'/hostStep1'} component={HostStep1Page}/>
+                            <Route exact path={'/hostStepRules'} component={HostStep5Page2}/> {/* hostStep5-2  */}
+                            <Route exact path={'/hostStepSetPrice'} component={HostStep5Page}/> {/* hostStep5  */}
+                            <Route exact path={'/hostStepFacilities'} component={HostStep4Page}/> {/* hostStep4  */}
+                            <Route exact path={'/hostStepAccommodationDetails'} component={HostStep3Page}/> {/* hostStep3 */}
+                            <Route exact path={'/hostStepSetMapLocation'} component={HostStep2Page2}/> {/* hostStep2-2 */}
+                            <Route exact path={'/hostStepAddress'} component={HostStep2Page}/> {/* hostStep2 */}
+                            <Route exact path={'/hostStepBasicInformation'} component={HostStep1Page}/> {/* hostStep1 */}
                             <Route exact path={'/searchHomePage/:sort/:id'} component={SearchHomePage}/>
-                            <Route exact path={'/mainPage'} component={MainPage}/>
+                            <Route exact path={''} component={MainPage}/>
                             <Route exact path={'/notFound'} component={NotFoundPage}/>
                             <Route exact path={'/addComments/:id'} component={AddComments}/>
                             <Route exact path={'/profileFavoritesPage'} component={ProfileFavoritesPage}/>
@@ -124,11 +118,6 @@ ReactDOM.render(
 
 
 
-
-                        </div>
-                    </div>
-
-                </CookiesProvider>
             </Switch>
         </BrowserRouter>
     </React.StrictMode>

@@ -14,6 +14,9 @@ const commaNumber = require('comma-number')
 class HostStep5Page extends Component {
     constructor(props) {
         super(props);
+        if(!JSON.parse(localStorage.getItem("info"))){
+            this.props.history.push('login');
+        }
         this.state={
             pricesFromSaturdayToWednesday:'',
             priceFridayAndHoliday:'',
@@ -168,14 +171,14 @@ class HostStep5Page extends Component {
                                 <input type="button" value="مرحله بعد"  className={"fv-hostStepPage1LeftButton"} onClick={()=>{
                                     if(validationInputs){
                                         localStorage.setItem(`${"step5"}`, JSON.stringify(localStorageData))
-                                        this.props.history.push('../../hostStep5-2')
+                                        this.props.history.push('../../hostStepRules')
                                     }
                                     else {
                                         this.setState({click:true})
                                     }
                                 }}/>
                                 <input type="button" value="مرحله قبل"  className={"fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"} onClick={()=>{
-                                    this.props.history.push('../../hostStep4')
+                                    this.props.history.push('../../hostStepFacilities')
                                 }}/>
                             </MDBRow>
                         </MDBCol>
@@ -187,8 +190,8 @@ class HostStep5Page extends Component {
                             کار زمان بر خواهد بود. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگرا
                             ن را در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند."
                             image={Logo}
-                            nextLink={"../../hostStep5-2"}
-                            returnLink={"../../hostStep4"}
+                            nextLink={"../../hostStepRules"}
+                            returnLink={"../../hostStepFacilities"}
                             localStorageName={"step5"}
                             localStorageData={localStorageData}/> */}
                     </MDBRow>

@@ -98,7 +98,7 @@ class LoginPage2 extends Component {
 
 
                     // Redirect User
-                    this.props.history.push("/mainPage");
+                    this.props.history.push("/");
 
                     // Save api token in local storage
                     localStorage.setItem("token",data.data.token);
@@ -142,7 +142,7 @@ class LoginPage2 extends Component {
                         <MDBRow className={"fv-LoginPageHeader"}>
                             <MDBCol>
                                 <i className="fas fa-chevron-right" /><p><Link to={{
-                                pathname: '/mainPage',
+                                pathname: '/',
                                 test:''  /* use : this.props.location.test */
                             }}>صفحه اصلی</Link></p>
                             </MDBCol>
@@ -191,7 +191,7 @@ class LoginPage2 extends Component {
                                                 .then(data =>{
                                                     if(data){
                                                         console.log(validationCode)
-                                                        this.props.history.push('/login3')
+                                                        this.props.history.push('/registration')
                                                     }
                                                 }) ; */
                                         }} value={"ادامه"} />

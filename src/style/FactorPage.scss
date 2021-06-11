@@ -6,6 +6,9 @@
     text-align: initial;
     padding-top: 1%;
     margin-bottom: 8%;
+    display: table-cell;
+    z-index: 1;
+
     img{
       width: 92%;
       margin-right: 4%;
@@ -50,7 +53,7 @@
    .fv-factorPageRightInfoLeftBody {
      box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.08);
      padding-top: 2%;
-     margin-right: -2%;
+     margin-right: 2%;
      width: 103.5%;
      margin-top: 2%;
      padding-left: 4%;
@@ -113,6 +116,8 @@
     padding-top: 2%;
     padding-bottom: 2%;
     border-radius: 15px;
+    width: 100%;
+    margin-right: 3%;
   }
   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo h5 {
     margin-top: 3%;
@@ -336,7 +341,7 @@
     }
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody {
       box-shadow: none;
-      width: 111%;
+      width: 108%;
     }
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyInnerLeft .fv-ProfilePageUserSetInfoButton input {
       margin-right: 2%;
@@ -377,7 +382,7 @@
 
      .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond {
        margin-right: -0.5%;
-       width: 96%;
+       width: 95%;
     }
      .fv-factorPageRightInfo {
       margin-right: -2%;
@@ -518,7 +523,7 @@
 @media (max-width: 360px) {
   .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond {
     margin-right: -1.25%;
-    width: 314px;
+    // width: 314px;
   }
   .fv-FactorPage .fv-factorPageRightInfoRightCodeTitleMobile .col-sm-2 {
     flex: 0 0 24.666667%;
@@ -538,7 +543,7 @@
 
   .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond {
     margin-right: -1.25%;
-    width: 98%;
+   // width: 98%;
   }
   .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftInnerTopButton1 input {
     font-size: 12px;

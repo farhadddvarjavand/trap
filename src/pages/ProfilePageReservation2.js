@@ -16,8 +16,11 @@ import config from "../services/config.json";
 class ProfilePageReservation2 extends Component {
     constructor(props) {
         super(props);
+        if(!JSON.parse(localStorage.getItem("info"))){
+            this.props.history.push('login');
+        }
         this.state={
-            city:'title',
+            city:'',
             dateToGo: {
                 day:'',
                 month:'',
@@ -72,7 +75,7 @@ class ProfilePageReservation2 extends Component {
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
                     <HeaderSearch
                         {...this.props}
-                        thisPageName = "رزورو های من"/>
+                        thisPageName = "رزرو های من"/>
 
                 </MDBContainer>
 
@@ -81,40 +84,10 @@ class ProfilePageReservation2 extends Component {
                     <ProfilePageUserInfo />
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
-                        <h5>رزورو های من</h5>
+                        <h5>رزرو های من</h5>
                         <MDBRow className={"fv-ProfilePageReservationSetInfo"}>
                             <MDBCol md={4} sm={12} className={""}>
-                                    <select value={this.state.city} onChange={(event)=>this.setState({city:event.target.value})}>
-                                        <option value='title' disabled>شهر یا روستا را انتخاب کنید</option>
-                                        <option value="تهران">تهران</option>
-                                        <option value="مشهد">مشهد</option>
-                                        <option value="اصفهان">اصفهان</option>
-                                        <option value="کرج">کرج</option>
-                                        <option value="شیراز">شیراز</option>
-                                        <option value="تبریز">	تبریز</option>
-                                        <option value="قم">قم</option>
-                                        <option value="اهواز">اهواز</option>
-                                        <option value="کرمانشاه">کرمانشاه</option>
-                                        <option value="ارومیه">ارومیه</option>
-                                        <option value="رشت">رشت</option>
-                                        <option value="زاهدان">زاهدان</option>
-                                        <option value="همدان">همدان</option>
-                                        <option value="کرمان">کرمان</option>
-                                        <option value="یزد">یزد</option>
-                                        <option value="اردبیل">اردبیل</option>
-                                        <option value="اراک">اراک</option>
-                                        <option value="بندرعباس">بندرعباس</option>
-                                        <option value="زنجان">زنجان</option>
-                                        <option value="سنندج">سنندج</option>
-                                        <option value="قزوین">قزوین</option>
-                                        <option value="خرم‌آباد">خرم‌آباد</option>
-                                        <option value="گرگان">گرگان</option>
-                                        <option value="ساری">ساری</option>
-                                        <option value="بابل">بابل</option>
-                                        <option value="سبزوار">سبزوار</option>
-                                        <option value="گلستان">گلستان</option>
-                                        <option value="آمل">آمل</option>
-                                    </select>
+                                <input type={"text"} placeholder={"شهر یا روستا را انتخاب کنید"} value={this.state.city} onChange={(e)=> this.setState({city:e.target.value})}/>
                             </MDBCol>
 
                             <MDBCol md={2} sm={5} className={"fv-ProfilePageReservationRightCalendar"}>
@@ -128,7 +101,7 @@ class ProfilePageReservation2 extends Component {
                                     let setCity = ''
                                     let setDateToGo = ''
                                     let setDateToreturn = ''
-                                    if(this.state.city === "title" ){
+                                    if(this.state.city === "" ){
                                         setCity = ''
                                     }else {
                                         setCity =this.state.city
@@ -166,10 +139,10 @@ class ProfilePageReservation2 extends Component {
                                 let className =''
                                 let md = ''
                                 let text = ""
-                                if(reserve.pay_status === "1"){   // در اتظار پرداخت
+                                if(reserve.pay_status === "1"){   // در انتظار پرداخت
                                     className = "fv-profilePaeReservation2PayButtonSet"
                                     md="5"
-                                    text = "در اتظار پرداخت"
+                                    text = "در انتظار پرداخت"
                                 }
                                 if(reserve.pay_status === "2"){   // پرداخت شد
                                     className = "fv-profilePaeReservation2PayButton"
@@ -239,16 +212,16 @@ class ProfilePageReservation2 extends Component {
                                             </MDBRow>
                                         </MDBRow>
                                     </MDBCol>
-                                  /*  <ReservationProduct
-                                        md={md}
-                                        classnameButton={className}
-                                        payStatus={reserve.pay_status}
-                                        villaTitle={}
-                                        state={}
-                                        entryDay={}
-                                        exitDate={}
-                                        cost={}
-                                    />*/
+                                    /*  <ReservationProduct
+                                          md={md}
+                                          classnameButton={className}
+                                          payStatus={reserve.pay_status}
+                                          villaTitle={}
+                                          state={}
+                                          entryDay={}
+                                          exitDate={}
+                                          cost={}
+                                      />*/
                                 )
                             })}
 

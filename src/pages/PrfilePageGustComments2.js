@@ -16,6 +16,9 @@ import "../style/scroolBodyProfilePages.scss"
 class PrfilePageGustComments2 extends Component {
     constructor(props) {
         super(props);
+        if(!JSON.parse(localStorage.getItem("info"))){
+            this.props.history.push('login');
+        }
         this.state={
             comments:[],
             answerCommentId:'',
@@ -165,7 +168,7 @@ class PrfilePageGustComments2 extends Component {
                                                                  text:this.state.textAreaComment
                                                              }
                                                          replayComment(data,this.state.villasUsertitle,this.state.answerCommentId)
-                                                             .then(res=>res.status===200 ? window.location.replace(`/profileGustComments2/${this.state.villasUsertitle}`) : '')
+                                                             .then(res=>res.status===200 ? window.location.replace(`/profileShowGuestComments/${this.state.villasUsertitle}`) : '')
 
                                                      }}>
                                                          <label>

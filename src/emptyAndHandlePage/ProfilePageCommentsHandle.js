@@ -45,17 +45,17 @@ class ProfilePageCommentsHandle extends Component {
                                         // avalin vilaie por
                                         if(Object.values(res.data.data).length !== 0){ /// agar vojod dasht commenti baraie villa haie sabt shode
                                             this.setState({comments: Object.values(res.data.data) , villaId:userVilla.id } , () =>{
-                                                this.props.history.push(`/profileGustComments2/${userVilla.id}`)
+                                                this.props.history.push(`/profileShowGuestComments/${userVilla.id}`)
                                             })
                                         }
 
                                         // console.log(res.data.data)
                                     }else {
-                                        this.props.history.push("/profileGustComments")
-                                        // this.props.history.push("/profileGustComments") /// صفحه ای پیدا نشده است
+                                        this.props.history.push("/profileGuestComments")
+                                        // this.props.history.push("/profileGuestComments") /// صفحه ای پیدا نشده است
                                     }
                                 })
-                                .catch(err=>console.log(err.response)) //.catch(err=>this.props.history.push("/profileGustComments"))
+                                .catch(err=>console.log(err.response)) //.catch(err=>this.props.history.push("/profileGuestComments"))
 
                         })
                     }else {

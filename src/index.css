@@ -428,6 +428,7 @@ body{
 }
 .fv-footerMenu .fv-cascadeOptionMainPageRowTop a{
   color: white;
+  margin-right: 3vw;
 }
 .fv-cascadeOptionMainPageRowTop .col-md-12{
   display: flow-root;
@@ -997,7 +998,7 @@ color {  100%, 0% {
 }
 @media (max-width: 540px){
   .fv-mainMobileDiscountedVillas .fv-product .row {
-    width: 112%;
+    width: 120%;
   }
 }
 @media (max-width: 360px){

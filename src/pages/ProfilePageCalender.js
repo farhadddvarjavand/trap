@@ -17,8 +17,8 @@ import {
     changeDatesCost,
     changeDatesStatus,
     getUserVillaComments,
-    userVillas,
-    villaDates
+    userVillas, villaClosedDates,
+    villaDates, villaReservedDatesOnly
 } from "../services/userService";
 import {reservedDates, villa, villaPrice} from "../services/villaService";
 import {getToday, priceOfPerMonth} from "../componentsPages/calculationsDate";
@@ -27,6 +27,9 @@ import config from "../services/config.json";
 class ProfilePageCalender extends Component {
     constructor(props) {
         super(props);
+        if(!JSON.parse(localStorage.getItem("info"))){
+            this.props.history.push('login');
+        }
         this.state={
             changeStatusSelectedDays:'title',
             price:'',
@@ -71,6 +74,14 @@ class ProfilePageCalender extends Component {
                 if(res.data.data)
                     this.setState({villasUser:res.data.data})
             })
+
+        villaReservedDatesOnly(this.state.villasUsertitle)
+            .then(res=>console.log(res))
+            .catch(err=>console.log(err))
+
+        villaClosedDates(this.state.villasUsertitle)
+            .then(res=>console.log(res))
+            .catch(err=>console.log(err))
 
 
 

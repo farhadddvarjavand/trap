@@ -36,7 +36,7 @@ class ProfilePageTransactionHandle extends Component {
         userTransactions()
             .then(res=>{
                 if (res.data.data.length>0){
-                    this.props.history.push(`/ProfileTransaction2`)
+                    this.props.history.push(`/ProfileMyTransaction`)
                 }else {
                     this.props.history.push("/ProfilePageTransactionEmpty")
                 }

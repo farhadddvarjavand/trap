@@ -13,6 +13,9 @@ import {setFinancialReports} from "../services/userService";
 class ProfilePageWallet2 extends Component {
     constructor(props) {
         super(props);
+        if(!JSON.parse(localStorage.getItem("info"))){
+            this.props.history.push('login');
+        }
         this.state={
             sourceOfTransaction:'',
             transactionAmount:'',
@@ -82,13 +85,31 @@ class ProfilePageWallet2 extends Component {
                                         description : this.state.transactionDescription ,
                                         amount : this.state.transactionAmount,
                                     }
+                                    console.log(data)
                                     setFinancialReports(data)
                                         .then(res=>{
                                             if(res.status){
                                                 this.props.history.push('/ProfileWallet')
                                             }
                                         })
-                                        .catch(err=>alert("لطفا اطلاعات را به درستی وارد کنید"))
+                                        .catch(err=>{
+                                            if(err.response.data){
+                                                if(err.response.data.errors)
+                                                    if(err.response.data.errors.amount)
+                                                alert(err.response.data.errors.amount[0])
+                                            }
+                                            if(err.response.data){
+                                                if(err.response.data.errors)
+                                                    if(err.response.data.errors.src)
+                                                alert(err.response.data.errors.src[0])
+                                            }
+                                            if(err.response.data){
+                                                if(err.response.data.errors)
+                                                    if(err.response.data.errors.date)
+                                                        alert(err.response.data.errors.date[0])
+                                            }
+                                           // console.log(err.response)
+                                        })
                                 }}/>
                             </MDBCol>
                         </MDBRow>

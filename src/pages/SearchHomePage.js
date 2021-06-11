@@ -277,7 +277,7 @@ class SearchHomePage extends Datas {
 
                     <MDBRow className={"fv-DisplayPageRotePathMobile "}>
                         <MDBCol>
-                            <Link to={"/mainPage"}> <p> صفحه اصلی </p> </Link>
+                            <Link to={"/"}> <p> صفحه اصلی </p> </Link>
                             <i className="fas fa-chevron-left" />
                             <p className={ "fv-DisplayPagePathNow"}> صفحه جستجو </p>  {/* اگر مقدار سوم وجود داشت کلاس رنگ سبز غیر فعال شود */}
                         </MDBCol>

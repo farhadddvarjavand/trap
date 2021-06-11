@@ -341,3 +341,28 @@ export const updateUserAvatar = async (data) => {
         { headers:{ 'Authorization' : await getToken() } }
     );
 }
+
+
+export const villaReservedDatesOnly = async (id) => {
+    return http.get(
+        `${config.webapi}/api/v1/user/villaReservedDates/${id}`,
+        { headers:{ 'Authorization' : await getToken() } }
+    );
+}
+
+export const villaClosedDates = async (id) => {
+    return http.get(
+        `${config.webapi}/api/v1/user/villaClosedDates/${id}`,
+        { headers:{ 'Authorization' : await getToken() } }
+    );
+}
+
+
+export const updateVilla = async (data,id) => {
+    return http.post(
+        `${config.webapi}/api/v1/villa/update/${id}`,
+        JSON.stringify(data),
+        { headers:{ 'Authorization' : await getToken() } }
+    );
+}
+

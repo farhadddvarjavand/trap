@@ -24,7 +24,7 @@ class footer extends Component{
                     <img className={"fv-footerMainPageSmaller"} src={Youtube} width="15" height="15" />
                 </MDBCol>
                 <MDBCol md={7}>
-                    <a>قوق کاربران</a>
+                    <a>حقوق کاربران</a>
                     <a>قوانین ترپ</a>
                     <a>تماس با پشتیبانی</a>
                     <a>درباره ترپ</a>
@@ -33,7 +33,7 @@ class footer extends Component{
             <MDBRow className={"fv-footerMainPage fv-footerMenuMobile"}>
                 <MDBRow className={"fv-footerMenuMobileTitle"}>
                     <MDBCol sm={5}>
-                        <a>قوق کاربران</a>
+                        <a>حقوق کاربران</a>
                     </MDBCol>
                     <MDBCol sm={4}>
                         <a>قوانین ترپ</a>

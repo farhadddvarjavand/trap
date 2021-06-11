@@ -21,6 +21,9 @@ const commaNumber = require('comma-number')
 class ProfilePageWallet extends Component {
     constructor(props) {
         super(props);
+        if(!JSON.parse(localStorage.getItem("info"))){
+            this.props.history.push('login');
+        }
         this.state={
             getFinancialReportsTopPage:[],
             getFinancialReports:[],
@@ -232,7 +235,7 @@ class ProfilePageWallet extends Component {
                             <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
                                 <input type="button" value="ثبت تراکنش جدید" onClick={()=>{
 
-                                    this.props.history.push('/ProfileWallet2')
+                                    this.props.history.push('/ProfileWalletTransactionRegistration')
                                 }}/>
                             </MDBCol>
                         </MDBRow>

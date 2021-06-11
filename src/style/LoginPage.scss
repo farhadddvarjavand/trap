@@ -108,12 +108,12 @@
         margin-right: -3.5%
       }
     }
-     .fv-LoginPageHeader {
+    .fv-LoginPageHeader {
       text-align: initial;
       margin-top: 7%;
-       a{
-         color: white;
-       }
+      a{
+        color: white;
+      }
     }
     .fv-loginPageBodyOne {
       margin-top: 11%;
@@ -122,8 +122,8 @@
       padding-top: 8%;
       color: white;
       background: #38353540;
-       backdrop-filter: blur(16px);
-        .fv-loginPageButton {
+      backdrop-filter: blur(16px);
+      .fv-loginPageButton {
         width: 45%;
         background: #15BE29;
         border-radius: 16px;
@@ -134,25 +134,49 @@
         margin-top: 5%;
         padding: 0;
         margin-bottom: 5%;
-        }
-        input {
-          width: 100%;
-          height: 54px;
-        }
-        a{
-          color: black;
-        }
       }
-   .fv-LoginPageHeader .col {
+      input {
+        width: 100%;
+        height: 54px;
+      }
+      a{
+        color: black;
+      }
+    }
+    .fv-LoginPageHeader .col {
       display: flex;
       margin-right: 5%;
       color: white;
     }
   }
 }
+
 @media (max-width: 375px) {
   .fv-loginPage .fv-loginPageImageLeftBody img {
     margin-right: -4%;
+  }
+  .fv-loginPage .fv-loginPageBodyOne .loader {
+    position: relative;
+    /* border-radius: 16px; */
+    /* width: 195.5px; */
+    /* height: 67px; */
+    /* margin-left: 7%; */
+    /* padding: 5.4% 13.4% 5.4% 13.4%; */
+    width: 44%;
+    background: #15BE29;
+    border-radius: 16px;
+    color: white;
+    height: 54px;
+    border: 1px solid #15BE29;
+    margin-left: 26%;
+    margin-top: 3%;
+    padding: 0;
+    margin-left: 4%;
+    margin-bottom: 3%;
+    margin-left: 4%;
+    margin-top: 5%;
+    padding: 0;
+    margin-bottom: 5%;
   }
 }
 @media (max-width: 320px) {

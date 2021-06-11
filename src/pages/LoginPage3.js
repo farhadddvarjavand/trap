@@ -26,6 +26,7 @@ class LoginPage3 extends Component {
         }
 
         await registerUser(datas).then(result => {
+            console.log(result)
             const status = result.status
             const data = result.data
             if (status === 200 &&  data.status===2) {
@@ -33,7 +34,7 @@ class LoginPage3 extends Component {
 
                 localStorage.setItem('phone_number', (datas.phone_number));
                 alert('پیامک اعتبارسنجی ارسال شد');
-                this.props.history.push("/login2");
+                this.props.history.push("/loginMembership");
 
             }else if(status === 200 &&  data.status===1){
                 this.setState({validNameAndPhoneNumber:false ,  clickLoader:false , errorsText:' پیامک برای شما ارسال شده لطفا چند دقیقه دیگر تلاش مجدد فرمایید'})
@@ -43,9 +44,9 @@ class LoginPage3 extends Component {
             }
         })
             .catch(error => {
-                console.log(error.response.data.errors )
+                console.log(error.response )
                 if(error.response.data.errors.phone_number && error.response.data.errors.fullname === undefined){
-                    if(error.response.data.errors.phone_number[0] === " شماره تلفن قبلا انتخاب شده است."){
+                    if(error.response.data.errors.phone_number[0] === "شماره تلفن قبلا انتخاب شده است."){
                         alert(' شما قبلا ثبت نام کرده اید')
                         this.props.history.push("/login");
                     }else {
@@ -86,7 +87,7 @@ class LoginPage3 extends Component {
                     <MDBCol md={6} sm={12} className={"fv-loginPageBody"}>
                         <MDBRow className={"fv-LoginPageHeader"}>
                             <MDBCol>
-                                <i className="fas fa-chevron-right" /><p><Link to={'/mainPage'}>صفحه اصلی</Link></p>
+                                <i className="fas fa-chevron-right" /><p><Link to={'/'}>صفحه اصلی</Link></p>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-loginPageBodyOne"}>
@@ -115,7 +116,7 @@ class LoginPage3 extends Component {
                                             .then(data =>{
                                                 if(data){
                                                     console.log(nameAndLastNAme,mobileNumber)
-                                                    this.props.history.push('/mainPage')
+                                                    this.props.history.push('/')
                                                 }
                                             }) ; */
                                     }}/>

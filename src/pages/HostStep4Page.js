@@ -15,6 +15,9 @@ import HostStepCheckbox from "../componentsPages/hostStepCheckbox";
 class HostStep4Page extends Component {
     constructor(props) {
         super(props);
+        if(!JSON.parse(localStorage.getItem("info"))){
+            this.props.history.push('login');
+        }
         this.state={
             generalFacilities:[],
             kitchenFacilities:[],
@@ -670,8 +673,8 @@ class HostStep4Page extends Component {
                             کار زمان بر خواهد بود. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگرا
                             ن را در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند."
                             image={HostStepImage1}
-                            nextLink={'../../hostStep5'}
-                            returnLink={'../../hostStep3'}
+                            nextLink={'../../hostStepSetPrice'}
+                            returnLink={'../../hostStepAccommodationDetails'}
                             localStorageName={"step4"}
                             localStorageData={localStorageData}/>
                     </MDBRow>

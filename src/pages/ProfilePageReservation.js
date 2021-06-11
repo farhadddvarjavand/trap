@@ -11,6 +11,9 @@ import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 class ProfilePageReservation extends Component {
     constructor(props) {
         super(props);
+        if(!JSON.parse(localStorage.getItem("info"))){
+            this.props.history.push('login');
+        }
 
     }
 
@@ -19,7 +22,7 @@ class ProfilePageReservation extends Component {
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
                     <HeaderSearch  {...this.props}
-                                   thisPageName = "رزورو های من"/>
+                                   thisPageName = "رزرو های من"/>
 
                 </MDBContainer>
 
@@ -28,7 +31,7 @@ class ProfilePageReservation extends Component {
                     <ProfilePageUserInfo />
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
-                        <h5>رزورو های من</h5>
+                        <h5>رزرو های من</h5>
 
                         <MDBRow className={"fv-ProfilePageReservationImage"}>
                             <MDBCol md={12}>

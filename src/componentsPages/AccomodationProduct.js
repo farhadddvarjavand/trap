@@ -41,7 +41,7 @@ const AccommmodationProduct =(props) =>{
                             </MDBCol>
                             <MDBCol md={6} sm={6} className={"fv-myAccommodationPagePaddingLeftButton"}>
                                 {props.classNameActiveTopLeft ?
-                                    <Link to={`/profileGustComments2/${props.code}`}><input type="button" value="پاسخ به نظرات" className={props.classNameActiveTopLeft} /></Link> :
+                                    <Link to={`/profileShowGuestComments/${props.code}`}><input type="button" value="پاسخ به نظرات" className={props.classNameActiveTopLeft} /></Link> :
                                     <input type="button" value="پاسخ به نظرات" className={props.classNameActiveTopLeft} />
                                 }
                             </MDBCol>
@@ -124,7 +124,8 @@ const AccommmodationProduct =(props) =>{
                                                     localStorage.setItem("step4", JSON.stringify(step4Data))
                                                     localStorage.setItem("step5", JSON.stringify(step5Data))
                                                     localStorage.setItem("step5-2", JSON.stringify(step52Data))
-                                                    props.history.push('/hostStep1')
+                                                    localStorage.setItem("editCode", JSON.stringify({editCode:props.code}))
+                                                    props.history.push('/hostStepBasicInformation')
                                                 });
 
                                         }
@@ -136,7 +137,7 @@ const AccommmodationProduct =(props) =>{
                             </MDBCol>
                             <MDBCol md={6} sm={6} className={"fv-myAccommodationPagePaddingLeftButton"}>
                                 {props.classNameActiveBottonLeft ?
-                                    <Link to={"/ProfileReservation2"}><input type="button" value="مشاهده رزروها" className={props.classNameActiveBottonLeft} /></Link> :
+                                    <Link to={"/ProfileMyReservation"}><input type="button" value="مشاهده رزروها" className={props.classNameActiveBottonLeft} /></Link> :
                                     <input type="button" value="مشاهده رزروها" className={props.classNameActiveBottonLeft} />
                                 }
                             </MDBCol>

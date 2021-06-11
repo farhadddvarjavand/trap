@@ -59,12 +59,12 @@ class HeaderSearch extends Component {
                       }}/>
                   </MDBCol>
                   <MDBCol sm={1} className={this.state.onclickHandel ? "fv-DisplayPageLoginSignMobile": "fv-hideMenu"} >
-                      <i className="fas fa-caret-down" onClick={()=>{
+                      <i className="fas fa-caret-up" onClick={()=>{
                           this.setState({onclickHandel:!this.state.onclickHandel})
                       }}/>
                   </MDBCol>
                 <MDBCol sm={1} className={this.state.onclickHandel ? "fv-hideMenu" : "fv-DisplayPageLoginSignMobile"} >
-                    <i className="fas fa-caret-right" onClick={()=>{
+                    <i className="fas fa-caret-left" onClick={()=>{
                         this.setState({onclickHandel:!this.state.onclickHandel})
                     }}/>
                 </MDBCol>
@@ -86,7 +86,7 @@ class HeaderSearch extends Component {
                             <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
                                 <MDBCol className={"fv-ProfilePageUserInfoDetailsBodyColumn"}>
                                     <Link to={'/login'}><p className={ window.location.href.match(/\blogin\b/) ? "fv-reservationActive" : ''}  ><i className="fa fa-door-open" />ورود</p></Link>
-                                    <Link to={'/login3'}> <p className={ window.location.href.match(/\blogin3\b/) ? "fv-transaction" : ''}  ><i className="fa fa-address-card" />ثبت نام</p> </Link>
+                                    <Link to={'/registration'}> <p className={ window.location.href.match(/\bregistration\b/) ? "fv-transaction" : ''}  ><i className="fa fa-address-card" />ثبت نام</p> </Link>
                                 </MDBCol>
                             </MDBRow>
                         </MDBCol>
@@ -96,7 +96,7 @@ class HeaderSearch extends Component {
 
                         <MDBRow className={"fv-DisplayPageRotePathMobile"}>
                             <MDBCol>
-                                <Link to={"/mainPage"}> <p> صفحه اصلی </p> </Link>
+                                <Link to={"/"}> <p> صفحه اصلی </p> </Link>
                                 <i className="fas fa-chevron-left" />
                                 <Link to={"/Profile"}><p className={this.props.thisPageName ? ""  : "fv-DisplayPagePathNow"}> پنل کاربری </p> </Link> {/* اگر مقدار سوم وجود داشت کلاس رنگ سبز غیر فعال شود */}
                                 <i className={this.props.thisPageName ? "fas fa-chevron-left" : ""} />     {/* اگر مقدار سوم وجود داشت کلاس فعال شود */}

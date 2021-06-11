@@ -81,13 +81,13 @@ class HeaderLoginMenu extends React.Component{
                         </MDBRow>
                         <MDBRow className={"fv-cascadeOptionMainPage"}>
                             <MDBCol md={12} sm={12}>
-                                <Link to={"/ProfileReservation2"}> <i className="fa fa-receipt" />
+                                <Link to={"/ProfileMyReservation"}> <i className="fa fa-receipt" />
                                     <a><p>رزور های من</p></a> </Link>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus fv-userInfoButtonCascadeMobile"}>
                             <MDBCol md={12} sm={12}>
-                                <Link to={"/hostStep1"}>
+                                <Link to={"/hostStepBasicInformation"}>
                                     <a onClick={()=>{
                                         localStorage.removeItem("step1")
                                         localStorage.removeItem("step2")
@@ -96,6 +96,7 @@ class HeaderLoginMenu extends React.Component{
                                         localStorage.removeItem("step4")
                                         localStorage.removeItem("step5")
                                         localStorage.removeItem("step5-2")
+                                        localStorage.removeItem("editCode")
                                     }}> <i className="fa fa-laptop-house" />  <p>میزبان شوید</p></a> </Link>
                             </MDBCol>
                         </MDBRow>
@@ -117,7 +118,7 @@ class HeaderLoginMenu extends React.Component{
                         <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
                             <MDBCol className={"fv-ProfilePageUserInfoDetailsBodyColumn"}>
                                 <Link to={'/login'}><p className={ window.location.href.match(/\blogin\b/) ? "fv-reservationActive" : ''}  ><i className="fa fa-door-open" />ورود</p></Link>
-                                <Link to={'/login3'}> <p className={ window.location.href.match(/\blogin3\b/) ? "fv-transaction" : ''}  ><i className="fa fa-address-card" />ثبت نام</p> </Link>
+                                <Link to={'/registration'}> <p className={ window.location.href.match(/\bregistration\b/) ? "fv-transaction" : ''}  ><i className="fa fa-address-card" />ثبت نام</p> </Link>
                             </MDBCol>
                         </MDBRow>
                     </MDBCol>
@@ -141,7 +142,8 @@ class HeaderLoginMenu extends React.Component{
                         localStorage.removeItem("step4")
                         localStorage.removeItem("step5")
                         localStorage.removeItem("step5-2")
-                        this.props.history.push('/hostStep1')
+                        localStorage.removeItem("editCode")
+                        this.props.history.push('/hostStepBasicInformation')
                     } }/>
                 </MDBCol>
                 <MDBCol md={9}>

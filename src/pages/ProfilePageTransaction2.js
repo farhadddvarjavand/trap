@@ -15,6 +15,9 @@ const commaNumber = require('comma-number')
 class ProfilePageTransaction2 extends Component {
     constructor(props) {
         super(props);
+        if(!JSON.parse(localStorage.getItem("info"))){
+            this.props.history.push('login');
+        }
         this.state={
             transactionDatas:[],
             transactionPrice:'',
@@ -67,13 +70,13 @@ class ProfilePageTransaction2 extends Component {
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
                         <h5>تراکنش های من</h5>
-                        <MDBRow className={"fv-ProfilePageReservationSetInfo"}>
+                        <MDBRow className={"fv-ProfilePageReservationSetInfo fv-ProfilePageTransaction2HeaderForMobile"}>
 
 
-                            <MDBCol md={3} sm={7} className={""}>
+                            <MDBCol md={3} sm={12} className={""}>
                                 <input type="text" placeholder="مبلغ تراکنش" onChange={(e)=>this.setState({transactionPrice:e.target.value})}/>
                             </MDBCol>
-                            <MDBCol md={2} sm={5} className={"fv-ProfilePageReservationRightCalendar"}>
+                            <MDBCol md={2} sm={12} className={"fv-ProfilePageReservationRightCalendar"}>
                                 <CalendarLinear dayToReturn={this.selectDay} text={'تاریخ تراکنش'} />
                             </MDBCol>
                             <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>

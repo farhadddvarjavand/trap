@@ -50,7 +50,7 @@ const ReservationProduct =(props) =>{
                          <input type="button" value="پرداخت"/> :
 
                          <input type="button" value="پرداخت2" onClick={()=> {
-                             props.history.push("/ProfileTransaction2");
+                             props.history.push("/ProfileMyTransaction");
                          }}/>
                     }
 

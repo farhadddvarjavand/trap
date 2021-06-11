@@ -21,14 +21,14 @@ class ProfilePageCalendarEmpty extends Component {
             <MDBContainer className={"fv-SearchHomePage  fv-ProfilePage fv-ProfilePageReservation  fv-profilePageReservationEmpty"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
                     <HeaderSearch  {...this.props}
-                                   thisPageName = "رزورو های من"/>
+                                   thisPageName = "رزرو های من"/>
                 </MDBContainer>
 
                 <MDBRow className={"fv-ProfilePageLeftBody"}>
                     <ProfilePageUserInfo />
 
                     <EmptyImagesPage
-                        title ="رزورو های من"
+                        title ="رزرو های من"
                         text="شما تاکنون رزروی نداشته اید"
                         image={Logo}/>
 
