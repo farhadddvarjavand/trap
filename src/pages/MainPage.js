@@ -135,7 +135,7 @@ class MainPage extends Datas {
                                 localStorage.removeItem("step5")
                                 localStorage.removeItem("step5-2")
                                 localStorage.removeItem("editCode")
-                                this.props.history.push('/registration')
+                                // this.props.history.push('/hostStepBasicInformation')
 
                             } } className={localStorage.getItem("token") ? "fv-getHostButtonMainPage" : "fv-hideButtonRegister"}  /> </Link>
                         </MDBCol>

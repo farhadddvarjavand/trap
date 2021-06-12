@@ -15,7 +15,7 @@ import CalendarForProfile from "../data/CalendarForProfile";
 import CalenderProfileMobile from "../data/CalenderProfileMobile";
 import {
     changeDatesCost,
-    changeDatesStatus,
+    changeDatesStatus, closedReservedDates,
     getUserVillaComments,
     userVillas, villaClosedDates,
     villaDates, villaReservedDatesOnly
@@ -23,6 +23,7 @@ import {
 import {reservedDates, villa, villaPrice} from "../services/villaService";
 import {getToday, priceOfPerMonth} from "../componentsPages/calculationsDate";
 import config from "../services/config.json";
+import moment from "moment-jalaali";
 
 class ProfilePageCalender extends Component {
     constructor(props) {
@@ -44,6 +45,9 @@ class ProfilePageCalender extends Component {
             selectedDaysAll : '',
             resultReservedDates:[],
             finallyPrice:[],
+
+            reservedDatesUsers:[],
+            closedDatesHost:[],
 
         }
 
@@ -70,18 +74,13 @@ class ProfilePageCalender extends Component {
 
         userVillas()
             .then(res=>{
-                console.log(res)
+              //  console.log(res)
                 if(res.data.data)
                     this.setState({villasUser:res.data.data})
             })
 
-        villaReservedDatesOnly(this.state.villasUsertitle)
-            .then(res=>console.log(res))
-            .catch(err=>console.log(err))
 
-        villaClosedDates(this.state.villasUsertitle)
-            .then(res=>console.log(res))
-            .catch(err=>console.log(err))
+
 
 
 
@@ -89,7 +88,19 @@ class ProfilePageCalender extends Component {
     villaReservedDates = ()=>{
 
 
-        reservedDates(this.state.villasUsertitle)
+        closedReservedDates(this.state.villasUsertitle)
+            .then(res=>{
+               // console.log(res)
+                this.setState({reservedDatesUsers:Object.values(res.data.data.reservedDates)  , closedDatesHost:Object.values(res.data.data.customizedDates)} , ()=>{
+                    this.calculatePricesWithString()
+
+                })
+
+            })
+            .catch(err=>console.log(err))
+
+
+       /* reservedDates(this.state.villasUsertitle)
             .then(res => {
                 this.setState({resultReservedDates: Object.values(res.data.data)} , () =>{
                         this.calculatePricesWithString()
@@ -98,7 +109,7 @@ class ProfilePageCalender extends Component {
             })
             .catch(error =>{
 
-            })
+            }) */
 
     }
     calculatePricesWithString = ()=>{
@@ -122,9 +133,9 @@ class ProfilePageCalender extends Component {
             }
         }
 
-        console.log(priceDaysUpdates) // araye gheimat ha 30 ta 30 ta ie mah
+      //  console.log(priceDaysUpdates) // araye gheimat ha 30 ta 30 ta ie mah
         // this.state.resultReservedDates // rozhaie gheire faal
-        console.log(this.state.resultReservedDates)
+        console.log(this.state.closedDatesHost)
 
         let finalCost=[]
         let finalCostArrays = []
@@ -134,10 +145,17 @@ class ProfilePageCalender extends Component {
 
         for (let i = 0 ; i < priceDaysUpdates.length ; i++){ // 2 ta
             for (let j = 0 ; j < priceDaysUpdates[i].daysPrice.length ; j++){ // 30 ta  => dar majmo in halghe 60 bar
-                for (let k = 0 ; k < this.state.resultReservedDates.length ; k ++){ // agar in halat bod gheire faal
-                    let sspliteReservedDays =  this.state.resultReservedDates[k].start_date.split("/")
+                for (let k = 0 ; k < this.state.closedDatesHost.length ; k ++){ // agar in halat bod gheire faal
+                    let sspliteReservedDays =  this.state.closedDatesHost[k].start_date.split("/")
                     if ( j+1 === Number(sspliteReservedDays[2]) &&  priceDaysUpdates[i].month === Number(sspliteReservedDays[1]) &&  priceDaysUpdates[i].year === Number(sspliteReservedDays[0])){
                         finalCostArrays.push("غیر فعال")
+                        isset = true
+                    }
+                }
+                for (let m = 0 ; m < this.state.reservedDatesUsers.length ; m ++){ // agar in halat bod gheire faal
+                    let sspliteReservedDays =  this.state.reservedDatesUsers[m].start_date.split("/")
+                    if ( j+1 === Number(sspliteReservedDays[2]) &&  priceDaysUpdates[i].month === Number(sspliteReservedDays[1]) &&  priceDaysUpdates[i].year === Number(sspliteReservedDays[0])){
+                        finalCostArrays.push("رزرو شده")
                         isset = true
                     }
                 }
@@ -151,13 +169,13 @@ class ProfilePageCalender extends Component {
                 if(priceDaysUpdates[i].daysPrice.length === j+1){
                     finalCost.push(finalCostArrays)
                     finalCostArrays=[]
-                    console.log(finalCost)
+                  //  console.log(finalCost)
                 }
 
             }
         }
 
-        console.log(finalCost)
+       // console.log(finalCost)
 
         let finalCosts=[]
 
@@ -170,8 +188,8 @@ class ProfilePageCalender extends Component {
             finalCostObject.daysPrice=finalCost[i]
             finalCostObject.month=priceDaysUpdates[i].month
             finalCostObject.year=priceDaysUpdates[i].year
-            console.log(finalCostObject)
-            console.log('ssssssssssssssssssss')
+           // console.log(finalCostObject)
+           // console.log('ssssssssssssssssssss')
             finalCosts.push(finalCostObject)
         }
         console.log(finalCosts)
@@ -194,7 +212,29 @@ class ProfilePageCalender extends Component {
     }
     render() {
 
-        const priceDaysUpdates = []  /// مورد نظر
+        let reservedDatesUsers = []
+        let closeDatesHost = []
+        for(let i = 0 ; i < this.state.reservedDatesUsers.length ; i++){
+            const result = this.state.reservedDatesUsers[i].end_date.split("/")
+            let date = {
+                year:result[0],
+                month:result[1],
+                day:result[2],
+            }
+            reservedDatesUsers.push(date)
+        }
+        for(let i = 0 ; i < this.state.closedDatesHost.length ; i++){
+            const result = this.state.closedDatesHost[i].end_date.split("/")
+            let date = {
+                year:result[0],
+                month:result[1],
+                day:result[2],
+            }
+            closeDatesHost.push(date)
+        }
+        // console.log(reservedDatesUsers)
+
+     /*   const priceDaysUpdates = []  /// مورد نظر
         let priceArrayOneMonth ={
             daysPrice: [] ,
             month: '',
@@ -214,7 +254,7 @@ class ProfilePageCalender extends Component {
             }
         }
 
-        console.log(priceDaysUpdates) // araye gheimat ha 30 ta 30 ta ie mah
+      // console.log(priceDaysUpdates) // araye gheimat ha 30 ta 30 ta ie mah
         // this.state.resultReservedDates // rozhaie gheire faal
 
         let finalCost=[]
@@ -227,7 +267,7 @@ class ProfilePageCalender extends Component {
                     let sspliteReservedDays =  this.state.resultReservedDates[k].start_date.split("/")
                     if ( j+1 === Number(sspliteReservedDays[2]) &&  priceDaysUpdates[i].month === Number(sspliteReservedDays[1]) &&  priceDaysUpdates[i].year === Number(sspliteReservedDays[0])){
                         finalCostArrays.push("غیر فعال")
-                        console.log(1)
+                      //  console.log(1)
                         isset = true
                     }
                 }
@@ -246,7 +286,7 @@ class ProfilePageCalender extends Component {
             }
         }
 
-        console.log(finalCost)
+        console.log(finalCost) */
 
 
         return(
@@ -331,6 +371,8 @@ class ProfilePageCalender extends Component {
 
                                 <CalendarForProfile
                                  villaPrice={this.state.finallyPrice}
+                                 closeDatesHostreserved = {closeDatesHost}
+                                 reservedDatesUsers = {reservedDatesUsers}
                                 getSelectedDay={this.getSelectedDays} />
                             </MDBRow>
 
@@ -482,6 +524,8 @@ class ProfilePageCalender extends Component {
                                 <MDBCol>
                                     <CalenderProfileMobile
                                         villaPrice={this.state.finallyPrice}
+                                        closeDatesHostreserved = {closeDatesHost}
+                                        reservedDatesUsers = {reservedDatesUsers}
                                         getSelectedDay={this.getSelectedDaysmobile} />
                                 </MDBCol>
                             </MDBRow>

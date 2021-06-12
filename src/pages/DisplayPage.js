@@ -93,6 +93,8 @@ class DisplayPage extends Component {
             lon:51.42,
             errors:false,
             finallyPrice:[],
+            alertErrors:false,
+            innerValidationFacilitiesCost:false,
 
         }
     }
@@ -319,6 +321,7 @@ componentDidMount() {
                 month: date.month,
                 year: date.year
             }
+            , alertErrors:false
         }))
          }
     }
@@ -332,6 +335,7 @@ componentDidMount() {
                 month: date.month,
                 year: date.year
             }
+            , alertErrors:false
         }))}
     }
 
@@ -348,7 +352,7 @@ componentDidMount() {
                   //  this.selectDayToReturn(selectedDay.from)
                     console.log(selectedDay)
 
-                this.setState({selectedDays:selectedDay})
+                this.setState({selectedDays:selectedDay })
             }
         }
     }
@@ -359,6 +363,8 @@ componentDidMount() {
 
 
     render() {
+
+        let reservedFacilitiesPrice = 0 //      ///////////////////// facilities price computing                   //
         const info = JSON.parse(localStorage.getItem("infoUser"))
         let nameAndFamily =  ""
         let avatar = ""
@@ -416,10 +422,10 @@ componentDidMount() {
 
         console.log(this.state.reservedTotalPrice)
         console.log(this.state.extraPeopleCost)
-        let chef = 0
-        let host = 0
-        let tour_guide = 0
-        let bodyguard = 0
+        let chef = ''
+        let host = ''
+        let tour_guide = ''
+        let bodyguard = ''
         if(this.state.facilitiesCheckbox.includes("chef")){
             if(this.state.resultVilla.info){
                 if(this.state.resultVilla.info.chef){
@@ -479,23 +485,51 @@ componentDidMount() {
                 { dates:daysCostString })
                 .then(response => console.log(response)) */
 
-                calculateFacilitiesCost({dates: daysCostString , chef:chef , host:host ,tour_guide:tour_guide , bodyguard:bodyguard })
+
+            // محاسبه facilities
+          /*  if((chef ||  host || tour_guide || bodyguard) && this.state.alertErrors === false ){
+                console.log(daysCostString)
+               if(!chef)
+                   chef=0
+                if(!host)
+                    host=0
+                if(!tour_guide)
+                    tour_guide=0
+                if(!bodyguard)
+                    bodyguard=0
+                console.log(Number(chef))
+                console.log(Number(host))
+                console.log(Number(tour_guide))
+                console.log(Number(bodyguard))
+                calculateFacilitiesCost({dates: daysCostString , chef:Number(chef) , host:Number(host) ,tour_guide:Number(tour_guide) , bodyguard:Number(bodyguard) })
                     .then(res=>{
                         if(res.status === 200 && this.state.reservedFacilitiesPrice !== res.data ){
-                            this.setState({reservedFacilitiesPrice:res.data })
+                            this.setState({reservedFacilitiesPrice:res.data , innerValidationFacilitiesCost : true}) // innerValidationFacilitiesCost true mishavad baraie halati ke akharin tik checkbox mikhahad bardashte shavaad => yani vojod darad kkonal checkboxi va amaliate facilities anjam shode kolan dar poroje
                         }
                     })
                     .catch(err=>{
-                        this.setState({reservedPrice: '', numberOfPeople: ' ', extraPeopleCost: ''})
+                        this.setState({reservedPrice: '', numberOfPeople: ' ', extraPeopleCost: '' , alertErrors:true})
+                       // alert("تاریخ را مجددا وارد نمایید")
+                       // this.selectDayToGo() // اولین روز خالی
+                       // this.selectDayToReturn()
                         console.log(err.response)
                     })
 
+            }
+            if(!chef &&  !host && !tour_guide && !bodyguard && this.state.innerValidationFacilitiesCost === true){ // dar halati ke karbar entekhab karde bod va khast bad az gheimat gerentan an facilities ra hazf konad (akharin facilities) => baraie akharin facilities ke gheire faal mishavad => hichkodam vojd nadarand va ghabli on ro faal mikonad
+                this.setState({reservedFacilitiesPrice:0,innerValidationFacilitiesCost:false })
+            }*/
 
             if(this.state.daysCostString !== daysCostString){
 
                 calculateCost({dates: daysCostString},this.props.match.params.id )
                     .then(res=>{
                         console.log(res)
+                        {/*   if(res.data.data === "Reservation failed" && !this.state.alertErrors ){ //
+                            rangeBetween = ' '
+                            alert('در این بازه انتخابی شما قبلا رزرو انجام شده لطفا تاریخ خود را عوض نمایید')
+                            this.setState({alertErrors:true})
+                        } */}
                         if(res.data.data !== "Reservation failed" && res.status === 200){
 
                             if(res.status === 200 && this.state.reservedPrice !== res.data){
@@ -513,12 +547,15 @@ componentDidMount() {
                                         }  )
                                         .catch(err=>console.log(err.response))
                                 } */
-                                this.setState({reservedPrice:res.data , numberOfPeople: ' ', extraPeopleCost: '' , daysCostString:daysCostString  , reservedFacilitiesPrice:0})  // لقیمت روز های رزرو شده فقط
+
+                                 reservedFacilitiesPrice = 0
+                                this.setState({reservedPrice:res.data , numberOfPeople: ' ', extraPeopleCost: '' , daysCostString:daysCostString  , reservedFacilitiesPrice:0 , alertErrors:false})  // لقیمت روز های رزرو شده فقط
                             }
                         }else {
                             if(this.state.reservedPrice || this.state.numberOfPeople !== ' ' || this.state.extraPeopleCost){
                                 alert("تاریخ انتخاب شده معتبر نمیباشد - شما قبلا در این تاریخ رزرو داشته اید")
-                                this.setState({reservedPrice:'' , numberOfPeople:' ' , extraPeopleCost:'' , reservedFacilitiesPrice:0})
+                                reservedFacilitiesPrice = 0
+                                this.setState({reservedPrice:'' , numberOfPeople:' ' , extraPeopleCost:'' , reservedFacilitiesPrice:0  , daysCostString:daysCostString})
                             }
                         }
 
@@ -526,6 +563,7 @@ componentDidMount() {
                     .catch(err=>{
                         if(this.state.reservedPrice || this.state.numberOfPeople !== ' ' || this.state.extraPeopleCost) {
                             alert("تاریخ انتخاب شده معتبر نمیباشد ")
+                            reservedFacilitiesPrice = 0
                             this.setState({reservedPrice: '', numberOfPeople: ' ', extraPeopleCost: ''  , reservedFacilitiesPrice:0 })
                         }
                     })
@@ -535,6 +573,7 @@ componentDidMount() {
 
         }else { //  daysCostString // اگر خالی باشد (ممکن است کاربر  تاریخ قبل وارد کرده باشد)
             if(this.state.daysCostString !== daysCostString){
+                reservedFacilitiesPrice = 0
                 this.setState({reservedPrice: '', numberOfPeople: ' ', extraPeopleCost: ''  , reservedFacilitiesPrice:0 , daysCostString:''})
             }
         }
@@ -622,43 +661,42 @@ componentDidMount() {
         let indexOfMaxDay = ""
         let indexOfMaxMonth = ""
         let indexOfMaxYear = ""
-
-        if(priceDaysUpdates.length > 0){        // چندمین خونه از آرایه قیمت ها پر هست که میشود اولین روز که باید فعال باشد
+        if(this.state.finallyPrice.length > 0){        // چندمین خونه از آرایه قیمت ها پر هست که میشود اولین روز که باید فعال باشد
             for (let i = 0 ; i < 31 ; i++){   // بگرد و اولین روزی که عدد وارد شده بود رو برگردون
-                if(Number(priceDaysUpdates[0].daysPrice[i]) && !minimumDayFixed){
+                if(Number(this.state.finallyPrice[0].daysPrice[i]) && !minimumDayFixed){
                     indexOfMinimumDay = i+1
-                    indexOfMinimumMonth = priceDaysUpdates[0].month
-                    indexOfMinimumYear= priceDaysUpdates[0].year
+                    indexOfMinimumMonth = this.state.finallyPrice[0].month
+                    indexOfMinimumYear= this.state.finallyPrice[0].year
                     minimumDayFixed = true
                 }
             }
             if(indexOfMinimumDay === ""  && !minimumDayFixed){               // اگر در آخر ماه قبلی روز ها غیر فعال ثبت شده بود و تایپ آن استرینگ بود در ماه بعد باید بگردیم دنبال روز فعال
                 for (let i = 0 ; i < 31 ; i++){
-                    console.log(priceDaysUpdates[1].daysPrice[i])
-                    if(Number(priceDaysUpdates[1].daysPrice[i])  && !minimumDayFixed){
+                    console.log(this.state.finallyPrice[1].daysPrice[i])
+                    if(Number(this.state.finallyPrice[1].daysPrice[i])  && !minimumDayFixed){
                         indexOfMinimumDay = i+1
-                        indexOfMinimumMonth = priceDaysUpdates[1].month
-                        indexOfMinimumYear= priceDaysUpdates[1].year
+                        indexOfMinimumMonth = this.state.finallyPrice[1].month
+                        indexOfMinimumYear= this.state.finallyPrice[1].year
                         minimumDayFixed = true
                     }
                 }
             }
             if(indexOfMinimumDay === ""  && !minimumDayFixed){               // اگر در آخر ماه قبلی روز ها غیر فعال ثبت شده بود و تایپ آن استرینگ بود در ماه بعد باید بگردیم دنبال روز فعال
                 for (let i = 0 ; i < 31 ; i++){
-                    console.log(priceDaysUpdates[2].daysPrice[i])
-                    if(Number(priceDaysUpdates[2].daysPrice[i])  && !minimumDayFixed){
+                    console.log(this.state.finallyPrice[2].daysPrice[i])
+                    if(Number(this.state.finallyPrice[2].daysPrice[i])  && !minimumDayFixed){
                         indexOfMinimumDay = i+1
-                        indexOfMinimumMonth = priceDaysUpdates[2].month
-                        indexOfMinimumYear= priceDaysUpdates[2].year
+                        indexOfMinimumMonth = this.state.finallyPrice[2].month
+                        indexOfMinimumYear= this.state.finallyPrice[2].year
                         minimumDayFixed = true
                     }
                 }
             }
 
 
-            indexOfMaxDay = priceDaysUpdates[priceDaysUpdates.length-1].daysPrice.length   //  mohasebe akharin roz ke meghdar vared karde
-            indexOfMaxMonth =  priceDaysUpdates[priceDaysUpdates.length-1].month
-            indexOfMaxYear =  priceDaysUpdates[priceDaysUpdates.length-1].year
+            indexOfMaxDay = this.state.finallyPrice[this.state.finallyPrice.length-1].daysPrice.length   //  mohasebe akharin roz ke meghdar vared karde
+            indexOfMaxMonth =  this.state.finallyPrice[this.state.finallyPrice.length-1].month
+            indexOfMaxYear =  this.state.finallyPrice[this.state.finallyPrice.length-1].year
 
         }
         const minimumDate ={     // اولین روز فعال که به قبل آن باید غیر فعال شود
@@ -782,6 +820,21 @@ componentDidMount() {
                 //  getDifferenceInDays(date1, date2)
             }
         }  */
+
+      /* **** ////////////////////////////////////////////////  //computing facilities //////////////////////////////////// ** */
+        if(!chef)
+            chef=0
+        if(!host)
+            host=0
+        if(!tour_guide)
+            tour_guide=0
+        if(!bodyguard)
+            bodyguard=0
+        if(rangeBetween){
+            reservedFacilitiesPrice = (Number(chef) + Number(host) + Number(tour_guide) + Number(bodyguard)) * Number(rangeBetween)
+        }
+
+        // console.log(reservedFacilitiesPrice)
 
 
 
@@ -959,7 +1012,7 @@ componentDidMount() {
 
                     <MDBRow className={"fv-DisplayPageRotePathMobile"}>
                         <MDBCol>
-                            <Link to={ "/mainPage"} ><p> صفحه اصلی </p></Link>
+                            <Link to={ "/"} ><p> صفحه اصلی </p></Link>
                             <i className="fas fa-chevron-left" />
                             <p className={"fv-DisplayPagePathNow"}> نمایش اقامتگاه </p>
                         </MDBCol>
@@ -974,7 +1027,7 @@ componentDidMount() {
 
                         <MDBRow className={"fv-DisplayPageRotePathMobile "}>
                             <MDBCol>
-                                <Link to={"/mainPage"}> <p> صفحه اصلی </p> </Link>
+                                <Link to={"/"}> <p> صفحه اصلی </p> </Link>
                                 <i className="fas fa-chevron-left" />
                                 <Link to={"/searchHomePage/Newest/1"}><p> صفحه جستجو </p> </Link> {/* اگر مقدار سوم وجود داشت کلاس رنگ سبز غیر فعال شود */}
                                 <i className="fas fa-chevron-left" />
@@ -1051,13 +1104,13 @@ componentDidMount() {
                                 </MDBRow>
                                 <MDBRow className={"fv-cascadeOptionMainPage"}>
                                     <MDBCol md={12} sm={12}>
-                                        <Link to={"/ProfileReservation2"}> <i className="fa fa-receipt" />
+                                        <Link to={"/ProfileMyReservation"}> <i className="fa fa-receipt" />
                                             <a><p>رزور های من</p></a> </Link>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus fv-userInfoButtonCascadeMobile"}>
                                     <MDBCol md={12} sm={12}>
-                                        <Link to={"/ProfileReservation2"}> <i className="fa fa-laptop-house" />
+                                        <Link to={"/ProfileMyReservation"}> <i className="fa fa-laptop-house" />
                                             <a><p>میزبان شوید</p></a> </Link>
                                     </MDBCol>
                                 </MDBRow>
@@ -1081,7 +1134,7 @@ componentDidMount() {
                             <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
                                 <MDBCol className={"fv-ProfilePageUserInfoDetailsBodyColumn"}>
                                     <Link to={'/login'}><p className={ window.location.href.match(/\blogin\b/) ? "fv-reservationActive" : ''}  ><i className="fa fa-door-open" />ورود</p></Link>
-                                    <Link to={'/login3'}> <p className={ window.location.href.match(/\blogin3\b/) ? "fv-transaction" : ''}  ><i className="fa fa-address-card" />ثبت نام</p> </Link>
+                                    <Link to={'/registration'}> <p className={ window.location.href.match(/\bregistration\b/) ? "fv-transaction" : ''}  ><i className="fa fa-address-card" />ثبت نام</p> </Link>
                                 </MDBCol>
                             </MDBRow>
                         </MDBCol>
@@ -1322,7 +1375,7 @@ componentDidMount() {
                                         <p>جمع کل</p>
                                     </MDBCol>
                                     <MDBCol  md={6}  sm={6} className={"fv-DisplayPageDetailsLeftFactorLeftMobile"} >
-                                        <p>{Number(this.state.reservedPrice) ? (Number(this.state.extraPeopleCost) ? commaNumber(Number(this.state.extraPeopleCost)+Number(this.state.reservedPrice)+Number(this.state.reservedFacilitiesPrice))  :  commaNumber(this.state.reservedPrice+this.state.reservedFacilitiesPrice )) : '' } تومان</p> {/* agar meghdare kol ba afrade ezafe vojod dasht ono dar nazar migirim dar gheire in sorat bedone jame bedone afrade ezafe ro dar nazar migirim */}
+                                        <p>{Number(this.state.reservedPrice) ? (Number(this.state.extraPeopleCost) ? commaNumber(Number(this.state.extraPeopleCost)+Number(this.state.reservedPrice)+Number(reservedFacilitiesPrice))  :  commaNumber(this.state.reservedPrice+reservedFacilitiesPrice )) : '' } تومان</p> {/* agar meghdare kol ba afrade ezafe vojod dasht ono dar nazar migirim dar gheire in sorat bedone jame bedone afrade ezafe ro dar nazar migirim */}
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow className={"fv-DisplayPageDetailsLeftButton"}>
@@ -1330,9 +1383,9 @@ componentDidMount() {
                                         <input type="button" value="درخواست رزرو" onClick={()=>{
                                             if (localStorage.getItem("token") ){
                                                 if(Number(this.state.reservedPrice )){
-                                                    let cost = this.state.reservedPrice+Number(this.state.reservedFacilitiesPrice)
+                                                    let cost = this.state.reservedPrice+Number(reservedFacilitiesPrice)
                                                     if(Number(this.state.extraPeopleCost)&&Number(this.state.reservedPrice)){
-                                                        cost = Number(this.state.extraPeopleCost)+Number(this.state.reservedPrice)+Number(this.state.reservedFacilitiesPrice)
+                                                        cost = Number(this.state.extraPeopleCost)+Number(this.state.reservedPrice)+Number(reservedFacilitiesPrice)
                                                     }
                                                     let extraCost = 0
                                                     if(Number(this.state.extraPeopleCost)){
@@ -1354,7 +1407,7 @@ componentDidMount() {
                                                         extra_people :extraPeople,   //this.state.resultVilla.details.max_capacity-this.state.resultVilla.details.standard_capacity ,
                                                         length_stay :rangeBetween,
                                                         extra_cost:extraCost,
-                                                        facilities_cost:this.state.reservedFacilitiesPrice
+                                                        facilities_cost:reservedFacilitiesPrice
                                                     }
                                                     console.log(data)
                                                     reserveRequest(data)
@@ -1367,7 +1420,7 @@ componentDidMount() {
                                                                     }
                                                                     localStorage.setItem("reservedDatas",dataSave); */
 
-                                                                this.props.history.push("/ProfileReservation2")
+                                                                this.props.history.push("/ProfileMyReservation")
                                                             }else {
                                                                 alert("اطلاعات را به درستی وارد نمایید")
                                                             }
@@ -1379,7 +1432,7 @@ componentDidMount() {
 
                                             }else {
                                                 alert("شما ابتدا باید وارد شوید")
-                                                this.props.history.push("/mainPage")
+                                                this.props.history.push("/")
                                             }
 
                                         }}/>
@@ -1637,7 +1690,7 @@ componentDidMount() {
                                 <CalendarDesktop
                                     minimumDate={minimumDate}
                                     maximumDate={maximumDate}
-                                    villaPrice={this.state.finallyPrice}
+                                    villaPrice={priceDaysUpdates}
                                     getSelectedDay={this.getSelectedDays}
                                     daysReserved={allDaysReservedConcat}
                                     getSelectedDaysCalendar={this.getSelectedDaysCalendar}/>
@@ -1654,7 +1707,7 @@ componentDidMount() {
                                     <CalendarForMobile
                                         minimumDate={minimumDate}
                                         maximumDate={maximumDate}
-                                        villaPrice={this.state.finallyPrice}
+                                        villaPrice={priceDaysUpdates}
                                         getSelectedDay={this.getSelectedDays}
                                         daysReserved={allDaysReservedConcat}
                                         getSelectedDaysCalendar={this.getSelectedDaysCalendar}/>
@@ -2052,7 +2105,7 @@ componentDidMount() {
                                 <p>جمع کل</p>
                             </MDBCol>
                             <MDBCol  md={6}  sm={6} >
-                                <p>{Number(this.state.reservedPrice) ? (Number(this.state.extraPeopleCost) ? commaNumber(Number(this.state.extraPeopleCost)+Number(this.state.reservedPrice)+Number(this.state.reservedFacilitiesPrice))  :  commaNumber(this.state.reservedPrice+this.state.reservedFacilitiesPrice )) : '' } تومان</p> {/* agar meghdare kol ba afrade ezafe vojod dasht ono dar nazar migirim dar gheire in sorat bedone jame bedone afrade ezafe ro dar nazar migirim */}
+                                <p>{Number(this.state.reservedPrice) ? (Number(this.state.extraPeopleCost) ? commaNumber(Number(this.state.extraPeopleCost)+Number(this.state.reservedPrice)+Number(reservedFacilitiesPrice))  :  commaNumber(this.state.reservedPrice+reservedFacilitiesPrice )) : '' } تومان</p> {/* agar meghdare kol ba afrade ezafe vojod dasht ono dar nazar migirim dar gheire in sorat bedone jame bedone afrade ezafe ro dar nazar migirim */}
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageDetailsLeftButton"}>
@@ -2060,9 +2113,9 @@ componentDidMount() {
                                 <input type="button" value="درخواست رزرو" onClick={()=>{
                                     if (localStorage.getItem("token") ){
                                         if(Number(this.state.reservedPrice )){
-                                            let cost = this.state.reservedPrice+Number(this.state.reservedFacilitiesPrice)
+                                            let cost = this.state.reservedPrice+Number(reservedFacilitiesPrice)
                                             if(Number(this.state.extraPeopleCost)&&Number(this.state.reservedPrice)){
-                                                cost = Number(this.state.extraPeopleCost)+Number(this.state.reservedPrice)+Number(this.state.reservedFacilitiesPrice)
+                                                cost = Number(this.state.extraPeopleCost)+Number(this.state.reservedPrice)+Number(reservedFacilitiesPrice)
                                             }
                                             let extraCost = 0
                                             if(Number(this.state.extraPeopleCost)){
@@ -2084,7 +2137,7 @@ componentDidMount() {
                                                 extra_people :extraPeople,   //this.state.resultVilla.details.max_capacity-this.state.resultVilla.details.standard_capacity ,
                                                 length_stay :rangeBetween,
                                                 extra_cost:extraCost,
-                                                facilities_cost:this.state.reservedFacilitiesPrice
+                                                facilities_cost:reservedFacilitiesPrice
                                             }
                                             console.log(data)
                                             reserveRequest(data)
@@ -2097,7 +2150,7 @@ componentDidMount() {
                                                             }
                                                             localStorage.setItem("reservedDatas",dataSave); */
 
-                                                        this.props.history.push("/ProfileReservation2")
+                                                        this.props.history.push("/ProfileMyReservation")
                                                     }else {
                                                         alert("اطلاعات را به درستی وارد نمایید")
                                                     }
@@ -2109,7 +2162,7 @@ componentDidMount() {
 
                                     }else {
                                         alert("شما ابتدا باید وارد شوید")
-                                        this.props.history.push("/mainPage")
+                                        this.props.history.push("/")
                                     }
 
                                 }}/>

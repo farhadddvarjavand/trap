@@ -343,7 +343,7 @@ export const updateUserAvatar = async (data) => {
 }
 
 
-export const villaReservedDatesOnly = async (id) => {
+/* export const villaReservedDatesOnly = async (id) => {
     return http.get(
         `${config.webapi}/api/v1/user/villaReservedDates/${id}`,
         { headers:{ 'Authorization' : await getToken() } }
@@ -353,6 +353,14 @@ export const villaReservedDatesOnly = async (id) => {
 export const villaClosedDates = async (id) => {
     return http.get(
         `${config.webapi}/api/v1/user/villaClosedDates/${id}`,
+        { headers:{ 'Authorization' : await getToken() } }
+    );
+} */
+
+
+export const closedReservedDates = async (id) => {
+    return http.get(
+        `${config.webapi}/api/v1/user/closedReservedDates/${id}`,
         { headers:{ 'Authorization' : await getToken() } }
     );
 }

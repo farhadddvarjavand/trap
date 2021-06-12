@@ -218,7 +218,41 @@
   .fv-ProfilePageCalenderLoader{
    height: 900px;
   }
- }
+
+
+   .yellowDay .fv-test {
+    color:#83846b  !important;;
+  }
+  .purpleDay .fv-test {
+    /* background: #2F80ED; */
+    color: #d81c61 !important;
+  }
+
+  .purpleDay.-selected ,.purpleDay.-selectedStart ,.purpleDay.-selectedEnd  {
+    background: #e5f4ff !important;
+    color: #d81c61;
+  }
+  .yellowDay.-selected , .yellowDay.-selectedStart , .yellowDay.-selectedEnd  , .yellowDay.-selectedEnd .fv-test , .yellowDay.-selected .fv-test , .yellowDay.-selectedStart .fv-test{
+    background:  #f2faeb !important;;
+    color: #83846b;
+  }
+  .-weekend.purpleDay .fv-test {
+    /* background: #2F80ED; */
+    color: #d81c61 !important;
+  }
+  .-weekend.yellowDay .fv-test {
+    /* background: #2F80ED; */
+    color: yellow !important;
+  }
+
+
+
+  .purpleDay:not(.-blank):not(.-selectedStart):not(.-selectedEnd):not(.-selectedBetween):not(.-selected):hover ,   .yellowDay:not(.-blank):not(.-selectedStart):not(.-selectedEnd):not(.-selectedBetween):not(.-selected):hover{
+    background: white !important;
+  }
+
+
+}
 
 
 

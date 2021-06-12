@@ -149,6 +149,14 @@ body{
   padding-right: 5%;
   padding-left: 3%;
   color: white;
+
+  padding-top: 2%;
+  padding-bottom: 2%;
+  margin-top: 0%;
+  font-size: 20px;
+  padding-right: 10%;
+  padding-left: 6%;
+  color: white;
 }
 .fv-footerMenu .fv-footerMenuRibbon .fv-hideButtonRegister , .fv-footerMenu .fv-footerMenuRibbonMobile .fv-hideButtonRegister , .fv-menuMobileLoginHide{
   display: none;
@@ -162,6 +170,17 @@ body{
   padding: 13px;
   border: none;
   margin-left: -35%;
+  /* padding-bottom: 8%; */
+  text-align: center;
+  border-radius: 15px;
+
+
+  background: #919191;
+  color: white;
+  margin-top: 2%;
+  padding: 13px;
+  border: none;
+  margin-left: -7%;
   /* padding-bottom: 8%; */
   text-align: center;
   border-radius: 15px;
@@ -428,7 +447,7 @@ body{
 }
 .fv-footerMenu .fv-cascadeOptionMainPageRowTop a{
   color: white;
-  margin-right: 3vw;
+  margin-right: 1vw;
 }
 .fv-cascadeOptionMainPageRowTop .col-md-12{
   display: flow-root;
@@ -515,6 +534,26 @@ body{
 .fv-gustNameAndInfoRight img  , .fv-gustNameAndInfoLeft img{
   margin-right: 2%;
 }
+input[type=text], select {
+  /* overflow: visible; */
+  padding-right: 1vw;
+  color: #909090;
+}
+textarea{
+  /* overflow: visible; */
+  padding-right: 1vw;
+  color: #909090;
+}
+.fv-footerMenuRibbon .col-md-9 {
+  flex: 0 0 73%;
+  max-width: 73%;
+}
+
+
+
+
+
+
 
 
 
@@ -733,9 +772,13 @@ color {  100%, 0% {
     margin-top: -11%;
   }
   .MainPage .fv-footerMenuRibbon .col-md-2 .fv-userInfoButtonCascade {
-    position: absolute;
+  /*  position: absolute;
     margin-right: -38%;
     width: 110%;
+    margin-top: 9%; */
+    position: absolute;
+    margin-right: -44%;
+    width: 107%;
     margin-top: 9%;
   }
   .fv-footerMenuRibbon .col-md-1 {
@@ -995,6 +1038,20 @@ color {  100%, 0% {
   .fv-mainMobileDiscountedVillas .fv-product .row {
     width: 112%;
   }
+  .fv-textInToCascadeOptionMainPage {
+    margin: auto;
+    text-align: center;
+    color: white;
+    margin-right: 8%;
+    padding: 0;
+    margin-top: -10vw;
+  }
+
+
+  textarea{
+    padding-right: 3vw;
+  }
+
 }
 @media (max-width: 540px){
   .fv-mainMobileDiscountedVillas .fv-product .row {

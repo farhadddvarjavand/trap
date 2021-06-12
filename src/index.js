@@ -68,7 +68,11 @@ ReactDOM.render(
 
     <React.StrictMode>
         <BrowserRouter>
-            <Switch>
+
+                <CookiesProvider>
+                        <ScrollToTop />
+                    <Switch>
+
                             <Route exact path={'/login'} component={LoginPage}/>
                             <Route exact path={'/loginMembership'} component={LoginPage2}/> {/* loginpage2 */}
                             <Route exact path={'/registration'} component={LoginPage3}/> {/* loginpage3 */}
@@ -97,7 +101,7 @@ ReactDOM.render(
                             <Route exact path={'/hostStepAddress'} component={HostStep2Page}/> {/* hostStep2 */}
                             <Route exact path={'/hostStepBasicInformation'} component={HostStep1Page}/> {/* hostStep1 */}
                             <Route exact path={'/searchHomePage/:sort/:id'} component={SearchHomePage}/>
-                            <Route exact path={''} component={MainPage}/>
+                              <Route exact path={'/'} component={MainPage}/>
                             <Route exact path={'/notFound'} component={NotFoundPage}/>
                             <Route exact path={'/addComments/:id'} component={AddComments}/>
                             <Route exact path={'/profileFavoritesPage'} component={ProfileFavoritesPage}/>
@@ -115,10 +119,12 @@ ReactDOM.render(
                             <Route exact path={'/ProfileWalletPageHandle'} component={ProfileWalletPageHandle}/>
                             <Route exact path={'/ProfileFavoritePageHandle'} component={ProfileFavoritePageHandle}/>
 
+                            <Route exact path={''} component={MainPage}/>
+                      </Switch>
+
+                </CookiesProvider>
 
 
-
-            </Switch>
         </BrowserRouter>
     </React.StrictMode>
   ,

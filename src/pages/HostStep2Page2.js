@@ -34,7 +34,7 @@ class HostStep2Page2 extends Component {
                     coordinates={[prevData.long, prevData.lat]}
                     anchor="bottom">
                 </Mapir.Marker>]
-                this.setState({markerArray:previousLocation});
+                this.setState({markerArray:previousLocation , lon : prevData.long , lat : prevData.lat , mapAddress :prevData.mapAddress });
             }
         }
     }
@@ -62,8 +62,8 @@ class HostStep2Page2 extends Component {
         // console.log(this.state.markerArray);
         const Map = Mapir.setToken({
             //factory parameters
-            hash:true,
-            logoPosition:"top-left",
+           // hash:true,
+           // logoPosition:"top-left",
             maxZoom:[16],
             transformRequest: (url) => {
                 return {
@@ -80,6 +80,7 @@ class HostStep2Page2 extends Component {
         const localStorageData={
             long:this.state.lon,
             lat:this.state.lat,
+            mapAddress:this.state.mapAddress,
         }
        // console.log(JSON.parse(localStorage.getItem("step2")))
         return (

@@ -86,21 +86,21 @@ class HostStep3Page extends Component {
 
 
             this.setState({
-                standardCapacity:prevData.standard_capacity,
-                maximumCapacity:prevData.max_capacity,
+                standardCapacity:Number(prevData.standard_capacity),
+                maximumCapacity:Number(prevData.max_capacity),
                 typeOfRent:prevData.rent_type,
-                numberOfBedroom:prevData.bedroom,
-                iranianToilet:prevData.ir_toilet,
-                Toilet:prevData.eu_toilet,
-                shower:prevData.shower,
+                numberOfBedroom:Number(prevData.bedroom),
+                iranianToilet:Number(prevData.ir_toilet),
+                Toilet:Number(prevData.eu_toilet),
+                shower:Number(prevData.shower),
                 yourAccommodationMeasure:prevData.area,
                 publicToiletCheckbox:prevsharedBathroom,
                 disinfectedCheckbox:prevDisinfected,
                 otherViewsCheckbox:prevPlaces,
                 accommodationViewsCheckbox:prevView,
                 setOtherSpace:prevSetOtherSpace,
-                numberOfMattress:mattressCount,
-                numberOfBed:bedCount,
+                numberOfMattress:Number(mattressCount),
+                numberOfBed:Number(bedCount),
 
             })
         }

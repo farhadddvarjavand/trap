@@ -55,6 +55,10 @@ const AccommmodationProduct =(props) =>{
                                             editVilla(props.code)
                                                 .then(res=>{
                                                     const allDataVilla = res.data.data[0]
+                                                  /*  let mapAddresses = " "  // map address
+                                                    if(allDataVilla.mapAddress){
+                                                        mapAddresses=allDataVilla.mapAddress
+                                                    } */
                                                     const step1Data = {
                                                         phone_number: allDataVilla.phone_number,
                                                         story: allDataVilla.story,
@@ -73,6 +77,7 @@ const AccommmodationProduct =(props) =>{
                                                     const step22Data = {
                                                         lat: allDataVilla.lat,
                                                         long:  allDataVilla.long,
+                                                       // mapAddress : mapAddresses,
                                                     }
                                                     const step3Data = {
                                                         area: allDataVilla.detail.area,

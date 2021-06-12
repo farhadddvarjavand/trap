@@ -869,7 +869,7 @@
         flex: 0 0 58.333333%;
         width: 66.666667% !important;
         text-align: initial;
-        margin-right: 0vw;
+        margin-right: 6vw;
     }
     .fv-widthHeaderLoginMenuForSearchHomePage .headerLoginMenu .fv-footerMenuRibbonMobile .col-sm-2 {
         flex: 0 0 10.666667%;
@@ -906,6 +906,12 @@
         margin-right: 7%;
     }
 
+    .fv-SearchHomePage .fv-footerMenuRibbonMobile .col-sm-8 {
+        flex: 0 0 58.333333%;
+        width: 66.666667% !important;
+        text-align: initial;
+        margin-right: 0vw;
+    }
 }
 @media (max-width: 766px) and (min-width: 478px) {
     .fv-widthHeaderLoginMenuForSearchHomePage .headerLoginMenu .fv-footerMenuRibbonMobile .col-sm-2 {

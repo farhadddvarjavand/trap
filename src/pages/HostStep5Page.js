@@ -67,8 +67,8 @@ class HostStep5Page extends Component {
             special_cost:this.state.priceFridayAndHoliday,
             normal_extra_cost:this.state.extraPersonPricesOnNormalDays,
             special_extra_cost:this.state.extraPersonPricesOnHolidays,
-            weekly_discount:this.state.weeklyDiscount,
-            monthly_discount:this.state.monthlyDiscount,
+            weekly_discount:Number(this.state.weeklyDiscount),
+            monthly_discount:Number(this.state.monthlyDiscount),
         }
         //console.log(JSON.parse(localStorage.getItem("step4")))
 

@@ -146,6 +146,7 @@ class HostStep5Page2 extends Component {
 
                 lat: step22Info.lat,
                 long:  step22Info.long,
+                mapAddress:step22Info.mapAddress,
 
                 area: step3Info.area,
                 bedroom:  step3Info.bedroom,
@@ -294,8 +295,8 @@ class HostStep5Page2 extends Component {
             console.log(allData)
 
         }else {
-            alert("لطفا اطلاعات را به درستی وارد نمایید")
             this.props.history.push(`/hostStepBasicInformation`)
+            alert("لطفا اطلاعات را به درستی وارد نمایید")
         }
 
         //console.log(JSON.parse(localStorage.getItem("step5")))

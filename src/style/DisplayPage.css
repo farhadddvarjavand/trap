@@ -567,6 +567,11 @@ display: none;
 .fv-DisplayPage .fv-DisplayPageTitleTopic {
     margin-top: 5%;
 }
+.-disabled .fv-test {
+    /* background: #2F80ED; */
+    color: #aaaaaa;
+    font-size: 11px;
+}
 
 
 /*    ezafe */
@@ -702,6 +707,36 @@ display: none;
 .fv-DisplayPageDetailsRightStayInHome .col-md-7 {
     padding: 0;
 }
+.fv-mainProduct.fv-mainMobile.fv-displayPageSimillarProducts .fv-product .col-md-5 {
+    text-align: end;
+    margin-right: -36px;
+    font-size: 12px;
+}
+
+
+
+
+/*    ***************************** ********************** **************** calendar Picker for Desktop css ************************************************* */
+.fv-SearchHomePage.fv-DisplayPage .DatePicker__calendarContainer .Calendar{
+    width: 300px !important;
+    height: 5.5vw !important;
+    margin-right: 10vw;
+    font-size: 9px !important;
+    margin-top: -5%;
+}
+.fv-SearchHomePage.fv-DisplayPage .DatePicker__calendarContainer .Calendar__day.-rtl{
+    height: 40px;
+}
+.fv-SearchHomePage.fv-DisplayPage .DatePicker__calendarContainer .Calendar__weekDays{
+    line-height: 40px;
+}
+.fv-SearchHomePage.fv-DisplayPage .DatePicker__calendarContainer .Calendar__section.-shown {
+    margin-top: -5px !important;
+}
+.fv-SearchHomePage.fv-DisplayPage .DatePicker__calendarContainer .Calendar__day.-rtl {
+    margin-bottom: 1px;
+}
+/*    ***************************** ********************** **************** calendar Picker for Desktop css ************************************************* */
 
 
 @media (max-width: 1200px) {
@@ -1273,7 +1308,7 @@ display: none;
     }
     .fv-DisplayPageCalenderForMobile .Calendar {
         width: 39em;
-        margin-right: -7.5vw;
+        margin-right:  -9.5vw;
     }
     .fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageCalenderForMobile{
         display: block;
@@ -1373,13 +1408,15 @@ display: none;
     }
     .fv-mainProduct.fv-mainMobile.fv-displayPageSimillarProducts .fv-product .col-md-5 {
         text-align: end;
-        margin-right: -6px;
-        font-size: 2.5vw;
-        margin-left: -54px;
+        margin-right: -2vw;
+        font-size: 3vw;
+        margin-left: -12vw;
     }
-    .fv-mainProduct.fv-mainMobile.fv-displayPageSimillarProducts .fv-productCapacityBox p{
-       font-size: 2.5vw;
+    .fv-mainProduct.fv-mainMobile.fv-displayPageSimillarProducts .fv-productCapacityBox p {
+        font-size: 3vw;
     }
+
+
     .fv-mainProduct.fv-mainMobile.fv-displayPageSimillarProducts .fv-productLocation .col-md-9 {
         border-bottom: 1px solid #400a0a;
         text-align: end;
@@ -1397,6 +1434,38 @@ display: none;
         margin-right: -2%;
         margin-top: 8%;
     }
+
+
+
+
+
+
+
+
+
+
+ /*    ***************************** ********************** **************** calendar for mobile css ************************************************* */
+    .fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageDetailsLeftBodyMobileReservation .DatePicker__calendarContainer .Calendar{
+        width: 70vw !important;
+        height: 5vw !important;
+        margin-right: 10vw;
+        font-size: 2vw !important;
+    }
+    .fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageDetailsLeftBodyMobileReservation .DatePicker__calendarContainer .Calendar__day.-rtl{
+        height: 9vw;
+    }
+    .fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageDetailsLeftBodyMobileReservation .DatePicker__calendarContainer .Calendar__weekDays{
+        line-height: 5vw;
+    }
+    .fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageDetailsLeftBodyMobileReservation .DatePicker__calendarContainer .Calendar__section.-shown {
+        margin-top: -1vw !important;
+    }
+    .fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageDetailsLeftBodyMobileReservation .DatePicker__calendarContainer .Calendar__day.-rtl {
+        margin-bottom: 0.3vw;
+    }
+    /*    ***************************** ********************** **************** calendar for mobile css ************************************************* */
+
+
 
 }
 
