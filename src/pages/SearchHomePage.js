@@ -18,6 +18,8 @@ import CalendarLinear from "../data/CalenddarLinear";
 import CalenddarLinearToReturn from "../data/CalenddarLinearToReturn";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 import HeaderLoginMenu from "../componentsPages/HeaderLoginMenu";
+import {Waiting} from "../componentsPages/WaitingLoad";
+
 const commaNumber = require('comma-number')
 
 
@@ -51,6 +53,7 @@ class SearchHomePage extends Datas {
             onclickHandelMobileMenu:false,
             paginationLimit: 4 ,     //   تعداد صفحات که نمایش داده شود را وارد میکنیم
             pagination : [],
+            SearchResultWaitingHandle:true,
 
 
         }
@@ -163,8 +166,10 @@ class SearchHomePage extends Datas {
     }
 
     render() {
-
-
+        const initialPaginationNumber = []
+        for (let i = 0 ; i< this.state.paginationLimit ; i++){
+            initialPaginationNumber.push(i+1)
+        }
 
         const info = JSON.parse(localStorage.getItem("infoUser"))
         let nameAndFamily =  ""
@@ -404,7 +409,7 @@ class SearchHomePage extends Datas {
                                         }
 
                                         this.postAndPushResultSearchPageVillas(data)
-                                        this.setState({doSearch:true})
+                                        this.setState({doSearch:true , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber})
                                         this.props.history.push('/searchHomePage/doSearch/1')
                                     }}/>
 
@@ -422,7 +427,7 @@ class SearchHomePage extends Datas {
                                          onClick={(event)=>{
                                              const data = {orderBy:'Newest'}
                                              this.postAndPushResultSearchPageVillas(data)
-                                             this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:""}) // agar bad az search karbar in ra zad hame pak shavad ke tasir migozarad bar search
+                                             this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber}) // agar bad az search karbar in ra zad hame pak shavad ke tasir migozarad bar search
                                 }}>
                                     جدیدترین
                                 </NavLink>
@@ -431,7 +436,7 @@ class SearchHomePage extends Datas {
                                           onClick={(event)=>{
                                               const data = {orderBy:'Expensive'}
                                               this.postAndPushResultSearchPageVillas(data)
-                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" })
+                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber})
                                 }}>
                                     گران‌ترین
                                 </NavLink>
@@ -440,7 +445,7 @@ class SearchHomePage extends Datas {
                                           onClick={(event)=>{
                                               const data = {orderBy:'Cheapest'}
                                               this.postAndPushResultSearchPageVillas(data)
-                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:""})
+                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber})
                                 }}>
                                     ارزان‌ترین
                                 </NavLink>
@@ -449,7 +454,7 @@ class SearchHomePage extends Datas {
                                           onClick={(event)=>{
                                               const data = {orderBy:'Popular'}
                                               this.postAndPushResultSearchPageVillas(data)
-                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:""})
+                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber})
                                 }}>
                                     محبوب‌ترین
                                 </NavLink>
@@ -458,7 +463,7 @@ class SearchHomePage extends Datas {
                                           onClick={(event)=>{
                                               const data = {orderBy:'Discount'}
                                               this.postAndPushResultSearchPageVillas(data)
-                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:""})
+                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber})
                                           }}>
                                     پرتخفیف ها
                                 </NavLink>
@@ -474,6 +479,8 @@ class SearchHomePage extends Datas {
 
                             </MDBRow>
                             <MDBRow className={"fv-mainProduct fv-mainMobile"} >
+                                {Waiting(this.state.SearchResultWaitingHandle , "fv-waitingPublicFullScreenSearchPage")}
+
                                 {searchPageVillas.map(searchPageVilla=>{
                                     // console.log(searchPageVilla)
                                     if(searchPageVilla.details){
@@ -523,7 +530,7 @@ class SearchHomePage extends Datas {
                                     }
                                     const datas = getDataPagination(1)
                                     this.postAndPushResultSearchPageVillas(datas)
-                                    this.setState({ pagination:newPagination})
+                                    this.setState({ pagination:newPagination , searchPageVillas:[] , SearchResultWaitingHandle:true})
 
                                     this.props.history.push(`/searchHomePage/${this.props.match.params.sort}/1`)
                                 }}><i className="fas fa-angle-double-right" /></button>
@@ -538,7 +545,7 @@ class SearchHomePage extends Datas {
                                            for (let i =0 ; i < this.state.pagination.length ; i ++){
                                                newPagination.push(this.state.pagination[i]-1)
                                            }
-                                           this.setState({ pagination:newPagination })
+                                           this.setState({ pagination:newPagination , searchPageVillas:[] , SearchResultWaitingHandle:true})
                                        }
 
                                        if(this.props.match.params.sort  === "doSearch" ){ // اگر سرچ کرده بود و بعد زد فقط یکی اضهفه شود به آن
@@ -547,14 +554,14 @@ class SearchHomePage extends Datas {
                                            console.log(data)
                                            this.postAndPushResultSearchPageVillas(data)
 
-                                           this.setState({pageNumber:this.props.match.params.id+1 , pageNum:this.props.match.params.id-1})
+                                           this.setState({pageNumber:this.props.match.params.id+1 , pageNum:this.props.match.params.id-1 , searchPageVillas:[] , SearchResultWaitingHandle:true})
                                            this.props.history.push(`/searchHomePage/doSearch/${Number(this.props.match.params.id)-1}`)
                                        }
                                        else {
 
                                            const datas = getDataPagination(Number(this.props.match.params.id)-1)
                                            this.postAndPushResultSearchPageVillas(datas)
-                                           this.setState({ pageNum:Number(this.props.match.params.id)-1})
+                                           this.setState({ pageNum:Number(this.props.match.params.id)-1 , searchPageVillas:[] , SearchResultWaitingHandle:true})
 
                                            this.props.history.push(`/searchHomePage/${this.props.match.params.sort}/${Number(this.props.match.params.id)-1}`)
                                        }
@@ -573,7 +580,7 @@ class SearchHomePage extends Datas {
                                                  onClick={(event)=>{
                                                      const data =getDataPaginationForewardAndBackwardForSearch(pagenumber)
                                                      this.postAndPushResultSearchPageVillas(data)
-                                                     this.setState({pageNumber:event.target.name , pageNum:pagenumber})
+                                                     this.setState({pageNumber:event.target.name , pageNum:pagenumber , searchPageVillas:[] , SearchResultWaitingHandle:true})
                                                  }}>
                                             {pagenumber}
                                         </NavLink>
@@ -589,7 +596,7 @@ class SearchHomePage extends Datas {
                                                     onClick={(event)=>{
                                                         const data =getDataPaginationForewardAndBackwardForSearch(paginations)
                                                         this.postAndPushResultSearchPageVillas(data)
-                                                            this.setState({pageNumber:event.target.name , pageNum:paginations})
+                                                            this.setState({pageNumber:event.target.name , pageNum:paginations , searchPageVillas:[] , SearchResultWaitingHandle:true})
                                                     }}>
                                                { paginations}
                                            </NavLink>
@@ -606,7 +613,7 @@ class SearchHomePage extends Datas {
                                             for (let i =0 ; i < this.state.pagination.length ; i ++){
                                                 newPagination.push(this.state.pagination[i]+1)
                                             }
-                                            this.setState({ pagination:newPagination})
+                                            this.setState({ pagination:newPagination , searchPageVillas:[] , SearchResultWaitingHandle:true})
                                         }
 
                                         if(this.props.match.params.sort  === "doSearch" ){ // اگر سرچ کرده بود و بعد زد فقط یکی اضهفه شود به آن
@@ -615,13 +622,13 @@ class SearchHomePage extends Datas {
                                             console.log(data)
                                             this.postAndPushResultSearchPageVillas(data)
 
-                                            this.setState({pageNumber:this.props.match.params.id+1 , pageNum:this.props.match.params.id+1})
+                                            this.setState({pageNumber:this.props.match.params.id+1 , pageNum:this.props.match.params.id+1 , searchPageVillas:[] , SearchResultWaitingHandle:true})
                                             this.props.history.push(`/searchHomePage/doSearch/${Number(this.props.match.params.id)+1}`)
                                         }
                                         else { // به صورت عای
                                             const datas = getDataPagination(Number(this.props.match.params.id)+1)
                                             this.postAndPushResultSearchPageVillas(datas)
-                                            this.setState({ pageNum:Number(this.props.match.params.id)+1 , addNumber:true})
+                                            this.setState({ pageNum:Number(this.props.match.params.id)+1 , addNumber:true , searchPageVillas:[] , SearchResultWaitingHandle:true})
 
                                             this.props.history.push(`/searchHomePage/${this.props.match.params.sort}/${Number(this.props.match.params.id)+1}`)
                                         }
@@ -642,7 +649,7 @@ class SearchHomePage extends Datas {
                                     }
                                     const datas = getDataPagination(endNumberOfPagesLimit)
                                     this.postAndPushResultSearchPageVillas(datas)
-                                    this.setState({ pagination:newPagination})
+                                    this.setState({ pagination:newPagination , searchPageVillas:[] , SearchResultWaitingHandle:true})
 
                                     this.props.history.push(`/searchHomePage/${this.props.match.params.sort}/${endNumberOfPagesLimit}`)
                                 }}><i className="fas fa-angle-double-left" /></button>

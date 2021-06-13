@@ -16,6 +16,8 @@ import ProfilePageGustComments2 from "../pages/PrfilePageGustComments2"
 import PrfilePageGustComments from "../pages/PrfilePageGustComments";
 import "../style/profilePageCommentsHandler.scss"
 import {villaPrice} from "../services/villaService";
+import ProfilePageReservation2 from "../pages/ProfilePageReservation2";
+import ProfilePageReservationEmpty from "./ProfilePageReservationEmpty";
 
 class ProfilePageReservationHandle extends Component {
     constructor(props) {
@@ -25,6 +27,7 @@ class ProfilePageReservationHandle extends Component {
             villaId:'',
             comment:false,
             villaPrice:[],
+            pushPage:'',
 
         }
     }
@@ -36,9 +39,11 @@ class ProfilePageReservationHandle extends Component {
             .then(res=>{
                 console.log(res)
                 if (res.data.data.length>0){
-                    this.props.history.push(`/ProfileMyReservation`)
+                    this.setState({pushPage:"full"})
+                    // this.props.history.push(`/ProfileMyReservation`)
                 }else {
-                    this.props.history.push("/ProfilePageReservationEmpty")
+                    this.setState({pushPage:"empty"})
+                    //  this.props.history.push("/ProfilePageReservationEmpty")
                 }
             })
             .catch(err=>console.log(err.response))
@@ -48,25 +53,29 @@ class ProfilePageReservationHandle extends Component {
 
 
         return(
-            <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageGustComments2 fv-profilePageCommentsHandler"}>
-                <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props} />
 
-                </MDBContainer>
+                <>
+                    {!this.state.pushPage ?
+                        <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageGustComments2 fv-profilePageCommentsHandler"}>
 
-                <MDBRow className={"fv-ProfilePageLeftBody"}>
+                            <MDBRow className={"fv-ProfilePageLeftBody"}>
 
-                    <ProfilePageUserInfo />
+                                <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
+                                    <MDBRow className={"fv-loaderComments"}>
+                                        <div className={ "cssload-wave" }>
+                                            <span></span><span></span><span></span><span></span><span></span>
+                                        </div>
+                                    </MDBRow>
+                                </MDBCol>
+                            </MDBRow>
+                        </MDBContainer>
+                    : ''}
+                    {this.state.pushPage === "full" ? <ProfilePageReservation2 /> : ''}
+                    {this.state.pushPage === "empty" ? <ProfilePageReservationEmpty /> : ''}
 
-                    <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
-                        <MDBRow className={"fv-loaderComments"}>
-                            <div className={ "cssload-wave" }>
-                                <span></span><span></span><span></span><span></span><span></span>
-                            </div>
-                        </MDBRow>
-                    </MDBCol>
-                </MDBRow>
-            </MDBContainer>
+
+                </>
+
         )
 
 

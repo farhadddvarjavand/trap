@@ -95,7 +95,7 @@ class ProfilePageCommentsHandle extends Component {
                     </MDBCol>
                 </MDBRow>
             </MDBContainer>
-                    )
+        )
 
 
     }

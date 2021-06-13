@@ -548,9 +548,30 @@ textarea{
   flex: 0 0 73%;
   max-width: 73%;
 }
-
-
-
+.fv-publicWaiting .circular {
+  animation: rotate 2s linear infinite;
+  position: inherit;
+  width: 16%;
+  z-index: 1;
+}
+.fv-waitingLoadPublicFullScreen{
+  width: 100%;
+  /* margin-inline: auto; */
+  margin: auto;
+  text-align: center;
+}
+.fv-publicWaiting .fv-hideLoader{
+  display: none;
+}
+.fv-waitingPublicFullScreenSearchPage .circular {
+  animation: rotate 2s linear infinite;
+  position: inherit;
+  width: 100%;
+  z-index: 1;
+}
+.fv-waitingPublicFullScreenSearchPage.fv-publicWaiting .circular {
+  margin-right: 86%;
+}
 
 
 
@@ -786,6 +807,10 @@ color {  100%, 0% {
     max-width: 8.333333%;
     padding: 0;
   }
+  .fv-waitingPublicFullScreenSearchPage.fv-publicWaiting .circular {
+    margin-right: 0%;
+  }
+
 
 }
 
@@ -1050,6 +1075,15 @@ color {  100%, 0% {
 
   textarea{
     padding-right: 3vw;
+  }
+  .fv-waitingPublicFullScreenSearchPage.fv-publicWaiting {
+    text-align: center;
+  }
+  .fv-waitingPublicFullScreenSearchPage.fv-publicWaiting .circular {
+    animation: rotate 2s linear infinite;
+    position: inherit;
+    width: 53%;
+    z-index: 1;
   }
 
 }

@@ -24,6 +24,8 @@ import CalendarLinear from "../data/CalenddarLinear";
 import {getUserInformation} from "../services/userService";
 import Footer from "../componentsPages/footer";
 import HeadeerLoginMenu from "../componentsPages/HeaderLoginMenu"
+import {Waiting} from "../componentsPages/WaitingLoad";
+
 const commaNumber = require('comma-number')
 
 
@@ -61,7 +63,28 @@ class MainPage extends Datas {
     }
 
 
+
     render() {
+        let popularVillaswaitingHandle = true
+        let bannersvillageswaitingHandle  = true
+        let bannersvillaswaitingHandle  = true
+        let discountedVillaswaitingHandle  = true
+        let economicVillaswaitingHandle =true
+        if(this.state.popularVillas.length>0){
+            popularVillaswaitingHandle =false
+        }
+        if(this.state.popularVillas.length>0){
+            bannersvillageswaitingHandle =false
+        }
+        if(this.state.popularVillas.length>0){
+            bannersvillaswaitingHandle =false
+        }
+        if(this.state.popularVillas.length>0){
+            discountedVillaswaitingHandle =false
+        }
+        if(this.state.popularVillas.length>0){
+            economicVillaswaitingHandle =false
+        }
         const info = JSON.parse(localStorage.getItem("infoUser"))
         let nameAndFamily =  ""
         let avatar = ""
@@ -299,12 +322,12 @@ class MainPage extends Datas {
                                 linkToPage={"/searchHomePage/Popular/1"}/>
             </MDBRow>
             <MDBRow className={"fv-mainProduct fv-mainMobile"} >
-
+                {Waiting( popularVillaswaitingHandle , "fv-waitingLoadPublicFullScreen")}
 
 
                 {popularVillage.map(productDetails=>{
-                    console.log(productDetails)
-                        if(productDetails.details){
+                  //  console.log(productDetails)
+                   //     if(productDetails.details){
                             return(
                                 <MDBCol md={3} sm={7} onClick={()=>{
                                     this.props.history.push(`/displayPage/${productDetails.id}`)
@@ -319,7 +342,7 @@ class MainPage extends Datas {
 
                                 </MDBCol>
                             )
-                        }else {
+                     /*   }else {
                             return(
                                 <MDBCol md={3} sm={7} onClick={()=>{
                                     this.props.history.push(`/displayPage/${productDetails.id}`)
@@ -334,7 +357,7 @@ class MainPage extends Datas {
 
                                 </MDBCol>
                             )
-                    }
+                    }  */
 
 
                 })}
@@ -345,6 +368,7 @@ class MainPage extends Datas {
                                 linkToPage={"/searchHomePage/Popular/1"}/>
             </MDBRow>
             <MDBRow className={"fv-mainMobileVillage"}>
+                {Waiting( bannersvillageswaitingHandle , "fv-waitingLoadPublicFullScreen")}
 
                 {bannersvillages.map(banners=>{
                    return( <MDBCol md={3} sm={7}>
@@ -360,6 +384,8 @@ class MainPage extends Datas {
                                 linkToPage={"/searchHomePage/cheapest/1"}/>
             </MDBRow>
             <MDBRow className={'fv-mainMobileAccommodation'} >
+                {Waiting( bannersvillaswaitingHandle , "fv-waitingLoadPublicFullScreen")}
+
                 {bannersvillas.map(bannersvila=>{
                   return  <MDBCol md={3} sm={7} >
                                  <TypesAccommodation
@@ -375,6 +401,8 @@ class MainPage extends Datas {
             </MDBRow>
 
             <MDBRow className={'fv-mainMobile fv-mainMobileDiscountedVillas'}>
+                {Waiting( discountedVillaswaitingHandle , "fv-waitingLoadPublicFullScreen")}
+
                 {discountedVillas.map(discountedVilla=>{
                     let discountPrice = ''
                     discountPrice = (discountedVilla.normal_cost * discountedVilla.weekly_discount) / 100
@@ -428,6 +456,8 @@ class MainPage extends Datas {
                                 linkToPage={"/searchHomePage/Cheapest/1"}/>
             </MDBRow>
             <MDBRow className={'fv-mainMobile'}>
+                {Waiting( economicVillaswaitingHandle , "fv-waitingLoadPublicFullScreen")}
+
                 {economicVillas.map(economicVilla=>{
                     return(
                         <MDBCol md={3} sm={6} onClick={()=>{

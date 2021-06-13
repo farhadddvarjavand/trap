@@ -714,6 +714,16 @@ display: none;
 }
 
 
+.fv-DisplayPage .fv-hideLoader{
+    display: none;
+}
+
+.fv-DisplayPageLoaderWaiting .fv-publicWaiting .circular {
+    animation: rotate 2s linear infinite;
+    position: inherit;
+    width: 50%;
+    z-index: 1;
+}
 
 
 /*    ***************************** ********************** **************** calendar Picker for Desktop css ************************************************* */
@@ -1434,8 +1444,17 @@ display: none;
         margin-right: -2%;
         margin-top: 8%;
     }
+    .fv-DisplayPageDetailsLeftBodyMobileReservation .fv-DisplayPageDetailsLeftFactor .col-md-6 {
+        flex: 0 0 45%;
+        max-width: 50%;
+        padding: 0;
+        text-align: center;
+    }
 
-
+    .fv-DisplayPageDetailsLeftBodyMobileReservation .fv-DisplayPageDetailsLeftFactor .fv-DisplayPageDetailsLeftFactorLeft {
+        text-align: inherit ;
+        margin-right: 4%;
+    }
 
 
 

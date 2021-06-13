@@ -20,6 +20,7 @@ class Datas extends React.Component{
 
             resultSearchPageVillas:[],
             data:'',
+            SearchResultWaitingHandle:true,
         }
     }
 
@@ -75,7 +76,7 @@ class Datas extends React.Component{
     postAndPushResultSearchPageVillas = (data)=> {
         doSearch(data)
             .then(res => {
-                this.setState({searchPageVillas: res.data.data , lastPageOfSearchPage:res.data.meta.last_page , totalVillas:res.data.meta.total});
+                this.setState({searchPageVillas: res.data.data , lastPageOfSearchPage:res.data.meta.last_page , totalVillas:res.data.meta.total , SearchResultWaitingHandle:false});
             })
             .catch(function (error) {
                 console.log('error')

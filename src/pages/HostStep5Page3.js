@@ -459,7 +459,7 @@ class HostStep5Page3 extends Component {
                         alert(showErrors)
                         if (err.response.data.errors.title || err.response.data.errors.type || err.response.data.errors.phone_number || err.response.data.errors.story) {
                             this.props.history.push('../../hostStep1')
-                        }
+                        }lo
                         if (err.response.data.errors.city || err.response.data.errors.state || err.response.data.errors.postal_code || err.response.data.errors.address) {
                             this.props.history.push('../../hostStepAddress')
                         }

@@ -61,6 +61,9 @@ import './font/fonts/ttf/IRANSansWeb.ttf'
 
 import './font/fonts/css.css';
 import PersianNumber from "./componentsPages/PersianNumber";
+import MainProfilePages from "./pages/MainProfilePages";
+import TestProfilePages2 from "./pages/TestProfilePages2";
+
 
 
 
@@ -72,6 +75,9 @@ ReactDOM.render(
                 <CookiesProvider>
                         <ScrollToTop />
                     <Switch>
+                            <Route exact path={'/TestProfilePages2'} component={TestProfilePages2}/>
+                            <Route exact path={'/MainProfilePages/:page'} component={MainProfilePages}/>
+
 
                             <Route exact path={'/login'} component={LoginPage}/>
                             <Route exact path={'/loginMembership'} component={LoginPage2}/> {/* loginpage2 */}

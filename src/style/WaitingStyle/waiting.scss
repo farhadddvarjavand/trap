@@ -1,0 +1,302 @@
+#ballsWaveG{
+  position:relative;
+  width:125px;
+  height:29px;
+  margin:auto;
+}
+
+.ballsWaveG{
+  position:absolute;
+  top:0;
+  background-color:#3EC886;
+  width:16px;
+  height:16px;
+  animation-name:ballsWaveG;
+  -o-animation-name:ballsWaveG;
+  -ms-animation-name:ballsWaveG;
+  -webkit-animation-name:ballsWaveG;
+  -moz-animation-name:ballsWaveG;
+  animation-duration:1.5s;
+  -o-animation-duration:1.5s;
+  -ms-animation-duration:1.5s;
+  -webkit-animation-duration:1.5s;
+  -moz-animation-duration:1.5s;
+  animation-iteration-count:infinite;
+  -o-animation-iteration-count:infinite;
+  -ms-animation-iteration-count:infinite;
+  -webkit-animation-iteration-count:infinite;
+  -moz-animation-iteration-count:infinite;
+  animation-direction:normal;
+  -o-animation-direction:normal;
+  -ms-animation-direction:normal;
+  -webkit-animation-direction:normal;
+  -moz-animation-direction:normal;
+  border-radius:8px;
+  -o-border-radius:8px;
+  -ms-border-radius:8px;
+  -webkit-border-radius:8px;
+  -moz-border-radius:8px;
+}
+
+#ballsWaveG_1{
+  left:0;
+  animation-delay:0s;
+  -o-animation-delay:0.6s;
+  -ms-animation-delay:0.6s;
+  -webkit-animation-delay:0.6s;
+  -moz-animation-delay:0.6s;
+}
+
+#ballsWaveG_2{
+  left:16px;
+  animation-delay:0.75s;
+  -o-animation-delay:0.75s;
+  -ms-animation-delay:0.75s;
+  -webkit-animation-delay:0.75s;
+  -moz-animation-delay:0.75s;
+}
+
+#ballsWaveG_3{
+  left:31px;
+  animation-delay:0.9s;
+  -o-animation-delay:0.9s;
+  -ms-animation-delay:0.9s;
+  -webkit-animation-delay:0.9s;
+  -moz-animation-delay:0.9s;
+}
+
+#ballsWaveG_4{
+  left:47px;
+  animation-delay:1.05s;
+  -o-animation-delay:1.05s;
+  -ms-animation-delay:1.05s;
+  -webkit-animation-delay:1.05s;
+  -moz-animation-delay:1.05s;
+}
+
+#ballsWaveG_5{
+  left:62px;
+  animation-delay:1.2s;
+  -o-animation-delay:1.2s;
+  -ms-animation-delay:1.2s;
+  -webkit-animation-delay:1.2s;
+  -moz-animation-delay:1.2s;
+}
+
+#ballsWaveG_6{
+  left:78px;
+  animation-delay:1.35s;
+  -o-animation-delay:1.35s;
+  -ms-animation-delay:1.35s;
+  -webkit-animation-delay:1.35s;
+  -moz-animation-delay:1.35s;
+}
+
+#ballsWaveG_7{
+  left:94px;
+  animation-delay:1.5s;
+  -o-animation-delay:1.5s;
+  -ms-animation-delay:1.5s;
+  -webkit-animation-delay:1.5s;
+  -moz-animation-delay:1.5s;
+}
+
+#ballsWaveG_8{
+  left:109px;
+  animation-delay:1.64s;
+  -o-animation-delay:1.64s;
+  -ms-animation-delay:1.64s;
+  -webkit-animation-delay:1.64s;
+  -moz-animation-delay:1.64s;
+}
+
+
+
+@keyframes ballsWaveG{
+  0%{
+    background-color:#3EC886;
+  }
+
+  100%{
+    background-color:rgba(102, 212, 72, 0.31);
+  }
+}
+
+@-o-keyframes ballsWaveG{
+  0%{
+    background-color:#3EC886;
+  }
+
+  100%{
+    background-color:rgb(161,161,161);
+  }
+}
+
+@-ms-keyframes ballsWaveG{
+  0%{
+    background-color:#3EC886;
+  }
+
+  100%{
+    background-color:rgb(161,161,161);
+  }
+}
+
+@-webkit-keyframes ballsWaveG{
+  0%{
+    background-color:#3EC886;
+  }
+
+  100%{
+    background-color:rgb(161,161,161);
+  }
+}
+
+@-moz-keyframes ballsWaveG{
+  0%{
+    background-color:#3EC886;
+  }
+
+  100%{
+    background-color:rgb(161,161,161);
+  }
+}
+
+
+
+
+#loadFacebookG{
+  width:125px;
+  height: 125px;
+  display: block;
+  position: relative;
+  margin:auto;
+}
+
+.facebook_blockG{
+  background-color:rgb(255,255,255);
+  border:3px solid #3EC886;;
+  float:left;
+  height:89px;
+  margin-left:7px;
+  width:23px;
+  opacity:0.1;
+  animation-name:bounceG;
+  -o-animation-name:bounceG;
+  -ms-animation-name:bounceG;
+  -webkit-animation-name:bounceG;
+  -moz-animation-name:bounceG;
+  animation-duration:1.5s;
+  -o-animation-duration:1.5s;
+  -ms-animation-duration:1.5s;
+  -webkit-animation-duration:1.5s;
+  -moz-animation-duration:1.5s;
+  animation-iteration-count:infinite;
+  -o-animation-iteration-count:infinite;
+  -ms-animation-iteration-count:infinite;
+  -webkit-animation-iteration-count:infinite;
+  -moz-animation-iteration-count:infinite;
+  animation-direction:normal;
+  -o-animation-direction:normal;
+  -ms-animation-direction:normal;
+  -webkit-animation-direction:normal;
+  -moz-animation-direction:normal;
+  transform:scale(0.7);
+  -o-transform:scale(0.7);
+  -ms-transform:scale(0.7);
+  -webkit-transform:scale(0.7);
+  -moz-transform:scale(0.7);
+}
+
+#blockG_1{
+  animation-delay:0.45s;
+  -o-animation-delay:0.45s;
+  -ms-animation-delay:0.45s;
+  -webkit-animation-delay:0.45s;
+  -moz-animation-delay:0.45s;
+}
+
+#blockG_2{
+  animation-delay:0.6s;
+  -o-animation-delay:0.6s;
+  -ms-animation-delay:0.6s;
+  -webkit-animation-delay:0.6s;
+  -moz-animation-delay:0.6s;
+}
+
+#blockG_3{
+  animation-delay:0.75s;
+  -o-animation-delay:0.75s;
+  -ms-animation-delay:0.75s;
+  -webkit-animation-delay:0.75s;
+  -moz-animation-delay:0.75s;
+}
+
+
+
+@keyframes bounceG{
+  0%{
+    transform:scale(1.2);
+    opacity:1;
+  }
+
+  100%{
+    transform:scale(0.7);
+    opacity:0.1;
+  }
+}
+
+@-o-keyframes bounceG{
+  0%{
+    -o-transform:scale(1.2);
+    opacity:1;
+  }
+
+  100%{
+    -o-transform:scale(0.7);
+    opacity:0.1;
+  }
+}
+
+@-ms-keyframes bounceG{
+  0%{
+    -ms-transform:scale(1.2);
+    opacity:1;
+  }
+
+  100%{
+    -ms-transform:scale(0.7);
+    opacity:0.1;
+  }
+}
+
+@-webkit-keyframes bounceG{
+  0%{
+    -webkit-transform:scale(1.2);
+    opacity:1;
+  }
+
+  100%{
+    -webkit-transform:scale(0.7);
+    opacity:0.1;
+  }
+}
+
+@-moz-keyframes bounceG{
+  0%{
+    -moz-transform:scale(1.2);
+    opacity:1;
+  }
+
+  100%{
+    -moz-transform:scale(0.7);
+    opacity:0.1;
+  }
+}
+.fv-computingReservedDetails .facebook_blockG {
+  height: 12px;
+}
+.fv-computingReservedDetails #loadFacebookG {
+  height: 50px;
+  margin-top: 10px;
+}

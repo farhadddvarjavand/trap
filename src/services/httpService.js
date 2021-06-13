@@ -10,7 +10,8 @@ axios.interceptors.response.use(null, error => {
         error.response.status < 500;
     if (!expectedErrors) {
         console.log(error);
-        alert("مشکلی از سمت سرور رخ داده است.");
+        alert("لطفا مجددا تلاش کنید");
+       // window.location.reload();
     }
 
     return Promise.reject(error);
