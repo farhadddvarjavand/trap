@@ -31,15 +31,9 @@ class MyAccommodationPage extends Component {
 
     render() {
         return(
-            <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-MyAccommodationPage"}>
-                <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props}
-                                   thisPageName = "اقامتگاه های من" />
-                </MDBContainer>
+            <div className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-MyAccommodationPage"}>
 
-                <MDBRow className={"fv-ProfilePageLeftBody"}>
-
-                    <ProfilePageUserInfo />
+                <div className={"fv-ProfilePageLeftBody"}>
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
 
@@ -108,14 +102,9 @@ class MyAccommodationPage extends Component {
                         </MDBRow>
 
                     </MDBCol>
-                </MDBRow>
+                </div>
 
-                 <MDBRow>
-                    <Footer />
-                </MDBRow>
-
-
-            </MDBContainer>
+            </div>
         )}
 }
 export default MyAccommodationPage

@@ -96,15 +96,7 @@ class ProfilePageWallet extends Component {
     render() {
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageWallet"}>
-                <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props}
-                                   thisPageName = "گزارش مالی"/>
-                </MDBContainer>
-
-                <MDBRow className={"fv-ProfilePageLeftBody"}>
-
-                    <ProfilePageUserInfo />
-
+                <div className={"fv-ProfilePageLeftBody"}>
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
                         <MDBRow className={"fv-ProfilePageReservationSetInfo"}>
                             <MDBCol md={4} sm={12} className={""}>
@@ -241,13 +233,10 @@ class ProfilePageWallet extends Component {
                         </MDBRow>
                     </MDBCol>
 
-                </MDBRow>
+                </div>
 
 
 
-                <MDBRow>
-                    <Footer />
-                </MDBRow>
 
             </MDBContainer>
         )}

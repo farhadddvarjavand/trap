@@ -32,6 +32,7 @@ import ProfileFavoritesPage from "./profileFavoritesPage";
 import ProfilePageWallet3 from "./ProfilePageWallet3";
 import MainPage from "./MainPage";
 import TestProfilePages2 from "./TestProfilePages2";
+import ProfilePageCalender from "./ProfilePageCalender";
 
 
 class MainProfilePages extends Component {
@@ -149,7 +150,9 @@ class MainProfilePages extends Component {
 
                     {this.props.match.params.page === "ProfilePageCommentsHandle" ? <ProfilePageCommentsHandle {...this.props} /> : '' }
 
-                    {this.props.match.params.page === "ProfilePageCalendarHandle" ? <ProfilePageCalendarHandle /> : '' }
+                    {this.props.match.params.page === "ProfilePageCalendarHandle" ? <ProfilePageCalendarHandle  {...this.props} /> : '' }
+
+                    {this.props.match.params.page === `profileCalender` ? <ProfilePageCalender  {...this.props}/> : '' }
 
                     {this.props.match.params.page === "ProfileWalletPageHandle" ? <ProfileWalletPageHandle /> : '' }
 
@@ -159,10 +162,6 @@ class MainProfilePages extends Component {
 
                     {this.props.match.params.page === "profileFavoritesPage" ? <ProfileFavoritesPage /> : '' }
 
-                    {this.props.match.params.page === "TestProfilePages2" ? <TestProfilePages2 /> : '' }
-
-
-                    {this.props.match.params.page === "profileShowGuestComments" ? <ProfileFavoritesPage /> : '' }
 
 
 

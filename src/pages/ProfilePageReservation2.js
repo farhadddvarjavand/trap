@@ -72,16 +72,8 @@ class ProfilePageReservation2 extends Component {
 
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2"}>
-                <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch
-                        {...this.props}
-                        thisPageName = "رزرو های من"/>
 
-                </MDBContainer>
-
-                <MDBRow className={"fv-ProfilePageLeftBody"}>
-
-                    <ProfilePageUserInfo />
+                <div className={"fv-ProfilePageLeftBody"}>
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
                         <h5>رزرو های من</h5>
@@ -227,11 +219,8 @@ class ProfilePageReservation2 extends Component {
 
                         </MDBRow>
                     </MDBCol>
-                </MDBRow>
+                </div>
 
-                <MDBRow>
-                    <Footer />
-                </MDBRow>
 
             </MDBContainer>
         )}

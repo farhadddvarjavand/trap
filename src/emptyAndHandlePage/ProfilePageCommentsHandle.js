@@ -15,6 +15,9 @@ import {fas} from "@fortawesome/free-solid-svg-icons";
 import ProfilePageGustComments2 from "../pages/PrfilePageGustComments2"
 import PrfilePageGustComments from "../pages/PrfilePageGustComments";
 import "../style/profilePageCommentsHandler.scss"
+import ProfilePageReservation2 from "../pages/ProfilePageReservation2";
+import ProfilePageReservationEmpty from "./ProfilePageReservationEmpty";
+import {WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
 
 class ProfilePageCommentsHandle extends Component {
     constructor(props) {
@@ -23,6 +26,8 @@ class ProfilePageCommentsHandle extends Component {
             userVillas:[],
             villaId:'',
             comment:false,
+            pushPage:'',
+            villaIdFullComments:''
 
         }
     }
@@ -45,13 +50,16 @@ class ProfilePageCommentsHandle extends Component {
                                         // avalin vilaie por
                                         if(Object.values(res.data.data).length !== 0){ /// agar vojod dasht commenti baraie villa haie sabt shode
                                             this.setState({comments: Object.values(res.data.data) , villaId:userVilla.id } , () =>{
-                                                this.props.history.push(`/profileShowGuestComments/${userVilla.id}`)
+                                                // this.props.history.push(`/profileShowGuestComments/${userVilla.id}`)
+                                                this.setState({villaIdFullComments:userVilla.id})
+
                                             })
                                         }
 
                                         // console.log(res.data.data)
                                     }else {
-                                        this.props.history.push("/profileGuestComments")
+                                        this.setState({villaIdFullComments:"guest"})
+                                      //  this.props.history.push("/profileGuestComments")
                                         // this.props.history.push("/profileGuestComments") /// صفحه ای پیدا نشده است
                                     }
                                 })
@@ -59,8 +67,9 @@ class ProfilePageCommentsHandle extends Component {
 
                         })
                     }else {
-                        this.props.history.push("/ProfilePageCommentsEmpty")
+                        // this.props.history.push("/ProfilePageCommentsEmpty")
                         // empty
+                        this.setState({villaIdFullComments:"guest"})
                     }
 
                 })
@@ -76,25 +85,20 @@ class ProfilePageCommentsHandle extends Component {
 
 
         return(
-            <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageGustComments2 fv-profilePageCommentsHandler"}>
-                <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props}/>
+            <>
+                {!this.state.villaIdFullComments ?
+                    WaitingLoadingProfilePage(true , "fv-waitingLoadPublicFullScreen")
 
-                </MDBContainer>
+                    : ''}
+                {Number(this.state.villaIdFullComments) ?  <ProfilePageGustComments2 villaId={Number(this.state.villaIdFullComments)} {...this.props}/> : ''}
+                {this.state.villaIdFullComments === "guest" ?   <PrfilePageGustComments /> : ''}
 
-                <MDBRow className={"fv-ProfilePageLeftBody"}>
 
-                    <ProfilePageUserInfo />
 
-                    <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
-                        <MDBRow className={"fv-loaderComments"}>
-                            <div className={ "cssload-wave" }>
-                                <span></span><span></span><span></span><span></span><span></span>
-                            </div>
-                        </MDBRow>
-                    </MDBCol>
-                </MDBRow>
-            </MDBContainer>
+            </>
+
+
+
         )
 
 

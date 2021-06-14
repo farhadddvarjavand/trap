@@ -11,6 +11,7 @@ import axios from "axios";
 import config from "../services/config.json"
 import http from "../services/httpService";
 import Logo from "../images/Logo.png";
+import {WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
 
 
 class ProfilePage extends Component {
@@ -35,6 +36,8 @@ class ProfilePage extends Component {
             avatarImageData:'',
 
             UserInfo:'',
+            loadingPageWaiting:true,
+            waitingButtonClick:false,
 
         }
 
@@ -59,6 +62,7 @@ componentDidMount() {
                     shabaNumber:res.data.shaba_number,
 
                     UserInfo : res.data,
+                    loadingPageWaiting:false,
                 })
             })
     }
@@ -130,131 +134,131 @@ componentDidMount() {
 
 
         return(
-            <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage"}>
-                <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props}  />
-                </MDBContainer>
+            <>
+            {this.state.loadingPageWaiting ?
+                WaitingLoadingProfilePage(true , "fv-waitingLoadPublicFullScreen")
+                :
+                <div className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage"}>
+                    <div className={"fv-ProfilePageLeftBody"}>
 
-                <MDBRow className={"fv-ProfilePageLeftBody"}>
-
-                   <ProfilePageUserInfo />
-
-                    <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-profilePageInner"}>
-                        <p className={this.state.errorField ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>لطفا کادر های قرمز را به درستی پر کنید</p>
-                        <h5>اطلاعات کاربری</h5>
-                        <p>نام و نام خانوادگی</p>
-                        <input type="text" className={this.state.errorField.includes('fullname')===true ? "fv-redBorderError" : ''} value={this.state.nameAndFamily}
-                               onChange={(e)=>this.setState({nameAndFamily:e.target.value})}/>
-                        <p>شماره موبایل</p>
-                        <input type="text" className={this.state.errorField.includes('phoneNumber')===true ? "fv-redBorderError" : ''} value={this.state.mobileNumber}
-                               onChange={(e)=>this.setState({mobileNumber:e.target.value})}/>
-                        <p>آدرس ایمیل</p>
-                        <input type="text" className={this.state.errorField.includes('email')===true ? "fv-redBorderError" : ''} value={this.state.emailAddress}
-                               onChange={(e)=>this.setState({emailAddress:e.target.value})}/>
-                        <p>کد ملی</p>
-                        <input type="text" value={this.state.nationalCode} className={this.state.errorField.includes('notionalCode')===true ? "fv-redBorderError" : ''}
-                               onChange={(e)=>this.setState({nationalCode:e.target.value})}/>
-                        <p>شغل</p>
-                        <input type="text" value={this.state.job}
-                               onChange={(e)=>this.setState({job:e.target.value})}/>
-                        <p>تحصیلات</p>
-                        <input type="text" value={this.state.education}
-                               onChange={(e)=>this.setState({education:e.target.value})}/>
-                        <p>زبانه خارجه</p>
-                        <input type="text" value={this.state.foreignTab}
-                               onChange={(e)=>this.setState({foreignTab:e.target.value})}/>
-                        <p>شماره کارت</p>
-                        <input type="text" value={this.state.cardNumber} className={this.state.errorField.includes('cardNumber')===true ? "fv-redBorderError" : ''}
-                               onChange={(e)=>this.setState({cardNumber:e.target.value})}/>
-                        <p>شماره شبا</p>
-                        <input type="text" value={this.state.shabaNumber} className={this.state.errorField.includes('shabaNumber')===true ? "fv-redBorderError" : ''}
-                               onChange={(e)=>this.setState({shabaNumber:e.target.value})}/>
+                        <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-profilePageInner"}>
+                            <p className={this.state.errorField ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>لطفا کادر های قرمز را به درستی پر کنید</p>
+                            <h5>اطلاعات کاربری</h5>
+                            <p>نام و نام خانوادگی</p>
+                            <input type="text" className={this.state.errorField.includes('fullname')===true ? "fv-redBorderError" : ''} value={this.state.nameAndFamily}
+                                   onChange={(e)=>this.setState({nameAndFamily:e.target.value})}/>
+                            <p>شماره موبایل</p>
+                            <input type="text" className={this.state.errorField.includes('phoneNumber')===true ? "fv-redBorderError" : ''} value={this.state.mobileNumber}
+                                   onChange={(e)=>this.setState({mobileNumber:e.target.value})}/>
+                            <p>آدرس ایمیل</p>
+                            <input type="text" className={this.state.errorField.includes('email')===true ? "fv-redBorderError" : ''} value={this.state.emailAddress}
+                                   onChange={(e)=>this.setState({emailAddress:e.target.value})}/>
+                            <p>کد ملی</p>
+                            <input type="text" value={this.state.nationalCode} className={this.state.errorField.includes('notionalCode')===true ? "fv-redBorderError" : ''}
+                                   onChange={(e)=>this.setState({nationalCode:e.target.value})}/>
+                            <p>شغل</p>
+                            <input type="text" value={this.state.job}
+                                   onChange={(e)=>this.setState({job:e.target.value})}/>
+                            <p>تحصیلات</p>
+                            <input type="text" value={this.state.education}
+                                   onChange={(e)=>this.setState({education:e.target.value})}/>
+                            <p>زبانه خارجه</p>
+                            <input type="text" value={this.state.foreignTab}
+                                   onChange={(e)=>this.setState({foreignTab:e.target.value})}/>
+                            <p>شماره کارت</p>
+                            <input type="text" value={this.state.cardNumber} className={this.state.errorField.includes('cardNumber')===true ? "fv-redBorderError" : ''}
+                                   onChange={(e)=>this.setState({cardNumber:e.target.value})}/>
+                            <p>شماره شبا</p>
+                            <input type="text" value={this.state.shabaNumber} className={this.state.errorField.includes('shabaNumber')===true ? "fv-redBorderError" : ''}
+                                   onChange={(e)=>this.setState({shabaNumber:e.target.value})}/>
 
 
-                        <MDBRow md={3} sm={12}>
-                            <MDBContainer className={"fv-hostStep5Page3Images fv-inputProfilePageAvatar"}>
+                            <MDBRow md={3} sm={12}>
+                                <MDBContainer className={"fv-hostStep5Page3Images fv-inputProfilePageAvatar"}>
 
 
-                                        <label htmlFor="myInput">
-                                            <label htmlFor="files2" className={this.state.clickLoaderAvatar ?  "fv-hideLoader" : "btn"}>تصویر خود را انتخاب کنید</label>
-                                            <input id="files2"   style={{display:'none'}}   onChange={this.fileSelectedHandler}  type="file"   name={'avatar'} />
+                                    <label htmlFor="myInput">
+                                        <label htmlFor="files2" className={this.state.clickLoaderAvatar ?  "fv-hideLoader" : "btn"}>تصویر خود را انتخاب کنید</label>
+                                        <input id="files2"   style={{display:'none'}}   onChange={this.fileSelectedHandler}  type="file"   name={'avatar'} />
 
-                                            <MDBRow>
-                                                <div className={this.state.clickLoaderAvatar ? "loaderAvatar" : "fv-hideLoader"}>
-                                                    <svg className="circular" viewBox="25 25 50 50">
-                                                        <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
-                                                                stroke-miterlimit="10"/>
-                                                    </svg>
-                                                </div>
-                                            </MDBRow>
-                                        </label>
-                            </MDBContainer>
-                        </MDBRow>
-
-
-                        <MDBRow>
-                            <MDBCol md={12} sm={12} className={'fv-ProfilePageUserSetInfoButton fv-profilePageEnButton'} >
-                                <input type="button" value="ذخیره"  onClick={()=>{
-
-                                   if(this.state.clickLoaderAvatar ) {  // agar karbar zamani ke ax dar hale upload ast click konad
-                                       alert("لطفا منتظر بمانید تا عکس آپلود شود")
-                                   }else {
-
-                                       const data ={
-                                           fullname:nameAndFamily,
-                                           phone_number:mobileNumber,
-                                           email:emailAddress,
-                                           national_code:nationalCode,
-                                           job:job,
-                                           education:education,
-                                           foreign_language:foreignTab,
-                                           card_number:cardNumber,
-                                           shaba_number:shabaNumber,
-                                           avatar:this.state.avatarImageData,
-                                       }
+                                        <MDBRow>
+                                            <div className={this.state.clickLoaderAvatar ? "loaderAvatar" : "fv-hideLoader"}>
+                                                <svg className="circular" viewBox="25 25 50 50">
+                                                    <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
+                                                            stroke-miterlimit="10"/>
+                                                </svg>
+                                            </div>
+                                        </MDBRow>
+                                    </label>
+                                </MDBContainer>
+                            </MDBRow>
 
 
-                                       let setAvatar = ""
-                                       if(this.state.avatarImageData){
-                                           setAvatar = this.state.avatarImageData
-                                       }else {
-                                           setAvatar = avatar
-                                       }
-                                       const userInfo={
-                                           avatar: setAvatar,
-                                           fullname: data.fullname,
-                                       }
+                            <MDBRow>
+                                <MDBCol md={12} sm={12} className={'fv-ProfilePageUserSetInfoButton fv-profilePageEnButton'} >
+                                    <input type="button" value="ذخیره"  onClick={()=>{
+                                        this.setState({waitingButtonClick:true})
 
-                                       const dataInfoUpdate ={
-                                           userInfo:userInfo
-                                       }
+                                        if(this.state.clickLoaderAvatar ) {  // agar karbar zamani ke ax dar hale upload ast click konad
+                                            alert("لطفا منتظر بمانید تا عکس آپلود شود")
+                                        }else {
 
-
-                                       console.log(userInfo)
-                                       updateUserInfo(data)
-                                           .then(result =>{
-                                               console.log(result)
-                                               if(result.status === 200){
-                                                   localStorage.setItem("infoUser" , JSON.stringify(dataInfoUpdate))
-                                                   window.location.reload();
-                                               }
-                                           })
-                                           .catch(error => this.handleError(error.response.data.errors))
+                                            const data ={
+                                                fullname:nameAndFamily,
+                                                phone_number:mobileNumber,
+                                                email:emailAddress,
+                                                national_code:nationalCode,
+                                                job:job,
+                                                education:education,
+                                                foreign_language:foreignTab,
+                                                card_number:cardNumber,
+                                                shaba_number:shabaNumber,
+                                                avatar:this.state.avatarImageData,
+                                            }
 
 
-                                   }
+                                            let setAvatar = ""
+                                            if(this.state.avatarImageData){
+                                                setAvatar = this.state.avatarImageData
+                                            }else {
+                                                setAvatar = avatar
+                                            }
+                                            const userInfo={
+                                                avatar: setAvatar,
+                                                fullname: data.fullname,
+                                            }
 
-                                }}/>
-                            </MDBCol>
-                        </MDBRow>
-                    </MDBCol>
-                </MDBRow>
+                                            const dataInfoUpdate ={
+                                                userInfo:userInfo
+                                            }
 
-                <MDBRow>
-                    <Footer />
-                </MDBRow>
 
-            </MDBContainer>
+                                            console.log(userInfo)
+                                            updateUserInfo(data)
+                                                .then(result =>{
+                                                    console.log(result)
+                                                    if(result.status === 200){
+                                                        localStorage.setItem("infoUser" , JSON.stringify(dataInfoUpdate))
+                                                        this.setState({waitingButtonClick:false})
+                                                        window.location.reload();
+                                                    }
+                                                })
+                                                .catch(error => this.handleError(error.response.data.errors))
+
+
+                                        }
+
+                                    }}/>
+                                </MDBCol>
+                            </MDBRow>
+                        </MDBCol>
+                    </div>
+
+                </div>
+            }
+
+
+                </>
         )}
 }
 export default ProfilePage

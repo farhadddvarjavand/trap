@@ -18,12 +18,8 @@ class AnotherPagesEmpty extends Component {
     render() {
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageTransaction"}>
-                <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props}
-                                   thisPageName = "یافت نشد"/>
-                </MDBContainer>
+
                 <MDBRow className={"fv-ProfilePageLeftBody"}>
-                    <ProfilePageUserInfo />
 
                     <EmptyImagesPage
                         title =""
@@ -31,9 +27,6 @@ class AnotherPagesEmpty extends Component {
                         image={Logo}/>
                 </MDBRow>
 
-                <MDBRow>
-                    <Footer />
-                </MDBRow>
 
             </MDBContainer>
         )}

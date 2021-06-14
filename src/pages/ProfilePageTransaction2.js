@@ -59,14 +59,10 @@ class ProfilePageTransaction2 extends Component {
         console.log(this.state.transactionDatas)
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction fv-ProfilePageTransaction2"}>
-                <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props}
-                                   thisPageName = "تراکنش های من"/>
-                </MDBContainer>
 
-                <MDBRow className={"fv-ProfilePageLeftBody"}>
+                <div className={"fv-ProfilePageLeftBody"}>
 
-                    <ProfilePageUserInfo />
+
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
                         <h5>تراکنش های من</h5>
@@ -126,11 +122,7 @@ class ProfilePageTransaction2 extends Component {
                         </table>
 
                     </MDBCol>
-                </MDBRow>
-
-                <MDBRow>
-                    <Footer />
-                </MDBRow>
+                </div>
 
             </MDBContainer>
         )}

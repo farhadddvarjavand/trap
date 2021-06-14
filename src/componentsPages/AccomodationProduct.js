@@ -35,7 +35,7 @@ const AccommmodationProduct =(props) =>{
                         <MDBRow className={"fv-profilePaeReservation2PayButton fv-myAccommodationPageCol6Button"}>
                             <MDBCol md={6} sm={6} className={"fv-myAccommodationPagePaddingRightButton"}>
                                 {props.classNameActiveTopRight ?
-                                    <Link to={`/profileCalender/${props.code}`}><input type="button" value="تقویم اقامت گاه" className={props.classNameActiveTopRight} /></Link> :
+                                    <Link to={`/MainProfilePages/profileCalender/${props.code}`} ><input type="button" value="تقویم اقامت گاه" className={props.classNameActiveTopRight} /></Link> :
                                     <input type="button" value="تقویم اقامت گاه" className={props.classNameActiveTopRight} />
                                 }
                             </MDBCol>

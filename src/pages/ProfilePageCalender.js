@@ -37,7 +37,7 @@ class ProfilePageCalender extends Component {
             villaPrice:[],
             selectedDays : '',
             selectedDaysMobile : '',
-            villasUsertitle:props.match.params.id,
+            villasUsertitle:this.props.villaId,
             clickHandlerLoading:false,
             villasUser:[],
             clickLoaderCalendar:false,
@@ -290,16 +290,8 @@ class ProfilePageCalender extends Component {
 
 
         return(
-            <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageGustComments2 fv-ProfilePageCalender"}>
-                <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props}
-                                   thisPageName = "تقویم من"/>
-
-                </MDBContainer>
-
-                <MDBRow className={"fv-ProfilePageLeftBody"}>
-
-                    <ProfilePageUserInfo />
+            <div className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageGustComments2 fv-ProfilePageCalender"}>
+                <div className={"fv-ProfilePageLeftBody"}>
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo fv-ProfilePageCalenderBody"}>
 
@@ -649,15 +641,10 @@ class ProfilePageCalender extends Component {
 
                     </MDBCol>
 
-                </MDBRow>
+                </div>
 
 
-
-                <MDBRow>
-                    <Footer />
-                </MDBRow>
-
-            </MDBContainer>
+            </div>
         )}
 }
 export default ProfilePageCalender

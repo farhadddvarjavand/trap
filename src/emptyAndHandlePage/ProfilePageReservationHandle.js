@@ -18,6 +18,7 @@ import "../style/profilePageCommentsHandler.scss"
 import {villaPrice} from "../services/villaService";
 import ProfilePageReservation2 from "../pages/ProfilePageReservation2";
 import ProfilePageReservationEmpty from "./ProfilePageReservationEmpty";
+import {WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
 
 class ProfilePageReservationHandle extends Component {
     constructor(props) {
@@ -56,19 +57,7 @@ class ProfilePageReservationHandle extends Component {
 
                 <>
                     {!this.state.pushPage ?
-                        <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageGustComments2 fv-profilePageCommentsHandler"}>
-
-                            <MDBRow className={"fv-ProfilePageLeftBody"}>
-
-                                <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
-                                    <MDBRow className={"fv-loaderComments"}>
-                                        <div className={ "cssload-wave" }>
-                                            <span></span><span></span><span></span><span></span><span></span>
-                                        </div>
-                                    </MDBRow>
-                                </MDBCol>
-                            </MDBRow>
-                        </MDBContainer>
+                        WaitingLoadingProfilePage(true , "fv-waitingLoadPublicFullScreen")
                     : ''}
                     {this.state.pushPage === "full" ? <ProfilePageReservation2 /> : ''}
                     {this.state.pushPage === "empty" ? <ProfilePageReservationEmpty /> : ''}

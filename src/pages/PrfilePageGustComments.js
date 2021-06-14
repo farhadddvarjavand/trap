@@ -19,14 +19,9 @@ class PrfilePageGustComments extends Component {
     render() {
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageTransaction fv-ProfilePageGustComments"}>
-                <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props}
-                                   thisPageName = "نظرات مهمان ها"/>
-                </MDBContainer>
 
                 <MDBRow className={"fv-ProfilePageLeftBody"}>
 
-                    <ProfilePageUserInfo />
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
                         <h5>نظرات مهمان ها</h5>
@@ -38,10 +33,6 @@ class PrfilePageGustComments extends Component {
                             </MDBCol>
                         </MDBRow>
                     </MDBCol>
-                </MDBRow>
-
-                <MDBRow>
-                    <Footer />
                 </MDBRow>
 
             </MDBContainer>

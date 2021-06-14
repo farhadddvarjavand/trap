@@ -23,6 +23,11 @@ import ProfilePageGustComments2 from "../pages/PrfilePageGustComments2"
 import PrfilePageGustComments from "../pages/PrfilePageGustComments";
 import "../style/profilePageCommentsHandler.scss"
 import {villaPrice} from "../services/villaService";
+import {waitingForCalculate, WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
+import ProfilePageReservation2 from "../pages/ProfilePageReservation2";
+import ProfilePageReservationEmpty from "./ProfilePageReservationEmpty";
+import AnotherPagesEmpty from "./anotherPagesEmpty";
+import ProfilePageWallet from "../pages/ProfilePageWallet";
 
 class ProfileWalletPageHandle extends Component {
     constructor(props) {
@@ -32,6 +37,7 @@ class ProfileWalletPageHandle extends Component {
             villaId:'',
             comment:false,
             villaPrice:[],
+            pushPage:'',
 
         }
     }
@@ -41,9 +47,11 @@ class ProfileWalletPageHandle extends Component {
         getFinancialReports()
             .then(res=>{
                 if (res.data.income || res.data.data){
-                    this.props.history.push(`/ProfileWallet`)
+                   // this.props.history.push(`/ProfileWallet`)
+                    this.setState({pushPage:"full"})
                 }else {
-                    this.props.history.push("/AnotherPagesEmpty")
+                    this.setState({pushPage:"empty"})
+                    //this.props.history.push("/AnotherPagesEmpty")
                 }
             })
             .catch(err=>console.log(err.response))
@@ -55,25 +63,16 @@ class ProfileWalletPageHandle extends Component {
 
 
         return(
-            <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageGustComments2 fv-profilePageCommentsHandler"}>
-                <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props} />
+            <>
+                {!this.state.pushPage ?
+                    WaitingLoadingProfilePage(true , "fv-waitingLoadPublicFullScreen")
+                    : ''}
+                {this.state.pushPage === "full" ? <ProfilePageWallet /> : ''}
+                {this.state.pushPage === "empty" ? <AnotherPagesEmpty /> : ''}
 
-                </MDBContainer>
 
-                <MDBRow className={"fv-ProfilePageLeftBody"}>
+            </>
 
-                    <ProfilePageUserInfo />
-
-                    <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
-                        <MDBRow className={"fv-loaderComments"}>
-                            <div className={ "cssload-wave" }>
-                                <span></span><span></span><span></span><span></span><span></span>
-                            </div>
-                        </MDBRow>
-                    </MDBCol>
-                </MDBRow>
-            </MDBContainer>
         )
 
 

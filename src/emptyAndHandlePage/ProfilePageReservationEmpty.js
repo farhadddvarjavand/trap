@@ -19,13 +19,10 @@ class ProfilePageCalendarEmpty extends Component {
     render() {
         return(
             <MDBContainer className={"fv-SearchHomePage  fv-ProfilePage fv-ProfilePageReservation  fv-profilePageReservationEmpty"}>
-                <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props}
-                                   thisPageName = "رزرو های من"/>
-                </MDBContainer>
 
-                <MDBRow className={"fv-ProfilePageLeftBody"}>
-                    <ProfilePageUserInfo />
+
+                <div className={"fv-ProfilePageLeftBody"}>
+
 
                     <EmptyImagesPage
                         title ="رزرو های من"
@@ -39,13 +36,8 @@ class ProfilePageCalendarEmpty extends Component {
                         }}/>
                     </MDBRow>
 
-                </MDBRow>
+                </div>
 
-
-
-                <MDBRow>
-                    <Footer />
-                </MDBRow>
 
             </MDBContainer>
         )}

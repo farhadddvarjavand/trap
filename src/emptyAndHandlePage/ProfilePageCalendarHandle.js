@@ -16,6 +16,9 @@ import ProfilePageGustComments2 from "../pages/PrfilePageGustComments2"
 import PrfilePageGustComments from "../pages/PrfilePageGustComments";
 import "../style/profilePageCommentsHandler.scss"
 import {villaPrice} from "../services/villaService";
+import ProfilePageCalender from "../pages/ProfilePageCalender";
+import ProfilePageCalendarEmpty from "./ProfilePageCalendarEmpty";
+import {WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
 
 class ProfilePageCalendarHandle extends Component {
     constructor(props) {
@@ -25,6 +28,7 @@ class ProfilePageCalendarHandle extends Component {
             villaId:'',
             comment:false,
             villaPrice:[],
+            villaIdFullCalendar:''
 
         }
     }
@@ -45,15 +49,17 @@ class ProfilePageCalendarHandle extends Component {
                                     console.log(Object.values(res.data).length)
                                    if( Object.values(res.data)[0] !== null){
                                        this.setState({villaPrice: Object.values(res.data) , villaId:userVilla.id } , () =>{
-                                              this.props.history.push(`/profileCalender/${userVilla.id}`)
+                                           //   this.props.history.push(`/profileCalender/${userVilla.id}`)
+                                           this.setState({villaIdFullCalendar:userVilla.id})
                                        })
                                     }
                                 })
                                 .catch(err=>console.log(err.response))  // this.props.history.push("/ProfilePageCalendarEmpty")
                         })
                     }else {
-                        this.props.history.push("/ProfilePageCalendarEmpty")
+                       //  this.props.history.push("/ProfilePageCalendarEmpty")
                         // empty
+                        this.setState({villaIdFullCalendar:"guest"})
                     }
 
                 })
@@ -69,26 +75,20 @@ class ProfilePageCalendarHandle extends Component {
 
 
         return(
-            <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageGustComments2 fv-profilePageCommentsHandler"}>
-                <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props} />
+            <>
+                {!this.state.villaIdFullCalendar ?
+                    WaitingLoadingProfilePage(true , "fv-waitingLoadPublicFullScreen")
 
-                </MDBContainer>
+                    : ''}
+                {Number(this.state.villaIdFullCalendar) ?  <ProfilePageCalender villaId={Number(this.state.villaIdFullCalendar)}/> : ''}
+                {this.state.villaIdFullCalendar === "guest" ?   <ProfilePageCalendarEmpty /> : ''}
 
-                <MDBRow className={"fv-ProfilePageLeftBody"}>
 
-                    <ProfilePageUserInfo />
 
-                    <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
-                        <MDBRow className={"fv-loaderComments"}>
-                            <div className={ "cssload-wave" }>
-                                <span></span><span></span><span></span><span></span><span></span>
-                            </div>
-                        </MDBRow>
-                    </MDBCol>
-                </MDBRow>
-            </MDBContainer>
-                    )
+            </>
+
+
+        )
 
 
     }

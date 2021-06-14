@@ -24,7 +24,7 @@ class PrfilePageGustComments2 extends Component {
             answerCommentId:'',
             textAreaComment:'',
             villasUser:[],
-            villasUsertitle:props.match.params.id,
+            villasUsertitle:this.props.villaId,
             clickHandlerLoading:false,
 
         }
@@ -47,18 +47,14 @@ class PrfilePageGustComments2 extends Component {
 
     render() {
         return(
-            <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageGustComments2"}>
-                <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props}
-                                   thisPageName = "نظرات مهمان ها"/>
-                </MDBContainer>
+            <div className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageGustComments2"}>
 
                 {/*display: table; width:100%*/}
                 {/*phone: flex-direction:column;*/}
-                <MDBRow className={"fv-ProfilePageLeftBody"}>
+                <div className={"fv-ProfilePageLeftBody"}>
 
                     {/*display: table-cell; */}
-                    <ProfilePageUserInfo />
+                    {/*  <ProfilePageUserInfo /> */}
                     {/*display: table-cell; */}
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
                         <MDBRow className={"fv-ProfilePageReservationSetInfo"}>
@@ -198,15 +194,11 @@ class PrfilePageGustComments2 extends Component {
 
                     </MDBCol>
 
-                </MDBRow>
+                </div>
 
 
 
-
-                <MDBRow>
-                    <Footer />
-                </MDBRow>
-            </MDBContainer>
+            </div>
         )}
 }
 export default PrfilePageGustComments2

@@ -13,6 +13,7 @@ import config from "../services/config.json";
 import ProductFavorites from "../componentsPages/ProductFavorites";
 import {favorites} from "../services/userService";
 import CalendarLinear from "../data/CalenddarLinear";
+import {WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
 const commaNumber = require('comma-number')
 
 class ProfilePageWallet2 extends Component {
@@ -28,34 +29,34 @@ class ProfilePageWallet2 extends Component {
             transactionDate:'',
             transactionDescription:'',
 
+            loadingPageWaiting:true,
+
+
 
         }
     }
 
     componentDidMount() {
         favorites()
-            .then(res=>this.setState({favoriteData:res.data.data}))
+            .then(res=>this.setState({favoriteData:res.data.data ,  loadingPageWaiting:false}))
     }
 
     render() {
         return(
-            <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageWallet2 fv-profileFavoritesPage"}>
-                <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props}
-                                   thisPageName = "علاقه مندی های من"/>
+            <>
+            {this.state.loadingPageWaiting ?
+                    WaitingLoadingProfilePage(true , "fv-waitingLoadPublicFullScreen")
+                    :
+            <div className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageWallet2 fv-profileFavoritesPage"}>
 
-                </MDBContainer>
+                <div className={"fv-ProfilePageLeftBody"}>
 
-                <MDBRow className={"fv-ProfilePageLeftBody"}>
-
-                    <ProfilePageUserInfo />
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
                         <h5>علاقه مندی های من</h5>
 
 
-                        <MDBRow>
-                            <MDBRow className={"fv-ProfilePageLeftBody"}>
+                        <MDBRow className={"fv-"}>
 
                                 {this.state.favoriteData.map(favoritedatas =>{
                                     if(favoritedatas.details)   ///// ///// ///// ///// ///// //// /// باید حذف شود   //// //// //
@@ -74,16 +75,14 @@ class ProfilePageWallet2 extends Component {
                                 })}
 
                             </MDBRow>
-                        </MDBRow>
                     </MDBCol>
-                </MDBRow>
+                </div>
 
-                <MDBRow>
-                    <Footer />
-                </MDBRow>
+            </div>
+            }
 
-            </MDBContainer>
 
+      </>
 
 
         )}

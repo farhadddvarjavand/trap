@@ -28,15 +28,9 @@ class ProfilePageWallet3 extends Component {
 
     render() {
         return(
-            <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageWallet2 fv-ProfilePageWallet3"}>
-                <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props}
-                                   thisPageName = "ایجاد تراکنش" />
-                </MDBContainer>
+            <div className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageWallet2 fv-ProfilePageWallet3"}>
 
-                <MDBRow className={"fv-ProfilePageLeftBody"}>
-
-                    <ProfilePageUserInfo />
+                <div className={"fv-ProfilePageLeftBody"}>
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo"}>
                         <h5>درخواست برداشت</h5>
@@ -69,13 +63,10 @@ class ProfilePageWallet3 extends Component {
                             </MDBCol>
                         </MDBRow>
                     </MDBCol>
-                </MDBRow>
+                </div>
 
-                <MDBRow>
-                    <Footer />
-                </MDBRow>
 
-            </MDBContainer>
+            </div>
         )}
 }
 export default ProfilePageWallet3

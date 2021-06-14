@@ -50,3 +50,63 @@ export const waitingForCalculate2 = (clickStatus , className)=>{
 }
 
 
+
+export const WaitingLoadingProfilePage2 = (clickStatus , className)=>{
+    return(
+        <div className={`${className} fv-publicWaiting`}>
+            <div className={clickStatus ? "loaderImage" : "fv-hideLoader"}>
+                <div className="cssload-wrap">
+                    <div className="cssload-container">
+                        <span className="cssload-dots"></span>
+                        <span className="cssload-dots"></span>
+                        <span className="cssload-dots"></span>
+                        <span className="cssload-dots"></span>
+                        <span className="cssload-dots"></span>
+                        <span className="cssload-dots"></span>
+                        <span className="cssload-dots"></span>
+                        <span className="cssload-dots"></span>
+                        <span className="cssload-dots"></span>
+                        <span className="cssload-dots"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+
+export const WaitingLoadingProfilePage = (clickStatus , className)=>{
+    return(
+        <div className={`${className} fv-publicWaiting`}>
+            <div className={clickStatus ? "loaderImage" : "fv-hideLoader"}>
+                <div id="spinningSquaresG">
+                    <div id="spinningSquaresG_1" className="spinningSquaresG"></div>
+                    <div id="spinningSquaresG_2" className="spinningSquaresG"></div>
+                    <div id="spinningSquaresG_3" className="spinningSquaresG"></div>
+                    <div id="spinningSquaresG_4" className="spinningSquaresG"></div>
+                    <div id="spinningSquaresG_5" className="spinningSquaresG"></div>
+                    <div id="spinningSquaresG_6" className="spinningSquaresG"></div>
+                    <div id="spinningSquaresG_7" className="spinningSquaresG"></div>
+                    <div id="spinningSquaresG_8" className="spinningSquaresG"></div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+
+export const WaitingLoadingProfilePage3 = (clickStatus , className)=>{
+    return(
+        <div className={`${className} fv-publicWaiting`}>
+            <div className={clickStatus ? "loaderImage" : "fv-hideLoader"}>
+                <div className={ "cssload-wave" }>
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+
+
+
