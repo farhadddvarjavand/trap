@@ -31,7 +31,8 @@ class ProfilePageCalendarEmpty extends Component {
 
                     <MDBRow className={"fv-hostStepPage2LeftButtonBody"}>
                         <input type="button" value="رزرو اقامتگاه"  className={"fv-hostStepPage1LeftButton"} onClick={()=>{
-                             this.props.history.push('/searchHomePage/Newest/1')
+                            window.location.replace('/searchHomePage/Newest/1');
+
 
                         }}/>
                     </MDBRow>
