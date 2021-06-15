@@ -33,7 +33,7 @@ class HeaderSearch extends Component {
             <div className={"fv-footerMenu fv-footerDisplayPage fv-DisplayPage fv-profilePageUserInfo"}>
             <MDBRow className={' fv-footerDisplayPageBody'}>
                 <MDBCol md={2}>
-                    <Link to={'/profile'}> <i className="fa fa-user-alt" />
+                    <Link to={'/MainProfilePages/profile'}> <i className="fa fa-user-alt" />
                         <a> حساب کاربری</a> </Link>
                 </MDBCol>
                 <MDBCol md={2} className={"fv-DisplayPageSearchIcon"}>
@@ -98,7 +98,7 @@ class HeaderSearch extends Component {
                             <MDBCol>
                                 <Link to={"/"}> <p> صفحه اصلی </p> </Link>
                                 <i className="fas fa-chevron-left" />
-                                <Link to={"/Profile"}><p className={this.props.thisPageName ? ""  : "fv-DisplayPagePathNow"}> پنل کاربری </p> </Link> {/* اگر مقدار سوم وجود داشت کلاس رنگ سبز غیر فعال شود */}
+                                <Link to={"/MainProfilePages/Profile"}><p className={this.props.thisPageName ? ""  : "fv-DisplayPagePathNow"}> پنل کاربری </p> </Link> {/* اگر مقدار سوم وجود داشت کلاس رنگ سبز غیر فعال شود */}
                                 <i className={this.props.thisPageName ? "fas fa-chevron-left" : ""} />     {/* اگر مقدار سوم وجود داشت کلاس فعال شود */}
                                 <p className={this.props.thisPageName ? "fv-DisplayPagePathNow" : ""}> {this.props.thisPageName} </p>
                             </MDBCol>

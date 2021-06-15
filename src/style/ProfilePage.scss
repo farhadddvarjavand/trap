@@ -108,7 +108,7 @@
         }
         p{
          /*  font-size: 14px; */
-          font-size: 17px;
+        //  font-size: 17px;
         }
       }
 
@@ -169,6 +169,12 @@
   .fv-inputProfilePageAvatar{
     margin-top: 2%;
   }
+  .fv-avtive{
+    font-size: 20px;
+  }
+  .fv-waitingProfilePage{
+    float: left;
+  }
 }
 .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-reservationActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-transaction, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-AccomoddationActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-RequestedReservationActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-myCalenderActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-updateProfileActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-gustCommentsActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-walletActive {
   font-weight: 400;
@@ -187,6 +193,11 @@
 .fv-ProfilePage .container .fv-footerMainPage {
   margin-top: 4%;
 }
+
+.fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoBody.fv-HideDesktopForMobile{
+  display: none;
+}
+
 
 @media (max-width: 763px) {
 
@@ -241,9 +252,23 @@
     margin-top: 12%;
     width: 50%;
   }
-  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoBody{
-      display: none;
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoBody , .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoBody.fv-hideMobileForDesktop{
+      // display: none;
     }
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoBody.fv-HideDesktopForMobile{
+    display: block;
+    height: 928px;
+    margin-top: -16%;
+    z-index: 62;
+    /* margin-right: -7%; */
+    width: 89vw;
+    margin-left: -4%;
+
+  }
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoBody.fv-hideMobileForDesktop{
+    display: none;
+  }
+
   .fv-ProfilePage .fv-footerMenu.fv-footerDisplayPage.fv-DisplayPage.fv-profilePageUserInfo .fv-ProfilePageLeftBody.fv-gustUsersMenu .fv-ProfilePageUserInfoBody {
     height: 123px;
   }
@@ -253,6 +278,9 @@
   .fv-ProfilePageLeftBody {
     flex-direction:column;
     display: flex;
+  }
+  .fv-ProfilePage .fv-waitingProfilePage{
+    margin-top: 10%;
   }
 }
 

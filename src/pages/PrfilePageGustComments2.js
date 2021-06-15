@@ -12,6 +12,7 @@ import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 import {getUserVillaComments, replayComment, userVillas} from "../services/userService";
 import "../style/scroolBodyProfilePages.scss"
+import {waitingForCalculate2} from "../componentsPages/WaitingLoad";
 
 class PrfilePageGustComments2 extends Component {
     constructor(props) {
@@ -26,6 +27,7 @@ class PrfilePageGustComments2 extends Component {
             villasUser:[],
             villasUsertitle:this.props.match.params.id,
             clickHandlerLoading:false,
+            clickAnswerLoader:false,
 
         }
     }
@@ -65,6 +67,7 @@ class PrfilePageGustComments2 extends Component {
                                             .then(res=>{
                                                 if(res.data.data && res.data.data !== "Something went wrong!")
                                                     this.setState({comments: Object.values(res.data.data) , clickHandlerLoading:false})
+                                                this.props.history.push(`/MainProfilePages/profileShowGuestComments/${e.target.value}`)
                                                 console.log(res.data.data)
                                             })
                                     })
@@ -159,19 +162,31 @@ class PrfilePageGustComments2 extends Component {
                                              <MDBRow className={comment.id === this.state.answerCommentId ? "fv-ProfilePageWalletWalletButton" : "fv-hideAnswerComments" } >
                                                  <MDBRow className={"fv-ProfilePageGustComments2SetComment"}>
                                                      <form onSubmit={(event)=>{
+                                                         this.setState({clickAnswerLoader:true})
                                                          event.preventDefault()
                                                          const data = {
                                                                  text:this.state.textAreaComment
                                                              }
                                                          replayComment(data,this.state.villasUsertitle,this.state.answerCommentId)
-                                                             .then(res=>res.status===200 ? window.location.replace(`/profileShowGuestComments/${this.state.villasUsertitle}`) : '')
+                                                             .then(res=>{
+                                                                 if(res.status===200){
+                                                                     getUserVillaComments(this.props.match.params.id)
+                                                                         .then(res=>{
+                                                                             if(res.data.data && res.data.data !== "Something went wrong!")
+                                                                                 this.setState({comments: Object.values(res.data.data) , clickAnswerLoader:false})
+                                                                             console.log(res.data.data)
+                                                                         })
+                                                                 }
+                                                             } )
+                                                             .then(err=>this.setState({clickAnswerLoader:false}))
 
                                                      }}>
                                                          <label>
                                                              <textarea value={this.state.textAreaComment} onChange={(e)=>this.setState({textAreaComment:e.target.value})} />
                                                          </label>
-                                                         <MDBRow className={"fv-ProfilePageWalletWalletButton"}>
-                                                             <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
+                                                         {waitingForCalculate2(this.state.clickAnswerLoader , "fv-waitingLoadPublicFullScreen fv-computingReservedDetails fv-ProfileCalendarWaiting")}
+                                                         <MDBRow className={!this.state.clickAnswerLoader?"fv-hideForWaiting" :"fv-ProfilePageWalletWalletButton"}>
+                                                             <MDBCol md={3} sm={12} className={!this.state.clickAnswerLoader?"fv-hideForWaiting" :"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
                                                                  <input type="submit" value="ذخیره پیام"/>
                                                              </MDBCol>
                                                          </MDBRow>

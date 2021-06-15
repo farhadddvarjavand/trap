@@ -11,6 +11,7 @@ import CalendarLinear from "../data/CalenddarLinear";
 import {getUserInformation, reservationsSearch, userReserves} from "../services/userService";
 import {Link} from "react-router-dom";
 import config from "../services/config.json";
+import {WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
 
 
 class ProfilePageReservation2 extends Component {
@@ -32,13 +33,20 @@ class ProfilePageReservation2 extends Component {
                 year : ''
             },
             reservesData:[],
+            waitingForLoad:true,
         }
 
     }
 
     componentDidMount() {
         userReserves()
-            .then(res=>res.status===200 ? this.setState({reservesData:res.data.data}) : '')
+            .then(res=>{
+                if(res.status===200 && res.data.data.length>0){
+                    this.setState({reservesData:res.data.data , waitingForLoad:false})
+                }else {
+                    this.props.history.push("/MainProfilePages/ProfilePageReservationEmpty")
+                }
+            })
     }
 
     selectDayToGo = (date) =>{                                    // set date to go
@@ -71,13 +79,17 @@ class ProfilePageReservation2 extends Component {
 
 
         return(
+            <>
+
+                {this.state.waitingForLoad ?   WaitingLoadingProfilePage(this.state.waitingForLoad , "fv-waitingLoadPublicFullScreen")
+                :
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2"}>
 
                 <div className={"fv-ProfilePageLeftBody"}>
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
                         <h5>رزرو های من</h5>
-                        <MDBRow className={"fv-ProfilePageReservationSetInfo"}>
+                        <MDBRow className={"fv-ProfilePageReservationSetInfo fv-profileMyReservationSearchBox"}>
                             <MDBCol md={4} sm={12} className={""}>
                                 <input type={"text"} placeholder={"شهر یا روستا را انتخاب کنید"} value={this.state.city} onChange={(e)=> this.setState({city:e.target.value})}/>
                             </MDBCol>
@@ -197,7 +209,7 @@ class ProfilePageReservation2 extends Component {
                                                     <input type="button" value="پرداخت"/> :
 
                                                     <input type="button" value="پرداخت" onClick={()=> {
-                                                        this.props.history.push(`/factor/${reserve.id}`);
+                                                        window.location.replace(`/factor/${reserve.id}`);
                                                     }}/>
                                                 }
 
@@ -223,6 +235,8 @@ class ProfilePageReservation2 extends Component {
 
 
             </MDBContainer>
+                }
+                </>
         )}
 }
 export default ProfilePageReservation2

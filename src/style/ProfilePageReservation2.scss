@@ -326,6 +326,22 @@
     margin-left: 20px !important;
     padding-left: 20px !important;
   }
+  .fv-ProfilePageReservation2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo.fv-profileMyReservationSearchBox {
+    border: 1px solid rgba(145, 145, 145, 0.2);
+    box-sizing: border-box;
+    border-radius: 15px;
+    height: 75%;
+    align-items: center;
+    padding-top: 5%;
+    padding-bottom: 46%;
+  }
+  .fv-DisplayPageDetailsRightBody.fv-displayPageOnly .col-md-2 h4 {
+    display:block
+  }
+  .fv-DisplayPageDetailsRightBody.fv-displayPageOnly .col-md-2 {
+    flex: 0 0 45.666667%;
+    max-width: 30.666667%;
+  }
 }
 
 @media (max-width: 411px) {

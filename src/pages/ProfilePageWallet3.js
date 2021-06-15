@@ -13,6 +13,7 @@ import Calender from "../componentsPages/calender";
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 import {withdrawal} from "../services/userService";
+import {waitingForCalculate} from "../componentsPages/WaitingLoad";
 
 class ProfilePageWallet3 extends Component {
     constructor(props) {
@@ -22,6 +23,7 @@ class ProfilePageWallet3 extends Component {
         }
         this.state={
             amountRequested:'',
+            waitingButton:false,
         }
 
     }
@@ -40,8 +42,9 @@ class ProfilePageWallet3 extends Component {
 
 
                         <MDBRow>
-                            <MDBCol md={12} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
-                                <input type="button" value="ارسال درخواست" onClick={()=>{
+                            <MDBCol md={12} sm={12} className={this.state.waitingButton ?  "fv-hideForWaiting" :"fv-ProfilePageUserSetInfoButton"} >
+                                <input type="button" value="ارسال درخواست" className={this.state.waitingButton ?  "fv-hideForWaiting" : ""} onClick={()=>{
+                                    this.setState({waitingButton:true})
 
                                     const withdrow  = {
                                         requested_amount:this.state.amountRequested
@@ -55,11 +58,19 @@ class ProfilePageWallet3 extends Component {
                                                 }else {
                                                     alert(res.data.data)
                                                 }
+
+                                                this.setState({waitingButton:false})
                                             })
                                             .catch(err=>{if(err.response.data.errors.requested_amount[0]){
-                                                return alert('مقدار نامعتبر میباشد')
+                                                 alert('مقدار نامعتبر میباشد')
+
+                                                this.setState({waitingButton:false})
                                             }})
                                 }}/>
+
+                            </MDBCol>
+                            <MDBCol md={12} sm={12}>
+                                {waitingForCalculate(this.state.waitingButton, "fv-waitingButtonWalletPage3")}
                             </MDBCol>
                         </MDBRow>
                     </MDBCol>

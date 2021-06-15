@@ -18,6 +18,7 @@ import config from "../services/config.json";
 import CalendarLinear from "../data/CalenddarLinear";
 import ProfilePageWallet2 from "./ProfilePageWallet2";
 import AnotherPagesEmpty from "../emptyAndHandlePage/anotherPagesEmpty";
+import {WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
 const commaNumber = require('comma-number')
 
 class ProfilePageWallet extends Component {
@@ -42,6 +43,7 @@ class ProfilePageWallet extends Component {
                 year : ''
             },
             switchPage:'',
+            waitingForLoad:true,
         }
     }
     //villasUsertitle:'title'   bod,
@@ -59,10 +61,15 @@ class ProfilePageWallet extends Component {
     getFinancialReports = ()=>{
         getFinancialReports()
             .then(res=>{
-                let getFinancialReportsTop = []
-                getFinancialReportsTop.push(res.data.income)
-                console.log(res)
-                this.setState({getFinancialReports : res.data.data , getFinancialReportsTopPage:getFinancialReportsTop})
+                if (res.data.income || res.data.data){
+                    let getFinancialReportsTop = []
+                    getFinancialReportsTop.push(res.data.income)
+                    console.log(res)
+                    this.setState({getFinancialReports : res.data.data , getFinancialReportsTopPage:getFinancialReportsTop ,  waitingForLoad:false})
+                }else {
+                    // this.setState({pushPage:"empty"})
+                    this.props.history.push("/MainProfilePages/AnotherPagesEmpty")
+                }
             })
             .catch(err=>console.log(err.response))
     }
@@ -99,8 +106,10 @@ class ProfilePageWallet extends Component {
     render() {
         return(
             <>
-                {!this.state.switchPage ?
-                        <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageWallet"}>
+
+                {this.state.waitingForLoad ?   WaitingLoadingProfilePage(this.state.waitingForLoad , "fv-waitingLoadPublicFullScreen")
+                    :
+                        <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-profileWalletInner"}>
                             <div className={"fv-ProfilePageLeftBody"}>
                                 <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
                                     <MDBRow className={"fv-ProfilePageReservationSetInfo"}>
@@ -231,8 +240,8 @@ class ProfilePageWallet extends Component {
                                     <MDBRow className={"fv-ProfilePageWalletWalletButton"}>
                                         <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
                                             <input type="button" value="ثبت تراکنش جدید" onClick={()=>{
-                                                this.setState({switchPage:'ProfileWalletTransactionRegistration'})
-                                               // this.props.history.push('/ProfileWalletTransactionRegistration')
+                                               // this.setState({switchPage:'ProfileWalletTransactionRegistration'})
+                                                this.props.history.push('/MainProfilePages/ProfileWalletTransactionRegistration')
                                             }}/>
                                         </MDBCol>
                                     </MDBRow>
@@ -241,10 +250,7 @@ class ProfilePageWallet extends Component {
                             </div>
                         </MDBContainer>
 
-                    : ''}
-                {this.state.switchPage === "ProfileWalletTransactionRegistration" ?   <ProfilePageWallet2 /> : ''}
-
-
+                }
             </>
         )}
 }

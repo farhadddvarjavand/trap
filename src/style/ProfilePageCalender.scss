@@ -368,6 +368,11 @@
   .fv-SearchHomePage.fv-DisplayPage.fv-ProfilePage.fv-ProfilePageReservation.fv-ProfilePageReservation2.container.fv-ProfilePageWallet.fv-ProfilePageGustComments2.fv-ProfilePageCalender .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo.fv-ProfilePageReservationUserInfo {
     display: block;
   }
+  .fv-ProfilePageWallet.fv-ProfilePageGustComments2.fv-ProfilePageCalender .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo h5 {
+    margin-bottom: 0%;
+    margin-bottom: 59%;
+    margin-top: 1%;
+  }
 }
 
 @media (max-width: 540px) {
@@ -492,6 +497,10 @@
   }
   .fv-ProfilePageWallet.fv-ProfilePageGustComments2.fv-ProfilePageCalender .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo.fv-ProfilePageReservationUserInfo {
     display: inline;
+  }
+  .fv-ProfilePageWallet.fv-ProfilePageGustComments2.fv-ProfilePageCalender .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo h5 {
+    margin-bottom: 12%;
+    margin-top: 1%;
   }
 
 }

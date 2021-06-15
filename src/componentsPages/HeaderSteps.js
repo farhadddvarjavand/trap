@@ -55,7 +55,7 @@ class HeaderSteps extends Component {
                                             <a><h5>{nameAndFamily}</h5></a>
                                         </MDBRow>
                                         <MDBRow>
-                                            <Link to={"/Profile"}><a>مشاهده حساب کاربری</a></Link>
+                                            <Link to={"/MainProfilePages/Profile"}><a>مشاهده حساب کاربری</a></Link>
                                         </MDBRow>
                                     </MDBCol>
                                 </MDBRow>
@@ -63,13 +63,13 @@ class HeaderSteps extends Component {
                         </MDBRow>
                         <MDBRow className={"fv-cascadeOptionMainPage"}>
                             <MDBCol md={12} sm={12}>
-                                <Link to={"/myAccommodation"}> <i className="fa fa-credit-card" />
+                                <Link to={"/MainProfilePages/myAccommodation"}> <i className="fa fa-credit-card" />
                                     <a><p>اقامت گاه های من</p></a> </Link>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-cascadeOptionMainPage"}>
                             <MDBCol md={12} sm={12}>
-                                <Link to={"/ProfileMyReservation"}> <i className="fa fa-receipt" />
+                                <Link to={"/MainProfilePages/ProfileMyReservation"}> <i className="fa fa-receipt" />
                                     <a><p>رزور های من</p></a> </Link>
                             </MDBCol>
                         </MDBRow>
@@ -96,7 +96,7 @@ class HeaderSteps extends Component {
                     <MDBCol sm={10} className={"fv-HostStep1Path"}>
                         <Link to={'/'}><p> صفحه اصلی </p></Link>
                         <i className="fas fa-chevron-left" />
-                        <Link to={'/Profile'}><p> پنل کاربری </p></Link>
+                        <Link to={'/MainProfilePages/Profile'}><p> پنل کاربری </p></Link>
                         <i className="fas fa-chevron-left" />
                         <p className={"fv-HostStepNow"}> ثبت اقامت گاه </p>
                     </MDBCol>

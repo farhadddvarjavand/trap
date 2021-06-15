@@ -556,7 +556,7 @@ class HostStep5Page3 extends Component {
                                         localStorage.removeItem("step5")
                                         localStorage.removeItem("step5-2")
                                         localStorage.removeItem("editCode")
-                                        this.props.history.push('/myAccommodation')
+                                        this.props.history.push('/MainProfilePages/myAccommodation')
                                         /* storeVilla(allData)
                                             .then(res=>{
                                                 if(res.status===200){

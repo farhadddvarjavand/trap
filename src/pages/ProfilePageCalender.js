@@ -101,6 +101,7 @@ class ProfilePageCalender extends Component {
                 this.setState({reservedDatesUsers:Object.values(res.data.data.reservedDates)  , closedDatesHost:Object.values(res.data.data.customizedDates) , waitingButtonPrice:false} , ()=>{
                     this.calculatePricesWithString()
 
+                    this.props.history.push(`/MainProfilePages/profileCalender/${this.state.villasUsertitle}`)
                 })
 
             })

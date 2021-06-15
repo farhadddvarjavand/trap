@@ -9,6 +9,7 @@ import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 import CalendarLinear from "../data/CalenddarLinear";
 import {setFinancialReports} from "../services/userService";
+import {waitingForCalculate, waitingForCalculate2} from "../componentsPages/WaitingLoad";
 
 class ProfilePageWallet2 extends Component {
     constructor(props) {
@@ -27,6 +28,7 @@ class ProfilePageWallet2 extends Component {
             },
 
             validTransactionAmount:false,
+            waitingButton:false,
 
         }
     }
@@ -71,7 +73,9 @@ class ProfilePageWallet2 extends Component {
 
                         <MDBRow>
                             <MDBCol md={12} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
-                                <input type="button" value="ذخیره تراکنش" onClick={()=>{
+                                {waitingForCalculate(this.state.waitingButton , "fv-waitingButtonWalletPage")}
+                                <input type="button" value="ذخیره تراکنش" className={this.state.waitingButton ? "fv-hideForWaiting" : ""} onClick={()=>{
+                                    this.setState({waitingButton:true})
                                     const setDate = this.state.date.year+"/"+this.state.date.month+"/"+this.state.date.day
                                     const data = {
                                         date : setDate ,
@@ -83,10 +87,13 @@ class ProfilePageWallet2 extends Component {
                                     setFinancialReports(data)
                                         .then(res=>{
                                             if(res.status){
-                                                this.props.history.push('/ProfileWallet')
+                                                alert("تراکنش شما با موفقیت ثبت گردید")
+                                                this.props.history.push('/MainProfilePages/ProfileWallet')
+                                                this.setState({waitingButton:false})
                                             }
                                         })
                                         .catch(err=>{
+                                            this.setState({waitingButton:false})
                                             if(err.response.data){
                                                 if(err.response.data.errors)
                                                     if(err.response.data.errors.amount)

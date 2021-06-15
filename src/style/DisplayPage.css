@@ -1103,7 +1103,7 @@ display: none;
     }
     .fv-SearchHomePage.fv-DisplayPage .row {
         margin-right: -3px;
-        margin-left: -10px;
+       /* margin-left: -10px; */
     }
     .fv-DisplayPageRotePathMobile{
         margin-top: 3%;
@@ -1484,6 +1484,10 @@ display: none;
     }
     /*    ***************************** ********************** **************** calendar for mobile css ************************************************* */
 
+    .fv-SearchHomePage.fv-DisplayPage.fv-DisplayPageOnly .row {
+        margin-right: -3px;
+        margin-left: -10px;
+    }
 
 
 }

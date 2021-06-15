@@ -1115,7 +1115,7 @@ componentDidMount() {
       /*  console.log(this.weekdayshortname)
         console.log(this.weekdayshortnamemonth) */
         return(
-            <MDBContainer className={"fv-SearchHomePage fv-DisplayPage"}>
+            <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-DisplayPageOnly"}>
 
                 <MDBContainer className={this.state.morePics === true ? "fv-MadeDisplayNoneForPics"    : ""}>
 
@@ -1450,7 +1450,7 @@ componentDidMount() {
                 </MDBRow>
 
                     <MDBRow className={"fv-DisplayPageDetails"}>
-                    <MDBCol md={8} className={"fv-DisplayPageDetailsRightBody"}>
+                    <MDBCol md={8} className={"fv-DisplayPageDetailsRightBody fv-displayPageOnly"}>
                         <MDBRow>
                             <MDBCol md={2} sm={2}>
                                 <img src={avatar ? `${config.webapi}/images/user//${avatar}` : MobileLogo} />

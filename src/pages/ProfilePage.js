@@ -11,7 +11,7 @@ import axios from "axios";
 import config from "../services/config.json"
 import http from "../services/httpService";
 import Logo from "../images/Logo.png";
-import {WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
+import {waitingForCalculate, WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
 
 
 class ProfilePage extends Component {
@@ -21,6 +21,9 @@ class ProfilePage extends Component {
             this.props.history.push('/login');
         }
         this.state={
+            ...props,
+            ...this.state,
+            ...this.props,
             nameAndFamily:'',
             mobileNumber:'',
             emailAddress:'',
@@ -38,11 +41,13 @@ class ProfilePage extends Component {
             UserInfo:'',
             loadingPageWaiting:true,
             waitingButtonClick:false,
+            waitingButtonStoreClick:false,
 
         }
 
     }
 componentDidMount() {
+
     this.authentication()
 }
 
@@ -61,10 +66,13 @@ componentDidMount() {
                     cardNumber:res.data.card_number,
                     shabaNumber:res.data.shaba_number,
 
+
                     UserInfo : res.data,
                     loadingPageWaiting:false,
+                    waitingButtonStoreClick:false
                 })
             })
+            .catch(err=>this.setState({waitingButtonStoreClick:false}))
     }
     handleError = (errorData) =>{
         const errors = []
@@ -86,7 +94,7 @@ componentDidMount() {
             if(errorData.shaba_number){
                 errors.push('shabaNumber')
             }
-        this.setState({errorField:errors})
+        this.setState({errorField:errors ,waitingButtonClick:false , waitingButtonStoreClick:false})
     }
 
     fileSelectedHandler = (event) => {
@@ -105,6 +113,7 @@ componentDidMount() {
                 .then(res=>{
                     if(res.data.avatar_count !== 0){
                         this.setState({avatarImageData:res.data.avatar} , ()=>{
+                            this.props.ChangeUserAvatarSrc(res.data.avatar)
                             this.setState({clickLoaderAvatar:false})
                         })
                     }
@@ -195,11 +204,13 @@ componentDidMount() {
 
 
                             <MDBRow>
-                                <MDBCol md={12} sm={12} className={'fv-ProfilePageUserSetInfoButton fv-profilePageEnButton'} >
-                                    <input type="button" value="ذخیره"  onClick={()=>{
-                                        this.setState({waitingButtonClick:true})
+                                <MDBCol md={12} sm={12} className={this.state.waitingButtonStoreClick ? "fv-hideForWaiting" : 'fv-ProfilePageUserSetInfoButton fv-profilePageEnButton'} >
+
+                                    <input type="button" value="ذخیره" className={this.state.waitingButtonStoreClick ? "fv-hideForWaiting" : ''}  onClick={()=>{
+                                        this.setState({waitingButtonClick:true , waitingButtonStoreClick:true})
 
                                         if(this.state.clickLoaderAvatar ) {  // agar karbar zamani ke ax dar hale upload ast click konad
+                                            this.setState({waitingButtonStoreClick:false})
                                             alert("لطفا منتظر بمانید تا عکس آپلود شود")
                                         }else {
 
@@ -239,8 +250,11 @@ componentDidMount() {
                                                     console.log(result)
                                                     if(result.status === 200){
                                                         localStorage.setItem("infoUser" , JSON.stringify(dataInfoUpdate))
-                                                        this.setState({waitingButtonClick:false})
-                                                        window.location.reload();
+                                                        this.setState({waitingButtonClick:false , waitingButtonStoreClick:false})
+                                                        this.props.ChangeUserNameAndFamily(userInfo.fullname)
+
+                                                        alert("اطلاعات شما با موفقیت به روزرسانی شد")
+                                                        this.authentication()
                                                     }
                                                 })
                                                 .catch(error => this.handleError(error.response.data.errors))
@@ -249,6 +263,10 @@ componentDidMount() {
                                         }
 
                                     }}/>
+
+                                </MDBCol>
+                                <MDBCol md={12} sm={12} className={!this.state.waitingButtonStoreClick ? "fv-hideForWaiting" : 'fv-waitingProfilePageBody'} >
+                                    {waitingForCalculate(this.state.waitingButtonStoreClick , "fv-waitingProfilePage")}
                                 </MDBCol>
                             </MDBRow>
                         </MDBCol>

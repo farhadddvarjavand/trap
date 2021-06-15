@@ -64,7 +64,7 @@ class HeaderLoginMenu extends React.Component{
                                         </MDBRow>
                                         <MDBRow>
                                             <MDBCol>
-                                                <Link to={"/Profile"}><a>مشاهده حساب کاربری</a></Link>
+                                                <Link to={"/MainProfilePages/Profile"}><a>مشاهده حساب کاربری</a></Link>
                                             </MDBCol>
 
                                         </MDBRow>
@@ -75,13 +75,13 @@ class HeaderLoginMenu extends React.Component{
                         </MDBRow>
                         <MDBRow className={"fv-cascadeOptionMainPage"}>
                             <MDBCol md={12} sm={12}>
-                                <Link to={"/myAccommodation"}> <i className="fa fa-credit-card" />
+                                <Link to={"/MainProfilePages/myAccommodation"}> <i className="fa fa-credit-card" />
                                     <a><p>اقامت گاه های من</p></a> </Link>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-cascadeOptionMainPage"}>
                             <MDBCol md={12} sm={12}>
-                                <Link to={"/ProfileMyReservation"}> <i className="fa fa-receipt" />
+                                <Link to={"/MainProfilePages/ProfileMyReservation"}> <i className="fa fa-receipt" />
                                     <a><p>رزور های من</p></a> </Link>
                             </MDBCol>
                         </MDBRow>

@@ -10,6 +10,7 @@ import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 import {transactionsSearch, userTransactions} from "../services/userService";
 import "../style/scroolBodyProfilePages.scss"
 import CalendarLinear from "../data/CalenddarLinear";
+import {WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
 const commaNumber = require('comma-number')
 
 class ProfilePageTransaction2 extends Component {
@@ -26,6 +27,7 @@ class ProfilePageTransaction2 extends Component {
                 month:'',
                 year : ''
             },
+            waitingForLoad:true,
         }
 
     }
@@ -36,8 +38,10 @@ class ProfilePageTransaction2 extends Component {
     transactionDatas = () =>{
         userTransactions()
             .then(res=>{
-                if (res.status===200){
-                    this.setState({transactionDatas:res.data.data})
+                if (res.status===200 && res.data.data.length>0){
+                    this.setState({transactionDatas:res.data.data , waitingForLoad:false})
+                }else {
+                    this.props.history.push("/MainProfilePages/ProfilePageTransactionEmpty")
                 }
             })
     }
@@ -58,73 +62,79 @@ class ProfilePageTransaction2 extends Component {
     render() {
         console.log(this.state.transactionDatas)
         return(
-            <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction fv-ProfilePageTransaction2"}>
+            <>
 
-                <div className={"fv-ProfilePageLeftBody"}>
+                {this.state.waitingForLoad ?   WaitingLoadingProfilePage(this.state.waitingForLoad , "fv-waitingLoadPublicFullScreen")
+                    :
+                        <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction fv-ProfilePageTransaction2"}>
 
-
-
-                    <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
-                        <h5>تراکنش های من</h5>
-                        <MDBRow className={"fv-ProfilePageReservationSetInfo fv-ProfilePageTransaction2HeaderForMobile"}>
+                            <div className={"fv-ProfilePageLeftBody"}>
 
 
-                            <MDBCol md={3} sm={12} className={""}>
-                                <input type="text" placeholder="مبلغ تراکنش" onChange={(e)=>this.setState({transactionPrice:e.target.value})}/>
-                            </MDBCol>
-                            <MDBCol md={2} sm={12} className={"fv-ProfilePageReservationRightCalendar"}>
-                                <CalendarLinear dayToReturn={this.selectDay} text={'تاریخ تراکنش'} />
-                            </MDBCol>
-                            <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
-                                <input type="button" value="جستجو" onClick={()=>{
-                                    let date = ''
-                                    if(this.state.date.year){
-                                        date =  this.state.date.year+"/"+this.state.date.month+"/"+this.state.date.day
-                                    }else {
-                                        date = ''
-                                    }
-                                    const data={
-                                        transaction_date : date ,
-                                        transaction_cost : this.state.transactionPrice ,
-                                    }
-                                    console.log(data)
-                                    transactionsSearch(data)
-                                        .then(res =>{
-                                            console.log(res.data.data)
-                                            this.setState({transactionDatas:res.data.data})
-                                        })
-                                        .catch(err=>console.log(err.response))
-                                }}/>
-                            </MDBCol>
-                        </MDBRow>
+
+                                <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
+                                    <h5>تراکنش های من</h5>
+                                    <MDBRow className={"fv-ProfilePageReservationSetInfo fv-ProfilePageTransaction2HeaderForMobile"}>
 
 
-                        <table>
-                            <tr className={"fv-tableTitle"}>
-                                <th className={"fv-tableTitleRightOne"}>نوع تراکنش</th>
-                                <th>تاریخ تراکنش</th>
-                                <th>مبلغ</th>
-                                <th className={"fv-tableTitleContents"}>شرح تراکنش</th>
-                                <th className={"fv-tableTitleLeftOne"}>وضعیت</th>
-                            </tr>
-                            {this.state.transactionDatas.map(transactionData=>{
-                                return(
-                                    <tr>
-                                        <td>{transactionData.type}</td>
-                                        <td>{transactionData.date}</td>
-                                        <td>{commaNumber(transactionData.amount)}</td>
-                                        <td>{transactionData.description}</td>
-                                        <td className={transactionData.status === "پرداخت شد"  ? "fv-test" :''}>{transactionData.status}</td>
-                                    </tr>
-                                )
-                            })}
+                                        <MDBCol md={3} sm={12} className={""}>
+                                            <input type="text" placeholder="مبلغ تراکنش" onChange={(e)=>this.setState({transactionPrice:e.target.value})}/>
+                                        </MDBCol>
+                                        <MDBCol md={2} sm={12} className={"fv-ProfilePageReservationRightCalendar"}>
+                                            <CalendarLinear dayToReturn={this.selectDay} text={'تاریخ تراکنش'} />
+                                        </MDBCol>
+                                        <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
+                                            <input type="button" value="جستجو" onClick={()=>{
+                                                let date = ''
+                                                if(this.state.date.year){
+                                                    date =  this.state.date.year+"/"+this.state.date.month+"/"+this.state.date.day
+                                                }else {
+                                                    date = ''
+                                                }
+                                                const data={
+                                                    transaction_date : date ,
+                                                    transaction_cost : this.state.transactionPrice ,
+                                                }
+                                                console.log(data)
+                                                transactionsSearch(data)
+                                                    .then(res =>{
+                                                        console.log(res.data.data)
+                                                        this.setState({transactionDatas:res.data.data})
+                                                    })
+                                                    .catch(err=>console.log(err.response))
+                                            }}/>
+                                        </MDBCol>
+                                    </MDBRow>
 
-                        </table>
 
-                    </MDBCol>
-                </div>
+                                    <table>
+                                        <tr className={"fv-tableTitle"}>
+                                            <th className={"fv-tableTitleRightOne"}>نوع تراکنش</th>
+                                            <th>تاریخ تراکنش</th>
+                                            <th>مبلغ</th>
+                                            <th className={"fv-tableTitleContents"}>شرح تراکنش</th>
+                                            <th className={"fv-tableTitleLeftOne"}>وضعیت</th>
+                                        </tr>
+                                        {this.state.transactionDatas.map(transactionData=>{
+                                            return(
+                                                <tr>
+                                                    <td>{transactionData.type}</td>
+                                                    <td>{transactionData.date}</td>
+                                                    <td>{commaNumber(transactionData.amount)}</td>
+                                                    <td>{transactionData.description}</td>
+                                                    <td className={transactionData.status === "پرداخت شد"  ? "fv-test" :''}>{transactionData.status}</td>
+                                                </tr>
+                                            )
+                                        })}
 
-            </MDBContainer>
+                                    </table>
+
+                                </MDBCol>
+                            </div>
+
+                        </MDBContainer>
+                }
+            </>
         )}
 }
 export default ProfilePageTransaction2

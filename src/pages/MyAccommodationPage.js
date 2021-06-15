@@ -16,6 +16,7 @@ import ProfilePageCalender from "./ProfilePageCalender";
 import ProfilePageReservation2 from "./ProfilePageReservation2";
 import ProfilePageWallet from "./ProfilePageWallet";
 import ProfilePageGustComments2 from "../pages/PrfilePageGustComments2";
+import {WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
 
 class MyAccommodationPage extends Component {
     constructor(props) {
@@ -27,23 +28,28 @@ class MyAccommodationPage extends Component {
             userVillas:[],
 
 
-            switchPage:'',
             villaId:'',
+            waitingForLoad:true,
         }
     }
 
     componentDidMount() {
         userVillas()
-            .then(res=>res.data ? this.setState({userVillas: res.data.data}) : '')
+            .then(res=>{
+                if(res.data && res.data.data.length>0){
+                    this.setState({userVillas: res.data.data , waitingForLoad:false})
+                }else {
+                    this.props.history.push("/MainProfilePages/AnotherPagesEmpty")
+                }
+            })
     }
 
-    pageThatSwitch = (page , id)=>{
-       this.setState({switchPage:page , villaId:id})
-    }
     render() {
         return(
             <>
-                {!this.state.switchPage ?
+
+                {this.state.waitingForLoad ?   WaitingLoadingProfilePage(this.state.waitingForLoad , "fv-waitingLoadPublicFullScreen")
+                    :
                     <div className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-MyAccommodationPage"}>
 
                         <div className={"fv-ProfilePageLeftBody"}>
@@ -64,7 +70,7 @@ class MyAccommodationPage extends Component {
                                             localStorage.removeItem("step5")
                                             localStorage.removeItem("step5-2")
                                             localStorage.removeItem("editCode")
-                                            this.props.history.push('/hostStepBasicInformation')
+                                            window.location.replace('/hostStepBasicInformation')
                                         }}/>
 
                                     </MDBCol>
@@ -119,18 +125,8 @@ class MyAccommodationPage extends Component {
                         </div>
 
                     </div>
-                : ''}
-
-                {this.state.switchPage === "ProfilePageCalender" ? <ProfilePageCalender villaId={Number(this.state.villaId)}/>  : ''}
-
-                {this.state.switchPage === "profileShowGuestComments" ? <ProfilePageGustComments2 villaId={Number(this.state.villaId)}/>  : ''}
-
-                {this.state.switchPage === "ProfileMyReservation" ? <ProfilePageReservation2 />  : ''}
-
-                {this.state.switchPage === "ProfileWallet" ? <ProfilePageWallet villaId={Number(this.state.villaId)}/>  : ''}
-
-                </>
-
+                }
+            </>
 
         )}
 }

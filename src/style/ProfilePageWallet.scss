@@ -1,3 +1,4 @@
+
 .fv-ProfilePageWallet{
 
   .fv-ProfilePageWalletWalletImage{
@@ -74,8 +75,7 @@
   .fv-ProfilePageWallet {
 
     .fv-ProfilePageWalletWalletImage {
-     // height: 100%;
-      width: 100%;
+      /* width: 100%; */
       /* overflow-x: auto; */
       /* border-collapse: collapse; */
       /* width: 104%; */
@@ -84,12 +84,13 @@
       /* box-shadow: 0 0 0 1px #ddd; */
       /* margin-top: 8%; */
       overflow-x: auto;
-      /* overflow: auto; */
+      margin-top: -51%;
+      margin-bottom: 49%;
       display: inline-block !important;
       /* overflow: auto; */
       white-space: nowrap;
       border-top-left-radius: 0px;
-      border-bottom-left-radius: 0px;
+      border-bottom-left-radius: 1px;
     }
     .fv-ProfilePageWalletWalletImageMobile {
       width: 62% !important;
@@ -184,7 +185,11 @@
   .fv-ProfilePageReservation.fv-ProfilePageReservation2.fv-ProfilePageTransaction.fv-ProfilePageTransaction2.fv-ProfilePageWallet .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .col-md-3 {
     margin-left: 11vw;
   }
-
+  .fv-ProfilePageWallet.fv-profileWalletInner .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo h5 {
+    margin-bottom: 0%;
+    margin-bottom: 58%;
+    margin-top: -12%;
+  }
 }
 @media (max-width: 376px) {
   .fv-ProfilePageWallet .fv-ProfilePageReservationRightCalendar .DatePicker__calendarContainer.-top {

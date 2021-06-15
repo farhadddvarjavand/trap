@@ -60,7 +60,7 @@ class ProfilePageWallet2 extends Component {
 
                                 {this.state.favoriteData.map(favoritedatas =>{
                                     if(favoritedatas.details)   ///// ///// ///// ///// ///// //// /// باید حذف شود   //// //// //
-                                    return   <MDBCol md={4} sm={12} className={"fv-ProfilePageUserSetInfo"} onClick={()=> this.props.history.push(`/displayPage/${favoritedatas.id}`)}>
+                                    return   <MDBCol md={4} sm={12} className={"fv-ProfilePageUserSetInfo"}>
                                         <ProductFavorites srcImage={`${config.webapi}/images/villas/main/${favoritedatas.main_img }`}
                                                           rate={favoritedatas.score}
                                                           topic={favoritedatas.title}

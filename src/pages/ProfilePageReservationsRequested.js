@@ -18,6 +18,7 @@ import {
 } from "../services/userService";
 import "../style/scroolBodyProfilePages.scss"
 import CalendarLinear from "../data/CalenddarLinear";
+import {waitingForCalculate2, WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
 
 class ProfilePageReservationsRequested extends Component {
     constructor(props) {
@@ -40,7 +41,8 @@ class ProfilePageReservationsRequested extends Component {
                 year : ''
             },
             reservationsIdSelected : [],
-
+            waitingForLoad:true,
+            waitingUpdateButton:false,
         }
     }
 
@@ -49,8 +51,11 @@ class ProfilePageReservationsRequested extends Component {
 
         userVillas()
             .then(res=>{
-                if(res.data.data)
-                    this.setState({villasUser:res.data.data})
+                if(res.data.data && res.data.data.length>0){
+                    this.setState({villasUser:res.data.data , waitingForLoad:false})
+                }else {
+                    this.props.history.push("/MainProfilePages/ProfilePageReservationEmpty")
+                }
             })
     }
 
@@ -113,6 +118,10 @@ class ProfilePageReservationsRequested extends Component {
 
     render() {
         return(
+            <>
+
+                {this.state.waitingForLoad ?   WaitingLoadingProfilePage(this.state.waitingForLoad , "fv-waitingLoadPublicFullScreen")
+                    :
             <div className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageReservationsRequested"}>
 
                 <div className={"fv-ProfilePageLeftBody"}>
@@ -214,11 +223,21 @@ class ProfilePageReservationsRequested extends Component {
                             })}
                         </table>
 
-                        <MDBRow className={"fv-ProfilePageReservationSetInfo fv-ProfilePageReservationsRequestedButton"}>
-                            <MDBCol md={3} sm={6} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageUserSetInfoButtonRight"}>
-                               <a> <input type="button" value="عدم تایید رزرو" onClick={()=>{
+
+                        <MDBRow className={this.state.waitingUpdateButton ? "fv-waitingReservationRequestClass" : "fv-hideForWaiting"} >
+
+                            <MDBCol sm={12} md={6} className={this.state.waitingUpdateButton ? "" : "fv-hideForWaiting" }>
+
+                                {waitingForCalculate2(this.state.waitingUpdateButton , "fv-waitingLoadPublicFullScreen fv-computingReservedDetails fv-ProfileCalendarWaiting")}
+                            </MDBCol>
+                        </MDBRow>
+                        <MDBRow className={this.state.waitingUpdateButton ? "fv-hideForWaiting" :"fv-ProfilePageReservationSetInfo fv-ProfilePageReservationsRequestedButton"} >
+                            <MDBCol md={3} sm={6} className={this.state.waitingUpdateButton ? "fv-hideForWaiting" : "fv-ProfilePageUserSetInfoButton fv-ProfilePageUserSetInfoButtonRight"}>
+                               <a > <input type="button" value="عدم تایید رزرو" onClick={()=>{
+                                   this.setState({waitingUpdateButton:true})
                                    if(this.state.reservationsIdSelected.length === 0){
                                        alert("لطفا سطر مورد نظر خود را انتخاب کنید")
+                                       this.setState({waitingUpdateButton:false})
                                    }else {
                                        const data={
                                            ids:this.state.reservationsIdSelected,
@@ -228,18 +247,28 @@ class ProfilePageReservationsRequested extends Component {
                                        console.log(data)
                                        changeReserveStatus(data)
                                            .then(res=>{
-                                               window.location.reload()
+                                               // window.location.reload()
+                                               allReservationsRequested()
+                                                   .then(res=>{
+                                                       this.setState({allReservationsRequested:res.data.data , waitingUpdateButton:false})
+                                                   })
+                                                   .catch(err=>this.setState({waitingUpdateButton:false}))
                                            })
-                                           .catch(err=>alert("لطفا سطر مورد نظر خود را انتخاب کنید"))
+                                           .catch(err=>{
+                                               alert("لطفا سطر مورد نظر خود را انتخاب کنید")
+                                               this.setState({waitingUpdateButton:false})
+                                           })
                                    }
 
                                }}/></a>
                             </MDBCol>
-                            <MDBCol md={3} sm={6} className={"fv-ProfilePageUserSetInfoButton "}>
-                               <a> <input type="button" value="تایید رزرو" onClick={()=>{
+                            <MDBCol md={3} sm={6} className={this.state.waitingUpdateButton ? "fv-hideForWaiting" : "fv-ProfilePageUserSetInfoButton "}>
 
+                               <a > <input type="button" value="تایید رزرو" onClick={()=>{
+                                   this.setState({waitingUpdateButton:true})
                                    if(this.state.reservationsIdSelected.length === 0){
                                        alert("لطفا سطر مورد نظر خود را انتخاب کنید")
+                                       this.setState({waitingUpdateButton:false})
                                    }else {
                                        const data={
                                            ids:this.state.reservationsIdSelected,
@@ -251,16 +280,27 @@ class ProfilePageReservationsRequested extends Component {
                                            .then(res=>{
                                                console.log(res)
                                                if(res.data.data === "Status updated"){
-                                                   window.location.reload()
+                                                   // window.location.reload()
+                                                   allReservationsRequested()
+                                                       .then(res=>{
+                                                           this.setState({allReservationsRequested:res.data.data , waitingUpdateButton:false})
+                                                       })
+                                                       .catch(err=>this.setState({waitingUpdateButton:false}))
+
                                                }else if(res.data.status) {
                                                    if(res.data.status=== -1){
                                                        alert(res.data.data)
+                                                       this.setState({waitingUpdateButton:false})
                                                    }
                                                }else {
                                                    alert(res.data.message)
+                                                   this.setState({waitingUpdateButton:false})
                                                }
                                            })
-                                           .catch(err=>alert("لطفا سطر مورد نظر خود را انتخاب کنید"))
+                                           .catch(err=>{
+                                               alert("لطفا سطر مورد نظر خود را انتخاب کنید")
+                                               this.setState({waitingUpdateButton:false})
+                                           })
                                    }
                                }}/></a>
                             </MDBCol>
@@ -271,6 +311,8 @@ class ProfilePageReservationsRequested extends Component {
 
 
             </div>
+                }
+            </>
         )}
 }
 export default ProfilePageReservationsRequested

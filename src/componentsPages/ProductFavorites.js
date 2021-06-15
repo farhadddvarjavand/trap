@@ -19,7 +19,12 @@ class ProductFavorites extends React.Component{
                                 villa_id:this.props.id
                             }
                             removeFromFavorite(data)
-                                .then(res => res.status===200 ?( alert('ویلای مورد نظر از علاقه مندی ها حذف شد') , window.location.reload()) : '')
+                                .then(res =>{
+                                    if(res.status===200){
+                                        alert('ویلای مورد نظر از علاقه مندی ها حذف شد')
+                                        window.location.reload()
+                                    }
+                                } )
 
                         }}/></a>
                     </MDBCol>

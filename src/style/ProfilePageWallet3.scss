@@ -23,8 +23,11 @@
     padding-left: 4%;
     color: #919191;
   }
-}
 
+}
+.fv-ProfilePageWallet2 .fv-waitingButtonWalletPage3 .fv-publicWaiting, .fv-ProfilePageWallet2 .fv-waitingButtonWalletPage3 #ballsWaveG {
+  float: left;
+}
 
 @media (max-width: 764px) {
   .fv-ProfilePageWallet3 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageUserSetInfoButton  input{
@@ -42,5 +45,9 @@
   }
   .fv-ProfilePageWallet2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageUserSetInfoButton input {
     text-align: center;
+  }
+  .fv-ProfilePageWallet2 .fv-waitingButtonWalletPage3 .fv-publicWaiting, .fv-ProfilePageWallet2 .fv-waitingButtonWalletPage3 #ballsWaveG {
+    /* float: left; */
+    margin-right: 36vw;
   }
 }

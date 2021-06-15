@@ -48,10 +48,7 @@ class AccommmodationProduct extends React.Component{
                                       <MDBCol md={6} sm={6} className={"fv-myAccommodationPagePaddingRightButton"}>
                                           {this.props.classNameActiveTopRight ?
                                              <input type="button" value="تقویم اقامت گاه" className={this.props.classNameActiveTopRight} onClick={()=>{
-                                                  // return<ProfilePageCalender villaId={Number(this.props.code)}/>
-                                                  // set state and go to page
-                                                 // this.setState({switchPage:"ProfilePageCalender" , id:this.props.code})
-                                                 this.props.pageSwitch("ProfilePageCalender",this.props.code)
+                                                 this.props.history.push(`/MainProfilePages/profileCalender/${this.props.code}`)
                                               }
                                               }/>:
                                               <input type="button" value="تقویم اقامت گاه" className={this.props.classNameActiveTopRight} />
@@ -61,7 +58,7 @@ class AccommmodationProduct extends React.Component{
                                           {this.props.classNameActiveTopLeft ?
                                              <input type="button" value="پاسخ به نظرات" className={this.props.classNameActiveTopLeft} onClick={()=>{
                                                  // this.setState({switchPage:"profileShowGuestComments" , id:this.props.code})
-                                                 this.props.pageSwitch("profileShowGuestComments",this.props.code)
+                                                 this.props.history.push(`/MainProfilePages/profileShowGuestComments/${this.props.code}`)
                                               }
                                               }/> :
                                               <input type="button" value="پاسخ به نظرات" className={this.props.classNameActiveTopLeft} />
@@ -152,7 +149,7 @@ class AccommmodationProduct extends React.Component{
                                                               localStorage.setItem("step5", JSON.stringify(step5Data))
                                                               localStorage.setItem("step5-2", JSON.stringify(step52Data))
                                                               localStorage.setItem("editCode", JSON.stringify({editCode:this.props.code}))
-                                                              this.props.history.push('/hostStepBasicInformation')
+                                                              window.location.replace('/hostStepBasicInformation');
                                                           });
 
                                                   }
@@ -165,8 +162,7 @@ class AccommmodationProduct extends React.Component{
                                       <MDBCol md={6} sm={6} className={"fv-myAccommodationPagePaddingLeftButton"}>
                                           {this.props.classNameActiveBottonLeft ?
                                               <input type="button" value="مشاهده رزروها" className={this.props.classNameActiveBottonLeft}  onClick={()=>{
-                                            //  this.setState({switchPage:"ProfileMyReservation"})
-                                                  this.props.pageSwitch("ProfileMyReservation",this.props.code)
+                                                  this.props.history.push(`/MainProfilePages/ProfileMyReservation`)
                                               }
                                               }/> :
                                               <input type="button" value="مشاهده رزروها" className={this.props.classNameActiveBottonLeft} />
@@ -177,9 +173,7 @@ class AccommmodationProduct extends React.Component{
                                       <MDBCol>
                                           {this.props.classNameActiveButton ?
                                              <input type="button" value="گزارشات مالی ویلا" className={this.props.classNameActiveButton} onClick={()=>{
-                                                  // this.setState({switchPage:"ProfileWallet"}) // on safhe ke mikhahim beravim (delbekhah mitavanad bashad) va chek mikonim dar return ke aya in hast ia na agar in bod beravad be component marbot be in bakhsh
-
-                                                  this.props.pageSwitch("ProfileWallet",this.props.code) // in safhe ke entekhab shode bod ra esmesh ra pass midahim be safhe asli(ghabli) ke dar anja chek shavad va beravad be in safhe
+                                                 this.props.history.push(`/MainProfilePages/ProfileWallet`)
                                               }
                                               }/>:
                                               <input type="button" value="گزارشات مالی ویلا" className={this.props.classNameActiveButton} />
