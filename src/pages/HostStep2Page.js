@@ -17,7 +17,7 @@ class HostStep2Page extends Component {
             this.props.history.push('/login');
         }
         this.state={
-            city:'title',
+            city:'',
             village:'',
             postCode:'',
             address:'',
@@ -35,7 +35,7 @@ class HostStep2Page extends Component {
             let validCity = false
             let validAddress =  false
             let hideUniq = false
-            if(prevData.city !== "title"){
+            if(prevData.city !== ""){
                 validCity=true
             }
             if(prevData.address){
@@ -94,44 +94,15 @@ class HostStep2Page extends Component {
                                 {/*  <p className={this.state.click && this.state.validPostCode===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}> <i className="fas fa-exclamation-triangle" />کد پستی معتبر نمی باشد</p> */}
                                 <p className={this.state.click && this.state.validAddress===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}> <i className="fas fa-exclamation-triangle" />نوشتن آدرس اجباریس</p>
                                 <p  className={"fv-hostStep2Page2Hidden"}>شهر/استان</p>
-                                <select value={this.state.city} onChange={(event)=>{
-                                    if(event.target.value !== "title"){
+                                <input type="text" placeholder={"شهر یا استان خود را وارد نماییید"} value={this.state.city} onChange={(event)=>{
+                                    if(event.target.value){
                                         this.setState({validCity:true})
                                     }else {
                                         this.setState({validCity:false})
                                     }
                                     this.setState({city:event.target.value})
-                                }}  className={this.state.click && this.state.validCity===false ?  "fv-hostStep2Page2Hidden fv-redBorderError" : "fv-hostStep2Page2Hidden"}>
-                                    <option value='title' disabled>نام شهر خود را وارد کنید</option>
-                                    <option value="تهران">تهران</option>
-                                    <option value="مشهد">مشهد</option>
-                                    <option value="اصفهان">اصفهان</option>
-                                    <option value="کرج">کرج</option>
-                                    <option value="شیراز">شیراز</option>
-                                    <option value="تبریز">	تبریز</option>
-                                    <option value="قم">قم</option>
-                                    <option value="اهواز">اهواز</option>
-                                    <option value="کرمانشاه">کرمانشاه</option>
-                                    <option value="ارومیه">ارومیه</option>
-                                    <option value="رشت">رشت</option>
-                                    <option value="زاهدان">زاهدان</option>
-                                    <option value="همدان">همدان</option>
-                                    <option value="کرمان">کرمان</option>
-                                    <option value="یزد">یزد</option>
-                                    <option value="اردبیل">اردبیل</option>
-                                    <option value="اراک">اراک</option>
-                                    <option value="بندرعباس">بندرعباس</option>
-                                    <option value="زنجان">زنجان</option>
-                                    <option value="سنندج">سنندج</option>
-                                    <option value="قزوین">قزوین</option>
-                                    <option value="خرم‌آباد">خرم‌آباد</option>
-                                    <option value="گرگان">گرگان</option>
-                                    <option value="ساری">ساری</option>
-                                    <option value="بابل">بابل</option>
-                                    <option value="سبزوار">سبزوار</option>
-                                    <option value="گلستان">گلستان</option>
-                                    <option value="آمل">آمل</option>
-                                </select>
+                                }} className={this.state.click && this.state.validCity===false ?  "fv-hostStep2Page2Hidden fv-redBorderError" : "fv-hostStep2Page2Hidden"} />
+
                                 <p className={"fv-hostStep2Page2Hidden"}>روستا/محله</p>
                                 <input type="text" value={this.state.village} onChange={(event)=>{ this.setState({village:event.target.value})} } className={"fv-hostStep2Page2Hidden"}/>
                                 <p className={"fv-hostStep2Page2Hidden"}>کدپستی</p>

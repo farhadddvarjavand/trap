@@ -132,7 +132,7 @@ class MainPage extends Datas {
        const {city,dateToGo,dateToReturn,numberOfPeople} = this.state
         return(
             <div className={"main"}>
-        <div className={'fv-footerMenu MainPage'}>
+        <div className={'fv-footerMenu MainPage fv-mainPageBodyOnly'}>
             <MDBRow className={'fv-footerMenuImage'}>
                 <img src={FotterpageImage} alt="Trulli" />
             </MDBRow>
@@ -187,7 +187,7 @@ class MainPage extends Datas {
                     </MDBRow>
 
             <MDBContainer className={localStorage.getItem("token") && this.state.onclickButtonHandle===false ? `fv-containerOptionMainPageRowTop ` : "fv-containerOptionMainPageRowTop fv-displayNoneLogin "}>
-                <MDBRow className={"fv-cascadeOptionMainPageRowTop"}>
+                <MDBRow className={"fv-cascadeOptionMainPageRowTop fv-cascadeOptionMainPageRowTopMainPage"}>
                     <MDBCol md={12} sm={12}>
                         <MDBRow>
                             <MDBCol md={2} sm={2}>

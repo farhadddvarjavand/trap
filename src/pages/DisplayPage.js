@@ -9,6 +9,7 @@ import MobileLogo from "../images/MobileLogo.png"
 import MobileMenu from "../images/MobileMenu.png"
 import Product from "../componentsPages/Product";
 import TopicsMainPage from "../componentsPages/topicsMainPage";
+import UserImage from "../images/user.png"
 import Calender from "../componentsPages/calender";
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import SearchHomePage from "./SearchHomePage";
@@ -454,6 +455,7 @@ class DisplayPage extends Component {
                 <MDBRow className={"fv-DisplayPageDetailsLeftButton"}>
                     <MDBCol>
                         {/*  Waiting   waitingForCalculate2*/}
+
                         {waitingForCalculate2(waitingCalculates || this.state.waitingForExtraPeople , "fv-waitingLoadPublicFullScreen fv-computingReservedDetails" )}
 
                         {waitingCalculates  || this.state.waitingForExtraPeople ? '' :
@@ -501,7 +503,7 @@ class DisplayPage extends Component {
                                                         }
                                                         localStorage.setItem("reservedDatas",dataSave); */
 
-                                                    this.props.history.push("/ProfileMyReservation")
+                                                    this.props.history.push("/MainProfilePages/ProfileMyReservation")
                                                 } else {
                                                     alert("اطلاعات را به درستی وارد نمایید")
                                                 }
@@ -1427,7 +1429,7 @@ class DisplayPage extends Component {
                         <MDBCol md={8} className={"fv-DisplayPageDetailsRightBody fv-displayPageOnly"}>
                             <MDBRow>
                                 <MDBCol md={2} sm={2}>
-                                    <img src={avatar ? `${config.webapi}/images/user//${avatar}` : MobileLogo} />
+                                    <img src={avatar ? `${config.webapi}/images/user//${avatar}` : UserImage} />
                                 </MDBCol>
                                 <MDBCol sm={10} className={"fv-DisplayPageDetailsPersonInformation fv-DisplayPageDetailsPersonInfo"}>
                                     <MDBRow>

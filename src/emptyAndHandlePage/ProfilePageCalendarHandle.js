@@ -40,29 +40,33 @@ class ProfilePageCalendarHandle extends Component {
 
         userVillas()
             .then(result=>{
-                console.log(result.data.data)
-                this.setState({userVillas:result.data.data} , ()=>{
-                    if(this.state.userVillas){ /// agar villaeii vojod dasht
-                        this.state.userVillas.map(userVilla => {
-                            villaPrice(userVilla.id)
-                                .then(res=>{
-                                    console.log(Object.values(res.data).length)
-                                   if( Object.values(res.data)[0] !== null){
-                                       this.setState({villaPrice: Object.values(res.data) , villaId:userVilla.id } , () =>{
-                                              this.props.history.push(`/MainProfilePages/profileCalender/${userVilla.id}`)
-                                          // this.setState({villaIdFullCalendar:userVilla.id})
-                                       })
-                                    }
-                                })
-                                .catch(err=>console.log(err.response))  // this.props.history.push("/ProfilePageCalendarEmpty")
-                        })
-                    }else {
-                         this.props.history.push("/MainProfilePages/ProfilePageCalendarEmpty")
-                        // empty
-                       // this.setState({villaIdFullCalendar:"guest"})
-                    }
+                if(result.data.data.length>0){
+                    this.setState({userVillas:result.data.data} , ()=>{
+                        if(this.state.userVillas){ /// agar villaeii vojod dasht
+                            this.state.userVillas.map(userVilla => {
+                                villaPrice(userVilla.id)
+                                    .then(res=>{
+                                        console.log(Object.values(res.data).length)
+                                        if( Object.values(res.data)[0] !== null){
+                                            this.setState({villaPrice: Object.values(res.data) , villaId:userVilla.id } , () =>{
+                                                this.props.history.push(`/MainProfilePages/profileCalender/${userVilla.id}`)
+                                                // this.setState({villaIdFullCalendar:userVilla.id})
+                                            })
+                                        }
+                                    })
+                                    .catch(err=>console.log(err.response))  // this.props.history.push("/ProfilePageCalendarEmpty")
+                            })
+                        }else {
+                            this.props.history.push("/MainProfilePages/ProfilePageCalendarEmpty")
+                            // empty
+                            // this.setState({villaIdFullCalendar:"guest"})
+                        }
 
-                })
+                    })
+                }else {
+                    this.props.history.push("/MainProfilePages/ProfilePageCalendarEmpty")
+                }
+
             })
 
 

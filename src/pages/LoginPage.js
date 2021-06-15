@@ -68,6 +68,7 @@ class LoginPage extends Component {
 
              }else if(status === 200 &&  data.status===1){
                  alert('پیامک برای شما ارسال شده لطفا چند دقیقه دیگر تلاش مجدد فرمایید');
+                 this.setState({ clickLoader:false})
              }
              else{
                  this.setState({validNumber:false , clickLoader:false})

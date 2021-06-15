@@ -13,6 +13,8 @@ import {editVilla, SetImages, storeVilla} from "../services/userService";
 import {villa} from "../services/villaService";
 import axios from "axios";
 import config from "../services/config.json";
+import HostStepImage1 from "../images/home_miz1 png.png"
+
 
 class HostStep5Page3 extends Component {
     constructor(props) {
@@ -530,12 +532,12 @@ class HostStep5Page3 extends Component {
                                         ر طراح بخواهد دنبال متن های مرتبط بگردد تمرکزش از روی کار اصلی برداشته میشود و این
                                         کار زمان بر خواهد بود. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگرا
                                         ن را در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند.</p>
-                                    <img src={Logo} className={"fv-hostStepPage1LeftImage"}/>
+                                    <img src={HostStepImage1} className={"fv-hostStepPage1LeftImage"}/>
                                 </MDBRow>
-                                <MDBRow className={"fv-hostStepPage2LeftButtonBody"}>
+                                <MDBRow className={ "fv-hostStepPage2LeftButtonBody"}>
 
                                     {/*  <div className={this.state.clickLoader ? "loader" : "fv-hideLoader"}> */}
-                                    <div className={this.state.clickLoader ? "loader" : "fv-hideLoader"}>
+                                    <div className={this.state.clickLoader || this.state.clickLoaderMainImage || this.state.clickLoaderImage1 || this.state.clickLoaderImage2 || this.state.clickLoaderImage3 || this.state.clickLoaderImage4 ? "loader" : "fv-hideLoader"}>
                                         <svg className="circular" viewBox="25 25 50 50">
                                             <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
                                                     stroke-miterlimit="10"/>
@@ -544,7 +546,7 @@ class HostStep5Page3 extends Component {
 
 
 
-                                    <input type="button" value="ثبت اقامتگاه"  className={this.state.clickLoader ? "fv-hideLoader" : "fv-hostStepPage1LeftButton"} onClick={()=>{
+                                    <input type="button" value="ثبت اقامتگاه"  className={this.state.clickLoader || this.state.clickLoaderMainImage || this.state.clickLoaderImage1 || this.state.clickLoaderImage2 || this.state.clickLoaderImage3 || this.state.clickLoaderImage4 ? "fv-hideLoader" : "fv-hostStepPage1LeftButton"} onClick={()=>{
 
                                         this.setState({clickLoader:true})
 
@@ -645,7 +647,7 @@ class HostStep5Page3 extends Component {
                                                .then(res => console.log(res))
                                                .catch(err=>console.log(err.response)) */
                                     }} />
-                                    <input type="button" value="مرحله قبل"  className={this.state.clickLoader ?  "fv-hideLoader" :  "fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"} onClick={()=>{
+                                    <input type="button" value="مرحله قبل"  className={this.state.clickLoader || this.state.clickLoaderMainImage || this.state.clickLoaderImage1 || this.state.clickLoaderImage2 || this.state.clickLoaderImage3 || this.state.clickLoaderImage4?  "fv-hideLoader" :  "fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"} onClick={()=>{
                                         localStorage.setItem("editCode", JSON.stringify({editCode:this.props.match.params.id}))
                                         this.props.history.push('../../hostStepRules')
                                     }}/>

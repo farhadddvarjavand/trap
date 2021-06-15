@@ -572,7 +572,12 @@ textarea{
 .fv-waitingPublicFullScreenSearchPage.fv-publicWaiting .circular {
   margin-right: 86%;
 }
-
+.fv-mainPageBodyOnly .fv-footerMenuRibbon .col-md-2 .fv-userInfoButtonCascade {
+  position: absolute;
+  margin-right: -155%;
+  width: 145%;
+  margin-top: 9%;
+}
 
 
 
@@ -754,6 +759,11 @@ color {  100%, 0% {
   80%, 90% {
     stroke: #ffa700;
   }
+}
+
+.fv-footerMenu .fv-cascadeOptionMainPageRowTop.fv-cascadeOptionMainPageRowTopMainPage a {
+  color: white;
+  margin-right: 0vw;
 }
 
 
@@ -1086,7 +1096,17 @@ color {  100%, 0% {
     z-index: 1;
   }
 
+  .fv-cascadeOptionMainPageRowTop.fv-cascadeOptionMainPageRowTopMainPage .fv-textInToCascadeOptionMainPage {
+    margin: auto;
+    text-align: center;
+    color: white;
+    margin-right: 15%;
+    padding: 0;
+    margin-top: -6vw;
+  }
+
 }
+
 @media (max-width: 540px){
   .fv-mainMobileDiscountedVillas .fv-product .row {
     width: 120%;

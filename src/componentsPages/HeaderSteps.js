@@ -75,7 +75,7 @@ class HeaderSteps extends Component {
                         </MDBRow>
                         <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus fv-userInfoButtonCascadeMobile"}>
                             <MDBCol md={12} sm={12}>
-                                <Link to={"/ProfileMyReservation"}> <i className="fa fa-laptop-house" />
+                                <Link to={"/hostStepBasicInformation"}> <i className="fa fa-laptop-house" />
                                     <a><p>میزبان شوید</p></a> </Link>
                             </MDBCol>
                         </MDBRow>

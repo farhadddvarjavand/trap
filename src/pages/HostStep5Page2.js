@@ -12,6 +12,7 @@ import HostStepCheckbox from "../componentsPages/hostStepCheckbox"
 import {Link} from "react-router-dom";
 import {getStoreVilla, storeVilla, updateVilla} from "../services/userService";
 import {villa} from "../services/villaService";
+import HostStepImage1 from "../images/home_miz1 png.png"
 
 class HostStep5Page2 extends Component {
     constructor(props) {
@@ -190,70 +191,70 @@ class HostStep5Page2 extends Component {
                 suitable_for: step52Info.suitable_for,
             }
 
-            if(allData.address === ""){
+            if(allData.address === "" || allData.address === null){
                 delete allData.address
             }
-            if(allData.area === ""){
+            if(allData.area === "" || allData.area === null){
                 delete allData.area
             }
-            if(allData.arrival_time === "title"){
+            if(allData.arrival_time === "title" || allData.arrival_time === null){
                 delete allData.arrival_time
             }
-            if(allData.auth_rules === ""){
+            if(allData.auth_rules === "" || allData.auth_rules === null){
                 delete allData.auth_rules
             }
-            if(allData.bodyguard === ""){
+            if(allData.bodyguard === "" || allData.bodyguard === null){
                 delete allData.bodyguard
             }
-            if(allData.catering === ""){
+            if(allData.catering === ""  || allData.catering === null){
                 delete allData.catering
             }
-            if(allData.chef === ""){
+            if(allData.chef === "" ||  allData.chef ===null){
                 delete allData.chef
             }
-            if(allData.city === "title"){
+            if(allData.city === "" || allData.city === null){
                 delete allData.city
             }
-            if(allData.state === "title"){
+            if(allData.state === "title" || allData.state === null){
                 delete allData.city
             }
-            if(allData.exit_time === "title"){
+            if(allData.exit_time === "title" || allData.exit_time === null){
                 delete allData.exit_time
             }
-            if(allData.general_fac === ""){
+            if(allData.general_fac === "" || allData.general_fac === null){
                 delete allData.general_fac
             }
-            if(allData.host === ""){
+            if(allData.host === "" || allData.host === null){
                 delete allData.host
             }
-            if(allData.kitchen_fac === ""){
+            if(allData.kitchen_fac === "" || allData.kitchen_fac === null){
                 delete allData.kitchen_fac
             }
-            if(allData.max_reserve === ""){
+            if(allData.max_reserve === "" || allData.max_reserve === null){
                 delete allData.max_reserve
             }
-            if(allData.min_reserve === ""){
+            if(allData.min_reserve === "" || allData.min_reserve === null){
                 delete allData.min_reserve
             }
-            if(allData.monthly_discount === ""){
+            if(allData.monthly_discount === "" || allData.monthly_discount === null){
                 delete allData.monthly_discount
             }
-            if(allData.normal_cost === ""){
+            if(allData.normal_cost === "" || allData.normal_cost === null){
                 delete allData.normal_cost
             }
-            if(allData.normal_extra_cost === ""){
+            if(allData.normal_extra_cost === "" || allData.normal_extra_cost === null){
                 delete allData.normal_extra_cost
             }
-            if(allData.phone_number === ""){
+            if(allData.phone_number === "" || allData.phone_number === null){
                 delete allData.phone_number
             }
-            if(allData.places === ""){
+            if(allData.places === "" || allData.places === null){
                 delete allData.places
             }
-            if(allData.postal_code === ""){
+            if(allData.postal_code === "" || allData.postal_code === null){
                 delete allData.postal_code
             }
-            if(allData.rent_type === "title"){
+            if(allData.rent_type === "title" || allData.rent_type === null){
                 delete allData.rent_type
             }
             if(allData.special_cost === ""){
@@ -265,7 +266,7 @@ class HostStep5Page2 extends Component {
             if(allData.special_rules === ""){
                 delete allData.special_rules
             }
-            if(allData.story === ""){
+            if(allData.story === "" || allData.story === null){
                 delete allData.story
             }
             if(allData.suitable_for === ""){
@@ -531,7 +532,7 @@ class HostStep5Page2 extends Component {
                                     ر طراح بخواهد دنبال متن های مرتبط بگردد تمرکزش از روی کار اصلی برداشته میشود و این
                                     کار زمان بر خواهد بود. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگرا
                                     ن را در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند.</p>
-                                <img src={Logo} className={"fv-hostStepPage1LeftImage"}/>
+                                <img src={HostStepImage1} className={"fv-hostStepPage1LeftImage"}/>
                             </MDBRow>
                             <MDBRow className={"fv-hostStepPage2LeftButtonBody"}>
 
