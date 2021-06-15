@@ -19,7 +19,7 @@ import config from "../services/config.json"
 import http from "../services/httpService";
 import Logo from "../images/Logo.png";
 import UserImage from "../images/user.png";
-import {Link, NavLink} from "react-router-dom";
+import {BrowserRouter, Link, NavLink, Route, Switch} from "react-router-dom";
 import ProfileWalletPageHandle from "../emptyAndHandlePage/ProfileWalletPageHandle";
 import ProfilePageReservationHandle from "../emptyAndHandlePage/ProfilePageReservationHandle";
 import ProfilePageTransactionHandle from "../emptyAndHandlePage/ProfilePageTransactionHandle";
@@ -33,13 +33,25 @@ import ProfilePageWallet3 from "./ProfilePageWallet3";
 import MainPage from "./MainPage";
 import TestProfilePages2 from "./TestProfilePages2";
 import ProfilePageCalender from "./ProfilePageCalender";
+import ProfilePageWallet from "./ProfilePageWallet";
+import AnotherPagesEmpty from "../emptyAndHandlePage/anotherPagesEmpty";
+import ProfilePageReservation2 from "./ProfilePageReservation2";
+import ProfilePageReservationEmpty from "../emptyAndHandlePage/ProfilePageReservationEmpty";
+import ProfilePageTransaction2 from "./ProfilePageTransaction2";
+import ProfilePageTransactionEmpty from "../emptyAndHandlePage/ProfilePageTransactionEmpty";
+import MyAccommodationPage from "./MyAccommodationPage";
+import ProfilePageReservationsRequested from "./ProfilePageReservationsRequested";
+import ProfilePageGustComments2 from "./PrfilePageGustComments2";
+import PrfilePageGustComments from "./PrfilePageGustComments";
+import {CookiesProvider} from "react-cookie";
+import ProfilePageCalendarEmpty from "../emptyAndHandlePage/ProfilePageCalendarEmpty";
 
 
 class MainProfilePages extends Component {
     constructor(props) {
         super(props);
         if(!JSON.parse(localStorage.getItem("info"))){
-            this.props.history.push('login');
+            this.props.history.push('/login');
         }
         this.state={
             activeClassChevron:true,
@@ -89,6 +101,14 @@ class MainProfilePages extends Component {
         console.log(this.props.match.params.Page)
 
         return(
+
+
+
+            <React.StrictMode>
+                <BrowserRouter>
+
+                    <CookiesProvider>
+
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
                     <HeaderSearch  {...this.props}  />  {/* for mobile same that */}
@@ -139,28 +159,61 @@ class MainProfilePages extends Component {
                     </MDBCol>
 
                     {/* */}
-                    {this.props.match.params.page === "ProfilePageReservationHandle" ? <ProfilePageReservationHandle /> : '' }
 
 
-                    {this.props.match.params.page === "ProfilePageTransactionHandle" ? <ProfilePageTransactionHandle /> : '' }
 
-                    {this.props.match.params.page === "MyAccomodationProfilePageHandle" ? <MyAccomodationProfilePageHandle /> : '' }
 
-                    {this.props.match.params.page === "ProfilePageReservationRequestedHandle" ? <ProfilePageReservationRequestedHandle /> : '' }
+                    <Route exact path={'/MainProfilePages/ProfilePageReservationHandle'} component={ProfilePageReservationHandle}/>
+                    <Route exact path={'/MainProfilePages/ProfileMyReservation'} component={ProfilePageReservation2}/>
 
-                    {this.props.match.params.page === "ProfilePageCommentsHandle" ? <ProfilePageCommentsHandle {...this.props} /> : '' }
 
-                    {this.props.match.params.page === "ProfilePageCalendarHandle" ? <ProfilePageCalendarHandle  {...this.props} /> : '' }
+                    <Route exact path={'/MainProfilePages/ProfilePageTransactionHandle'} component={ProfilePageTransactionHandle}/>
+                    <Route exact path={'/MainProfilePages/ProfileMyTransaction'} component={ProfilePageTransaction2}/>
+                    <Route exact path={'/MainProfilePages/ProfilePageTransactionEmpty'} component={ProfilePageTransactionEmpty}/>
 
-                    {this.props.match.params.page === `profileCalender` ? <ProfilePageCalender  {...this.props}/> : '' }
 
-                    {this.props.match.params.page === "ProfileWalletPageHandle" ? <ProfileWalletPageHandle /> : '' }
 
-                    {this.props.match.params.page === "profileWalletRequestWithdraw" ? <ProfilePageWallet3 /> : '' }
 
-                    {this.props.match.params.page === "Profile" ? <ProfilePage /> : '' }
 
-                    {this.props.match.params.page === "profileFavoritesPage" ? <ProfileFavoritesPage /> : '' }
+                    <Route exact path={'/MainProfilePages/MyAccomodationProfilePageHandle'} component={MyAccomodationProfilePageHandle}/>
+                    <Route exact path={'/MainProfilePages/myAccommodation'} component={MyAccommodationPage}/>
+                    <Route exact path={'/MainProfilePages/AnotherPagesEmpty'} component={AnotherPagesEmpty}/>
+
+
+
+                    <Route exact path={'/MainProfilePages/ProfilePageReservationRequestedHandle'} component={ProfilePageReservationRequestedHandle}/>
+                    <Route exact path={'/MainProfilePages/profileReservations'} component={ProfilePageReservationsRequested}/>
+                    <Route exact path={'/MainProfilePages/ProfilePageReservationEmpty'} component={ProfilePageReservationEmpty}/>
+
+
+
+                        <Route exact path={'/MainProfilePages/ProfilePageCommentsHandle'} component={ProfilePageCommentsHandle}/>
+                        <Route path={'/MainProfilePages/profileShowGuestComments/:id'} component={ProfilePageGustComments2}/> {/* profileGustComments2 */}
+                        <Route exact path={'/MainProfilePages/profileGuestComments'} component={PrfilePageGustComments}/> {/* profileGustComments */}
+
+
+
+
+
+
+                    <Route exact path={'/MainProfilePages/ProfilePageCalendarHandle'} component={ProfilePageCalendarHandle}/>
+                    <Route exact path={'/MainProfilePages/profileCalender/:id'} component={ProfilePageCalender}/>
+                    <Route exact path={'/MainProfilePages/ProfilePageCalendarEmpty'} component={ProfilePageCalendarEmpty}/>
+
+
+
+                    <Route exact path={'/MainProfilePages/ProfileWalletPageHandle'} component={ProfileWalletPageHandle}/>
+                    <Route exact path={'/MainProfilePages/ProfileWallet'} component={ProfilePageWallet}/>
+                    <Route exact path={'/MainProfilePages/AnotherPagesEmpty'} component={AnotherPagesEmpty}/>
+
+
+                    <Route exact path={'/MainProfilePages/profileWalletRequestWithdraw'} component={ProfilePageWallet3}/>
+
+
+                    <Route exact path={'/MainProfilePages/profile'} component={ProfilePage}/>
+
+                    <Route exact path={'/MainProfilePages/profileFavoritesPage'} component={ProfileFavoritesPage}/>
+
 
 
 
@@ -173,6 +226,10 @@ class MainProfilePages extends Component {
                 </MDBRow>
 
             </MDBContainer>
+                    </CookiesProvider>
+                </BrowserRouter>
+            </React.StrictMode>
+
         )}
 }
 export default MainProfilePages

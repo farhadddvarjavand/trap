@@ -50,16 +50,16 @@ class ProfilePageCommentsHandle extends Component {
                                         // avalin vilaie por
                                         if(Object.values(res.data.data).length !== 0){ /// agar vojod dasht commenti baraie villa haie sabt shode
                                             this.setState({comments: Object.values(res.data.data) , villaId:userVilla.id } , () =>{
-                                                // this.props.history.push(`/profileShowGuestComments/${userVilla.id}`)
-                                                this.setState({villaIdFullComments:userVilla.id})
+                                                 this.props.history.push(`/MainProfilePages/profileShowGuestComments/${userVilla.id}`)
+                                                //this.setState({villaIdFullComments:userVilla.id})
 
                                             })
                                         }
 
                                         // console.log(res.data.data)
                                     }else {
-                                        this.setState({villaIdFullComments:"guest"})
-                                      //  this.props.history.push("/profileGuestComments")
+                                       // this.setState({villaIdFullComments:"guest"})
+                                        this.props.history.push("/MainProfilePages/profileGuestComments")
                                         // this.props.history.push("/profileGuestComments") /// صفحه ای پیدا نشده است
                                     }
                                 })
@@ -86,15 +86,7 @@ class ProfilePageCommentsHandle extends Component {
 
         return(
             <>
-                {!this.state.villaIdFullComments ?
-                    WaitingLoadingProfilePage(true , "fv-waitingLoadPublicFullScreen")
-
-                    : ''}
-                {Number(this.state.villaIdFullComments) ?  <ProfilePageGustComments2 villaId={Number(this.state.villaIdFullComments)} {...this.props}/> : ''}
-                {this.state.villaIdFullComments === "guest" ?   <PrfilePageGustComments /> : ''}
-
-
-
+                {WaitingLoadingProfilePage(true , "fv-waitingLoadPublicFullScreen")}
             </>
 
 

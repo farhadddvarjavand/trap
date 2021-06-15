@@ -28,6 +28,7 @@ import ProfilePageReservation2 from "../pages/ProfilePageReservation2";
 import ProfilePageReservationEmpty from "./ProfilePageReservationEmpty";
 import AnotherPagesEmpty from "./anotherPagesEmpty";
 import ProfilePageWallet from "../pages/ProfilePageWallet";
+import MyAccommodationPage from "../pages/MyAccommodationPage";
 
 class ProfileWalletPageHandle extends Component {
     constructor(props) {
@@ -47,11 +48,11 @@ class ProfileWalletPageHandle extends Component {
         getFinancialReports()
             .then(res=>{
                 if (res.data.income || res.data.data){
-                   // this.props.history.push(`/ProfileWallet`)
-                    this.setState({pushPage:"full"})
+                    this.props.history.push(`/MainProfilePages/ProfileWallet`)
+                   // this.setState({pushPage:"full"})
                 }else {
-                    this.setState({pushPage:"empty"})
-                    //this.props.history.push("/AnotherPagesEmpty")
+                   // this.setState({pushPage:"empty"})
+                    this.props.history.push("/MainProfilePages/AnotherPagesEmpty")
                 }
             })
             .catch(err=>console.log(err.response))
@@ -64,13 +65,7 @@ class ProfileWalletPageHandle extends Component {
 
         return(
             <>
-                {!this.state.pushPage ?
-                    WaitingLoadingProfilePage(true , "fv-waitingLoadPublicFullScreen")
-                    : ''}
-                {this.state.pushPage === "full" ? <ProfilePageWallet /> : ''}
-                {this.state.pushPage === "empty" ? <AnotherPagesEmpty /> : ''}
-
-
+                { WaitingLoadingProfilePage(true , "fv-waitingLoadPublicFullScreen")  }
             </>
 
         )

@@ -17,7 +17,7 @@ class HostStep3Page extends Component {
     constructor(props) {
         super(props);
         if(!JSON.parse(localStorage.getItem("info"))){
-            this.props.history.push('login');
+            this.props.history.push('/login');
         }
         this.state={
             standardCapacity:1,

@@ -77,6 +77,7 @@ ReactDOM.render(
                     <Switch>
                             <Route exact path={'/TestProfilePages2'} component={TestProfilePages2}/>
                             <Route exact path={'/MainProfilePages/:page'} component={MainProfilePages}/>
+                            <Route exact path={'/MainProfilePages/:page/:id'} component={MainProfilePages}/>
 
 
                             <Route exact path={'/login'} component={LoginPage}/>
@@ -84,8 +85,9 @@ ReactDOM.render(
                             <Route exact path={'/registration'} component={LoginPage3}/> {/* loginpage3 */}
                             <Route exact path={'/factor/:id'} component={FactorPage}/>
                             <Route exact path={'/profileReservations'} component={ProfilePageReservationsRequested}/>
-                            <Route exact path={'/MainProfilePages/profileCalender/:id'} component={ProfilePageCalender}/>
-                            <Route exact path={'/profileShowGuestComments/:id'} component={ProfilePageGustComments2}/> {/* profileGustComments2 */}
+
+                            {/* <Route exact path={'/profileCalender/:id'} component={ProfilePageCalender}/>
+                            {/* <Route exact path={'/profileShowGuestComments/:id'} component={ProfilePageGustComments2}/> */} {/* profileGustComments2 */}
                             <Route exact path={'/profileGuestComments'} component={PrfilePageGustComments}/> {/* profileGustComments */}
                             <Route exact path={'/displayPage/:id'} component={DisplayPage}/>
                             <Route exact path={'/profileWalletRequestWithdraw'} component={ProfilePageWallet3}/> {/* profileWallet3 */}

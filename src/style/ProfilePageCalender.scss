@@ -365,7 +365,9 @@
     padding-bottom: 6% ;
     margin-bottom: 6%;
   }
-
+  .fv-SearchHomePage.fv-DisplayPage.fv-ProfilePage.fv-ProfilePageReservation.fv-ProfilePageReservation2.container.fv-ProfilePageWallet.fv-ProfilePageGustComments2.fv-ProfilePageCalender .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo.fv-ProfilePageReservationUserInfo {
+    display: block;
+  }
 }
 
 @media (max-width: 540px) {
@@ -488,7 +490,9 @@
     padding-bottom: 6% ;
     margin-bottom: 6%;
   }
-
+  .fv-ProfilePageWallet.fv-ProfilePageGustComments2.fv-ProfilePageCalender .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo.fv-ProfilePageReservationUserInfo {
+    display: inline;
+  }
 
 }
 @media (max-width: 540px) {

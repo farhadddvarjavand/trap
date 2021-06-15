@@ -49,17 +49,17 @@ class ProfilePageCalendarHandle extends Component {
                                     console.log(Object.values(res.data).length)
                                    if( Object.values(res.data)[0] !== null){
                                        this.setState({villaPrice: Object.values(res.data) , villaId:userVilla.id } , () =>{
-                                           //   this.props.history.push(`/profileCalender/${userVilla.id}`)
-                                           this.setState({villaIdFullCalendar:userVilla.id})
+                                              this.props.history.push(`/MainProfilePages/profileCalender/${userVilla.id}`)
+                                          // this.setState({villaIdFullCalendar:userVilla.id})
                                        })
                                     }
                                 })
                                 .catch(err=>console.log(err.response))  // this.props.history.push("/ProfilePageCalendarEmpty")
                         })
                     }else {
-                       //  this.props.history.push("/ProfilePageCalendarEmpty")
+                         this.props.history.push("/MainProfilePages/ProfilePageCalendarEmpty")
                         // empty
-                        this.setState({villaIdFullCalendar:"guest"})
+                       // this.setState({villaIdFullCalendar:"guest"})
                     }
 
                 })
@@ -76,15 +76,7 @@ class ProfilePageCalendarHandle extends Component {
 
         return(
             <>
-                {!this.state.villaIdFullCalendar ?
-                    WaitingLoadingProfilePage(true , "fv-waitingLoadPublicFullScreen")
-
-                    : ''}
-                {Number(this.state.villaIdFullCalendar) ?  <ProfilePageCalender villaId={Number(this.state.villaIdFullCalendar)}/> : ''}
-                {this.state.villaIdFullCalendar === "guest" ?   <ProfilePageCalendarEmpty /> : ''}
-
-
-
+                { WaitingLoadingProfilePage(true , "fv-waitingLoadPublicFullScreen")}
             </>
 
 

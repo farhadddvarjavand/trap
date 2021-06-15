@@ -23,7 +23,7 @@ class ProfilePageReservationsRequested extends Component {
     constructor(props) {
         super(props);
         if(!JSON.parse(localStorage.getItem("info"))){
-            this.props.history.push('login');
+            this.props.history.push('/login');
         }
         this.state={
             allReservationsRequested:[],
@@ -113,7 +113,7 @@ class ProfilePageReservationsRequested extends Component {
 
     render() {
         return(
-            <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageReservationsRequested"}>
+            <div className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageReservationsRequested"}>
 
                 <div className={"fv-ProfilePageLeftBody"}>
 
@@ -249,7 +249,16 @@ class ProfilePageReservationsRequested extends Component {
                                        console.log(data)
                                        changeReserveStatus(data)
                                            .then(res=>{
-                                               window.location.reload()
+                                               console.log(res)
+                                               if(res.data.data === "Status updated"){
+                                                   window.location.reload()
+                                               }else if(res.data.status) {
+                                                   if(res.data.status=== -1){
+                                                       alert(res.data.data)
+                                                   }
+                                               }else {
+                                                   alert(res.data.message)
+                                               }
                                            })
                                            .catch(err=>alert("لطفا سطر مورد نظر خود را انتخاب کنید"))
                                    }
@@ -261,7 +270,7 @@ class ProfilePageReservationsRequested extends Component {
                 </div>
 
 
-            </MDBContainer>
+            </div>
         )}
 }
 export default ProfilePageReservationsRequested

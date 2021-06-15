@@ -21,6 +21,7 @@ import ProfilePageReservationEmpty from "./ProfilePageReservationEmpty";
 import ProfilePageTransaction2 from "../pages/ProfilePageTransaction2";
 import ProfilePageTransactionEmpty from "./ProfilePageTransactionEmpty";
 import {WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
+import MyAccomodationProfilePageHandle from "./MyAccomodationProfilePageHandle";
 
 class ProfilePageTransactionHandle extends Component {
     constructor(props) {
@@ -42,11 +43,11 @@ class ProfilePageTransactionHandle extends Component {
         userTransactions()
             .then(res=>{
                 if (res.data.data.length>0){
-                    this.setState({pushPage:"full"})
-                   // this.props.history.push(`/ProfileMyTransaction`)
+                   // this.setState({pushPage:"full"})
+                    this.props.history.push(`/MainProfilePages/ProfileMyTransaction`)
                 }else {
-                    this.setState({pushPage:"empty"})
-                   // this.props.history.push("/ProfilePageTransactionEmpty")
+                   // this.setState({pushPage:"empty"})
+                    this.props.history.push("/MainProfilePages/ProfilePageTransactionEmpty")
                 }
             })
             .catch(err=>console.log(err.response))
@@ -57,13 +58,7 @@ class ProfilePageTransactionHandle extends Component {
 
         return(
             <>
-                    {!this.state.pushPage ?
-                        WaitingLoadingProfilePage(true , "fv-waitingLoadPublicFullScreen")
-                        : ''}
-                    {this.state.pushPage === "full" ? <ProfilePageTransaction2 /> : ''}
-                    {this.state.pushPage === "empty" ? <ProfilePageTransactionEmpty /> : ''}
-
-
+                    { WaitingLoadingProfilePage(true , "fv-waitingLoadPublicFullScreen")}
             </>
         )
 

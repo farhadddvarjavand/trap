@@ -14,7 +14,7 @@ class ProfilePageWallet2 extends Component {
     constructor(props) {
         super(props);
         if(!JSON.parse(localStorage.getItem("info"))){
-            this.props.history.push('login');
+            this.props.history.push('/login');
         }
         this.state={
             sourceOfTransaction:'',
@@ -46,15 +46,9 @@ class ProfilePageWallet2 extends Component {
     render() {
         console.log(this.state.date)
         return(
-            <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageWallet2"}>
-                <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props}
-                              thisPageName = "گزارش مالی" />
-                </MDBContainer>
+            <div className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageWallet2"}>
 
-                <MDBRow className={"fv-ProfilePageLeftBody"}>
-
-                    <ProfilePageUserInfo />
+                <div className={"fv-ProfilePageLeftBody"}>
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo"}>
                         <p>منبع تراکنش</p>
@@ -114,13 +108,10 @@ class ProfilePageWallet2 extends Component {
                             </MDBCol>
                         </MDBRow>
                     </MDBCol>
-                </MDBRow>
+                </div>
 
-                <MDBRow>
-                    <Footer />
-                </MDBRow>
 
-            </MDBContainer>
+            </div>
         )}
 }
 export default ProfilePageWallet2

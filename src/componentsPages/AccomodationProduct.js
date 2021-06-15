@@ -3,161 +3,195 @@ import React from "react";
 import {Link, Route, withRouter} from 'react-router-dom';
 import ProfilePageCalender from "../pages/ProfilePageCalender";
 import {editVilla} from "../services/userService";
+import ProfilePageGustComments2 from "../pages/PrfilePageGustComments2";
+import ProfilePageReservation2 from "../pages/ProfilePageReservation2";
+import ProfilePageWallet from "../pages/ProfilePageWallet";
 
+class AccommmodationProduct extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state={
+        }
+    }
+    componentWillMount() {
 
-const AccommmodationProduct =(props) =>{
-    return(
-                <MDBCol md={4}>
-                    <MDBRow className={'fv-product fv-mobileProduct'}>
-                        <MDBRow className={"fv-ProfilePageReservation2ImageProductContentTopOne"}>
-                            <MDBCol md={props.md}>
-                                <p>{props.status}</p>
-                                <input type="text"/>
-                            </MDBCol>
-                        </MDBRow>
-                        <img src={props.mainImg} className={'fv-productImage'}/>
+    }
 
-                        <MDBRow>
-                            <MDBCol className={'fv-productTopic'}>
-                                {props.title}
-                            </MDBCol>
-                        </MDBRow>
-                        <MDBRow className={'fv-ProfilePageReservation2ProductLocaton'}>
-                            <MDBCol md={12} sm={10}>
-                                <a>کد آگهی : {props.code}</a>
-                            </MDBCol>
-                        </MDBRow>
+    render() {
+        return(
+                          <MDBCol md={4}>
+                              <MDBRow className={'fv-product fv-mobileProduct'}>
+                                  <MDBRow className={"fv-ProfilePageReservation2ImageProductContentTopOne"}>
+                                      <MDBCol md={this.props.md}>
+                                          <p>{this.props.status}</p>
+                                          <input type="text"/>
+                                      </MDBCol>
+                                  </MDBRow>
+                                  <img src={this.props.mainImg} className={'fv-productImage'}/>
 
-                        <MDBRow className={"fv-borderButton"}>
+                                  <MDBRow>
+                                      <MDBCol className={'fv-productTopic'}>
+                                          {this.props.title}
+                                      </MDBCol>
+                                  </MDBRow>
+                                  <MDBRow className={'fv-ProfilePageReservation2ProductLocaton'}>
+                                      <MDBCol md={12} sm={10}>
+                                          <a>کد آگهی : {this.props.code}</a>
+                                      </MDBCol>
+                                  </MDBRow>
 
-                        </MDBRow>
+                                  <MDBRow className={"fv-borderButton"}>
 
-                        <MDBRow className={"fv-profilePaeReservation2PayButton fv-myAccommodationPageCol6Button"}>
-                            <MDBCol md={6} sm={6} className={"fv-myAccommodationPagePaddingRightButton"}>
-                                {props.classNameActiveTopRight ?
-                                    <Link to={`/MainProfilePages/profileCalender/${props.code}`} ><input type="button" value="تقویم اقامت گاه" className={props.classNameActiveTopRight} /></Link> :
-                                    <input type="button" value="تقویم اقامت گاه" className={props.classNameActiveTopRight} />
-                                }
-                            </MDBCol>
-                            <MDBCol md={6} sm={6} className={"fv-myAccommodationPagePaddingLeftButton"}>
-                                {props.classNameActiveTopLeft ?
-                                    <Link to={`/profileShowGuestComments/${props.code}`}><input type="button" value="پاسخ به نظرات" className={props.classNameActiveTopLeft} /></Link> :
-                                    <input type="button" value="پاسخ به نظرات" className={props.classNameActiveTopLeft} />
-                                }
-                            </MDBCol>
-                        </MDBRow>
-                        <MDBRow className={"fv-profilePaeReservation2PayButton fv-myAccommodationPageCol6Button"}>
-                            <MDBCol md={6} sm={6} className={"fv-myAccommodationPagePaddingRightButton"}>
-                                {props.classNameActiveBottonRight ?
-                                    <input type="button" value="ویرایش اقامت گاه" className={props.classNameActiveBottonRight} onClick={()=>{
-                                        if(props.classNameActiveBottonRight === "fv-myAccommodationPageActiveButton"){
-                                            JSON.parse(localStorage.getItem("step5-2"))
-                                            editVilla(props.code)
-                                                .then(res=>{
-                                                    const allDataVilla = res.data.data[0]
-                                                  /*  let mapAddresses = " "  // map address
-                                                    if(allDataVilla.mapAddress){
-                                                        mapAddresses=allDataVilla.mapAddress
-                                                    } */
-                                                    const step1Data = {
-                                                        phone_number: allDataVilla.phone_number,
-                                                        story: allDataVilla.story,
-                                                        title: allDataVilla.title,
-                                                        type: allDataVilla.type,
-                                                        phoneNumberDisable:true, // baraye eddit bayad phoneNumber gheire faal shavad - agar vojod dasht gheirefaal mikonim
-                                                    }
-                                                    const step2Data = {
-                                                        address: allDataVilla.address,
-                                                        city: allDataVilla.city,
-                                                        state: allDataVilla.city,
-                                                        postal_code: allDataVilla.postal_code,
-                                                        village: allDataVilla.village,
-                                                        postalCodeDisable:true,    // baraye eddit bayad postalCode gheire faal shavad - agar vojod dasht gheirefaal mikonim
-                                                    }
-                                                    const step22Data = {
-                                                        lat: allDataVilla.lat,
-                                                        long:  allDataVilla.long,
-                                                       // mapAddress : mapAddresses,
-                                                    }
-                                                    const step3Data = {
-                                                        area: allDataVilla.detail.area,
-                                                        bedroom:  allDataVilla.detail.bedroom,
-                                                        eu_toilet:  allDataVilla.detail.eu_toilet,
-                                                        ir_toilet:  allDataVilla.detail.ir_toilet,
-                                                        max_capacity:  allDataVilla.detail.max_capacity,
-                                                        places:  allDataVilla.detail.places,
-                                                        rent_type:  allDataVilla.detail.rent_type,
-                                                        shared_bathroom:  allDataVilla.detail.shared_bathroom,
-                                                        shower:  allDataVilla.detail.shower,
-                                                        standard_capacity: allDataVilla.detail.standard_capacity,
-                                                        view:  allDataVilla.detail.view,
-                                                        disinfected:allDataVilla.disinfected,
-                                                        mattress_count:allDataVilla.mattress_count,
-                                                        bed_count:allDataVilla.bed_count,
-                                                    }
-                                                    const step4Data = {
-                                                        bodyguard: allDataVilla.info.bodyguard,
-                                                        catering: allDataVilla.info.catering,
-                                                        chef: allDataVilla.info.chef,
-                                                        general_fac: allDataVilla.info.general_fac,
-                                                        host: allDataVilla.info.host,
-                                                        kitchen_fac: allDataVilla.info.kitchen_fac,
-                                                        temp_fac: allDataVilla.info.temp_fac,
-                                                        tour_guide: allDataVilla.info.tour_guide,
-                                                    }
-                                                    const step5Data = {
-                                                        monthly_discount: allDataVilla.rule.monthly_discount,
-                                                        normal_cost: allDataVilla.rule.normal_cost,
-                                                        normal_extra_cost:  allDataVilla.rule.normal_extra_cost,
-                                                        special_cost:  allDataVilla.rule.special_cost,
-                                                        special_extra_cost: allDataVilla.rule.special_extra_cost,
-                                                        weekly_discount:  allDataVilla.rule.weekly_discount,
-                                                    }
-                                                    const step52Data = {
-                                                        arrival_time: allDataVilla.rule.arrival_time,
-                                                        auth_rules: allDataVilla.rule.auth_rules,
-                                                        exit_time: allDataVilla.rule.exit_time,
-                                                        max_reserve: allDataVilla.rule.max_reserve,
-                                                        min_reserve: allDataVilla.rule.min_reserve,
-                                                        special_rules: allDataVilla.rule.special_rules,
-                                                        suitable_for: allDataVilla.rule.suitable_for,
-                                                    }
-                                                    localStorage.setItem("step1", JSON.stringify(step1Data))
-                                                    localStorage.setItem("step2", JSON.stringify(step2Data))
-                                                    localStorage.setItem("step2-2", JSON.stringify(step22Data))
-                                                    localStorage.setItem("step3", JSON.stringify(step3Data))
-                                                    localStorage.setItem("step4", JSON.stringify(step4Data))
-                                                    localStorage.setItem("step5", JSON.stringify(step5Data))
-                                                    localStorage.setItem("step5-2", JSON.stringify(step52Data))
-                                                    localStorage.setItem("editCode", JSON.stringify({editCode:props.code}))
-                                                    props.history.push('/hostStepBasicInformation')
-                                                });
+                                  </MDBRow>
 
-                                        }
+                                  <MDBRow className={"fv-profilePaeReservation2PayButton fv-myAccommodationPageCol6Button"}>
+                                      <MDBCol md={6} sm={6} className={"fv-myAccommodationPagePaddingRightButton"}>
+                                          {this.props.classNameActiveTopRight ?
+                                             <input type="button" value="تقویم اقامت گاه" className={this.props.classNameActiveTopRight} onClick={()=>{
+                                                  // return<ProfilePageCalender villaId={Number(this.props.code)}/>
+                                                  // set state and go to page
+                                                 // this.setState({switchPage:"ProfilePageCalender" , id:this.props.code})
+                                                 this.props.pageSwitch("ProfilePageCalender",this.props.code)
+                                              }
+                                              }/>:
+                                              <input type="button" value="تقویم اقامت گاه" className={this.props.classNameActiveTopRight} />
+                                          }
+                                      </MDBCol>
+                                      <MDBCol md={6} sm={6} className={"fv-myAccommodationPagePaddingLeftButton"}>
+                                          {this.props.classNameActiveTopLeft ?
+                                             <input type="button" value="پاسخ به نظرات" className={this.props.classNameActiveTopLeft} onClick={()=>{
+                                                 // this.setState({switchPage:"profileShowGuestComments" , id:this.props.code})
+                                                 this.props.pageSwitch("profileShowGuestComments",this.props.code)
+                                              }
+                                              }/> :
+                                              <input type="button" value="پاسخ به نظرات" className={this.props.classNameActiveTopLeft} />
+                                          }
+                                      </MDBCol>
+                                  </MDBRow>
+                                  <MDBRow className={"fv-profilePaeReservation2PayButton fv-myAccommodationPageCol6Button"}>
+                                      <MDBCol md={6} sm={6} className={"fv-myAccommodationPagePaddingRightButton"}>
+                                          {this.props.classNameActiveBottonRight ?
+                                              <input type="button" value="ویرایش اقامت گاه" className={this.props.classNameActiveBottonRight} onClick={()=>{
+                                                  if(this.props.classNameActiveBottonRight === "fv-myAccommodationPageActiveButton"){
+                                                      JSON.parse(localStorage.getItem("step5-2"))
+                                                      editVilla(this.props.code)
+                                                          .then(res=>{
+                                                              const allDataVilla = res.data.data[0]
+                                                              /*  let mapAddresses = " "  // map address
+                                                                if(allDataVilla.mapAddress){
+                                                                    mapAddresses=allDataVilla.mapAddress
+                                                                } */
+                                                              const step1Data = {
+                                                                  phone_number: allDataVilla.phone_number,
+                                                                  story: allDataVilla.story,
+                                                                  title: allDataVilla.title,
+                                                                  type: allDataVilla.type,
+                                                                  phoneNumberDisable:true, // baraye eddit bayad phoneNumber gheire faal shavad - agar vojod dasht gheirefaal mikonim
+                                                              }
+                                                              const step2Data = {
+                                                                  address: allDataVilla.address,
+                                                                  city: allDataVilla.city,
+                                                                  state: allDataVilla.city,
+                                                                  postal_code: allDataVilla.postal_code,
+                                                                  village: allDataVilla.village,
+                                                                  postalCodeDisable:true,    // baraye eddit bayad postalCode gheire faal shavad - agar vojod dasht gheirefaal mikonim
+                                                              }
+                                                              const step22Data = {
+                                                                  lat: allDataVilla.lat,
+                                                                  long:  allDataVilla.long,
+                                                                  // mapAddress : mapAddresses,
+                                                              }
+                                                              const step3Data = {
+                                                                  area: allDataVilla.detail.area,
+                                                                  bedroom:  allDataVilla.detail.bedroom,
+                                                                  eu_toilet:  allDataVilla.detail.eu_toilet,
+                                                                  ir_toilet:  allDataVilla.detail.ir_toilet,
+                                                                  max_capacity:  allDataVilla.detail.max_capacity,
+                                                                  places:  allDataVilla.detail.places,
+                                                                  rent_type:  allDataVilla.detail.rent_type,
+                                                                  shared_bathroom:  allDataVilla.detail.shared_bathroom,
+                                                                  shower:  allDataVilla.detail.shower,
+                                                                  standard_capacity: allDataVilla.detail.standard_capacity,
+                                                                  view:  allDataVilla.detail.view,
+                                                                  disinfected:allDataVilla.disinfected,
+                                                                  mattress_count:allDataVilla.mattress_count,
+                                                                  bed_count:allDataVilla.bed_count,
+                                                              }
+                                                              const step4Data = {
+                                                                  bodyguard: allDataVilla.info.bodyguard,
+                                                                  catering: allDataVilla.info.catering,
+                                                                  chef: allDataVilla.info.chef,
+                                                                  general_fac: allDataVilla.info.general_fac,
+                                                                  host: allDataVilla.info.host,
+                                                                  kitchen_fac: allDataVilla.info.kitchen_fac,
+                                                                  temp_fac: allDataVilla.info.temp_fac,
+                                                                  tour_guide: allDataVilla.info.tour_guide,
+                                                              }
+                                                              const step5Data = {
+                                                                  monthly_discount: allDataVilla.rule.monthly_discount,
+                                                                  normal_cost: allDataVilla.rule.normal_cost,
+                                                                  normal_extra_cost:  allDataVilla.rule.normal_extra_cost,
+                                                                  special_cost:  allDataVilla.rule.special_cost,
+                                                                  special_extra_cost: allDataVilla.rule.special_extra_cost,
+                                                                  weekly_discount:  allDataVilla.rule.weekly_discount,
+                                                              }
+                                                              const step52Data = {
+                                                                  arrival_time: allDataVilla.rule.arrival_time,
+                                                                  auth_rules: allDataVilla.rule.auth_rules,
+                                                                  exit_time: allDataVilla.rule.exit_time,
+                                                                  max_reserve: allDataVilla.rule.max_reserve,
+                                                                  min_reserve: allDataVilla.rule.min_reserve,
+                                                                  special_rules: allDataVilla.rule.special_rules,
+                                                                  suitable_for: allDataVilla.rule.suitable_for,
+                                                              }
+                                                              localStorage.setItem("step1", JSON.stringify(step1Data))
+                                                              localStorage.setItem("step2", JSON.stringify(step2Data))
+                                                              localStorage.setItem("step2-2", JSON.stringify(step22Data))
+                                                              localStorage.setItem("step3", JSON.stringify(step3Data))
+                                                              localStorage.setItem("step4", JSON.stringify(step4Data))
+                                                              localStorage.setItem("step5", JSON.stringify(step5Data))
+                                                              localStorage.setItem("step5-2", JSON.stringify(step52Data))
+                                                              localStorage.setItem("editCode", JSON.stringify({editCode:this.props.code}))
+                                                              this.props.history.push('/hostStepBasicInformation')
+                                                          });
 
-                                    }
-                                    }/> :
-                                    <input type="button" value="ویرایش اقامت گاه" className={props.classNameActiveBottonRight} />
-                                }
-                            </MDBCol>
-                            <MDBCol md={6} sm={6} className={"fv-myAccommodationPagePaddingLeftButton"}>
-                                {props.classNameActiveBottonLeft ?
-                                    <Link to={"/ProfileMyReservation"}><input type="button" value="مشاهده رزروها" className={props.classNameActiveBottonLeft} /></Link> :
-                                    <input type="button" value="مشاهده رزروها" className={props.classNameActiveBottonLeft} />
-                                }
-                            </MDBCol>
-                        </MDBRow>
-                        <MDBRow className={"fv-profilePaeReservation2PayButton fv-myAccommodationPageFinanceButton"}>
-                            <MDBCol>
-                                {props.classNameActiveButton ?
-                                    <Link to={"/ProfileWallet"}><input type="button" value="گزارشات مالی ویلا" className={props.classNameActiveButton} /></Link> :
-                                    <input type="button" value="گزارشات مالی ویلا" className={props.classNameActiveButton} />
-                                }
-                            </MDBCol>
+                                                  }
 
-                        </MDBRow>
-                    </MDBRow>
-                </MDBCol>
-    )
+                                              }
+                                              }/> :
+                                              <input type="button" value="ویرایش اقامت گاه" className={this.props.classNameActiveBottonRight} />
+                                          }
+                                      </MDBCol>
+                                      <MDBCol md={6} sm={6} className={"fv-myAccommodationPagePaddingLeftButton"}>
+                                          {this.props.classNameActiveBottonLeft ?
+                                              <input type="button" value="مشاهده رزروها" className={this.props.classNameActiveBottonLeft}  onClick={()=>{
+                                            //  this.setState({switchPage:"ProfileMyReservation"})
+                                                  this.props.pageSwitch("ProfileMyReservation",this.props.code)
+                                              }
+                                              }/> :
+                                              <input type="button" value="مشاهده رزروها" className={this.props.classNameActiveBottonLeft} />
+                                          }
+                                      </MDBCol>
+                                  </MDBRow>
+                                  <MDBRow className={"fv-profilePaeReservation2PayButton fv-myAccommodationPageFinanceButton"}>
+                                      <MDBCol>
+                                          {this.props.classNameActiveButton ?
+                                             <input type="button" value="گزارشات مالی ویلا" className={this.props.classNameActiveButton} onClick={()=>{
+                                                  // this.setState({switchPage:"ProfileWallet"}) // on safhe ke mikhahim beravim (delbekhah mitavanad bashad) va chek mikonim dar return ke aya in hast ia na agar in bod beravad be component marbot be in bakhsh
+
+                                                  this.props.pageSwitch("ProfileWallet",this.props.code) // in safhe ke entekhab shode bod ra esmesh ra pass midahim be safhe asli(ghabli) ke dar anja chek shavad va beravad be in safhe
+                                              }
+                                              }/>:
+                                              <input type="button" value="گزارشات مالی ویلا" className={this.props.classNameActiveButton} />
+                                          }
+                                      </MDBCol>
+
+                                  </MDBRow>
+                              </MDBRow>
+                          </MDBCol>
+
+        )
+    }
 }
+
 export default AccommmodationProduct

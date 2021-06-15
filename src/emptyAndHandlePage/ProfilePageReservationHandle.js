@@ -19,6 +19,7 @@ import {villaPrice} from "../services/villaService";
 import ProfilePageReservation2 from "../pages/ProfilePageReservation2";
 import ProfilePageReservationEmpty from "./ProfilePageReservationEmpty";
 import {WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
+import MyAccomodationProfilePageHandle from "./MyAccomodationProfilePageHandle";
 
 class ProfilePageReservationHandle extends Component {
     constructor(props) {
@@ -40,11 +41,11 @@ class ProfilePageReservationHandle extends Component {
             .then(res=>{
                 console.log(res)
                 if (res.data.data.length>0){
-                    this.setState({pushPage:"full"})
-                    // this.props.history.push(`/ProfileMyReservation`)
+                    //this.setState({pushPage:"full"})
+                     this.props.history.push(`/MainProfilePages/ProfileMyReservation`)
                 }else {
-                    this.setState({pushPage:"empty"})
-                    //  this.props.history.push("/ProfilePageReservationEmpty")
+                    //this.setState({pushPage:"empty"})
+                      this.props.history.push("/MainProfilePages/ProfilePageReservationEmpty")
                 }
             })
             .catch(err=>console.log(err.response))
@@ -55,15 +56,10 @@ class ProfilePageReservationHandle extends Component {
 
         return(
 
-                <>
-                    {!this.state.pushPage ?
-                        WaitingLoadingProfilePage(true , "fv-waitingLoadPublicFullScreen")
-                    : ''}
-                    {this.state.pushPage === "full" ? <ProfilePageReservation2 /> : ''}
-                    {this.state.pushPage === "empty" ? <ProfilePageReservationEmpty /> : ''}
+            <>
+                { WaitingLoadingProfilePage(true , "fv-waitingLoadPublicFullScreen")  }
+            </>
 
-
-                </>
 
         )
 

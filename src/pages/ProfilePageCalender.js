@@ -24,12 +24,18 @@ import {reservedDates, villa, villaPrice} from "../services/villaService";
 import {getToday, priceOfPerMonth} from "../componentsPages/calculationsDate";
 import config from "../services/config.json";
 import moment from "moment-jalaali";
+import {
+    Waiting,
+    waitingForCalculate,
+    waitingForCalculate2, WaitingLoadingProfilePage, WaitingLoadingProfilePage2,
+    WaitingLoadingProfilePage3
+} from "../componentsPages/WaitingLoad";
 
 class ProfilePageCalender extends Component {
     constructor(props) {
         super(props);
         if(!JSON.parse(localStorage.getItem("info"))){
-            this.props.history.push('login');
+            this.props.history.push('/login');
         }
         this.state={
             changeStatusSelectedDays:'title',
@@ -37,7 +43,7 @@ class ProfilePageCalender extends Component {
             villaPrice:[],
             selectedDays : '',
             selectedDaysMobile : '',
-            villasUsertitle:this.props.villaId,
+            villasUsertitle:this.props.match.params.id,
             clickHandlerLoading:false,
             villasUser:[],
             clickLoaderCalendar:false,
@@ -48,6 +54,7 @@ class ProfilePageCalender extends Component {
 
             reservedDatesUsers:[],
             closedDatesHost:[],
+            waitingButtonPrice:false,
 
         }
 
@@ -63,6 +70,7 @@ class ProfilePageCalender extends Component {
     }
 
     componentDidMount() {
+
         villaPrice(this.state.villasUsertitle)
             .then(res=>{
                 if(res.data){
@@ -83,7 +91,6 @@ class ProfilePageCalender extends Component {
 
 
 
-
     }
     villaReservedDates = ()=>{
 
@@ -91,13 +98,13 @@ class ProfilePageCalender extends Component {
         closedReservedDates(this.state.villasUsertitle)
             .then(res=>{
                // console.log(res)
-                this.setState({reservedDatesUsers:Object.values(res.data.data.reservedDates)  , closedDatesHost:Object.values(res.data.data.customizedDates)} , ()=>{
+                this.setState({reservedDatesUsers:Object.values(res.data.data.reservedDates)  , closedDatesHost:Object.values(res.data.data.customizedDates) , waitingButtonPrice:false} , ()=>{
                     this.calculatePricesWithString()
 
                 })
 
             })
-            .catch(err=>console.log(err))
+            .catch(err=>this.setState({ waitingButtonPrice:false}))
 
 
        /* reservedDates(this.state.villasUsertitle)
@@ -309,6 +316,7 @@ class ProfilePageCalender extends Component {
                                                         })
                                                     }
                                                 })
+                                                .catch(err=>this.setState({ waitingButtonPrice:false}))
                                         })
                                     }}>
                                         <option value='title' disabled>نام اقامت گاه</option>
@@ -394,7 +402,8 @@ class ProfilePageCalender extends Component {
                             </MDBRow>
                             <MDBRow className={"fv-ProfilePageWalletWalletButton"}>
                                 <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
-                                    <input className={"fv-changePriceCalendar"} type="button" value="ذخیره قیمت" onClick={()=>{
+                                    {waitingForCalculate2(this.state.waitingButtonPrice , "fv-waitingLoadPublicFullScreen fv-computingReservedDetails fv-ProfileCalendarWaiting")}
+                                    <input className={this.state.waitingButtonPrice ? "fv-hideForWaiting" :"fv-changePriceCalendar"} type="button" value="ذخیره قیمت" onClick={()=>{
                                         const setDatesArray = []
                                         let setDatesString = ''
                                         for(let i = 0 ; i < this.state.selectedDaysAll.length ; i++){
@@ -414,13 +423,27 @@ class ProfilePageCalender extends Component {
                                         }
 
                                         if(this.state.price){                                         // برای تغییر دادن قیمت میباشد
+                                           this.setState({waitingButtonPrice:true})
                                             changeDatesCost(datasForPrice , this.state.villasUsertitle)
-                                                .then(res => res.status === 200 ?  window.location.replace(`/profileCalender/${this.state.villasUsertitle}`) : '')
+                                                .then(res =>{
+                                                    if(res.status === 200){
+                                                        villaPrice(this.state.villasUsertitle)
+                                                            .then(res=>{
+                                                                if(res.data){
+                                                                    this.setState({villaPrice:res.data , waitingButtonPrice:false} , ()=>{
+                                                                        this.villaReservedDates()
+                                                                    })
+                                                                }
+                                                            })
+                                                        // /${this.state.villasUsertitle}`
+                                                    }
+                                                } )
+                                                .catch(err=>this.setState({ waitingButtonPrice:false}))
                                         }
 
 
                                     }}/>
-                                    <input  className={"fv-changeStateCalendar"} type="button" value="ذخیره وضعیت" onClick={()=>{
+                                    <input  className={this.state.waitingButtonPrice ? "fv-hideForWaiting" : "fv-changeStateCalendar"} type="button" value="ذخیره وضعیت" onClick={()=>{
                                         const setDatesArray = []
                                         let setDatesString = ''
                                         for(let i = 0 ; i < this.state.selectedDaysAll.length ; i++){
@@ -441,9 +464,22 @@ class ProfilePageCalender extends Component {
                                                 dates : setDatesString ,
                                                 special_price : "0000"
                                             }
-                                                                                 // برای تغییر دادن قیمت میباشد
+                                            this.setState({waitingButtonPrice:true})                       // برای تغییر دادن قیمت میباشد
                                                 changeDatesCost(datasForStatus , this.state.villasUsertitle)
-                                                    .then(res => res.status === 200 ?  window.location.replace(`/profileCalender/${this.state.villasUsertitle}`) : '')
+                                                    .then(res =>{
+                                                        if(res.status === 200){
+                                                            villaPrice(this.state.villasUsertitle)
+                                                                .then(res=>{
+                                                                    if(res.data){
+                                                                        this.setState({villaPrice:res.data , waitingButtonPrice:false} , ()=>{
+                                                                            this.villaReservedDates()
+                                                                        })
+                                                                    }
+                                                                })
+                                                            // /${this.state.villasUsertitle}`
+                                                        }
+                                                    } )
+                                                    .catch(err=>this.setState({ waitingButtonPrice:false}))
 
                                         }else {
                                             datasForStatus = {             // برای تغییر دادن status میباشد
@@ -451,8 +487,22 @@ class ProfilePageCalender extends Component {
                                                 status : this.state.changeStatusSelectedDays
                                             }
                                             if(this.state.changeStatusSelectedDays !== 'title'){           // برای تغییر دادن status میباشد
+                                                this.setState({waitingButtonPrice:true})
                                                 changeDatesStatus(datasForStatus ,  this.state.villasUsertitle)
-                                                    .then(res => res.status === 200 ?  window.location.replace(`/profileCalender/${this.state.villasUsertitle}`) : '')
+                                                    .then(res =>{
+                                                        if(res.status === 200){
+                                                            villaPrice(this.state.villasUsertitle)
+                                                                .then(res=>{
+                                                                    if(res.data){
+                                                                        this.setState({villaPrice:res.data , waitingButtonPrice:false} , ()=>{
+                                                                            this.villaReservedDates()
+                                                                        })
+                                                                    }
+                                                                })
+                                                            // /${this.state.villasUsertitle}`
+                                                        }
+                                                    } )
+                                                    .catch(err=>this.setState({ waitingButtonPrice:false}))
                                             }
                                         }
 
@@ -568,7 +618,8 @@ class ProfilePageCalender extends Component {
                             </MDBRow>
                             <MDBRow className={"fv-ProfilePageWalletWalletButton"}>
                                 <MDBCol md={3} sm={6} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
-                                    <input className={"fv-changePriceCalendar"} type="button" value="ذخیره قیمت" onClick={()=>{
+                                    {waitingForCalculate2(this.state.waitingButtonPrice , "fv-waitingLoadPublicFullScreen fv-computingReservedDetails fv-ProfileCalendarWaiting")}
+                                    <input className={this.state.waitingButtonPrice ? "fv-hideForWaiting" :"fv-changePriceCalendar"} type="button" value="ذخیره قیمت" onClick={()=>{
                                         const setDatesArray = []
                                         let setDatesString = ''
                                         for(let i = 0 ; i < this.state.selectedDaysAll.length ; i++){
@@ -588,15 +639,29 @@ class ProfilePageCalender extends Component {
                                         }
 
                                         if(this.state.price){                                         // برای تغییر دادن قیمت میباشد
+                                            this.setState({waitingButtonPrice:true})
                                             changeDatesCost(datasForPrice , this.state.villasUsertitle)
-                                                .then(res => res.status === 200 ?  window.location.replace(`/profileCalender/${this.state.villasUsertitle}`) : '')
+                                                .then(res =>{
+                                                    if(res.status === 200){
+                                                        villaPrice(this.state.villasUsertitle)
+                                                            .then(res=>{
+                                                                if(res.data){
+                                                                    this.setState({villaPrice:res.data , waitingButtonPrice:false} , ()=>{
+                                                                        this.villaReservedDates()
+                                                                    })
+                                                                }
+                                                            })
+                                                       // /${this.state.villasUsertitle}`
+                                                    }
+                                                } )
+                                                .catch(err=>this.setState({ waitingButtonPrice:false}))
                                         }
 
 
                                     }}/>
                                 </MDBCol>
                                 <MDBCol md={3} sm={6} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
-                                    <input  className={"fv-changeStateCalendar"} type="button" value="ذخیره وضعیت" onClick={()=>{
+                                    <input  className={this.state.waitingButtonPrice ? "fv-hideForWaiting" :"fv-changeStateCalendar"} type="button" value="ذخیره وضعیت" onClick={()=>{
                                         const setDatesArray = []
                                         let setDatesString = ''
                                         for(let i = 0 ; i < this.state.selectedDaysAll.length ; i++){
@@ -618,9 +683,23 @@ class ProfilePageCalender extends Component {
                                                 dates : setDatesString ,
                                                 special_price : "0000"
                                             }
+                                            this.setState({waitingButtonPrice:true})
                                             // برای تغییر دادن قیمت میباشد
                                             changeDatesCost(datasForStatus , this.state.villasUsertitle)
-                                                .then(res => res.status === 200 ?  window.location.replace(`/profileCalender/${this.state.villasUsertitle}`) : '')
+                                                .then(res =>{
+                                                    if(res.status === 200){
+                                                        villaPrice(this.state.villasUsertitle)
+                                                            .then(res=>{
+                                                                if(res.data){
+                                                                    this.setState({villaPrice:res.data} , ()=>{
+                                                                        this.villaReservedDates()
+                                                                    })
+                                                                }
+                                                            })
+                                                        // /${this.state.villasUsertitle}`
+                                                    }
+                                                } )
+                                                .catch(err=>this.setState({ waitingButtonPrice:false}))
 
                                         }else {
                                             datasForStatus = {             // برای تغییر دادن status میباشد
@@ -628,8 +707,22 @@ class ProfilePageCalender extends Component {
                                                 status : this.state.changeStatusSelectedDays
                                             }
                                             if(this.state.changeStatusSelectedDays !== 'title'){           // برای تغییر دادن status میباشد
+                                                this.setState({waitingButtonPrice:true})
                                                 changeDatesStatus(datasForStatus ,  this.state.villasUsertitle)
-                                                    .then(res => res.status === 200 ?  window.location.replace(`/profileCalender/${this.state.villasUsertitle}`) : '')
+                                                    .then(res =>{
+                                                        if(res.status === 200){
+                                                            villaPrice(this.state.villasUsertitle)
+                                                                .then(res=>{
+                                                                    if(res.data){
+                                                                        this.setState({villaPrice:res.data} , ()=>{
+                                                                            this.villaReservedDates()
+                                                                        })
+                                                                    }
+                                                                })
+                                                            // /${this.state.villasUsertitle}`
+                                                        }
+                                                    } )
+                                                    .catch(err=>this.setState({ waitingButtonPrice:false}))
                                             }
                                         }
 

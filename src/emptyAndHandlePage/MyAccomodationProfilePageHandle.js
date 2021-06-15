@@ -40,11 +40,11 @@ class MyAccomodationProfilePageHandle extends Component {
         userVillas()
             .then(res=>{
                 if (res.data.data.length>0){
-                    this.setState({pushPage:"full"})
-                    // this.props.history.push(`/myAccommodation`)
+                   // this.setState({pushPage:"full"})
+                     this.props.history.push(`/MainProfilePages/myAccommodation`)
                 }else {
-                    this.setState({pushPage:"empty"})
-                    // this.props.history.push("/AnotherPagesEmpty")
+                   // this.setState({pushPage:"empty"})
+                     this.props.history.push("/MainProfilePages/AnotherPagesEmpty")
                 }
             })
             .catch(err=>console.log(err.response))
@@ -56,14 +56,7 @@ class MyAccomodationProfilePageHandle extends Component {
 
         return(
             <>
-                {!this.state.pushPage ?
-                    WaitingLoadingProfilePage(true , "fv-waitingLoadPublicFullScreen")
-
-                    : ''}
-                {this.state.pushPage === "full" ? <MyAccommodationPage /> : ''}
-                {this.state.pushPage === "empty" ? <AnotherPagesEmpty /> : ''}
-
-
+                {WaitingLoadingProfilePage(true , "fv-waitingLoadPublicFullScreen")}
             </>
         )
 

@@ -17,14 +17,14 @@ class PrfilePageGustComments2 extends Component {
     constructor(props) {
         super(props);
         if(!JSON.parse(localStorage.getItem("info"))){
-            this.props.history.push('login');
+            this.props.history.push('/login');
         }
         this.state={
             comments:[],
             answerCommentId:'',
             textAreaComment:'',
             villasUser:[],
-            villasUsertitle:this.props.villaId,
+            villasUsertitle:this.props.match.params.id,
             clickHandlerLoading:false,
 
         }

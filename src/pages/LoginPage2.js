@@ -95,6 +95,7 @@ class LoginPage2 extends Component {
                         userInfo:data.data.user
                     }
                     localStorage.setItem("infoUser" , JSON.stringify(info))
+                    localStorage.setItem("info" , JSON.stringify(info))
 
 
                     // Redirect User
@@ -117,10 +118,12 @@ class LoginPage2 extends Component {
                             this.setState({errorsText:err.response.data.errors.sms_code , validCode:false , clickLoader:false})
                         }
                     }else {
-                        alert("اررور از سمت سرور رخ داده است")
+                        alert("کد نامعتبر میباشد لطفا مجددا تلاش کنید")
+                        this.props.history.push("/login");
                     }
                 }else {
-                    alert("اررور از سمت سرور رخ داده است")
+                    alert("کد نامعتبر میباشد لطفا مجددا تلاش کنید")
+                    this.props.history.push("/login");
                 }
 
             })
