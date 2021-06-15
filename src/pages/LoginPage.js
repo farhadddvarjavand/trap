@@ -3,7 +3,6 @@ import {MDBAlert, MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import "../style/LoginPage.scss"
 import HostStepIncreaseAndDecreaseButton from "../componentsPages/hostStepIncreaseAndDecreaseButton"
 import HostStep1Page from "./HostStep1Page";
-import HeaderSteps from "../componentsPages/HeaderSteps";
 import Logo from "../images/Logo.png";
 import MobileLogo from "../images/MobileLogo.png"
 import LoginPageImage from "../images/simon-haslett-BSkXuvmSHLA-unsplash 1.png"
