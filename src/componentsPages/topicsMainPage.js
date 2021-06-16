@@ -17,7 +17,7 @@ class topicsMainPage extends React.Component{
                         <h8><Link to={this.props.linkToPage}>مشاهده همه</Link></h8>
                     </MDBCol>
                     <MDBCol md={4} sm={9} className={"fv-topicMainPageTopic"}>
-                        <h4>{this.props.topic}</h4>
+                        <h5>{this.props.topic}</h5>
                     </MDBCol>
 
                 </React.Fragment>

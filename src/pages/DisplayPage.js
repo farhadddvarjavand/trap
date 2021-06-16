@@ -99,6 +99,9 @@ class DisplayPage extends Component {
             alertErrors:false,
             innerValidationFacilitiesCost:false,
 
+            imSureButton:false,
+            waitingAreYouSureQuestionButton:false,
+
 
         }
     }
@@ -367,6 +370,8 @@ class DisplayPage extends Component {
 
     reservedHandle = (minimumDate ,maximumDate , allDaysReservedConcat ,  daysCostString ,resultVillaArray ,  rangeBetween ,  reservedFacilitiesPrice , chef , host , tour_guide , bodyguard , className , waitingCalculate)=>{
         let waitingCalculates = waitingCalculate
+        let imSure = false
+        let imNotSure = false
         return(
             <MDBCol md={4} className={className}>
                 <MDBRow>
@@ -377,8 +382,8 @@ class DisplayPage extends Component {
                 </MDBRow>
                 <MDBRow className={"fv-DisplayPageDetailsLeftBodyDate"}>
                     <MDBRow className={"fv-DisplayPageDetailsLeftSelectedDate"}>
-                        <input type='text' value=' تاریخ ورود' className={"fv-DisplayPageDetailsLeftBodyDateOnText"} />
-                        <input type='text' value=' تاریخ خروج' className={"fv-DisplayPageDetailsLeftBodyDateOutText"} />
+                        <input type='text' disabled={true} value=' تاریخ ورود' className={"fv-DisplayPageDetailsLeftBodyDateOnText"} />
+                        <input type='text' disabled={true} value=' تاریخ خروج' className={"fv-DisplayPageDetailsLeftBodyDateOutText"} />
                     </MDBRow>
                     <MDBRow className={"fv-DisplayPageDetailsLeftTextDate"}>
                         <div  className={"fv-DisplayPageDetailsLeftBodyDateOnInput"}>  <CalendarLinearLimitedDays minimumDate={minimumDate} maximumDate={maximumDate} dayToGo={this.selectDayToGo} text={'انتخاب روز'}  daysReserved={allDaysReservedConcat}/> </div>
@@ -386,7 +391,7 @@ class DisplayPage extends Component {
                     </MDBRow>
                 </MDBRow>
                 <MDBRow className={"fv-DisplayPageDetailsLeftBodyCapacityText"}>
-                    <input type='text' value=' تعداد نفرات'/>
+                    <input type='text' disabled={true} value=' تعداد نفرات'/>
                 </MDBRow>
                 <MDBRow className={"fv-DisplayPageDetailsLeftBodyCapacityOption"}>
                     <select value={this.state.numberOfPeople} onChange={(event)=>{
@@ -456,67 +461,90 @@ class DisplayPage extends Component {
                     <MDBCol>
                         {/*  Waiting   waitingForCalculate2*/}
 
-                        {waitingForCalculate2(waitingCalculates || this.state.waitingForExtraPeople , "fv-waitingLoadPublicFullScreen fv-computingReservedDetails" )}
 
-                        {waitingCalculates  || this.state.waitingForExtraPeople ? '' :
-                            <input type="button" value="درخواست رزرو" onClick={() => {
-                                if (localStorage.getItem("token")) {
-                                    if (Number(this.state.reservedPrice)) {
-                                        let cost = this.state.reservedPrice + Number(reservedFacilitiesPrice)
-                                        if (Number(this.state.extraPeopleCost) && Number(this.state.reservedPrice)) {
-                                            cost = Number(this.state.extraPeopleCost) + Number(this.state.reservedPrice) + Number(reservedFacilitiesPrice)
-                                        }
-                                        let extraCost = 0
-                                        if (Number(this.state.extraPeopleCost)) {
-                                            extraCost = Number(this.state.extraPeopleCost)
-                                        }
-                                        let extraPeople = 0
-                                        if (this.state.numberOfPeople && Number(this.state.extraPeopleCost)) {
-                                            extraPeople = this.state.numberOfPeople
-                                        }
-                                        const data = {
-                                            villa_title: this.state.resultVilla.title,
-                                            state: this.state.resultVilla.state,
-                                            city: this.state.resultVilla.city,
-                                            entry_date: this.state.dateToGo.year + "/" + this.state.dateToGo.month + "/" + this.state.dateToGo.day,
-                                            exit_date: this.state.dateToReturn.year + "/" + this.state.dateToReturn.month + "/" + this.state.dateToReturn.day,
-                                            cost: cost,
-                                            villa_id: this.state.resultVilla.id,
-                                            passengers_number: this.state.resultVilla.details.standard_capacity,
-                                            extra_people: extraPeople,   //this.state.resultVilla.details.max_capacity-this.state.resultVilla.details.standard_capacity ,
-                                            length_stay: rangeBetween,
-                                            extra_cost: extraCost,
-                                            facilities_cost: reservedFacilitiesPrice,
-                                            chef: chef,
-                                            host: host,
-                                            tour_guide: tour_guide,
-                                            bodyguard: bodyguard,
-                                        }
-                                        console.log(data)
-                                        reserveRequest(data)
-                                            .then(res => {
-                                                console.log(res)
-                                                if (res.status === 200) {
-                                                    /*    const dataSave = {                       /// ezafe kardann be reserve ha dar taghvim
-                                                            end_date: data.exit_date ,
-                                                            start_date: data.exit_date,
-                                                        }
-                                                        localStorage.setItem("reservedDatas",dataSave); */
-
-                                                    this.props.history.push("/MainProfilePages/ProfileMyReservation")
-                                                } else {
-                                                    alert("اطلاعات را به درستی وارد نمایید")
+                        {this.state.waitingAreYouSureQuestionButton  && !this.state.imSureButton ?
+                            <MDBContainer >
+                                <MDBRow>
+                                    <p>آیا مطمئن هستید؟</p>
+                                </MDBRow>
+                                <MDBRow>
+                                    <MDBCol>
+                                        <input type={"button"} value={"بله"} onClick={()=>{
+                                            this.setState({imSureButton:true})
+                                            if (Number(this.state.reservedPrice)) {
+                                                let cost = this.state.reservedPrice + Number(reservedFacilitiesPrice)
+                                                if (Number(this.state.extraPeopleCost) && Number(this.state.reservedPrice)) {
+                                                    cost = Number(this.state.extraPeopleCost) + Number(this.state.reservedPrice) + Number(reservedFacilitiesPrice)
                                                 }
-                                            })
-                                            .catch(err => console.log(err.response))
-                                    } else {
-                                        alert("اطلاعات را به درستی وارد نمایید")
-                                    }
+                                                let extraCost = 0
+                                                if (Number(this.state.extraPeopleCost)) {
+                                                    extraCost = Number(this.state.extraPeopleCost)
+                                                }
+                                                let extraPeople = 0
+                                                if (this.state.numberOfPeople && Number(this.state.extraPeopleCost)) {
+                                                    extraPeople = this.state.numberOfPeople
+                                                }
+                                                const data = {
+                                                    villa_title: this.state.resultVilla.title,
+                                                    state: this.state.resultVilla.state,
+                                                    city: this.state.resultVilla.city,
+                                                    entry_date: this.state.dateToGo.year + "/" + this.state.dateToGo.month + "/" + this.state.dateToGo.day,
+                                                    exit_date: this.state.dateToReturn.year + "/" + this.state.dateToReturn.month + "/" + this.state.dateToReturn.day,
+                                                    cost: cost,
+                                                    villa_id: this.state.resultVilla.id,
+                                                    passengers_number: this.state.resultVilla.details.standard_capacity,
+                                                    extra_people: extraPeople,   //this.state.resultVilla.details.max_capacity-this.state.resultVilla.details.standard_capacity ,
+                                                    length_stay: rangeBetween,
+                                                    extra_cost: extraCost,
+                                                    facilities_cost: reservedFacilitiesPrice,
+                                                    chef: chef,
+                                                    host: host,
+                                                    tour_guide: tour_guide,
+                                                    bodyguard: bodyguard,
+                                                }
+                                                console.log(data)
+                                                reserveRequest(data)
+                                                    .then(res => {
+                                                        console.log(res)
+                                                        if (res.status === 200) {
+                                                            /*    const dataSave = {                       /// ezafe kardann be reserve ha dar taghvim
+                                                                    end_date: data.exit_date ,
+                                                                    start_date: data.exit_date,
+                                                                }
+                                                                localStorage.setItem("reservedDatas",dataSave); */
 
-                                } else {
-                                    alert("شما ابتدا باید وارد شوید")
-                                    this.props.history.push("/")
-                                }
+                                                            this.props.history.push("/MainProfilePages/ProfileMyReservation")
+                                                        } else {
+                                                            this.setState({waitingAreYouSureQuestionButton:true , imSureButton:false})
+                                                            alert("اطلاعات را به درستی وارد نمایید")
+                                                        }
+                                                    })
+                                                    .catch(err => console.log(err.response))
+                                            } else {
+                                                this.setState({waitingAreYouSureQuestionButton:false , imSureButton:false})
+                                                alert("اطلاعات را به درستی وارد نمایید")
+                                            }
+                                        }}/>
+                                    </MDBCol>
+                                    <MDBCol>
+                                        <input type={"button"} value={"خیر"} style={{background: `#ffd6d6` , color : 'black'}} onClick={()=>this.setState({waitingAreYouSureQuestionButton:false})}/>
+                                    </MDBCol>
+                                </MDBRow>
+                            </MDBContainer>
+                            : ""}
+
+
+
+                        {waitingForCalculate2(waitingCalculates || this.state.waitingForExtraPeople || this.state.imSureButton , "fv-waitingLoadPublicFullScreen fv-computingReservedDetails" )}
+
+                        {waitingCalculates  || this.state.waitingForExtraPeople || this.state.waitingAreYouSureQuestionButton ? '' :
+                            <input type="button" value="درخواست رزرو" onClick={() => {
+                                    if (localStorage.getItem("token")) {
+                                        this.setState({waitingAreYouSureQuestionButton:true , imSureButton:false})
+                                    } else {
+                                        alert("شما ابتدا باید وارد شوید")
+                                        this.props.history.push("/")
+                                    }
 
                             }}/>
                         }
@@ -647,6 +675,7 @@ class DisplayPage extends Component {
             }
         }
 
+
         let daysCostString = ""
         if(daysSelected.length>0){
             for(let i = 0 ; i < daysSelected.length ; i++){
@@ -695,10 +724,12 @@ class DisplayPage extends Component {
                   this.setState({reservedFacilitiesPrice:0,innerValidationFacilitiesCost:false })
               }*/
 
+
             if(this.state.daysCostString !== daysCostString){
                 waitingCalculate = true
 
                 calculateCost({dates: daysCostString},this.props.match.params.id )
+
                     .then(res=>{
                         console.log(res)
                         {/*   if(res.data.data === "Reservation failed" && !this.state.alertErrors ){ //
@@ -1477,7 +1508,7 @@ class DisplayPage extends Component {
                                     <p><i className="fa fa-bed" aria-hidden="true" /> {this.state.resultVilla.details?this.state.resultVilla.details.bed_count:''} تخت یک نفره + {this.state.resultVilla.details?this.state.resultVilla.details.mattress_count:''} تشک معمولی </p>
                                 </MDBRow>
                                 <MDBRow className={"h4Mobile"}>
-                                    <h4>درباره اقامت گاه</h4>
+                                    <h5>درباره اقامت گاه</h5>
                                 </MDBRow>
                                 <MDBRow className={"fv-DisplayPageDetailsRightParagraph pMobile"}>
                                     <p>{story}</p>
@@ -1496,19 +1527,19 @@ class DisplayPage extends Component {
                                 <MDBRow className={"fv-DisplayPageDetailsRightStayInHome"}>
                                     {this.state.resultVilla.rules && this.state.resultVilla.rules.min_reserve?
                                         <MDBCol md={5} sm={11}>
-                                            <h4> حداقل تعداد روز اقامت </h4>
+                                            <h5> حداقل تعداد روز اقامت </h5>
                                             <p>{this.state.resultVilla.rules.min_reserve} روز </p>
                                         </MDBCol>
                                         :
                                         ''}
                                     {this.state.resultVilla.rules && this.state.resultVilla.rules.max_reserve ?
                                         <MDBCol md={7} sm={11}>
-                                            <h4> حداکثر تعداد روز اقامت </h4>
+                                            <h5> حداکثر تعداد روز اقامت </h5>
                                             <p>{this.state.resultVilla.rules.max_reserve} روز </p>
                                         </MDBCol>
                                         :
                                         ''}
-                                    <h4> امکانات </h4>
+                                    <h5> امکانات </h5>
                                 </MDBRow>
 
                                 <div>
@@ -1552,7 +1583,7 @@ class DisplayPage extends Component {
                                             {/*<p>مشاهده امکانات بیشتر</p>  */}
                                         </MDBRow>
                                         <MDBRow  className={"fv-DisplayPageّMoreFacilities"}>
-                                            <h4>امکانات ویژه</h4>
+                                            <h5>امکانات ویژه</h5>
                                         </MDBRow>
                                         <MDBRow className={"fv-DisplayPageDetailsRightParagraph"}>
                                             <h5>هر کدام از امکانات زیر که دوست دارید انتخاب کنید تا به شما در سفر حس بهتری بدهد </h5>
@@ -1636,7 +1667,7 @@ class DisplayPage extends Component {
 
                                 </MDBRow>
                                 <MDBRow>
-                                    <h4> اجاره بها </h4>
+                                    <h5> اجاره بها </h5>
                                 </MDBRow>
 
                                 <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
@@ -1750,7 +1781,7 @@ class DisplayPage extends Component {
 
 
                                 <MDBRow>
-                                    <h4> قوانین </h4>
+                                    <h5> قوانین </h5>
                                 </MDBRow>
                                 <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
                                     {this.state.resultVilla.rules && this.state.resultVilla.rules.arrival_time ?
@@ -1787,7 +1818,7 @@ class DisplayPage extends Component {
                             <div id="Address">                                        {/*        fv-Address     */}
 
                                 <MDBRow>
-                                    <h4> آدرس </h4>
+                                    <h5> آدرس </h5>
                                     {console.log(this.state.resultVilla)}
                                 </MDBRow>
                                 <MDBRow>
@@ -1830,10 +1861,10 @@ class DisplayPage extends Component {
 
                                 <MDBRow className={"fv-DisplayPageDetailsRightingComment"}>
                                     <MDBCol md={9}>
-                                        <h4> نظرات </h4>
+                                        <h5> نظرات </h5>
                                     </MDBCol>
                                     <MDBCol md={2}>
-                                        <Link to={`/addComments/${this.props.match.params.id}`}><h4> نوشتن نظر<i className="fas fa-chevron-left" /> </h4></Link>
+                                        <Link to={`/addComments/${this.props.match.params.id}`}><h4> نوشتن نظر<i style={{color: `#3EC886`}} className="fas fa-chevron-left" /> </h4></Link>
                                     </MDBCol>
                                 </MDBRow>
                                 {cleaningRate || adComplianceRate || hospitalityRate || hostingQualityRate ?

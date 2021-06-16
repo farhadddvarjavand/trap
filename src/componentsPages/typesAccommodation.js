@@ -11,7 +11,7 @@ class typesAccommodation extends React.Component{
         return (
             <div className={'fv-typesAccommodation fv-mobileProduct'}>
                 <img src={this.props.image} className={'fv-productImage fv-popularVillageImage fv-typesAccommodationImage'}/>
-                <MDBRow>
+                <MDBRow className={'fv-typesAccommodationTopicBody'}>
                     <MDBCol size={11} className={'fv-popularVillageTitle fv-typesAccommodationTopic'}>
                         <div className={'test'}>
                         <a>{this.props.topic}</a>

@@ -118,7 +118,7 @@ class HeaderLoginMenu extends React.Component{
                         <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
                             <MDBCol className={"fv-ProfilePageUserInfoDetailsBodyColumn"}>
                                 <Link to={'/login'}><p className={ window.location.href.match(/\blogin\b/) ? "fv-reservationActive" : ''}  ><i className="fa fa-door-open" />ورود</p></Link>
-                                <Link to={'/registration'}> <p className={ window.location.href.match(/\bregistration\b/) ? "fv-transaction" : ''}  ><i className="fa fa-address-card" />ثبت نام</p> </Link>
+                                {/* <Link to={'/registration'}> <p className={ window.location.href.match(/\bregistration\b/) ? "fv-transaction" : ''}  ><i className="fa fa-address-card" />ثبت نام</p> </Link> */}
                             </MDBCol>
                         </MDBRow>
                     </MDBCol>

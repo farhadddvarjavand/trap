@@ -724,6 +724,9 @@ display: none;
     width: 50%;
     z-index: 1;
 }
+.fv-DisplayPageDetailsLeftSelectedDate input , .fv-DisplayPageDetailsLeftBodyCapacityText input{
+    background: white;
+}
 
 
 /*    ***************************** ********************** **************** calendar Picker for Desktop css ************************************************* */
@@ -1179,7 +1182,7 @@ display: none;
         text-align: center;
     }
     .fv-DisplayPageDetailsPersonInformation {
-        margin-right: -1%;
+        margin-right: -17%;
     }
     .fv-DisplayPageDetailsRightBody h5 {
         font-size: 22px;

@@ -8,7 +8,7 @@ class Product extends React.Component{
         return(
            <MDBRow className={'fv-product fv-mobileProduct'}>
                 <img src={this.props.srcImage} className={'fv-productImage'}/>
-                <MDBRow  >
+                <MDBRow  className={'fv-productRateBoxBody'}>
                     {this.props.rate ?
                         <MDBCol md={4} sm={5} className={'fv-productRateBox'}>
                             <i className="fa fa-star" aria-hidden="true" />
@@ -22,7 +22,7 @@ class Product extends React.Component{
                 </MDBRow>
                <MDBRow>
                <MDBCol className={'fv-productTopic'}>
-                        {this.props.topic}
+                       <h6>{this.props.topic}</h6>
                </MDBCol>
                </MDBRow>
                 <MDBRow className={'fv-productLocation'}>

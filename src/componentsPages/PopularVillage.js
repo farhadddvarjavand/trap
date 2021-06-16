@@ -10,8 +10,8 @@ class PopularVillage extends React.Component{
             <MDBContainer className={'fv-product fv-popularVillage fv-mobileProduct'}>
                 <img src={this.props.srcImage} className={'fv-productImage fv-popularVillageImage fv-popularVillageTitle'}/>
 
-                        <h3>{this.props.location}</h3>
-                        <h6> {this.props.capacity}<p>خانه</p> </h6>
+                        <h6>{this.props.location}</h6>
+                        <p>{this.props.capacity} خانه </p>
 
             </MDBContainer>
         )

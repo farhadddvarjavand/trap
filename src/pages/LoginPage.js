@@ -58,21 +58,29 @@ class LoginPage extends Component {
              */
 
          await sendPhoneNumber(phone_number).then(result => {
-             const status = result.status
-             const data = result.data
-             if (status === 200 &&  data.status===2) {
-                 // Phone number have to save in local storage for use it, in the next step
-                 localStorage.setItem('phone_number', (phone_number.phone_number));
-                 alert('پیامک اعتبارسنجی ارسال شد');
-                 this.props.history.push("/loginMembership");
+            // console.log(result)
+             if(result.data.redirection){
+                 alert("به ترپ خوش آمدید لطفا ابتدا ثبت نام کنید")
+                 this.props.history.push( "/registration");
 
-             }else if(status === 200 &&  data.status===1){
-                 alert('پیامک برای شما ارسال شده لطفا چند دقیقه دیگر تلاش مجدد فرمایید');
-                 this.setState({ clickLoader:false})
+             }else {
+                 const status = result.status
+                 const data = result.data
+                 if (status === 200 &&  data.status===2) {
+                     // Phone number have to save in local storage for use it, in the next step
+                     localStorage.setItem('phone_number', (phone_number.phone_number));
+                     alert('پیامک اعتبارسنجی ارسال شد');
+                     this.props.history.push("/loginMembership");
+
+                 }else if(status === 200 &&  data.status===1){
+                     alert('پیامک برای شما ارسال شده لطفا چند دقیقه دیگر تلاش مجدد فرمایید');
+                     this.setState({ clickLoader:false})
+                 }
+                 else{
+                     this.setState({validNumber:false , clickLoader:false})
+                 }
              }
-             else{
-                 this.setState({validNumber:false , clickLoader:false})
-             }
+
          })
              .catch(error => error.response.status === 422 ?  this.setState({validNumber:false ,clickLoader:false}) : '')
 
@@ -97,12 +105,12 @@ class LoginPage extends Component {
                                 <h3>ورود به حساب کاربری</h3>
                                 {/* <p>شماره موبایل خود را وارد نمایید</p> */}
                                 <MDBRow>
-                                    <MDBCol md={4}>
+                                    <MDBCol md={12}>
                                         <p>شماره موبایل خود را وارد نمایید</p>
                                     </MDBCol>
-                                    <MDBCol >
+                                    {/*  <MDBCol >
                                         <Link to={"/registration"} ><p>عضو شوید</p> </Link>
-                                    </MDBCol>
+                                    </MDBCol>  */}
                                 </MDBRow>
                                 <input type="text" placeholder={'شماره موبایل'} className={this.state.validNumber===false ? "fv-redBorderError"  : "" }  name={'phone_number'} value={this.state.phone_number}
                                        onChange={((e)=>this.setState({phone_number : e.target.value }))}/>

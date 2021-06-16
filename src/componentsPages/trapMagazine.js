@@ -12,7 +12,7 @@ class trapMagazine extends React.Component{
                 <img src={this.props.srcimmage} className={'fv-productImage fv-popularVillageImage fv-trapMagazineImage'}/>
                 <MDBRow>
                     <MDBCol md={12} className={'fv-trapMagazineImageTitle'}>
-                        <h3>{this.props.title}</h3>
+                        <h6>{this.props.title}</h6>
                         <p>{this.props.comment}</p>
                     </MDBCol>
                     <MDBCol md={12} className={'fv-trapMagazineImageReadMore'}>

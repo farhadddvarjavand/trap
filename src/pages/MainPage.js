@@ -148,7 +148,7 @@ class MainPage extends Datas {
 
                             <a className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" : "fv-hideButtonRegister"}  onClick={()=>{ // agar login bod ba click roie dokme in karo kon
                                 this.setState({onclickButtonHandle:!this.state.onclickButtonHandle})
-                            }}> <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage} /> {nameAndFamily} </a>
+                            }}> <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage} /><h6>{nameAndFamily}</h6> </a>
                             <Link to={ "/hostStepBasicInformation"} ><input type='button' value=' میزبان شوید' onClick={()=>{
                                 localStorage.removeItem("step1")
                                 localStorage.removeItem("step2")
@@ -196,7 +196,7 @@ class MainPage extends Datas {
                             <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={12} sm={12}>
                                 <MDBRow>
                                     <MDBCol>
-                                        <a><h5>{nameAndFamily}</h5></a>
+                                        <a><h6>{nameAndFamily}</h6></a>
                                     </MDBCol>
 
                                 </MDBRow>
@@ -255,7 +255,7 @@ class MainPage extends Datas {
                     <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
                         <MDBCol className={"fv-ProfilePageUserInfoDetailsBodyColumn"}>
                             <Link to={'/login'}><p className={ window.location.href.match(/\blogin\b/) ? "fv-reservationActive" : ''}  ><i className="fa fa-door-open" />ورود</p></Link>
-                            <Link to={'/registration'}> <p className={ window.location.href.match(/\bregistration\b/) ? "fv-transaction" : ''}  ><i className="fa fa-address-card" />ثبت نام</p> </Link>
+                            {/* <Link to={'/registration'}> <p className={ window.location.href.match(/\bregistration\b/) ? "fv-transaction" : ''}  ><i className="fa fa-address-card" />ثبت نام</p> </Link>  */}
                         </MDBCol>
                     </MDBRow>
                 </MDBCol>
@@ -371,6 +371,7 @@ class MainPage extends Datas {
                 {Waiting( bannersvillageswaitingHandle , "fv-waitingLoadPublicFullScreen")}
 
                 {bannersvillages.map(banners=>{
+                    console.log(banners)
                    return( <MDBCol md={3} sm={7}>
                         <PopularVillage srcImage={banners.link}
                                         location={banners.title}
@@ -492,7 +493,7 @@ class MainPage extends Datas {
                     </MDBRow>
                 </MDBCol>
                 <MDBCol md={6} sm={4}>
-                    <h1>درباره ما</h1>
+                    <h3>درباره ما</h3>
                     <p>
                         طراحان سایت هنگام طراحی قالب سایت معمولا با این موضوع رو برو هستند که محتوای اصلی صفحات آماد
                         ه نیست. در نتیجه طرح کلی دید درستی به کار فرما نمیدهد. اگر طراح بخواهد دنبال متن های مرتبط بگر
@@ -517,7 +518,7 @@ class MainPage extends Datas {
                     </MDBRow>
                 </MDBCol>
                 <MDBCol sm={9}>
-                    <h1>درباره ما</h1>
+                    <h3>درباره ما</h3>
                     <p>
                         طراحان سایت هنگام طراحی قالب سایت معمولا با این موضوع رو برو هستند که محتوای اصلی صفحات آماد
                         ه نیست. در نتیجه طرح کلی دید درستی به کار فرما نمیدهد. اگر طراح بخواهد دنبال متن های مرتبط بگر
@@ -532,9 +533,11 @@ class MainPage extends Datas {
                 </MDBCol>
             </MDBRow>
 
+            <div className={"fv-commentsInMainPageAllBody"}>
+            <MDBContainer >
             <MDBRow className={"fv-commentsTitle"}>
                 <MDBCol>
-                    <h1>نظرات مهمان ها</h1>
+                    <h4>نظرات مهمان ها</h4>
                 </MDBCol>
             </MDBRow>
             <MDBRow className={"fv-comment"}>
@@ -574,6 +577,9 @@ class MainPage extends Datas {
                     </div>
                 </MDBCol>
             </MDBRow>
+            </MDBContainer>
+            </div>
+
                 <MDBRow className={"fv-topicMainPage"}>
                     <TopicsMainPage topic="مجله ترپ"
                                     linkToPage={"/searchHomePage/Newest/1"}/>
@@ -582,6 +588,7 @@ class MainPage extends Datas {
                     <MDBCol md={3} sm={6}>
                     <TrapMagazine
                     srcimmage="https://www.w3schools.com/html/pic_trulli.jpg"
+                    title="ترپمجله ترپ."
                     topic="مجله ترپ"
                     comment="مجله ترپمجله ترپمجله ترپمجله ترپمجله ترپمجله ترپ. مجله ترپمج
                     له ترپمجله ترپمجله ترپممجله ترپمجله ترپمجله ترپجله ترپ"/>
@@ -589,6 +596,7 @@ class MainPage extends Datas {
                     <MDBCol md={3} sm={6}>
                         <TrapMagazine
                             srcimmage="https://www.w3schools.com/html/pic_trulli.jpg"
+                            title="ترپمجله ترپ."
                             topic="مجله ترپ"
                             comment="مجله ترپمجله ترپمجله ترپمجله ترپمجله. ترپمجله ترپ. مجله ترپمجله تر
                             پمجله ترپمجله ترپممجله ترپمجله ترپمجله. ترپجله ترپ"/>
@@ -596,6 +604,7 @@ class MainPage extends Datas {
                     <MDBCol md={3} sm={6}>
                         <TrapMagazine
                             srcimmage="https://www.w3schools.com/html/pic_trulli.jpg"
+                            title="ترپمجله ترپ."
                             topic="مجله ترپ"
                             comment="مجله ترپمجله ترپمجله ترپمجله ترپمجله ترپمجله ترپ. م
                             جله ترپمجله ترپمجله ترپمجله ترپممجله ترپمجله ترپمجله ترپجله ترپ"/>
@@ -603,6 +612,7 @@ class MainPage extends Datas {
                     <MDBCol md={3} sm={6}>
                         <TrapMagazine
                             srcimmage="https://www.w3schools.com/html/pic_trulli.jpg"
+                            title="ترپمجله ترپ."
                             topic="مجله ترپ"
                             comment="مجله ترپمجله ترپمجله ترپمجله ترپمجله ترپمجله ترپ. مج
                             له ترپمجله ترپمجله ترپمجله ترپممجله ترپمجله ترپمجله ترپجله ترپ"/>
