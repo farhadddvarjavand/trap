@@ -14,7 +14,7 @@ class ProductFavorites extends React.Component{
             <MDBRow className={'fv-product fv-mobileProduct fv-productFavorites'}>
                 <MDBRow className={"fv-trashFavorites"}>
                     <MDBCol>
-                        <a><i className="fa fa-trash" aria-hidden="true" onClick={()=>{
+                        <a><i style={{color:'#3EC886'}} className="fa fa-trash" aria-hidden="true" onClick={()=>{
                             const data ={
                                 villa_id:this.props.id
                             }
@@ -31,19 +31,30 @@ class ProductFavorites extends React.Component{
                 </MDBRow>
                 <img src={this.props.srcImage} className={'fv-productImage'}/>
                 <MDBRow  >
-                    <MDBCol md={4} sm={5} className={'fv-productRateBox'}>
-                        <i className="fa fa-star" aria-hidden="true" />
-                        {this.props.rate}
-                    </MDBCol>
+                    {this.props.rate ?
+                        <MDBCol md={4} sm={5} className={'fv-productRateBox'}>
+                            <i className="fa fa-star" aria-hidden="true" />
+                            {this.props.rate}
+                        </MDBCol>
+                        :
+                        <MDBCol md={4} sm={5} className={'fv-productRateBox'}>
+                          <p style={{color: `#FEA801` , marginTop : '0%'}}>جدید</p>
+                        </MDBCol>
+                    }
+
                 </MDBRow>
+                <MDBContainer>
+
+
+
                 <MDBRow>
                     <MDBCol className={'fv-productTopic'}>
-                        {this.props.topic}
+                       <h6>{this.props.topic}</h6>
                     </MDBCol>
                 </MDBRow>
                 <MDBRow className={'fv-productLocation'}>
                     <MDBCol md={9} sm={10}>
-                        <a>{this.props.location} </a>
+                        <h6>{this.props.location} </h6>
                     </MDBCol>
                 </MDBRow>
 
@@ -51,7 +62,7 @@ class ProductFavorites extends React.Component{
                     <MDBCol md={2} sm={3} className={'fv-capacityBody'}>
                         <p> نفر </p><p> {this.props.capacity} </p>
                     </MDBCol>
-                    <MDBCol md={5} sm={9} className={'fv-maximumNumber'}>
+                    <MDBCol md={5} sm={6} className={'fv-maximumNumber'}>
                         <a>حداکثر نفرات </a>
                         <i className="fa fa-user-friends" />
                     </MDBCol>
@@ -74,11 +85,11 @@ class ProductFavorites extends React.Component{
                     </MDBRow>
                     <MDBRow className={'fv-productPriceBox'}>
                         <MDBCol md={10}>
-                            <a className={'fv-productPriceBoxPriceText'}>هرشب</a>
-                            {this.props.price}
+                            <h6>{this.props.price}</h6>
+                            <p className={'fv-productPriceBoxPriceText'}>هرشب</p>
                         </MDBCol>
                     </MDBRow>
-
+                </MDBContainer>
             </MDBRow>
         )
     }

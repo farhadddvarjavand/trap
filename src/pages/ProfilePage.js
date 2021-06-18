@@ -113,6 +113,29 @@ componentDidMount() {
                 .then(res=>{
                     if(res.data.avatar_count !== 0){
                         this.setState({avatarImageData:res.data.avatar} , ()=>{
+                            const info = JSON.parse(localStorage.getItem("infoUser"))
+                            let avatar = ""
+                            let fullName = ""
+                            if(info){
+                                fullName=info.userInfo.fullname
+                                avatar=info.userInfo.avatar
+                            }
+
+                            let setAvatar = ""
+                            if(this.state.avatarImageData){
+                                setAvatar = this.state.avatarImageData
+                            }else {
+                                setAvatar = avatar
+                            }
+                            const userInfo={
+                                avatar: setAvatar,
+                                fullname: fullName,
+                            }
+
+                            const dataInfoUpdate ={
+                                userInfo:userInfo
+                            }
+                            localStorage.setItem("infoUser" , JSON.stringify(dataInfoUpdate))
                             this.props.ChangeUserAvatarSrc(res.data.avatar)
                             this.setState({clickLoaderAvatar:false})
                         })

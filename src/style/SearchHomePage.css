@@ -164,7 +164,7 @@
     direction: ltr;
 }
 .fv-SearchHomePage .fv-productLocation .col-md-9 {
-    border-bottom: 1px solid #400a0a;
+    border-bottom: 1px solid rgba(145, 145, 145, 0.5);
     text-align: end;
     padding-right: 0;
     margin: auto;
@@ -708,7 +708,7 @@
         font-size: 4vw;
     }
     .fv-SearchHomePage .fv-productLocation .col-md-9 {
-        border-bottom: 1px solid #400a0a;
+        border-bottom: 1px solid rgba(145, 145, 145, 0.5);
         text-align: end;
         padding-right: 0;
         margin: auto;

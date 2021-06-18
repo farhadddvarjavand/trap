@@ -43,7 +43,8 @@
     flex: 0 0 110.333333%;
     max-width: 118.333333%;
     margin-left: -6%;
-    margin-top: 4%;
+    margin-top: 3%;
+    display: inherit;
   }
   .fv-product {
     background-color: white;
@@ -60,6 +61,15 @@
     box-shadow: none;
     margin-right: 0%;
     padding-right: 3%;
+  }
+  .fv-productCapacityBoxFavorites {
+    margin-top: -5%;
+  }
+  .fv-ProfilePageUserSetInfo.fv-ProfilePageReservationUserInfo .fv-productPriceBox p {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    font-size: 14px;
+    margin-left: 3%;
   }
 }
 
@@ -109,10 +119,12 @@
       margin-left: -2%;
     }
      .fv-product .fv-productPriceBox .col-md-10 {
-      margin-left: -33%;
-      margin-top: 4%;
-      display: flex;
-      direction: rtl;
+       /* margin-left: -33%; */
+       /* margin-top: 4%; */
+       /* display: flex; */
+       /* direction: rtl; */
+       margin-left: 5%;
+       margin-top: 0%;
     }
     .fv-productPriceBox a:not([href]):not([tabindex]), .fv-profileFavoritesPage .fv-productPriceBox a:not([href]):not([tabindex]):focus, .fv-profileFavoritesPage .fv-productPriceBox a:not([href]):not([tabindex]):hover {
       margin-left: 5%;
@@ -151,7 +163,8 @@
      // margin-top: 550%;
     }
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo h5 {
-      margin-bottom: 4%;
+      margin-bottom: 7%;
+      margin-right: 10%;
     }
      .fv-productFavorites .fv-productCapacityBoxFavorites .col-md-11 {
       margin-right: 0%;
@@ -169,6 +182,19 @@
       margin-right: -44px;
       font-size: 3.5vw;
     }
+    .fv-productCapacityBoxFavorites {
+      margin-top: 0%;
+    }
+  }
+  .fv-profileFavoritesPage .fv-product.fv-mobileProduct.fv-productFavorites .fv-trashFavorites .fa-trash{
+    // margin-top: -10%;
+    margin-bottom: 9%;
+  }
+  .fv-profileFavoritesPage .fv-productFavorites .fv-productLocation .col-md-9 {
+    padding-right: 2%;
+  }
+  .fv-profileFavoritesPage .fv-productFavorites .fv-productCapacityBoxFavorites .col-md-11 {
+    margin-left: 16%;
   }
 }
 

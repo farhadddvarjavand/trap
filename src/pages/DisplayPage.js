@@ -48,6 +48,7 @@ import axios from "axios";
 import HeaderLoginMenu from "../componentsPages/HeaderLoginMenu";
 import CalendarLinearLimitedDays from "../data/CalendarLinearLimitedDays";
 import {Waiting, waitingForCalculate, waitingForCalculate2} from "../componentsPages/WaitingLoad";
+import DisplayHeader from "../componentsPages/DisplayHeader";
 const commaNumber = require('comma-number')
 
 class DisplayPage extends Component {
@@ -1217,7 +1218,10 @@ class DisplayPage extends Component {
                         </MDBCol>
                     </MDBRow>
                     */}
-                        <MDBContainer className={"fv-widthHeaderLoginMenuForDisplayPage"}>  {/* menu */}
+                        <div className={'fv-footerMenu fv-footerDisplayPage'}>
+                            <DisplayHeader  {...this.props}/>
+                        </div>
+                        {/*  <MDBContainer className={"fv-widthHeaderLoginMenuForDisplayPage"}>
                             <HeaderLoginMenu
                                 {...this.props}/>
                         </MDBContainer>
@@ -1228,14 +1232,13 @@ class DisplayPage extends Component {
                                 <MDBCol>
                                     <Link to={"/"}> <p> صفحه اصلی </p> </Link>
                                     <i className="fas fa-chevron-left" />
-                                    <Link to={"/searchHomePage/Newest/1"}><p> صفحه جستجو </p> </Link> {/* اگر مقدار سوم وجود داشت کلاس رنگ سبز غیر فعال شود */}
+                                    <Link to={"/searchHomePage/Newest/1"}><p> صفحه جستجو </p> </Link>
                                     <i className="fas fa-chevron-left" />
                                     <p className={ "fv-DisplayPagePathNow"}> صفحه نمایش </p>
-                                    {/* <i className={this.props.thisPageName ? "fas fa-chevron-left" : ""} />
-                                <p className={this.props.thisPageName ? "fv-DisplayPagePathNow" : ""}> {this.props.thisPageName} </p>  */}
+
                                 </MDBCol>
                             </MDBRow>
-                        </MDBContainer>
+                        </MDBContainer> */}
 
                         {/*
                     <MDBContainer className={'fv-footerMenu fv-SearchHomePageBody'}>
@@ -1333,12 +1336,12 @@ class DisplayPage extends Component {
                     <div className={"fv-DisplayPageTitle"}>
                         <MDBRow className={"fv-DisplayPageTitleTopic"}>
                             <MDBCol md={2}>
-                                <p> {this.state.resultVilla.title} </p>
+                                <h5> {this.state.resultVilla.title} </h5>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageSearchName"}>
                             <MDBCol md={2}>
-                                <p><i className="fa fa-map-marker-alt" /> {this.state.resultVilla.state} </p>
+                                <h6><i className="fa fa-map-marker-alt" /> {this.state.resultVilla.state} </h6>
                             </MDBCol>
                             <MDBCol md={2}>
                                 {this.state.resultVilla.score ?
@@ -1407,11 +1410,14 @@ class DisplayPage extends Component {
 
                             </MDBRow>
                         </div>
-                        <MDBRow className={"fv-DisplayPageDisplayMoreImage"}>
-                            <MDBCol>
-                                <a onClick={()=> this.setState({morePics:true})}> مشاهده تصویر بیشتر <i className="fas fa-angle-left" /></a>
-                            </MDBCol>
-                        </MDBRow>
+                        {this.state.resultImages.length > 0 ?
+                            <MDBRow className={"fv-DisplayPageDisplayMoreImage"}>
+                                <MDBCol>
+                                    <a onClick={()=> this.setState({morePics:true})}> مشاهده تصویر بیشتر <i className="fas fa-angle-left" /></a>
+                                </MDBCol>
+                            </MDBRow>
+                            : ''
+                        }
 
 
                     </div>                                              {/*        fv-Pictures     */}
@@ -1539,7 +1545,7 @@ class DisplayPage extends Component {
                                         </MDBCol>
                                         :
                                         ''}
-                                    <h6> امکانات </h6>
+                                    <h6 style={{marginTop:'1%' , marginBottom:'1%'}}> امکانات </h6>
                                 </MDBRow>
 
                                 <div>
@@ -1586,7 +1592,7 @@ class DisplayPage extends Component {
                                             <h6>امکانات ویژه</h6>
                                         </MDBRow>
                                         <MDBRow className={"fv-DisplayPageDetailsRightParagraph"}>
-                                            <h6>هر کدام از امکانات زیر که دوست دارید انتخاب کنید تا به شما در سفر حس بهتری بدهد </h6>
+                                            <p className={"h7"}>هر کدام از امکانات زیر که دوست دارید انتخاب کنید تا به شما در سفر حس بهتری بدهد </p>
                                         </MDBRow>
                                     </div>
                                     : ''}
@@ -1601,10 +1607,10 @@ class DisplayPage extends Component {
                                                     <p>آشپز</p>
                                                 </MDBCol>
                                                 <MDBCol  md={2} sm={2}>
-                                                    <p> {commaNumber(chefPrice)} </p>
+                                                    <h6>{commaNumber(chefPrice)}</h6>
                                                 </MDBCol>
                                                 <MDBCol  md={4} sm={2}>
-                                                    <p> ریال </p>
+                                                    <p style={{fontSize:'12px' , color:'#919191'}}> تومان </p>
                                                 </MDBCol>
                                             </MDBRow>
                                         </MDBCol>
@@ -1620,10 +1626,10 @@ class DisplayPage extends Component {
                                                     <p>مهماندار</p>
                                                 </MDBCol>
                                                 <MDBCol  md={2} sm={2}>
-                                                    <p> {commaNumber(hostPrice)}  </p>
+                                                    <h6>{commaNumber(hostPrice)}</h6>
                                                 </MDBCol>
                                                 <MDBCol  md={4} sm={2}>
-                                                    <p> ریال </p>
+                                                    <p style={{fontSize:'12px' , color:'#919191'}}> تومان </p>
                                                 </MDBCol>
                                             </MDBRow>
                                         </MDBCol>
@@ -1638,10 +1644,10 @@ class DisplayPage extends Component {
                                                     <p>راهنمای سفر</p>
                                                 </MDBCol>
                                                 <MDBCol  md={2} sm={2}>
-                                                    <p> {commaNumber(tourGuidePrice)} </p>
+                                                    <h6>{commaNumber(tourGuidePrice)}</h6>
                                                 </MDBCol>
                                                 <MDBCol  md={4} sm={2}>
-                                                    <p> ریال </p>
+                                                    <p style={{fontSize:'12px' , color:'#919191'}}> تومان </p>
                                                 </MDBCol>
                                             </MDBRow>
                                         </MDBCol>
@@ -1656,17 +1662,17 @@ class DisplayPage extends Component {
                                                     <p>بادیگارد</p>
                                                 </MDBCol>
                                                 <MDBCol  md={2} sm={2}>
-                                                    <p> {commaNumber(bodyguardPrice)} </p>
+                                                    <h6>{commaNumber(bodyguardPrice)}</h6>
                                                 </MDBCol>
                                                 <MDBCol  md={4} sm={2}>
-                                                    <p> ریال </p>
+                                                    <p style={{fontSize:'12px' , color:'#919191'}}> تومان </p>
                                                 </MDBCol>
                                             </MDBRow>
                                         </MDBCol>
                                         : ''}
 
                                 </MDBRow>
-                                <MDBRow>
+                                <MDBRow className={"fv-rentDisplayPage"}>
                                     <h6> اجاره بها </h6>
                                 </MDBRow>
 
@@ -1677,7 +1683,7 @@ class DisplayPage extends Component {
                                         </MDBRow>
                                     </MDBCol>
                                     <MDBCol md={11} sm={11}>
-                                        <p>ایام عادی : </p> <h6> {commaNumber(normalCostRules)} </h6>
+                                        <p>ایام عادی: </p> <h6 className={"fv-PricesRent"}> {commaNumber(normalCostRules)} تومان</h6>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
@@ -1687,7 +1693,7 @@ class DisplayPage extends Component {
                                         </MDBRow>
                                     </MDBCol>
                                     <MDBCol md={11} sm={11}>
-                                        <p> هزینه هر نفر اضافه به ازای هر شب :  </p> <h6>{commaNumber(normalExtraCostRules)}</h6>
+                                        <p> هزینه هر نفر اضافه به ازای هر شب:  </p> <h6 className={"fv-PricesRent"}>{commaNumber(normalExtraCostRules)} تومان</h6>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
@@ -1697,7 +1703,7 @@ class DisplayPage extends Component {
                                         </MDBRow>
                                     </MDBCol>
                                     <MDBCol md={11} sm={11}>
-                                        <p>ایام پیک : </p> <h6> {commaNumber(specialCostRules)} </h6>
+                                        <p>ایام پیک: </p> <h6 className={"fv-PricesRent"}> {commaNumber(specialCostRules)} تومان</h6>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
@@ -1707,7 +1713,7 @@ class DisplayPage extends Component {
                                         </MDBRow>
                                     </MDBCol>
                                     <MDBCol md={11} sm={11}>
-                                        <p>نفر اضافه در ایام پیک : </p> <h6> {commaNumber(specialExtraCostRules)} </h6>
+                                        <p>نفر اضافه در ایام پیک: </p> <h6 className={"fv-PricesRent"}> {commaNumber(specialExtraCostRules)} تومان</h6>
                                     </MDBCol>
                                 </MDBRow>
                                 {Number(weeklyDiscountRules) !== 0 ?
@@ -1718,7 +1724,7 @@ class DisplayPage extends Component {
                                             </MDBRow>
                                         </MDBCol>
                                         <MDBCol md={11} sm={11}>
-                                            <p>تخفیف هفتگی :  </p> <h6> {weeklyDiscountRules} درصد </h6>
+                                            <p>تخفیف هفتگی:  </p> <h6 className={"fv-PricesRent"}> {weeklyDiscountRules} درصد </h6>
                                         </MDBCol>
                                     </MDBRow>
                                     : ''}
@@ -1730,7 +1736,7 @@ class DisplayPage extends Component {
                                             </MDBRow>
                                         </MDBCol>
                                         <MDBCol md={11} sm={11}>
-                                            <p>تخفیف ماهانه : </p> <h6> {monthlyDiscountRules} درصد </h6>
+                                            <p>تخفیف ماهانه: </p> <h6 className={"fv-PricesRent"}> {monthlyDiscountRules} درصد </h6>
                                         </MDBCol>
                                     </MDBRow>
                                     : ''}
@@ -1802,13 +1808,13 @@ class DisplayPage extends Component {
                                 {this.state.resultVilla.rules ? this.state.resultVilla.rules.auth_rules.map(authRule =>{
                                     return(
                                         <MDBRow>
-                                            <p>{authRule}</p>
+                                            <p className={"h7"}>{authRule}</p>
                                         </MDBRow>
                                     )
                                 }) : ''}
 
                                 <MDBRow>
-                                    <p>{specialRules}</p>
+                                    <p className={"h7"}>{specialRules}</p>
                                 </MDBRow>
 
 
@@ -1818,7 +1824,7 @@ class DisplayPage extends Component {
                             <div id="Address">                                        {/*        fv-Address     */}
 
                                 <MDBRow>
-                                    <h6> آدرس </h6>
+                                    <h6 className={"fv-addressP"}> آدرس </h6>
                                     {console.log(this.state.resultVilla)}
                                 </MDBRow>
                                 <MDBRow>
@@ -1873,7 +1879,7 @@ class DisplayPage extends Component {
                                             <p className={"fv-DisplayPageDetailsRating"}> 5 </p>
                                         </MDBCol>
                                         <MDBCol md={2} sm={3}>
-                                            <p className={"fv-DisplayPageDetailsRate"}>  /{(cleaningRate+adComplianceRate+hospitalityRate+hostingQualityRate)/5} <i className="fa fa-star" /> </p>
+                                            <p className={"fv-DisplayPageDetailsRate"}>  /{this.state.resultVilla.score} <i className="fa fa-star" /> </p>
                                         </MDBCol >
                                         <MDBCol md={2} sm={4} className={"fv-DisplayPageDetailsRateNumberPerson"}>
                                             <p> ({this.state.resultComments.length} نظر) </p>
@@ -1977,18 +1983,18 @@ class DisplayPage extends Component {
                                                         <MDBCol className={"fv-DisplayPageDetailsPersonInformation"}>
                                                             <MDBRow>
                                                                 <MDBCol sm={10}>
-                                                                    <h6> {resultComment.user_name}</h6>
+                                                                    <h6 className={"fv-usernamePageComment"}> {resultComment.user_name}</h6>
                                                                 </MDBCol>
                                                             </MDBRow>
                                                             <MDBRow className={"fv-DisplayPageDetailsCode"}>
                                                                 <MDBCol sm={10}>
-                                                                    <p>{resultComment.created_at}</p>
+                                                                    <p className={"fv-createAt"}>{resultComment.created_at}</p>
                                                                 </MDBCol>
                                                             </MDBRow>
                                                         </MDBCol>
                                                     </MDBRow>
                                                     <MDBRow>
-                                                        <p>{resultComment.text}</p>
+                                                        <p style={{marginRight:'3%' ,  marginBottom: '2%'}}>{resultComment.text}</p>
                                                     </MDBRow>
                                                 </div>
                                             )}
@@ -2002,26 +2008,26 @@ class DisplayPage extends Component {
                                                         <MDBCol className={"fv-DisplayPageDetailsPersonInformation"}>
                                                             <MDBRow>
                                                                 <MDBCol sm={10}>
-                                                                    <h6> {resultComment.user_name}</h6>
+                                                                    <h6 className={"fv-usernamePageComment"}> {resultComment.user_name}</h6>
                                                                 </MDBCol>
                                                             </MDBRow>
                                                             <MDBRow className={"fv-DisplayPageDetailsCode"}>
                                                                 <MDBCol sm={10}>
-                                                                    <p>{resultComment.created_at}</p>
+                                                                    <p className={"fv-createAt"}>{resultComment.created_at}</p>
                                                                 </MDBCol>
                                                             </MDBRow>
                                                         </MDBCol>
                                                     </MDBRow>
                                                     <MDBRow>
-                                                        <p>{resultComment.text}</p>
+                                                        <p style={{marginRight:'3%' , marginBottom: '2%'}}>{resultComment.text}</p>
                                                     </MDBRow>
                                                     <MDBRow className={"fv-displayPageComments"}>
                                                         <MDBCol>
                                                             <MDBRow className={"fv-displayPageCommentsDate"}>
-                                                                <p>{resultComment.answer.created_at}</p>
+                                                                <p className={"fv-createAtAnswer"}>{resultComment.answer.created_at}</p>
                                                             </MDBRow>
                                                             <MDBRow className={"fv-displayPageCommentsTitle"}>
-                                                                <p> {resultComment.user_name} </p>
+                                                                <h6 className={"fv-usernamePageComment"}> {resultComment.user_name} </h6>
                                                             </MDBRow>
                                                             <MDBRow>
                                                                 <p>{resultComment.answer.text}</p>

@@ -151,7 +151,7 @@ class MainPage extends Datas {
 
                             <a className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" : "fv-hideButtonRegister"}  onClick={()=>{ // agar login bod ba click roie dokme in karo kon
                                 this.setState({onclickButtonHandle:!this.state.onclickButtonHandle})
-                            }}> <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage} /><h6>{nameAndFamily}</h6> </a>
+                            }}><h6> <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage} />{nameAndFamily}</h6> </a>
                             <Link to={ "/hostStepBasicInformation"} ><input type='button' value=' میزبان شوید' onClick={()=>{
                                 localStorage.removeItem("step1")
                                 localStorage.removeItem("step2")

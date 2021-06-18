@@ -50,6 +50,7 @@ import ScrollToTop from "../componentsPages/ScrollToTop";
 import FactorPage from "./FactorPage";
 import MobileLogo from "../images/MobileLogo.png";
 import LogoName from "../images/LogoName.png";
+import AddComments from "./addComments";
 const commaNumber = require('comma-number')
 
 
@@ -343,6 +344,7 @@ class MainProfilePages extends Component {
                         )}/>
 
                         <Route exact path={'/MainProfilePages/profileFavoritesPage'} component={ProfileFavoritesPage}/>
+
 
 
                         </>

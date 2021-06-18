@@ -400,7 +400,7 @@
     padding-right: 3%;
 }
 .fv-DisplayPageDetailsRightBody .fv-DisplayPageDetailsPersonInformation h6 ,.fv-DisplayPageDetailsRightBody .fv-DisplayPageDetailsPersonInformation p {
-    margin-right: 5%;
+   /* margin-right: 5%; */
 }
 .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo h6{
     margin-right:  26px;
@@ -548,7 +548,7 @@ display: none;
     direction: initial;
 }
 .fv-DisplayPage .fv-displayPageCommentOneInner{
-    border-bottom: 1px solid #909090;
+    border-bottom: 1px solid rgba(145, 145, 145, 0.5);
     padding-right: 3%;
     margin-right: -6%;
     margin-left: 6%;
@@ -728,6 +728,95 @@ display: none;
 .fv-DisplayPageDetailsLeftSelectedDate input , .fv-DisplayPageDetailsLeftBodyCapacityText input{
     background: white;
 }
+.fv-DisplayPageTitle .fv-DisplayPageTitleTopic h5{
+    margin-top:2%;
+    margin-bottom:7%
+}
+.fv-SearchHomePage.fv-DisplayPage .fv-footerMenu.fv-footerDisplayPage.fv-DisplayPage.fv-profilePageUserInfo .fv-hideMenuDisplayMobile{
+    display: none;
+}
+.fv-SearchHomePage.fv-DisplayPage .h4Mobile h6{
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+.fv-SearchHomePage .fv-DisplayPageDetailsّFacilities .fv-facilitiesAvailable .fas , .fv-SearchHomePage .fv-DisplayPageDetailsّFacilities .fv-facilitiesAvailable .fa {
+    color: black;
+}
+.fv-SearchHomePage .fv-DisplayPageDetailsّFacilities .fv-facilitiesUnavailable .fa , .fv-SearchHomePage .fv-DisplayPageDetailsّFacilities .fv-facilitiesUnavailable .fas{
+    color: #cecccc;
+}
+.fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageDetailsّFacilities.fv-DisplayPageTomanTitle h6 {
+    text-align: end;
+}
+.fv-DisplayPageDetailsّFacilities.fv-DisplayPageTomanTitle .col-md-4 {
+
+    margin-top: auto;
+}
+.fv-DisplayPageDetailsّFacilities.fv-DisplayPageTomanTitle .col-md-2 {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.fv-DisplayPageDetailsّFacilities.fv-DisplayPageTomanTitle .col-md-3 {
+    flex: 0 0 12%;
+    max-width: 25%;
+}
+.fv-SearchHomePage.fv-DisplayPage .fv-rentDisplayPage h6{
+    margin-top: 2%;
+    margin-bottom: 1%;
+}
+.fv-DisplayPageMenu.fv-DisplayPageRent .fv-PricesRent{
+    margin-right: 2%;
+}
+.fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageMenu.fv-DisplayPageRent p{
+    color: #919191;
+}
+#Address .fv-addressP{
+    margin-top: 4%;
+    margin-bottom: 2%;
+    font-size: 19px;
+}
+.fv-DisplayPageDetailsRightingComment h6 {
+    text-align: initial;
+    /* margin-top: 4%; */
+    margin-right: 1%;
+    margin-bottom: 2%;
+}
+
+.fv-SearchHomePage.fv-DisplayPage .fv-displayPageCommentPerson .fv-usernamePageComment {
+    margin-top: 3%;
+}
+.fv-SearchHomePage.fv-DisplayPage .fv-displayPageComments .fv-usernamePageComment {
+    margin-bottom: 1.3rem;
+    margin-top: 2%;
+}
+.fv-displayPageCommentOneInner .fv-displayPageCommentPerson .fv-DisplayPageDetailsCode .fv-createAt{
+    margin-top:-1% ;
+    margin-right:1%;
+    color: #919191;
+    margin-bottom: 3%;
+}
+.fv-displayPageCommentOneInner .fv-displayPageCommentPerson .fv-DisplayPageDetailsPersonInformation .fv-UserNameComments{
+    margin-top:-1% ;
+    margin-right:1%;
+}
+.fv-SearchHomePage.fv-DisplayPage .fv-displayPageCommentPerson .fv-usernamePageComment {
+    margin-top: 3%;
+    margin-right: 1%;
+}
+.fv-SearchHomePage.fv-DisplayPage .fv-displayPageCommentOneInner .fv-displayPageComments{
+    margin-right: 0;
+}
+.fv-SearchHomePage.fv-DisplayPage .fv-displayPageCommentsDate .fv-createAtAnswer{
+    margin-top: 0%;
+}
+
+
+
+
+
+
+
+
 
 
 /*    ***************************** ********************** **************** calendar Picker for Desktop css ************************************************* */
@@ -770,8 +859,10 @@ display: none;
         max-width: 18.666667%;
     }
     .fv-DisplayPageDetailsScore {
-        font-size: 1.2vw;
+        font-size: 14px;
     }
+
+
     .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo h5 {
         margin-right: 25px;
     }
@@ -821,6 +912,10 @@ display: none;
     .fv-DisplayPageDetailsLeftFactorLeftMobile{
         text-align: end;
     }
+    .fv-DisplayPageDetailsّFacilities.fv-DisplayPageTomanTitle .col-md-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
 }
 @media (max-width: 768px) and (min-width: 540px){
 
@@ -869,10 +964,10 @@ display: none;
         padding-bottom: 2%;
         direction: ltr;
     }
-    .fv-DisplayPageDetailsScore .fv-DisplayPageDetailsScoreBody .col-md-3 {
-        flex: 0 0 37%;
-        max-width: 36%;
-        font-size: 15px;
+    .fv-DisplayPageDetailsRightBody .fv-DisplayPageDetailsScore .fv-DisplayPageDetailsScoreBody .col-md-3 {
+        flex: 0 0 44%;
+        max-width: 31%;
+        font-size: 11px;
     }
 }
 @media (max-width: 989px) and (min-width: 768px){
@@ -1004,8 +1099,8 @@ display: none;
     }
     .fv-DisplayPageDetailsRightBody .fv-DisplayPageDetailsScore .fv-DisplayPageDetailsScoreBody .col-md-3 {
         flex: 0 0 44%;
-        max-width: 42%;
-        font-size: 15px;
+        max-width: 31%;
+        font-size: 11px;
     }
 }
 
@@ -1074,7 +1169,8 @@ display: none;
         padding: 0;
         margin-top: 4%;
         /* margin-left: -21%; */
-        margin-right: 14%;
+        /* margin-right: 14%; */
+        margin-right: 3%;
     }
     .fv-DisplayPageDetailsRate {
         margin-right: -20px;
@@ -1101,7 +1197,7 @@ display: none;
         display: flex;
     }
     .fv-SearchHomePage.fv-DisplayPage .row {
-        margin-right: -3px;
+        margin-right: 1px;
        /* margin-left: -10px; */
     }
     .fv-DisplayPageRotePathMobile{
@@ -1158,7 +1254,7 @@ display: none;
         margin-top: 4px;
     }
     .fv-DisplayPageMenu {
-        margin-top: 30%;
+        margin-top: 27%;
     }
     .fv-DisplayPageMenu.row .col-sm-2 {
         margin-right: 5%;
@@ -1185,7 +1281,8 @@ display: none;
     }
 
     .fv-DisplayPageDetails .fv-DisplayPageDetailsRightBody.col-md-8 {
-        margin-top: 12%;
+        margin-top: 4%;
+        padding-right: 0;
     }
     .fv-DisplayPageDetails .pMobile{
         font-size: 4vw;
@@ -1198,7 +1295,7 @@ display: none;
         width: 100%;
     }
     .fv-DisplayPageDetailsRightStayInHome .col-sm-11 {
-        margin-right: -4%;
+     /*   margin-right: -4%; */
         margin-bottom: 3%;
     }
     .fv-DisplayPageّMoreFacilities p{
@@ -1210,12 +1307,12 @@ display: none;
         font-size: 19px;
     }
     .fv-DisplayPageDetailsRightParagraph{
-        margin-bottom: 6%;
+        margin-bottom: -1%;
     }
     .fv-DisplayPageDetailsّFacilities .col-sm-2 {
         font-size: 19px;
-        margin-right: -14%;
-        margin-left: 12%;
+        margin-right: -11%;
+        margin-left: 3%;
     }
     .fv-DisplayPageMenu.fv-DisplayPageRent .row .slider_pagination_btn {
         padding: 4px;
@@ -1271,8 +1368,15 @@ display: none;
         margin-bottom: 0%;
     }
     .fv-DisplayPageDetailsّFacilities.fv-DisplayPageTomanTitle .col-md-4 {
-        margin-right: 3%;
+        margin-right: -6%;
+        margin-top: auto;
+        /* margin-bottom: auto; */
     }
+    .fv-DisplayPageDetailsّFacilities.fv-DisplayPageTomanTitle .col-md-2 {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
     .fv-DisplayPageDetails .fv-SearchHomePagePagination input[type=button] {
         color: #15BE29;
         background-color: white;
@@ -1317,7 +1421,7 @@ display: none;
     }
     .fv-DisplayPageCalenderForMobile .Calendar {
         width: 39em;
-        margin-right:  -9.5vw;
+        margin-right: -5.5vw;
     }
     .fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageCalenderForMobile{
         display: block;
@@ -1336,8 +1440,12 @@ display: none;
         /* padding-right: 5px; */
         /* padding-left: 11px; */
         display: inline-block;
-        margin-right: 9vw;
+       /* margin-right: 9vw; */
         /* margin-left: 9%; */
+        margin-left: 11%;
+    }
+    .fv-mainProduct.fv-mainMobile.fv-displayPageSimillarProducts .col-sm-7, fv-mainProduct.fv-mainMobile.fv-displayPageSimillarProducts .col-sm-6 {
+        margin-right: 0
     }
     .fv-DisplayPage .fv-mobileProduct {
         width: 116%;
@@ -1375,10 +1483,15 @@ display: none;
     }
 
     .container .mapboxgl-map , .container-lg .mapboxgl-map , .container-md .mapboxgl-map , .container-sm .mapboxgl-map , .container-xl .mapboxgl-map {
-        width: 300px !important;
-        height: 208px  !important;
-        margin-right: -9%;
+        width: 100% !important;
+        height: 100% !important;
+        margin-right: -1%;
     }
+    .fv-DisplayPageDetailsRightingComment .col-md-2 {
+        padding-left: 0;
+        text-align: end;
+    }
+
     .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo .col-sm-6 {
         width: 64% !important;
     }
@@ -1454,8 +1567,19 @@ display: none;
         text-align: inherit ;
         margin-right: 4%;
     }
-
-
+    .fv-SearchHomePage.fv-DisplayPage .h4Mobile h6 {
+        margin-top: 4%;
+        margin-bottom: 4%;
+    }
+    .fv-DisplayPageDetailsّFacilities.fv-DisplayPageTomanTitle .col-md-3 {
+        flex: 0 0 39%;
+        max-width: 25%;
+    }
+    .fv-SearchHomePage.fv-DisplayPage .fv-rentDisplayPage h6 {
+        margin-top: 2%;
+        margin-bottom: 3%;
+        margin-right: 1%;
+    }
 
 
 
@@ -1487,8 +1611,49 @@ display: none;
         margin-right: -3px;
         margin-left: -10px;
     }
+    .fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageMenu.fv-DisplayPageRent p{
+        font-size: 3.5vw;
+    }
+    .fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageMenu.fv-DisplayPageRent h6{
+        font-size: 3.5vw;
+    }
+    .fv-DisplayPageMenu .col-md-2, .fv-DisplayPageMenu .col-md-1 {
+        margin-top: -1%;
+    }
+    .fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageDetailsScore {
+            font-size: 4vw;
+     }
+    .fv-displayPageCommentOneInner .fv-displayPageCommentPerson .fv-DisplayPageDetailsCode .fv-createAt {
+        margin-top: -1%;
+        margin-right: -6vw;
+    }
+    .fv-SearchHomePage.fv-DisplayPage .fv-displayPageCommentPerson .fv-usernamePageComment {
+        margin-top: 13%;
+    }
 
 
+    .fv-DisplayPage .fv-displayPageCommentOneInner {
+        border-bottom: 1px solid #909090;
+        margin-left: -7%;
+        margin-right: -3%;
+    }
+    .fv-displayPageCommentOneInner .fv-displayPageCommentPerson .fv-DisplayPageDetailsCode .fv-createAt {
+        margin-top: -1%;
+        margin-right: -9vw;
+    }
+    .fv-SearchHomePage.fv-DisplayPage .fv-displayPageCommentPerson .fv-usernamePageComment {
+        margin-top: 8%;
+        margin-right: -9vw;
+    }
+    .fv-displayPageCommentPerson .fv-DisplayPageDetailsPersonInformation {
+        margin-right: 5%;
+        margin-bottom: 3%;
+    }
+    .fv-SearchHomePage.fv-DisplayPage .fv-displayPageCommentsDate .fv-createAtAnswer {
+        margin-top: 2%;
+        font-weight: 600;
+        font-size: 12px;
+    }
 }
 
 
@@ -1610,7 +1775,7 @@ display: none;
         direction: rtl;
         display: block;
         box-shadow: 1px 1px 11px #88888830;
-        margin-top: 18%;
+        margin-top: 7%;
         margin-bottom: 15%;
     }
     .fv-footerDisplayPageBody .fv-test {
@@ -1705,7 +1870,7 @@ display: none;
         margin-right: 12%;
     }
     .fv-DisplayPageDetailsLeftBodyMobileReservation .fv-DisplayPageDetailsLeftTextDate {
-        width: 96.5%;
+        width: 96%;
         z-index: 1;
     }
     .fv-DisplayPageDetailsLeftBodyCapacityText input {

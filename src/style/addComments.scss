@@ -1,7 +1,7 @@
 .fv-addComments{
  .fv-ProfilePageWallet2TextArea textarea {
-    width: 100%;
-    height: 328%;
+   width: 100%;
+   height: 389%;
   }
   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageUserSetInfoButton {
     margin-top: 25%;
@@ -11,7 +11,7 @@
       margin-top:2%;
     }
     .fv-cleaningRateStars{
-      margin-right: 10%;
+      margin-right: 7%;
     }
     .fv-compatibilityWithAdvertisementStars{
       margin-right: 2%;
@@ -40,8 +40,8 @@
     }
   }
   .fv-addCommentsRateTopic{
-    margin-top: 20%;
-    margin-bottom: 1%;
+    margin-top: 28vh;
+    margin-bottom: -2%;
   }
   .fa-star{
     margin-right: 2%;
@@ -59,6 +59,13 @@
       margin: -10px;
     }
   }
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageUserSetInfoButton input {
+    width: 16%;
+    background: #15BE29;
+    border-radius: 16px;
+    color: white;
+  }
+
 }
 
 
@@ -91,7 +98,7 @@
       }
     }
     .fv-addCommentsRateTopic{
-      margin-top: 55%;
+      margin-top: 73%;
       margin-bottom: 2%;
     }
 
@@ -102,15 +109,18 @@
     .fv-addCommentsRate .fv-cleaningRateAddComments,.fv-addCommentsRate .fv-compatibilityWithAdvertisementAddComment,  .fv-addCommentsRate .fv-hospitalityAddComment, .fv-addCommentsRate .fv-hostingQualityAddComment {
       margin-top: 10%;
     }
-    .fv-addCommentsRate .fv-cleaningRateStars {
-      margin-right: 18%;
-    }
     .fv-hospitalityStars{
       margin-right: 5%;
     }
      .fv-addCommentsRate .col-md-6 p {
-      margin-left: 1%;
+      margin-left: 0%;
     }
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageUserSetInfoButton input {
+      width: 45%;
+    }
+  }
+  .fv-addComments .fv-addCommentsRate .fv-cleaningRateStars {
+    margin-right: 18%;
   }
 }
 @media (max-width: 320px) {
@@ -123,6 +133,12 @@
      padding: 8px;
      margin: -16px;
     }
+  }
+  .fv-addComments .fv-addCommentsRate .col-md-6 {
+    font-size: 3vw;
+  }
+  .fv-addComments .fv-addCommentsRate .fv-cleaningRateStars {
+    margin-right: 15%;
   }
 }
 @media (max-width: 280px) {

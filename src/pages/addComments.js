@@ -10,6 +10,8 @@ import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 import "../style/addComments.scss"
 import StarRatings from 'react-star-ratings';
 import {addComment, getUserInformation} from "../services/userService";
+import DisplayPage from "./DisplayPage";
+import DisplayHeader from "../componentsPages/DisplayHeader";
 
 class ProfilePageWallet2 extends Component {
     constructor(props) {
@@ -65,27 +67,17 @@ class ProfilePageWallet2 extends Component {
         return(
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageWallet2 fv-addComments"}>
                 <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
-                    <HeaderSearch  {...this.props}/>
-                    <MDBRow className={"fv-DisplayPageRotePathMobile"}>
-                        <MDBCol>
-                            <p>صفحه اصلی</p>
-                            <i className="fas fa-chevron-left" />
-                            <p>پنل کاربری</p>
-                            <i className="fas fa-chevron-left" />
-                            <p className={"fv-DisplayPagePathNow"}>ایجاد تراکنش</p>
-                        </MDBCol>
-                    </MDBRow>
+                    <DisplayHeader  {...this.props}/>
                 </MDBContainer>
 
                 <MDBRow className={"fv-ProfilePageLeftBody"}>
 
-                    <ProfilePageUserInfo />
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo"}>
-                        <p>کاربر عزیز لطفا نظر خود را در خصوص اقامتی که داشتید درج کنید</p>
-                        <p>نام شما</p>
+                        <h6>کاربر عزیز لطفا نظر خود را در خصوص اقامتی که داشتید درج کنید</h6>
+                        <h6>نام شما</h6>
                         <input type="text" className={"fv-nameAddComments"}  value={this.state.name} />
-                        <p>توضیحات شما</p>
+                        <h6>توضیحات شما</h6>
                         <MDBRow className={"fv-ProfilePageWallet2TextArea"}>
                             <MDBCol>
                                 <textarea value={this.state.textComment}
@@ -96,7 +88,7 @@ class ProfilePageWallet2 extends Component {
 
                         <MDBRow  className={"fv-addCommentsRateTopic"}>
                             <MDBCol md={12}>
-                                <p >به هر کدام از موارد زیر امتیاز دهید</p>
+                                <h6 >به هر کدام از موارد زیر امتیاز دهید</h6>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-addCommentsRate"}>
@@ -160,7 +152,7 @@ class ProfilePageWallet2 extends Component {
 
                         <MDBRow>
                             <MDBCol md={12} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
-                                <input type="button" value="ذخیره تراکنش" onClick={()=>{
+                                <input type="button" value="ارسال پیام" onClick={()=>{
                                     const totalScore = (this.state.cleaningRate +  this.state.compatibilityWithAdvertisement + this.state.hospitality + this.state.hostingQuality) /4
                                     const data ={
                                        text : this.state.textComment ,
@@ -177,7 +169,23 @@ class ProfilePageWallet2 extends Component {
                                                 this.props.history.push(`/displayPage/${this.props.match.params.id}`)
                                             }
                                         } )
-                                        .catch(err => err.response ?  alert('لطفا مقادیر را به درستی پر کنید') : '' )
+                                        .catch(err =>{
+                                            if(err.response.data.errors.ad_compliance){
+                                                alert(err.response.data.errors.ad_compliance)
+                                            }
+                                            if(err.response.data.errors.cleaning){
+                                                alert(err.response.data.errors.cleaning)
+                                            }
+                                            if(err.response.data.errors.hospitality){
+                                                alert(err.response.data.errors.hospitality)
+                                            }
+                                            if(err.response.data.errors.hosting_quality){
+                                                alert(err.response.data.errors.hosting_quality)
+                                            }
+                                            if(err.response.data.errors.text){
+                                                alert(err.response.data.errors.text)
+                                            }
+                                        })
                                 }}/>
                             </MDBCol>
                         </MDBRow>
