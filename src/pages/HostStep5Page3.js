@@ -498,7 +498,7 @@ class HostStep5Page3 extends Component {
 
                         <MDBRow className={"fv-HostStep1PageBody"}>
                             <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
-                                <h5 className={"fv-hostStep3NumberOfCapacityMobile"}>تصویر اصلی</h5>
+                                <h6 className={"fv-hostStep3NumberOfCapacityMobile"}>تصویر اصلی</h6>
                                 <p className={"fv-hostStep5P"}>مهمانان ابتدا این تصویر را میبینند،این تصویر معرف اقامت گاه شماست،پس تصویر با کیفیت و زیبا انتخاب کنید</p>
 
                                 <MDBRow className={"fv-hostStep5Page3TopPicImage"}>

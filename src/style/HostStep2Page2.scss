@@ -21,6 +21,18 @@
   width: 446px !important;
   height: 348px !important;
 }
+.fv-waitingLoadPublicFullScreen.fv-waitingMapHostStepsPage {
+  width: 70%;
+  /* margin-inline: auto; */
+  margin: auto;
+  text-align: center;
+  margin-top: 34%;
+  margin-right: 0%;
+}
+.fv-waitingLoadPublicFullScreen.fv-waitingMapHostStepsPage .circular {
+  width: 50%;
+}
+
 
 
 @media (max-width: 1200px) {

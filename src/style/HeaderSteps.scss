@@ -134,7 +134,7 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
     /* margin-right: -15px; */
     /* margin-left: -15px; */
     background-color: #3EC886;
-    width: 25%;
+    width: 315px;
     margin-right: 5%;
     padding-top: 3%;
     padding-bottom: 3%;
@@ -146,7 +146,7 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
   .fv-cascadeOptionMainPage {
     /* box-sizing: border-box; */
     background-color: white;
-    width: 25%;
+    width: 315px;
     margin-right: 5%;
     text-align: start;
     font-size: 18px;
@@ -154,6 +154,7 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
     padding-top: 1.5%;
     padding-bottom: 1.5%;
     display: block;
+    border: 1px solid #F5F5F5;
   }
  .fv-cascadeOptionMainPageRowTop a {
     color: white;
@@ -164,7 +165,7 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
     text-align: end;
     position: absolute;
     z-index: 2;
-    margin-top: 7.5%;
+    margin-top: 6.5%;
   }
   .fv-cascadeOptionMainPageRowTop .col-md-12 {
     display: contents;
@@ -194,10 +195,10 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
     margin-left: 5%;
   }
   .fv-cascadeOptionMainPageRowTop img {
-    width: 65px;
+    width: 50px;
     margin-right: 19px;
-    height: 54px;
-    border-radius: 15px;
+    height: 50px;
+    border-radius: 15px
   }
   .fv-textInToCascadeOptionMainPage {
     margin: auto;
@@ -460,7 +461,9 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
     }
     .fv-cascadeOptionMainPage {
       width: 80%;
-      border: 1px solid #7788997a;
+      border: 1px solid #F5F5F5;
+      padding-top: 3%;
+      padding-bottom: 3%;
     }
     .fv-containerOptionMainPageRowTop {
       z-index: 20;

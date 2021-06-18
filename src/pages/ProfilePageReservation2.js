@@ -174,20 +174,20 @@ class ProfilePageReservation2 extends Component {
 
                                             <MDBRow>
                                                 <MDBCol className={'fv-productTopic'}>
-                                                    {reserve.villa_title}
+                                                  <h6>{reserve.villa_title}</h6>
                                                 </MDBCol>
                                             </MDBRow>
                                             <MDBRow className={'fv-ProfilePageReservation2ProductLocaton'}>
                                                 <MDBCol md={12} sm={10}>
-                                                    <a>{reserve.state}</a>
-                                                    <i className="fa fa-map-marker-alt" />
+                                                    <p>{reserve.state}
+                                                    <i className="fa fa-map-marker-alt" /></p>
                                                 </MDBCol>
                                             </MDBRow>
 
                                             <MDBRow className={'fv-productCapacityBox'}>
                                                 <MDBCol md={12} sm={9} className={"fv-ProfilePageReservation2ProductDate"}>
                                                     <i className="fa fa-calendar" />
-                                                    <a> {reserve.entry_date}  تا {reserve.exit_date} </a>
+                                                    <p> {reserve.entry_date}  تا {reserve.exit_date} </p>
                                                 </MDBCol>
                                             </MDBRow>
                                             <MDBRow className={"fv-borderButton"}>
@@ -198,7 +198,7 @@ class ProfilePageReservation2 extends Component {
                                                     <p>تومان</p>
                                                 </MDBCol>
                                                 <MDBCol md={3} sm={3}>
-                                                    <h5>{reserve.cost}</h5>
+                                                    <h6>{reserve.cost}</h6>
                                                 </MDBCol>
                                                 <MDBCol md={7} sm={7}>
                                                     <h5>مبلغ قابل پرداخت</h5>

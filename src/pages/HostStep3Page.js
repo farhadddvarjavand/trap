@@ -203,7 +203,7 @@ class HostStep3Page extends Component {
                     <MDBRow className={"fv-HostStep1PageBody"}>
 
                         <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
-                                 <h5 className={"fv-hostStep3NumberOfCapacityMobile"}>ظرفیت اقامت گاه</h5>
+                                 <h6 className={"fv-hostStep3NumberOfCapacityMobile"}>ظرفیت اقامت گاه</h6>
 
                             <HostStepIncreaseAndDecreaseButton
                             text="ظرفیت استاندارد"
@@ -220,7 +220,7 @@ class HostStep3Page extends Component {
                                 nameOfSection={'maximumCapacity'}
                             />
 
-                            <h5>نوع اجاره</h5>
+                            <h6>نوع اجاره</h6>
                             <select value={this.state.typeOfRent} onChange={(event)=>this.setState({typeOfRent:event.target.value})}>
                                 <option value='title' disabled> </option>
                                 <option value="خانه اشتراکی">خانه اشتراکی</option>
@@ -228,7 +228,7 @@ class HostStep3Page extends Component {
                                 <option value="خانه اجاره ای">خانه اجاره ای</option>
                             </select>
 
-                            <h5 className={"fv-hostStep3BedRoom"}>اتاق خواب</h5>
+                            <h6 className={"fv-hostStep3BedRoom"}>اتاق خواب</h6>
 
                             <div  className={"fv-hostStep3CapacityOfRom"}>
                                 <HostStepIncreaseAndDecreaseButton
@@ -255,7 +255,7 @@ class HostStep3Page extends Component {
                                 nameOfSection={'numberOfMattress'}
                             />
 
-                            <h5>حمام/سرویس بهداشتی</h5>
+                            <h6>حمام/سرویس بهداشتی</h6>
 
                             <HostStepIncreaseAndDecreaseButton
                                 text="توالت ایرانی"
@@ -305,7 +305,7 @@ class HostStep3Page extends Component {
                                 setCheckedPrev = {this.state.disinfectedCheckbox} // آرایه ایی که اگر لوکال استوریج وجود داشت پر می باشد
                                 nameOfPart={'disinfectedCheckbox'}/>
 
-                            <h5 className={"fv-hostStep3AnyPlace"}>سایر فضاها</h5>
+                            <h6 className={"fv-hostStep3AnyPlace"}>سایر فضاها</h6>
 
                             <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLineTwo"}>
                                 <MDBCol md={2} sm={6}>
@@ -390,7 +390,7 @@ class HostStep3Page extends Component {
                                     </MDBCol>
                                 })}
                             </MDBRow>
-                            <p className={"fv-marginRight fv-hostStep3AddNewPlace"}>اضافه کردن فضای جدید</p>
+                            <h6 className={"fv-marginRight fv-hostStep3AddNewPlace"}>اضافه کردن فضای جدید</h6>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
                                     <input type="text" placeholder=" فضا خود را بنویسید " value={this.state.yourSpace}
@@ -415,7 +415,7 @@ class HostStep3Page extends Component {
                                     }}/>
                                 </MDBCol>
                             </MDBRow>
-                            <h5 className={"fv-hostStep3View"}>ویوی اقامت گاه</h5>
+                            <h6 className={"fv-hostStep3View"}>ویوی اقامت گاه</h6>
                             <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLine fv-hostStep3CheckBoxGroupInLineSecond"}>
                                 <MDBCol md={3} sm={6} className={""} >
                                     <HostStepCheckbox
@@ -458,7 +458,7 @@ class HostStep3Page extends Component {
                                         nameOfPart={'accommodationViewsCheckbox'}/>
                                 </MDBCol>
                             </MDBRow>
-                            <h5 className={"fv-hostStep3Measure"}> متراژ اقامت گاه </h5>
+                            <h6 className={"fv-hostStep3Measure"}> متراژ اقامت گاه </h6>
                             <input className={"fv-marginRight"} type="text" placeholder="" value={this.state.yourAccommodationMeasure}
                                    onChange={(e)=>this.setState({yourAccommodationMeasure:e.target.value})}/>
                         </MDBCol>

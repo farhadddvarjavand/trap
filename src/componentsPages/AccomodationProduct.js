@@ -20,7 +20,7 @@ class AccommmodationProduct extends React.Component{
     render() {
         return(
                           <MDBCol md={4}>
-                              <MDBRow className={'fv-product fv-mobileProduct'}>
+                              <MDBRow className={'fv-product fv-mobileProduct fv-myAccommodationProducts'}>
                                   <MDBRow className={"fv-ProfilePageReservation2ImageProductContentTopOne"}>
                                       <MDBCol md={this.props.md}>
                                           <p>{this.props.status}</p>
@@ -31,7 +31,7 @@ class AccommmodationProduct extends React.Component{
 
                                   <MDBRow>
                                       <MDBCol className={'fv-productTopic'}>
-                                          {this.props.title}
+                                        <h6> {this.props.title}</h6>
                                       </MDBCol>
                                   </MDBRow>
                                   <MDBRow className={'fv-ProfilePageReservation2ProductLocaton'}>

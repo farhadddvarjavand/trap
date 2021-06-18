@@ -16,6 +16,8 @@ import Image1 from "../images/image1.png"
 import Image2 from "../images/image2.png"
 import Image3 from "../images/image3.png"
 import Image4 from "../images/image4.png"
+import MyaccommodationsIcon from "../images/icons/Folder.svg"
+import Logout from "../images/icons/Logout.svg"
 import {Link} from "react-router-dom";
 import {productData} from "../data/testData"
 import Datas from "../data/Datas";
@@ -24,6 +26,7 @@ import CalendarLinear from "../data/CalenddarLinear";
 import {getUserInformation} from "../services/userService";
 import Footer from "../componentsPages/footer";
 import HeadeerLoginMenu from "../componentsPages/HeaderLoginMenu"
+
 import {Waiting} from "../componentsPages/WaitingLoad";
 
 const commaNumber = require('comma-number')
@@ -193,15 +196,15 @@ class MainPage extends Datas {
                             <MDBCol md={2} sm={2}>
                                 <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage} />
                             </MDBCol>
-                            <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={12} sm={12}>
+                            <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={8} sm={8}>
                                 <MDBRow>
-                                    <MDBCol>
+                                    <MDBCol md={12}>
                                         <a><h6>{nameAndFamily}</h6></a>
                                     </MDBCol>
 
                                 </MDBRow>
-                                <MDBRow>
-                                    <MDBCol>
+                                <MDBRow className={"fv-visitProfile"}>
+                                    <MDBCol md={12}>
                                         <Link to={"/MainProfilePages/Profile"}><a>مشاهده حساب کاربری</a></Link>
                                     </MDBCol>
 
@@ -213,13 +216,13 @@ class MainPage extends Datas {
                 </MDBRow>
                 <MDBRow className={"fv-cascadeOptionMainPage"}>
                     <MDBCol md={12} sm={12}>
-                        <Link to={"/MainProfilePages/myAccommodation"}> <i className="fa fa-credit-card" />
+                        <Link to={"/MainProfilePages/myAccommodation"}> <img style={{marginRight : '15px' , marginLeft : '5px'}} src={MyaccommodationsIcon} />
                             <a><p>اقامت گاه های من</p></a> </Link>
                     </MDBCol>
                 </MDBRow>
                 <MDBRow className={"fv-cascadeOptionMainPage"}>
                     <MDBCol md={12} sm={12}>
-                        <Link to={"/MainProfilePages/ProfileMyReservation"}> <i className="fa fa-receipt" />
+                        <Link to={"/MainProfilePages/ProfileMyReservation"}> <img style={{marginRight : '15px' , marginLeft : '5px'}} src={MyaccommodationsIcon} />
                             <a><p>رزور های من</p></a> </Link>
                     </MDBCol>
                 </MDBRow>
@@ -243,7 +246,7 @@ class MainPage extends Datas {
                         <a onClick={()=>{
                             localStorage.clear()
                             this.props.history.push("/")
-                        }}> <i className="fa fa-sign-out-alt" />
+                        }}> <img style={{marginRight : '15px' , marginLeft : '5px'}} src={Logout} />
                             <p>خروج از حساب کاربری</p></a>
                     </MDBCol>
                 </MDBRow>
@@ -266,10 +269,10 @@ class MainPage extends Datas {
 
             <MDBRow className={'fv-searchMainPageTopic'}>
                 <MDBCol md={12}>
-                    <p>اجاره خانه های روستایی</p>
+                    <h2>اجاره خانه های روستایی</h2>
                 </MDBCol>
                 <MDBCol md={12}>
-                    <p>خانه های روستایی در رویایی ترین مناطق</p>
+                    <h2>خانه های روستایی در رویایی ترین مناطق</h2>
                 </MDBCol>
             </MDBRow>
 

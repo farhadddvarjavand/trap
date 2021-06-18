@@ -73,7 +73,7 @@ class ProfilePageTransaction2 extends Component {
 
 
                                 <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
-                                    <h5>تراکنش های من</h5>
+                                    <h6>تراکنش های من</h6>
                                     <MDBRow className={"fv-ProfilePageReservationSetInfo fv-ProfilePageTransaction2HeaderForMobile"}>
 
 
@@ -109,11 +109,11 @@ class ProfilePageTransaction2 extends Component {
 
                                     <table>
                                         <tr className={"fv-tableTitle"}>
-                                            <th className={"fv-tableTitleRightOne"}>نوع تراکنش</th>
-                                            <th>تاریخ تراکنش</th>
-                                            <th>مبلغ</th>
-                                            <th className={"fv-tableTitleContents"}>شرح تراکنش</th>
-                                            <th className={"fv-tableTitleLeftOne"}>وضعیت</th>
+                                            <th className={"fv-tableTitleRightOne"}><h6>نوع تراکنش</h6></th>
+                                            <th><h6>تاریخ تراکنش</h6></th>
+                                            <th><h6>مبلغ</h6></th>
+                                            <th className={"fv-tableTitleContents"}><h6>شرح تراکنش</h6></th>
+                                            <th className={"fv-tableTitleLeftOne"}><h6>وضعیت</h6></th>
                                         </tr>
                                         {this.state.transactionDatas.map(transactionData=>{
                                             return(

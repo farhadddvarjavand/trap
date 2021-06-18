@@ -9,6 +9,7 @@ import Footer from "../componentsPages/footer";
 import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt"
 import Mapir from "mapir-react-component";
 import HostStepImage1 from "../images/home_miz1 png.png"
+import {Waiting} from "../componentsPages/WaitingLoad";
 
 class HostStep2Page2 extends Component {
     constructor(props) {
@@ -22,6 +23,7 @@ class HostStep2Page2 extends Component {
             lat: 35.72,
             lon: 51.42,
             mapAddress:'',
+            waitingMapLoad:true,
         }
         this.reverseFunction = this.reverseFunction.bind(this);
     }
@@ -92,9 +94,10 @@ class HostStep2Page2 extends Component {
 
                 <MDBRow className={"fv-HostStep1PageBody"}>
                     <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
-                        <p className={"fv-hostStep2Page2P"}> لطفا از روی نقشه آدرس دقیق خود را پیدا کنید</p>
+                        <h6 className={"fv-hostStep2Page2P"}> لطفا از روی نقشه آدرس دقیق خود را پیدا کنید</h6>
                         <textarea className={"fv-hostStep2Page2Textarea"} value={this.state.mapAddress} disabled={true}/>
 
+                        {/* {Waiting(true, "fv-waitingLoadPublicFullScreen fv-waitingMapHostStepsPage")} */}
                         <MDBRow>
                             <Mapir
                                 center={[this.state.lon, this.state.lat]}

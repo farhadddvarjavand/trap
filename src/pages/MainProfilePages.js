@@ -50,6 +50,7 @@ import ScrollToTop from "../componentsPages/ScrollToTop";
 import FactorPage from "./FactorPage";
 import MobileLogo from "../images/MobileLogo.png";
 import LogoName from "../images/LogoName.png";
+const commaNumber = require('comma-number')
 
 
 class MainProfilePages extends Component {
@@ -219,12 +220,11 @@ class MainProfilePages extends Component {
                     {this.state.onclickHandel ?
                         <MDBCol md={3} className={"fv-ProfilePageUserInfoBody fv-HideDesktopForMobile"}>
                             <img src={this.state.AvatarSrc ? `${config.webapi}/images/user/${this.state.AvatarSrc}` : UserImage}/>
-                            <p>{this.state.nameAndFamily}</p>
-                            <h5>اطلاعات کاربری</h5>
+                            <h5 style={{marginTop:'7%' , marginBottom:'10%'}}>{this.state.nameAndFamily}</h5>
                             <MDBRow className={"fv-ProfilePageUserHoldingInfo"}>
                                 <MDBCol md={12}>
                                     <p>موجودی حساب شما</p>
-                                    <h5>{this.state.stock}</h5>
+                                    <h6 >{commaNumber(this.state.stock)} تومان </h6>
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
@@ -265,12 +265,11 @@ class MainProfilePages extends Component {
                     {/*           for desktop          */}
                     <MDBCol md={3} className={"fv-ProfilePageUserInfoBody fv-hideMobileForDesktop"}>
                         <img src={this.state.AvatarSrc ? `${config.webapi}/images/user/${this.state.AvatarSrc}` : UserImage}/>
-                        <p>{this.state.nameAndFamily}</p>
-                        <h5>اطلاعات کاربری</h5>
+                        <h5 style={{marginTop:'7%' , marginBottom:'10%'}}>{this.state.nameAndFamily}</h5>
                         <MDBRow className={"fv-ProfilePageUserHoldingInfo"}>
                             <MDBCol md={12}>
                                 <p>موجودی حساب شما</p>
-                                <h5>{this.state.stock}</h5>
+                                <h6>{commaNumber(this.state.stock)} تومان </h6>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>

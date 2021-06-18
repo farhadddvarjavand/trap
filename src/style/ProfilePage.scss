@@ -22,9 +22,13 @@
       // height: 1000px;
       h5{
         margin-top: 2%;
-        font-size: 18px;
+       // font-size: 18px;
       }
       p{
+        margin-top: 2%;
+        margin-bottom: 1%;
+      }
+      h6{
         margin-top: 2%;
         margin-bottom: 1%;
       }
@@ -175,6 +179,11 @@
   .fv-waitingProfilePage{
     float: left;
   }
+  input{
+    font-weight: 600;
+    font-size: 14px;
+  }
+
 }
 .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-reservationActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-transaction, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-AccomoddationActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-RequestedReservationActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-myCalenderActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-updateProfileActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-gustCommentsActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-walletActive {
   font-weight: 400;

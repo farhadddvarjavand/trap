@@ -85,7 +85,7 @@ class HostStep5Page extends Component {
                             <p className={this.state.click && validationInputs===false ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>لطفا کادر های قرمز را به درستی پر کنید</p>
                             <p className={this.state.click && this.state.validNormalCost===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}><i className="fas fa-exclamation-triangle" /> قیمت را به درستی وارد فرمایید - وارد کردن قیمت از شنبه تا چهارشنبه اجباریست</p>
                             <p className={this.state.click && this.state.validExtraCost===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}><i className="fas fa-exclamation-triangle" /> قیمت را به درستی وارد فرمایید - وارد کردن قیمت پنجشنبه و جمعه و تعطیل اجباریست</p>
-                            <h5 className={"fv-hostStep3NumberOfCapacityMobile"}>قیمت گذاری کلی</h5>
+                            <h6 className={"fv-hostStep3NumberOfCapacityMobile"}>قیمت گذاری کلی</h6>
                             <p className={"fv-hostStep5P"}>قیمت از شنبه تا چهارشنبه</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
@@ -134,8 +134,8 @@ class HostStep5Page extends Component {
                                 </MDBCol>
                             </MDBRow>
 
-                            <h5 className={"fv-hostStep3NumberOfCapacityMobile"}>تخفیف</h5>
-                            <p className={"fv-hostStep5P"}>میتوانید جهت تشویق مهمانان به رزرو بیشتر تخفیف قرار دهید</p>
+                            <h6 className={"fv-hostStep3NumberOfCapacityMobile"}>تخفیف</h6>
+                            <p style={{marginTop:'1%' , marginBottom: '1%' , fontSize : '13px'}} className={"fv-hostStep5P"}>میتوانید جهت تشویق مهمانان به رزرو بیشتر تخفیف قرار دهید</p>
                             <p className={"fv-hostStep5P"}>تخفیف هفتگی</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>

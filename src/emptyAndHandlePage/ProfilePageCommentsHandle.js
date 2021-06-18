@@ -39,8 +39,7 @@ class ProfilePageCommentsHandle extends Component {
 
         userVillas()
             .then(result=>{
-                if(result.data.data.leeway>0){
-
+                if(result.data.data.length>0){
                     console.log(result)
                     this.setState({userVillas:result.data.data} , ()=>{
                         if(this.state.userVillas){ /// agar villaeii vojod dasht
@@ -51,13 +50,16 @@ class ProfilePageCommentsHandle extends Component {
                                         if(res.data.data && res.data.data !== "Something went wrong!"){
                                             // avalin vilaie por
                                             if(Object.values(res.data.data).length !== 0){ /// agar vojod dasht commenti baraie villa haie sabt shode
-                                                this.setState({comments: Object.values(res.data.data) , villaId:userVilla.id } , () =>{
+                                                console.log(Object.values(res.data.data))
+
+                                              //  this.setState({comments: Object.values(res.data.data) , villaId:userVilla.id } , () =>{
+
                                                     this.props.history.push(`/MainProfilePages/profileShowGuestComments/${userVilla.id}`)
                                                     //this.setState({villaIdFullComments:userVilla.id})
 
-                                                })
+                                            //    })
                                             }else {
-                                                this.props.history.push("/MainProfilePages/profileGuestComments")
+                                               // this.props.history.push("/MainProfilePages/profileGuestComments")
                                             }
 
                                             // console.log(res.data.data)

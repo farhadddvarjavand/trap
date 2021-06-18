@@ -179,10 +179,10 @@ class ProfilePageWallet extends Component {
                                                 <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
                                                     <MDBRow className={"fv-ProfilePageWalletWalletImageP"}>
                                                         <MDBCol md={12}>
-                                                            <p>در آمد شما از ترپ</p>
+                                                            <h6>در آمد شما از ترپ</h6>
                                                         </MDBCol>
                                                         <MDBCol md={12}>
-                                                            <p>{commaNumber(getFinancialReportsTopPages.trappIncome)} تومان</p>
+                                                            <h6>{commaNumber(getFinancialReportsTopPages.trappIncome)} تومان</h6>
                                                         </MDBCol>
                                                     </MDBRow>
                                                     <img src={WalletPic1} />
@@ -190,10 +190,10 @@ class ProfilePageWallet extends Component {
                                                 <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
                                                     <MDBRow className={"fv-ProfilePageWalletWalletImageP"}>
                                                         <MDBCol md={12} className={"fv-ProfilePageWalletWalletImagePWhiteColor"}>
-                                                            <p>در آمد شما از سایر منابع</p>
+                                                            <h6>در آمد شما از سایر منابع</h6>
                                                         </MDBCol>
                                                         <MDBCol md={12}>
-                                                            <p>{commaNumber(getFinancialReportsTopPages.otherIncome)} تومان</p>
+                                                            <h6>{commaNumber(getFinancialReportsTopPages.otherIncome)} تومان</h6>
                                                         </MDBCol>
                                                     </MDBRow>
                                                     <img src={WalletPic2} />
@@ -201,10 +201,10 @@ class ProfilePageWallet extends Component {
                                                 <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
                                                     <MDBRow className={"fv-ProfilePageWalletWalletImageP fv-ProfilePageWalletWalletImagePWhiteColor"}>
                                                         <MDBCol md={12}>
-                                                            <p>کل درآمد شما از اجاره ویلا</p>
+                                                            <h6>کل درآمد شما از اجاره ویلا</h6>
                                                         </MDBCol>
                                                         <MDBCol md={12}>
-                                                            <p>{commaNumber(getFinancialReportsTopPages.totalIncome)} تومان</p>
+                                                            <h6>{commaNumber(getFinancialReportsTopPages.totalIncome)} تومان</h6>
                                                         </MDBCol>
                                                     </MDBRow>
                                                     <img src={WalletPic3} />
@@ -222,10 +222,10 @@ class ProfilePageWallet extends Component {
 
                                     <table>
                                         <tr className={"fv-tableTitle"}>
-                                            <th>تاریخ تراکنش</th>
-                                            <th>منبع تراکنش</th>
-                                            <th className={"fv-tableDiscriptions"}>شرح تراکنش</th>
-                                            <th>مبلغ</th>
+                                            <th><h6>تاریخ تراکنش</h6></th>
+                                            <th><h6>منبع تراکنش</h6></th>
+                                            <th className={"fv-tableDiscriptions"}><h6>شرح تراکنش</h6></th>
+                                            <th><h6>مبلغ</h6></th>
                                         </tr>
                                         {this.state.getFinancialReports.map(getFinancialReport=>{
                                             return      <tr>

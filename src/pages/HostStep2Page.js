@@ -89,11 +89,11 @@ class HostStep2Page extends Component {
 
                         <MDBRow className={"fv-HostStep1PageBody"}>
                             <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
-                                <p className={this.state.click && validationInputs===false ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>لطفا کادر های قرمز را به درستی پر کنید</p>
+                                <h6 style={{paddingBottom : '3%'}} className={this.state.click && validationInputs===false ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>لطفا کادر های قرمز را به درستی پر کنید</h6>
                                 <p className={this.state.click && this.state.validCity===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}><i className="fas fa-exclamation-triangle" />  پر کردن شهر اجباریست</p>
                                 {/*  <p className={this.state.click && this.state.validPostCode===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}> <i className="fas fa-exclamation-triangle" />کد پستی معتبر نمی باشد</p> */}
-                                <p className={this.state.click && this.state.validAddress===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}> <i className="fas fa-exclamation-triangle" />نوشتن آدرس اجباریس</p>
-                                <p  className={"fv-hostStep2Page2Hidden"}>شهر/استان</p>
+                                <p className={this.state.click && this.state.validAddress===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}> <i className="fas fa-exclamation-triangle" />نوشتن آدرس اجباریست - آدرس باید بیشتر از ۵ کاراکتر داشته باشد</p>
+                                <h6  className={"fv-hostStep2Page2Hidden"}>شهر/استان</h6>
                                 <input type="text" placeholder={"شهر یا استان خود را وارد نماییید"} value={this.state.city} onChange={(event)=>{
                                     if(event.target.value){
                                         this.setState({validCity:true})
@@ -103,9 +103,9 @@ class HostStep2Page extends Component {
                                     this.setState({city:event.target.value})
                                 }} className={this.state.click && this.state.validCity===false ?  "fv-hostStep2Page2Hidden fv-redBorderError" : "fv-hostStep2Page2Hidden"} />
 
-                                <p className={"fv-hostStep2Page2Hidden"}>روستا/محله</p>
+                                <h6 className={"fv-hostStep2Page2Hidden"}>روستا/محله</h6>
                                 <input type="text" value={this.state.village} onChange={(event)=>{ this.setState({village:event.target.value})} } className={"fv-hostStep2Page2Hidden"}/>
-                                <p className={"fv-hostStep2Page2Hidden"}>کدپستی</p>
+                                <h6 className={"fv-hostStep2Page2Hidden"}>کدپستی</h6>
                                 <input type="text" value={this.state.postCode} onChange={(event)=>{
                                     {/* if(event.target.value.length === 10 &&  Number(event.target.value)){
                                         this.setState({validPostCode:true})
@@ -114,9 +114,9 @@ class HostStep2Page extends Component {
                                     } */}
                                     this.setState({postCode:event.target.value})
                                 }}  className={"fv-hostStep2Page2Hidden"}/>
-                                <p className={"fv-hostStep2Page2Hidden"}>آدرس دقیق</p>
+                                <h6 className={"fv-hostStep2Page2Hidden"}>آدرس دقیق</h6>
                                 <textarea value={this.state.address} onChange={(event)=>{
-                                    if(event.target.value){
+                                    if(event.target.value.length > 5){
                                         this.setState({validAddress:true})
                                     }else {
                                         this.setState({validAddress:false})

@@ -9,6 +9,8 @@ import React from "react";
 import "../style/SearchHomePage.css"
 import "../style/headerLoginMenu.scss"
 import UserImage from "../images/user.png"
+import MyaccommodationsIcon from "../images/icons/Folder.svg";
+import Logout from "../images/icons/Logout.svg";
 
 class HeaderLoginMenu extends React.Component{
     constructor() {
@@ -56,9 +58,9 @@ class HeaderLoginMenu extends React.Component{
                                         <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage} />
                                     </MDBCol>
                                     <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={12} sm={12}>
-                                        <MDBRow>
+                                        <MDBRow className={"fv-textInToCascadeOptionHeaderLoginNameAnFamily"}>
                                             <MDBCol>
-                                                <a><h5>{nameAndFamily}</h5></a>
+                                                <a><h6>{nameAndFamily}</h6></a>
                                             </MDBCol>
 
                                         </MDBRow>
@@ -75,13 +77,13 @@ class HeaderLoginMenu extends React.Component{
                         </MDBRow>
                         <MDBRow className={"fv-cascadeOptionMainPage"}>
                             <MDBCol md={12} sm={12}>
-                                <Link to={"/MainProfilePages/myAccommodation"}> <i className="fa fa-credit-card" />
+                                <Link to={"/MainProfilePages/myAccommodation"}> <img style={{marginRight : '15px' , marginLeft : '5px'}} src={MyaccommodationsIcon} />
                                     <a><p>اقامت گاه های من</p></a> </Link>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-cascadeOptionMainPage"}>
                             <MDBCol md={12} sm={12}>
-                                <Link to={"/MainProfilePages/ProfileMyReservation"}> <i className="fa fa-receipt" />
+                                <Link to={"/MainProfilePages/ProfileMyReservation"}> <img style={{marginRight : '15px' , marginLeft : '5px'}} src={MyaccommodationsIcon} />
                                     <a><p>رزور های من</p></a> </Link>
                             </MDBCol>
                         </MDBRow>
@@ -105,7 +107,7 @@ class HeaderLoginMenu extends React.Component{
                                 <a onClick={()=>{
                                     localStorage.clear()
                                     window.location.reload();
-                                }}> <i className="fa fa-sign-out-alt" />
+                                }}> <img style={{marginRight : '15px' , marginLeft : '5px'}} src={Logout} />
                                     <p>خروج از حساب کاربری</p></a>
                             </MDBCol>
                         </MDBRow>

@@ -12,7 +12,7 @@
     img{
       width: 92%;
       margin-right: 4%;
-      margin-bottom: 2%;
+      margin-bottom: 6%;
       border-radius: 3px;
     }
     .fv-factorPageRightInfoRightPadding{
@@ -75,7 +75,7 @@
            margin-top: 3%;
            margin-left: 4%;
          }
-         h5 {
+         h6 {
            margin-right: 7%;
          }
        }
@@ -95,8 +95,12 @@
     place-content: flex-end;
     margin-right: 2%;
     margin-left: -7%;
-    h5{
+    h6{
       margin-right: 3%;
+    }
+    .h7{
+      margin-right: 3%;
+      margin-top: 1%;
     }
   }
   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftInnerTopButton{
@@ -119,7 +123,7 @@
     width: 100%;
     margin-right: 3%;
   }
-  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo h5 {
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo h6 {
     margin-top: 3%;
   }
  .fv-factorPageRightInfoLeftInnerTop {
@@ -162,7 +166,7 @@
        padding-bottom: 6%;
      }
      .fv-factorPageRightInfoLeftBodyInnerLeft{
-       h5{
+       h6{
          margin-right: 0%;
          margin-bottom: 7%;
        }
@@ -206,6 +210,9 @@
     font-size: 14px;
   }
 
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBodyInnerLeft .h7 {
+    margin-bottom: 3%;
+  }
 }
 .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyInnerLeftP {
   place-content: end;
@@ -276,7 +283,7 @@
       margin-top: 11%;
     }
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftInnerTopButton1{
-      margin-top: -55%;
+      margin-top: -25%;
       text-align: end;
       font-size: 13px;
       input{
@@ -396,7 +403,7 @@
       place-content: end;
        padding: 0;
     }
-    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyInnerLeft h5 {
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyInnerLeft h6 {
       margin-right: 2%;
     }
 
@@ -440,7 +447,8 @@
    .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn {
      text-align: initial;
      margin-bottom: 6%;
-     margin-right: 3%;
+     margin-right: 0%;
+     margin-top: -7%;
     }
     .fv-factorPageRightInfoLeftBodyOrderThatPayTitleMobile{
       margin-top: -5%;
@@ -459,7 +467,7 @@
       margin-right: 7%;
     }
     .fv-factorPageRightInfo .fv-factorPageRightInfoTitleMobile .fv-factorPageRightInfoRightPaddingTitle2{
-      margin-right: -3%;
+      margin-right: 3%;
       margin-top: 10%;
       color: #15BE29;
     }
@@ -484,25 +492,27 @@
       color: #919191;
     }
      .fv-factorPageRightInfoLeftInnerTopReserveCodeMobileP {
-      margin-left: -9%;
-      font-size: 14px;
-      color: #919191;
-      text-align-last: end;
-       margin-right: 20%;
+       margin-left: 0;
+       font-size: 14px;
+       color: #919191;
+       text-align-last: end;
+       margin-right: 0;
     }
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond .fv-factorPageRightInfoLeftInnerTop {
       margin-right: 10%;
       margin-left: -5%;
+      text-align: center;
     }
      .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond .fv-factorPageRightInfoLeftInnerTop .fas, .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond .fv-factorPageRightInfoLeftInnerTop .fas {
       margin-top: 3%;
       margin-left: -12%;
     }
-    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo h5 {
-      margin-top: 3%;
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo h6 {
+      margin-top: 4%;
+      margin-bottom: 4%;
     }
   }
-  .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyInnerLeft h5 {
+  .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyInnerLeft h6 {
     margin-right: -2%;
   }
   .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyInnerLeft .fv-factorPageRightInfoLeftBodyOrderThatPayToman {
@@ -511,7 +521,18 @@
     font-size: 13px;
     padding-top: 2%;
   }
-
+  .fv-FactorPage .fv-factorPageRightInfoLeftBodyInner.fv-factorPageRightInfoLeftBodyInnerMobile .fv-factorPageRightInfoLeftBodyInnerLeft .h7 {
+    margin-top: 6%;
+    margin-bottom: 1%;
+  }
+  .fv-FactorPage .fv-factorPageRightInfo img {
+    width: 50px;
+    margin-right: 16%;
+    margin-bottom: 6%;
+    border-radius: 3px;
+    height: 41px;
+    margin-top: 28%;
+  }
 }
 
 
@@ -548,7 +569,7 @@
   .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftInnerTopButton1 input {
     font-size: 12px;
   }
-  .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyInnerLeft h5 {
+  .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyInnerLeft h6 {
     font-size: 5vw;
   }
   .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyOrderThatPay {
@@ -576,7 +597,7 @@
   .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo p {
     font-size: 11px;
   }
-  .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyInnerLeft h5 {
+  .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyInnerLeft h6 {
     font-size: 5vw
   }
   .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftInnerTopButton1 input {

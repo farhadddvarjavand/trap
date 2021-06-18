@@ -189,7 +189,7 @@ class HostStep4Page extends Component {
 
 
                         <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
-                            <h5 className={"fv-hostStep3NumberOfCapacityMobile"}>امکانات کلی</h5>
+                            <h6 className={"fv-hostStep3NumberOfCapacityMobile"}>امکانات کلی</h6>
                             <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLine"}>
                                 <MDBCol md={6} sm={5}>
                                     <HostStepCheckbox
@@ -297,7 +297,7 @@ class HostStep4Page extends Component {
                                 </MDBCol>
                             </MDBRow>
 
-                            <h5 className={"fv-hostStep3NumberOfCapacityMobile‌"}>امکانات آشپرخانه</h5>
+                            <h6 className={"fv-hostStep3NumberOfCapacityMobile‌"}>امکانات آشپرخانه</h6>
                             <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLine"}>
                                 <MDBCol md={6} sm={5}>
                                     <HostStepCheckbox
@@ -418,7 +418,7 @@ class HostStep4Page extends Component {
                                 </MDBCol>
                             </MDBRow>
 
-                            <h5 className={"fv-hostStep3NumberOfCapacityMobile‌"}>امکانات سرمایشی و گرمایشی اتاق را مشخص کنید</h5>
+                            <h6 className={"fv-hostStep3NumberOfCapacityMobile‌"}>امکانات سرمایشی و گرمایشی اتاق را مشخص کنید</h6>
                             <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLine"}>
                                 <MDBCol md={6} sm={5}>
                                     <HostStepCheckbox
@@ -525,8 +525,8 @@ class HostStep4Page extends Component {
                                         nameOfPart={'coolingAndHeatingFacilities'}/>
                                 </MDBCol>
                             </MDBRow>
-                            <h5 className={"fv-hostStep3NumberOfCapacityMobile‌"}>امکانات ویژه</h5>
-                            <h5 className={"fv-hostStep3NumberOfCapacityMobile‌"}>هر کدام از امکانات زیر را ارائه میدهید انتخاب کنید و مبلغ آن را ذکر کنید</h5>
+                            <h6 className={"fv-hostStep3NumberOfCapacityMobile‌"}>امکانات ویژه</h6>
+                            <h6 className={"fv-hostStep3NumberOfCapacityMobile‌"}>هر کدام از امکانات زیر را ارائه میدهید انتخاب کنید و مبلغ آن را ذکر کنید</h6>
                             <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLine"}>
 
                                 <MDBCol md={6} sm={7}>
@@ -615,7 +615,7 @@ class HostStep4Page extends Component {
                                 </MDBCol>
                             </MDBRow>
 
-                            <h5 className={"fv-hostStep3NumberOfCapacityMobile‌"}>پذیرایی</h5>
+                            <h6 className={"fv-hostStep3NumberOfCapacityMobile‌"}>پذیرایی</h6>
                             <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLine"}>
                                 <MDBCol md={6} sm={6}>
                                     <HostStepCheckbox

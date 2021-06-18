@@ -108,10 +108,10 @@ class HostStep1Page extends Component {
 
                 <MDBRow className={"fv-HostStep1PageBody"}>
                     <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
-                        <p className={this.state.click && validationInputs===false ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>لطفا کادر های قرمز را به درستی پر کنید</p>
+                        <h6 style={{paddingBottom : '3%'}} className={this.state.click && validationInputs===false ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>لطفا کادر های قرمز را به درستی پر کنید</h6>
                         <p className={this.state.click && this.state.validTitle===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}><i className="fas fa-exclamation-triangle" />  پر کردن عنوان اقامتگاه اجباریست</p>
                         <p className={this.state.click && this.state.validPhoneNumber===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}> <i className="fas fa-exclamation-triangle" /> شماره تلفن معتبر نمی باشد</p>
-                            <p  className={"fv-hostStep2Page2Hidden"}>عنوان اقامت گاه</p>
+                            <h6  className={"fv-hostStep2Page2Hidden"}>عنوان اقامت گاه</h6>
                             <input type="text" value={this.state.accommodationTitle} onChange={(event)=>{
                                 if(event.target.value){
                                     this.setState({validTitle:true})
@@ -120,7 +120,7 @@ class HostStep1Page extends Component {
                                 }
                                 this.setState({accommodationTitle:event.target.value})
                             }} className={this.state.click && this.state.validTitle===false ?  "fv-hostStep2Page2Hidden fv-redBorderError" : "fv-hostStep2Page2Hidden"}/>
-                            <p className={"fv-hostStep2Page2Hidden"}> نوع اقامت گاه</p>
+                            <h6 className={"fv-hostStep2Page2Hidden"}> نوع اقامت گاه</h6>
                             <select value={this.state.accommodationKind} onChange={(event)=>this.setState({accommodationKind:event.target.value})}  className={"fv-hostStep2Page2Hidden"}>
                                 <option value='title' disabled>نوع اقامت گاه</option>
                                 <option value="ویلایی">ویلایی</option>
@@ -129,7 +129,7 @@ class HostStep1Page extends Component {
                                 <option value="سازمانی">سازمانی</option>
                                 <option value="سایر">سایر</option>
                             </select>
-                            <p className={"fv-hostStep2Page2Hidden"}>شماره ضروری</p>
+                            <h6 className={"fv-hostStep2Page2Hidden"}>شماره ضروری</h6>
                             <input type="text" value={this.state.number} disabled={this.state.hideUniq ? true : false} onChange={(event)=>{
                                 this.setState({number:event.target.value})
                                 if(event.target.value.length === 11 && Number(event.target.value)){
@@ -138,7 +138,7 @@ class HostStep1Page extends Component {
                                     this.setState({validPhoneNumber:false})
                                 }
                             }} className={this.state.click && this.state.validPhoneNumber===false  ?  "fv-hostStep2Page2Hidden fv-redBorderError" : "fv-hostStep2Page2Hidden"}/>
-                            <p className={"fv-hostStep2Page2Hidden"}> داستان اقامت گاه شما</p>
+                            <h6 className={"fv-hostStep2Page2Hidden"}> داستان اقامت گاه شما</h6>
                             <textarea value={this.state.accommodationHistory} onChange={(event)=>{
                                 this.setState({accommodationHistory:event.target.value})
                             }} className={"fv-hostStep2Page2Hidden"}/>

@@ -53,16 +53,16 @@ class ProfilePageWallet2 extends Component {
                 <div className={"fv-ProfilePageLeftBody"}>
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo"}>
-                        <p>منبع تراکنش</p>
+                        <p className={"h7"}>منبع تراکنش</p>
                         <input type="text"  value={this.state.sourceOfTransaction}
                                onChange={(event)=>{this.setState({sourceOfTransaction:event.target.value})}}/>
-                        <p>مبلغ تراکنش</p>
+                        <p className={"h7"}>مبلغ تراکنش</p>
                         <input type="text"  value={this.state.transactionAmount}
                                onChange={(event)=>{this.setState({transactionAmount:event.target.value})}}/>
-                        <p>تاریخ تراکنش</p>
+                        <p className={"h7"}>تاریخ تراکنش</p>
 
                         <div className={"fv-calendarInProfilePageWallet2"}> <CalendarLinear dayToGo={this.selectDay} text={'انتخاب روز'} /></div>
-                        <p>شرح تراکنش</p>
+                        <p className={"h7"}>شرح تراکنش</p>
                         <MDBRow className={"fv-ProfilePageWallet2TextArea"}>
                             <MDBCol>
                                 <textarea value={this.state.transactionDescription}

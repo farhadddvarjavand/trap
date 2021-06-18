@@ -314,7 +314,7 @@ class HostStep5Page2 extends Component {
 
                     <MDBRow className={"fv-HostStep1PageBody"}>
                         <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
-                            <h5 className={"fv-hostStep3NumberOfCapacityMobile"}>قوانین</h5>
+                            <h6 className={"fv-hostStep3NumberOfCapacityMobile"}>قوانین</h6>
                             <p className={"fv-hostStep5P"}>هرکدام از موارد که مهمان مجاز میباشد را انتخاب کنید</p>
 
                             <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLine"}>
@@ -373,7 +373,7 @@ class HostStep5Page2 extends Component {
                                 </MDBCol>
                             </MDBRow>
 
-                            <h5 className={"fv-hostStep3NumberOfCapacityMobile"}>قوانین خاص</h5>
+                            <h6 className={"fv-hostStep3NumberOfCapacityMobile"}>قوانین خاص</h6>
                             <p className={"fv-hostStep5P"}>اگر قانون خاص دیگری دارید در کادر پایین بنویسید</p>
                             <MDBRow className={"fv-hostStep3AddPlace fv-hostStep5Page2SpaceRow"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
@@ -442,7 +442,7 @@ class HostStep5Page2 extends Component {
                                         nameOfPart={'groupOfGuests'}/>
                                 </MDBCol>
                             </MDBRow>
-                            <h5 className={"fv-hostStep3NumberOfCapacityMobile"}>زمان ورود و خروج</h5>
+                            <h6 className={"fv-hostStep3NumberOfCapacityMobile"}>زمان ورود و خروج</h6>
                             <p className={"fv-hostStep5P"}>لطفا زمان تحویل ملک به مهمان و تخلیه ملک را مشخص کنید</p>
 
                             <MDBRow className={"fv-timeOutAndTimeIn"}>

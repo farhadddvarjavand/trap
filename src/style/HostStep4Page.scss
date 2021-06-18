@@ -1,6 +1,6 @@
 .fv-hostStep4Page{
-  h5 {
-    font-size: 18px;
+  h6 {
+    margin-right: -4%;
   }
 
   .fv-hostStep4PageSelect{
@@ -20,7 +20,7 @@
     margin-right: -20%;
   }
   .fv-hostStep4PaddingTop{
-    padding-bottom: 7%;
+    padding-bottom: 1%;
   }
   .fv-hostStep3CheckBoxGroupInLine{
     padding-top: 1%;
@@ -43,6 +43,10 @@
 }
 .fv-HostStep2Page.fv-hostStep2Page2.fv-hostStep3Page.fv-hostStep4Page .fv-enabledTextbox{
   background: white;
+}
+.fv-hostStep2Page2.fv-hostStep3Page.fv-hostStep4Page .fv-hostStepPage1Right h6 {
+  margin-bottom: 1%;
+  margin-top: 0.5%;
 }
 @media (max-width: 967px) and  (min-width: 539px) {
   .fv-hostStep4Page  .fv-hostStepPage2LeftButtonBody {

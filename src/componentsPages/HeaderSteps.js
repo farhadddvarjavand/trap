@@ -7,6 +7,8 @@ import MobileLogo from "../images/MobileLogo.png"
 import config from "../services/config.json";
 import {Link} from "react-router-dom";
 import UserImage from "../images/user.png"
+import MyaccommodationsIcon from "../images/icons/Folder.svg"
+import Logout from "../images/icons/Logout.svg"
 
 
 class HeaderSteps extends Component {
@@ -35,7 +37,7 @@ class HeaderSteps extends Component {
                            this.setState({hideButtonLogin:!this.state.hideButtonLogin})
                        }}> <img src={info.userInfo.avatar ? `${config.webapi}/images/user/${info.userInfo.avatar }` : UserImage}/>
 
-                           <a className={"name_desktop"}>{info.userInfo.fullname}</a> </a>
+                           <a style={{fontSize: "1rem" , fontWeight: "600" }} className={"name_desktop"}>  {info.userInfo.fullname}</a> </a>
                     </MDBCol>
                     <MDBCol md={9} sm={6} className={""}>
                         <img src={FotterpageLogo} className={"hide_mobile"}/>
@@ -52,7 +54,7 @@ class HeaderSteps extends Component {
                                     </MDBCol>
                                     <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={7} sm={8}>
                                         <MDBRow>
-                                            <a><h5>{nameAndFamily}</h5></a>
+                                            <a><h6>{nameAndFamily}</h6></a>
                                         </MDBRow>
                                         <MDBRow>
                                             <Link to={"/MainProfilePages/Profile"}><a>مشاهده حساب کاربری</a></Link>
@@ -63,13 +65,13 @@ class HeaderSteps extends Component {
                         </MDBRow>
                         <MDBRow className={"fv-cascadeOptionMainPage"}>
                             <MDBCol md={12} sm={12}>
-                                <Link to={"/MainProfilePages/myAccommodation"}> <i className="fa fa-credit-card" />
+                                <Link to={"/MainProfilePages/myAccommodation"}> <img style={{marginRight : '15px' , marginLeft : '5px'}} src={MyaccommodationsIcon} />
                                     <a><p>اقامت گاه های من</p></a> </Link>
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-cascadeOptionMainPage"}>
                             <MDBCol md={12} sm={12}>
-                                <Link to={"/MainProfilePages/ProfileMyReservation"}> <i className="fa fa-receipt" />
+                                <Link to={"/MainProfilePages/ProfileMyReservation"}> <img style={{marginRight : '15px' , marginLeft : '5px'}} src={MyaccommodationsIcon} />
                                     <a><p>رزور های من</p></a> </Link>
                             </MDBCol>
                         </MDBRow>
@@ -84,7 +86,7 @@ class HeaderSteps extends Component {
                                 <a onClick={()=>{
                                     localStorage.clear()
                                     window.location.reload();
-                                }}> <i className="fa fa-sign-out-alt" />
+                                }}> <img style={{marginRight : '15px' , marginLeft : '5px'}} src={Logout} />
                                     <p>خروج از حساب کاربری</p></a>
                             </MDBCol>
                         </MDBRow>

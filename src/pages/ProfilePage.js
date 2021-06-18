@@ -152,32 +152,32 @@ componentDidMount() {
 
                         <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-profilePageInner"}>
                             <p className={this.state.errorField ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>لطفا کادر های قرمز را به درستی پر کنید</p>
-                            <h5>اطلاعات کاربری</h5>
-                            <p>نام و نام خانوادگی</p>
+                            <h6>اطلاعات کاربری</h6>
+                            <h6>نام و نام خانوادگی</h6>
                             <input type="text" className={this.state.errorField.includes('fullname')===true ? "fv-redBorderError" : ''} value={this.state.nameAndFamily}
                                    onChange={(e)=>this.setState({nameAndFamily:e.target.value})}/>
-                            <p>شماره موبایل</p>
+                            <h6>شماره موبایل</h6>
                             <input type="text" className={this.state.errorField.includes('phoneNumber')===true ? "fv-redBorderError" : ''} value={this.state.mobileNumber}
                                    onChange={(e)=>this.setState({mobileNumber:e.target.value})}/>
-                            <p>آدرس ایمیل</p>
+                            <h6>آدرس ایمیل</h6>
                             <input type="text" className={this.state.errorField.includes('email')===true ? "fv-redBorderError" : ''} value={this.state.emailAddress}
                                    onChange={(e)=>this.setState({emailAddress:e.target.value})}/>
-                            <p>کد ملی</p>
+                            <h6>کد ملی</h6>
                             <input type="text" value={this.state.nationalCode} className={this.state.errorField.includes('notionalCode')===true ? "fv-redBorderError" : ''}
                                    onChange={(e)=>this.setState({nationalCode:e.target.value})}/>
-                            <p>شغل</p>
+                            <h6>شغل</h6>
                             <input type="text" value={this.state.job}
                                    onChange={(e)=>this.setState({job:e.target.value})}/>
-                            <p>تحصیلات</p>
+                            <h6>تحصیلات</h6>
                             <input type="text" value={this.state.education}
                                    onChange={(e)=>this.setState({education:e.target.value})}/>
-                            <p>زبانه خارجه</p>
+                            <h6>زبانه خارجه</h6>
                             <input type="text" value={this.state.foreignTab}
                                    onChange={(e)=>this.setState({foreignTab:e.target.value})}/>
-                            <p>شماره کارت</p>
+                            <h6>شماره کارت</h6>
                             <input type="text" value={this.state.cardNumber} className={this.state.errorField.includes('cardNumber')===true ? "fv-redBorderError" : ''}
                                    onChange={(e)=>this.setState({cardNumber:e.target.value})}/>
-                            <p>شماره شبا</p>
+                            <h6>شماره شبا</h6>
                             <input type="text" value={this.state.shabaNumber} className={this.state.errorField.includes('shabaNumber')===true ? "fv-redBorderError" : ''}
                                    onChange={(e)=>this.setState({shabaNumber:e.target.value})}/>
 

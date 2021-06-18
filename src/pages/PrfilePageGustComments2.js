@@ -13,6 +13,7 @@ import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 import {getUserVillaComments, replayComment, userVillas} from "../services/userService";
 import "../style/scroolBodyProfilePages.scss"
 import {waitingForCalculate2} from "../componentsPages/WaitingLoad";
+import UserImage from "../images/user.png"
 
 class PrfilePageGustComments2 extends Component {
     constructor(props) {
@@ -92,20 +93,20 @@ class PrfilePageGustComments2 extends Component {
                                 return  <MDBContainer className={"fv-ProfilePageGustComments2CommentOne"}>
                                             <MDBRow className={"fv-ProfilePageGustComments2CommentOneLogo"}>
                                                 <MDBCol md={2} sm={3}>
-                                                    <img src={MobileLogo}/>
+                                                    <img src={UserImage}/>
                                                 </MDBCol>
                                                 <MDBCol md={7} sm={7}>
                                                     <MDBRow>
-                                                        <h5>{comment.user_name}</h5>
+                                                        <h6>{comment.user_name}</h6>
                                                     </MDBRow>
                                                     <MDBRow>
-                                                        <p>{comment.created_at}</p>
+                                                        <p style={{color : '#919191'}}>{comment.created_at}</p>
                                                     </MDBRow>
                                                 </MDBCol>
                                             </MDBRow>
                                             <MDBRow>
                                                 <MDBCol>
-                                                    <p>{comment.text}</p>
+                                                    <p className={"h7"}>{comment.text}</p>
                                                 </MDBCol>
                                             </MDBRow>
 
@@ -113,12 +114,12 @@ class PrfilePageGustComments2 extends Component {
                                             <MDBContainer className={"fv-ProfilePageGustComments2CommentOneAnswer"}>
                                                 <MDBRow className={"fv-ProfilePageGustComments2CommentOneAnswerCommentDate"}>
                                                     <MDBCol>
-                                                        <p>{comment.answer.created_at}</p>
+                                                        <p className={"h8"}>{comment.answer.created_at}</p>
                                                     </MDBCol>
                                                 </MDBRow>
                                                 <MDBRow>
                                                     <MDBCol>
-                                                        <h5>میزبان کلبه سبز</h5>
+                                                        <h6>میزبان کلبه سبز</h6>
                                                     </MDBCol>
                                                 </MDBRow>
                                                 <MDBRow className={"fv-ProfilePageGustComments2CommentOneAnswerComment"}>
@@ -132,11 +133,11 @@ class PrfilePageGustComments2 extends Component {
                              return   <MDBContainer className={"fv-ProfilePageGustComments2CommentOne"}>
                                              <MDBRow className={"fv-ProfilePageGustComments2CommentOneLogo"}>
                                                  <MDBCol md={2} sm={3}>
-                                                     <img src={MobileLogo}/>
+                                                     <img src={UserImage}/>
                                                  </MDBCol>
                                                  <MDBCol md={7} sm={7}>
                                                      <MDBRow>
-                                                         <h5>{comment.user_name}</h5>
+                                                         <h6>{comment.user_name}</h6>
                                                      </MDBRow>
                                                      <MDBRow>
                                                          <p>{comment.created_at}</p>
@@ -145,7 +146,7 @@ class PrfilePageGustComments2 extends Component {
                                              </MDBRow>
                                              <MDBRow>
                                                  <MDBCol>
-                                                     <p>{comment.text}</p>
+                                                     <p className={"h7"}>{comment.text}</p>
                                                  </MDBCol>
                                              </MDBRow>
                                              <MDBRow className={comment.id === this.state.answerCommentId ? "fv-hideAnswerComments" : "fv-ProfilePageGustComments2CommentOneAnswerButton"}>
@@ -155,7 +156,7 @@ class PrfilePageGustComments2 extends Component {
                                                              ,buttonClassname:"fv-ProfilePageWalletWalletButton" , answerATag:"fv-hideAnswerComments"
                                                              , answerCommentId:comment.id})
                                                          console.log(comment.id)
-                                                     }}><h5>جواب دادن به نظر</h5></a>
+                                                     }}><h6>جواب دادن به نظر</h6></a>
                                                  </MDBCol>
                                              </MDBRow>
 
@@ -185,8 +186,8 @@ class PrfilePageGustComments2 extends Component {
                                                              <textarea value={this.state.textAreaComment} onChange={(e)=>this.setState({textAreaComment:e.target.value})} />
                                                          </label>
                                                          {waitingForCalculate2(this.state.clickAnswerLoader , "fv-waitingLoadPublicFullScreen fv-computingReservedDetails fv-ProfileCalendarWaiting")}
-                                                         <MDBRow className={!this.state.clickAnswerLoader?"fv-hideForWaiting" :"fv-ProfilePageWalletWalletButton"}>
-                                                             <MDBCol md={3} sm={12} className={!this.state.clickAnswerLoader?"fv-hideForWaiting" :"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
+                                                         <MDBRow className={this.state.clickAnswerLoader?"fv-hideForWaiting" :"fv-ProfilePageWalletWalletButton"}>
+                                                             <MDBCol md={3} sm={12} className={this.state.clickAnswerLoader?"fv-hideForWaiting" :"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
                                                                  <input type="submit" value="ذخیره پیام"/>
                                                              </MDBCol>
                                                          </MDBRow>

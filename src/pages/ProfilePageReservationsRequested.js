@@ -127,7 +127,7 @@ class ProfilePageReservationsRequested extends Component {
                 <div className={"fv-ProfilePageLeftBody"}>
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
-                        <h5>رزروهای درخواستی</h5>
+                        <h6>رزروهای درخواستی</h6>
                         <p className={"fv-ProfilePageReservationsRequestedPTitle"}>جهت تایید یا عدم تایید رزرو مهمان هر سطر را انتخاب کنید و تایید یا عدم تایید کنید</p>
                         <MDBRow className={"fv-ProfilePageReservationSetInfo"}>
 
@@ -151,7 +151,7 @@ class ProfilePageReservationsRequested extends Component {
                             </MDBCol>
 
                             <MDBCol md={3} sm={10} className={"fv-ProfilePageUserSetInfoButton"}>
-                                <input type="button" value="جست و جو" onClick={()=>{
+                                <input type="button" value="جستجو" onClick={()=>{
                                     let villaId = ""
                                     let setDateToGo = ''
                                     let setDateToreturn = ''
@@ -194,12 +194,12 @@ class ProfilePageReservationsRequested extends Component {
 
                         <table>
                             <tr className={"fv-tableTitle"}>
-                                <th className={"fv-tableTitleRightOne"}>نام اقامت گاه</th>
-                                <th className={"fv-tableTitleRightSecond"}>نام مهمان</th>
-                                <th>تعداد نفرات</th>
-                                <th>از تاریخ</th>
-                                <th className={"fv-tableTitleContents"}>تا تاریخ</th>
-                                <th className={"fv-tableTitleLeftOne"}>وضعیت</th>
+                                <th className={"fv-tableTitleRightOne"}><h6>نام اقامت گاه</h6></th>
+                                <th className={"fv-tableTitleRightSecond"}><h6>نام مهمان</h6></th>
+                                <th><h6>تعداد نفرات</h6></th>
+                                <th><h6>از تاریخ</h6></th>
+                                <th className={"fv-tableTitleContents"}><h6>تا تاریخ</h6></th>
+                                <th className={"fv-tableTitleLeftOne"}><h6>وضعیت</h6></th>
                             </tr>
                             {this.state.allReservationsRequested.map(allReservationsRequest=>{
                                 let state = ""
