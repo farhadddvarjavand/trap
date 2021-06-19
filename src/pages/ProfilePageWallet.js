@@ -44,6 +44,7 @@ class ProfilePageWallet extends Component {
             },
             switchPage:'',
             waitingForLoad:true,
+            waitingForSearch:false,
         }
     }
     //villasUsertitle:'title'   bod,
@@ -136,6 +137,7 @@ class ProfilePageWallet extends Component {
                                         </MDBCol>
                                         <MDBCol md={2} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
                                             <input type="button" value="جستجو" onClick={()=>{
+                                                this.setState({waitingForSearch : true})
                                                 let setTitle = ''
                                                 let setDateToGo = ''
                                                 let setDateToreturn = ''
@@ -167,84 +169,91 @@ class ProfilePageWallet extends Component {
                                                         console.log(res)
                                                         let getFinancialReportsTop = []
                                                         getFinancialReportsTop.push(res.data.income)
-                                                        this.setState({getFinancialReports : res.data.data , getFinancialReportsTopPage:getFinancialReportsTop})
+                                                        this.setState({getFinancialReports : res.data.data , getFinancialReportsTopPage:getFinancialReportsTop , waitingForSearch:false})
+                                                    })
+                                                    .catch(err=>{
+                                                        this.setState({waitingForSearch:false})
+                                                        console.log(err.response)
                                                     })
                                             }}/>
                                         </MDBCol>
                                     </MDBRow>
 
+                                    {this.state.getFinancialReportsTopPage.map(getFinancialReportsTopPages=>{
+                                        return  <MDBRow className={"fv-ProfilePageWalletWalletImage"}>
+                                            <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
+                                                <MDBRow className={"fv-ProfilePageWalletWalletImageP"}>
+                                                    <MDBCol md={12}>
+                                                        <h6>در آمد شما از ترپ</h6>
+                                                    </MDBCol>
+                                                    <MDBCol md={12}>
+                                                        <h6>{commaNumber(getFinancialReportsTopPages.trappIncome)} تومان</h6>
+                                                    </MDBCol>
+                                                </MDBRow>
+                                                <img src={WalletPic1} />
+                                            </MDBCol>
+                                            <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
+                                                <MDBRow className={"fv-ProfilePageWalletWalletImageP"}>
+                                                    <MDBCol md={12} className={"fv-ProfilePageWalletWalletImagePWhiteColor"}>
+                                                        <h6>در آمد شما از سایر منابع</h6>
+                                                    </MDBCol>
+                                                    <MDBCol md={12}>
+                                                        <h6>{commaNumber(getFinancialReportsTopPages.otherIncome)} تومان</h6>
+                                                    </MDBCol>
+                                                </MDBRow>
+                                                <img src={WalletPic2} />
+                                            </MDBCol>
+                                            <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
+                                                <MDBRow className={"fv-ProfilePageWalletWalletImageP fv-ProfilePageWalletWalletImagePWhiteColor"}>
+                                                    <MDBCol md={12}>
+                                                        <h6>کل درآمد شما از اجاره ویلا</h6>
+                                                    </MDBCol>
+                                                    <MDBCol md={12}>
+                                                        <h6>{commaNumber(getFinancialReportsTopPages.totalIncome)} تومان</h6>
+                                                    </MDBCol>
+                                                </MDBRow>
+                                                <img src={WalletPic3} />
+                                            </MDBCol>
+                                        </MDBRow>
+                                    })}
 
-                                        { this.state.getFinancialReportsTopPage.map(getFinancialReportsTopPages=>{
-                                          return  <MDBRow className={"fv-ProfilePageWalletWalletImage"}>
-                                                <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
-                                                    <MDBRow className={"fv-ProfilePageWalletWalletImageP"}>
-                                                        <MDBCol md={12}>
-                                                            <h6>در آمد شما از ترپ</h6>
-                                                        </MDBCol>
-                                                        <MDBCol md={12}>
-                                                            <h6>{commaNumber(getFinancialReportsTopPages.trappIncome)} تومان</h6>
-                                                        </MDBCol>
-                                                    </MDBRow>
-                                                    <img src={WalletPic1} />
-                                                </MDBCol>
-                                                <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
-                                                    <MDBRow className={"fv-ProfilePageWalletWalletImageP"}>
-                                                        <MDBCol md={12} className={"fv-ProfilePageWalletWalletImagePWhiteColor"}>
-                                                            <h6>در آمد شما از سایر منابع</h6>
-                                                        </MDBCol>
-                                                        <MDBCol md={12}>
-                                                            <h6>{commaNumber(getFinancialReportsTopPages.otherIncome)} تومان</h6>
-                                                        </MDBCol>
-                                                    </MDBRow>
-                                                    <img src={WalletPic2} />
-                                                </MDBCol>
-                                                <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
-                                                    <MDBRow className={"fv-ProfilePageWalletWalletImageP fv-ProfilePageWalletWalletImagePWhiteColor"}>
-                                                        <MDBCol md={12}>
-                                                            <h6>کل درآمد شما از اجاره ویلا</h6>
-                                                        </MDBCol>
-                                                        <MDBCol md={12}>
-                                                            <h6>{commaNumber(getFinancialReportsTopPages.totalIncome)} تومان</h6>
-                                                        </MDBCol>
-                                                    </MDBRow>
-                                                    <img src={WalletPic3} />
+                                    {this.state.waitingForSearch ? WaitingLoadingProfilePage(this.state.waitingForSearch ,"fv-waitingLoadPublicFullScreen fv-waitingForSearchReservation" ) : ""}
+                                    {!this.state.waitingForSearch ?
+                                        <>
+                                            <MDBRow>
+                                                <MDBCol>
+                                                    <h5>ریز گزارشات مالی</h5>
                                                 </MDBCol>
                                             </MDBRow>
-                                        })}
 
 
-                                    <MDBRow>
-                                        <MDBCol>
-                                            <h5>ریز گزارشات مالی</h5>
-                                        </MDBCol>
-                                    </MDBRow>
+                                            <table>
+                                                <tr className={"fv-tableTitle"}>
+                                                    <th><h6>تاریخ تراکنش</h6></th>
+                                                    <th><h6>منبع تراکنش</h6></th>
+                                                    <th className={"fv-tableDiscriptions"}><h6>شرح تراکنش</h6></th>
+                                                    <th><h6>مبلغ</h6></th>
+                                                </tr>
+                                                {this.state.getFinancialReports.map(getFinancialReport=>{
+                                                    return      <tr>
+                                                                    <td>{getFinancialReport.date}</td>
+                                                                    <td>{getFinancialReport.src}</td>
+                                                                    <td>{getFinancialReport.description}</td>
+                                                                    <td>{commaNumber(getFinancialReport.amount)}</td>
+                                                                </tr>
+                                                })}
 
-
-                                    <table>
-                                        <tr className={"fv-tableTitle"}>
-                                            <th><h6>تاریخ تراکنش</h6></th>
-                                            <th><h6>منبع تراکنش</h6></th>
-                                            <th className={"fv-tableDiscriptions"}><h6>شرح تراکنش</h6></th>
-                                            <th><h6>مبلغ</h6></th>
-                                        </tr>
-                                        {this.state.getFinancialReports.map(getFinancialReport=>{
-                                            return      <tr>
-                                                            <td>{getFinancialReport.date}</td>
-                                                            <td>{getFinancialReport.src}</td>
-                                                            <td>{getFinancialReport.description}</td>
-                                                            <td>{commaNumber(getFinancialReport.amount)}</td>
-                                                        </tr>
-                                        })}
-
-                                    </table>
-                                    <MDBRow className={"fv-ProfilePageWalletWalletButton"}>
-                                        <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
-                                            <input type="button" value="ثبت تراکنش جدید" onClick={()=>{
-                                               // this.setState({switchPage:'ProfileWalletTransactionRegistration'})
-                                                this.props.history.push('/MainProfilePages/ProfileWalletTransactionRegistration')
-                                            }}/>
-                                        </MDBCol>
-                                    </MDBRow>
+                                            </table>
+                                            <MDBRow className={"fv-ProfilePageWalletWalletButton"}>
+                                                <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
+                                                    <input type="button" value="ثبت تراکنش جدید" onClick={()=>{
+                                                       // this.setState({switchPage:'ProfileWalletTransactionRegistration'})
+                                                        this.props.history.push('/MainProfilePages/ProfileWalletTransactionRegistration')
+                                                    }}/>
+                                                </MDBCol>
+                                            </MDBRow>
+                                        </>
+                                        : ''}
                                 </MDBCol>
 
                             </div>

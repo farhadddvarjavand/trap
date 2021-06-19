@@ -196,6 +196,17 @@ $backgroundColorButton:#15BE29;
   margin-bottom: 3%;
   margin-top: 0.5%;
 }
+.fv-hostStep3Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .hostStepIncreaseAndDecreaseBody .button, .fv-hostStep3Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .hostStepIncreaseAndDecreaseBody input {
+  width: 32px;
+  /* height: 83px; */
+  font-size: 19.5px;
+  /* margin-top: auto; */
+  /* margin: auto; */
+  font-weight: 600;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-top: 3%;
+}
 
 @media (max-width: 1200px) and (min-width: 991px){
   .fv-hostStep3Page .fv-hostStepPage1Right .fv-hostStep3CheckBox.fv-hostStep3CheckBoxGroupInLine .col-md-2 {
@@ -255,12 +266,32 @@ $backgroundColorButton:#15BE29;
     margin-right: -7%;
   }
 }
-@media (max-width: 767px){}
+@media (max-width: 767px){
+  .fv-HostStep2Page.fv-hostStep2Page2.fv-hostStep3Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStep3NumberOfCapacityMobile{
+    margin-top: 5%;
+    margin-bottom: 4%;
+  }
+  .fv-HostStep2Page.fv-hostStep2Page2.fv-hostStep3Page .fv-hostStepPage1Right .fv-hostStep3BedRoom{
+    margin-top: 9%;
+  }
+  .fv-HostStep2Page.fv-hostStep2Page2.fv-hostStep3Page .fv-hostStepPage1Right .fv-hostStep3View{
+    margin-top: 7%;
+  }
+  .fv-HostStep2Page.fv-hostStep2Page2.fv-hostStep3Page .fv-hostStep3CheckBoxGroupInLineTwo {
+    margin-bottom: 3%;
+  }
+  .fv-HostStep2Page.fv-hostStep2Page2.fv-hostStep3Page .fv-hostStep3CheckBoxGroupInLineSecondTwo {
+    margin-bottom: 3%;
+  }
+  .fv-HostStep2Page.fv-hostStep2Page2.fv-hostStep3Page .fv-hostStepPage1Right .fv-hostStep3Measure{
+    margin-top: 4%;
+  }
+}
 @media (max-width: 540px){
   .fv-hostStep3Page{
     .hostStepIncreaseAndDecreaseBody{
       .col-sm-3 {
-        flex: 0 0 32%;
+        flex: 0 0 44%;
         width: 25% !important;
         font-size: 15px;
       }
@@ -390,7 +421,7 @@ $backgroundColorButton:#15BE29;
       flex: 0 0 14.333333%;
       max-width: 10.333333%;
       margin-right: -14%;
-      margin-left: -6%;
+      margin-left: -7%;
       margin-top: auto;
       margin-bottom: auto;
     }

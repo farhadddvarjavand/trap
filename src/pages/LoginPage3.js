@@ -95,7 +95,7 @@ class LoginPage3 extends Component {
                             <MDBCol sm={12}>
                                 <h4>ثبت نام</h4>
                                 <input type="text" placeholder={"نام و نام خانوادگی"}  value={nameAndLastNAme} onChange={((e)=>this.setState({nameAndLastNAme : e.target.value}))} />
-                                <input type="text" placeholder={"شماره موبایل"} className={"fv-loginPage3MobileNumber"} value={mobileNumber} onChange={((e)=>this.setState({mobileNumber : e.target.value}))} />
+                                <input type="text" placeholder={"شماره موبایل"} className={"fv-loginPage3MobileNumber fv-english-number"} value={mobileNumber} onChange={((e)=>this.setState({mobileNumber : e.target.value}))} />
                                 <MDBRow>
                                     <div className={this.state.clickLoader ? "loader" : "fv-hideLoader"}>
                                         <svg className="circular" viewBox="25 25 50 50">

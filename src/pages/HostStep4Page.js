@@ -526,7 +526,7 @@ class HostStep4Page extends Component {
                                 </MDBCol>
                             </MDBRow>
                             <h6 className={"fv-hostStep3NumberOfCapacityMobile‌"}>امکانات ویژه</h6>
-                            <h6 className={"fv-hostStep3NumberOfCapacityMobile‌"}>هر کدام از امکانات زیر را ارائه میدهید انتخاب کنید و مبلغ آن را ذکر کنید</h6>
+                            <h6 className={"h7 fv-hostStep3NumberOfCapacityMobile‌"}>هر کدام از امکانات زیر را ارائه میدهید انتخاب کنید و مبلغ آن را ذکر کنید</h6>
                             <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLine"}>
 
                                 <MDBCol md={6} sm={7}>

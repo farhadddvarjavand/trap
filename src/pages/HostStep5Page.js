@@ -136,7 +136,7 @@ class HostStep5Page extends Component {
 
                             <h6 className={"fv-hostStep3NumberOfCapacityMobile"}>تخفیف</h6>
                             <p style={{marginTop:'1%' , marginBottom: '1%' , fontSize : '13px'}} className={"fv-hostStep5P"}>میتوانید جهت تشویق مهمانان به رزرو بیشتر تخفیف قرار دهید</p>
-                            <p className={"fv-hostStep5P"}>تخفیف هفتگی</p>
+                            <p className={"fv-hostStep5P fv-discountWeekly"}>تخفیف هفتگی</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
                                     <input type="text" placeholder={"%"} value={this.state.weeklyDiscount}

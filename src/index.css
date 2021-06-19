@@ -11,6 +11,9 @@
 body{
   font-family: "IRANSansMobile(FaNum) Light" !important;
 }
+.fv-english-number{
+  font-family: "IRANSansWeb-Regular" !important;
+}
 .h4, h4 {
   font-size: 1.2rem ;
 }

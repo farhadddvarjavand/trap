@@ -28,6 +28,7 @@ class ProfilePageTransaction2 extends Component {
                 year : ''
             },
             waitingForLoad:true,
+            waitingForSearch:false,
         }
 
     }
@@ -78,13 +79,14 @@ class ProfilePageTransaction2 extends Component {
 
 
                                         <MDBCol md={3} sm={12} className={""}>
-                                            <input type="text" placeholder="مبلغ تراکنش" onChange={(e)=>this.setState({transactionPrice:e.target.value})}/>
+                                            <input type="text" placeholder="مبلغ تراکنش" value={this.state.transactionPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} onChange={(e)=>this.setState({transactionPrice:e.target.value.replace(/,/g, "")})}/>
                                         </MDBCol>
                                         <MDBCol md={2} sm={12} className={"fv-ProfilePageReservationRightCalendar"}>
                                             <CalendarLinear dayToReturn={this.selectDay} text={'تاریخ تراکنش'} />
                                         </MDBCol>
                                         <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
                                             <input type="button" value="جستجو" onClick={()=>{
+                                                this.setState({waitingForSearch : true})
                                                 let date = ''
                                                 if(this.state.date.year){
                                                     date =  this.state.date.year+"/"+this.state.date.month+"/"+this.state.date.day
@@ -99,13 +101,20 @@ class ProfilePageTransaction2 extends Component {
                                                 transactionsSearch(data)
                                                     .then(res =>{
                                                         console.log(res.data.data)
-                                                        this.setState({transactionDatas:res.data.data})
+                                                        this.setState({transactionDatas:res.data.data , waitingForSearch:false})
                                                     })
-                                                    .catch(err=>console.log(err.response))
+                                                    .catch(err=>{
+                                                        this.setState({waitingForSearch:false})
+                                                        console.log(err.response)
+                                                    })
                                             }}/>
                                         </MDBCol>
                                     </MDBRow>
 
+
+
+                                    {this.state.waitingForSearch ? WaitingLoadingProfilePage(this.state.waitingForSearch ,"fv-waitingLoadPublicFullScreen fv-waitingForSearchReservation" ) : ""}
+                                    {!this.state.waitingForSearch ?
 
                                     <table>
                                         <tr className={"fv-tableTitle"}>
@@ -128,6 +137,9 @@ class ProfilePageTransaction2 extends Component {
                                         })}
 
                                     </table>
+
+                                        : ''}
+
 
                                 </MDBCol>
                             </div>

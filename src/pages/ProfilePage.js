@@ -67,6 +67,7 @@ componentDidMount() {
                     shabaNumber:res.data.shaba_number,
 
 
+
                     UserInfo : res.data,
                     loadingPageWaiting:false,
                     waitingButtonStoreClick:false
@@ -154,6 +155,8 @@ componentDidMount() {
     };
 
     render() {
+        let test =<p>s</p>
+        let IR ="IR-"
         const info = JSON.parse(localStorage.getItem("infoUser"))
         // let fullName =  ""
         let avatar = ""
@@ -180,13 +183,13 @@ componentDidMount() {
                             <input type="text" className={this.state.errorField.includes('fullname')===true ? "fv-redBorderError" : ''} value={this.state.nameAndFamily}
                                    onChange={(e)=>this.setState({nameAndFamily:e.target.value})}/>
                             <h6>شماره موبایل</h6>
-                            <input type="text" className={this.state.errorField.includes('phoneNumber')===true ? "fv-redBorderError" : ''} value={this.state.mobileNumber}
+                            <input type="text" className={this.state.errorField.includes('phoneNumber')===true ? "fv-redBorderError" : 'fv-english-number'} value={this.state.mobileNumber}
                                    onChange={(e)=>this.setState({mobileNumber:e.target.value})}/>
                             <h6>آدرس ایمیل</h6>
                             <input type="text" className={this.state.errorField.includes('email')===true ? "fv-redBorderError" : ''} value={this.state.emailAddress}
                                    onChange={(e)=>this.setState({emailAddress:e.target.value})}/>
                             <h6>کد ملی</h6>
-                            <input type="text" value={this.state.nationalCode} className={this.state.errorField.includes('notionalCode')===true ? "fv-redBorderError" : ''}
+                            <input type="text" value={this.state.nationalCode} className={this.state.errorField.includes('notionalCode')===true ? "fv-redBorderError fv-english-number" : 'fv-english-number'}
                                    onChange={(e)=>this.setState({nationalCode:e.target.value})}/>
                             <h6>شغل</h6>
                             <input type="text" value={this.state.job}
@@ -198,11 +201,14 @@ componentDidMount() {
                             <input type="text" value={this.state.foreignTab}
                                    onChange={(e)=>this.setState({foreignTab:e.target.value})}/>
                             <h6>شماره کارت</h6>
-                            <input type="text" value={this.state.cardNumber} className={this.state.errorField.includes('cardNumber')===true ? "fv-redBorderError" : ''}
+                            <input type="text" value={this.state.cardNumber} className={this.state.errorField.includes('cardNumber')===true ? "fv-redBorderError fv-english-number" : 'fv-english-number'}
                                    onChange={(e)=>this.setState({cardNumber:e.target.value})}/>
                             <h6>شماره شبا</h6>
-                            <input type="text" value={this.state.shabaNumber} className={this.state.errorField.includes('shabaNumber')===true ? "fv-redBorderError" : ''}
-                                   onChange={(e)=>this.setState({shabaNumber:e.target.value})}/>
+                            <input type="text"  value={`${IR}${this.state.shabaNumber}`} className={this.state.errorField.includes('shabaNumber')===true ? "fv-redBorderError fv-english-number" : 'fv-english-number'}
+                                   onChange={(e)=>{
+                                       let mystring = e.target.value.replace('IR-','');
+                                       this.setState({shabaNumber:mystring})
+                                   }}/>
 
 
                             <MDBRow md={3} sm={12}>

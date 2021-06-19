@@ -58,7 +58,7 @@ class DisplayHeader extends Component {
                     </MDBCol>
 
                     <MDBCol sm={2}  sm={2} className={"fv-DisplayPageLoginImageMobile"} >
-                        <img src={avatar ? `${config.webapi}/images/user/${avatar}` : MobileLogo} onClick={()=>{
+                        <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage} onClick={()=>{
                             this.setState({onclickHandel:!this.state.onclickHandel})
                         }}/>
                     </MDBCol>

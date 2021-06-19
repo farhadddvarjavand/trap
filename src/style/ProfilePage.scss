@@ -64,7 +64,7 @@
     }
     .fv-ProfilePageUserInfoBody{
       background: rgba(145, 145, 145, 0.1);
-      border-radius: 30px;
+      // border-radius: 30px;
       margin-left: 1.5%;
       // margin-bottom: 69%;
       margin-bottom: 38%;
@@ -181,7 +181,9 @@
   }
   input{
   }
-
+  .fv-waitingForSearchReservation{
+    margin-top: 15%;
+  }
 }
 .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-reservationActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-transaction, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-AccomoddationActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-RequestedReservationActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-myCalenderActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-updateProfileActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-gustCommentsActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-walletActive {
   font-weight: 400;
@@ -208,6 +210,9 @@
 
 @media (max-width: 763px) {
 
+  .fv-ProfilePage .fv-waitingForSearchReservation{
+    margin-top: 7%;
+  }
   .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoBody .fv-ProfilePageUserHoldingInfo {
     height: 12%;
   }

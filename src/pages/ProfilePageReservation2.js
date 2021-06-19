@@ -12,6 +12,7 @@ import {getUserInformation, reservationsSearch, userReserves} from "../services/
 import {Link} from "react-router-dom";
 import config from "../services/config.json";
 import {WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
+const commaNumber = require('comma-number')
 
 
 class ProfilePageReservation2 extends Component {
@@ -34,6 +35,7 @@ class ProfilePageReservation2 extends Component {
             },
             reservesData:[],
             waitingForLoad:true,
+            waitingForSearch:false,
         }
 
     }
@@ -102,6 +104,7 @@ class ProfilePageReservation2 extends Component {
                             </MDBCol>
                             <MDBCol md={2} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
                                 <input type="button" value="جستجو " onClick={()=>{
+                                    this.setState({waitingForSearch : true})
                                     let setCity = ''
                                     let setDateToGo = ''
                                     let setDateToreturn = ''
@@ -131,105 +134,119 @@ class ProfilePageReservation2 extends Component {
                                     reservationsSearch(data)
                                         .then(res =>{
                                             console.log(res.data.data)
-                                            this.setState({reservesData:res.data.data})
+                                            this.setState({reservesData:res.data.data , waitingForSearch:false})
                                         })
-                                        .catch(err=>console.log(err.response))
+                                        .catch(err=>{
+                                            this.setState({waitingForSearch:false})
+                                            console.log(err.response)
+                                        })
                                 }}/>
                             </MDBCol>
                         </MDBRow>
 
-                        <MDBRow>
-                            {this.state.reservesData.map(reserve=>{
-                                let className =''
-                                let md = ''
-                                let text = ""
-                                if(reserve.pay_status === "1"){   // در انتظار پرداخت
-                                    className = "fv-profilePaeReservation2PayButtonSet"
-                                    md="5"
-                                    text = "در انتظار پرداخت"
-                                }
-                                if(reserve.pay_status === "2"){   // پرداخت شد
-                                    className = "fv-profilePaeReservation2PayButton"
-                                    md="4"
-                                    text= "پرداخت شد"
-                                }
-                                if(reserve.pay_status === "0"){  // در انتظار پذیرش مشتری
-                                    className = "fv-profilePaeReservation2PayButton"
-                                    md="7"
-                                    text="در انتظار پذیرش مییزبان"
-                                }
+
+                        {this.state.waitingForSearch ? WaitingLoadingProfilePage(this.state.waitingForSearch ,"fv-waitingLoadPublicFullScreen fv-waitingForSearchReservation" ) : ""}
+                        {!this.state.waitingForSearch ?
+                            <MDBRow>
+                                {this.state.reservesData.map(reserve=>{
+                                    let className =''
+                                    let md = ''
+                                    let text = ""
+                                    if(reserve.pay_status === "1"){   // در انتظار پرداخت
+                                        className = "fv-profilePaeReservation2PayButtonSet"
+                                        md="5"
+                                        text = "در انتظار پرداخت"
+                                    }
+                                    if(reserve.pay_status === "2"){   // پرداخت شد
+                                        className = "fv-profilePaeReservation2PayButtonPayed"
+                                        md="4"
+                                        text= "پرداخت شد"
+                                    }
+                                    if(reserve.pay_status === "0"){  // در انتظار پذیرش مشتری
+                                        className = "fv-profilePaeReservation2PayButton"
+                                        md="7"
+                                        text="در انتظار پذیرش مییزبان"
+                                    }
+                                    console.log(reserve)
+                                    return(
+                                        <MDBCol md={4}>
+                                            <MDBRow className={'fv-product fv-mobileProduct'}>
+                                                <MDBRow className={"fv-ProfilePageReservation2ImageProductContentTopOne"}>
+                                                    <MDBCol md={md}>
+                                                        <p style={{marginRight:'5%'}}>{text}</p>
+                                                        <input type="text"/>
+                                                    </MDBCol>
+                                                </MDBRow>
+                                                <img src={`${config.webapi}/images/villas/main/${reserve.img_src }`} className={'fv-productImage'}/>
+
+                                                <MDBRow>
+                                                    <MDBCol className={'fv-productTopic'}>
+                                                        <h6>{reserve.villa_title}</h6>
+                                                    </MDBCol>
+                                                </MDBRow>
+                                                <MDBRow className={'fv-ProfilePageReservation2ProductLocaton'}>
+                                                    <MDBCol md={12} sm={10}>
+                                                        <p>{reserve.state}
+                                                            <i className="fa fa-map-marker-alt" /></p>
+                                                    </MDBCol>
+                                                </MDBRow>
+
+                                                <MDBRow className={'fv-productCapacityBox'}>
+                                                    <MDBCol md={12} sm={9} className={"fv-ProfilePageReservation2ProductDate"}>
+                                                        <i className="fa fa-calendar" />
+                                                        <p> {reserve.entry_date}  تا {reserve.exit_date} </p>
+                                                    </MDBCol>
+                                                </MDBRow>
+                                                <MDBRow className={"fv-borderButton"}>
+
+                                                </MDBRow>
+                                                <MDBRow className={"fv-profilePaeReservation2PriceBox"}>
+                                                    <MDBCol md={2} sm={2}>
+                                                        <p>تومان</p>
+                                                    </MDBCol>
+                                                    <MDBCol md={3} sm={3}>
+                                                        <h6>{commaNumber(reserve.cost)}</h6>
+                                                    </MDBCol>
+                                                    <MDBCol md={7} sm={7}>
+                                                        <h5>مبلغ قابل پرداخت</h5>
+                                                    </MDBCol>
+                                                </MDBRow>
+                                                <MDBRow className={className}>
+                                                    {reserve.pay_status === "1" ?
+                                                        <input type="button" value="پرداخت" onClick={()=> {
+                                                            window.location.replace(`/factor/${reserve.villa_id}`);
+                                                        }}/>
+                                                    :  reserve.pay_status === "2" ?
+                                                         <input type="button" value="نمایش جزئیات ویلا" onClick={()=>{
+                                                             window.location.replace(`/displayPage/${reserve.villa_id}`);
+                                                         } }/>
+                                                    :  reserve.pay_status === "0" ?
+                                                          <input type="button" value="پرداخت"/>
+                                                    : ''}
 
 
-                                console.log(reserve)
-                                return(
-                                    <MDBCol md={4}>
-                                        <MDBRow className={'fv-product fv-mobileProduct'}>
-                                            <MDBRow className={"fv-ProfilePageReservation2ImageProductContentTopOne"}>
-                                                <MDBCol md={md}>
-                                                    <p>{text}</p>
-                                                    <input type="text"/>
-                                                </MDBCol>
+                                                </MDBRow>
                                             </MDBRow>
-                                            <img src={`${config.webapi}/images/villas/main/${reserve.img_src }`} className={'fv-productImage'}/>
+                                        </MDBCol>
+                                        /*  <ReservationProduct
+                                              md={md}
+                                              classnameButton={className}
+                                              payStatus={reserve.pay_status}
+                                              villaTitle={}
+                                              state={}
+                                              entryDay={}
+                                              exitDate={}
+                                              cost={}
+                                          />*/
+                                    )
+                                })}
 
-                                            <MDBRow>
-                                                <MDBCol className={'fv-productTopic'}>
-                                                  <h6>{reserve.villa_title}</h6>
-                                                </MDBCol>
-                                            </MDBRow>
-                                            <MDBRow className={'fv-ProfilePageReservation2ProductLocaton'}>
-                                                <MDBCol md={12} sm={10}>
-                                                    <p>{reserve.state}
-                                                    <i className="fa fa-map-marker-alt" /></p>
-                                                </MDBCol>
-                                            </MDBRow>
+                            </MDBRow>
 
-                                            <MDBRow className={'fv-productCapacityBox'}>
-                                                <MDBCol md={12} sm={9} className={"fv-ProfilePageReservation2ProductDate"}>
-                                                    <i className="fa fa-calendar" />
-                                                    <p> {reserve.entry_date}  تا {reserve.exit_date} </p>
-                                                </MDBCol>
-                                            </MDBRow>
-                                            <MDBRow className={"fv-borderButton"}>
+                        : ''}
 
-                                            </MDBRow>
-                                            <MDBRow className={"fv-profilePaeReservation2PriceBox"}>
-                                                <MDBCol md={2} sm={2}>
-                                                    <p>تومان</p>
-                                                </MDBCol>
-                                                <MDBCol md={3} sm={3}>
-                                                    <h6>{reserve.cost}</h6>
-                                                </MDBCol>
-                                                <MDBCol md={7} sm={7}>
-                                                    <h5>مبلغ قابل پرداخت</h5>
-                                                </MDBCol>
-                                            </MDBRow>
-                                            <MDBRow className={className}>
-                                                {className === "fv-profilePaeReservation2PayButton" ?
-                                                    <input type="button" value="پرداخت"/> :
 
-                                                    <input type="button" value="پرداخت" onClick={()=> {
-                                                        window.location.replace(`/factor/${reserve.id}`);
-                                                    }}/>
-                                                }
 
-                                            </MDBRow>
-                                        </MDBRow>
-                                    </MDBCol>
-                                    /*  <ReservationProduct
-                                          md={md}
-                                          classnameButton={className}
-                                          payStatus={reserve.pay_status}
-                                          villaTitle={}
-                                          state={}
-                                          entryDay={}
-                                          exitDate={}
-                                          cost={}
-                                      />*/
-                                )
-                            })}
-
-                        </MDBRow>
                     </MDBCol>
                 </div>
 

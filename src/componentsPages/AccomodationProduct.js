@@ -23,7 +23,7 @@ class AccommmodationProduct extends React.Component{
                               <MDBRow className={'fv-product fv-mobileProduct fv-myAccommodationProducts'}>
                                   <MDBRow className={"fv-ProfilePageReservation2ImageProductContentTopOne"}>
                                       <MDBCol md={this.props.md}>
-                                          <p>{this.props.status}</p>
+                                          <p style={{marginRight:'5%'}}>{this.props.status}</p>
                                           <input type="text"/>
                                       </MDBCol>
                                   </MDBRow>

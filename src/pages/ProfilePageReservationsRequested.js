@@ -43,6 +43,7 @@ class ProfilePageReservationsRequested extends Component {
             reservationsIdSelected : [],
             waitingForLoad:true,
             waitingUpdateButton:false,
+            waitingForSearch:false,
         }
     }
 
@@ -152,6 +153,7 @@ class ProfilePageReservationsRequested extends Component {
 
                             <MDBCol md={3} sm={10} className={"fv-ProfilePageUserSetInfoButton"}>
                                 <input type="button" value="جستجو" onClick={()=>{
+                                    this.setState({waitingForSearch : true})
                                     let villaId = ""
                                     let setDateToGo = ''
                                     let setDateToreturn = ''
@@ -184,127 +186,138 @@ class ProfilePageReservationsRequested extends Component {
                                     requestedReservationsSearch(datas)
                                         .then(res=>{
                                             console.log(res)
-                                            this.setState({allReservationsRequested:res.data.data})
+                                            this.setState({allReservationsRequested:res.data.data  , waitingForSearch:false})
                                         })
-                                        .catch(err=>console.log(err.response))
+                                        .catch(err=>{
+                                            this.setState({waitingForSearch:false})
+                                            console.log(err.response)
+                                        })
                                 }}/>
                             </MDBCol>
                         </MDBRow>
 
 
-                        <table>
-                            <tr className={"fv-tableTitle"}>
-                                <th className={"fv-tableTitleRightOne"}><h6>نام اقامت گاه</h6></th>
-                                <th className={"fv-tableTitleRightSecond"}><h6>نام مهمان</h6></th>
-                                <th><h6>تعداد نفرات</h6></th>
-                                <th><h6>از تاریخ</h6></th>
-                                <th className={"fv-tableTitleContents"}><h6>تا تاریخ</h6></th>
-                                <th className={"fv-tableTitleLeftOne"}><h6>وضعیت</h6></th>
-                            </tr>
-                            {this.state.allReservationsRequested.map(allReservationsRequest=>{
-                                let state = ""
-                                if(allReservationsRequest.satus === "0"){
-                                    state="در انتظار تایید توسط مالک ویلا"
-                                }
-                                if(allReservationsRequest.satus === "1"){
-                                    state="در انتظار پرداخت"
-                                }
-                                if(allReservationsRequest.satus === "2"){
-                                    state="پرداخت شده"
-                                }
-                               return <tr onClick={()=>this.selectedRow(allReservationsRequest.id)} className={ this.state.reservationsIdSelected.indexOf(allReservationsRequest.id) !== -1   ? "fv-selected" : ""} >
-                                   <td> <a >{allReservationsRequest.title}</a></td>
-                                   <td><a >{allReservationsRequest.guest_name}</a></td>
-                                   <td> <a >{allReservationsRequest.passengers_number}</a></td>
-                                   <td><a >{allReservationsRequest.start_date}</a></td>
-                                   <td><a>{allReservationsRequest.end_date}</a></td>
-                                   <td className={allReservationsRequest.satus === "2" ? "fv-reservedColor" : ""}><a >{state}</a></td>
-                                </tr>
-                            })}
-                        </table>
 
 
-                        <MDBRow className={this.state.waitingUpdateButton ? "fv-waitingReservationRequestClass" : "fv-hideForWaiting"} >
+                        {this.state.waitingForSearch ? WaitingLoadingProfilePage(this.state.waitingForSearch ,"fv-waitingLoadPublicFullScreen fv-waitingForSearchReservation" ) : ""}
+                        {!this.state.waitingForSearch ?
+                                <>
 
-                            <MDBCol sm={12} md={6} className={this.state.waitingUpdateButton ? "" : "fv-hideForWaiting" }>
+                                    <table>
+                                        <tr className={"fv-tableTitle"}>
+                                            <th className={"fv-tableTitleRightOne"}><h6>نام اقامت گاه</h6></th>
+                                            <th className={"fv-tableTitleRightSecond"}><h6>نام مهمان</h6></th>
+                                            <th><h6>تعداد نفرات</h6></th>
+                                            <th><h6>از تاریخ</h6></th>
+                                            <th className={"fv-tableTitleContents"}><h6>تا تاریخ</h6></th>
+                                            <th className={"fv-tableTitleLeftOne"}><h6>وضعیت</h6></th>
+                                        </tr>
+                                        {this.state.allReservationsRequested.map(allReservationsRequest=>{
+                                            let state = ""
+                                            if(allReservationsRequest.satus === "0"){
+                                                state="در انتظار تایید توسط مالک ویلا"
+                                            }
+                                            if(allReservationsRequest.satus === "1"){
+                                                state="در انتظار پرداخت"
+                                            }
+                                            if(allReservationsRequest.satus === "2"){
+                                                state="پرداخت شده"
+                                            }
+                                           return <tr onClick={()=>this.selectedRow(allReservationsRequest.id)} className={ this.state.reservationsIdSelected.indexOf(allReservationsRequest.id) !== -1   ? "fv-selected" : ""} >
+                                               <td> <a >{allReservationsRequest.title}</a></td>
+                                               <td><a >{allReservationsRequest.guest_name}</a></td>
+                                               <td> <a >{allReservationsRequest.passengers_number}</a></td>
+                                               <td><a >{allReservationsRequest.start_date}</a></td>
+                                               <td><a>{allReservationsRequest.end_date}</a></td>
+                                               <td className={allReservationsRequest.satus === "2" ? "fv-reservedColor" : ""}><a >{state}</a></td>
+                                            </tr>
+                                        })}
+                                    </table>
 
-                                {waitingForCalculate2(this.state.waitingUpdateButton , "fv-waitingLoadPublicFullScreen fv-computingReservedDetails fv-ProfileCalendarWaiting")}
-                            </MDBCol>
-                        </MDBRow>
-                        <MDBRow className={this.state.waitingUpdateButton ? "fv-hideForWaiting" :"fv-ProfilePageReservationSetInfo fv-ProfilePageReservationsRequestedButton"} >
-                            <MDBCol md={3} sm={6} className={this.state.waitingUpdateButton ? "fv-hideForWaiting" : "fv-ProfilePageUserSetInfoButton fv-ProfilePageUserSetInfoButtonRight"}>
-                               <a > <input type="button" value="عدم تایید رزرو" onClick={()=>{
-                                   this.setState({waitingUpdateButton:true})
-                                   if(this.state.reservationsIdSelected.length === 0){
-                                       alert("لطفا سطر مورد نظر خود را انتخاب کنید")
-                                       this.setState({waitingUpdateButton:false})
-                                   }else {
-                                       const data={
-                                           ids:this.state.reservationsIdSelected,
-                                           status:0 ,
-                                       }
 
-                                       console.log(data)
-                                       changeReserveStatus(data)
-                                           .then(res=>{
-                                               // window.location.reload()
-                                               allReservationsRequested()
-                                                   .then(res=>{
-                                                       this.setState({allReservationsRequested:res.data.data , waitingUpdateButton:false})
-                                                   })
-                                                   .catch(err=>this.setState({waitingUpdateButton:false}))
-                                           })
-                                           .catch(err=>{
-                                               alert("لطفا سطر مورد نظر خود را انتخاب کنید")
-                                               this.setState({waitingUpdateButton:false})
-                                           })
-                                   }
+                                    <MDBRow className={this.state.waitingUpdateButton ? "fv-waitingReservationRequestClass" : "fv-hideForWaiting"} >
 
-                               }}/></a>
-                            </MDBCol>
-                            <MDBCol md={3} sm={6} className={this.state.waitingUpdateButton ? "fv-hideForWaiting" : "fv-ProfilePageUserSetInfoButton "}>
+                                        <MDBCol sm={12} md={6} className={this.state.waitingUpdateButton ? "" : "fv-hideForWaiting" }>
 
-                               <a > <input type="button" value="تایید رزرو" onClick={()=>{
-                                   this.setState({waitingUpdateButton:true})
-                                   if(this.state.reservationsIdSelected.length === 0){
-                                       alert("لطفا سطر مورد نظر خود را انتخاب کنید")
-                                       this.setState({waitingUpdateButton:false})
-                                   }else {
-                                       const data={
-                                           ids:this.state.reservationsIdSelected,
-                                           status:1 ,
-                                       }
-
-                                       console.log(data)
-                                       changeReserveStatus(data)
-                                           .then(res=>{
-                                               console.log(res)
-                                               if(res.data.data === "Status updated"){
-                                                   // window.location.reload()
-                                                   allReservationsRequested()
-                                                       .then(res=>{
-                                                           this.setState({allReservationsRequested:res.data.data , waitingUpdateButton:false})
-                                                       })
-                                                       .catch(err=>this.setState({waitingUpdateButton:false}))
-
-                                               }else if(res.data.status) {
-                                                   if(res.data.status=== -1){
-                                                       alert(res.data.data)
-                                                       this.setState({waitingUpdateButton:false})
-                                                   }
-                                               }else {
-                                                   alert(res.data.message)
+                                            {waitingForCalculate2(this.state.waitingUpdateButton , "fv-waitingLoadPublicFullScreen fv-computingReservedDetails fv-ProfileCalendarWaiting")}
+                                        </MDBCol>
+                                    </MDBRow>
+                                    <MDBRow className={this.state.waitingUpdateButton ? "fv-hideForWaiting" :"fv-ProfilePageReservationSetInfo fv-ProfilePageReservationsRequestedButton"} >
+                                        <MDBCol md={3} sm={6} className={this.state.waitingUpdateButton ? "fv-hideForWaiting" : "fv-ProfilePageUserSetInfoButton fv-ProfilePageUserSetInfoButtonRight"}>
+                                           <a > <input type="button" value="عدم تایید رزرو" onClick={()=>{
+                                               this.setState({waitingUpdateButton:true})
+                                               if(this.state.reservationsIdSelected.length === 0){
+                                                   alert("لطفا سطر مورد نظر خود را انتخاب کنید")
                                                    this.setState({waitingUpdateButton:false})
+                                               }else {
+                                                   const data={
+                                                       ids:this.state.reservationsIdSelected,
+                                                       status:0 ,
+                                                   }
+
+                                                   console.log(data)
+                                                   changeReserveStatus(data)
+                                                       .then(res=>{
+                                                           // window.location.reload()
+                                                           allReservationsRequested()
+                                                               .then(res=>{
+                                                                   this.setState({allReservationsRequested:res.data.data , waitingUpdateButton:false})
+                                                               })
+                                                               .catch(err=>this.setState({waitingUpdateButton:false}))
+                                                       })
+                                                       .catch(err=>{
+                                                           alert("لطفا سطر مورد نظر خود را انتخاب کنید")
+                                                           this.setState({waitingUpdateButton:false})
+                                                       })
                                                }
-                                           })
-                                           .catch(err=>{
-                                               alert("لطفا سطر مورد نظر خود را انتخاب کنید")
-                                               this.setState({waitingUpdateButton:false})
-                                           })
-                                   }
-                               }}/></a>
-                            </MDBCol>
-                        </MDBRow>
+
+                                           }}/></a>
+                                        </MDBCol>
+                                        <MDBCol md={3} sm={6} className={this.state.waitingUpdateButton ? "fv-hideForWaiting" : "fv-ProfilePageUserSetInfoButton "}>
+
+                                           <a > <input type="button" value="تایید رزرو" onClick={()=>{
+                                               this.setState({waitingUpdateButton:true})
+                                               if(this.state.reservationsIdSelected.length === 0){
+                                                   alert("لطفا سطر مورد نظر خود را انتخاب کنید")
+                                                   this.setState({waitingUpdateButton:false})
+                                               }else {
+                                                   const data={
+                                                       ids:this.state.reservationsIdSelected,
+                                                       status:1 ,
+                                                   }
+
+                                                   console.log(data)
+                                                   changeReserveStatus(data)
+                                                       .then(res=>{
+                                                           console.log(res)
+                                                           if(res.data.data === "Status updated"){
+                                                               // window.location.reload()
+                                                               allReservationsRequested()
+                                                                   .then(res=>{
+                                                                       this.setState({allReservationsRequested:res.data.data , waitingUpdateButton:false})
+                                                                   })
+                                                                   .catch(err=>this.setState({waitingUpdateButton:false}))
+
+                                                           }else if(res.data.status) {
+                                                               if(res.data.status=== -1){
+                                                                   alert(res.data.data)
+                                                                   this.setState({waitingUpdateButton:false})
+                                                               }
+                                                           }else {
+                                                               alert(res.data.message)
+                                                               this.setState({waitingUpdateButton:false})
+                                                           }
+                                                       })
+                                                       .catch(err=>{
+                                                           alert("لطفا سطر مورد نظر خود را انتخاب کنید")
+                                                           this.setState({waitingUpdateButton:false})
+                                                       })
+                                               }
+                                           }}/></a>
+                                        </MDBCol>
+                                    </MDBRow>
+                                </>
+                            : ''}
 
                     </MDBCol>
                 </div>

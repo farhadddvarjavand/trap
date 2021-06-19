@@ -41,7 +41,7 @@ import {
     calculateCost,
     calculateExtraCost,
     calculateFacilitiesCost,
-    reserveRequest
+    reserveRequest, userReserves
 } from "../services/userService";
 import "../style/extra.scss"
 import axios from "axios";
@@ -102,6 +102,7 @@ class DisplayPage extends Component {
 
             imSureButton:false,
             waitingAreYouSureQuestionButton:false,
+            reservesData:[],
 
 
         }
@@ -109,7 +110,13 @@ class DisplayPage extends Component {
 
 
     componentDidMount() {
-
+        userReserves()
+            .then(res=>{
+                if(res.status===200 && res.data.data.length>0){
+                    console.log(res.data.data)
+                    this.setState({reservesData:res.data.data})
+                }
+            })
 
 
         villa(this.props.match.params.id)
@@ -171,6 +178,8 @@ class DisplayPage extends Component {
                 }
             })
             .catch(err=>console.log(err.response))
+
+
 
 
     }
@@ -561,6 +570,7 @@ class DisplayPage extends Component {
 
 
     render() {
+        let thisVillaIsReserved = false
         let LoadingPagewaitingHandle = true
         if(this.state.villaPrice.length>0){
             LoadingPagewaitingHandle = false
@@ -1119,8 +1129,24 @@ class DisplayPage extends Component {
         const Map = Mapir.setToken({
             //factory parameters
             // hash:true,
-            // logoPosition:"top-left",
-            maxZoom:[15],
+           //  logoPosition:"top-left",
+            maxZoom:[10],
+            transformRequest: (url) => {
+                return {
+                    url: url,
+                    headers: {
+                        'x-api-key':
+                            'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImY1ZDU3NTg4MDA3MjQ1MGM2ZjJkMWYyNWYzNjZlMDJhMGVmNGEzYWE5NjZlYjc3YzI4MTkwZWE3Y2RjYmU2MWYzYjQ3NjdmZjNkNDAxNDU0In0.eyJhdWQiOiIxMzk2MiIsImp0aSI6ImY1ZDU3NTg4MDA3MjQ1MGM2ZjJkMWYyNWYzNjZlMDJhMGVmNGEzYWE5NjZlYjc3YzI4MTkwZWE3Y2RjYmU2MWYzYjQ3NjdmZjNkNDAxNDU0IiwiaWF0IjoxNjIwOTEwNDA2LCJuYmYiOjE2MjA5MTA0MDYsImV4cCI6MTYyMzUwMjQwNiwic3ViIjoiIiwic2NvcGVzIjpbImJhc2ljIl19.JURJHCjC_7gcpLXnXJaNjp1l9O6z4t4rqais2S8FE9GApwpdo1amHqdMMlk87m_08GLnxG8E_ADOavM9sZjJMikekrTOzc7IDBn1DN7RC75IF-lA5x8uyZs7EdSzEB7fTdVtgs0z6frjO4KYciznkPP0eSHyueV84Scsi-M1q95vQ7DU_2w216yH2sdc3aXUs_emNqNyGOuQ4q9qFmjR5nMOIGy1AP9Bb5NqFTnvFZzJ022bX7_atlxysLPQ5h1r1LwzRpHBlIT2KG3bJo1SjSiOVNxK-cUSF1yG8YKvZAwfzZHFFJ1wnViH6KnR_yPSczGi14xUUA7wCKCwqKkcVQ', //Mapir api key
+                        'Mapir-SDK': 'reactjs'
+                    },
+                }
+            }
+        });
+        const MapDetails = Mapir.setToken({
+            //factory parameters
+            // hash:true,
+            //  logoPosition:"top-left",
+            maxZoom:[20],
             transformRequest: (url) => {
                 return {
                     url: url,
@@ -1431,31 +1457,31 @@ class DisplayPage extends Component {
                         </MDBRow>
                     </MDBCol>     */}
                         <MDBCol md={1} sm={2}>
-                            <a href="#facilities" name={'facilities'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}>امکانات</a>
+                            <a href="#facilities" name={'facilities'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}><p className={"h7"}>امکانات</p></a>
                             <MDBRow>
                                 <button className={this.state.displayButtonName === 'facilities' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                             </MDBRow>
                         </MDBCol>
                         <MDBCol md={1} sm={2}>
-                            <a href="#Address" name={'Address'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}>آدرس</a>
+                            <a href="#Address" name={'Address'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}><p className={"h7"}>آدرس</p></a>
                             <MDBRow>
                                 <button className={this.state.displayButtonName === 'Address' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                             </MDBRow>
                         </MDBCol>
                         <MDBCol md={2} className={"fv-DisplayPageMenuRows"} >
-                            <a href="#Roles"  name={'Roles'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}>قوانین اقامتگاه</a>
+                            <a href="#Roles"  name={'Roles'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}><p className={"h7"}>قوانین اقامتگاه</p></a>
                             <MDBRow>
                                 <button className={this.state.displayButtonName === 'Roles' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                             </MDBRow>
                         </MDBCol>
                         <MDBCol sm={2} className={"fv-DisplayPageMenuRowsMobile"}>
-                            <a  href="#Roles" name={'Roles'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}> قوانین</a>
+                            <a  href="#Roles" name={'Roles'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}> <p className={"h7"}>قوانین</p></a>
                             <MDBRow>
                                 <button className={this.state.displayButtonName === 'Roles' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                             </MDBRow>
                         </MDBCol>
                         <MDBCol md={1} sm={2}>
-                            <a href="#Comments" name={'Comments'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}>نظرات</a>
+                            <a href="#Comments" name={'Comments'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}><p className={"h7"}>نظرات</p></a>
                             <MDBRow>
                                 <button className={this.state.displayButtonName === 'Comments' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                             </MDBRow>
@@ -1501,9 +1527,11 @@ class DisplayPage extends Component {
 
 
                             <div id="facilities" className={''}>                                            {/*    fv-facilities      */}
-                                <MDBRow className={"fv-DisplayPageDetailsRightHomeImage pMobile"}>
-                                    <p><i className="fas fa-home" /> {rentType} </p>
-                                </MDBRow>
+                                {rentType ?
+                                    <MDBRow className={"fv-DisplayPageDetailsRightHomeImage pMobile"}>
+                                        <p><i className="fas fa-home" /> {rentType} </p>
+                                    </MDBRow>
+                                : ''}
                                 <MDBRow className={"pMobile"}>
                                     <p> <i className="fa fa-users" />  ظرفیت استاندارد {standardCapacity }  نفر+{maxCapacity} نفر اضافه </p>
                                 </MDBRow>
@@ -1513,16 +1541,22 @@ class DisplayPage extends Component {
                                 <MDBRow className={"pMobile"}>
                                     <p><i className="fa fa-bed" aria-hidden="true" /> {this.state.resultVilla.details?this.state.resultVilla.details.bed_count:''} تخت یک نفره + {this.state.resultVilla.details?this.state.resultVilla.details.mattress_count:''} تشک معمولی </p>
                                 </MDBRow>
-                                <MDBRow className={"h4Mobile"}>
-                                    <h6>درباره اقامت گاه</h6>
-                                </MDBRow>
-                                <MDBRow className={"fv-DisplayPageDetailsRightParagraph pMobile"}>
-                                    <p>{story}</p>
-                                </MDBRow>
+                                {story ?
+                                    <>
+                                        <MDBRow className={"h4Mobile"}>
+                                            <h6>درباره اقامت گاه</h6>
+                                        </MDBRow>
+                                        <MDBRow className={"fv-DisplayPageDetailsRightParagraph pMobile"}>
+                                            <p>{story}</p>
+                                        </MDBRow>
+                                    </>
+                                : ''}
 
-                                <MDBRow className={"pMobile"}>
-                                    <p> <i className="fas fa-check-square" /> {aboutVillaCheckbox} </p>
-                                </MDBRow>
+                                {aboutVillaCheckbox ?
+                                    <MDBRow className={"pMobile"}>
+                                        <p> <i className="fas fa-check-square" /> {aboutVillaCheckbox} </p>
+                                    </MDBRow>
+                                : ''}
                                 {this.state.resultVilla.details ? this.state.resultVilla.details.places.map(facilitie=>{
                                     return <MDBRow className={"pMobile"}>
                                         <p> <i className="fas fa-check-square" /> {facilitie} </p>
@@ -1821,46 +1855,98 @@ class DisplayPage extends Component {
                             </div>                                                             {/*        fv-Roles     */}
 
 
-                            <div id="Address">                                        {/*        fv-Address     */}
+                            {/*                     fv- address                        */ }
+                            {this.state.reservesData ? this.state.reservesData.map(reservedDataSelect =>{
+                                if(this.props.match.params.id === reservedDataSelect.villa_id && reservedDataSelect.pay_status === "2"){
+                                    thisVillaIsReserved = true
+                                }
+                            }) : ''}
+                            {thisVillaIsReserved ?
+                                <div id="Address">                                        {/*        fv-Address with details     */}
 
-                                <MDBRow>
-                                    <h6 className={"fv-addressP"}> آدرس </h6>
-                                    {console.log(this.state.resultVilla)}
-                                </MDBRow>
-                                <MDBRow>
-                                    <h6> {address} </h6>
-                                </MDBRow>
-                                <MDBRow>
-                                    <h6> {phoneNumber} </h6>
-                                </MDBRow>
-
-                                {Number(this.state.resultVilla.long) !== 51.42 && Number(this.state.resultVilla.lat) !== 35.72 && this.state.resultVilla.long !== undefined && this.state.resultVilla.lat !== undefined && this.state.resultVilla.long  && this.state.resultVilla.lat ? // agar lat and long vojod dasht
-                                    <MDBRow className={"fv-displayPageMap"}>
-                                        {Waiting(LoadingPagewaitingHandle , "fv-waitingLoadPublicFullScreen" )}
-                                        <MDBCol md={8}>
-
-
-                                            {LoadingPagewaitingHandle ? '' :
-                                                <Mapir
-                                                    width="636"
-                                                    center={[this.state.resultVilla.long ? Number(this.state.resultVilla.long) : 51.526770, this.state.resultVilla.lat ? Number(this.state.resultVilla.lat) : 35.724254]}
-                                                    Map={Map}
-                                                >
-                                                    <Mapir.Layer
-                                                        type="symbol"
-                                                        layout={{"icon-image": "harbor-15"}}>
-                                                    </Mapir.Layer>
-                                                    <Mapir.Marker
-                                                        coordinates={[this.state.resultVilla.long ? Number(this.state.resultVilla.long) : 51.526770, this.state.resultVilla.lat ? Number(this.state.resultVilla.lat) : 35.724254]}
-                                                        anchor="bottom">
-                                                    </Mapir.Marker>
-                                                </Mapir>
-                                            }
-                                        </MDBCol>
+                                    <MDBRow>
+                                        <h6 className={"fv-addressP"}> آدرس </h6>
+                                        {console.log(this.state.resultVilla)}
                                     </MDBRow>
-                                    : ''}
+                                    <MDBRow>
+                                        <h6> {address} </h6>
+                                    </MDBRow>
+                                    <MDBRow>
+                                        <h6> {phoneNumber} </h6>
+                                    </MDBRow>
 
-                            </div>                                                              {/*        fv-Address     */}
+                                    {Number(this.state.resultVilla.long) !== 51.42 && Number(this.state.resultVilla.lat) !== 35.72 && this.state.resultVilla.long !== undefined && this.state.resultVilla.lat !== undefined && this.state.resultVilla.long  && this.state.resultVilla.lat ? // agar lat and long vojod dasht
+                                        <MDBRow className={"fv-displayPageMap"}>
+                                            {Waiting(LoadingPagewaitingHandle , "fv-waitingLoadPublicFullScreen" )}
+                                            <MDBCol md={8}>
+
+
+                                                {LoadingPagewaitingHandle ? '' :
+                                                    <Mapir
+                                                        width="636"
+                                                        center={[this.state.resultVilla.long ? Number(this.state.resultVilla.long) : 51.526770, this.state.resultVilla.lat ? Number(this.state.resultVilla.lat) : 35.724254]}
+                                                        Map={MapDetails}
+                                                    >
+                                                        <Mapir.Layer
+                                                            type="symbol"
+                                                            layout={{"icon-image": "harbor-15"}}>
+                                                        </Mapir.Layer>
+                                                        <Mapir.Marker
+                                                            coordinates={[this.state.resultVilla.long ? Number(this.state.resultVilla.long) : 51.526770, this.state.resultVilla.lat ? Number(this.state.resultVilla.lat) : 35.724254]}
+                                                            anchor="bottom">
+                                                        </Mapir.Marker>
+                                                    </Mapir>
+                                                }
+                                            </MDBCol>
+                                        </MDBRow>
+                                        : ''}
+
+                                </div>
+
+                                :
+
+
+                                <div id="Address">                                        {/*        fv-Address without details     */}
+
+                                    <MDBRow>
+                                        <h6 className={"fv-addressP"}> آدرس </h6>
+                                        {console.log(this.state.resultVilla)}
+                                    </MDBRow>
+                                    <MDBRow>
+                                        <h6> {this.state.resultVilla.city}{this.state.resultVilla.village ? ` - ${this.state.resultVilla.village}` : ''} </h6>
+                                    </MDBRow>
+
+                                    {Number(this.state.resultVilla.long) !== 51.42 && Number(this.state.resultVilla.lat) !== 35.72 && this.state.resultVilla.long !== undefined && this.state.resultVilla.lat !== undefined && this.state.resultVilla.long  && this.state.resultVilla.lat ? // agar lat and long vojod dasht
+                                        <MDBRow className={"fv-displayPageMap"}>
+                                            {Waiting(LoadingPagewaitingHandle , "fv-waitingLoadPublicFullScreen" )}
+                                            <MDBCol md={8}>
+
+
+                                                {LoadingPagewaitingHandle ? '' :
+                                                    <Mapir
+                                                        width="636"
+                                                        center={[this.state.resultVilla.long ? Number(this.state.resultVilla.long) : 51.526770, this.state.resultVilla.lat ? Number(this.state.resultVilla.lat) : 35.724254]}
+                                                        Map={Map}
+                                                    >
+                                                        <Mapir.Layer
+                                                            type="symbol"
+                                                            layout={{"icon-image": "harbor-15"}}>
+                                                        </Mapir.Layer>
+                                                        <Mapir.Marker
+                                                            coordinates={[this.state.resultVilla.long ? Number(this.state.resultVilla.long) : 51.526770, this.state.resultVilla.lat ? Number(this.state.resultVilla.lat) : 35.724254]}
+                                                            anchor="bottom">
+                                                        </Mapir.Marker>
+                                                    </Mapir>
+                                                }
+                                            </MDBCol>
+                                        </MDBRow>
+                                        : ''}
+
+                                </div>                                                   // fv- address    address end
+
+                            }
+                            {/*                     fv- address                        */ }
+
 
 
                             <div id="Comments">                                  {/*        fv-Comments     */}

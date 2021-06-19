@@ -37,7 +37,7 @@
     }
 
     .col-md-4 {
-      max-width: 33.666667%;
+      max-width: 22.666667%;
     }
   }
 
@@ -69,7 +69,9 @@
   .fv-myAccommodationProducts .fv-productTopic h6{
     margin-top:3%
   }
-
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-profilePaeReservation2PayButton input, .fv-ProfilePageReservation2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-profilePaeReservation2PayButtonSet input {
+    border-radius: 13px;
+  }
 }
 
 

@@ -48,9 +48,20 @@
   margin-bottom: 1%;
   margin-top: 0.5%;
 }
-@media (max-width: 967px) and  (min-width: 539px) {
+@media (max-width: 967px) and  (min-width: 767px) {
   .fv-hostStep4Page  .fv-hostStepPage2LeftButtonBody {
     margin-top: 350%;
+  }
+}
+@media (max-width: 767px) {
+  .fv-hostStep4Page  .fv-hostStepPage2LeftButtonBody {
+    margin-top: 350%;
+  }
+  .fv-hostStep4Page .fv-hostStep4PaddingTop {
+    padding-bottom: 6%;
+  }
+  .fv-HostStep2Page.fv-hostStep2Page2.fv-hostStep3Page.fv-hostStep4Page .fv-HostStep1PageBody .fv-hostStepPage1Right .fv-hostStep3NumberOfCapacityMobile‌{
+    margin-bottom: 3%;
   }
 }
 @media (max-width: 540px) {

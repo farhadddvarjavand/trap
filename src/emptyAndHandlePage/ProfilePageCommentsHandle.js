@@ -54,6 +54,26 @@ class ProfilePageCommentsHandle extends Component {
 
                                               //  this.setState({comments: Object.values(res.data.data) , villaId:userVilla.id } , () =>{
 
+                                                /*
+
+                                                 {res.data.data.map(res=>{
+                                                if(Object.values(res.answer)){ /// agar vojod dasht commenti baraie villa haie sabt shode
+
+
+
+                                                    //  this.setState({comments: Object.values(res.data.data) , villaId:userVilla.id } , () =>{
+
+                                                    this.props.history.push(`/MainProfilePages/profileShowGuestComments/${userVilla.id}`)
+                                                    //this.setState({villaIdFullComments:userVilla.id})
+
+                                                    // bayad ie state gozashte shavad ke agar true shod yani vojod dashte va  agar false shod yani nabode va beravad be safhe yaft nashod
+                                                    //    })
+                                                }else {
+                                                    // this.props.history.push("/MainProfilePages/profileGuestComments")
+                                                }
+                                            })}
+                                                * */
+
                                                     this.props.history.push(`/MainProfilePages/profileShowGuestComments/${userVilla.id}`)
                                                     //this.setState({villaIdFullComments:userVilla.id})
 
@@ -65,17 +85,19 @@ class ProfilePageCommentsHandle extends Component {
                                             // console.log(res.data.data)
                                         }else {
                                             // this.setState({villaIdFullComments:"guest"})
-                                            this.props.history.push("/MainProfilePages/profileGuestComments")
+                                           // this.props.history.push("/MainProfilePages/profileGuestComments")
                                             // this.props.history.push("/profileGuestComments") /// صفحه ای پیدا نشده است
                                         }
                                     })
-                                    .catch(err=> this.props.history.push("/MainProfilePages/profileGuestComments")) //.catch(err=>this.props.history.push("/profileGuestComments"))
+                                    .catch(err=>{
+                                      //  this.props.history.push("/MainProfilePages/profileGuestComments")
+                                    } ) //.catch(err=>this.props.history.push("/profileGuestComments"))
 
                             })
                         }else {
                             // this.props.history.push("/ProfilePageCommentsEmpty")
                             // empty
-                            this.props.history.push("/MainProfilePages/profileGuestComments")
+                             this.props.history.push("/MainProfilePages/profileGuestComments")
                             // this.setState({villaIdFullComments:"guest"})
                         }
 
@@ -86,7 +108,9 @@ class ProfilePageCommentsHandle extends Component {
                 }
 
             })
-            .catch(err=> this.props.history.push("/MainProfilePages/profileGuestComments"))
+            .catch(err=>{
+              //  this.props.history.push("/MainProfilePages/profileGuestComments")
+            } )
 
 
 

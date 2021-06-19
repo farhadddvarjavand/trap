@@ -8,8 +8,9 @@ import Footer from "../componentsPages/footer"
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 import CalendarLinear from "../data/CalenddarLinear";
-import {setFinancialReports} from "../services/userService";
+import {getUserVillaComments, setFinancialReports, userVillas} from "../services/userService";
 import {waitingForCalculate, waitingForCalculate2} from "../componentsPages/WaitingLoad";
+import {villaPrice} from "../services/villaService";
 
 class ProfilePageWallet2 extends Component {
     constructor(props) {
@@ -18,9 +19,11 @@ class ProfilePageWallet2 extends Component {
             this.props.history.push('/login');
         }
         this.state={
-            sourceOfTransaction:'',
+            sourceOfTransaction:'title',
             transactionAmount:'',
             transactionDescription:'',
+            villasUser:[],
+
             date: {
                 day:1400,
                 month:'',
@@ -32,6 +35,14 @@ class ProfilePageWallet2 extends Component {
 
         }
     }
+    componentWillMount() {
+        userVillas()
+            .then(res=>{
+                if(res.data.data)
+                    this.setState({villasUser:res.data.data})
+            })
+    }
+
     selectDay = (date) =>{                                    // set date to go
         if(date) {this.setState(prevstate =>({
             date: {
@@ -46,7 +57,7 @@ class ProfilePageWallet2 extends Component {
         }
     }
     render() {
-        console.log(this.state.date)
+        console.log(this.state.sourceOfTransaction)
         return(
             <div className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageWallet2"}>
 
@@ -54,11 +65,19 @@ class ProfilePageWallet2 extends Component {
 
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo"}>
                         <p className={"h7"}>منبع تراکنش</p>
-                        <input type="text"  value={this.state.sourceOfTransaction}
-                               onChange={(event)=>{this.setState({sourceOfTransaction:event.target.value})}}/>
+
+                            <select value={this.state.sourceOfTransaction} onChange={(e)=>{
+                                this.setState({sourceOfTransaction:e.target.value } )
+                            }}>
+                                <option value='title' disabled>نام اقامت گاه</option>
+                                {this.state.villasUser.map(vilauser=>{
+                                    return  <option value={vilauser.title}>{vilauser.title}</option>
+                                })}
+                            </select>
+
                         <p className={"h7"}>مبلغ تراکنش</p>
-                        <input type="text"  value={this.state.transactionAmount}
-                               onChange={(event)=>{this.setState({transactionAmount:event.target.value})}}/>
+                        <input type="text"  value={this.state.transactionAmount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                               onChange={(event)=>{this.setState({transactionAmount:event.target.value.replace(/,/g, "")})}}/>
                         <p className={"h7"}>تاریخ تراکنش</p>
 
                         <div className={"fv-calendarInProfilePageWallet2"}> <CalendarLinear dayToGo={this.selectDay} text={'انتخاب روز'} /></div>
@@ -77,9 +96,13 @@ class ProfilePageWallet2 extends Component {
                                 <input type="button" value="ذخیره تراکنش" className={this.state.waitingButton ? "fv-hideForWaiting" : ""} onClick={()=>{
                                     this.setState({waitingButton:true})
                                     const setDate = this.state.date.year+"/"+this.state.date.month+"/"+this.state.date.day
+                                    let src = ""
+                                    if(this.state.sourceOfTransaction !== "title"){
+                                        src = this.state.sourceOfTransaction
+                                    }
                                     const data = {
                                         date : setDate ,
-                                        src : this.state.sourceOfTransaction ,
+                                        src : src ,
                                         description : this.state.transactionDescription ,
                                         amount : this.state.transactionAmount,
                                     }

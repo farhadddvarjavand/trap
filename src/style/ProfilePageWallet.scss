@@ -55,6 +55,12 @@
   }
   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo select {
     padding-right: 3%;
+    width: 50%;
+    height: 54px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    border-radius: 14px;
   }
   .fv-tableDiscriptions{
     width: 40%;
@@ -193,6 +199,9 @@
     margin-bottom: 0%;
     margin-bottom: 58%;
     margin-top: -12%;
+  }
+  .fv-ProfilePageWallet .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo select {
+    width: 100%;
   }
 }
 @media (max-width: 376px) {
