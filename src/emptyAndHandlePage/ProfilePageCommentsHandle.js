@@ -34,6 +34,7 @@ class ProfilePageCommentsHandle extends Component {
 
     componentDidMount() {
 
+        let existComment = false
 
 
 
@@ -47,42 +48,10 @@ class ProfilePageCommentsHandle extends Component {
                                 getUserVillaComments(userVilla.id)    // برای هر ویلا که طرف دارد چک کن
                                     .then(res=>{    // اگر ویلایی کامنت داشت برو داخل
                                         console.log(res)  // آی دی ویلایی که کامنت دارد را باید پاس بدهیم به مرحله بعد
-                                        if(res.data.data && res.data.data !== "Something went wrong!"){
-                                            // avalin vilaie por
-                                            if(Object.values(res.data.data).length !== 0){ /// agar vojod dasht commenti baraie villa haie sabt shode
-                                                console.log(Object.values(res.data.data))
+                                        if(res.data.data.length>0 && res.data.data !== "Something went wrong!"){
+                                            existComment = true
+                                        this.props.history.push(`/MainProfilePages/profileShowGuestComments/${userVilla.id}`)
 
-                                              //  this.setState({comments: Object.values(res.data.data) , villaId:userVilla.id } , () =>{
-
-                                                /*
-
-                                                 {res.data.data.map(res=>{
-                                                if(Object.values(res.answer)){ /// agar vojod dasht commenti baraie villa haie sabt shode
-
-
-
-                                                    //  this.setState({comments: Object.values(res.data.data) , villaId:userVilla.id } , () =>{
-
-                                                    this.props.history.push(`/MainProfilePages/profileShowGuestComments/${userVilla.id}`)
-                                                    //this.setState({villaIdFullComments:userVilla.id})
-
-                                                    // bayad ie state gozashte shavad ke agar true shod yani vojod dashte va  agar false shod yani nabode va beravad be safhe yaft nashod
-                                                    //    })
-                                                }else {
-                                                    // this.props.history.push("/MainProfilePages/profileGuestComments")
-                                                }
-                                            })}
-                                                * */
-
-                                                    this.props.history.push(`/MainProfilePages/profileShowGuestComments/${userVilla.id}`)
-                                                    //this.setState({villaIdFullComments:userVilla.id})
-
-                                            //    })
-                                            }else {
-                                               // this.props.history.push("/MainProfilePages/profileGuestComments")
-                                            }
-
-                                            // console.log(res.data.data)
                                         }else {
                                             // this.setState({villaIdFullComments:"guest"})
                                            // this.props.history.push("/MainProfilePages/profileGuestComments")
@@ -95,10 +64,13 @@ class ProfilePageCommentsHandle extends Component {
 
                             })
                         }else {
-                            // this.props.history.push("/ProfilePageCommentsEmpty")
-                            // empty
-                             this.props.history.push("/MainProfilePages/profileGuestComments")
-                            // this.setState({villaIdFullComments:"guest"})
+                            if(existComment === false){
+                                // this.props.history.push("/ProfilePageCommentsEmpty")
+                                // empty
+                                this.props.history.push("/MainProfilePages/profileGuestComments")
+                                // this.setState({villaIdFullComments:"guest"})
+                            }
+
                         }
 
                     })

@@ -51,6 +51,7 @@ import FactorPage from "./FactorPage";
 import MobileLogo from "../images/MobileLogo.png";
 import LogoName from "../images/LogoName.png";
 import AddComments from "./addComments";
+import ProfilePageChargeWallet from "./ProfilePageChargeWallet";
 const commaNumber = require('comma-number')
 
 
@@ -252,6 +253,7 @@ class MainProfilePages extends Component {
                                         </div>
                                     }
                                     <NavLink to={'/MainProfilePages/ProfileWallet'}  activeClassName={"fv-reservationActive"}><p onClick={()=>this.setState({onclickHandel:false})}><i className="fas fa-wallet"/>کیف پول</p></NavLink>
+                                    <NavLink to={'/MainProfilePages/ProfilePageChargeWallet'}  activeClassName={"fv-reservationActive"}><p onClick={()=>this.setState({onclickHandel:false})}><i className="fas fa-wallet"/>شارژ کیف پول</p></NavLink>
                                     <NavLink to={'/MainProfilePages/profileWalletRequestWithdraw'}  activeClassName={"fv-reservationActive"}><p onClick={()=>this.setState({onclickHandel:false})}><i className="fas fa-chart-bar" />درخواست برداشت</p></NavLink>
                                     <NavLink to={'/MainProfilePages/Profile'}  activeClassName={"fv-reservationActive"}><p onClick={()=>this.setState({onclickHandel:false})}><i className="fas fa-user" />ویرایش پروفایل</p></NavLink>
                                     <NavLink to={'/MainProfilePages/profileFavoritesPage'}  activeClassName={"fv-reservationActive"}><p onClick={()=>this.setState({onclickHandel:false})}><i className="fa fa-heart" />علاقه مندی ها</p></NavLink>
@@ -297,6 +299,7 @@ class MainProfilePages extends Component {
                                     </div>
                                 }
                                 <NavLink to={'/MainProfilePages/ProfileWallet'}  activeClassName={"fv-reservationActive"}><p ><i className="fas fa-wallet"/>کیف پول</p></NavLink>
+                                <NavLink to={'/MainProfilePages/ProfilePageChargeWallet'}  activeClassName={"fv-reservationActive"}><p ><i className="fas fa-wallet"/>شارژ کیف پول</p></NavLink>
                                 <NavLink to={'/MainProfilePages/profileWalletRequestWithdraw'}  activeClassName={"fv-reservationActive"}><p ><i className="fas fa-chart-bar" />درخواست برداشت</p></NavLink>
                                 <NavLink to={'/MainProfilePages/Profile'}  activeClassName={"fv-reservationActive"}><p><i className="fas fa-user" />ویرایش پروفایل</p></NavLink>
                                 <NavLink to={'/MainProfilePages/profileFavoritesPage'}  activeClassName={"fv-reservationActive"}><p><i className="fa fa-heart" />علاقه مندی ها</p></NavLink>
@@ -336,6 +339,8 @@ class MainProfilePages extends Component {
                         <Route exact path={'/MainProfilePages/ProfileWalletTransactionRegistration'} component={ProfilePageWallet2}/>
 
                         <Route exact path={'/MainProfilePages/profileWalletRequestWithdraw'} component={ProfilePageWallet3}/>
+
+                            <Route exact path={'/MainProfilePages/ProfilePageChargeWallet'} component={ProfilePageChargeWallet}/>
 
                         <Route exact path={'/MainProfilePages/profile'} render={(props) => (
                             <ProfilePage ChangeUserNameAndFamily={this.ChangeUserNameAndFamily}

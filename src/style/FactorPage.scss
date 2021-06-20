@@ -213,6 +213,44 @@
   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBodyInnerLeft .h7 {
     margin-bottom: 3%;
   }
+
+
+
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage input{
+    width: 2vh;
+    height: 6vh;
+    align-items: center;
+  }
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdraw{
+    //width: 50%;
+  }
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .col-md-2 {
+    flex: 0 0 21.666667%;
+    max-width: 12.666667%;
+    padding-left: 0;
+    padding: 0;
+  }
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdrawRowOne{
+    padding: 0;
+    margin-top: 1.5%;
+  }
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage  .fv-radioButtonForWithdrawRowOne .h7{
+    margin: 0;
+  }
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage  .fv-radioButtonForWithdrawRowOne .col-md-7 ,   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage  .fv-radioButtonForWithdrawRowOne .col-md-4{
+    padding: 0;
+    margin-right: 1%;
+    margin-left: -6vh;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdrawTwo {
+    background: #aaaaaa;
+  }
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdrawTwoRowOne{
+    background: #E88F0A;
+  }
+
 }
 .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyInnerLeftP {
   place-content: end;

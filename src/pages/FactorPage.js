@@ -73,7 +73,9 @@ class FactorPage extends Component {
                         </MDBRow>
                         <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
                             <MDBCol className={"fv-ProfilePageUserInfoDetailsBodyColumn"}>
-                                <p><i className="fas fa-home"/>{this.state.villaInfo.rent_type}</p>
+                                {this.state.villaInfo.rent_type?
+                                    <p><i className="fas fa-home"/>{this.state.villaInfo.rent_type}</p>
+                                    : ''}
                                 <p><i className="fa fa-user-friends" />ظرفیت استاندارد {this.state.villaInfo.standard_capacity} نفر+{this.state.villaInfo.max_capacity ? Number(this.state.villaInfo.max_capacity - this.state.villaInfo.standard_capacity) : ''} نفر اضافه</p>
                                 <p><i className='fas fa-boxes' />{this.state.villaInfo.bedroom} اتاق خواب+{this.state.villaInfo.shower} حمام+{this.state.villaInfo.ir_toilet} دست شویی ایرانی+{this.state.villaInfo.eu_toilet} دست شویی فرنگی</p>
                                 <p><i className="fas fa-bed" />{this.state.villaInfo.bed_count} تخت یک نفره+{this.state.villaInfo.mattress_count} تشک معمولی</p>
@@ -107,7 +109,60 @@ class FactorPage extends Component {
                                 </MDBCol> */}
                             </MDBRow>
                             <MDBRow className={"fv-factorPageRightInfoLeftBodyInner"}>
-                                <MDBCol md={6}>
+                                <MDBCol md={6}  className={"fv-rightBodyOfFactorPageInner"}>
+                                    <h6>نحوه پرداخت</h6>
+                                    <MDBRow  className={"fv-radioButtonFactorPage"}>
+                                        <MDBCol className={"fv-radioButtonForWithdraw"} md={2}>
+                                            <MDBContainer>
+                                                <input type={"radio"} value={""}/>
+                                            </MDBContainer>
+                                        </MDBCol>
+                                        <MDBCol className={"fv-radioButtonForWithdrawRowOne"} md={10}>
+                                            <MDBRow>
+                                                <MDBCol md={7}>
+                                                    <p className={"h7"}>پرداخت از طریق کیف پول</p>
+                                                </MDBCol>
+                                                <MDBCol  md={5}>
+                                                    <p style={{color:'#EB5757'}} className={"h7"}>موجودی ناکافی</p>
+                                                </MDBCol>
+                                            </MDBRow>
+                                        </MDBCol>
+
+                                        <MDBRow className={"fv-radioButtonForWithdrawTwoRowOne"}>
+                                            <MDBCol className={"fv-radioButtonForWithdrawTwo"} md={12}>
+
+                                                <MDBRow className={"fv-radioButtonForWithdrawTwoRow"}>
+                                                    <MDBCol md={6}>
+                                                        <p style={{fontSize:'14px'}}>موجودی کیف پول</p>
+                                                    </MDBCol>
+                                                    <MDBCol  md={6}>
+                                                        <h6  style={{color:'#EB5757'}} >۰۰۰۵۴۲ تومان</h6>
+                                                    </MDBCol>
+                                                </MDBRow>
+                                            </MDBCol>
+                                        </MDBRow>
+
+
+
+                                        <MDBCol md={12}>
+
+                                        </MDBCol>
+
+                                            <MDBCol className={"fv-radioButtonForWithdraw"} md={2}>
+                                                <MDBContainer>
+                                                    <input type={"radio"} value={""}/>
+                                                </MDBContainer>
+                                            </MDBCol>
+                                            <MDBCol className={"fv-radioButtonForWithdrawRowOne"} md={10}>
+                                                <MDBRow>
+                                                    <MDBCol md={7}>
+                                                        <p className={"h7"}>پرداخت مستقیم</p>
+                                                    </MDBCol>
+                                                </MDBRow>
+                                            </MDBCol>
+
+
+                                    </MDBRow>
                                     <p>کد تخفیف</p>
                                     <MDBRow>
                                         <MDBCol md={6}>
@@ -260,7 +315,9 @@ class FactorPage extends Component {
                                     </MDBRow>
                                     <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
                                         <MDBCol className={"fv-ProfilePageUserInfoDetailsBodyColumn"}>
-                                            <p><i className="fas fa-home"/>{this.state.villaInfo.rent_type}</p>
+                                            {this.state.villaInfo.rent_type?
+                                                <p><i className="fas fa-home"/>{this.state.villaInfo.rent_type}</p>
+                                            : ''}
                                             <p><i className="fa fa-user-friends" />ظرفیت استاندارد {this.state.villaInfo.standard_capacity} نفر+{this.state.villaInfo.max_capacity ? Number(this.state.villaInfo.max_capacity - this.state.villaInfo.standard_capacity) : ''} نفر اضافه</p>
                                             <p><i className='fas fa-boxes' />{this.state.villaInfo.bedroom} اتاق خواب+{this.state.villaInfo.shower} حمام+{this.state.villaInfo.ir_toilet} دست شویی ایرانی+{this.state.villaInfo.eu_toilet} دست شویی فرنگیی</p>
                                             <p><i className="fas fa-bed" />{this.state.villaInfo.bed_count} تخت یک نفره+{this.state.villaInfo.mattress_count} تشک معمولی</p>

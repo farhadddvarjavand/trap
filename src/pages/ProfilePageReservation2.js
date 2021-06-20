@@ -214,7 +214,7 @@ class ProfilePageReservation2 extends Component {
                                                 <MDBRow className={className}>
                                                     {reserve.pay_status === "1" ?
                                                         <input type="button" value="پرداخت" onClick={()=> {
-                                                            window.location.replace(`/factor/${reserve.villa_id}`);
+                                                            window.location.replace(`/factor/${reserve.id}`);
                                                         }}/>
                                                     :  reserve.pay_status === "2" ?
                                                          <input type="button" value="نمایش جزئیات ویلا" onClick={()=>{

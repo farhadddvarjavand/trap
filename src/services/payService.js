@@ -28,6 +28,17 @@ export const requestPay = async data => {
     );
 }
 
+export const chargeWallet = async data => {
+    return http.post(
+
+        `${config.webapi}/api/v1/chargeWallet`,
+        JSON.stringify(data),
+        { headers:{ 'Authorization' : await getToken() } }
+
+    );
+}
+
+
 // Get Payment Status  --  Method = POST
 export const getPayStatus = data => {
     return http.post(

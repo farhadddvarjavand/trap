@@ -79,7 +79,7 @@ class Datas extends React.Component{
                 this.setState({searchPageVillas: res.data.data , lastPageOfSearchPage:res.data.meta.last_page , totalVillas:res.data.meta.total , SearchResultWaitingHandle:false});
             })
             .catch(function (error) {
-                console.log('error')
+                console.log(error.response)
             })
     }
 

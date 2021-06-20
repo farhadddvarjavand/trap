@@ -55,7 +55,7 @@
   }
   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo select {
     padding-right: 3%;
-    width: 50%;
+    width: 85%;
     height: 54px;
     background: #FFFFFF;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -64,6 +64,15 @@
   }
   .fv-tableDiscriptions{
     width: 40%;
+  }
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-accommodationOption {
+    padding-right: 3%;
+    width: 50%;
+    height: 54px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    border-radius: 14px;
   }
 }
 

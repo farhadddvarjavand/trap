@@ -66,7 +66,7 @@ class ProfilePageWallet2 extends Component {
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo"}>
                         <p className={"h7"}>منبع تراکنش</p>
 
-                            <select value={this.state.sourceOfTransaction} onChange={(e)=>{
+                            <select className={"fv-accommodationOption"} value={this.state.sourceOfTransaction} onChange={(e)=>{
                                 this.setState({sourceOfTransaction:e.target.value } )
                             }}>
                                 <option value='title' disabled>نام اقامت گاه</option>

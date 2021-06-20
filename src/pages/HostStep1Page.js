@@ -137,7 +137,7 @@ class HostStep1Page extends Component {
                                 }else {
                                     this.setState({validPhoneNumber:false})
                                 }
-                            }} className={this.state.click && this.state.validPhoneNumber===false  ?  "fv-hostStep2Page2Hidden fv-redBorderError" : "fv-hostStep2Page2Hidden"}/>
+                            }} className={this.state.click && this.state.validPhoneNumber===false  ?  "fv-hostStep2Page2Hidden fv-redBorderError fv-english-number" : "fv-hostStep2Page2Hidden fv-english-number"}/>
                             <h6 className={"fv-hostStep2Page2Hidden"}> داستان اقامت گاه شما</h6>
                             <textarea value={this.state.accommodationHistory} onChange={(event)=>{
                                 this.setState({accommodationHistory:event.target.value})

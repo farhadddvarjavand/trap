@@ -342,7 +342,6 @@ export const updateUserAvatar = async (data) => {
     );
 }
 
-
 /* export const villaReservedDatesOnly = async (id) => {
     return http.get(
         `${config.webapi}/api/v1/user/villaReservedDates/${id}`,
@@ -366,6 +365,7 @@ export const closedReservedDates = async (id) => {
 }
 
 
+
 export const updateVilla = async (data,id) => {
     return http.post(
         `${config.webapi}/api/v1/villa/update/${id}`,
@@ -373,4 +373,21 @@ export const updateVilla = async (data,id) => {
         { headers:{ 'Authorization' : await getToken() } }
     );
 }
+
+
+export const getProvinces = async () => {
+    return http.get(
+        `${config.webapi}/api/v1/villa/getProvinces`,
+        { headers:{ 'Authorization' : await getToken() } }
+    );
+}
+
+export const getCities = async (id) => {
+    return http.get(
+        `${config.webapi}/api/v1/villa/getCities/${id}`,
+        { headers:{ 'Authorization' : await getToken() } }
+    );
+}
+
+
 

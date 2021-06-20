@@ -37,6 +37,7 @@ class SearchHomePage extends Datas {
             dateToReturn:'',
             numberOfPeople:'',
             numberOfBedroom:'',
+            villaCode:'',
             dateIn:'',
             dateOut:'',
             accommodationGroup:[],
@@ -236,6 +237,8 @@ class SearchHomePage extends Datas {
                 disinfected:setDisinfectedAccommodation,
                 page:pageNumber,
                 orderBy:this.props.match.params.sort,
+                villa_id:this.state.villaCode,
+
             }
 
             if(setCostRange ===','){
@@ -253,6 +256,9 @@ class SearchHomePage extends Datas {
             if(data.bedroom === null || data.bedroom === "" || data.bedroom === undefined){
                 delete data.bedroom
             }
+            if(data.villa_id === null || data.villa_id === "" || data.villa_id === undefined){
+                delete data.villa_id
+            }
             if(data.type === null || data.type === "" || data.type === undefined){
                 delete data.type
             }
@@ -262,7 +268,8 @@ class SearchHomePage extends Datas {
             if(setDisinfectedAccommodation===0){
                 delete data.disinfected
             }
-            return data
+            console.log(data)
+
         }
 
 
@@ -329,6 +336,7 @@ class SearchHomePage extends Datas {
                                         </MDBCol>
                                         <input type='text' placeholder='تعداد نفرات' value={this.state.numberOfPeople} onChange={(event)=>{this.setState({numberOfPeople:event.target.value})}}/>
                                         <input type='text' placeholder='تعداد خواب' value={this.state.numberOfBedroom} onChange={(event)=>{this.setState({numberOfBedroom:event.target.value})}}/>
+                                        <input type='text' placeholder='کدآگهی' value={this.state.villaCode} onChange={(event)=>{this.setState({villaCode:event.target.value})}}/>
                                     </MDBRow>
                                     <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
                                         <p>قیمت</p>
@@ -381,6 +389,7 @@ class SearchHomePage extends Datas {
                                             type:setAccommodationGroupToString,
                                             discount:setDiscountAccommodation,
                                             disinfected:setDisinfectedAccommodation,
+                                            villa_id:Number(this.state.villaCode),
                                         }
 
                                         if(setCostRange ===','){
@@ -398,6 +407,9 @@ class SearchHomePage extends Datas {
                                         if(data.bedroom === null || data.bedroom === "" || data.bedroom === undefined){
                                             delete data.bedroom
                                         }
+                                        if(data.villa_id === null || data.villa_id === "" || data.villa_id === undefined){
+                                            delete data.villa_id
+                                        }
                                         if(data.type === null || data.type === "" || data.type === undefined){
                                             delete data.type
                                         }
@@ -407,6 +419,7 @@ class SearchHomePage extends Datas {
                                         if(setDisinfectedAccommodation===0){
                                             delete data.disinfected
                                         }
+                                        console.log(data)
 
                                         this.postAndPushResultSearchPageVillas(data)
                                         this.setState({doSearch:true , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber})
@@ -427,7 +440,7 @@ class SearchHomePage extends Datas {
                                          onClick={(event)=>{
                                              const data = {orderBy:'Newest'}
                                              this.postAndPushResultSearchPageVillas(data)
-                                             this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber}) // agar bad az search karbar in ra zad hame pak shavad ke tasir migozarad bar search
+                                             this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" ,villaCode:'' , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber}) // agar bad az search karbar in ra zad hame pak shavad ke tasir migozarad bar search
                                 }}>
                                     جدیدترین
                                 </NavLink>
@@ -436,7 +449,7 @@ class SearchHomePage extends Datas {
                                           onClick={(event)=>{
                                               const data = {orderBy:'Expensive'}
                                               this.postAndPushResultSearchPageVillas(data)
-                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber})
+                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" ,villaCode:''  , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber})
                                 }}>
                                     گران‌ترین
                                 </NavLink>
@@ -445,7 +458,7 @@ class SearchHomePage extends Datas {
                                           onClick={(event)=>{
                                               const data = {orderBy:'Cheapest'}
                                               this.postAndPushResultSearchPageVillas(data)
-                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber})
+                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"",villaCode:''  , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber})
                                 }}>
                                     ارزان‌ترین
                                 </NavLink>
@@ -454,7 +467,7 @@ class SearchHomePage extends Datas {
                                           onClick={(event)=>{
                                               const data = {orderBy:'Popular'}
                                               this.postAndPushResultSearchPageVillas(data)
-                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber})
+                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" ,villaCode:'' , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber})
                                 }}>
                                     محبوب‌ترین
                                 </NavLink>
@@ -463,7 +476,7 @@ class SearchHomePage extends Datas {
                                           onClick={(event)=>{
                                               const data = {orderBy:'Discount'}
                                               this.postAndPushResultSearchPageVillas(data)
-                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber})
+                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" ,villaCode:''  , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber})
                                           }}>
                                     پرتخفیف ها
                                 </NavLink>

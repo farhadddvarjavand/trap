@@ -140,7 +140,7 @@ class HostStep5Page2 extends Component {
 
                 address: step2Info.address,
                 city: step2Info.city,
-                state: step2Info.city,
+                state: step2Info.state,
                 postal_code: step2Info.postal_code,
                 village: step2Info.village,
 
@@ -215,8 +215,8 @@ class HostStep5Page2 extends Component {
             if(allData.city === "" || allData.city === null){
                 delete allData.city
             }
-            if(allData.state === "title" || allData.state === null){
-                delete allData.city
+            if(allData.state === "title" || allData.state === null || allData.state === ""){
+                delete allData.state
             }
             if(allData.exit_time === "title" || allData.exit_time === null){
                 delete allData.exit_time
@@ -257,40 +257,40 @@ class HostStep5Page2 extends Component {
             if(allData.rent_type === "title" || allData.rent_type === null){
                 delete allData.rent_type
             }
-            if(allData.special_cost === ""){
+            if(allData.special_cost === "" || allData.special_cost === null){
                 delete allData.special_cost
             }
-            if(allData.special_extra_cost === ""){
+            if(allData.special_extra_cost === "" || allData.special_extra_cost === null){
                 delete allData.special_extra_cost
             }
-            if(allData.special_rules === ""){
+            if(allData.special_rules === "" || allData.special_rules === null){
                 delete allData.special_rules
             }
             if(allData.story === "" || allData.story === null){
                 delete allData.story
             }
-            if(allData.suitable_for === ""){
+            if(allData.suitable_for === "" || allData.suitable_for === null){
                 delete allData.suitable_for
             }
-            if(allData.temp_fac === ""){
+            if(allData.temp_fac === "" || allData.temp_fac === null){
                 delete allData.temp_fac
             }
-            if(allData.title === ""){
+            if(allData.title === "" || allData.title === null){
                 delete allData.title
             }
-            if(allData.tour_guide === ""){
+            if(allData.tour_guide === "" || allData.tour_guide === null){
                 delete allData.tour_guide
             }
-            if(allData.type === "title"){
+            if(allData.type === "title" || allData.type === null){
                 delete allData.type
             }
-            if(allData.view === ""){
+            if(allData.view === "" || allData.view === null){
                 delete allData.view
             }
-            if(allData.village === ""){
+            if(allData.village === "" || allData.village === null){
                 delete allData.village
             }
-            if(allData.weekly_discount === ""){
+            if(allData.weekly_discount === "" || allData.weekly_discount === null){
                 delete allData.weekly_discount
             }
             console.log(allData)

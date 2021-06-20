@@ -88,7 +88,7 @@ class AccommmodationProduct extends React.Component{
                                                               const step2Data = {
                                                                   address: allDataVilla.address,
                                                                   city: allDataVilla.city,
-                                                                  state: allDataVilla.city,
+                                                                  state: allDataVilla.state,
                                                                   postal_code: allDataVilla.postal_code,
                                                                   village: allDataVilla.village,
                                                                   postalCodeDisable:true,    // baraye eddit bayad postalCode gheire faal shavad - agar vojod dasht gheirefaal mikonim

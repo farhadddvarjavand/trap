@@ -55,8 +55,53 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
 .fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left.fv-hostStepPageSpace .fv-hostStepPage2LeftButtonBodySharedButton .fv-hostStepPage2LeftButton {
   margin-left: -5%;
 }
+.fv-cityLoader {
+  text-align: center;
+  margin-top: 2%;
+}
 
-@media (max-width: 1200px) and (min-width: 767px){
+.fv-cityLoader .circular {
+  animation: rotate 2s linear infinite;
+  height: 28%;
+  transform-origin: center center;
+  width: 13%;
+  position: initial;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.fv-HostStep2Page .fv-hideLoaderCityLoad{
+  display: none;
+}
+.fv-cityLoaderNextBottom .circular {
+  animation: rotate 2s linear infinite;
+  height: 28%;
+  transform-origin: center center;
+  width: 36%;
+  position: initial;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.fv-HostStep2Page{
+   .fv-HostStep1PageBody .fv-hostStepPage1Right h6 {
+    margin-bottom: 2%;
+    margin-top: 4.5%;
+  }
+  .fv-HostStep1PageBody .fv-hostStepPage1Left.fv-hostStepPageSpace .fv-hostStepPage1LeftButton.fv-NextBottomWaitingHostStep2Page {
+    margin-left: 7%;
+    margin-right: 18%;
+  }
+}
+
+
+
+
+  @media (max-width: 1200px) and (min-width: 767px){
   .fv-HostStep2Page.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
     margin-left: 131%;
     /* padding: 5% 15% 5% 15%; */
@@ -70,6 +115,13 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
     margin-top: -21.5%;
     margin-right: -41%;
     z-index: 2;
+  }
+
+}
+@media (max-width: 767px){
+  .fv-HostStep2Page .fv-HostStep1PageBody .fv-hostStepPage1Left.fv-hostStepPageSpace .fv-hostStepPage1LeftButton.fv-NextBottomWaitingHostStep2Page {
+    margin-left: 7%;
+    margin-right: 8%;
   }
 }
 @media (max-width: 767px) and (min-width: 500px) {
@@ -92,6 +144,7 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
     z-index: 1;
   }
 
+
 }
 @media (max-width: 500px) {
   .fv-hostStep2Page2.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {
@@ -100,6 +153,7 @@ $unselectedTextColor:rgba(145, 145, 145, 0.5);
   .fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left.fv-hostStepPageSpace .fv-hostStepPage2LeftButton {
     margin-left: -4%;
   }
+
 }
 @media (max-width: 320px) {
   .fv-HostStep2Page.fv-HostStep2Page .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage2LeftButton {

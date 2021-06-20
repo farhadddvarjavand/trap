@@ -1913,7 +1913,7 @@ class DisplayPage extends Component {
                                         {console.log(this.state.resultVilla)}
                                     </MDBRow>
                                     <MDBRow>
-                                        <h6> {this.state.resultVilla.city}{this.state.resultVilla.village ? ` - ${this.state.resultVilla.village}` : ''} </h6>
+                                        <h6> {this.state.resultVilla.state}{` - ${this.state.resultVilla.city}`} </h6>
                                     </MDBRow>
 
                                     {Number(this.state.resultVilla.long) !== 51.42 && Number(this.state.resultVilla.lat) !== 35.72 && this.state.resultVilla.long !== undefined && this.state.resultVilla.lat !== undefined && this.state.resultVilla.long  && this.state.resultVilla.lat ? // agar lat and long vojod dasht
