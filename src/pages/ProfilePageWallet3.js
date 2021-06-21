@@ -53,6 +53,7 @@ class ProfilePageWallet3 extends Component {
                                             .then(res=>{
                                                 if(res.data.status === 1){
                                                     alert("درخواست بررداشت با موفقیت ثبت شد")
+                                                    this.props.ChangeAmountPrice()
                                                     this.props.history.push(`/MainProfilePages/ProfileMyTransaction`)
                                                     console.log(res)  //s درخواست بررداشت باید فرستاده بشود  // "Withdrawal request created"
                                                 }else {
@@ -61,11 +62,13 @@ class ProfilePageWallet3 extends Component {
 
                                                 this.setState({waitingButton:false})
                                             })
-                                            .catch(err=>{if(err.response.data.errors.requested_amount[0]){
-                                                 alert('مقدار نامعتبر میباشد')
+                                            .catch(err=>{
+                                                if(err.response){
+                                                    alert('مقدار نامعتبر میباشد')
+                                                }
 
                                                 this.setState({waitingButton:false})
-                                            }})
+                                            })
                                 }}/>
 
                             </MDBCol>

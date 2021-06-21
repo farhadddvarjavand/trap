@@ -5,12 +5,13 @@ import Logo from "../images/Logo.png";
 import "../style/FactorPage.scss"
 import HeaderSearch from "../componentsPages/HeaderSearch";
 import {factor, requestPay} from "../services/payService";
-import {calculateCost} from "../services/userService";
+import {calculateCost, getUserStock} from "../services/userService";
 import {arrayBetweenDates} from "../componentsPages/calculationsDate";
 import {extendMoment} from "moment-range";
 import Moment from "moment";
 import {Link} from "react-router-dom";
 import config from "../services/config.json";
+import {Waiting, WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
 const commaNumber = require('comma-number')
 
 class FactorPage extends Component {
@@ -22,20 +23,52 @@ class FactorPage extends Component {
         this.state={
             factorInfo:[] ,
             villaInfo:[],
+            statusPay: 'direct',
+            statusWallet:true,
+            stock:'',
+
+            waitingLoadingPage:true,
+
 
         }
+        this.onValChange = this.onValChange.bind(this);
     }
     componentDidMount() {
         this.factor()
+
+        getUserStock()
+            .then(res=>{
+                this.setState({stock:res.data.data})
+            })
+            .catch(err=>console.log(err.response))
+
     }
 
     factor =()=>{
         factor(this.props.match.params.id)
             .then(res=>{
                 console.log(res)
-                this.setState({factorInfo:res.data.data , villaInfo:res.data.data.villa})
+                this.setState({factorInfo:res.data.data , villaInfo:res.data.data.villa , waitingLoadingPage:false})
             })
             .catch(err=>console.log(err.response))
+    }
+
+
+    onValChange = (event) => {
+        this.setState({
+            statusPay: event.target.value,
+            statusWallet:true
+        });
+    }
+    walletVerify = (event) => {
+        this.setState({
+            statusPay: event.target.value
+        });
+        if(Number(this.state.stock) < Number(this.state.factorInfo.cost)){ // mojodi kamtaraz gheimate factor bod
+            this.setState({
+                statusWallet:false,
+            });
+        }
     }
 
 
@@ -47,6 +80,10 @@ class FactorPage extends Component {
                                    thisPageName = "فاکتور" />
                 </MDBContainer>
 
+                {this.state.waitingLoadingPage ? WaitingLoadingProfilePage(this.state.waitingLoadingPage , "fv-waitingLoadPublicFullScreen") :
+
+
+                    <>
                 <MDBRow className={"fv-ProfilePageLeftBody desktop"}>
 
                     <MDBCol md={3} className={"fv-factorPageRightInfo"}>
@@ -114,7 +151,14 @@ class FactorPage extends Component {
                                     <MDBRow  className={"fv-radioButtonFactorPage"}>
                                         <MDBCol className={"fv-radioButtonForWithdraw"} md={2}>
                                             <MDBContainer>
-                                                <input type={"radio"} value={""}/>
+                                                <label>
+                                                        <input
+                                                            type="radio"
+                                                            value="wallet"
+                                                            checked={this.state.statusPay === "wallet"}
+                                                            onChange={this.walletVerify}/>
+                                                </label>
+
                                             </MDBContainer>
                                         </MDBCol>
                                         <MDBCol className={"fv-radioButtonForWithdrawRowOne"} md={10}>
@@ -122,25 +166,29 @@ class FactorPage extends Component {
                                                 <MDBCol md={7}>
                                                     <p className={"h7"}>پرداخت از طریق کیف پول</p>
                                                 </MDBCol>
-                                                <MDBCol  md={5}>
-                                                    <p style={{color:'#EB5757'}} className={"h7"}>موجودی ناکافی</p>
-                                                </MDBCol>
+                                                {this.state.statusWallet === false ?
+                                                    <MDBCol  md={5}>
+                                                        <p style={{color:'#EB5757'}} className={"h7"}>موجودی ناکافی</p>
+                                                    </MDBCol> : ''  }
+
                                             </MDBRow>
                                         </MDBCol>
 
-                                        <MDBRow className={"fv-radioButtonForWithdrawTwoRowOne"}>
-                                            <MDBCol className={"fv-radioButtonForWithdrawTwo"} md={12}>
+                                        {this.state.statusPay === "wallet" ?
+                                            <MDBRow className={"fv-radioButtonForWithdrawTwoRowOne"}>
+                                                <MDBCol className={"fv-radioButtonForWithdrawTwo"} md={12}>
 
-                                                <MDBRow className={"fv-radioButtonForWithdrawTwoRow"}>
-                                                    <MDBCol md={6}>
-                                                        <p style={{fontSize:'14px'}}>موجودی کیف پول</p>
-                                                    </MDBCol>
-                                                    <MDBCol  md={6}>
-                                                        <h6  style={{color:'#EB5757'}} >۰۰۰۵۴۲ تومان</h6>
-                                                    </MDBCol>
-                                                </MDBRow>
-                                            </MDBCol>
-                                        </MDBRow>
+                                                    <a>  <MDBRow className={"fv-radioButtonForWithdrawTwoRow"}>
+                                                        <MDBCol md={6}>
+                                                            <p style={{fontSize:'14px'}}>موجودی کیف پول</p>
+                                                        </MDBCol>
+                                                        <MDBCol  md={6}>
+                                                            <h6> {commaNumber(this.state.stock)}تومان</h6>
+                                                        </MDBCol>
+                                                    </MDBRow> </a>
+                                                </MDBCol>
+                                            </MDBRow> : ''   }
+
 
 
 
@@ -150,7 +198,13 @@ class FactorPage extends Component {
 
                                             <MDBCol className={"fv-radioButtonForWithdraw"} md={2}>
                                                 <MDBContainer>
-                                                    <input type={"radio"} value={""}/>
+
+                                                    <input
+                                                        type="radio"
+                                                        value="direct"
+                                                        checked={this.state.statusPay === "direct"}
+                                                        onChange={this.onValChange}/>
+
                                                 </MDBContainer>
                                             </MDBCol>
                                             <MDBCol className={"fv-radioButtonForWithdrawRowOne"} md={10}>
@@ -234,25 +288,61 @@ class FactorPage extends Component {
                                     </MDBRow>
                                     <MDBRow>
                                         <MDBCol md={12} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
-                                            <input type="button" value="پرداخت" onClick={()=>{
-                                                const data ={
-                                                    amount : Number(this.state.factorInfo.cost)*10,
-                                                    reservation_id : this.state.factorInfo.id,
-                                                    villa_id :this.state.villaInfo.id,
-                                                }
-                                                console.log(data)
-                                                requestPay(data)
-                                                    .then(res=>{
-                                                        if(res.data.status === 0){
-                                                            alert(res.data.data)
+                                            {this.state.statusWallet ?
+                                                <input type="button" value="پرداخت" onClick={()=>{
+                                                    if(this.state.statusPay === "wallet"){ // dar inja roie radio button wallet click shide va az ghabl ham chek shode ke mojodi dashte bashad
+                                                        const data ={
+                                                            amount : Number(this.state.factorInfo.cost),
+                                                            reservation_id : this.state.factorInfo.id,
+                                                            villa_id :this.state.villaInfo.id,
+                                                            wallet:true
                                                         }
-                                                        else  {
-                                                            console.log(res)
-                                                            window.location.replace(res.data.payment_url);
+                                                        requestPay(data)
+                                                            .then(res=>{
+                                                                console.log(res)
+                                                                if(res.data.status === -1){
+                                                                    // mojodi kafi nist
+                                                                    alert(res.data.message)
+                                                                }
+                                                                if(res.data.status === 1){
+                                                                    alert(res.data.message)
+                                                                    window.location.replace("/MainProfilePages/ProfileMyReservation");
+                                                                }
+                                                                if(res.data.status === -2){
+                                                                    alert(res.data.message)
+                                                                    window.location.replace("/MainProfilePages/ProfileMyReservation");
+                                                                }
+                                                            })
+                                                            .catch(err=>console.log(err.response))
+
+                                                    }else { // dar sorati ke pardakht mostaghim bashad
+                                                        const data ={
+                                                            amount : Number(this.state.factorInfo.cost),
+                                                            reservation_id : this.state.factorInfo.id,
+                                                            villa_id :this.state.villaInfo.id,
                                                         }
-                                                    })
-                                                    .catch(err=>console.log(err.response))
-                                            }}/>
+                                                        console.log(data)
+                                                        requestPay(data)
+                                                            .then(res=>{
+                                                                if(res.data.status === 0){
+                                                                    alert(res.data.data)
+                                                                }
+                                                                else  {
+                                                                    console.log(res)
+                                                                    window.location.replace(res.data.payment_url);
+                                                                }
+                                                            })
+                                                            .catch(err=>console.log(err.response))
+                                                    }
+
+
+                                                }}/>
+                                                :
+                                                        <input style={{background:'rgb(235, 87, 87)'}} type="button" value="شارژ کیف پول" onClick={()=>{
+                                                            window.location.replace("/MainProfilePages/ProfilePageChargeWallet");
+                                                        }}/>
+                                            }
+
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCol>
@@ -260,6 +350,8 @@ class FactorPage extends Component {
                         </MDBContainer>
                     </MDBCol>
                 </MDBRow>
+
+
 
                 {/**//**//**//*9*//**//**//**//**//**/         /* Mobile */        /**//**/ /**//**//**//**/}
 
@@ -388,6 +480,83 @@ class FactorPage extends Component {
                                     </MDBRow>
                                 </MDBCol>
                                 <MDBCol md={6}>
+
+                                    <h6>نحوه پرداخت</h6>
+                                    <MDBRow  className={"fv-radioButtonFactorPage"}>
+                                        <MDBCol className={"fv-radioButtonForWithdraw"} md={2} sm={2}>
+                                            <MDBContainer>
+                                                <label>
+                                                    <input
+                                                        type="radio"
+                                                        value="wallet"
+                                                        checked={this.state.statusPay === "wallet"}
+                                                        onChange={this.walletVerify}/>
+                                                </label>
+
+                                            </MDBContainer>
+                                        </MDBCol>
+                                        <MDBCol className={"fv-radioButtonForWithdrawRowOne"} md={10} sm={10}>
+                                            <MDBRow>
+                                                <MDBCol md={7}>
+                                                    <p className={"h7"}>پرداخت از طریق کیف پول</p>
+                                                </MDBCol>
+                                                {this.state.statusWallet === false ?
+                                                    <MDBCol  md={5}>
+                                                        <p style={{color:'#EB5757' , marginTop:'2%' , paddingRight:'-6%' , marginRight: '-10%'}} className={"h7"}>موجودی ناکافی</p>
+                                                    </MDBCol> : ''  }
+
+                                            </MDBRow>
+                                        </MDBCol>
+
+                                        {this.state.statusPay === "wallet" ?
+                                            <MDBRow className={"fv-radioButtonForWithdrawTwoRowOne"}>
+                                                <MDBCol className={"fv-radioButtonForWithdrawTwo"} md={12} sm={12}>
+
+                                                      <MDBRow className={"fv-radioButtonForWithdrawTwoRow"}>
+                                                        <MDBRow className={"fv-walletStockMobile"}>
+                                                            <MDBCol md={6} sm={12}>
+                                                                <p style={{fontSize:'14px'}}>موجودی کیف پول</p>
+                                                            </MDBCol>
+                                                        </MDBRow>
+                                                        <MDBRow>
+                                                            <MDBCol className={"fv-amountStockMobile"} md={6} sm={12}>
+                                                                <h6 style={{marginTop:'10%'}}>{commaNumber(this.state.stock)}تومان</h6>
+                                                            </MDBCol>
+                                                        </MDBRow>
+
+                                                    </MDBRow>
+                                                </MDBCol>
+                                            </MDBRow> : ''   }
+
+
+
+
+                                        <MDBCol md={12}>
+
+                                        </MDBCol>
+
+                                        <MDBCol className={"fv-radioButtonForWithdraw"} md={2} sm={2}>
+                                            <MDBContainer>
+
+                                                <input
+                                                    type="radio"
+                                                    value="direct"
+                                                    checked={this.state.statusPay === "direct"}
+                                                    onChange={this.onValChange}/>
+
+                                            </MDBContainer>
+                                        </MDBCol>
+                                        <MDBCol className={"fv-radioButtonForWithdrawRowOne"} md={10} sm={10}>
+                                            <MDBRow>
+                                                <MDBCol md={7}>
+                                                    <p className={"h7"}>پرداخت مستقیم</p>
+                                                </MDBCol>
+                                            </MDBRow>
+                                        </MDBCol>
+
+
+                                    </MDBRow>
+
                                     <p>کد تخفیف</p>
                                     <MDBRow>
                                         <MDBCol md={6} sm={9}>
@@ -399,7 +568,60 @@ class FactorPage extends Component {
                                     </MDBRow>
                                     <MDBRow className={"fv-FactorPageButtonMobile"}>
                                         <MDBCol md={12} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
-                                            <input type="button" value="پرداخت"/>
+                                            {this.state.statusWallet ?
+                                                <input type="button" value="پرداخت" onClick={()=>{
+                                                    if(this.state.statusPay === "wallet"){ // dar inja roie radio button wallet click shide va az ghabl ham chek shode ke mojodi dashte bashad
+                                                        const data ={
+                                                            amount : Number(this.state.factorInfo.cost),
+                                                            reservation_id : this.state.factorInfo.id,
+                                                            villa_id :this.state.villaInfo.id,
+                                                            wallet:true
+                                                        }
+                                                        requestPay(data)
+                                                            .then(res=>{
+                                                                console.log(res)
+                                                                if(res.data.status === -1){
+                                                                    // mojodi kafi nist
+                                                                    alert(res.data.message)
+                                                                }
+                                                                if(res.data.status === 1){
+                                                                    alert(res.data.message)
+                                                                    window.location.replace("/MainProfilePages/ProfileMyReservation");
+                                                                }
+                                                                if(res.data.status === -2){
+                                                                    alert(res.data.message)
+                                                                    window.location.replace("/MainProfilePages/ProfileMyReservation");
+                                                                }
+                                                            })
+                                                            .catch(err=>console.log(err.response))
+
+                                                    }else { // dar sorati ke pardakht mostaghim bashad
+                                                        const data ={
+                                                            amount : Number(this.state.factorInfo.cost),
+                                                            reservation_id : this.state.factorInfo.id,
+                                                            villa_id :this.state.villaInfo.id,
+                                                        }
+                                                        console.log(data)
+                                                        requestPay(data)
+                                                            .then(res=>{
+                                                                if(res.data.status === 0){
+                                                                    alert(res.data.data)
+                                                                }
+                                                                else  {
+                                                                    console.log(res)
+                                                                    window.location.replace(res.data.payment_url);
+                                                                }
+                                                            })
+                                                            .catch(err=>console.log(err.response))
+                                                    }
+
+
+                                                }}/>
+                                                :
+                                                <input style={{background:'rgb(235, 87, 87)'}} type="button" value="شارژ کیف پول" onClick={()=>{
+                                                    window.location.replace("/MainProfilePages/ProfilePageChargeWallet");
+                                                }}/>
+                                            }
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCol>
@@ -407,6 +629,9 @@ class FactorPage extends Component {
                         </MDBContainer>
                     </MDBCol>
                 </MDBRow>
+
+                </>
+                }
 
                 <MDBRow>
                     <Footer />

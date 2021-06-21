@@ -6,7 +6,15 @@
 }
 @font-face {
   font-family: 'IRANSansWeb(FaNum)';
-  src: local('IRANSans'), url(font/fonts/ttf/IRANSansWeb.ttf) format('truetype');
+  src: local('IRANSans'), url('font/fonts/IRANSansWeb(FaNum)_Light.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'IRANSansMobile(FaNum) Light';
+  src: local('IRANSans'), url('font/fonts/IRANSansWeb(FaNum)_Light.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'IRANSansWeb-Regular';
+  src: local('IRANSans'), url('font/IRANSansMobile(FaNum).ttf') format('truetype');
 }
 body{
   font-family: "IRANSansMobile(FaNum) Light" !important;

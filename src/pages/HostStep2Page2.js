@@ -25,9 +25,9 @@ class HostStep2Page2 extends Component {
             mapAddress:'',
             waitingMapLoad:true,
         }
-        this.reverseFunction = this.reverseFunction.bind(this);
     }
     componentDidMount() {
+        this.reverseFunction = this.reverseFunction.bind(this);
         const prevData =  JSON.parse(localStorage.getItem("step2-2"))
         if (prevData) {
             if(prevData.long>0)

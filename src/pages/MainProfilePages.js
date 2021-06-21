@@ -100,6 +100,13 @@ class MainProfilePages extends Component {
     ChangeUserAvatarSrc = (avatarSrc) =>{
         this.setState({AvatarSrc:avatarSrc})
     }
+    ChangeAmountPrice = () =>{
+        getUserStock()
+            .then(res=>{
+                this.setState({stock:res.data.data})
+            })
+            .catch(err=>console.log(err.response))
+    }
 
 
     swetchPages = (page) =>{
@@ -338,7 +345,10 @@ class MainProfilePages extends Component {
                         <Route exact path={'/MainProfilePages/ProfileWallet'} component={ProfilePageWallet}/>
                         <Route exact path={'/MainProfilePages/ProfileWalletTransactionRegistration'} component={ProfilePageWallet2}/>
 
-                        <Route exact path={'/MainProfilePages/profileWalletRequestWithdraw'} component={ProfilePageWallet3}/>
+                            <Route exact path={'/MainProfilePages/profileWalletRequestWithdraw'} render={(props) => (
+                                <ProfilePageWallet3 ChangeAmountPrice={this.ChangeAmountPrice}
+                                />
+                            )}/>
 
                             <Route exact path={'/MainProfilePages/ProfilePageChargeWallet'} component={ProfilePageChargeWallet}/>
 

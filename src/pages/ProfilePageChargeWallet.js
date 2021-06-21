@@ -50,11 +50,22 @@ class ProfilePageChargeWallet extends Component {
                                     console.log(data)
                                     chargeWallet(data)
                                         .then(res=>{
-                                            console.log(res)
+                                            if(res.data.status === 0){
+                                                alert(res.data.data)
+                                            }
+                                            else  {
+                                                console.log(res)
+                                                window.location.replace(res.data.payment_url);
+                                            }
                                         })
                                         .catch(err=>{
                                             console.log(err.response)
+                                            if(err.response.data && err.response.data.errors){
+                                                alert(err.response.data.errors.amount[0])
+                                                this.setState({waitingButton:false})
+                                            }
                                         })
+
                                 }}/>
 
                             </MDBCol>

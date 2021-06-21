@@ -604,6 +604,8 @@ class DisplayPage extends Component {
 
         let rangeBetween = ' '
 
+        console.log(range.diff('days'))
+
         if(range.diff('days')){
             if(range.diff('days')<0)
             {
@@ -618,8 +620,23 @@ class DisplayPage extends Component {
 
             }
         }
-        if(range.diff('days') === 0){
+        if(range.diff('days') === 0 && Number(this.state.dateToGo.day) === Number(this.state.dateToReturn.day)){
             rangeBetween=1
+        }
+        console.log(this.state.dateToReturn.day)
+        console.log(this.state.dateToGo.day)
+        if(Number(this.state.dateToGo.day) === 31 && this.state.dateToReturn.day !== "انتخاب تاریخ"){
+            if(Number(this.state.dateToGo.day) !== Number(this.state.dateToReturn.day)){
+                rangeBetween = rangeBetween + 1
+            }
+            if(Number(this.state.dateToGo.day) === Number(this.state.dateToReturn.day) && Number(this.state.dateToGo.month) !== Number(this.state.dateToReturn.month) ){
+                rangeBetween = rangeBetween + 1
+            }
+            if(Number(this.state.dateToGo.day) === Number(this.state.dateToReturn.day) && Number(this.state.dateToGo.month) === Number(this.state.dateToReturn.month) && Number(this.state.dateToGo.year) !== Number(this.state.dateToReturn.year)){
+                rangeBetween = rangeBetween + 1
+            }
+
+
         }
 
 
@@ -736,6 +753,7 @@ class DisplayPage extends Component {
               }*/
 
 
+            console.log(daysCostString)
             if(this.state.daysCostString !== daysCostString){
                 waitingCalculate = true
 
