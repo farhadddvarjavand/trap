@@ -29,7 +29,7 @@ import ProfilePageCalendarEmpty from "../emptyAndHandlePage/ProfilePageCalendarE
 import ProfilePageWallet2 from "./ProfilePageWallet2";
 import ScrollToTop from "../componentsPages/ScrollToTop";
 import MobileLogo from "../images/MobileLogo.png";
-import LogoName from "../images/LogoName.png";
+import FotterpageLogo from "../images/Logo.png"
 import ProfilePageChargeWallet from "./ProfilePageChargeWallet";
 
 const commaNumber = require('comma-number')
@@ -132,7 +132,8 @@ class MainProfilePages extends Component {
                                     <MDBRow className={' fv-footerDisplayPageBody'}>
                                         <MDBCol md={2}>
                                             <Link to={'/MainProfilePages/profile'}> <i className="fa fa-user-alt"/>
-                                                <a> حساب کاربری</a> </Link>
+                                                <a style={{marginRight: '2%'}}>{this.state.nameAndFamily ? this.state.nameAndFamily : 'میهمان'}</a>
+                                            </Link>
                                         </MDBCol>
                                         <MDBCol md={2} className={"fv-DisplayPageSearchIcon"}>
                                             <input type='searchBbox' placeholder=' جستجو شهر مورد نظر'
@@ -180,8 +181,10 @@ class MainProfilePages extends Component {
                                             }}/>
                                         </MDBCol>
                                         <MDBCol md={6} sm={9} className={"menuMobile"}>
-                                            <img src={LogoName} className={"fv-DisplayPageSearchName"}/>
-                                            <img src={MobileLogo} className={"fv-DisplayPageSearchLogo"}/>
+                                            {/* img src={FotterpageLogo} className={"fv-DisplayPageSearchName"} */}
+                                            <a onClick={() => window.location.replace("/")}> <img src={FotterpageLogo}
+                                                                                                  className={"fv-DisplayPageSearchLogo"}/>
+                                            </a>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage"}>
@@ -310,8 +313,9 @@ class MainProfilePages extends Component {
                                                          activeClassName={"fv-reservationActive"}><p
                                                     onClick={() => this.setState({onclickHandel: false})}><i
                                                     className="fa fa-heart"/>علاقه مندی ها</p></NavLink>
-                                                <NavLink to={'/'}><p><i className="fas fa-sign-out-alt"/>خروج</p>
-                                                </NavLink>
+                                                <a onClick={() => {
+                                                    window.location.replace(`/`);
+                                                }}><p><i className="fas fa-sign-out-alt"/>خروج</p></a>
                                             </MDBCol>
                                         </MDBRow>
                                     </MDBCol> : ''

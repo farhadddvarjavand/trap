@@ -1,49 +1,55 @@
 
-.fv-HostStep1Page{
+.fv-HostStep1Page {
 
-  .fv-HostStep1PageBody{
+  .fv-HostStep1PageBody {
     direction: rtl;
 
-    .fv-hostStepPage1Right{
-        text-align: initial;
-        margin-top: 2%;
+    .fv-hostStepPage1Right {
+      text-align: initial;
+      margin-top: 2%;
 
-      .button, input , textarea , select , [textarea]{
+      .button, input, textarea, select, [textarea] {
         width: 60%;
         border: 1px solid rgba(145, 145, 145, 0.5);
         border-radius: 14px;
         height: 54px;
 
       }
-      select{
+
+      select {
+        background: white;
         margin: 1px;
       }
-      textarea{
+
+      textarea {
         height: 40%;
-       // border: 1px solid rgba(0, 0, 0, 0.1);
+        // border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 14px;
 
       }
-      h6{
+
+      h6 {
         margin-bottom: 1%;
         margin-top: 4.5%;
       }
-      .fv-hostStep2Page2P , .fv-hostStep2Page2Textarea , .fv-hostStep2Page2Map{
+
+      .fv-hostStep2Page2P, .fv-hostStep2Page2Textarea, .fv-hostStep2Page2Map {
         display: none;
       }
     }
 
-    .fv-hostStepPage1Left{
+    .fv-hostStepPage1Left {
       text-align: initial;
       margin-top: 2%;
 
-      .fv-hostStepPage1LeftImage{
+      .fv-hostStepPage1LeftImage {
         /* margin-left: 8%; */
         margin-inline-start: auto;
         width: 303px;
         height: 243px;
       }
-      .fv-hostStepPage1LeftButton{
+
+      .fv-hostStepPage1LeftButton {
         float: left;
         margin-left: 18%;
         /*padding: 3.5% 10.8% 3.5% 10.8%;*/
@@ -56,10 +62,12 @@
         width: 195.5px;
         height: 67px;
       }
+
       .fv-hostStepPage2LeftButtonBody {
         direction: ltr;
       }
-      .fv-hostStepPage1LeftContentBody{
+
+      .fv-hostStepPage1LeftContentBody {
         width: 99%;
         border: 1px solid #88888817;
         box-shadow: 0px 4px 14px rgba(14, 15, 15, 0.08);
@@ -68,34 +76,40 @@
         padding-left: 8%;
 
       }
-      .fv-hostStepPage2LeftButton{
+
+      .fv-hostStepPage2LeftButton {
         display: none;
       }
     }
 
   }
-  .fv-redBorderError{
+
+  .fv-redBorderError {
     border: 1px solid red;
     background: #E88F0A;
   }
-  .fv-alertNotErrorText{
+
+  .fv-alertNotErrorText {
     display: none;
   }
-  .fv-alertErrorText{
+
+  .fv-alertErrorText {
     color: mediumvioletred;
     border-bottom: 1px solid #E88F0A;
   }
-  .fv-alertErrorTextWithoutBorder{
+
+  .fv-alertErrorTextWithoutBorder {
     color: mediumvioletred;
     margin-right: 3%;
   }
+
   .fv-HostStep1PageBody .fv-hostStepPage1Left.fv-hostStepPageSpace .fv-hostStepPage1LeftButton {
     margin-left: 7%;
   }
 }
 
 
-@media (max-width: 1200px) and (min-width: 767px){
+@media (max-width: 1200px) and (min-width: 767px) {
 
   .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .button, .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right input, .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right textarea, .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right select {
     width: 90%;
@@ -117,7 +131,7 @@
 }
 
 @media (max-width: 767px) {
-  .fv-hostStepPage1LeftContentBody{
+  .fv-hostStepPage1LeftContentBody {
     display: none;
   }
   .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .button, .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right input, .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right select {
@@ -125,7 +139,7 @@
     height: 46px;
     border-radius: 7px;
   }
-  .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right textarea{
+  .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right textarea {
     width: 100%;
     border-radius: 1px;
   }
@@ -134,7 +148,7 @@
     margin-left: 4%;
     z-index: 5;
   }
-  .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage1LeftButton{
+  .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage1LeftButton {
     border-radius: 8px;
     margin-left: 9vw;
     /* padding: 5.4% 13.4% 5.4% 13.4%; */

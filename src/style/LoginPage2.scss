@@ -1,12 +1,14 @@
-.fv-loginPage2{
-  .fv-loginPageBodyOne{
-    .col-md-5 , .col-md-5 p a{
+.fv-loginPage2 {
+  .fv-loginPageBodyOne {
+    .col-md-3, .col-md-3 p a {
       margin-right: -6%;
       color: #32C788;
     }
-    .fv-loginPage2RightBodyButtonAndTime{
+
+    .fv-loginPage2RightBodyButtonAndTime {
       margin-left: 25%;
       margin-top: 3%;
+
       .col-md-8 {
         text-align: end;
         margin: auto;
@@ -25,10 +27,12 @@
         padding: 0;
       }
     }
-    .fv-reloadLink{
+
+    .fv-reloadLink {
       color: #32C788;
     }
   }
+
   .fv-loginPageBodyOne .loader {
     position: relative;
     /* border-radius: 16px; */
@@ -49,7 +53,7 @@
 }
 
 @media (max-width: 540px) {
-  .fv-loginPage2 .fv-loginPageBodyOne .col-md-5 {
+  .fv-loginPage2 .fv-loginPageBodyOne .col-md-3 {
     margin-right: 0%;
     color: #32C788;
     margin-top: -5%;
@@ -83,7 +87,7 @@
   .fv-loginPage2 .fv-loginPageBodyOne .fv-reloadLink {
     color: #ffffff;
   }
-  .fv-loginPage2 .fv-loginPageBodyOne .col-md-5, .fv-loginPage2 .fv-loginPageBodyOne .col-md-5 p a {
+  .fv-loginPage2 .fv-loginPageBodyOne .col-md-3, .fv-loginPage2 .fv-loginPageBodyOne .col-md-3 p a {
     margin-right: 1%;
     color: #32C788;
   }
@@ -112,12 +116,14 @@
     margin-bottom: 30%;
   }
 }
-@media (max-width: 360px) and (min-width: 355px){
+
+@media (max-width: 360px) and (min-width: 355px) {
   .fv-loginPage .fv-loginPageImageLeftBody {
     margin-top: -140%;
   }
 }
-@media (max-width: 320px){
+
+@media (max-width: 320px) {
   .fv-loginPage2 .fv-loginPageImageLeftBody {
     margin-top: -250;
   }

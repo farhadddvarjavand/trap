@@ -617,6 +617,13 @@
         margin-top: 0vw;
     }
 
+    .fv-MainBody.fv-mainProductsSimilar {
+        /* max-width: 1294px; */
+        /* margin-right: 9px !important; */
+        padding-right: 3px;
+        padding-left: 7%;
+    }
+
 }
 
 @media (max-width: 540px) {

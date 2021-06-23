@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {MDBCol, MDBRow} from "mdbreact";
+import {MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import "../style/LoginPage2.scss"
 import LoginPageImage from "../images/simon-haslett-BSkXuvmSHLA-unsplash 1.png"
 import {Link} from "react-router-dom";
@@ -15,6 +15,7 @@ class LoginPage2 extends Component {
             errorsText: "کد وارد شده معتبر نمیباشد",
             validCode: true,
             clickLoader: false,
+            phoneNumber: '',
 
         }
     }
@@ -22,10 +23,15 @@ class LoginPage2 extends Component {
 
     componentDidMount() {
         this.setTime()
+
+        let phoneNumber = localStorage.getItem("phone_number")
+        this.setState({phoneNumber: phoneNumber})
     }
 
     componentWillUnmount() {
         clearInterval(this.myInterval)
+
+
     }
 
     setTime = () => {
@@ -131,7 +137,7 @@ class LoginPage2 extends Component {
 
         const {minutes, seconds, validationCode} = this.state
         return (
-            <div>
+            <MDBContainer className={"fv-loginPagesBody"}>
 
 
                 <MDBRow className={"fv-loginPage fv-loginPage2"}>
@@ -150,10 +156,10 @@ class LoginPage2 extends Component {
                             <MDBCol sm={12} className={"fv-loginPage2RightBody"}>
                                 <h3>تایید شماره موبایل</h3>
                                 <MDBRow>
-                                    <MDBCol md={6} sm={12}>
-                                        <p>کد تایید به شماره {this.props.mobileNumber} ارسال شد</p>
+                                    <MDBCol md={9} sm={12}>
+                                        <p>کد تایید به شماره {this.state.phoneNumber} ارسال شد</p>
                                     </MDBCol>
-                                    <MDBCol md={5} sm={12}>
+                                    <MDBCol md={3} sm={12}>
                                         <p><Link to={'/login'}>ویرایش شماره</Link></p>
                                     </MDBCol>
                                 </MDBRow>
@@ -216,7 +222,7 @@ class LoginPage2 extends Component {
                 </MDBRow>
 
 
-            </div>
+            </MDBContainer>
         )
     }
 }

@@ -10,8 +10,6 @@ import TrapMagazine from "../componentsPages/trapMagazine"
 import TopicsMainPage from "../componentsPages/topicsMainPage";
 import FotterpageImage from "../images/footerMainImage.png"
 import FotterpageLogo from "../images/Logo.png"
-import LogoName from "../images/LogoName.png"
-import MobileLogo from "../images/MobileLogo.png"
 import MobileMenu from "../images/MobileMenu.png"
 import UserImage from "../images/user.png"
 import Image1 from "../images/image1.png"
@@ -180,11 +178,8 @@ class MainPage extends Datas {
                                    this.setState({onclickButtonHandle: !this.state.onclickButtonHandle})
                                }}> <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage}/></a>
                         </MDBCol>
-                        <MDBCol sm={2} className={"fv-footerMenuRibbonButton"}>
-                            <img src={LogoName}/>
-                        </MDBCol>
                         <MDBCol sm={2}>
-                            <img src={MobileLogo}/>
+                            <img src={FotterpageLogo}/>
                         </MDBCol>
                     </MDBRow>
 

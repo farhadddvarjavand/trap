@@ -1,65 +1,77 @@
 import React, {Component} from "react";
 import {MDBCol, MDBContainer, MDBRow} from "mdbreact";
-import LogoName from "../images/LogoName.png";
-import MobileLogo from "../images/MobileLogo.png";
 import config from "../services/config.json";
-import Logo from "../images/Logo.png";
 import {Link} from "react-router-dom";
 import "../style/headerSearch.scss"
-import ProfilePageUserInfo from "./ProfilePageUserInfo";
 import UserImage from "../images/user.png";
 import MyaccommodationsIcon from "../images/icons/Folder.svg";
 import Logout from "../images/icons/Logout.svg";
+import FotterpageLogo from "../images/Logo.png"
 import "../style/HeaderDisplay.scss"
 
 class DisplayHeader extends Component {
     constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             ...props,
             ...this.state,
             ...this.props,
-            searchResult:'',
-            onclickHandel:false,
+            searchResult: '',
+            onclickHandel: false,
 
         }
     }
 
     render() {
         const info = JSON.parse(localStorage.getItem("infoUser"))
-        let nameAndFamily =  ""
+        let nameAndFamily = ""
         let avatar = ""
-        if(info){
-            nameAndFamily=info.userInfo.fullname
-            avatar=info.userInfo.avatar
+        if (info) {
+            nameAndFamily = info.userInfo.fullname
+            avatar = info.userInfo.avatar
         }
         return (
-            <div className={"fv-footerMenu fv-footerDisplayPage fv-DisplayPage fv-profilePageUserInfo fv-DisplayHeader"}>
+            <div
+                className={"fv-footerMenu fv-footerDisplayPage fv-DisplayPage fv-profilePageUserInfo fv-DisplayHeader"}>
                 <MDBRow className={' fv-footerDisplayPageBody'}>
                     <MDBCol md={2} className={"fv-homeIconDisplayPageBody"}>
-                        <p> <Link to={'/'}> <i style={{marginLeft:'10px'}} className="fa fa-home" />
-                          خانه </Link></p>
+                        <a> <i className="fa fa-user-alt"/>
+                            {nameAndFamily ?
+                                <a style={{marginRight: '2%'}}>{nameAndFamily}</a>
+                                :
+                                <Link style={{marginRight: '2%'}} to={'/'}><p>ورود</p></Link>
+                            }
+                        </a>
                     </MDBCol>
                     <MDBCol md={2} className={"fv-DisplayPageSearchIcon"}>
-                        <input type='searchBbox' placeholder=' جستجو شهر مورد نظر' onChange={(e)=>this.setState({searchResult:e.target.value})}/>
+                        <input type='searchBbox' placeholder=' جستجو شهر مورد نظر'
+                               onChange={(e) => this.setState({searchResult: e.target.value})}/>
                     </MDBCol>
-                    <MDBCol  md={2} className={"fv-DisplayPageSearchIcon"} >
-                        <a onClick={()=>{
+                    <MDBCol md={2} className={"fv-DisplayPageSearchIcon"}>
+                        <a onClick={() => {
                             const mainPageSearch = {
-                                city:`C ${this.state.searchResult}`,
+                                city: `C ${this.state.searchResult}`,
                                 numberOfPeople: '',
-                                dateToGo:'',
-                                dateToReturn:'',
+                                dateToGo: '',
+                                dateToReturn: '',
                             }
-                            localStorage.setItem("mainPageSearch"  , JSON.stringify(mainPageSearch));
-                            this.props.history.push({pathname:"/searchHomePage/doSearch/1",searchDatas: {city: this.state.city, dayToGo: mainPageSearch.dateToGo , dateToReturn:mainPageSearch.dateToReturn , capacity:mainPageSearch.numberOfPeople}})
+                            localStorage.setItem("mainPageSearch", JSON.stringify(mainPageSearch));
+                            this.props.history.push({
+                                pathname: "/searchHomePage/doSearch/1",
+                                searchDatas: {
+                                    city: this.state.city,
+                                    dayToGo: mainPageSearch.dateToGo,
+                                    dateToReturn: mainPageSearch.dateToReturn,
+                                    capacity: mainPageSearch.numberOfPeople
+                                }
+                            })
 
-                        }}><i className="fa fa-search" /></a>
+                        }}><i className="fa fa-search"/></a>
                     </MDBCol>
 
-                    <MDBCol sm={2}  sm={2} className={"fv-DisplayPageLoginImageMobile"} >
-                        <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage} onClick={()=>{
-                            this.setState({onclickHandel:!this.state.onclickHandel})
+                    <MDBCol sm={2} sm={2} className={"fv-DisplayPageLoginImageMobile"}>
+                        <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage} onClick={() => {
+                            this.setState({onclickHandel: !this.state.onclickHandel})
                         }}/>
                     </MDBCol>
                     {/*  <MDBCol sm={1} className={this.state.onclickHandel ? "fv-DisplayPageLoginSignMobile": "fv-hideMenu"} >
@@ -73,20 +85,23 @@ class DisplayHeader extends Component {
                         }}/>
                     </MDBCol> */}
                     <MDBCol md={6} sm={9} className={"menuMobile"}>
-                        <img src={LogoName} className={"fv-DisplayPageSearchName"}/>
-                        <img src={MobileLogo} className={"fv-DisplayPageSearchLogo"}/>
+                        {/* img src={FotterpageLogo} className={"fv-DisplayPageSearchName"} */}
+                        <a onClick={() => window.location.replace("/")}> <img src={FotterpageLogo}
+                                                                              className={"fv-DisplayPageSearchLogo"}/>
+                        </a>
                     </MDBCol>
                 </MDBRow>
 
 
                 <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage"}>
-                    <MDBRow className={this.state.onclickHandel && localStorage.getItem("token") ? "fv-ProfilePageLeftBody" : "fv-hideMenuDisplayMobile"}> {/* profile info for mobile             if user*/}
-                        <MDBContainer className={`fv-containerOptionMainPageRowTop ` }>
+                    <MDBRow
+                        className={this.state.onclickHandel && localStorage.getItem("token") ? "fv-ProfilePageLeftBody" : "fv-hideMenuDisplayMobile"}> {/* profile info for mobile             if user*/}
+                        <MDBContainer className={`fv-containerOptionMainPageRowTop `}>
                             <MDBRow className={"fv-cascadeOptionMainPageRowTop fv-cascadeOptionMainPageRowTopMainPage"}>
                                 <MDBCol md={12} sm={12}>
                                     <MDBRow>
                                         <MDBCol md={2} sm={2}>
-                                            <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage} />
+                                            <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage}/>
                                         </MDBCol>
                                         <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={8} sm={8}>
                                             <MDBRow>
@@ -97,7 +112,8 @@ class DisplayHeader extends Component {
                                             </MDBRow>
                                             <MDBRow className={"fv-visitProfile"}>
                                                 <MDBCol md={12}>
-                                                    <Link to={"/MainProfilePages/Profile"}><a>مشاهده حساب کاربری</a></Link>
+                                                    <Link to={"/MainProfilePages/Profile"}><a>مشاهده حساب
+                                                        کاربری</a></Link>
                                                 </MDBCol>
 
                                             </MDBRow>
@@ -108,20 +124,23 @@ class DisplayHeader extends Component {
                             </MDBRow>
                             <MDBRow className={"fv-cascadeOptionMainPage"}>
                                 <MDBCol md={12} sm={12}>
-                                    <Link to={"/MainProfilePages/myAccommodation"}> <img style={{marginRight : '15px' , marginLeft : '5px'}} src={MyaccommodationsIcon} />
+                                    <Link to={"/MainProfilePages/myAccommodation"}> <img
+                                        style={{marginRight: '15px', marginLeft: '5px'}} src={MyaccommodationsIcon}/>
                                         <a><p>اقامت گاه های من</p></a> </Link>
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow className={"fv-cascadeOptionMainPage"}>
                                 <MDBCol md={12} sm={12}>
-                                    <Link to={"/MainProfilePages/ProfileMyReservation"}> <img style={{marginRight : '15px' , marginLeft : '5px'}} src={MyaccommodationsIcon} />
+                                    <Link to={"/MainProfilePages/ProfileMyReservation"}> <img
+                                        style={{marginRight: '15px', marginLeft: '5px'}} src={MyaccommodationsIcon}/>
                                         <a><p>رزور های من</p></a> </Link>
                                 </MDBCol>
                             </MDBRow>
-                            <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus fv-userInfoButtonCascadeMobile"}>
+                            <MDBRow
+                                className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus fv-userInfoButtonCascadeMobile"}>
                                 <MDBCol md={12} sm={12}>
                                     <Link to={"/hostStepBasicInformation"}>
-                                        <a onClick={()=>{
+                                        <a onClick={() => {
                                             localStorage.removeItem("step1")
                                             localStorage.removeItem("step2")
                                             localStorage.removeItem("step2-2")
@@ -130,15 +149,15 @@ class DisplayHeader extends Component {
                                             localStorage.removeItem("step5")
                                             localStorage.removeItem("step5-2")
                                             localStorage.removeItem("editCode")
-                                        }}><i className="fa fa-laptop-house" />   <p>میزبان شوید</p></a> </Link>
+                                        }}><i className="fa fa-laptop-house"/>   <p>میزبان شوید</p></a> </Link>
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus"}>
                                 <MDBCol md={12} sm={12}>
-                                    <a onClick={()=>{
+                                    <a onClick={() => {
                                         localStorage.clear()
                                         this.props.history.push("/")
-                                    }}> <img style={{marginRight : '15px' , marginLeft : '5px'}} src={Logout} />
+                                    }}> <img style={{marginRight: '15px', marginLeft: '5px'}} src={Logout}/>
                                         <p>خروج از حساب کاربری</p></a>
                                 </MDBCol>
                             </MDBRow>
@@ -146,11 +165,14 @@ class DisplayHeader extends Component {
 
                     </MDBRow>
 
-                    <MDBRow className={this.state.onclickHandel && !localStorage.getItem("token") ? "fv-ProfilePageLeftBody fv-gustUsersMenu"  : "fv-hideMenu"}> {/* profile info for mobile            if gust*/}
+                    <MDBRow
+                        className={this.state.onclickHandel && !localStorage.getItem("token") ? "fv-ProfilePageLeftBody fv-gustUsersMenu" : "fv-hideMenu"}> {/* profile info for mobile            if gust*/}
                         <MDBCol md={3} className={"fv-ProfilePageUserInfoBody"}>
                             <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
                                 <MDBCol className={"fv-ProfilePageUserInfoDetailsBodyColumn"}>
-                                    <Link to={'/login'}><p className={ window.location.href.match(/\blogin\b/) ? "fv-reservationActive" : ''}  ><i className="fa fa-door-open" />ورود</p></Link>
+                                    <Link to={'/login'}><p
+                                        className={window.location.href.match(/\blogin\b/) ? "fv-reservationActive" : ''}>
+                                        <i className="fa fa-door-open"/>ورود</p></Link>
                                     {/* <Link to={'/registration'}> <p className={ window.location.href.match(/\bregistration\b/) ? "fv-transaction" : ''}  ><i className="fa fa-address-card" />ثبت نام</p> </Link>  */}
                                 </MDBCol>
                             </MDBRow>
@@ -169,9 +191,10 @@ class DisplayHeader extends Component {
                             </MDBCol>
                         </MDBRow>
                     </MDBContainer>  */}
-    </MDBContainer>
+                </MDBContainer>
             </div>
         )
     }
 }
+
 export default DisplayHeader

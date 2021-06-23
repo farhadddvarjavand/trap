@@ -3,12 +3,14 @@
     max-width: 100%;
     display: inherit;
 }
-.fv-searchMainPage [type=button]:not(:disabled),.fv-searchMainPage [type=reset]:not(:disabled),.fv-searchMainPage [type=submit]:not(:disabled),.fv-searchMainPage button:not(:disabled) {
+
+.fv-searchMainPage [type=button]:not(:disabled), .fv-searchMainPage [type=reset]:not(:disabled), .fv-searchMainPage [type=submit]:not(:disabled), .fv-searchMainPage button:not(:disabled) {
     cursor: pointer;
     margin-left: 0%;
     margin-right: -4%;
 }
-.fv-SearchHomePagePaginationSelected , .fv-SearchHomePagePaginationDefault{
+
+.fv-SearchHomePagePaginationSelected, .fv-SearchHomePagePaginationDefault {
     margin-top: 0%;
     margin-left: 1%;
     margin-right: 1%;
@@ -20,47 +22,56 @@
     padding-right: 2%;
     font-size: 18px;
 }
-.fv-SearchHomePagePaginationSelected , .fv-SortMenu .fv-selected
-{
+
+.fv-SearchHomePagePaginationSelected, .fv-SortMenu .fv-selected {
     background-color: #15BE29;
     color: white;
 }
+
 .container, .container-lg, .container-md, .container-sm, .container-xl {
     max-width: 1294px;
 }
-.fv-footerMenuRibbon{
+
+.fv-footerMenuRibbon {
     box-shadow: none;
 }
 
-.fv-SearchHomePage .fv-footerMenuRibbon{
+.fv-SearchHomePage .fv-footerMenuRibbon {
     color: black;
     /* margin-right: -9%;
      margin-left: -9%;*/
 }
-.fv-SearchHomePage .fv-footerMenuRibbonButton input, .fv-footerMenuRibbonButton button{
+
+.fv-SearchHomePage .fv-footerMenuRibbonButton input, .fv-footerMenuRibbonButton button {
     background-color: rgba(102, 212, 72, 0.31);
     color: #3EC886;
-    position: absolute;  /* ezafe shod */
-    margin-right: -125%;  /* ezafe shod */
+    position: absolute; /* ezafe shod */
+    margin-right: -125%; /* ezafe shod */
 }
+
 .fv-searchMainPage.fv-searchMainPageDateReturn input, .fv-searchMainPage.fv-searchMainPageDateOut input {
     width: 145%;
     margin-right: -11%;
 }
-.fv-searchMainPageBody{
+
+.fv-searchMainPageBody {
     width: 100%;
 }
+
 .fv-searchMainPageBody .fv-searchMainPage.row {
     margin-right: 0%;
     /*border: 1px solid #88888836;*/
     box-shadow: none;
 }
+
 .fv-searchMainPageBody .fv-searchMainPage {
     width: 100%;
 }
+
 .fv-searchMainPagePrice p {
     margin-top: -6%;
 }
+
 .fv-searchMainPagePrice {
     width: 102%;
     margin-right: -1%;
@@ -74,32 +85,38 @@
     direction: rtl;
 }
 
-.fv-searchMainPageBorder{
+.fv-searchMainPageBorder {
     border: 1px solid #88888836;
 }
+
 .fv-searchMainPagePrice2 .col-md-5 {
     flex: 0 0 41.666667%;
     max-width: 37.666667%;
 }
-.fv-searchMainPagePriceSecond.fv-searchMainPagePrice p{
+
+.fv-searchMainPagePriceSecond.fv-searchMainPagePrice p {
     width: 100%;
     text-align: initial;
     margin-right: 4%;
     margin-top: 1%;
 }
+
 .fv-SearchHomePageBody .fv-searchMainPagePrice.fv-searchMainPagePriceSecond input[type=checkbox], .fv-SearchHomePageBody .fv-searchMainPagePrice.fv-searchMainPagePriceSecond input[type=radio] {
     width: 9%;
     height: 25px;
     margin-bottom: 6%;
 }
+
 .fv-searchMainPagePrice.fv-searchMainPagePriceSecond {
     text-align: start;
 }
-.fv-searchMainPagesSearchButton{
+
+.fv-searchMainPagesSearchButton {
     background-color: #15BE29;
     color: white;
 }
-.fv-SortMenu .fv-selected , .fv-SortMenu .fv-unSelected {
+
+.fv-SortMenu .fv-selected, .fv-SortMenu .fv-unSelected {
 
     margin-top: 0%;
     padding: 13px;
@@ -111,19 +128,23 @@
     text-align: start;
     border-radius: 15px;
 }
-.fv-SortMenu .fv-selected{
+
+.fv-SortMenu .fv-selected {
     background-color: #15BE29;
     color: white;
 }
+
 .fv-SortMenu a {
     color: #979797;
 }
+
 .fv-SortMenu p {
     margin-top: auto;
     margin-bottom: auto;
     /* margin-left: 7%; */
 }
-.fv-SortMenu{
+
+.fv-SortMenu {
     border: 1px solid #88888836;
     padding-right: 1%;
     padding-top: 2%;
@@ -133,36 +154,43 @@
     border-radius: 15px;
     direction: rtl;
 }
-.fv-searchMainPageBodyLeft{
+
+.fv-searchMainPageBodyLeft {
     margin-top: 5%;
 }
-.fv-searchMainPageBodyLeft .fv-mainProduct{
+
+.fv-searchMainPageBodyLeft .fv-mainProduct {
     direction: ltr;
     margin-left: 1%;
     padding-right: 1%;
     padding-top: 2%;
 }
-.fv-searchMainPageBodyLeft .fv-mainProduct .fv-product{
+
+.fv-searchMainPageBodyLeft .fv-mainProduct .fv-product {
     margin-bottom: 11%;
     width: 109%;
 }
-.fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox{
+
+.fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox {
     font-size: 12px;
     direction: ltr;
 }
-.fv-SearchHomePage  .fv-searchMainPageBodyLeft .fv-mainProduct {
+
+.fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct {
     direction: ltr;
     margin-left: 1%;
     padding-right: 1%;
     padding-top: 2%;
     direction: rtl;
 }
-.fv-SearchHomePage  .fv-product .fv-productTopic {
+
+.fv-SearchHomePage .fv-product .fv-productTopic {
     padding-right: 12.5%;
     font-size: 19px;
     color: #15BE29;
     direction: ltr;
 }
+
 .fv-SearchHomePage .fv-productLocation .col-md-9 {
     border-bottom: 1px solid rgba(145, 145, 145, 0.5);
     text-align: end;
@@ -171,24 +199,29 @@
     font-size: 14px;
     direction: ltr;
 }
+
 .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox .col-md-5 {
     padding-left: 10px;
 }
+
 .fv-SearchHomePage .fv-productRateBox {
     font-size: 14px;
     padding-top: 2%;
     padding-bottom: 2%;
     direction: ltr;
 }
+
 .fv-SearchHomePage .fv-product .fv-productPriceBoxToman {
     color: #15BE29;
     padding-left: 3%;
 }
-.fv-SearchHomePagePagination{
+
+.fv-SearchHomePagePagination {
     place-content: center;
     direction: rtl;
 }
-.fv-SearchHomePagePagination input[type=button]{
+
+.fv-SearchHomePagePagination input[type=button] {
     color: #15BE29;
     background-color: white;
     margin-top: 0%;
@@ -206,31 +239,38 @@
     padding-right: 2%;
     font-size: 18px;
 }
-.fv-SearchHomePage .fv-searchMainPage.row{
+
+.fv-SearchHomePage .fv-searchMainPage.row {
     box-shadow: none;
     padding-top: 0%;
     margin-top: 17%;
     margin-left: 0%;
     margin-right: 0%;
 }
-.fv-searchMainPage{
+
+.fv-searchMainPage {
     margin-bottom: 0%;
 }
-.fv-SearchHomePageMobileProduct{
+
+.fv-SearchHomePageMobileProduct {
     place-content: center;
-    text-align:center ;
+    text-align: center;
 }
-.fv-SearchHomePageMobileProduct .fv-product{
+
+.fv-SearchHomePageMobileProduct .fv-product {
     margin-bottom: 10%;
     padding-right: 3%;
     padding-left: 3%;
 }
-.fv-SearchHomePageBodyMobile{
+
+.fv-SearchHomePageBodyMobile {
     display: none;
 }
-.fv-SearchHomePageBody{
+
+.fv-SearchHomePageBody {
     display: contents;
 }
+
 .fv-productPriceBox a:not([href]):not([tabindex]), .fv-productPriceBox a:not([href]):not([tabindex]):focus, .fv-productPriceBox a:not([href]):not([tabindex]):hover {
     color: #15BE29;
     font-size: 15px;
@@ -243,10 +283,12 @@
     margin-top: 4%;
     direction: ltr;
 }
+
 .fv-SearchHomePage .fv-footerMenuRibbon {
     margin-left: -7%;
     margin-right: -7%;
 }
+
 .container .fv-footerMainPage {
     padding-top: 20%;
     padding-right: 6%;
@@ -254,9 +296,11 @@
     margin-left: -7%;
     margin-right: -7%;
 }
+
 .fv-footerMenuRibbon .col-md-1 {
     margin: auto;
 }
+
 .fv-footerMenuRibbon .col-md-1 a {
     color: black;
 }
@@ -264,13 +308,15 @@
 .fv-footerMainPage.fv-footerMenuMobile {
     display: none;
 }
-.fv-footerMenu .fv-searchMainPage .DatePicker  input {
+
+.fv-footerMenu .fv-searchMainPage .DatePicker input {
     line-height: 45px;
 }
 
 .fv-SearchHomePageBodyMobile.fv-footerMenu.main .fv-widthHeaderLoginMenuForSearchHomePage {
 
 }
+
 .fv-widthHeaderLoginMenuForSearchHomePage .headerLoginMenu .fv-footerMenuRibbonMobile .col-sm-2 {
     flex: 0 0 21.666667%;
     width: 16.666667% !important;
@@ -278,13 +324,15 @@
     margin-right: -21vw;
     margin-top: 12px;
 }
+
 .fv-widthHeaderLoginMenuForSearchHomePage .fv-footerMenuRibbon {
     text-align: center;
     margin-left: -30%;
     width: 142%;
     margin-right: -8%;
 }
-.fv-SearchHomePagePagination [type=button]:not(:disabled),.fv-SearchHomePagePagination [type=reset]:not(:disabled),.fv-SearchHomePagePagination [type=submit]:not(:disabled),.fv-SearchHomePagePagination button:not(:disabled) {
+
+.fv-SearchHomePagePagination [type=button]:not(:disabled), .fv-SearchHomePagePagination [type=reset]:not(:disabled), .fv-SearchHomePagePagination [type=submit]:not(:disabled), .fv-SearchHomePagePagination button:not(:disabled) {
     margin: 0;
     background: white;
     margin-left: 0.5%;
@@ -292,49 +340,56 @@
     padding-top: 1%;
     padding-bottom: 0.5%;
 }
+
 .fv-SearchHomePagePagination {
     place-content: center;
 }
-.fv-SearchHomePagePagination .fv-hideforwardAndBackwardButton{
+
+.fv-SearchHomePagePagination .fv-hideforwardAndBackwardButton {
     display: none;
 }
+
 .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile .col {
     display: contents;
 }
-.fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile{
+
+.fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile {
     margin-top: 5%;
     margin-bottom: -5%;
     z-index: 5;
     position: relative;
     margin-right: 1%;
 }
-.fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile a{
+
+.fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile a {
     color: black;
 }
+
 .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile .fa-chevron-left {
     margin-top: 0.5%;
     margin-right: 2%;
     margin-left: 2%;
     font-size: 13px;
 }
-.fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile .fv-DisplayPagePathNow{
+
+.fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile .fv-DisplayPagePathNow {
     color: #15BE29;
 }
 
 
-
-
-
-@media (max-width: 1200px) and (min-width: 991px){
+@media (max-width: 1200px) and (min-width: 991px) {
     .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-product.fv-mobileProduct .col-md-5 {
         font-size: 10px;
     }
+
     .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox .col-md-5 {
         padding-left: 7px;
     }
+
     .fv-widthHeaderLoginMenuForSearchHomePage .fv-footerMenuRibbon {
         width: 150%;
     }
+
     .fv-SearchHomePage .fv-footerMenu .fv-footerMenuRibbon .col-md-9 {
         flex: 0 0 75%;
         max-width: 75%;
@@ -344,6 +399,7 @@
         margin-right: -2%;
         margin-top: 0.5%;
     }
+
     .fv-SearchHomePage .fv-widthHeaderLoginMenuForSearchHomePage .fv-footerMenuRibbon .col-md-9 {
         flex: 0 0 75%;
         max-width: 75%;
@@ -353,6 +409,7 @@
         margin-right: 5%;
         margin-top: 0.5%;
     }
+
     .fv-SearchHomePage .fv-widthHeaderLoginMenuForDisplayPage .fv-footerMenuRibbon .col-md-9 {
         flex: 0 0 75%;
         max-width: 75%;
@@ -365,7 +422,8 @@
 
 
 }
-@media (max-width: 991px) and (min-width: 769px){
+
+@media (max-width: 991px) and (min-width: 769px) {
     .fv-SearchHomePage .fv-footerMenu .fv-footerMenuRibbon .col-md-9 {
         flex: 0 0 75%;
         max-width: 75%;
@@ -376,11 +434,13 @@
         margin-top: 0.5%;
     }
 }
-@media (max-width: 768px) and (min-width: 540px){
+
+@media (max-width: 768px) and (min-width: 540px) {
 
     .fv-widthHeaderLoginMenuForSearchHomePage .fv-footerMenuRibbon {
         width: 135%;
     }
+
     .fv-mobileProduct .fv-trapMagazineImageTitle {
         /* width: 109%; */
         /* direction: rtl; */
@@ -391,6 +451,7 @@
         height: 165px;
         white-space: break-spaces;
     }
+
     .fv-trapMagazine .col-sm-6 {
         margin-inline-start: auto;
         margin-left: 41px;
@@ -424,17 +485,20 @@
 
 }
 
-@media (max-width: 991px) and (min-width: 766px){
+@media (max-width: 991px) and (min-width: 766px) {
     .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product {
         margin-bottom: 11%;
         width: 120%;
     }
-    .fv-SearchHomePage.container ,.fv-SearchHomePage.container-md ,.fv-SearchHomePage.container-sm {
-        max-width: 846px ;
+
+    .fv-SearchHomePage.container, .fv-SearchHomePage.container-md, .fv-SearchHomePage.container-sm {
+        max-width: 846px;
     }
+
     .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox .col-md-5 {
         padding-left: 0px;
     }
+
     .fv-product .col-md-5 {
         text-align: end;
         margin-right: -32px;
@@ -442,6 +506,7 @@
         padding-left: 0%;
         padding-right: 8%;
     }
+
     .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox {
         font-size: 9.5px;
     }
@@ -449,15 +514,16 @@
 }
 
 
-
 @media (max-width: 766px) {
     .fv-SearchHomePage .fv-productPriceBoxPriceText {
         margin-top: 0vw;
     }
-    .fv-SearchHomePage .fv-hideMobile{
+
+    .fv-SearchHomePage .fv-hideMobile {
         display: none;
     }
-    .fv-searchMobileSearchPageHide , .fv-searchMobileSearchPageHide2{
+
+    .fv-searchMobileSearchPageHide, .fv-searchMobileSearchPageHide2 {
         display: none !important;
     }
 
@@ -467,30 +533,37 @@
         margin-left: -6px;
         margin-top: -34%;
     }
+
     .fv-SearchHomePage .fv-product .row .col-md-2 {
         margin-left: 21px;
     }
+
     .fv-SearchHomePageMobileProduct .fv-product .fv-productCapacityBox .col-sm-9 {
         flex: 0 0 41.666667%;
         max-width: 41.666667% !important;
         padding-left: 0;
     }
+
     .fv-SearchHomePageMobileProduct .fv-product .fv-productCapacityBox .col-sm-11 {
         flex: 0 0 41.666667%;
         max-width: 41.666667% !important;
         margin-top: 0%;
     }
+
     .fv-SearchHomePageMobileProduct .fv-product .fv-productCapacityBox {
         margin-top: 0%;
         font-size: 4vw;
     }
+
     .fv-SearchHomePageMobileProduct .fv-product .fv-productPriceBoxPriceText {
         float: none;
     }
+
     .fv-SearchHomePageMobileProduct {
         text-align: inherit;
     }
-    .fv-SearchHomePageBodyMobile{
+
+    .fv-SearchHomePageBodyMobile {
         display: contents;
     }
 
@@ -503,56 +576,71 @@
         font-size: 3vw;
         width: 95%;
     }
+
     .fv-productPriceBox a:not([href]):not([tabindex]), .fv-productPriceBox a:not([href]):not([tabindex]):focus, .fv-productPriceBox a:not([href]):not([tabindex]):hover {
         font-size: 3.5vw;
         margin-left: 4%;
     }
+
     .fv-footerMainPage .fv-footerMainPageSmaller img {
         margin-right: 1.5vw;
         border-radius: 23px;
         width: 30px;
         height: 30px;
     }
+
     .fv-footerMainPage .fv-footerMainPageBigger {
         margin-right: 0;
         place-content: center;
     }
-    .fv-footerMainPage.fv-footerMenuMobile .row a{
+
+    .fv-footerMainPage.fv-footerMenuMobile .row a {
         place-content: flex-end;
     }
-    .fv-footerMainPage.fv-footerMenus{
+
+    .fv-footerMainPage.fv-footerMenus {
         display: none;
     }
-    .fv-footerMainPage.fv-footerMenuMobile{
+
+    .fv-footerMainPage.fv-footerMenuMobile {
         display: contents;
     }
+
     .fv-footerMenuMobileTitle {
         place-content: flex-end;
         margin-top: 20%;
         margin-bottom: 5%;
     }
-    .fv-footerMainPage .fv-footerMainPageBigger{
+
+    .fv-footerMainPage .fv-footerMainPageBigger {
         margin-top: 5%;
     }
+
     .fv-SearchHomePage .fv-searchMainPageLeft.fv-searchMainPage.row {
         padding-left: 23%;
     }
+
     .fv-SearchHomePage .fv-productRateBox {
         font-size: 16px;
     }
+
     .fv-searchMainPage.fv-searchMainPageDateReturn input, .fv-searchMainPage.fv-searchMainPageDateOut input {
         width: 203%;
         margin-right: -25%;
     }
+
     .fv-searchMainPage.fv-searchMainPageDateOut input {
         margin-right: -16%;
     }
+
     .fv-searchMainPage.fv-searchMainPageDateReturn input {
         margin-right: -33%;
     }
+
     .fv-searchMainPage .fv-searchMainPageBetweenDate.col-sm-1 {
         margin-right: 14%;
     }
+
     .fv-SearchHomePage .fv-product .fv-productPriceBox .col-md-10 {
         margin-left: -54%;
         margin-top: 2%;
@@ -560,24 +648,27 @@
         display: inherit;
         direction: ltr;
     }
+
     .fv-SearchHomePage .fv-searchMainPage.row {
         margin-left: 6%;
         margin-right: 8%;
     }
+
     .fv-SearchHomePageMobileProduct .col-sm-7 {
         margin-left: 18%;
     }
+
     .fv-SearchHomePage .fv-SearchHomePageMobileProduct .fv-mobileProduct {
         width: 146%;
         direction: ltr;
     }
-    .fv-SearchHomePage .fv-product .fv-productCapacityBox .fv-maximumNumber, .fv-SearchHomePage  .fv-product .fv-productCapacityBox .fv-capacityBody {
+
+    .fv-SearchHomePage .fv-product .fv-productCapacityBox .fv-maximumNumber, .fv-SearchHomePage .fv-product .fv-productCapacityBox .fv-capacityBody {
         margin-top: 0%;
     }
 
 
-
-    .fv-searchMainPageForMobile .fv-searchMainPage [type=button]:not(:disabled),.fv-searchMainPageForMobile .fv-searchMainPage [type=reset]:not(:disabled), .fv-searchMainPage [type=submit]:not(:disabled), .fv-searchMainPage button:not(:disabled) {
+    .fv-searchMainPageForMobile .fv-searchMainPage [type=button]:not(:disabled), .fv-searchMainPageForMobile .fv-searchMainPage [type=reset]:not(:disabled), .fv-searchMainPage [type=submit]:not(:disabled), .fv-searchMainPage button:not(:disabled) {
         cursor: pointer;
         margin-left: -3%;
         margin-right: 6%;
@@ -592,6 +683,7 @@
         text-align: start;
         padding-top: 2%;
     }
+
     fv-searchMainPageForMobile .fv-searchMainPagePrice {
         width: 102%;
         margin-right: -1%;
@@ -605,7 +697,7 @@
         direction: rtl;
     }
 
-    .fv-searchMainPage .fv-searchMainPageForMobile  button, .fv-searchMainPage .fv-searchMainPageForMobile input {
+    .fv-searchMainPage .fv-searchMainPageForMobile button, .fv-searchMainPage .fv-searchMainPageForMobile input {
         width: 100%;
         line-height: 54px;
         /* margin-top: 3%; */
@@ -615,6 +707,7 @@
         box-shadow: 0px 1px 1px #88888836;
         width: 8%;
     }
+
     .fv-SearchHomePage .fv-searchMainPageForMobile.fv-searchMainPage.row {
         margin-left: 3%;
         margin-right: 9%;
@@ -625,6 +718,7 @@
         box-shadow: none;
         width: 13%;
     }
+
     .fv-searchMainPageForMobile .fv-searchMainPagePriceSecond.fv-searchMainPagePrice p {
         width: 100%;
         text-align: initial;
@@ -632,16 +726,15 @@
         margin-top: 4%;
         font-size: 15px;
     }
-    .fv-searchMainPageForMobile.fv-searchMainPage [type=button]:not(:disabled), .fv-searchMainPageForMobile.fv-searchMainPage [type=reset]:not(:disabled),.fv-searchMainPageForMobile.fv-searchMainPage [type=submit]:not(:disabled),.fv-searchMainPageForMobile.fv-searchMainPage button:not(:disabled) {
+
+    .fv-searchMainPageForMobile.fv-searchMainPage [type=button]:not(:disabled), .fv-searchMainPageForMobile.fv-searchMainPage [type=reset]:not(:disabled), .fv-searchMainPageForMobile.fv-searchMainPage [type=submit]:not(:disabled), .fv-searchMainPageForMobile.fv-searchMainPage button:not(:disabled) {
         cursor: pointer;
         margin-left: -3%;
         margin-right: -4%;
     }
 
 
-
-
-    .fv-SearchHomePageBody{
+    .fv-SearchHomePageBody {
         /* display: none; */
     }
 
@@ -659,23 +752,26 @@
         /* height: 387px; */
 
     }
+
     .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product {
-       /* margin-bottom: 11%;
-        width: 200%;
-        margin-right: -26%; */
+        /* margin-bottom: 11%;
+         width: 200%;
+         margin-right: -26%; */
 
         margin-bottom: 11%;
         width: 171%;
         margin-right: -14%;
     }
+
     .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct {
-      /*  direction: ltr;
-        margin-left: 9%;
-        margin-right: -10%;
-        padding-right: 2%;
-        padding-top: 2%;
-        direction: ltr; */
+        /*  direction: ltr;
+          margin-left: 9%;
+          margin-right: -10%;
+          padding-right: 2%;
+          padding-top: 2%;
+          direction: ltr; */
     }
+
     .fv-SearchHomePage .fv-searchMainPageBodyLeft p {
         text-align: initial;
     }
@@ -685,28 +781,34 @@
         direction: ltr;
         margin-top: 0;
     }
+
     .fv-SearchHomePage .fv-product .fv-productCapacityBox .fv-numberOfBedBody {
         display: flex;
         justify-content: flex-end;
         margin-left: -6px;
         margin-top: -10%;
     }
+
     .fv-SearchHomePage .fv-product .fv-productPriceBox .col-md-10 {
         margin-left: 1%;
         margin-top: 2%;
         text-align: end;
         font-size: 4vw;
     }
+
     .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox .col-md-5 {
         padding-left: 10px;
         text-align: initial;
     }
+
     .fv-SearchHomePage .fv-product .row .col-md-2 {
         margin-left: 24px;
     }
+
     .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox {
         font-size: 4vw;
     }
+
     .fv-SearchHomePage .fv-productLocation .col-md-9 {
         border-bottom: 1px solid rgba(145, 145, 145, 0.5);
         text-align: end;
@@ -716,20 +818,24 @@
         direction: ltr;
         padding-bottom: 2%;
     }
+
     .fv-product .fv-productCapacityBox .fv-numberOfBedBody .fa, .fv-product .fv-productCapacityBox .fv-numberOfBedBody .fas {
         margin-left: 1%;
         margin-top: 1%;
     }
+
     .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox .col-md-5 {
         padding-left: 12px;
         text-align: initial;
         margin-left: 1%;
     }
+
     .fv-SearchHomePageBody .fv-searchMainPagePrice.fv-searchMainPagePriceSecond input[type=checkbox], .fv-SearchHomePageBody .fv-searchMainPagePrice.fv-searchMainPagePriceSecond input[type=radio] {
         width: 12%;
         margin-bottom: 6%;
         height: 69%;
     }
+
     .fv-searchMainPagePriceSecond.fv-searchMainPagePrice p {
         width: 100%;
         text-align: initial;
@@ -737,14 +843,17 @@
         margin-top: 5%;
         font-size: 4vw;
     }
+
     .fv-SearchHomePage .fv-searchMainPage.row {
         margin-left: 4%;
         margin-right: 11%;
     }
+
     .fv-searchMainPageBodyLeft {
         margin-right: 9%;
     }
-    .fv-searchMainPageBodyLeft .fv-mainProduct.fv-mainMobile .col-sm-7, .fv-searchMainPageBodyLeft .fv-mainProduct.fv-mainMobile  .col-sm-6 {
+
+    .fv-searchMainPageBodyLeft .fv-mainProduct.fv-mainMobile .col-sm-7, .fv-searchMainPageBodyLeft .fv-mainProduct.fv-mainMobile .col-sm-6 {
         display: block;
     }
 
@@ -760,7 +869,7 @@
         /* box-shadow: 1px 1px 11px #88888830; */
     }
 
-    .fv-SearchHomePage .fv-ProfilePageLeftBody.fv-gustUsersMenuSearchPage .fv-ProfilePageUserInfoBody  ,   .fv-SearchHomePage .fv-ProfilePageLeftBody.fv-hostUsersMenuSearchPage .fv-ProfilePageUserInfoBody{
+    .fv-SearchHomePage .fv-ProfilePageLeftBody.fv-gustUsersMenuSearchPage .fv-ProfilePageUserInfoBody, .fv-SearchHomePage .fv-ProfilePageLeftBody.fv-hostUsersMenuSearchPage .fv-ProfilePageUserInfoBody {
         background: rgba(145, 145, 145, 0.1);
         border-radius: 30px;
         margin-left: 1.5%;
@@ -772,6 +881,7 @@
     .fv-SearchHomePage .fv-ProfilePageLeftBody.fv-gustUsersMenuSearchPage .fv-ProfilePageUserInfoBody {
         height: 135px;
     }
+
     .fv-SearchHomePage .fv-ProfilePageLeftBody.fv-gustUsersMenuSearchPage .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn p {
         /* font-size: 14px; */
         font-size: 20px;
@@ -788,12 +898,13 @@
         padding-top: 4%;
         padding-bottom: 4%;
     }
-    .fv-SearchHomePage.fv-DisplayPage .fv-hideMenuSearchPageMobile{
+
+    .fv-SearchHomePage.fv-DisplayPage .fv-hideMenuSearchPageMobile {
         display: none;
     }
 
 
-    .fv-SearchHomePage.fv-DisplayPage  .fv-ProfilePageLeftBody.fv-gustUsersMenuSearchPage.fv-ProfilePageUserInfoBodySearchPage{
+    .fv-SearchHomePage.fv-DisplayPage .fv-ProfilePageLeftBody.fv-gustUsersMenuSearchPage.fv-ProfilePageUserInfoBodySearchPage {
         margin-left: -26px;
         position: absolute;
         z-index: 9;
@@ -804,17 +915,21 @@
         border-radius: 15px;
         text-align: initial;
     }
-    .fv-SearchHomePage.fv-DisplayPage  .fv-ProfilePageLeftBody.fv-gustUsersMenuSearchPage.fv-ProfilePageUserInfoBodySearchPage a{
+
+    .fv-SearchHomePage.fv-DisplayPage .fv-ProfilePageLeftBody.fv-gustUsersMenuSearchPage.fv-ProfilePageUserInfoBodySearchPage a {
         color: black;
     }
+
     .fv-SearchHomePage.fv-DisplayPage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody {
         margin-right: 3%;
         margin-top: 5%;
     }
+
     .fv-SearchHomePage.fv-DisplayPage .fv-ProfilePageLeftBody.fv-gustUsersMenuSearchPage .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn p {
         /* font-size: 14px; */
         font-size: 20px;
     }
+
     .fv-SearchHomePage.fv-DisplayPage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fa, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fas {
         margin-left: 4%;
     }
@@ -830,6 +945,7 @@
         color: white;
         padding: 4%;
     }
+
     .fv-SearchHomePagePaginationSelected, .fv-SearchHomePagePaginationDefault {
         margin-top: 0%;
         margin-left: 1%;
@@ -843,7 +959,8 @@
         font-size: 15px;
         padding: 4%;
     }
-    .fv-searchMainPageBodyLeft .fv-SearchHomePagePagination{
+
+    .fv-searchMainPageBodyLeft .fv-SearchHomePagePagination {
         margin-left: 9%;
         margin-right: 0%;
     }
@@ -852,25 +969,30 @@
         margin-top: 9%;
         z-index: 1;
     }
+
     .fv-SearchHomePage .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile .fa-chevron-left {
         margin-top: 0.5%;
         margin-right: 2%;
         margin-left: 2%;
         font-size: 13px;
     }
+
     .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile .col {
         display: contents;
         font-size: 3vw;
     }
+
     .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile {
         margin-right: 9%;
     }
+
     .fv-footerMenuRibbonMobile .col-sm-8 {
         flex: 0 0 58.333333%;
         width: 66.666667% !important;
         text-align: initial;
         margin-right: 6vw;
     }
+
     .fv-widthHeaderLoginMenuForSearchHomePage .headerLoginMenu .fv-footerMenuRibbonMobile .col-sm-2 {
         flex: 0 0 10.666667%;
         width: 12.666667% !important;
@@ -878,15 +1000,18 @@
         margin-right: -10vw;
         margin-top: 12px;
     }
+
     .fv-SearchHomePage.fv-DisplayPage .fv-topicMainPageTopic {
         text-align: end;
         margin-right: -2px;
     }
+
     .fv-SearchHomePage .fv-product .col-md-5 {
         text-align: end;
         margin-right: -44px;
         font-size: 3vw;
     }
+
     .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox .col-md-5 {
         padding-left: 40px;
         text-align: initial;
@@ -900,6 +1025,7 @@
         margin-top: -6%;
         display: contents;
     }
+
     .fv-SearchHomePage .fv-footerMenu.fv-footerDisplayPage.fv-searchHomePagePathTop .fv-DisplayPageRotePathMobile {
         margin-top: 6%;
         z-index: 1;
@@ -912,7 +1038,21 @@
         text-align: initial;
         margin-right: 0vw;
     }
+
+    .fv-SearchHomePage .fv-footerMenu .col-md-6 {
+        padding: 0;
+        margin-top: -6%;
+        /* margin-left: -21%; */
+        /* margin-right: 14%; */
+        margin-right: -28%;
+    }
+
+    .fv-SearchHomePage.headerLoginMenu .fv-SearchHomePageBodyMobile.fv-footerMenu.main .menuMobile img {
+        width: 32vw;
+        margin-top: 4%;
+    }
 }
+
 @media (max-width: 766px) and (min-width: 478px) {
     .fv-widthHeaderLoginMenuForSearchHomePage .headerLoginMenu .fv-footerMenuRibbonMobile .col-sm-2 {
         flex: 0 0 10.666667%;
@@ -928,10 +1068,12 @@
         margin-left: -8%;
     }
 }
+
 @media (max-width: 320px) {
     .fv-searchMainPage.fv-searchMainPageDateReturn input {
         margin-right: -59%;
     }
+
     .fv-searchMainPage.fv-searchMainPageDateReturn input, .fv-searchMainPage.fv-searchMainPageDateOut input {
         width: 232%;
     }
@@ -939,6 +1081,7 @@
     .fv-searchMainPageForMobile.fv-searchMainPage .fv-searchMainPageDateReturn input, .fv-searchMainPageForMobile.fv-searchMainPage .fv-searchMainPageDateOut input {
         width: 208%;
     }
+
     .fv-searchMainPageForMobile.fv-searchMainPage .fv-searchMainPageBetweenDate.col-sm-1 {
         margin-right: 19%;
     }
@@ -946,8 +1089,8 @@
 
     .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product {
         margin-bottom: 11%;
-       /* width: 215%; */
-       /* margin-right: -26%; */
+        /* width: 215%; */
+        /* margin-right: -26%; */
     }
 
     .fv-widthHeaderLoginMenuForSearchHomePage .headerLoginMenu .fv-footerMenuRibbonMobile .col-sm-2 {
@@ -963,6 +1106,7 @@
         text-align: end;
         margin-right: -6%;
     }
+
     .fv-widthHeaderLoginMenuForSearchHomePage .headerLoginMenu .fv-footerMenuRibbonMobile .col-sm-2 {
         flex: 0 0 22.666667%;
         width: 16.666667% !important;
@@ -971,16 +1115,19 @@
         margin-top: 12px;
     }
 }
+
 @media (max-width: 280px) {
     .fv-productPriceBox a:not([href]):not([tabindex]), .fv-productPriceBox a:not([href]):not([tabindex]):focus, .fv-productPriceBox a:not([href]):not([tabindex]):hover {
         display: contents;
     }
+
     .fv-footerMenu .fv-searchMainPage button:not(:disabled) {
         cursor: pointer;
         margin-left: 0;
         margin-right: auto;
         font-size: 3.2vw;
     }
+
     .fv-SearchHomePage .fv-footerMenuRibbonMobile .col-sm-2 {
         flex: 0 0 27.666667%;
         width: 60.666667% !important;
@@ -988,6 +1135,7 @@
         margin-right: -16vw;
         margin-top: 12px;
     }
+
     .fv-widthHeaderLoginMenuForSearchHomePage .headerLoginMenu .fv-footerMenuRibbonMobile .col-sm-2 {
         flex: 0 0 31.666667%;
         width: 16.666667% !important;
@@ -1002,9 +1150,11 @@
         text-align: initial;
         margin-right: 1vw;
     }
-    .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox p , .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox i {
+
+    .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox p, .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox i {
         font-size: 11px;
     }
+
     .fv-SearchHomePage .fv-searchMainPageBodyLeft .fv-mainProduct .fv-product .fv-productCapacityBox .col-md-5 {
         padding-left: 34px;
         text-align: initial;
