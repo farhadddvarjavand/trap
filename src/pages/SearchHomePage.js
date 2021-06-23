@@ -62,6 +62,7 @@ class SearchHomePage extends Datas {
     }
 
     setAccommodationGroup =(event) =>{
+
         let repeat = false
         const setData= this.state.accommodationGroup
         if(event.target.checked === false){
@@ -82,10 +83,31 @@ class SearchHomePage extends Datas {
             }
         }
     }
+    accommodationCheckedPool = () =>{ // dar halati ke az mainpage roie estakhrdar klick karde bashad
+        if(localStorage.getItem("mainPageSearchAccommodationGroup") && this.props.location.searchDatasAccomomdation && this.props.location.searchDatasAccomomdation.accommodationGroup === "استخردار" ){
+            return true
+        }
+    }
+    accommodationCheckedCoastal = () =>{ // dar halati ke az mainpage roie estakhrdar klick karde bashad
+        if(localStorage.getItem("mainPageSearchAccommodationGroup") && this.props.location.searchDatasAccomomdation && this.props.location.searchDatasAccomomdation.accommodationGroup === "ساحلی" ){
+            return true
+        }
+    }
+    accommodationCheckedSummer = () =>{ // dar halati ke az mainpage roie estakhrdar klick karde bashad
+        if(localStorage.getItem("mainPageSearchAccommodationGroup") && this.props.location.searchDatasAccomomdation && this.props.location.searchDatasAccomomdation.accommodationGroup === "ییلاقی" ){
+            return true
+        }
+    }
+    accommodationCheckedForest = () =>{ // dar halati ke az mainpage roie estakhrdar klick karde bashad
+        if(localStorage.getItem("mainPageSearchAccommodationGroup") && this.props.location.searchDatasAccomomdation && this.props.location.searchDatasAccomomdation.accommodationGroup === "کلبه جنگلی" ){
+            return true
+        }
+    }
+
 
     componentDidMount() {
         super.componentDidMount();
-        if(!JSON.parse(localStorage.getItem("mainPageSearch"))){
+        if(!JSON.parse(localStorage.getItem("mainPageSearch")) && !JSON.parse(localStorage.getItem("mainPageSearchAccommodationGroup"))){ // agar az safhe main tavasote serch ha nayomade bod (revale adi anjam shavad) bar asase page va sort ke hast anjam shavad (baraye avalin bar) safhe 1 search
             const data ={
                 orderBy:this.props.match.params.sort,
                 page:this.props.match.params.id
@@ -145,6 +167,21 @@ class SearchHomePage extends Datas {
             localStorage.removeItem("mainPageSearch");
 
         }
+        if(localStorage.getItem("mainPageSearchAccommodationGroup")){ // agar az tarighe eghamatgah haie dar main estakhrdar , ..... omade bod
+            this.setState({
+                accommodationGroup:[this.props.location.searchDatasAccomomdation.accommodationGroup],
+            })
+            mainPageSearchLocal= JSON.parse(localStorage.getItem("mainPageSearchAccommodationGroup"))
+            let data = ''
+            data = {
+                type:mainPageSearchLocal.accommodationGroup.toLocaleString()
+            }
+            console.log(data)
+            this.postAndPushResultSearchPageVillas(data)
+            this.setState({doSearch:true})
+            localStorage.removeItem("mainPageSearchAccommodationGroup");
+        }
+
 
         const paginationsShow = []
         for (let i = 0 ; i< this.state.paginationLimit ; i++){
@@ -216,13 +253,13 @@ class SearchHomePage extends Datas {
         }
 
 
-       const getDataPagination= (pageNumberChange) =>{
-                let data = ''
-                data = {
-                    page:pageNumberChange,
-                    orderBy:this.props.match.params.sort,
-                }
-                return data
+        const getDataPagination= (pageNumberChange) =>{
+            let data = ''
+            data = {
+                page:pageNumberChange,
+                orderBy:this.props.match.params.sort,
+            }
+            return data
         }
         const getDataPaginationForewardAndBackwardForSearch = (pageNumber)=>{
             let data = ''
@@ -238,7 +275,6 @@ class SearchHomePage extends Datas {
                 page:pageNumber,
                 orderBy:this.props.match.params.sort,
                 villa_id:this.state.villaCode,
-
             }
 
             if(setCostRange ===','){
@@ -253,11 +289,11 @@ class SearchHomePage extends Datas {
             if(data.area === "C "){
                 delete data.area
             }
+            if(data.villa_id === null || data.villa_id === "" || data.villa_id === undefined || data.villa_id === 0){
+                delete data.villa_id
+            }
             if(data.bedroom === null || data.bedroom === "" || data.bedroom === undefined){
                 delete data.bedroom
-            }
-            if(data.villa_id === null || data.villa_id === "" || data.villa_id === undefined){
-                delete data.villa_id
             }
             if(data.type === null || data.type === "" || data.type === undefined){
                 delete data.type
@@ -268,8 +304,7 @@ class SearchHomePage extends Datas {
             if(setDisinfectedAccommodation===0){
                 delete data.disinfected
             }
-            console.log(data)
-
+            return data
         }
 
 
@@ -353,16 +388,16 @@ class SearchHomePage extends Datas {
                                     <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
                                         <p>دسته بندی اقامتگاه</p>
                                         <MDBCol md={12}>
-                                            <input type="checkbox" name="استخردار" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>استخردار</p>
+                                            <input type="checkbox" name="استخردار" checked={this.accommodationCheckedPool()} onChange={(event)=>this.setAccommodationGroup(event)}/> <p>استخردار</p>
                                         </MDBCol>
                                         <MDBCol md={12}>
-                                            <input type="checkbox" name="ساحلی" onChange={(event)=>this.setAccommodationGroup(event)}/> <p>ساحلی</p>
+                                            <input type="checkbox" name="ساحلی" checked={this.accommodationCheckedCoastal()} onChange={(event)=>this.setAccommodationGroup(event)}/> <p>ساحلی</p>
                                         </MDBCol>
                                         <MDBCol md={12}>
-                                            <input type="checkbox" name="ییلاقی" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p>ییلاقی</p>
+                                            <input type="checkbox" name="ییلاقی" checked={this.accommodationCheckedSummer()}  onChange={(event)=>this.setAccommodationGroup(event)}/>  <p>ییلاقی</p>
                                         </MDBCol>
                                         <MDBCol md={12}>
-                                            <input type="checkbox" name="کلبه جنگلی" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p> کلبه جنگلی</p>
+                                            <input type="checkbox" name="کلبه جنگلی" checked={this.accommodationCheckedForest()} onChange={(event)=>this.setAccommodationGroup(event)}/>  <p> کلبه جنگلی</p>
                                         </MDBCol>
                                         <MDBCol md={12}>
                                             <input type="checkbox" name="خانه قدیمی" onChange={(event)=>this.setAccommodationGroup(event)}/>  <p>خانه قدیمی</p>
@@ -393,7 +428,7 @@ class SearchHomePage extends Datas {
                                         }
 
                                         if(setCostRange ===','){
-                                           delete data.costRange
+                                            delete data.costRange
                                         }
                                         if(setDateToGoAndDateToReturn === ',' ){
                                             delete data.dateRange
@@ -404,11 +439,11 @@ class SearchHomePage extends Datas {
                                         if(data.area === "C "){
                                             delete data.area
                                         }
+                                        if(data.villa_id === null || data.villa_id === "" || data.villa_id === undefined || data.villa_id === 0){
+                                            delete data.villa_id
+                                        }
                                         if(data.bedroom === null || data.bedroom === "" || data.bedroom === undefined){
                                             delete data.bedroom
-                                        }
-                                        if(data.villa_id === null || data.villa_id === "" || data.villa_id === undefined){
-                                            delete data.villa_id
                                         }
                                         if(data.type === null || data.type === "" || data.type === undefined){
                                             delete data.type
@@ -419,7 +454,6 @@ class SearchHomePage extends Datas {
                                         if(setDisinfectedAccommodation===0){
                                             delete data.disinfected
                                         }
-                                        console.log(data)
 
                                         this.postAndPushResultSearchPageVillas(data)
                                         this.setState({doSearch:true , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber})
@@ -440,8 +474,8 @@ class SearchHomePage extends Datas {
                                          onClick={(event)=>{
                                              const data = {orderBy:'Newest'}
                                              this.postAndPushResultSearchPageVillas(data)
-                                             this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" ,villaCode:'' , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber}) // agar bad az search karbar in ra zad hame pak shavad ke tasir migozarad bar search
-                                }}>
+                                             this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber , dateToGo:'',  dateToReturn:'', setVillage:''}) // agar bad az search karbar in ra zad hame pak shavad ke tasir migozarad bar search
+                                         }}>
                                     جدیدترین
                                 </NavLink>
                                 <NavLink  to={this.props.match.params.sort === 'Expensive' ? `/searchHomePage/Expensive/${this.props.match.params.id}` : `/searchHomePage/Expensive/1`}
@@ -449,8 +483,8 @@ class SearchHomePage extends Datas {
                                           onClick={(event)=>{
                                               const data = {orderBy:'Expensive'}
                                               this.postAndPushResultSearchPageVillas(data)
-                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" ,villaCode:''  , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber})
-                                }}>
+                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber  , dateToGo:'' ,  dateToReturn:'', setVillage:''})
+                                          }}>
                                     گران‌ترین
                                 </NavLink>
                                 <NavLink  to={this.props.match.params.sort === 'Cheapest' ? `/searchHomePage/Cheapest/${this.props.match.params.id}` : `/searchHomePage/Cheapest/1`}
@@ -458,8 +492,8 @@ class SearchHomePage extends Datas {
                                           onClick={(event)=>{
                                               const data = {orderBy:'Cheapest'}
                                               this.postAndPushResultSearchPageVillas(data)
-                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"",villaCode:''  , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber})
-                                }}>
+                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber , dateToGo:''  ,  dateToReturn:'', setVillage:''})
+                                          }}>
                                     ارزان‌ترین
                                 </NavLink>
                                 <NavLink  to={this.props.match.params.sort === 'Popular' ? `/searchHomePage/Popular/${this.props.match.params.id}` : `/searchHomePage/Popular/1`}
@@ -467,8 +501,8 @@ class SearchHomePage extends Datas {
                                           onClick={(event)=>{
                                               const data = {orderBy:'Popular'}
                                               this.postAndPushResultSearchPageVillas(data)
-                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" ,villaCode:'' , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber})
-                                }}>
+                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber , dateToGo:''  ,  dateToReturn:'', setVillage:''})
+                                          }}>
                                     محبوب‌ترین
                                 </NavLink>
                                 <NavLink  to={this.props.match.params.sort === 'Discount' ? `/searchHomePage/Discount/${this.props.match.params.id}` : `/searchHomePage/Discount/1`}
@@ -476,7 +510,7 @@ class SearchHomePage extends Datas {
                                           onClick={(event)=>{
                                               const data = {orderBy:'Discount'}
                                               this.postAndPushResultSearchPageVillas(data)
-                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" ,villaCode:''  , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber})
+                                              this.setState({sortedBy:event.target.name , doSearch:false , numberOfPeople:"" , numberOfBedroom:"" , searchPageVillas:[] , SearchResultWaitingHandle:true , pagination:initialPaginationNumber  , dateToGo:'' ,  dateToReturn:'', setVillage:''})
                                           }}>
                                     پرتخفیف ها
                                 </NavLink>
@@ -551,71 +585,71 @@ class SearchHomePage extends Datas {
 
 
                                 <button className={'fv-SearchHomePagePaginationDefault'} disabled={pages.length < this.state.paginationLimit ? true : false} onClick={()=>{  // agar tedad safahat kamtarz 2ta bod
-                                   if(this.props.match.params.id>1){  // hadeaghal 2 bashad ke manfi nashavad
+                                    if(this.props.match.params.id>1){  // hadeaghal 2 bashad ke manfi nashavad
 
-                                       if(Number(this.props.match.params.id) === Number(this.state.pagination[0])){
-                                           let newPagination = []
-                                           for (let i =0 ; i < this.state.pagination.length ; i ++){
-                                               newPagination.push(this.state.pagination[i]-1)
-                                           }
-                                           this.setState({ pagination:newPagination , searchPageVillas:[] , SearchResultWaitingHandle:true})
-                                       }
+                                        if(Number(this.props.match.params.id) === Number(this.state.pagination[0])){
+                                            let newPagination = []
+                                            for (let i =0 ; i < this.state.pagination.length ; i ++){
+                                                newPagination.push(this.state.pagination[i]-1)
+                                            }
+                                            this.setState({ pagination:newPagination , searchPageVillas:[] , SearchResultWaitingHandle:true})
+                                        }
 
-                                       if(this.props.match.params.sort  === "doSearch" ){ // اگر سرچ کرده بود و بعد زد فقط یکی اضهفه شود به آن
+                                        if(this.props.match.params.sort  === "doSearch" ){ // اگر سرچ کرده بود و بعد زد فقط یکی اضهفه شود به آن
 
-                                           const data =getDataPaginationForewardAndBackwardForSearch(Number(this.props.match.params.id)-1)
-                                           console.log(data)
-                                           this.postAndPushResultSearchPageVillas(data)
+                                            const data =getDataPaginationForewardAndBackwardForSearch(Number(this.props.match.params.id)-1)
+                                            console.log(data)
+                                            this.postAndPushResultSearchPageVillas(data)
 
-                                           this.setState({pageNumber:this.props.match.params.id+1 , pageNum:this.props.match.params.id-1 , searchPageVillas:[] , SearchResultWaitingHandle:true})
-                                           this.props.history.push(`/searchHomePage/doSearch/${Number(this.props.match.params.id)-1}`)
-                                       }
-                                       else {
+                                            this.setState({pageNumber:this.props.match.params.id+1 , pageNum:this.props.match.params.id-1 , searchPageVillas:[] , SearchResultWaitingHandle:true})
+                                            this.props.history.push(`/searchHomePage/doSearch/${Number(this.props.match.params.id)-1}`)
+                                        }
+                                        else {
 
-                                           const datas = getDataPagination(Number(this.props.match.params.id)-1)
-                                           this.postAndPushResultSearchPageVillas(datas)
-                                           this.setState({ pageNum:Number(this.props.match.params.id)-1 , searchPageVillas:[] , SearchResultWaitingHandle:true})
+                                            const datas = getDataPagination(Number(this.props.match.params.id)-1)
+                                            this.postAndPushResultSearchPageVillas(datas)
+                                            this.setState({ pageNum:Number(this.props.match.params.id)-1 , searchPageVillas:[] , SearchResultWaitingHandle:true})
 
-                                           this.props.history.push(`/searchHomePage/${this.props.match.params.sort}/${Number(this.props.match.params.id)-1}`)
-                                       }
+                                            this.props.history.push(`/searchHomePage/${this.props.match.params.sort}/${Number(this.props.match.params.id)-1}`)
+                                        }
 
 
-                                   }
+                                    }
                                 }}><i className="fas fa-caret-right" /></button>
 
 
 
                                 {pages.length<this.state.paginationLimit ? pages.map(pagenumber => {
-                                    return(
+                                        return(
 
-                                        <NavLink to={`/searchHomePage/${this.props.match.params.sort}/${pagenumber}`} exact name={pagenumber}
-                                                 className={'fv-SearchHomePagePaginationDefault'} activeClassName="fv-SearchHomePagePaginationSelected"
-                                                 onClick={(event)=>{
-                                                     const data =getDataPaginationForewardAndBackwardForSearch(pagenumber)
-                                                     this.postAndPushResultSearchPageVillas(data)
-                                                     this.setState({pageNumber:event.target.name , pageNum:pagenumber , searchPageVillas:[] , SearchResultWaitingHandle:true})
-                                                 }}>
-                                            {pagenumber}
-                                        </NavLink>
+                                            <NavLink to={`/searchHomePage/${this.props.match.params.sort}/${pagenumber}`} exact name={pagenumber}
+                                                     className={'fv-SearchHomePagePaginationDefault'} activeClassName="fv-SearchHomePagePaginationSelected"
+                                                     onClick={(event)=>{
+                                                         const data =getDataPaginationForewardAndBackwardForSearch(pagenumber)
+                                                         this.postAndPushResultSearchPageVillas(data)
+                                                         this.setState({pageNumber:event.target.name , pageNum:pagenumber , searchPageVillas:[] , SearchResultWaitingHandle:true})
+                                                     }}>
+                                                {pagenumber}
+                                            </NavLink>
 
-                                    )
-                                })
-                                :
-                                   this.state.pagination.map(paginations => {
-                                       return(
+                                        )
+                                    })
+                                    :
+                                    this.state.pagination.map(paginations => {
+                                        return(
 
-                                           <NavLink to={`/searchHomePage/${this.props.match.params.sort}/${paginations}`} exact name={paginations}
-                                                    className={'fv-SearchHomePagePaginationDefault'} activeClassName="fv-SearchHomePagePaginationSelected"
-                                                    onClick={(event)=>{
-                                                        const data =getDataPaginationForewardAndBackwardForSearch(paginations)
-                                                        this.postAndPushResultSearchPageVillas(data)
-                                                            this.setState({pageNumber:event.target.name , pageNum:paginations , searchPageVillas:[] , SearchResultWaitingHandle:true})
-                                                    }}>
-                                               { paginations}
-                                           </NavLink>
+                                            <NavLink to={`/searchHomePage/${this.props.match.params.sort}/${paginations}`} exact name={paginations}
+                                                     className={'fv-SearchHomePagePaginationDefault'} activeClassName="fv-SearchHomePagePaginationSelected"
+                                                     onClick={(event)=>{
+                                                         const data =getDataPaginationForewardAndBackwardForSearch(paginations)
+                                                         this.postAndPushResultSearchPageVillas(data)
+                                                         this.setState({pageNumber:event.target.name , pageNum:paginations , searchPageVillas:[] , SearchResultWaitingHandle:true})
+                                                     }}>
+                                                { paginations}
+                                            </NavLink>
 
-                                       )
-                                   })
+                                        )
+                                    })
                                 }
 
 
@@ -631,7 +665,7 @@ class SearchHomePage extends Datas {
 
                                         if(this.props.match.params.sort  === "doSearch" ){ // اگر سرچ کرده بود و بعد زد فقط یکی اضهفه شود به آن
 
-                                           const data =getDataPaginationForewardAndBackwardForSearch(Number(this.props.match.params.id)+1)
+                                            const data =getDataPaginationForewardAndBackwardForSearch(Number(this.props.match.params.id)+1)
                                             console.log(data)
                                             this.postAndPushResultSearchPageVillas(data)
 
@@ -677,7 +711,7 @@ class SearchHomePage extends Datas {
                 </MDBContainer>
 
                 <MDBRow>
-                  <Footer />
+                    <Footer />
                 </MDBRow>
 
             </MDBContainer>

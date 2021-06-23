@@ -74,6 +74,7 @@ class Datas extends React.Component{
     }
 
     postAndPushResultSearchPageVillas = (data)=> {
+        console.log(data)
         doSearch(data)
             .then(res => {
                 this.setState({searchPageVillas: res.data.data , lastPageOfSearchPage:res.data.meta.last_page , totalVillas:res.data.meta.total , SearchResultWaitingHandle:false});

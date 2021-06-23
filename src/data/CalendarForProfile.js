@@ -1,5 +1,4 @@
-
-import React, { useState } from "react";
+import React, {useState} from "react";
 
 import "./Calendar/DatePicker.css";
 
@@ -9,25 +8,24 @@ import {getToday} from "../componentsPages/calculationsDate";
 
 const CalendarForProfile = (props) => {
 
-   const today = getToday()    /// show today date {year , month , dday }
+
+    const today = getToday()    /// show today date {year , month , dday }
     const preselectedDays = [
         {
             year: parseInt(today.year),
-            month:parseInt(today.month),
+            month: parseInt(today.month),
             day: parseInt(today.day),
         },
 
     ]
 
-
-
     const [selectedDayRange, setSelectedDayRange] = useState(
         preselectedDays
     );
-   props.getSelectedDay(selectedDayRange)
+    props.getSelectedDay(selectedDayRange)
 
     let defaultDay = ''
-    defaultDay =[
+    defaultDay = [
         // here we add some CSS classes
         /*  { year: 1400, month: 1, day: 6, className: 'orangeDay' },
           { year: 1400, month: 2, day: 23, className: 'orangeDay' },
@@ -40,20 +38,20 @@ const CalendarForProfile = (props) => {
 
     let closeDatesHostreserved = []
     let reservedDatesUsers = []
-    if(props.closeDatesHostreserved){
+    if (props.closeDatesHostreserved) {
         //   console.log(this.props.daysReserved)
-        for (let i = 0 ; i<props.closeDatesHostreserved.length ; i++){
-            let newList =  { year: '', month: '', day: '', className: 'purpleDay' }
+        for (let i = 0; i < props.closeDatesHostreserved.length; i++) {
+            let newList = {year: '', month: '', day: '', className: 'purpleDay'}
             newList.year = parseInt(props.closeDatesHostreserved[i].year)
             newList.month = parseInt(props.closeDatesHostreserved[i].month)
             newList.day = parseInt(props.closeDatesHostreserved[i].day)
             closeDatesHostreserved.push(newList)
         }
     }
-    if(props.reservedDatesUsers){
+    if (props.reservedDatesUsers) {
         //   console.log(this.props.daysReserved)
-        for (let i = 0 ; i<props.reservedDatesUsers.length ; i++){
-            let newList =  { year: '', month: '', day: '', className: 'yellowDay' }
+        for (let i = 0; i < props.reservedDatesUsers.length; i++) {
+            let newList = {year: '', month: '', day: '', className: 'yellowDay'}
             newList.year = parseInt(props.reservedDatesUsers[i].year)
             newList.month = parseInt(props.reservedDatesUsers[i].month)
             newList.day = parseInt(props.reservedDatesUsers[i].day)

@@ -85,7 +85,7 @@ class HeaderSteps extends Component {
                             <MDBCol md={12} sm={12}>
                                 <a onClick={()=>{
                                     localStorage.clear()
-                                    window.location.reload();
+                                    window.location.replace("/login");
                                 }}> <img style={{marginRight : '15px' , marginLeft : '5px'}} src={Logout} />
                                     <p>خروج از حساب کاربری</p></a>
                             </MDBCol>

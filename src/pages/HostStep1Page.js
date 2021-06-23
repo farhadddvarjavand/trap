@@ -159,7 +159,7 @@ class HostStep1Page extends Component {
                             <input type="button" value="مرحله بعد"  className={"fv-hostStepPage1LeftButton"} onClick={()=>{
                                 if(validationInputs){
                                     localStorage.setItem(`${"step1"}`, JSON.stringify(localStorageData))
-                                    this.props.history.push('../../hostStepAddress')
+                                    this.props.history.push('../../hostStepSetMapLocation')
                                 }
                                 else {
                                     this.setState({click:true})

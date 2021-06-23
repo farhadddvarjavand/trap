@@ -473,7 +473,7 @@ class HostStep3Page extends Component {
                             ن را در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند."
                             image={HostStepImage1}
                             nextLink={"../../hostStepFacilities"}
-                            returnLink={"../../hostStepSetMapLocation"}
+                            returnLink={"../../hostStepAddress"}
                             localStorageName={"step3"}
                             localStorageData={localStorageData}/>
                     </MDBRow>

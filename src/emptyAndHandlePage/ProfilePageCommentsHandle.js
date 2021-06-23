@@ -1,33 +1,23 @@
 import React, {Component} from "react";
-import {MDBAlert, MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import "../style/SearchHomePage.css"
 import "../style/DisplayPage.css"
 import "../style/ProfilePageReservation2.scss"
 import "../style/ProfilePageReservation.scss"
 import "../style/ProfilePageWallet.scss"
 import "../style/ProfilePageGustComments2.scss"
-import Footer from "../componentsPages/footer"
-import MobileLogo from "../images/MobileLogo.png"
-import HeaderSearch from "../componentsPages/HeaderSearch";
-import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
-import {getUserVillaComments, replayComment, userVillas} from "../services/userService";
-import {fas} from "@fortawesome/free-solid-svg-icons";
-import ProfilePageGustComments2 from "../pages/PrfilePageGustComments2"
-import PrfilePageGustComments from "../pages/PrfilePageGustComments";
+import {getUserVillaComments, userVillas} from "../services/userService";
 import "../style/profilePageCommentsHandler.scss"
-import ProfilePageReservation2 from "../pages/ProfilePageReservation2";
-import ProfilePageReservationEmpty from "./ProfilePageReservationEmpty";
 import {WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
 
 class ProfilePageCommentsHandle extends Component {
     constructor(props) {
         super(props);
-        this.state={
-            userVillas:[],
-            villaId:'',
-            comment:false,
-            pushPage:'',
-            villaIdFullComments:''
+        this.state = {
+            userVillas: [],
+            villaId: '',
+            comment: false,
+            pushPage: '',
+            villaIdFullComments: ''
 
         }
     }
@@ -37,34 +27,35 @@ class ProfilePageCommentsHandle extends Component {
         let existComment = false
 
 
-
         userVillas()
-            .then(result=>{
-                if(result.data.data.length>0){
+            .then(result => {
+                if (result.data.data.length > 0) {
                     console.log(result)
-                    this.setState({userVillas:result.data.data} , ()=>{
-                        if(this.state.userVillas){ /// agar villaeii vojod dasht
+                    this.setState({userVillas: result.data.data}, () => {
+                        if (this.state.userVillas) { /// agar villaeii vojod dasht
                             this.state.userVillas.map(userVilla => {
                                 getUserVillaComments(userVilla.id)    // برای هر ویلا که طرف دارد چک کن
-                                    .then(res=>{    // اگر ویلایی کامنت داشت برو داخل
+                                    .then(res => {    // اگر ویلایی کامنت داشت برو داخل
                                         console.log(res)  // آی دی ویلایی که کامنت دارد را باید پاس بدهیم به مرحله بعد
-                                        if(res.data.data.length>0 && res.data.data !== "Something went wrong!"){
+                                        if (res.data.data.length > 0 && res.data.data !== "Something went wrong!") {
                                             existComment = true
-                                        this.props.history.push(`/MainProfilePages/profileShowGuestComments/${userVilla.id}`)
+                                            this.props.history.push(`/MainProfilePages/profileShowGuestComments/${userVilla.id}`)
 
-                                        }else {
+                                        } else {
+                                            this.props.history.push("/MainProfilePages/profileGuestComments")
                                             // this.setState({villaIdFullComments:"guest"})
-                                           // this.props.history.push("/MainProfilePages/profileGuestComments")
+                                            // this.props.history.push("/MainProfilePages/profileGuestComments")
                                             // this.props.history.push("/profileGuestComments") /// صفحه ای پیدا نشده است
                                         }
                                     })
-                                    .catch(err=>{
-                                      //  this.props.history.push("/MainProfilePages/profileGuestComments")
-                                    } ) //.catch(err=>this.props.history.push("/profileGuestComments"))
+                                    .catch(err => {
+                                        console.log(err.response)
+                                        //  this.props.history.push("/MainProfilePages/profileGuestComments")
+                                    }) //.catch(err=>this.props.history.push("/profileGuestComments"))
 
                             })
-                        }else {
-                            if(existComment === false){
+                        } else {
+                            if (existComment === false) {
                                 // this.props.history.push("/ProfilePageCommentsEmpty")
                                 // empty
                                 this.props.history.push("/MainProfilePages/profileGuestComments")
@@ -75,15 +66,15 @@ class ProfilePageCommentsHandle extends Component {
 
                     })
 
-                }else {
+                } else {
                     this.props.history.push("/MainProfilePages/profileGuestComments")
                 }
 
             })
-            .catch(err=>{
-              //  this.props.history.push("/MainProfilePages/profileGuestComments")
-            } )
-
+            .catch(err => {
+                console.log(err.response)
+                //  this.props.history.push("/MainProfilePages/profileGuestComments")
+            })
 
 
     }
@@ -93,11 +84,10 @@ class ProfilePageCommentsHandle extends Component {
         console.log(this.state.villaId)
 
 
-        return(
+        return (
             <>
-                {WaitingLoadingProfilePage(true , "fv-waitingLoadPublicFullScreen")}
+                {WaitingLoadingProfilePage(true, "fv-waitingLoadPublicFullScreen")}
             </>
-
 
 
         )
@@ -105,4 +95,5 @@ class ProfilePageCommentsHandle extends Component {
 
     }
 }
+
 export default ProfilePageCommentsHandle

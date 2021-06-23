@@ -25,9 +25,9 @@ class HostStep2Page2 extends Component {
             mapAddress:'',
             waitingMapLoad:true,
         }
+        this.reverseFunction = this.reverseFunction.bind(this);
     }
     componentDidMount() {
-        this.reverseFunction = this.reverseFunction.bind(this);
         const prevData =  JSON.parse(localStorage.getItem("step2-2"))
         if (prevData) {
             if(prevData.long>0)
@@ -125,8 +125,8 @@ class HostStep2Page2 extends Component {
                     د. همچنین طراح به دنبال این است که پس از ارایه کار نظر دیگران را
                     در مورد طراحی جویا شود و نمی‌خواهد افراد روی متن های موجود تمرکز کنند"
                         image={HostStepImage1}
-                        nextLink={"../../hostStepAccommodationDetails"}
-                        returnLink={"../../hostStepAddress"}
+                        nextLink={"../../hostStepAddress"}
+                        returnLink={"../../hostStepBasicInformation"}
                         localStorageName={"step2-2"}
                         localStorageData={localStorageData}/>
                 </MDBRow>

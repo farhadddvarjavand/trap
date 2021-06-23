@@ -1,5 +1,5 @@
-.fv-FactorPage{
-  .fv-factorPageRightInfo{
+.fv-FactorPage {
+  .fv-factorPageRightInfo {
     background: #FFFFFF;
     box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.08);
     border-radius: 15px;
@@ -9,104 +9,125 @@
     display: table-cell;
     z-index: 1;
 
-    img{
+    img {
       width: 92%;
       margin-right: 4%;
       margin-bottom: 6%;
       border-radius: 3px;
     }
-    .fv-factorPageRightInfoRightPadding{
+
+    .fv-factorPageRightInfoRightPadding {
       margin-right: 27%;
       font-size: 14px;
     }
-    .fv-factorPageRightInfoRightPaddingTitle{
+
+    .fv-factorPageRightInfoRightPaddingTitle {
       margin-right: 4%;
     }
-    .fv-factorPageRightInfoRightPaddingTitle2{
+
+    .fv-factorPageRightInfoRightPaddingTitle2 {
       margin-right: 9%;
     }
-    .fv-factorPageRightRate{
+
+    .fv-factorPageRightRate {
       display: flex;
       direction: initial;
       text-align: center;
       place-content: flex-end;
-      .fv-factorPageRightRateNumber{
+
+      .fv-factorPageRightRateNumber {
         font-size: 12px;
         color: #8D8D8D;
         margin-top: 6%;
         margin-left: 2%;
       }
-      .fv-factorPageRightRateStar{
+
+      .fv-factorPageRightRateStar {
         font-size: 12px;
         margin-top: 6%;
-        color:  #FEA801;
+        color: #FEA801;
       }
     }
-    .fa-home{
+
+    .fa-home {
       font-size: 21px;
     }
 
   }
- .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo {
-   margin-right: 1.5%;
-   border: none;
-   .fv-factorPageRightInfoLeftBody {
-     box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.08);
-     padding-top: 2%;
-     margin-right: 2%;
-     width: 103.5%;
-     margin-top: 2%;
-     padding-left: 4%;
-     padding-right: 4%;
-     border-radius: 15px;
-     padding-bottom: 10%;
-     .fv-factorPageRightInfoLeftTopInnerSecond{
-       height: 65px;
-       align-content: center;
-       background: #F4F4F4;
-       border-radius: 15px;
-       .fa, .fas {
-         margin-left: 2%;
-       }
-       .fv-factorPageRightInfoLeftInnerTop {
-         margin-right: 3%;
-         margin-left: 0%;
-         .fa, .fas {
-           margin-top: 3%;
-           margin-left: 4%;
-         }
-         h6 {
-           margin-right: 7%;
-         }
-       }
-       .fv-factorPageRightInfoLeftInnerChangeCalender{
-         color: #15BE29;
-       }
-     }
-   }
+
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo {
+    margin-right: 1.5%;
+    border: none;
+
+    .fv-factorPageRightInfoLeftBody {
+      box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.08);
+      padding-top: 2%;
+      margin-right: 2%;
+      width: 103.5%;
+      margin-top: 2%;
+      padding-left: 4%;
+      padding-right: 4%;
+      border-radius: 15px;
+      padding-bottom: 10%;
+
+      .fv-factorPageRightInfoLeftTopInnerSecond {
+        height: 65px;
+        align-content: center;
+        background: #F4F4F4;
+        border-radius: 15px;
+
+        .fa, .fas {
+          margin-left: 2%;
+        }
+
+        .fv-factorPageRightInfoLeftInnerTop {
+          margin-right: 3%;
+          margin-left: 0%;
+
+          .fa, .fas {
+            margin-top: 3%;
+            margin-left: 4%;
+          }
+
+          h6 {
+            margin-right: 7%;
+          }
+        }
+
+        .fv-factorPageRightInfoLeftInnerChangeCalender {
+          color: #15BE29;
+        }
+      }
+    }
   }
+
   .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody {
     margin-right: -3%;
     margin-top: -3%;
   }
-  .fv-factorPageRightInfoLeftInnerTop{
+
+  .fv-factorPageRightInfoLeftInnerTop {
     display: flex;
     direction: initial;
     place-content: flex-end;
     margin-right: 2%;
     margin-left: -7%;
-    h6{
+
+    h6 {
       margin-right: 3%;
     }
-    .h7{
+
+    .h7 {
       margin-right: 3%;
       margin-top: 1%;
     }
   }
-  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftInnerTopButton{
+
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftInnerTopButton {
     text-align: end;
     width: 40%;
-    input{
+
+    input {
       border-radius: 15px;
       color: #E88F0A;
       background: rgba(242, 201, 76, 0.2);
@@ -114,7 +135,8 @@
       border: 1px solid white;
     }
   }
-  .fv-factorPageRightInfoLeftTop{
+
+  .fv-factorPageRightInfoLeftTop {
     box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.08);
     align-items: center;
     padding-top: 2%;
@@ -123,15 +145,19 @@
     width: 100%;
     margin-right: 3%;
   }
+
   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo h6 {
     margin-top: 3%;
   }
- .fv-factorPageRightInfoLeftInnerTop {
+
+  .fv-factorPageRightInfoLeftInnerTop {
     align-self: center;
   }
-  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-ProfilePageUserSetInfoButton{
+
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-ProfilePageUserSetInfoButton {
     text-align: inherit;
     margin-top: 0;
+
     input {
       width: 80%;
       background: #FBFBFB;
@@ -143,70 +169,78 @@
       margin-right: 5%;
     }
   }
-   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner{
-     input {
-       width: 117%;
-     }
-     .col-md-4 {
-       display: flex;
-       padding-right: 4%;
-       place-content: center;
-     }
-     .fv-factorPageRightInfoLeftBodyOrderLastColumn{
-       width: 105%;
-       border-bottom: 1px solid rgba(145, 145, 145, 0.5);
-       margin-right: -3%;
-       margin-top: 2%;
-       margin-bottom: 2%;
-     }
-     .fv-factorPageRightInfoLeftBodyOrderThatPay{
-       background: #F4F4F4;
-       border-radius: 15px;
-       padding-top: 6%;
-       padding-bottom: 6%;
-     }
-     .fv-factorPageRightInfoLeftBodyInnerLeft{
-       h6{
-         margin-right: 0%;
-         margin-bottom: 7%;
-       }
-       .fv-ProfilePageUserSetInfoButton input {
-         margin-right: -4%;
-         width: 108%;
-         margin-top: 9%;
-         background: #15BE29;
-         box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.08);
-         border-radius: 16px;
-         color: white;
-       }
-       .fv-factorPageRightInfoLeftBodyOrderThatPayToman{
-         margin-right: 10%;
-         color: #919191;
-         font-size: 13px;
-         padding-top: 2%;
-       }
-     }
-   }
 
-  .fv-FactorPageForMobile{
-    display: none;
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner {
+    input {
+      width: 117%;
+    }
+
+    .col-md-4 {
+      display: flex;
+      padding-right: 4%;
+      place-content: center;
+    }
+
+    .fv-factorPageRightInfoLeftBodyOrderLastColumn {
+      width: 105%;
+      border-bottom: 1px solid rgba(145, 145, 145, 0.5);
+      margin-right: -3%;
+      margin-top: 2%;
+      margin-bottom: 2%;
+    }
+
+    .fv-factorPageRightInfoLeftBodyOrderThatPay {
+      background: #F4F4F4;
+      border-radius: 15px;
+      padding-top: 6%;
+      padding-bottom: 6%;
+    }
+
+    .fv-factorPageRightInfoLeftBodyInnerLeft {
+      h6 {
+        margin-right: 0%;
+        margin-bottom: 7%;
+      }
+
+      .fv-ProfilePageUserSetInfoButton input {
+        margin-right: -4%;
+        width: 108%;
+        margin-top: 9%;
+        background: #15BE29;
+        box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.08);
+        border-radius: 16px;
+        color: white;
+      }
+
+      .fv-factorPageRightInfoLeftBodyOrderThatPayToman {
+        margin-right: 10%;
+        color: #919191;
+        font-size: 13px;
+        padding-top: 2%;
+      }
+    }
   }
-   .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond .col-md-3 {
+
+  .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond .col-md-3 {
     flex: 0 0 35%;
     max-width: 34%;
   }
-  .fv-factorPageRightInfoLeftBodyInnerLeft .fv-factorPageRightInfoLeftBodyInnerLeftInner{
+
+  .fv-factorPageRightInfoLeftBodyInnerLeft .fv-factorPageRightInfoLeftBodyInnerLeftInner {
     margin-bottom: 4%;
   }
-  .fv-factorPageRightInfoLeftBodyInnerLeft .fv-factorPageRightInfoLeftBodyInnerLeftInner .fv-factorPageRightInfoLeftBodyInnerLeftP p{
+
+  .fv-factorPageRightInfoLeftBodyInnerLeft .fv-factorPageRightInfoLeftBodyInnerLeftInner .fv-factorPageRightInfoLeftBodyInnerLeftP p {
     font-size: 15px;
   }
-   .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn p {
+
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn p {
     /* font-size: 14px; */
     font-size: 14px;
     margin-top: 5%;
   }
-  .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fa,  .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fas{
+
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fa, .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fas {
     font-size: 14px;
   }
 
@@ -215,35 +249,40 @@
   }
 
 
-
-  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage input{
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage input {
     width: 2vh;
     height: 6vh;
     align-items: center;
   }
-  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdraw{
+
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdraw {
     //width: 50%;
   }
+
   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .col-md-2 {
     flex: 0 0 21.666667%;
     max-width: 12.666667%;
     padding-left: 0;
     padding: 0;
   }
-  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdrawRowOne{
+
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdrawRowOne {
     padding: 0;
     margin-top: 1.5%;
   }
-  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage  .fv-radioButtonForWithdrawRowOne .h7{
+
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdrawRowOne .h7 {
     margin: 0;
   }
-  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage  .fv-radioButtonForWithdrawRowOne .col-md-7 ,   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage  .fv-radioButtonForWithdrawRowOne .col-md-4{
+
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdrawRowOne .col-md-7, .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdrawRowOne .col-md-4 {
     padding: 0;
     margin-right: 1%;
     margin-left: -6vh;
     margin-bottom: 0;
     margin-top: 0;
   }
+
   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdrawTwo {
     padding-right: 13%;
     padding-left: 0%;
@@ -253,13 +292,14 @@
     border-radius: 15px;
     margin-bottom: 8%;
   }
-  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdrawTwo .fv-radioButtonForWithdrawTwoRow .col-md-6{
+
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdrawTwo .fv-radioButtonForWithdrawTwoRow .col-md-6 {
     padding: 0;
     place-self: center;
     margin-right: -2%;
   }
 
-  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdrawTwoRowOne{
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdrawTwoRowOne {
     margin-right: 8%;
     padding: 0;
     width: 65%;
@@ -267,35 +307,39 @@
   }
 
 }
+
+.fv-SearchHomePage.fv-DisplayPage.fv-ProfilePage.fv-FactorPage .fv-ProfilePageLeftBody.fv-FactorPageForMobile {
+  display: none;
+}
+
 .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyInnerLeftP {
   place-content: end;
 }
 
 
-
-@media (max-width: 767px) and (min-width: 560px){
+@media (max-width: 767px) and (min-width: 560px) {
   .fv-ProfilePageWallet.fv-ProfilePageWallet2.fv-profileFavoritesPage {
-     .fv-product .row .col-md-2 {
+    .fv-product .row .col-md-2 {
       margin-left: 35px;
     }
 
-     .fv-product .row .col-md-2 {
+    .fv-product .row .col-md-2 {
       font-size: 3vw !important;
     }
 
-     .fv-product .col-md-5 {
+    .fv-product .col-md-5 {
       text-align: end;
       margin-right: -41px;
       font-size: 3.5vw;
       margin-left: -31%;
     }
 
-     .fv-productFavorites .fv-productCapacityBoxFavorites .col-md-11 {
+    .fv-productFavorites .fv-productCapacityBoxFavorites .col-md-11 {
       margin-right: 0%;
       font-size: 3vw;
     }
 
-     .fv-product .col-md-5 {
+    .fv-product .col-md-5 {
       text-align: end;
       margin-right: -41px;
       font-size: 3vw;
@@ -303,16 +347,17 @@
     }
   }
 }
-@media (max-width: 560px) and (min-width: 480px){
+
+@media (max-width: 560px) and (min-width: 480px) {
   .fv-ProfilePageWallet.fv-ProfilePageWallet2.fv-profileFavoritesPage {
-     .fv-product .col-md-5 {
+    .fv-product .col-md-5 {
       text-align: end;
       margin-right: -69px;
       font-size: 3.5vw;
       margin-left: -23%;
     }
 
-     .fv-product .row .col-md-2 {
+    .fv-product .row .col-md-2 {
       margin-left: 51px;
     }
   }
@@ -320,26 +365,23 @@
 }
 
 
-
 @media (max-width: 756px) {
 
-  .fv-FactorPage{
-    .desktop{
-      display: none;
-    }
-    .fv-FactorPageForMobile{
-      display: inherit;
-    }
+  .fv-FactorPage {
+
+
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo {
       margin-right: 1.5%;
       border: none;
       margin-top: 11%;
     }
-    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftInnerTopButton1{
+
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftInnerTopButton1 {
       margin-top: -25%;
       text-align: end;
       font-size: 13px;
-      input{
+
+      input {
         border-radius: 15px;
         color: #E88F0A;
         background: rgba(242, 201, 76, 0.2);
@@ -347,6 +389,7 @@
         border: 1px solid white;
       }
     }
+
     .fv-factorPageRightInfoLeftTop {
       align-items: center;
       padding-top: 2%;
@@ -356,6 +399,7 @@
       margin-left: -11%;
       margin-right: -2%;
     }
+
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody {
       padding-top: 6%;
       margin-right: -2%;
@@ -367,6 +411,7 @@
       padding-bottom: 10%;
       margin-top: -46%;
     }
+
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond {
       height: 65px;
       align-content: center;
@@ -377,6 +422,7 @@
       margin-right: 0%;
       margin-top: 0%;
     }
+
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftInnerTopButton {
       text-align: end;
       width: 40%;
@@ -384,25 +430,31 @@
       font-size: 15px;
       margin-left: 14%;
     }
+
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody {
       box-shadow: none;
     }
+
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond .fv-factorPageRightInfoLeftInnerTop2Mobile {
       margin-right: 3%;
       margin-left: 0%;
       place-content: end;
     }
+
     .fv-factorPageRightInfo {
       margin-top: 15%;
     }
+
     .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody {
       margin-right: -3%;
       margin-top: 2%;
     }
+
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody {
       box-shadow: none;
       width: 108%;
     }
+
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyInnerLeft .fv-ProfilePageUserSetInfoButton input {
       margin-right: 2%;
       width: 99%;
@@ -411,6 +463,7 @@
       border-radius: 16px;
       color: white;
     }
+
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-ProfilePageUserSetInfoButton input {
       width: 100%;
       color: #15BE29;
@@ -421,9 +474,11 @@
       background: white;
       border-radius: 8px;
     }
+
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo {
       margin-right: 3%;
     }
+
     .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-ProfilePageUserSetInfoButton input {
 
       border: 1px solid #66D448;
@@ -431,32 +486,38 @@
       background: white;
       border-radius: 8px;
     }
+
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo {
       margin-right: 4%;
       padding-left: 1%;
       padding-right: 1%;
     }
+
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo {
       flex: 0 0 97.666667%;
       max-width: 93.666667%;
     }
 
-     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond {
-       margin-right: 0.5%;
-       width: 95%;
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond {
+      margin-right: 0.5%;
+      width: 95%;
     }
-     .fv-factorPageRightInfo {
+
+    .fv-factorPageRightInfo {
       margin-right: -2%;
       margin-left: 5%;
     }
+
     .fv-factorPageRightInfoLeftBodyInnerLeft {
       margin-left: 8%;
       margin-right: -5%;
     }
-     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .col-md-4 {
+
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .col-md-4 {
       place-content: end;
-       padding: 0;
+      padding: 0;
     }
+
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyInnerLeft h6 {
       margin-right: 2%;
     }
@@ -470,6 +531,7 @@
       margin-top: 8%;
       margin-bottom: 9%;
     }
+
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInnerMobile {
       box-shadow: 0px 4px 14px rgba(14, 15, 15, 0.08);
       width: 100%;
@@ -478,7 +540,8 @@
       border-radius: 15px;
       margin-right: -2.5%;
     }
-     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyOrderThatPay {
+
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyOrderThatPay {
       padding-top: 7%;
       padding-bottom: 7%;
       margin-top: 3%;
@@ -498,69 +561,85 @@
       margin-left: 3%;
       margin-right: -3%;
     }
-   .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn {
-     text-align: initial;
-     margin-bottom: 6%;
-     margin-right: 0%;
-     margin-top: -7%;
+
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn {
+      text-align: initial;
+      margin-bottom: 6%;
+      margin-right: 0%;
+      margin-top: -7%;
     }
-    .fv-factorPageRightInfoLeftBodyOrderThatPayTitleMobile{
+
+    .fv-factorPageRightInfoLeftBodyOrderThatPayTitleMobile {
       margin-top: -5%;
     }
-    .fv-factorPageRightInfoLeftBodyOrderThatPayPriceMobile{
+
+    .fv-factorPageRightInfoLeftBodyOrderThatPayPriceMobile {
       margin-top: 5%;
       margin-bottom: -5%;
     }
-    .fv-factorPageRightInfoLeftBodyOrderThatPayToman{
+
+    .fv-factorPageRightInfoLeftBodyOrderThatPayToman {
       margin-right: 10%;
       color: #919191;
       font-size: 13px;
       padding-top: 5%;
     }
+
     .fv-factorPageRightInfo .fv-factorPageRightInfoRightPaddingTitle2 {
       margin-right: 7%;
     }
-    .fv-factorPageRightInfo .fv-factorPageRightInfoTitleMobile .fv-factorPageRightInfoRightPaddingTitle2{
+
+    .fv-factorPageRightInfo .fv-factorPageRightInfoTitleMobile .fv-factorPageRightInfoRightPaddingTitle2 {
       margin-right: 3%;
       margin-top: 10%;
       color: #15BE29;
     }
+
     .fv-factorPageRightInfoRightCodeTitleMobile .col-sm-2 {
       flex: 0 0 20.666667%;
     }
-    .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond .fv-factorPageRightInfoLeftInnerChangeCalender{
+
+    .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond .fv-factorPageRightInfoLeftInnerChangeCalender {
       color: #15BE29;
     }
-    .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-FactorPageIconSeeDetailsMobile,  .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-FactorPageIconSeeDetailsMobile{
+
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-FactorPageIconSeeDetailsMobile, .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-FactorPageIconSeeDetailsMobile {
       margin-left: 2%;
       margin-right: -2%;
     }
+
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageUserInfoDetailsBodyColumn p {
       margin-top: 8%;
       margin-bottom: 1%;
     }
-    .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-FactorPageIconSeeDetailsMobile,  .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-FactorPageIconGreenColorMobile{
+
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-FactorPageIconSeeDetailsMobile, .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-FactorPageIconGreenColorMobile {
       color: #15BE29;
     }
-    .fv-factorPageRightInfoLeftInnerTopReserveCodeMobileIcon{
+
+    .fv-factorPageRightInfoLeftInnerTopReserveCodeMobileIcon {
       color: #919191;
     }
-     .fv-factorPageRightInfoLeftInnerTopReserveCodeMobileP {
-       margin-left: 0;
-       font-size: 14px;
-       color: #919191;
-       text-align-last: end;
-       margin-right: 0;
+
+    .fv-factorPageRightInfoLeftInnerTopReserveCodeMobileP {
+      margin-left: 0;
+      font-size: 14px;
+      color: #919191;
+      text-align-last: end;
+      margin-right: 0;
     }
+
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond .fv-factorPageRightInfoLeftInnerTop {
       margin-right: 10%;
       margin-left: -5%;
       text-align: center;
     }
-     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond .fv-factorPageRightInfoLeftInnerTop .fas, .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond .fv-factorPageRightInfoLeftInnerTop .fas {
+
+    .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond .fv-factorPageRightInfoLeftInnerTop .fas, .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond .fv-factorPageRightInfoLeftInnerTop .fas {
       margin-top: 3%;
       margin-left: -12%;
     }
+
     .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo h6 {
       margin-top: 4%;
       margin-bottom: 4%;
@@ -599,7 +678,7 @@
     width: 80%;
   }
 
-  .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonForWithdrawTwoRow .fv-walletStockMobile p{
+  .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonForWithdrawTwoRow .fv-walletStockMobile p {
     font-size: 14px;
     margin-top: -37%;
     margin-right: -15%;
@@ -609,9 +688,12 @@
     margin-top: 34%;
     margin-bottom: 9%;
   }
-
-
-
+  .fv-SearchHomePage.fv-DisplayPage.fv-ProfilePage.fv-FactorPage .fv-ProfilePageLeftBody.fv-FactorPageForMobile {
+    display: inherit;
+  }
+  .fv-SearchHomePage.fv-DisplayPage.fv-ProfilePage.fv-FactorPage .fv-ProfilePageLeftBody.desktop {
+    display: none;
+  }
 }
 
 
@@ -620,6 +702,7 @@
     flex: 0 0 21.666667%;
   }
 }
+
 @media (max-width: 360px) {
   .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond {
     margin-right: -1.25%;
@@ -629,6 +712,7 @@
     flex: 0 0 24.666667%;
   }
 }
+
 @media (max-width: 320px) {
   .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-factorPageRightInfoLeftBodyOrderThatPay {
     padding-top: 7%;
@@ -643,7 +727,7 @@
 
   .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftTopInnerSecond {
     margin-right: -1.25%;
-   // width: 98%;
+    // width: 98%;
   }
   .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftInnerTopButton1 input {
     font-size: 12px;
@@ -655,6 +739,7 @@
     font-size: 3.5vw;
   }
 }
+
 @media (max-width: 280px) {
 
   .fv-FactorPage .fv-factorPageRightInfoRightCodeTitleMobile .col-sm-2 {

@@ -40,6 +40,11 @@ class HostStep2Page extends Component {
     }
     componentDidMount() {
 
+        const PrevAddressMap =  JSON.parse(localStorage.getItem("step2-2"))
+        if(PrevAddressMap){
+            this.setState({address:PrevAddressMap.mapAddress , validAddress:true})
+        }
+
         let prevData = ''
 
         if( JSON.parse(localStorage.getItem("step2"))){
@@ -279,14 +284,14 @@ class HostStep2Page extends Component {
                                                onClick={() => {
                                                    if (validationInputs) {
                                                        localStorage.setItem(`${"step2"}`, JSON.stringify(localStorageData))
-                                                       this.props.history.push('../../hostStepSetMapLocation')
+                                                       this.props.history.push('../../hostStepAccommodationDetails')
                                                    } else {
                                                        this.setState({click: true})
                                                    }
                                                }}/>
                                     }
                                     <input type="button" value="مرحله قبل"  className={"fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"} onClick={()=>{
-                                        this.props.history.push('../../hostStepBasicInformation')
+                                        this.props.history.push('../../hostStepSetMapLocation')
                                     }}/>
                                 </MDBRow>
                             </MDBCol>

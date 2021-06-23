@@ -1,54 +1,30 @@
 import React, {Component} from "react";
-import {MDBAlert, MDBCol, MDBContainer, MDBRow} from "mdbreact";
+import {MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import "../style/SearchHomePage.css"
 import "../style/DisplayPage.css"
 import Footer from "../componentsPages/footer"
-import FotterpageLogo from "../images/Logo.png"
-import LogoName from "../images/LogoName.png"
-import MobileLogo from "../images/MobileLogo.png"
-import MobileMenu from "../images/MobileMenu.png"
 import Product from "../componentsPages/Product";
 import TopicsMainPage from "../componentsPages/topicsMainPage";
 import UserImage from "../images/user.png"
-import Calender from "../componentsPages/calender";
-import HeaderSearch from "../componentsPages/HeaderSearch";
-import SearchHomePage from "./SearchHomePage";
-import Datas from "../data/Datas";
 import config from "../services/config.json";
 import CalendarDesktop from "../data/CalendarDesktop";
-import Calendar from 'react-calendar'
-import 'moment/locale/fa';   // new
-import GoogleMapReact from 'google-map-react';
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import 'moment/locale/fa'; // new
 import 'react-modern-calendar-datepicker/lib/DatePicker.css';
-import DatePicker from "react-modern-calendar-datepicker";
-import {MapTest} from "../data/MapTest";
 import CalendarForMobile from "../data/CalendarForMobilejs";
-import CalendarLinear from "../data/CalenddarLinear";
-import {villa , villaComments , villaImages ,similarVillas , reservedDates , villaPrice} from "../services/villaService"
+import {reservedDates, similarVillas, villa, villaComments, villaImages, villaPrice} from "../services/villaService"
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
 import Moment from 'moment';
-import { extendMoment } from 'moment-range';
-import * as moment from 'jalali-moment';
-import {utils} from "../data/Calendar";
-import {arrayBetweenDates , arrayBetweenDatesObject , priceOfPerMonth} from "../componentsPages/calculationsDate"
+import {extendMoment} from 'moment-range';
+import {arrayBetweenDates, arrayBetweenDatesObject, priceOfPerMonth} from "../componentsPages/calculationsDate"
 import Mapir from "mapir-react-component";
 import {Link} from "react-router-dom";
-import {
-    addToFavorite,
-    calculateCost,
-    calculateExtraCost,
-    calculateFacilitiesCost,
-    reserveRequest, userReserves
-} from "../services/userService";
+import {addToFavorite, calculateCost, calculateExtraCost, reserveRequest, userReserves} from "../services/userService";
 import "../style/extra.scss"
-import axios from "axios";
-import HeaderLoginMenu from "../componentsPages/HeaderLoginMenu";
 import CalendarLinearLimitedDays from "../data/CalendarLinearLimitedDays";
-import {Waiting, waitingForCalculate, waitingForCalculate2} from "../componentsPages/WaitingLoad";
+import {Waiting, waitingForCalculate2} from "../componentsPages/WaitingLoad";
 import DisplayHeader from "../componentsPages/DisplayHeader";
+
 const commaNumber = require('comma-number')
 
 class DisplayPage extends Component {
@@ -58,51 +34,51 @@ class DisplayPage extends Component {
             ...this.props,
             ...this.state,
             dateToGo: {
-                day:1400,
-                month:'',
-                year : ''
+                day: 1400,
+                month: '',
+                year: ''
             },
             dateToReturn: {
-                day:'انتخاب تاریخ',
-                month:'',
-                year : ''
+                day: 'انتخاب تاریخ',
+                month: '',
+                year: ''
             },
-            facilitiesCheckbox:[],
-            numberOfPeople:' ',
-            displayButtonName:'',
+            facilitiesCheckbox: [],
+            numberOfPeople: ' ',
+            displayButtonName: '',
 
-            resultVilla:[],
-            resultComments:[],
-            resultRateComments:[],
-            resultImages:[],
-            resultSimilarVillas:[],
-            resultReservedDates:[],
-            villaPrice:[],
-            selectedDays : '',
-            error:'',
-            morePics:false,
-            addToFavorites:false,
-            reservedPrice:'',
-            reservedFacilitiesPrice:0,
-            reservedTotalPrice:'',
-            extraPeopleCost:'',
-            onclickHandelMobileMenu:false,
-            daysCostString:'',
-            waitingForExtraPeople:false,
+            resultVilla: [],
+            resultComments: [],
+            resultRateComments: [],
+            resultImages: [],
+            resultSimilarVillas: [],
+            resultReservedDates: [],
+            villaPrice: [],
+            selectedDays: '',
+            error: '',
+            morePics: false,
+            addToFavorites: false,
+            reservedPrice: '',
+            reservedFacilitiesPrice: 0,
+            reservedTotalPrice: '',
+            extraPeopleCost: '',
+            onclickHandelMobileMenu: false,
+            daysCostString: '',
+            waitingForExtraPeople: false,
 
 
             date: new Date(),
             selectedPlace: '',
-            lat:35.72,
-            lon:51.42,
-            errors:false,
-            finallyPrice:[],
-            alertErrors:false,
-            innerValidationFacilitiesCost:false,
+            lat: 35.72,
+            lon: 51.42,
+            errors: false,
+            finallyPrice: [],
+            alertErrors: false,
+            innerValidationFacilitiesCost: false,
 
-            imSureButton:false,
-            waitingAreYouSureQuestionButton:false,
-            reservesData:[],
+            imSureButton: false,
+            waitingAreYouSureQuestionButton: false,
+            reservesData: [],
 
 
         }
@@ -111,22 +87,21 @@ class DisplayPage extends Component {
 
     componentDidMount() {
         userReserves()
-            .then(res=>{
-                if(res.status===200 && res.data.data.length>0){
-                    console.log(res.data.data)
-                    this.setState({reservesData:res.data.data})
+            .then(res => {
+                if (res.status === 200 && res.data.data.length > 0) {
+                    this.setState({reservesData: res.data.data})
                 }
             })
 
 
         villa(this.props.match.params.id)
             .then(res => {
-                if(res.data.status === 404){
+                if (res.data.status === 404) {
                     this.props.history.push('/notFound');
                 }
                 this.setState({resultVilla: res.data.data});
             })
-            .catch(error =>{
+            .catch(error => {
                 console.log(error)
             })
 
@@ -134,82 +109,83 @@ class DisplayPage extends Component {
             .then(res => {
                 this.setState({resultImages: res.data.data});
             })
-            .catch(error =>{
+            .catch(error => {
             })
 
         villaComments(this.props.match.params.id)
             .then(res => {
                 // console.log( res)
                 // console.log( 'resultcomments-hadi')
-                if(res.data.data)
-                    this.setState({resultComments: Object.values(res.data.data) , resultRateComments: res.data});
+                if (res.data.data)
+                    this.setState({resultComments: Object.values(res.data.data), resultRateComments: res.data});
                 // else
                 //     console.log(res.data.data);
             })
-            .catch(error =>{
+            .catch(error => {
 
             })
 
         similarVillas(this.props.match.params.id)
             .then(res => {
-                if(res.data.data)
+                if (res.data.data)
                     this.setState({resultSimilarVillas: res.data.data});
             })
-            .catch(error =>{
+            .catch(error => {
 
             })
 
         reservedDates(this.props.match.params.id)
             .then(res => {
-                if(res.data.data)
+                console.log(res)
+                if (res.data.data)
                     console.log(Object.values(res.data.data))
-                this.setState({resultReservedDates: Object.values(res.data.data)});
+                this.setState({resultReservedDates: Object.values(res.data.data)}, () => {
+                    this.calculatePricesWithString()
+                });
             })
-            .catch(error =>{
+            .catch(error => {
 
             })
 
         villaPrice(this.props.match.params.id)
-            .then(res=>{
-                if(res.data){
-                    this.setState({villaPrice:res.data} , ()=>{
+            .then(res => {
+                if (res.data) {
+                    this.setState({villaPrice: res.data}, () => {
                         this.villaReservedDates()
                     })
                 }
             })
-            .catch(err=>console.log(err.response))
-
-
+            .catch(err => console.log(err.response))
 
 
     }
-    villaReservedDates = ()=>{
+
+    villaReservedDates = () => {
         reservedDates(this.props.match.params.id)
             .then(res => {
-                this.setState({resultReservedDates: Object.values(res.data.data)} , () =>{
+                this.setState({resultReservedDates: Object.values(res.data.data)}, () => {
                     this.calculatePricesWithString()
                 });
             })
-            .catch(error =>{
+            .catch(error => {
             })
     }
-    calculatePricesWithString = ()=>{
+    calculatePricesWithString = () => {
         const priceDaysUpdates = []  /// مورد نظر
-        let priceArrayOneMonth ={
-            daysPrice: [] ,
+        let priceArrayOneMonth = {
+            daysPrice: [],
             month: '',
             year: ''
         }
-        if(this.state.villaPrice[0]){
-            priceArrayOneMonth.daysPrice = priceOfPerMonth(this.state.villaPrice[0].year , this.state.villaPrice[0].month , this.state.villaPrice[0].daysPrice)
-            priceArrayOneMonth.month=this.state.villaPrice[0].month
-            priceArrayOneMonth.year=this.state.villaPrice[0].year
+        if (this.state.villaPrice[0]) {
+            priceArrayOneMonth.daysPrice = priceOfPerMonth(this.state.villaPrice[0].year, this.state.villaPrice[0].month, this.state.villaPrice[0].daysPrice)
+            priceArrayOneMonth.month = this.state.villaPrice[0].month
+            priceArrayOneMonth.year = this.state.villaPrice[0].year
         }
-        for(let i = 0 ; i<this.state.villaPrice.length ; i++){
-            if(i===0){
+        for (let i = 0; i < this.state.villaPrice.length; i++) {
+            if (i === 0) {
                 priceDaysUpdates.push(priceArrayOneMonth)
-            }
-            else {
+            } else {
                 priceDaysUpdates.push(this.state.villaPrice[i])
             }
         }
@@ -218,31 +194,31 @@ class DisplayPage extends Component {
         // this.state.resultReservedDates // rozhaie gheire faal
         //  console.log(this.state.resultReservedDates)
 
-        let finalCost=[]
+        let finalCost = []
         let finalCostArrays = []
         let finalCostMonth = []
         let finalCostYear = []
         let isset = false
 
-        for (let i = 0 ; i < priceDaysUpdates.length ; i++){ // 2 ta
-            for (let j = 0 ; j < priceDaysUpdates[i].daysPrice.length ; j++){ // 30 ta  => dar majmo in halghe 60 bar
-                for (let k = 0 ; k < this.state.resultReservedDates.length ; k ++){ // agar in halat bod gheire faal
-                    let sspliteReservedDays =  this.state.resultReservedDates[k].start_date.split("/")
-                    if ( j+1 === Number(sspliteReservedDays[2]) &&  priceDaysUpdates[i].month === Number(sspliteReservedDays[1]) &&  priceDaysUpdates[i].year === Number(sspliteReservedDays[0])){
+        for (let i = 0; i < priceDaysUpdates.length; i++) { // 2 ta
+            for (let j = 0; j < priceDaysUpdates[i].daysPrice.length; j++) { // 30 ta  => dar majmo in halghe 60 bar
+                for (let k = 0; k < this.state.resultReservedDates.length; k++) { // agar in halat bod gheire faal
+                    let sspliteReservedDays = this.state.resultReservedDates[k].start_date.split("/")
+                    if (j + 1 === Number(sspliteReservedDays[2]) && priceDaysUpdates[i].month === Number(sspliteReservedDays[1]) && priceDaysUpdates[i].year === Number(sspliteReservedDays[0])) {
                         finalCostArrays.push("غیر فعال")
                         isset = true
                     }
                 }
-                if(isset === false){
+                if (isset === false) {
                     finalCostArrays.push(priceDaysUpdates[i].daysPrice[j])
                 }
-                if(isset === true){
+                if (isset === true) {
                     isset = false
                 }
 
-                if(priceDaysUpdates[i].daysPrice.length === j+1){
+                if (priceDaysUpdates[i].daysPrice.length === j + 1) {
                     finalCost.push(finalCostArrays)
-                    finalCostArrays=[]
+                    finalCostArrays = []
                     console.log(finalCost)
                 }
 
@@ -251,23 +227,23 @@ class DisplayPage extends Component {
 
         //  console.log(finalCost)
 
-        let finalCosts=[]
+        let finalCosts = []
 
-        for (let i = 0 ; i < this.state.villaPrice.length ; i++){
-            let finalCostObject= {
-                daysPrice:'',
+        for (let i = 0; i < this.state.villaPrice.length; i++) {
+            let finalCostObject = {
+                daysPrice: '',
                 month: '',
                 year: ''
             }
-            finalCostObject.daysPrice=finalCost[i]
-            finalCostObject.month=priceDaysUpdates[i].month
-            finalCostObject.year=priceDaysUpdates[i].year
+            finalCostObject.daysPrice = finalCost[i]
+            finalCostObject.month = priceDaysUpdates[i].month
+            finalCostObject.year = priceDaysUpdates[i].year
             console.log(finalCostObject)
             console.log('ssssssssssssssssssss')
             finalCosts.push(finalCostObject)
         }
         // console.log(finalCosts)
-        this.setState({finallyPrice:finalCosts})
+        this.setState({finallyPrice: finalCosts})
 
     }
 
@@ -305,132 +281,143 @@ class DisplayPage extends Component {
       onMarkerClick = (e) => {
           this.setState({selectedPlace: e.Name});
       } */
-    setFacilitiesCheckbox =(event) =>{
+    setFacilitiesCheckbox = (event) => {
         let repeat = false
-        const setData= this.state.facilitiesCheckbox
-        if(event.target.checked === false){
+        const setData = this.state.facilitiesCheckbox
+        if (event.target.checked === false) {
             const index = setData.indexOf(event.target.name)
             if (index !== -1) {
                 setData.splice(index, 1);
-                this.setState({facilitiesCheckbox:setData})
+                this.setState({facilitiesCheckbox: setData})
             }
         } else {
-            setData.map(checked=>{
-                if(checked === event.target.name){
-                    repeat=true
+            setData.map(checked => {
+                if (checked === event.target.name) {
+                    repeat = true
                 }
             })
-            if(repeat === false){
+            if (repeat === false) {
                 setData.push(event.target.name)
-                this.setState({facilitiesCheckbox:setData})
+                this.setState({facilitiesCheckbox: setData})
             }
         }
     }
 
-    selectDayToGo = (date) =>{                                    // set date to go
-        if(date) {this.setState(prevstate =>({
-            dateToGo: {
-                ...prevstate.day,
-                ...prevstate.month,
-                ...prevstate.year,
-                day: date.day,
-                month: date.month,
-                year: date.year
-            }
-            , alertErrors:false
-        }))
+    selectDayToGo = (date) => {                                    // set date to go
+        if (date) {
+            this.setState(prevstate => ({
+                dateToGo: {
+                    ...prevstate.day,
+                    ...prevstate.month,
+                    ...prevstate.year,
+                    day: date.day,
+                    month: date.month,
+                    year: date.year
+                }
+                , alertErrors: false
+            }))
         }
     }
-    selectDayToReturn = (date) =>{                               // set date to return
-        if(date) {this.setState(prevState => ({
-            dateToReturn:{
-                ...prevState.day ,
-                ...prevState.month ,
-                ...prevState.year ,
-                day: date.day,
-                month: date.month,
-                year: date.year
-            }
-            , alertErrors:false
-        }))}
+    selectDayToReturn = (date) => {                               // set date to return
+        if (date) {
+            this.setState(prevState => ({
+                dateToReturn: {
+                    ...prevState.day,
+                    ...prevState.month,
+                    ...prevState.year,
+                    day: date.day,
+                    month: date.month,
+                    year: date.year
+                }
+                , alertErrors: false
+            }))
+        }
     }
 
-    setDateFormat=(year,month,day)=>{
-        return year+'/'+month+'/'+day
+    setDateFormat = (year, month, day) => {
+        return year + '/' + month + '/' + day
     }
 
-    getSelectedDays = (selectedDay)=>{
+    getSelectedDays = (selectedDay) => {
 
-        if(selectedDay && selectedDay !== this.state.selectedDays){
-            if(selectedDay.from && selectedDay.to){ // agar 2 meghdar vared shode bod
+        if (selectedDay && selectedDay !== this.state.selectedDays) {
+            if (selectedDay.from && selectedDay.to) { // agar 2 meghdar vared shode bod
 
                 //   this.selectDayToGo(selectedDay.from)
                 //  this.selectDayToReturn(selectedDay.from)
                 console.log(selectedDay)
 
-                this.setState({selectedDays:selectedDay })
+                this.setState({selectedDays: selectedDay})
             }
         }
     }
-    getSelectedDaysCalendar = (data) =>{
+    getSelectedDaysCalendar = (data) => {
         //   this.selectDayToGo(data.from)
         //   this.selectDayToReturn(data.to)
     }
 
 
-    reservedHandle = (minimumDate ,maximumDate , allDaysReservedConcat ,  daysCostString ,resultVillaArray ,  rangeBetween ,  reservedFacilitiesPrice , chef , host , tour_guide , bodyguard , className , waitingCalculate)=>{
+    reservedHandle = (minimumDate, maximumDate, allDaysReservedConcat, daysCostString, resultVillaArray, rangeBetween, reservedFacilitiesPrice, chef, host, tour_guide, bodyguard, className, waitingCalculate) => {
         let waitingCalculates = waitingCalculate
         let imSure = false
         let imNotSure = false
-        return(
+        return (
             <MDBCol md={4} className={className}>
                 <MDBRow>
-                    <p>قیمت از شبی {this.state.resultVilla.rules ? commaNumber(this.state.resultVilla.rules.normal_cost) : ''} تومان</p>
+                    <p>قیمت از
+                        شبی {this.state.resultVilla.rules ? commaNumber(this.state.resultVilla.rules.normal_cost) : ''} تومان</p>
                 </MDBRow>
                 <MDBRow className={"fv-DisplayPageDetailsLeftEmptyMobile"}>
-                    <p><i className="fa fa-calendar" aria-hidden="true" /> اولین تاریخ خالی این اقامت گاه {`${minimumDate.year}/${minimumDate.month}/${minimumDate.day}`} میباشد </p>
+                    <p><i className="fa fa-calendar" aria-hidden="true"/> اولین تاریخ خالی این اقامت
+                        گاه {`${minimumDate.year}/${minimumDate.month}/${minimumDate.day}`} میباشد </p>
                 </MDBRow>
                 <MDBRow className={"fv-DisplayPageDetailsLeftBodyDate"}>
                     <MDBRow className={"fv-DisplayPageDetailsLeftSelectedDate"}>
-                        <input type='text' disabled={true} value=' تاریخ ورود' className={"fv-DisplayPageDetailsLeftBodyDateOnText"} />
-                        <input type='text' disabled={true} value=' تاریخ خروج' className={"fv-DisplayPageDetailsLeftBodyDateOutText"} />
+                        <input type='text' disabled={true} value=' تاریخ ورود'
+                               className={"fv-DisplayPageDetailsLeftBodyDateOnText"}/>
+                        <input type='text' disabled={true} value=' تاریخ خروج'
+                               className={"fv-DisplayPageDetailsLeftBodyDateOutText"}/>
                     </MDBRow>
                     <MDBRow className={"fv-DisplayPageDetailsLeftTextDate"}>
-                        <div  className={"fv-DisplayPageDetailsLeftBodyDateOnInput"}>  <CalendarLinearLimitedDays minimumDate={minimumDate} maximumDate={maximumDate} dayToGo={this.selectDayToGo} text={'انتخاب روز'}  daysReserved={allDaysReservedConcat}/> </div>
-                        <div  className={"fv-DisplayPageDetailsLeftBodyDateOutInput"} >  <CalendarLinearLimitedDays  minimumDate={minimumDate} maximumDate={maximumDate} dayToReturn={this.selectDayToReturn} text={'انتخاب روز'}  daysReserved={allDaysReservedConcat}/> </div>
+                        <div className={"fv-DisplayPageDetailsLeftBodyDateOnInput"}><CalendarLinearLimitedDays
+                            minimumDate={minimumDate} maximumDate={maximumDate} dayToGo={this.selectDayToGo}
+                            text={'انتخاب روز'} daysReserved={allDaysReservedConcat}/></div>
+                        <div className={"fv-DisplayPageDetailsLeftBodyDateOutInput"}><CalendarLinearLimitedDays
+                            minimumDate={minimumDate} maximumDate={maximumDate} dayToReturn={this.selectDayToReturn}
+                            text={'انتخاب روز'} daysReserved={allDaysReservedConcat}/></div>
                     </MDBRow>
                 </MDBRow>
                 <MDBRow className={"fv-DisplayPageDetailsLeftBodyCapacityText"}>
                     <input type='text' disabled={true} value=' تعداد نفرات'/>
                 </MDBRow>
                 <MDBRow className={"fv-DisplayPageDetailsLeftBodyCapacityOption"}>
-                    <select value={this.state.numberOfPeople} onChange={(event)=>{
-                        this.setState({numberOfPeople:event.target.value })
-                        if(Number(this.state.reservedPrice)){
-                            this.setState({ waitingForExtraPeople:true})
+                    <select value={this.state.numberOfPeople} onChange={(event) => {
+                        this.setState({numberOfPeople: event.target.value})
+                        if (Number(this.state.reservedPrice)) {
+                            this.setState({waitingForExtraPeople: true})
                             const data = {
-                                dates:daysCostString,
-                                extra_people:Number(event.target.value)
+                                dates: daysCostString,
+                                extra_people: Number(event.target.value)
                             }
-                            calculateExtraCost(data,this.props.match.params.id)
-                                .then(res =>{
+                            calculateExtraCost(data, this.props.match.params.id)
+                                .then(res => {
                                     waitingCalculates = false
-                                    this.setState({extraPeopleCost: res.data  , waitingForExtraPeople:false})
-                                }  )
-                                .catch(err=>console.log(err.response))
-                        }else {
-                            this.setState({numberOfPeople:' '})
+                                    this.setState({extraPeopleCost: res.data, waitingForExtraPeople: false})
+                                })
+                                .catch(err => console.log(err.response))
+                        } else {
+                            this.setState({numberOfPeople: ' '})
                             alert("لطفا ابتدا تاریخ را اننتخاب کنید")
                         }
                     }}>
                         <option value=' ' disabled>تعداد نفرات</option>
-                        { resultVillaArray.map(extraCapacity =>{
+                        {resultVillaArray.map(extraCapacity => {
                             let numberPeople = []
                             let options = []
                             console.log(extraCapacity)
-                            if(extraCapacity.details){
-                                for (let i = 0 ; i < extraCapacity.details.max_capacity - extraCapacity.details.standard_capacity ; i++){
-                                    numberPeople.push(i+1)
+                            if (extraCapacity.details) {
+                                for (let i = 0; i < extraCapacity.details.max_capacity - extraCapacity.details.standard_capacity; i++) {
+                                    numberPeople.push(i + 1)
                                 }
                             }
                             return <>
@@ -438,33 +425,33 @@ class DisplayPage extends Component {
                                     numberPeople.map(num => <option value={num}>{num}</option>)
                                 }
                             </>
-                        }) }
+                        })}
 
                     </select>
                 </MDBRow>
                 <MDBRow className={"fv-DisplayPageDetailsLeftFactor"}>
-                    <MDBCol md={6}  sm={6} className={"fv-DisplayPageDetailsLeftFactorLeft"}>
-                        <p>{rangeBetween} روز </p>
+                    <MDBCol md={6} sm={6} className={"fv-DisplayPageDetailsLeftFactorLeft"}>
+                        <p>{rangeBetween >= 1 ? rangeBetween - 1 : ''} روز </p>
                     </MDBCol>
-                    <MDBCol  md={6}  sm={6} >
+                    <MDBCol md={6} sm={6}>
                         <p>{this.state.reservedPrice ? commaNumber(this.state.reservedPrice) : ''} تومان</p>
                     </MDBCol>
                 </MDBRow>
                 <MDBRow className={"fv-DisplayPageDetailsLeftFactor fv-DisplayPageDetailsLeftFactorBorderLine"}>
-                    <MDBCol  md={6}  sm={6} className={"fv-DisplayPageDetailsLeftFactorLeft"}>
+                    <MDBCol md={6} sm={6} className={"fv-DisplayPageDetailsLeftFactorLeft"}>
                         <p>{this.state.numberOfPeople} نفر اضافه </p>
                     </MDBCol>
-                    <MDBCol  md={6}  sm={6} >
-                        <p>{Number(this.state.extraPeopleCost) ? commaNumber(Number(this.state.extraPeopleCost)) : ' ' } تومان</p>
+                    <MDBCol md={6} sm={6}>
+                        <p>{Number(this.state.extraPeopleCost) ? commaNumber(Number(this.state.extraPeopleCost)) : ' '} تومان</p>
                     </MDBCol>
                 </MDBRow>
 
                 <MDBRow className={"fv-DisplayPageDetailsLeftFactor"}>
-                    <MDBCol  md={6}  sm={6} className={"fv-DisplayPageDetailsLeftFactorLeft"}>
+                    <MDBCol md={6} sm={6} className={"fv-DisplayPageDetailsLeftFactorLeft"}>
                         <p>جمع کل</p>
                     </MDBCol>
-                    <MDBCol  md={6}  sm={6} >
-                        <p>{Number(this.state.reservedPrice) ? (Number(this.state.extraPeopleCost) ? commaNumber(Number(this.state.extraPeopleCost)+Number(this.state.reservedPrice)+Number(reservedFacilitiesPrice))  :  commaNumber(this.state.reservedPrice+reservedFacilitiesPrice )) : '' } تومان</p> {/* agar meghdare kol ba afrade ezafe vojod dasht ono dar nazar migirim dar gheire in sorat bedone jame bedone afrade ezafe ro dar nazar migirim */}
+                    <MDBCol md={6} sm={6}>
+                        <p>{Number(this.state.reservedPrice) ? (Number(this.state.extraPeopleCost) ? commaNumber(Number(this.state.extraPeopleCost) + Number(this.state.reservedPrice) + Number(reservedFacilitiesPrice)) : commaNumber(this.state.reservedPrice + reservedFacilitiesPrice)) : ''} تومان</p> {/* agar meghdare kol ba afrade ezafe vojod dasht ono dar nazar migirim dar gheire in sorat bedone jame bedone afrade ezafe ro dar nazar migirim */}
                     </MDBCol>
                 </MDBRow>
                 <MDBRow className={"fv-DisplayPageDetailsLeftButton"}>
@@ -472,15 +459,15 @@ class DisplayPage extends Component {
                         {/*  Waiting   waitingForCalculate2*/}
 
 
-                        {this.state.waitingAreYouSureQuestionButton  && !this.state.imSureButton ?
-                            <MDBContainer >
+                        {this.state.waitingAreYouSureQuestionButton && !this.state.imSureButton ?
+                            <MDBContainer>
                                 <MDBRow>
                                     <p>آیا مطمئن هستید؟</p>
                                 </MDBRow>
                                 <MDBRow>
                                     <MDBCol>
-                                        <input type={"button"} value={"بله"} onClick={()=>{
-                                            this.setState({imSureButton:true})
+                                        <input type={"button"} value={"بله"} onClick={() => {
+                                            this.setState({imSureButton: true})
                                             if (Number(this.state.reservedPrice)) {
                                                 let cost = this.state.reservedPrice + Number(reservedFacilitiesPrice)
                                                 if (Number(this.state.extraPeopleCost) && Number(this.state.reservedPrice)) {
@@ -525,36 +512,43 @@ class DisplayPage extends Component {
 
                                                             this.props.history.push("/MainProfilePages/ProfileMyReservation")
                                                         } else {
-                                                            this.setState({waitingAreYouSureQuestionButton:true , imSureButton:false})
+                                                            this.setState({
+                                                                waitingAreYouSureQuestionButton: true,
+                                                                imSureButton: false
+                                                            })
                                                             alert("اطلاعات را به درستی وارد نمایید")
                                                         }
                                                     })
                                                     .catch(err => console.log(err.response))
                                             } else {
-                                                this.setState({waitingAreYouSureQuestionButton:false , imSureButton:false})
+                                                this.setState({
+                                                    waitingAreYouSureQuestionButton: false,
+                                                    imSureButton: false
+                                                })
                                                 alert("اطلاعات را به درستی وارد نمایید")
                                             }
                                         }}/>
                                     </MDBCol>
                                     <MDBCol>
-                                        <input type={"button"} value={"خیر"} style={{background: `#ffd6d6` , color : 'black'}} onClick={()=>this.setState({waitingAreYouSureQuestionButton:false})}/>
+                                        <input type={"button"} value={"خیر"}
+                                               style={{background: `#ffd6d6`, color: 'black'}}
+                                               onClick={() => this.setState({waitingAreYouSureQuestionButton: false})}/>
                                     </MDBCol>
                                 </MDBRow>
                             </MDBContainer>
                             : ""}
 
 
+                        {waitingForCalculate2(waitingCalculates || this.state.waitingForExtraPeople || this.state.imSureButton, "fv-waitingLoadPublicFullScreen fv-computingReservedDetails")}
 
-                        {waitingForCalculate2(waitingCalculates || this.state.waitingForExtraPeople || this.state.imSureButton , "fv-waitingLoadPublicFullScreen fv-computingReservedDetails" )}
-
-                        {waitingCalculates  || this.state.waitingForExtraPeople || this.state.waitingAreYouSureQuestionButton ? '' :
+                        {waitingCalculates || this.state.waitingForExtraPeople || this.state.waitingAreYouSureQuestionButton ? '' :
                             <input type="button" value="درخواست رزرو" onClick={() => {
-                                    if (localStorage.getItem("token")) {
-                                        this.setState({waitingAreYouSureQuestionButton:true , imSureButton:false})
-                                    } else {
-                                        alert("شما ابتدا باید وارد شوید")
-                                        this.props.history.push("/")
-                                    }
+                                if (localStorage.getItem("token")) {
+                                    this.setState({waitingAreYouSureQuestionButton: true, imSureButton: false})
+                                } else {
+                                    alert("شما ابتدا باید وارد شوید")
+                                    this.props.history.push("/")
+                                }
 
                             }}/>
                         }
@@ -566,26 +560,22 @@ class DisplayPage extends Component {
     }
 
 
-
-
-
     render() {
         let thisVillaIsReserved = false
         let LoadingPagewaitingHandle = true
-        if(this.state.villaPrice.length>0){
+        if (this.state.villaPrice.length > 0) {
             LoadingPagewaitingHandle = false
         }
         let waitingCalculate = false
 
 
-
         let reservedFacilitiesPrice = 0 //      ///////////////////// facilities price computing                   //
         const info = JSON.parse(localStorage.getItem("infoUser"))
-        let nameAndFamily =  ""
+        let nameAndFamily = ""
         let avatar = ""
-        if(info){
-            nameAndFamily=info.userInfo.fullname
-            avatar=info.userInfo.avatar
+        if (info) {
+            nameAndFamily = info.userInfo.fullname
+            avatar = info.userInfo.avatar
         }
 
         const resultVillaArray = []
@@ -594,45 +584,42 @@ class DisplayPage extends Component {
         console.log(resultVilla)
 
 
-        console.log(priceOfPerMonth(1400 , 2 , [1,2,3,4,"",6,7]))   // price days
+        console.log(priceOfPerMonth(1400, 2, [1, 2, 3, 4, "", 6, 7]))   // price days
         const moment = extendMoment(Moment);
         const start = new Date(this.state.dateToGo.year, this.state.dateToGo.month, this.state.dateToGo.day);
-        const end   = new Date(this.state.dateToReturn.year, this.state.dateToReturn.month, this.state.dateToReturn.day);
+        const end = new Date(this.state.dateToReturn.year, this.state.dateToReturn.month, this.state.dateToReturn.day);
         const range = moment.range(start, end);
-
 
 
         let rangeBetween = ' '
 
         console.log(range.diff('days'))
 
-        if(range.diff('days')){
-            if(range.diff('days')<0)
-            {
-                if(this.state.reservedPrice){
-                    this.setState({reservedPrice:"" , extraPeopleCost:""})
+        if (range.diff('days')) {
+            if (range.diff('days') < 0) {
+                if (this.state.reservedPrice) {
+                    this.setState({reservedPrice: "", extraPeopleCost: ""})
 
                 }
-                rangeBetween=' '
-            }
-            else {
+                rangeBetween = ' '
+            } else {
                 rangeBetween = range.diff('days') + 1;
 
             }
         }
-        if(range.diff('days') === 0 && Number(this.state.dateToGo.day) === Number(this.state.dateToReturn.day)){
-            rangeBetween=1
+        if (range.diff('days') === 0 && Number(this.state.dateToGo.day) === Number(this.state.dateToReturn.day)) {
+            rangeBetween = 1
         }
         console.log(this.state.dateToReturn.day)
         console.log(this.state.dateToGo.day)
-        if(Number(this.state.dateToGo.day) === 31 && this.state.dateToReturn.day !== "انتخاب تاریخ"){
-            if(Number(this.state.dateToGo.day) !== Number(this.state.dateToReturn.day)){
+        if (Number(this.state.dateToGo.day) === 31 && this.state.dateToReturn.day !== "انتخاب تاریخ") {
+            if (Number(this.state.dateToGo.day) !== Number(this.state.dateToReturn.day)) {
                 rangeBetween = rangeBetween + 1
             }
-            if(Number(this.state.dateToGo.day) === Number(this.state.dateToReturn.day) && Number(this.state.dateToGo.month) !== Number(this.state.dateToReturn.month) ){
+            if (Number(this.state.dateToGo.day) === Number(this.state.dateToReturn.day) && Number(this.state.dateToGo.month) !== Number(this.state.dateToReturn.month)) {
                 rangeBetween = rangeBetween + 1
             }
-            if(Number(this.state.dateToGo.day) === Number(this.state.dateToReturn.day) && Number(this.state.dateToGo.month) === Number(this.state.dateToReturn.month) && Number(this.state.dateToGo.year) !== Number(this.state.dateToReturn.year)){
+            if (Number(this.state.dateToGo.day) === Number(this.state.dateToReturn.day) && Number(this.state.dateToGo.month) === Number(this.state.dateToReturn.month) && Number(this.state.dateToGo.year) !== Number(this.state.dateToReturn.year)) {
                 rangeBetween = rangeBetween + 1
             }
 
@@ -640,16 +627,15 @@ class DisplayPage extends Component {
         }
 
 
-        const daytogoGeneralFormat = this.setDateFormat(this.state.dateToGo.year+"/"+ this.state.dateToGo.month+"/"+ this.state.dateToGo.day)
-        const daytoreturnGeneralFormat = this.setDateFormat(this.state.dateToReturn.year+"/"+ this.state.dateToReturn.month+"/"+ this.state.dateToReturn.day)
+        const daytogoGeneralFormat = this.setDateFormat(this.state.dateToGo.year + "/" + this.state.dateToGo.month + "/" + this.state.dateToGo.day)
+        const daytoreturnGeneralFormat = this.setDateFormat(this.state.dateToReturn.year + "/" + this.state.dateToReturn.month + "/" + this.state.dateToReturn.day)
 
-        const daysSelected = arrayBetweenDates(daytogoGeneralFormat,daytoreturnGeneralFormat,rangeBetween)
-        console.log(arrayBetweenDates(daytogoGeneralFormat,daytoreturnGeneralFormat,rangeBetween)) // date general   return =>   1400/01/01
+        const daysSelected = arrayBetweenDates(daytogoGeneralFormat, daytoreturnGeneralFormat, rangeBetween)
+        console.log(arrayBetweenDates(daytogoGeneralFormat, daytoreturnGeneralFormat, rangeBetween)) // date general   return =>   1400/01/01
         console.log('arrayBetweenDates(start,end,rangeBetween)')
 
-        console.log(arrayBetweenDatesObject(daytogoGeneralFormat,daytoreturnGeneralFormat,rangeBetween)) // date object   return =>   [{ year:1400 , month: 01 , day:01  }]
+        console.log(arrayBetweenDatesObject(daytogoGeneralFormat, daytoreturnGeneralFormat, rangeBetween)) // date object   return =>   [{ year:1400 , month: 01 , day:01  }]
         console.log('arrayBetweenDates(start,end,rangeBetween)')
-
 
 
         console.log(this.state.reservedTotalPrice)
@@ -658,59 +644,59 @@ class DisplayPage extends Component {
         let host = ''
         let tour_guide = ''
         let bodyguard = ''
-        if(this.state.facilitiesCheckbox.includes("chef")){
-            if(this.state.resultVilla.info){
-                if(this.state.resultVilla.info.chef){
-                    chef=this.state.resultVilla.info.chef
-                }else {
+        if (this.state.facilitiesCheckbox.includes("chef")) {
+            if (this.state.resultVilla.info) {
+                if (this.state.resultVilla.info.chef) {
+                    chef = this.state.resultVilla.info.chef
+                } else {
                     chef = 0
                 }
-            }else {
+            } else {
                 chef = 0
             }
         }
-        if(this.state.facilitiesCheckbox.includes("host")){
-            if(this.state.resultVilla.info){
-                if(this.state.resultVilla.info.host){
-                    host=this.state.resultVilla.info.host
-                }else {
+        if (this.state.facilitiesCheckbox.includes("host")) {
+            if (this.state.resultVilla.info) {
+                if (this.state.resultVilla.info.host) {
+                    host = this.state.resultVilla.info.host
+                } else {
                     host = 0
                 }
-            }else {
+            } else {
                 host = 0
             }
         }
-        if(this.state.facilitiesCheckbox.includes("tour_guide")){
-            if(this.state.resultVilla.info){
-                if(this.state.resultVilla.info.tour_guide){
-                    tour_guide=this.state.resultVilla.info.tour_guide
-                }else {
+        if (this.state.facilitiesCheckbox.includes("tour_guide")) {
+            if (this.state.resultVilla.info) {
+                if (this.state.resultVilla.info.tour_guide) {
+                    tour_guide = this.state.resultVilla.info.tour_guide
+                } else {
                     tour_guide = 0
                 }
-            }else {
+            } else {
                 tour_guide = 0
             }
         }
-        if(this.state.facilitiesCheckbox.includes("bodyguard")){
-            if(this.state.resultVilla.info){
-                if(this.state.resultVilla.info.bodyguard){
-                    bodyguard=this.state.resultVilla.info.bodyguard
-                }else {
+        if (this.state.facilitiesCheckbox.includes("bodyguard")) {
+            if (this.state.resultVilla.info) {
+                if (this.state.resultVilla.info.bodyguard) {
+                    bodyguard = this.state.resultVilla.info.bodyguard
+                } else {
                     bodyguard = 0
                 }
-            }else {
+            } else {
                 bodyguard = 0
             }
         }
 
 
         let daysCostString = ""
-        if(daysSelected.length>0){
-            for(let i = 0 ; i < daysSelected.length ; i++){
-                if(i===0){
-                    daysCostString =daysSelected[i];
-                }else {
-                    daysCostString =`${daysCostString},${daysSelected[i]}` ;
+        if (daysSelected.length > 0) {
+            for (let i = 0; i < daysSelected.length; i++) {
+                if (i === 0) {
+                    daysCostString = daysSelected[i];
+                } else {
+                    daysCostString = `${daysCostString},${daysSelected[i]}`;
                 }
             }
             // console.log(daysCostString)
@@ -753,22 +739,23 @@ class DisplayPage extends Component {
               }*/
 
 
-            console.log(daysCostString)
-            if(this.state.daysCostString !== daysCostString){
+            //  console.log(daysCostString)
+            if (this.state.daysCostString !== daysCostString) {
                 waitingCalculate = true
 
-                calculateCost({dates: daysCostString},this.props.match.params.id )
+                calculateCost({dates: daysCostString}, this.props.match.params.id)
 
-                    .then(res=>{
+                    .then(res => {
                         console.log(res)
                         {/*   if(res.data.data === "Reservation failed" && !this.state.alertErrors ){ //
                             rangeBetween = ' '
                             alert('در این بازه انتخابی شما قبلا رزرو انجام شده لطفا تاریخ خود را عوض نمایید')
                             this.setState({alertErrors:true})
-                        } */}
-                        if(res.data.data !== "Reservation failed" && res.status === 200){
+                        } */
+                        }
+                        if (res.data.data !== "Reservation failed" && res.status === 200) {
 
-                            if(res.status === 200 && this.state.reservedPrice !== res.data){
+                            if (res.status === 200 && this.state.reservedPrice !== res.data) {
                                 /*
                                 if(this.state.extraPeopleCost){
                                     const data = {
@@ -785,70 +772,95 @@ class DisplayPage extends Component {
                                 } */
                                 waitingCalculate = false
                                 reservedFacilitiesPrice = 0
-                                this.setState({reservedPrice:res.data , numberOfPeople: ' ', extraPeopleCost: '' , daysCostString:daysCostString  , reservedFacilitiesPrice:0 , alertErrors:false})  // لقیمت روز های رزرو شده فقط
+                                this.setState({
+                                    reservedPrice: res.data,
+                                    numberOfPeople: ' ',
+                                    extraPeopleCost: '',
+                                    daysCostString: daysCostString,
+                                    reservedFacilitiesPrice: 0,
+                                    alertErrors: false
+                                })  // لقیمت روز های رزرو شده فقط
                             }
-                        }else {
+                        } else {
                             waitingCalculate = false
-                            if(this.state.reservedPrice || this.state.numberOfPeople !== ' ' || this.state.extraPeopleCost){
+                            if (this.state.reservedPrice || this.state.numberOfPeople !== ' ' || this.state.extraPeopleCost) {
                                 alert("تاریخ انتخاب شده معتبر نمیباشد - شما قبلا در این تاریخ رزرو داشته اید")
                                 reservedFacilitiesPrice = 0
-                                this.setState({reservedPrice:'' , numberOfPeople:' ' , extraPeopleCost:'' , reservedFacilitiesPrice:0  , daysCostString:daysCostString})
+                                this.setState({
+                                    reservedPrice: '',
+                                    numberOfPeople: ' ',
+                                    extraPeopleCost: '',
+                                    reservedFacilitiesPrice: 0,
+                                    daysCostString: daysCostString
+                                })
                             }
                         }
 
                     })
-                    .catch(err=>{
-                        if(this.state.reservedPrice || this.state.numberOfPeople !== ' ' || this.state.extraPeopleCost) {
+                    .catch(err => {
+                        if (this.state.reservedPrice || this.state.numberOfPeople !== ' ' || this.state.extraPeopleCost) {
                             alert("تاریخ انتخاب شده معتبر نمیباشد ")
                             waitingCalculate = false
                             reservedFacilitiesPrice = 0
-                            this.setState({reservedPrice: '', numberOfPeople: ' ', extraPeopleCost: ''  , reservedFacilitiesPrice:0})
+                            this.setState({
+                                reservedPrice: '',
+                                numberOfPeople: ' ',
+                                extraPeopleCost: '',
+                                reservedFacilitiesPrice: 0
+                            })
                         }
                     })
 
             }
 
 
-        }else { //  daysCostString // اگر خالی باشد (ممکن است کاربر  تاریخ قبل وارد کرده باشد)
-            if(this.state.daysCostString !== daysCostString){
+        } else { //  daysCostString // اگر خالی باشد (ممکن است کاربر  تاریخ قبل وارد کرده باشد)
+            if (this.state.daysCostString !== daysCostString) {
                 alert("تاریخ انتخابی شما اشتباه میباشد لطفا بازه تاریخ را درست وارد نمایید")
                 reservedFacilitiesPrice = 0
-                this.setState({reservedPrice: '', numberOfPeople: ' ', extraPeopleCost: ''  , reservedFacilitiesPrice:0 , daysCostString:''})
+                this.setState({
+                    reservedPrice: '',
+                    numberOfPeople: ' ',
+                    extraPeopleCost: '',
+                    reservedFacilitiesPrice: 0,
+                    daysCostString: ''
+                })
             }
         }
         let daysBetweenReserved = ''
         let allDaysReservedConcat = ''
 
         // console.log(this.state.resultReservedDates)
-        if(this.state.resultReservedDates){
-            let startReservedDatearray =''
-            let endReservedDatearray   = ''
-            let startReservedDate =  ''
-            let endReservedDate   = ''
+        if (this.state.resultReservedDates) {
+            let startReservedDatearray = ''
+            let endReservedDatearray = ''
+            let startReservedDate = ''
+            let endReservedDate = ''
 
             let allReservedDatesVillas = []     // خانه های رزرو شده را به ترتیب میدهد
-            for (let i = 0 ; i < this.state.resultReservedDates.length ; i++ ){   // ممکن است چد استارت دیتا و اند دیتا فرستاده شود که باید تمام تاریخ های بین آن را بگیریم
+            for (let i = 0; i < this.state.resultReservedDates.length; i++) {   // ممکن است چد استارت دیتا و اند دیتا فرستاده شود که باید تمام تاریخ های بین آن را بگیریم
                 startReservedDatearray = this.state.resultReservedDates[i].start_date.split("/")
 
-                if(startReservedDatearray[2].length===1){
+                if (startReservedDatearray[2].length === 1) {
                     startReservedDatearray[2] = `0${startReservedDatearray[2]}`
                 }
-                startReservedDate=new Date(startReservedDatearray[0], startReservedDatearray[1], startReservedDatearray[2]);
+                startReservedDate = new Date(startReservedDatearray[0], startReservedDatearray[1], startReservedDatearray[2]);
                 endReservedDatearray = this.state.resultReservedDates[i].end_date.split("/")
-                if(endReservedDatearray[2].length===1){
+                if (endReservedDatearray[2].length === 1) {
                     endReservedDatearray[2] = `0${endReservedDatearray[2]}`
                 }
-                endReservedDate=new Date(endReservedDatearray[0], endReservedDatearray[1], endReservedDatearray[2]);
+                endReservedDate = new Date(endReservedDatearray[0], endReservedDatearray[1], endReservedDatearray[2]);
                 const rangeReservedDate = moment.range(startReservedDate, endReservedDate);
                 let rangeBetweenDate = rangeReservedDate.diff('days');
                 //console.log(rangeBetweenDate)
-                if(rangeReservedDate.diff('days') === 0){
-                    rangeBetweenDate=1
+                if (rangeReservedDate.diff('days') === 0) {
+                    rangeBetweenDate = 1
                 }
 
-                if(rangeBetweenDate>0){
+                if (rangeBetweenDate > 0) {
+                    rangeBetweenDate = rangeBetweenDate + 1
 
-                    daysBetweenReserved = arrayBetweenDatesObject(this.state.resultReservedDates[i].start_date,this.state.resultReservedDates[i].end_date,rangeBetweenDate)
+                    daysBetweenReserved = arrayBetweenDatesObject(this.state.resultReservedDates[i].start_date, this.state.resultReservedDates[i].end_date, rangeBetweenDate)
                 }
 
 
@@ -856,9 +868,9 @@ class DisplayPage extends Component {
             }
 
 
-            if(allReservedDatesVillas){
-                for(let i = 0 ; i < allReservedDatesVillas.length ; i ++){
-                    if(i===0){
+            if (allReservedDatesVillas) {
+                for (let i = 0; i < allReservedDatesVillas.length; i++) {
+                    if (i === 0) {
                         allDaysReservedConcat = allReservedDatesVillas[i]
                     } else {
                         allDaysReservedConcat = allDaysReservedConcat.concat(allReservedDatesVillas[i]);
@@ -867,27 +879,23 @@ class DisplayPage extends Component {
             }
             // console.log(allReservedDatesVillas[0])   // خانه های رزرو شده را به ترتیب میدهد
         }
-        console.log(this.state.resultReservedDates)
-
-
 
 
         const priceDaysUpdates = []  /// مورد نظر
-        let priceArrayOneMonth ={
-            daysPrice: [] ,
+        let priceArrayOneMonth = {
+            daysPrice: [],
             month: '',
             year: ''
         }
-        if(this.state.villaPrice[0]){
-            priceArrayOneMonth.daysPrice = priceOfPerMonth(this.state.villaPrice[0].year , this.state.villaPrice[0].month , this.state.villaPrice[0].daysPrice)
-            priceArrayOneMonth.month=this.state.villaPrice[0].month
-            priceArrayOneMonth.year=this.state.villaPrice[0].year
+        if (this.state.villaPrice[0]) {
+            priceArrayOneMonth.daysPrice = priceOfPerMonth(this.state.villaPrice[0].year, this.state.villaPrice[0].month, this.state.villaPrice[0].daysPrice)
+            priceArrayOneMonth.month = this.state.villaPrice[0].month
+            priceArrayOneMonth.year = this.state.villaPrice[0].year
         }
-        for(let i = 0 ; i<this.state.villaPrice.length ; i++){
-            if(i===0){
+        for (let i = 0; i < this.state.villaPrice.length; i++) {
+            if (i === 0) {
                 priceDaysUpdates.push(priceArrayOneMonth)
-            }
-            else {
+            } else {
                 priceDaysUpdates.push(this.state.villaPrice[i])
             }
         }
@@ -900,52 +908,50 @@ class DisplayPage extends Component {
         let indexOfMaxDay = ""
         let indexOfMaxMonth = ""
         let indexOfMaxYear = ""
-        if(this.state.finallyPrice.length > 0){        // چندمین خونه از آرایه قیمت ها پر هست که میشود اولین روز که باید فعال باشد
-            for (let i = 0 ; i < 31 ; i++){   // بگرد و اولین روزی که عدد وارد شده بود رو برگردون
-                if(Number(this.state.finallyPrice[0].daysPrice[i]) && !minimumDayFixed){
-                    indexOfMinimumDay = i+1
+        if (this.state.finallyPrice.length > 0) {        // چندمین خونه از آرایه قیمت ها پر هست که میشود اولین روز که باید فعال باشد
+            for (let i = 0; i < 31; i++) {   // بگرد و اولین روزی که عدد وارد شده بود رو برگردون
+                if (Number(this.state.finallyPrice[0].daysPrice[i]) && !minimumDayFixed) {
+                    indexOfMinimumDay = i + 1
                     indexOfMinimumMonth = this.state.finallyPrice[0].month
-                    indexOfMinimumYear= this.state.finallyPrice[0].year
+                    indexOfMinimumYear = this.state.finallyPrice[0].year
                     minimumDayFixed = true
                 }
             }
-            if(indexOfMinimumDay === ""  && !minimumDayFixed){               // اگر در آخر ماه قبلی روز ها غیر فعال ثبت شده بود و تایپ آن استرینگ بود در ماه بعد باید بگردیم دنبال روز فعال
-                for (let i = 0 ; i < 31 ; i++){
-                    console.log(this.state.finallyPrice[1].daysPrice[i])
-                    if(Number(this.state.finallyPrice[1].daysPrice[i])  && !minimumDayFixed){
-                        indexOfMinimumDay = i+1
+            if (indexOfMinimumDay === "" && !minimumDayFixed) {               // اگر در آخر ماه قبلی روز ها غیر فعال ثبت شده بود و تایپ آن استرینگ بود در ماه بعد باید بگردیم دنبال روز فعال
+                for (let i = 0; i < 31; i++) {
+                    if (Number(this.state.finallyPrice[1].daysPrice[i]) && !minimumDayFixed) {
+                        indexOfMinimumDay = i + 1
                         indexOfMinimumMonth = this.state.finallyPrice[1].month
-                        indexOfMinimumYear= this.state.finallyPrice[1].year
+                        indexOfMinimumYear = this.state.finallyPrice[1].year
                         minimumDayFixed = true
                     }
                 }
             }
-            if(indexOfMinimumDay === ""  && !minimumDayFixed){               // اگر در آخر ماه قبلی روز ها غیر فعال ثبت شده بود و تایپ آن استرینگ بود در ماه بعد باید بگردیم دنبال روز فعال
-                for (let i = 0 ; i < 31 ; i++){
-                    console.log(this.state.finallyPrice[2].daysPrice[i])
-                    if(Number(this.state.finallyPrice[2].daysPrice[i])  && !minimumDayFixed){
-                        indexOfMinimumDay = i+1
+            if (indexOfMinimumDay === "" && !minimumDayFixed) {               // اگر در آخر ماه قبلی روز ها غیر فعال ثبت شده بود و تایپ آن استرینگ بود در ماه بعد باید بگردیم دنبال روز فعال
+                for (let i = 0; i < 31; i++) {
+                    if (Number(this.state.finallyPrice[2].daysPrice[i]) && !minimumDayFixed) {
+                        indexOfMinimumDay = i + 1
                         indexOfMinimumMonth = this.state.finallyPrice[2].month
-                        indexOfMinimumYear= this.state.finallyPrice[2].year
+                        indexOfMinimumYear = this.state.finallyPrice[2].year
                         minimumDayFixed = true
                     }
                 }
             }
 
 
-            indexOfMaxDay = this.state.finallyPrice[this.state.finallyPrice.length-1].daysPrice.length   //  mohasebe akharin roz ke meghdar vared karde
-            indexOfMaxMonth =  this.state.finallyPrice[this.state.finallyPrice.length-1].month
-            indexOfMaxYear =  this.state.finallyPrice[this.state.finallyPrice.length-1].year
+            indexOfMaxDay = this.state.finallyPrice[this.state.finallyPrice.length - 1].daysPrice.length   //  mohasebe akharin roz ke meghdar vared karde
+            indexOfMaxMonth = this.state.finallyPrice[this.state.finallyPrice.length - 1].month
+            indexOfMaxYear = this.state.finallyPrice[this.state.finallyPrice.length - 1].year
 
         }
-        const minimumDate ={     // اولین روز فعال که به قبل آن باید غیر فعال شود
-            day:indexOfMinimumDay ,
-            month : indexOfMinimumMonth,
+        const minimumDate = {     // اولین روز فعال که به قبل آن باید غیر فعال شود
+            day: indexOfMinimumDay,
+            month: indexOfMinimumMonth,
             year: indexOfMinimumYear,
         }
-        const maximumDate ={     // اولین روز فعال که به قبل آن باید غیر فعال شود
-            day:indexOfMaxDay ,
-            month : indexOfMaxMonth,
+        const maximumDate = {     // اولین روز فعال که به قبل آن باید غیر فعال شود
+            day: indexOfMaxDay,
+            month: indexOfMaxMonth,
             year: indexOfMaxYear,
         }
         // console.log(minimumDate)  // avalin roze faal
@@ -1054,47 +1060,46 @@ class DisplayPage extends Component {
           }  */
 
         /* **** ////////////////////////////////////////////////  //computing facilities //////////////////////////////////// ** */
-        if(!chef)
-            chef=0
-        if(!host)
-            host=0
-        if(!tour_guide)
-            tour_guide=0
-        if(!bodyguard)
-            bodyguard=0
-        if(rangeBetween){
-            reservedFacilitiesPrice = (Number(chef) + Number(host) + Number(tour_guide) + Number(bodyguard)) * Number(rangeBetween)
-        }else {
+        if (!chef)
+            chef = 0
+        if (!host)
+            host = 0
+        if (!tour_guide)
+            tour_guide = 0
+        if (!bodyguard)
+            bodyguard = 0
+        if (rangeBetween >= 1) {
+            reservedFacilitiesPrice = (Number(chef) + Number(host) + Number(tour_guide) + Number(bodyguard)) * Number(rangeBetween - 1)
+        } else {
             reservedFacilitiesPrice = 0
         }
 
         // console.log(reservedFacilitiesPrice)
 
 
-
         let aboutVillaCheckbox = ''
         let rentType = ''
         let standardCapacity = ''
         let maxCapacity = ''
-        let bedroom=''
-        let irToilet=''
-        let euToilet=''
-        let shower=''
-        let sharedBathroom=''
+        let bedroom = ''
+        let irToilet = ''
+        let euToilet = ''
+        let shower = ''
+        let sharedBathroom = ''
 
-        let normalCostRules=''
-        let specialCostRules=''
-        let normalExtraCostRules=''
-        let specialExtraCostRules=''
-        let weeklyDiscountRules=''
-        let monthlyDiscountRules=''
-        let specialRules=''
+        let normalCostRules = ''
+        let specialCostRules = ''
+        let normalExtraCostRules = ''
+        let specialExtraCostRules = ''
+        let weeklyDiscountRules = ''
+        let monthlyDiscountRules = ''
+        let specialRules = ''
 
         let chefPrice = ''
         let hostPrice = ''
         let tourGuidePrice = ''
         let bodyguardPrice = ''
-        let generalFacilities=''
+        let generalFacilities = ''
 
         let address = this.state.resultVilla.address
         let phoneNumber = this.state.resultVilla.phone_number
@@ -1108,7 +1113,7 @@ class DisplayPage extends Component {
         let resultComments = []
 
 
-        if(this.state.resultVilla.details){
+        if (this.state.resultVilla.details) {
             aboutVillaCheckbox = this.state.resultVilla.details.view
             rentType = this.state.resultVilla.details.rent_type
             standardCapacity = this.state.resultVilla.details.standard_capacity
@@ -1119,36 +1124,36 @@ class DisplayPage extends Component {
             shower = this.state.resultVilla.details.shower
             sharedBathroom = this.state.resultVilla.details.shared_bathroom
         }
-        if(this.state.resultVilla.rules){
+        if (this.state.resultVilla.rules) {
             normalCostRules = this.state.resultVilla.rules.normal_cost
             specialCostRules = this.state.resultVilla.rules.special_cost
-            normalExtraCostRules= this.state.resultVilla.rules.normal_extra_cost
-            specialExtraCostRules= this.state.resultVilla.rules.special_extra_cost
-            weeklyDiscountRules= this.state.resultVilla.rules.weekly_discount
-            monthlyDiscountRules= this.state.resultVilla.rules.monthly_discount
-            specialRules=this.state.resultVilla.rules.special_rules
+            normalExtraCostRules = this.state.resultVilla.rules.normal_extra_cost
+            specialExtraCostRules = this.state.resultVilla.rules.special_extra_cost
+            weeklyDiscountRules = this.state.resultVilla.rules.weekly_discount
+            monthlyDiscountRules = this.state.resultVilla.rules.monthly_discount
+            specialRules = this.state.resultVilla.rules.special_rules
 
         }
-        if(this.state.resultVilla.info){
-            chefPrice=this.state.resultVilla.info.chef
-            hostPrice=this.state.resultVilla.info.host
-            tourGuidePrice=this.state.resultVilla.info.tour_guide
-            bodyguardPrice=this.state.resultVilla.info.bodyguard
-            generalFacilities=this.state.resultVilla.info.fac
+        if (this.state.resultVilla.info) {
+            chefPrice = this.state.resultVilla.info.chef
+            hostPrice = this.state.resultVilla.info.host
+            tourGuidePrice = this.state.resultVilla.info.tour_guide
+            bodyguardPrice = this.state.resultVilla.info.bodyguard
+            generalFacilities = this.state.resultVilla.info.fac
         }
-        if(this.state.resultRateComments.scores){
-            cleaningRate=this.state.resultRateComments.scores[0].Cleaning
-            adComplianceRate =this.state.resultRateComments.scores[0].Ad_compliance
-            hospitalityRate =this.state.resultRateComments.scores[0].Hospitality
-            hostingQualityRate =this.state.resultRateComments.scores[0].Hosting_quality
+        if (this.state.resultRateComments.scores) {
+            cleaningRate = this.state.resultRateComments.scores[0].Cleaning
+            adComplianceRate = this.state.resultRateComments.scores[0].Ad_compliance
+            hospitalityRate = this.state.resultRateComments.scores[0].Hospitality
+            hostingQualityRate = this.state.resultRateComments.scores[0].Hosting_quality
         }
 
 
         const Map = Mapir.setToken({
             //factory parameters
             // hash:true,
-           //  logoPosition:"top-left",
-            maxZoom:[10],
+            //  logoPosition:"top-left",
+            maxZoom: [10],
             transformRequest: (url) => {
                 return {
                     url: url,
@@ -1164,7 +1169,7 @@ class DisplayPage extends Component {
             //factory parameters
             // hash:true,
             //  logoPosition:"top-left",
-            maxZoom:[20],
+            maxZoom: [20],
             transformRequest: (url) => {
                 return {
                     url: url,
@@ -1178,15 +1183,12 @@ class DisplayPage extends Component {
         });
 
 
-
-
-
         /*  console.log(this.weekdayshortname)
           console.log(this.weekdayshortnamemonth) */
-        return(
+        return (
             <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-DisplayPageOnly"}>
 
-                <MDBContainer className={this.state.morePics === true ? "fv-MadeDisplayNoneForPics"    : ""}>
+                <MDBContainer className={this.state.morePics === true ? "fv-MadeDisplayNoneForPics" : ""}>
 
                     <MDBContainer className={'fv-footerMenu fv-footerDisplayPage'}>
                         {/*  <div className="App">
@@ -1209,7 +1211,6 @@ class DisplayPage extends Component {
                         </Mapir>
                     </div >
                      */}
-
 
 
                         {/*  <DatePicker
@@ -1248,7 +1249,6 @@ class DisplayPage extends Component {
                         value={this.state.date}
                         tileClassName="content"
                     /> */}
-
 
 
                         {/*
@@ -1385,31 +1385,33 @@ class DisplayPage extends Component {
                         </MDBRow>
                         <MDBRow className={"fv-DisplayPageSearchName"}>
                             <MDBCol md={2}>
-                                <h6><i className="fa fa-map-marker-alt" /> {this.state.resultVilla.state} </h6>
+                                <h6><i className="fa fa-map-marker-alt"/> {this.state.resultVilla.state} </h6>
                             </MDBCol>
                             <MDBCol md={2}>
                                 {this.state.resultVilla.score ?
                                     <div>
                                         <p className={"fv-DisplayPageDetailsRating  fv-DisplayPageDetailsRatingTop"}> 5 </p>
-                                        <p className={"fv-DisplayPageDetailsRate fv-DisplayPageDetailsRateTop"}>  /{this.state.resultVilla.score}<i className="fa fa-star" /> </p>
+                                        <p className={"fv-DisplayPageDetailsRate fv-DisplayPageDetailsRateTop"}> /{this.state.resultVilla.score}<i
+                                            className="fa fa-star"/></p>
                                     </div>
                                     :
                                     ''}
                             </MDBCol>
 
                             <MDBCol md={8} className={"fv-DisplayPageLike"}>
-                                <a className={this.state.addToFavorites ?"addToFavoritesTextHide" : ""} onClick={()=>{
-                                    this.setState({addToFavorites: true})
-                                    const data ={
-                                        villa_id:this.props.match.params.id
-                                    }
-                                    addToFavorite(data)
-                                        .then(res=>res.status===200 ?
-                                            (
-                                                this.setState({addToFavorites: false}) ,
-                                                    alert('ویلا به علاقه مندی های شما اضافه شد'))
-                                            :'')
-                                }}><p> اضافه به علاقه مندی ها <i className="fas fa-heart"/></p></a>
+                                <a className={this.state.addToFavorites ? "addToFavoritesTextHide" : ""}
+                                   onClick={() => {
+                                       this.setState({addToFavorites: true})
+                                       const data = {
+                                           villa_id: this.props.match.params.id
+                                       }
+                                       addToFavorite(data)
+                                           .then(res => res.status === 200 ?
+                                               (
+                                                   this.setState({addToFavorites: false}) ,
+                                                       alert('ویلا به علاقه مندی های شما اضافه شد'))
+                                               : '')
+                                   }}><p> اضافه به علاقه مندی ها <i className="fas fa-heart"/></p></a>
                                 <div className={this.state.addToFavorites ? "cssload-wave" : ""}>
                                     <span></span><span></span><span></span><span></span><span></span>
                                 </div>
@@ -1422,22 +1424,27 @@ class DisplayPage extends Component {
                         </MDBRow>
 
 
-                        <div> { /* className={this.state.displayButtonName === 'pictures' ? 'fv-displayActive' :  'fv-displayDeActive'} */ }                              {/*        fv-Pictures     */}
+                        <div> { /* className={this.state.displayButtonName === 'pictures' ? 'fv-displayActive' :  'fv-displayDeActive'} */} {/*        fv-Pictures     */}
 
                             <MDBRow className={"fv-DisplayPageSearchProductImage"}>
                                 <MDBCol md={8} sm={12}>
-                                    <img className={this.state.resultImages[0] ? "fv-aboutUsThirdImageRight" : "fv-aboutUsThirdImageDesktopNone"} src={this.state.resultImages[0] ? `${config.webapi}/images/villas/main/${this.state.resultImages[0].img_src }`: ''} />
+                                    <img
+                                        className={this.state.resultImages[0] ? "fv-aboutUsThirdImageRight" : "fv-aboutUsThirdImageDesktopNone"}
+                                        src={this.state.resultImages[0] ? `${config.webapi}/images/villas/main/${this.state.resultImages[0].img_src}` : ''}/>
                                 </MDBCol>
                                 <MDBCol md={4}>
                                     <MDBRow>
-                                        <img className={this.state.resultImages[1] ? "fv-aboutUsThirdImageLeftFirst" : "fv-aboutUsThirdImageDesktopNone"} src={this.state.resultImages[1] ? `${config.webapi}/images/villas/main/${this.state.resultImages[1].img_src }` : ''} />
+                                        <img
+                                            className={this.state.resultImages[1] ? "fv-aboutUsThirdImageLeftFirst" : "fv-aboutUsThirdImageDesktopNone"}
+                                            src={this.state.resultImages[1] ? `${config.webapi}/images/villas/main/${this.state.resultImages[1].img_src}` : ''}/>
                                     </MDBRow>
                                     <MDBRow>
-                                        <img className={this.state.resultImages[2] ? "fv-aboutUsThirdImageLeftSecond" : "fv-aboutUsThirdImageDesktopNone"} src={this.state.resultImages[2] ? `${config.webapi}/images/villas/main/${this.state.resultImages[2].img_src }`:''}/>
+                                        <img
+                                            className={this.state.resultImages[2] ? "fv-aboutUsThirdImageLeftSecond" : "fv-aboutUsThirdImageDesktopNone"}
+                                            src={this.state.resultImages[2] ? `${config.webapi}/images/villas/main/${this.state.resultImages[2].img_src}` : ''}/>
                                     </MDBRow>
                                 </MDBCol>
                             </MDBRow>
-
 
 
                             <MDBRow className={"efv-svgPagination fv-displayPageImagePaginationMobil"}>
@@ -1446,7 +1453,8 @@ class DisplayPage extends Component {
                                     <div className="slider_pagination">
                                         <AwesomeSlider animation="cubeAnimation">
                                             {this.state.resultImages.map(resultImage => {
-                                                return <div data-src={`${config.webapi}/images/villas/main/${resultImage.img_src }`} />
+                                                return <div
+                                                    data-src={`${config.webapi}/images/villas/main/${resultImage.img_src}`}/>
                                             })}
                                         </AwesomeSlider>
                                     </div>
@@ -1457,14 +1465,16 @@ class DisplayPage extends Component {
                         {this.state.resultImages.length > 0 ?
                             <MDBRow className={"fv-DisplayPageDisplayMoreImage"}>
                                 <MDBCol>
-                                    <a onClick={()=> this.setState({morePics:true})}> مشاهده تصویر بیشتر <i className="fas fa-angle-left" /></a>
+                                    <a onClick={() => this.setState({morePics: true})}> مشاهده تصویر بیشتر <i
+                                        className="fas fa-angle-left"/></a>
                                 </MDBCol>
                             </MDBRow>
                             : ''
                         }
 
 
-                    </div>                                              {/*        fv-Pictures     */}
+                    </div>
+                    {/*        fv-Pictures     */}
 
 
                     <MDBRow className={"fv-DisplayPageMenu"}>
@@ -1475,33 +1485,48 @@ class DisplayPage extends Component {
                         </MDBRow>
                     </MDBCol>     */}
                         <MDBCol md={1} sm={2}>
-                            <a href="#facilities" name={'facilities'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}><p className={"h7"}>امکانات</p></a>
+                            <a href="#facilities" name={'facilities'}
+                               onClick={(e) => this.setState({displayButtonName: e.target.name})}><p
+                                className={"h7"}>امکانات</p></a>
                             <MDBRow>
-                                <button className={this.state.displayButtonName === 'facilities' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
+                                <button
+                                    className={this.state.displayButtonName === 'facilities' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                             </MDBRow>
                         </MDBCol>
                         <MDBCol md={1} sm={2}>
-                            <a href="#Address" name={'Address'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}><p className={"h7"}>آدرس</p></a>
+                            <a href="#Address" name={'Address'}
+                               onClick={(e) => this.setState({displayButtonName: e.target.name})}><p
+                                className={"h7"}>آدرس</p></a>
                             <MDBRow>
-                                <button className={this.state.displayButtonName === 'Address' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
+                                <button
+                                    className={this.state.displayButtonName === 'Address' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                             </MDBRow>
                         </MDBCol>
-                        <MDBCol md={2} className={"fv-DisplayPageMenuRows"} >
-                            <a href="#Roles"  name={'Roles'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}><p className={"h7"}>قوانین اقامتگاه</p></a>
+                        <MDBCol md={2} className={"fv-DisplayPageMenuRows"}>
+                            <a href="#Roles" name={'Roles'}
+                               onClick={(e) => this.setState({displayButtonName: e.target.name})}><p
+                                className={"h7"}>قوانین اقامتگاه</p></a>
                             <MDBRow>
-                                <button className={this.state.displayButtonName === 'Roles' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
+                                <button
+                                    className={this.state.displayButtonName === 'Roles' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                             </MDBRow>
                         </MDBCol>
                         <MDBCol sm={2} className={"fv-DisplayPageMenuRowsMobile"}>
-                            <a  href="#Roles" name={'Roles'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}> <p className={"h7"}>قوانین</p></a>
+                            <a href="#Roles" name={'Roles'}
+                               onClick={(e) => this.setState({displayButtonName: e.target.name})}><p
+                                className={"h7"}>قوانین</p></a>
                             <MDBRow>
-                                <button className={this.state.displayButtonName === 'Roles' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
+                                <button
+                                    className={this.state.displayButtonName === 'Roles' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                             </MDBRow>
                         </MDBCol>
                         <MDBCol md={1} sm={2}>
-                            <a href="#Comments" name={'Comments'} onClick={(e)=>this.setState({displayButtonName:e.target.name})}><p className={"h7"}>نظرات</p></a>
+                            <a href="#Comments" name={'Comments'}
+                               onClick={(e) => this.setState({displayButtonName: e.target.name})}><p
+                                className={"h7"}>نظرات</p></a>
                             <MDBRow>
-                                <button className={this.state.displayButtonName === 'Comments' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
+                                <button
+                                    className={this.state.displayButtonName === 'Comments' ? "slider_pagination_btn" : "slider_pagination_btn slider_pagination_btn_Unselected"}/>
                             </MDBRow>
                         </MDBCol>
                     </MDBRow>
@@ -1510,12 +1535,13 @@ class DisplayPage extends Component {
                         <MDBCol md={8} className={"fv-DisplayPageDetailsRightBody fv-displayPageOnly"}>
                             <MDBRow>
                                 <MDBCol md={2} sm={2}>
-                                    <img src={avatar ? `${config.webapi}/images/user//${avatar}` : UserImage} />
+                                    <img src={avatar ? `${config.webapi}/images/user//${avatar}` : UserImage}/>
                                 </MDBCol>
-                                <MDBCol sm={10} className={"fv-DisplayPageDetailsPersonInformation fv-DisplayPageDetailsPersonInfo"}>
+                                <MDBCol sm={10}
+                                        className={"fv-DisplayPageDetailsPersonInformation fv-DisplayPageDetailsPersonInfo"}>
                                     <MDBRow>
                                         <MDBCol md={1} sm={4}>
-                                            <p>{nameAndFamily ?"میزبان" : "میهمان" }</p>
+                                            <p>{nameAndFamily ? "میزبان" : "میهمان"}</p>
                                         </MDBCol>
                                         <MDBCol sm={6}>
                                             <h6>{nameAndFamily}</h6>
@@ -1525,7 +1551,7 @@ class DisplayPage extends Component {
                                         <MDBCol md={2} sm={5}>
                                             <p>کد آگهی</p>
                                         </MDBCol>
-                                        <MDBCol  md={10} sm={3}>
+                                        <MDBCol md={10} sm={3}>
                                             <h6>{this.state.resultVilla.id}</h6>
                                         </MDBCol>
                                     </MDBRow>
@@ -1533,31 +1559,37 @@ class DisplayPage extends Component {
                             </MDBRow>
 
 
-
-
-                            <MDBCol md={4} className={LoadingPagewaitingHandle ? "fv-DisplayPageDetailsLeftBodyMobileReservation fv-DisplayPageLoaderWaiting" : " fv-hideLoader"}>
-                                {Waiting(LoadingPagewaitingHandle , "fv-waitingLoadPublicFullScreen" )}
+                            <MDBCol md={4}
+                                    className={LoadingPagewaitingHandle ? "fv-DisplayPageDetailsLeftBodyMobileReservation fv-DisplayPageLoaderWaiting" : " fv-hideLoader"}>
+                                {Waiting(LoadingPagewaitingHandle, "fv-waitingLoadPublicFullScreen")}
                             </MDBCol>
-                            <div className={"fv-DisplayPageDetailsLeftBodyMobile"}>                             {/*     Reservation For Mobile     */}
-                                {LoadingPagewaitingHandle ? '' : this.reservedHandle(minimumDate,maximumDate,allDaysReservedConcat,daysCostString,resultVillaArray,rangeBetween,reservedFacilitiesPrice,chef,host,tour_guide,bodyguard , "fv-DisplayPageDetailsLeftBodyMobileReservation" , waitingCalculate)}
+                            <div
+                                className={"fv-DisplayPageDetailsLeftBodyMobile"}>                             {/*     Reservation For Mobile     */}
+                                {LoadingPagewaitingHandle ? '' : this.reservedHandle(minimumDate, maximumDate, allDaysReservedConcat, daysCostString, resultVillaArray, rangeBetween, reservedFacilitiesPrice, chef, host, tour_guide, bodyguard, "fv-DisplayPageDetailsLeftBodyMobileReservation", waitingCalculate)}
                             </div>
 
 
-
-                            <div id="facilities" className={''}>                                            {/*    fv-facilities      */}
+                            <div id="facilities"
+                                 className={''}>                                            {/*    fv-facilities      */}
                                 {rentType ?
                                     <MDBRow className={"fv-DisplayPageDetailsRightHomeImage pMobile"}>
-                                        <p><i className="fas fa-home" /> {rentType} </p>
+                                        <p><i className="fas fa-home"/> {rentType} </p>
                                     </MDBRow>
-                                : ''}
+                                    : ''}
                                 <MDBRow className={"pMobile"}>
-                                    <p> <i className="fa fa-users" />  ظرفیت استاندارد {standardCapacity }  نفر+{maxCapacity} نفر اضافه </p>
+                                    <p><i className="fa fa-users"/> ظرفیت
+                                        استاندارد {standardCapacity} نفر+{maxCapacity} نفر اضافه </p>
                                 </MDBRow>
                                 <MDBRow className={"pMobile"}>
-                                    <p><i className="fa fa-building" /> {bedroom} اتاق خواب+{shower} حمام+{irToilet} دست شویی ایرانی{Number(euToilet) !== 0 ? `+${euToilet} دستشویی فرنگی`  : ''}</p>
+                                    <p><i className="fa fa-building"/> {bedroom} اتاق خواب+{shower} حمام+{irToilet} دست
+                                        شویی ایرانی{Number(euToilet) !== 0 ? `+${euToilet} دستشویی فرنگی` : ''}</p>
                                 </MDBRow>
                                 <MDBRow className={"pMobile"}>
-                                    <p><i className="fa fa-bed" aria-hidden="true" /> {this.state.resultVilla.details?this.state.resultVilla.details.bed_count:''} تخت یک نفره + {this.state.resultVilla.details?this.state.resultVilla.details.mattress_count:''} تشک معمولی </p>
+                                    <p><i className="fa fa-bed"
+                                          aria-hidden="true"/> {this.state.resultVilla.details ? this.state.resultVilla.details.bed_count : ''} تخت
+                                        یک نفره
+                                        + {this.state.resultVilla.details ? this.state.resultVilla.details.mattress_count : ''} تشک
+                                        معمولی </p>
                                 </MDBRow>
                                 {story ?
                                     <>
@@ -1568,22 +1600,22 @@ class DisplayPage extends Component {
                                             <p>{story}</p>
                                         </MDBRow>
                                     </>
-                                : ''}
+                                    : ''}
 
                                 {aboutVillaCheckbox ?
                                     <MDBRow className={"pMobile"}>
-                                        <p> <i className="fas fa-check-square" /> {aboutVillaCheckbox} </p>
+                                        <p><i className="fas fa-check-square"/> {aboutVillaCheckbox} </p>
                                     </MDBRow>
-                                : ''}
-                                {this.state.resultVilla.details ? this.state.resultVilla.details.places.map(facilitie=>{
+                                    : ''}
+                                {this.state.resultVilla.details ? this.state.resultVilla.details.places.map(facilitie => {
                                     return <MDBRow className={"pMobile"}>
-                                        <p> <i className="fas fa-check-square" /> {facilitie} </p>
+                                        <p><i className="fas fa-check-square"/> {facilitie} </p>
                                     </MDBRow>
                                 }) : ''}
 
 
                                 <MDBRow className={"fv-DisplayPageDetailsRightStayInHome"}>
-                                    {this.state.resultVilla.rules && this.state.resultVilla.rules.min_reserve?
+                                    {this.state.resultVilla.rules && this.state.resultVilla.rules.min_reserve ?
                                         <MDBCol md={5} sm={11}>
                                             <h6> حداقل تعداد روز اقامت </h6>
                                             <p>{this.state.resultVilla.rules.min_reserve} روز </p>
@@ -1597,54 +1629,63 @@ class DisplayPage extends Component {
                                         </MDBCol>
                                         :
                                         ''}
-                                    <h6 style={{marginTop:'1%' , marginBottom:'1%'}}> امکانات </h6>
+                                    <h6 style={{marginTop: '1%', marginBottom: '1%'}}> امکانات </h6>
                                 </MDBRow>
 
                                 <div>
                                     <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
-                                        <MDBCol md={4} sm={6} className={generalFacilities.includes('جارو برقی')?'fv-facilitiesAvailable': 'fv-facilitiesUnavailable'}>
-                                            <p> <i className="fa fa-broom" /> جارو برقی </p>
+                                        <MDBCol md={4} sm={6}
+                                                className={generalFacilities.includes('جارو برقی') ? 'fv-facilitiesAvailable' : 'fv-facilitiesUnavailable'}>
+                                            <p><i className="fa fa-broom"/> جارو برقی </p>
                                         </MDBCol>
-                                        <MDBCol md={8} sm={6} className={generalFacilities.includes('اینترنت رایگان')?'fv-facilitiesAvailable': 'fv-facilitiesUnavailable'}>
-                                            <p> <i className="fas fa-wifi" /> اینترنت رایگان </p>
-                                        </MDBCol>
-                                    </MDBRow>
-                                    <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
-                                        <MDBCol md={4} sm={6} className={generalFacilities.includes('تلفن')?'fv-facilitiesAvailable': 'fv-facilitiesUnavailable'}>
-                                            <p> <i className="fas fa-phone" /> تلفن </p>
-                                        </MDBCol>
-                                        <MDBCol md={8} sm={6} className={generalFacilities.includes('جعبه کمک های اولیه')?'fv-facilitiesAvailable': 'fv-facilitiesUnavailable'}>
-                                            <p><i className="fas fa-box" />  جعبه کمک های اولیه </p>
+                                        <MDBCol md={8} sm={6}
+                                                className={generalFacilities.includes('اینترنت رایگان') ? 'fv-facilitiesAvailable' : 'fv-facilitiesUnavailable'}>
+                                            <p><i className="fas fa-wifi"/> اینترنت رایگان </p>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
-                                        <MDBCol md={4} sm={6} className={generalFacilities.includes('مهر و جانماز')?'fv-facilitiesAvailable': 'fv-facilitiesUnavailable'}>
-                                            <p> <i className="fas fa-pray" /> مهر و جانماز </p>
+                                        <MDBCol md={4} sm={6}
+                                                className={generalFacilities.includes('تلفن') ? 'fv-facilitiesAvailable' : 'fv-facilitiesUnavailable'}>
+                                            <p><i className="fas fa-phone"/> تلفن </p>
                                         </MDBCol>
-                                        <MDBCol md={8} sm={6} className={generalFacilities.includes('تلوزیون')?'fv-facilitiesAvailable': 'fv-facilitiesUnavailable'}>
-                                            <p><i className="fas fa-tv" /> تلوزیون </p>
+                                        <MDBCol md={8} sm={6}
+                                                className={generalFacilities.includes('جعبه کمک های اولیه') ? 'fv-facilitiesAvailable' : 'fv-facilitiesUnavailable'}>
+                                            <p><i className="fas fa-box"/> جعبه کمک های اولیه </p>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
-                                        <MDBCol md={4} sm={6} className={generalFacilities.includes('یخچال')?'fv-facilitiesAvailable': 'fv-facilitiesUnavailable'}>
-                                            <p><i className="fa fa-door-closed" /> یخچال </p>
+                                        <MDBCol md={4} sm={6}
+                                                className={generalFacilities.includes('مهر و جانماز') ? 'fv-facilitiesAvailable' : 'fv-facilitiesUnavailable'}>
+                                            <p><i className="fas fa-pray"/> مهر و جانماز </p>
                                         </MDBCol>
-                                        <MDBCol md={8} sm={6} className={generalFacilities.includes('اجاق گاز')?'fv-facilitiesAvailable': 'fv-facilitiesUnavailable'}>
-                                            <p><i className="fa fa-calendar-minus" /> اجاق گاز </p>
+                                        <MDBCol md={8} sm={6}
+                                                className={generalFacilities.includes('تلوزیون') ? 'fv-facilitiesAvailable' : 'fv-facilitiesUnavailable'}>
+                                            <p><i className="fas fa-tv"/> تلوزیون </p>
+                                        </MDBCol>
+                                    </MDBRow>
+                                    <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
+                                        <MDBCol md={4} sm={6}
+                                                className={generalFacilities.includes('یخچال') ? 'fv-facilitiesAvailable' : 'fv-facilitiesUnavailable'}>
+                                            <p><i className="fa fa-door-closed"/> یخچال </p>
+                                        </MDBCol>
+                                        <MDBCol md={8} sm={6}
+                                                className={generalFacilities.includes('اجاق گاز') ? 'fv-facilitiesAvailable' : 'fv-facilitiesUnavailable'}>
+                                            <p><i className="fa fa-calendar-minus"/> اجاق گاز </p>
                                         </MDBCol>
                                     </MDBRow>
                                 </div>
 
                                 {chefPrice || hostPrice || tourGuidePrice || bodyguardPrice ?
                                     <div>
-                                        <MDBRow  className={"fv-DisplayPageّMoreFacilities"}>
+                                        <MDBRow className={"fv-DisplayPageّMoreFacilities"}>
                                             {/*<p>مشاهده امکانات بیشتر</p>  */}
                                         </MDBRow>
-                                        <MDBRow  className={"fv-DisplayPageّMoreFacilities"}>
+                                        <MDBRow className={"fv-DisplayPageّMoreFacilities"}>
                                             <h6>امکانات ویژه</h6>
                                         </MDBRow>
                                         <MDBRow className={"fv-DisplayPageDetailsRightParagraph"}>
-                                            <p className={"h7"}>هر کدام از امکانات زیر که دوست دارید انتخاب کنید تا به شما در سفر حس بهتری بدهد </p>
+                                            <p className={"h7"}>هر کدام از امکانات زیر که دوست دارید انتخاب کنید تا به
+                                                شما در سفر حس بهتری بدهد </p>
                                         </MDBRow>
                                     </div>
                                     : ''}
@@ -1653,16 +1694,17 @@ class DisplayPage extends Component {
                                         <MDBCol sm={12} md={12}>
                                             <MDBRow>
                                                 <MDBCol md={1} sm={1}>
-                                                    <input type="checkbox"  name={"chef"} onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
+                                                    <input type="checkbox" name={"chef"}
+                                                           onChange={(event) => this.setFacilitiesCheckbox(event)}/>
                                                 </MDBCol>
-                                                <MDBCol  md={3} sm={5}>
+                                                <MDBCol md={3} sm={5}>
                                                     <p>آشپز</p>
                                                 </MDBCol>
-                                                <MDBCol  md={2} sm={2}>
+                                                <MDBCol md={2} sm={2}>
                                                     <h6>{commaNumber(chefPrice)}</h6>
                                                 </MDBCol>
-                                                <MDBCol  md={4} sm={2}>
-                                                    <p style={{fontSize:'12px' , color:'#919191'}}> تومان </p>
+                                                <MDBCol md={4} sm={2}>
+                                                    <p style={{fontSize: '12px', color: '#919191'}}> تومان </p>
                                                 </MDBCol>
                                             </MDBRow>
                                         </MDBCol>
@@ -1672,16 +1714,17 @@ class DisplayPage extends Component {
                                         <MDBCol sm={12} md={12}>
                                             <MDBRow>
                                                 <MDBCol md={1} sm={1}>
-                                                    <input type="checkbox"  name={"host"} onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
+                                                    <input type="checkbox" name={"host"}
+                                                           onChange={(event) => this.setFacilitiesCheckbox(event)}/>
                                                 </MDBCol>
-                                                <MDBCol  md={3} sm={5}>
+                                                <MDBCol md={3} sm={5}>
                                                     <p>مهماندار</p>
                                                 </MDBCol>
-                                                <MDBCol  md={2} sm={2}>
+                                                <MDBCol md={2} sm={2}>
                                                     <h6>{commaNumber(hostPrice)}</h6>
                                                 </MDBCol>
-                                                <MDBCol  md={4} sm={2}>
-                                                    <p style={{fontSize:'12px' , color:'#919191'}}> تومان </p>
+                                                <MDBCol md={4} sm={2}>
+                                                    <p style={{fontSize: '12px', color: '#919191'}}> تومان </p>
                                                 </MDBCol>
                                             </MDBRow>
                                         </MDBCol>
@@ -1690,16 +1733,17 @@ class DisplayPage extends Component {
                                         <MDBCol sm={12} md={12}>
                                             <MDBRow>
                                                 <MDBCol md={1} sm={1}>
-                                                    <input type="checkbox"  name={"tour_guide"} onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
+                                                    <input type="checkbox" name={"tour_guide"}
+                                                           onChange={(event) => this.setFacilitiesCheckbox(event)}/>
                                                 </MDBCol>
-                                                <MDBCol  md={3} sm={5}>
+                                                <MDBCol md={3} sm={5}>
                                                     <p>راهنمای سفر</p>
                                                 </MDBCol>
-                                                <MDBCol  md={2} sm={2}>
+                                                <MDBCol md={2} sm={2}>
                                                     <h6>{commaNumber(tourGuidePrice)}</h6>
                                                 </MDBCol>
-                                                <MDBCol  md={4} sm={2}>
-                                                    <p style={{fontSize:'12px' , color:'#919191'}}> تومان </p>
+                                                <MDBCol md={4} sm={2}>
+                                                    <p style={{fontSize: '12px', color: '#919191'}}> تومان </p>
                                                 </MDBCol>
                                             </MDBRow>
                                         </MDBCol>
@@ -1708,16 +1752,17 @@ class DisplayPage extends Component {
                                         <MDBCol sm={12} md={12}>
                                             <MDBRow>
                                                 <MDBCol md={1} sm={1}>
-                                                    <input type="checkbox"  name={"bodyguard"} onChange={(event)=>this.setFacilitiesCheckbox(event)}/>
+                                                    <input type="checkbox" name={"bodyguard"}
+                                                           onChange={(event) => this.setFacilitiesCheckbox(event)}/>
                                                 </MDBCol>
-                                                <MDBCol  md={3} sm={5}>
+                                                <MDBCol md={3} sm={5}>
                                                     <p>بادیگارد</p>
                                                 </MDBCol>
-                                                <MDBCol  md={2} sm={2}>
+                                                <MDBCol md={2} sm={2}>
                                                     <h6>{commaNumber(bodyguardPrice)}</h6>
                                                 </MDBCol>
-                                                <MDBCol  md={4} sm={2}>
-                                                    <p style={{fontSize:'12px' , color:'#919191'}}> تومان </p>
+                                                <MDBCol md={4} sm={2}>
+                                                    <p style={{fontSize: '12px', color: '#919191'}}> تومان </p>
                                                 </MDBCol>
                                             </MDBRow>
                                         </MDBCol>
@@ -1731,71 +1776,78 @@ class DisplayPage extends Component {
                                 <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
                                     <MDBCol md={1} sm={1}>
                                         <MDBRow>
-                                            <button className="slider_pagination_btn" />
+                                            <button className="slider_pagination_btn"/>
                                         </MDBRow>
                                     </MDBCol>
                                     <MDBCol md={11} sm={11}>
-                                        <p>ایام عادی: </p> <h6 className={"fv-PricesRent"}> {commaNumber(normalCostRules)} تومان</h6>
+                                        <p>ایام عادی: </p> <h6
+                                        className={"fv-PricesRent"}> {commaNumber(normalCostRules)} تومان</h6>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
                                     <MDBCol md={1} sm={1}>
                                         <MDBRow>
-                                            <button className="slider_pagination_btn" />
+                                            <button className="slider_pagination_btn"/>
                                         </MDBRow>
                                     </MDBCol>
                                     <MDBCol md={11} sm={11}>
-                                        <p> هزینه هر نفر اضافه به ازای هر شب:  </p> <h6 className={"fv-PricesRent"}>{commaNumber(normalExtraCostRules)} تومان</h6>
+                                        <p> هزینه هر نفر اضافه به ازای هر شب: </p> <h6
+                                        className={"fv-PricesRent"}>{commaNumber(normalExtraCostRules)} تومان</h6>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
                                     <MDBCol md={1} sm={1}>
                                         <MDBRow>
-                                            <button className="slider_pagination_btn" />
+                                            <button className="slider_pagination_btn"/>
                                         </MDBRow>
                                     </MDBCol>
                                     <MDBCol md={11} sm={11}>
-                                        <p>ایام پیک: </p> <h6 className={"fv-PricesRent"}> {commaNumber(specialCostRules)} تومان</h6>
+                                        <p>ایام پیک: </p> <h6
+                                        className={"fv-PricesRent"}> {commaNumber(specialCostRules)} تومان</h6>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
                                     <MDBCol md={1} sm={1}>
                                         <MDBRow>
-                                            <button className="slider_pagination_btn" />
+                                            <button className="slider_pagination_btn"/>
                                         </MDBRow>
                                     </MDBCol>
                                     <MDBCol md={11} sm={11}>
-                                        <p>نفر اضافه در ایام پیک: </p> <h6 className={"fv-PricesRent"}> {commaNumber(specialExtraCostRules)} تومان</h6>
+                                        <p>نفر اضافه در ایام پیک: </p> <h6
+                                        className={"fv-PricesRent"}> {commaNumber(specialExtraCostRules)} تومان</h6>
                                     </MDBCol>
                                 </MDBRow>
                                 {Number(weeklyDiscountRules) !== 0 ?
                                     <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
                                         <MDBCol md={1} sm={1}>
                                             <MDBRow>
-                                                <button className="slider_pagination_btn" />
+                                                <button className="slider_pagination_btn"/>
                                             </MDBRow>
                                         </MDBCol>
                                         <MDBCol md={11} sm={11}>
-                                            <p>تخفیف هفتگی:  </p> <h6 className={"fv-PricesRent"}> {weeklyDiscountRules} درصد </h6>
+                                            <p>تخفیف هفتگی: </p> <h6
+                                            className={"fv-PricesRent"}> {weeklyDiscountRules} درصد </h6>
                                         </MDBCol>
                                     </MDBRow>
                                     : ''}
-                                {Number(monthlyDiscountRules)!==0 ?
+                                {Number(monthlyDiscountRules) !== 0 ?
                                     <MDBRow className={"fv-DisplayPageMenu fv-DisplayPageRent"}>
                                         <MDBCol md={1} sm={1}>
                                             <MDBRow>
-                                                <button className="slider_pagination_btn" />
+                                                <button className="slider_pagination_btn"/>
                                             </MDBRow>
                                         </MDBCol>
                                         <MDBCol md={11} sm={11}>
-                                            <p>تخفیف ماهانه: </p> <h6 className={"fv-PricesRent"}> {monthlyDiscountRules} درصد </h6>
+                                            <p>تخفیف ماهانه: </p> <h6
+                                            className={"fv-PricesRent"}> {monthlyDiscountRules} درصد </h6>
                                         </MDBCol>
                                     </MDBRow>
                                     : ''}
 
 
-                                <MDBRow className={"fv-DisplayPageCalender fv-DisplayPageCalenderForDesktop"}>                  {/*    calender-calendar     */}
-                                    {Waiting(LoadingPagewaitingHandle , "fv-waitingLoadPublicFullScreen" )}
+                                <MDBRow
+                                    className={"fv-DisplayPageCalender fv-DisplayPageCalenderForDesktop"}>                  {/*    calender-calendar     */}
+                                    {Waiting(LoadingPagewaitingHandle, "fv-waitingLoadPublicFullScreen")}
 
                                     {LoadingPagewaitingHandle ? '' :
                                         <CalendarDesktop
@@ -1815,8 +1867,9 @@ class DisplayPage extends Component {
                                     <Calender />
                                 </MDBCol>  */}
                                 </MDBRow>
-                                <MDBRow className={'fv-DisplayPageCalenderForMobile'}>                  {/*    calender-calendar     */}
-                                    {Waiting(LoadingPagewaitingHandle , "fv-waitingLoadPublicFullScreen" )}
+                                <MDBRow
+                                    className={'fv-DisplayPageCalenderForMobile'}>                  {/*    calender-calendar     */}
+                                    {Waiting(LoadingPagewaitingHandle, "fv-waitingLoadPublicFullScreen")}
                                     {LoadingPagewaitingHandle ? '' :
                                         <MDBCol>
                                             <CalendarForMobile
@@ -1829,13 +1882,11 @@ class DisplayPage extends Component {
                                         </MDBCol>
                                     }
                                 </MDBRow>
-                            </div>                                                             {/*         fv-facilities          */}
+                            </div>
+                            {/*         fv-facilities          */}
 
 
-
-
-
-                            <div  id="Roles">                                      {/*        fv-Roles     */}
+                            <div id="Roles">                                      {/*        fv-Roles     */}
 
 
                                 <MDBRow>
@@ -1844,21 +1895,25 @@ class DisplayPage extends Component {
                                 <MDBRow className={"fv-DisplayPageDetailsّFacilities"}>
                                     {this.state.resultVilla.rules && this.state.resultVilla.rules.arrival_time ?
                                         <MDBCol md={4} sm={12}>
-                                            <p> <i className="fas fa-clock" /> ساعت ورود : {this.state.resultVilla.rules ? this.state.resultVilla.rules.arrival_time : ""}</p>
+                                            <p><i className="fas fa-clock"/> ساعت ورود
+                                                : {this.state.resultVilla.rules ? this.state.resultVilla.rules.arrival_time : ""}
+                                            </p>
                                         </MDBCol>
                                         : ''
                                     }
                                     {this.state.resultVilla.rules && this.state.resultVilla.rules.exit_time ?
                                         <MDBCol md={8} sm={12}>
-                                            <p>  <i className="fas fa-clock" /> ساعت خروج : {this.state.resultVilla.rules ? this.state.resultVilla.rules.exit_time : ""} </p>
+                                            <p><i className="fas fa-clock"/> ساعت خروج
+                                                : {this.state.resultVilla.rules ? this.state.resultVilla.rules.exit_time : ""}
+                                            </p>
                                         </MDBCol>
                                         :
                                         ''}
 
                                 </MDBRow>
 
-                                {this.state.resultVilla.rules ? this.state.resultVilla.rules.auth_rules.map(authRule =>{
-                                    return(
+                                {this.state.resultVilla.rules ? this.state.resultVilla.rules.auth_rules.map(authRule => {
+                                    return (
                                         <MDBRow>
                                             <p className={"h7"}>{authRule}</p>
                                         </MDBRow>
@@ -1870,21 +1925,22 @@ class DisplayPage extends Component {
                                 </MDBRow>
 
 
-                            </div>                                                             {/*        fv-Roles     */}
+                            </div>
+                            {/*        fv-Roles     */}
 
 
-                            {/*                     fv- address                        */ }
-                            {this.state.reservesData ? this.state.reservesData.map(reservedDataSelect =>{
-                                if(this.props.match.params.id === reservedDataSelect.villa_id && reservedDataSelect.pay_status === "2"){
+                            {/*                     fv- address                        */}
+                            {this.state.reservesData ? this.state.reservesData.map(reservedDataSelect => {
+                                if (this.props.match.params.id === reservedDataSelect.villa_id && reservedDataSelect.pay_status === "2") {
                                     thisVillaIsReserved = true
                                 }
                             }) : ''}
                             {thisVillaIsReserved ?
-                                <div id="Address">                                        {/*        fv-Address with details     */}
+                                <div
+                                    id="Address">                                        {/*        fv-Address with details     */}
 
                                     <MDBRow>
                                         <h6 className={"fv-addressP"}> آدرس </h6>
-                                        {console.log(this.state.resultVilla)}
                                     </MDBRow>
                                     <MDBRow>
                                         <h6> {address} </h6>
@@ -1893,9 +1949,9 @@ class DisplayPage extends Component {
                                         <h6> {phoneNumber} </h6>
                                     </MDBRow>
 
-                                    {Number(this.state.resultVilla.long) !== 51.42 && Number(this.state.resultVilla.lat) !== 35.72 && this.state.resultVilla.long !== undefined && this.state.resultVilla.lat !== undefined && this.state.resultVilla.long  && this.state.resultVilla.lat ? // agar lat and long vojod dasht
+                                    {Number(this.state.resultVilla.long) !== 51.42 && Number(this.state.resultVilla.lat) !== 35.72 && this.state.resultVilla.long !== undefined && this.state.resultVilla.lat !== undefined && this.state.resultVilla.long && this.state.resultVilla.lat ? // agar lat and long vojod dasht
                                         <MDBRow className={"fv-displayPageMap"}>
-                                            {Waiting(LoadingPagewaitingHandle , "fv-waitingLoadPublicFullScreen" )}
+                                            {Waiting(LoadingPagewaitingHandle, "fv-waitingLoadPublicFullScreen")}
                                             <MDBCol md={8}>
 
 
@@ -1924,19 +1980,19 @@ class DisplayPage extends Component {
                                 :
 
 
-                                <div id="Address">                                        {/*        fv-Address without details     */}
+                                <div
+                                    id="Address">                                        {/*        fv-Address without details     */}
 
                                     <MDBRow>
                                         <h6 className={"fv-addressP"}> آدرس </h6>
-                                        {console.log(this.state.resultVilla)}
                                     </MDBRow>
                                     <MDBRow>
                                         <h6> {this.state.resultVilla.state}{` - ${this.state.resultVilla.city}`} </h6>
                                     </MDBRow>
 
-                                    {Number(this.state.resultVilla.long) !== 51.42 && Number(this.state.resultVilla.lat) !== 35.72 && this.state.resultVilla.long !== undefined && this.state.resultVilla.lat !== undefined && this.state.resultVilla.long  && this.state.resultVilla.lat ? // agar lat and long vojod dasht
+                                    {Number(this.state.resultVilla.long) !== 51.42 && Number(this.state.resultVilla.lat) !== 35.72 && this.state.resultVilla.long !== undefined && this.state.resultVilla.lat !== undefined && this.state.resultVilla.long && this.state.resultVilla.lat ? // agar lat and long vojod dasht
                                         <MDBRow className={"fv-displayPageMap"}>
-                                            {Waiting(LoadingPagewaitingHandle , "fv-waitingLoadPublicFullScreen" )}
+                                            {Waiting(LoadingPagewaitingHandle, "fv-waitingLoadPublicFullScreen")}
                                             <MDBCol md={8}>
 
 
@@ -1963,18 +2019,25 @@ class DisplayPage extends Component {
                                 </div>                                                   // fv- address    address end
 
                             }
-                            {/*                     fv- address                        */ }
-
+                            {/*                     fv- address                        */}
 
 
                             <div id="Comments">                                  {/*        fv-Comments     */}
 
                                 <MDBRow className={"fv-DisplayPageDetailsRightingComment"}>
                                     <MDBCol md={9}>
-                                        <h6> نظرات </h6>
+                                        {cleaningRate || adComplianceRate || hospitalityRate || hostingQualityRate ?
+                                            <h6> نظرات </h6>
+                                            : ''}
                                     </MDBCol>
                                     <MDBCol md={2}>
-                                        <Link to={`/addComments/${this.props.match.params.id}`}><h4> نوشتن نظر<i style={{color: `#3EC886` , marginRight :`6%`}} className="fas fa-chevron-left" /> </h4></Link>
+                                        {nameAndFamily ?
+                                            <Link to={`/addComments/${this.props.match.params.id}`}><h4> نوشتن نظر<i
+                                                style={{color: `#3EC886`, marginRight: `6%`}}
+                                                className="fas fa-chevron-left"/></h4></Link>
+                                            : ''
+                                        }
+
                                     </MDBCol>
                                 </MDBRow>
                                 {cleaningRate || adComplianceRate || hospitalityRate || hostingQualityRate ?
@@ -1983,8 +2046,9 @@ class DisplayPage extends Component {
                                             <p className={"fv-DisplayPageDetailsRating"}> 5 </p>
                                         </MDBCol>
                                         <MDBCol md={2} sm={3}>
-                                            <p className={"fv-DisplayPageDetailsRate"}>  /{this.state.resultVilla.score} <i className="fa fa-star" /> </p>
-                                        </MDBCol >
+                                            <p className={"fv-DisplayPageDetailsRate"}> /{this.state.resultVilla.score}
+                                                <i className="fa fa-star"/></p>
+                                        </MDBCol>
                                         <MDBCol md={2} sm={4} className={"fv-DisplayPageDetailsRateNumberPerson"}>
                                             <p> ({this.state.resultComments.length} نظر) </p>
                                         </MDBCol>
@@ -1992,97 +2056,109 @@ class DisplayPage extends Component {
                                     :
                                     ''
                                 }
-
-                                <MDBRow className={"fv-DisplayPageDetailsScore"}>
-                                    <MDBCol md={5} sm={12}>
-                                        <MDBRow className={"fv-DisplayPageDetailsScoreBody"}>
-                                            <MDBCol md={3} sm={3}>
-                                                <p> نظافت </p>
-                                            </MDBCol>
-                                            <MDBCol  md={4} sm={4} className={"fv-DisplayPageDetailsScoreButton"}>
-                                                <input type="button" className={"fv-DisplayPageDetailsScoreButtonFirst"}/>
-                                            </MDBCol >
-                                            <MDBCol  md={4} sm={4}>
-                                                <input type="button" style={{
-                                                    padding: 0,
-                                                    position: "absolute" ,
-                                                    width: `${cleaningRate*20}%` ,
-                                                    background: "#15BE29"}}/>
-                                            </MDBCol >
-                                            <MDBCol md={1} sm={1}  className={"fv-DisplayPageDetailsScoreRateText"}>
-                                                <p> {cleaningRate} </p>
-                                            </MDBCol>
-                                        </MDBRow>
-                                    </MDBCol>
-                                    <MDBCol md={5} sm={12}>
-                                        <MDBRow className={"fv-DisplayPageDetailsScoreBody"}>
-                                            <MDBCol md={3} sm={3}>
-                                                <p> تطابق با آکهی </p>
-                                            </MDBCol>
-                                            <MDBCol  md={4} sm={4} className={"fv-DisplayPageDetailsScoreButton"}>
-                                                <input type="button" className={"fv-DisplayPageDetailsScoreButtonFirst"}/>
-                                            </MDBCol >
-                                            <MDBCol  md={4} sm={4}>
-                                                <input type="button" style={{
-                                                    padding: 0,
-                                                    position: "absolute" ,
-                                                    width: `${adComplianceRate*20}%` ,
-                                                    background: "#15BE29"}}/>
-                                            </MDBCol >
-                                            <MDBCol md={1} sm={1} className={"fv-DisplayPageDetailsScoreRateText"}>
-                                                <p> {adComplianceRate} </p>
-                                            </MDBCol>
-                                        </MDBRow>
-                                    </MDBCol>
-                                    <MDBCol md={5} sm={12}>
-                                        <MDBRow className={"fv-DisplayPageDetailsScoreBody"}>
-                                            <MDBCol md={3} sm={3}>
-                                                <p> مهمان نوازی </p>
-                                            </MDBCol>
-                                            <MDBCol  md={4} sm={4} className={"fv-DisplayPageDetailsScoreButton"}>
-                                                <input type="button" className={"fv-DisplayPageDetailsScoreButtonFirst"}/>
-                                            </MDBCol >
-                                            <MDBCol  md={4} sm={4}>
-                                                <input type="button" style={{
-                                                    padding: 0,
-                                                    position: "absolute" ,
-                                                    width: `${hospitalityRate*20}%` ,
-                                                    background: "#15BE29"}}/>
-                                            </MDBCol >
-                                            <MDBCol md={1} sm={1} className={"fv-DisplayPageDetailsScoreRateText"}>
-                                                <p> {hospitalityRate} </p>
-                                            </MDBCol>
-                                        </MDBRow>
-                                    </MDBCol>
-                                    <MDBCol md={5} sm={12}>
-                                        <MDBRow className={"fv-DisplayPageDetailsScoreBody"}>
-                                            <MDBCol md={3} sm={3}>
-                                                <p> کیفیت میزبانی </p>
-                                            </MDBCol>
-                                            <MDBCol  md={4} sm={4} className={"fv-DisplayPageDetailsScoreButton"}>
-                                                <input type="button" className={"fv-DisplayPageDetailsScoreButtonFirst"}/>
-                                            </MDBCol >
-                                            <MDBCol  md={4} sm={4}>
-                                                <input type="button" style={{
-                                                    padding: 0,
-                                                    position: "absolute" ,
-                                                    width: `${hostingQualityRate*20}%` ,
-                                                    background: "#15BE29"}}/>
-                                            </MDBCol >
-                                            <MDBCol md={1} sm={1} className={"fv-DisplayPageDetailsScoreRateText"}>
-                                                <p> {hostingQualityRate} </p>
-                                            </MDBCol>
-                                        </MDBRow>
-                                    </MDBCol>
-                                </MDBRow>
+                                {cleaningRate || adComplianceRate || hospitalityRate || hostingQualityRate ?
+                                    <MDBRow className={"fv-DisplayPageDetailsScore"}>
+                                        <MDBCol md={5} sm={12}>
+                                            <MDBRow className={"fv-DisplayPageDetailsScoreBody"}>
+                                                <MDBCol md={3} sm={3}>
+                                                    <p> نظافت </p>
+                                                </MDBCol>
+                                                <MDBCol md={4} sm={4} className={"fv-DisplayPageDetailsScoreButton"}>
+                                                    <input type="button"
+                                                           className={"fv-DisplayPageDetailsScoreButtonFirst"}/>
+                                                </MDBCol>
+                                                <MDBCol md={4} sm={4}>
+                                                    <input type="button" style={{
+                                                        padding: 0,
+                                                        position: "absolute",
+                                                        width: `${cleaningRate * 20}%`,
+                                                        background: "#15BE29"
+                                                    }}/>
+                                                </MDBCol>
+                                                <MDBCol md={1} sm={1} className={"fv-DisplayPageDetailsScoreRateText"}>
+                                                    <p> {cleaningRate} </p>
+                                                </MDBCol>
+                                            </MDBRow>
+                                        </MDBCol>
+                                        <MDBCol md={5} sm={12}>
+                                            <MDBRow className={"fv-DisplayPageDetailsScoreBody"}>
+                                                <MDBCol md={3} sm={3}>
+                                                    <p> تطابق با آکهی </p>
+                                                </MDBCol>
+                                                <MDBCol md={4} sm={4} className={"fv-DisplayPageDetailsScoreButton"}>
+                                                    <input type="button"
+                                                           className={"fv-DisplayPageDetailsScoreButtonFirst"}/>
+                                                </MDBCol>
+                                                <MDBCol md={4} sm={4}>
+                                                    <input type="button" style={{
+                                                        padding: 0,
+                                                        position: "absolute",
+                                                        width: `${adComplianceRate * 20}%`,
+                                                        background: "#15BE29"
+                                                    }}/>
+                                                </MDBCol>
+                                                <MDBCol md={1} sm={1} className={"fv-DisplayPageDetailsScoreRateText"}>
+                                                    <p> {adComplianceRate} </p>
+                                                </MDBCol>
+                                            </MDBRow>
+                                        </MDBCol>
+                                        <MDBCol md={5} sm={12}>
+                                            <MDBRow className={"fv-DisplayPageDetailsScoreBody"}>
+                                                <MDBCol md={3} sm={3}>
+                                                    <p> مهمان نوازی </p>
+                                                </MDBCol>
+                                                <MDBCol md={4} sm={4} className={"fv-DisplayPageDetailsScoreButton"}>
+                                                    <input type="button"
+                                                           className={"fv-DisplayPageDetailsScoreButtonFirst"}/>
+                                                </MDBCol>
+                                                <MDBCol md={4} sm={4}>
+                                                    <input type="button" style={{
+                                                        padding: 0,
+                                                        position: "absolute",
+                                                        width: `${hospitalityRate * 20}%`,
+                                                        background: "#15BE29"
+                                                    }}/>
+                                                </MDBCol>
+                                                <MDBCol md={1} sm={1} className={"fv-DisplayPageDetailsScoreRateText"}>
+                                                    <p> {hospitalityRate} </p>
+                                                </MDBCol>
+                                            </MDBRow>
+                                        </MDBCol>
+                                        <MDBCol md={5} sm={12}>
+                                            <MDBRow className={"fv-DisplayPageDetailsScoreBody"}>
+                                                <MDBCol md={3} sm={3}>
+                                                    <p> کیفیت میزبانی </p>
+                                                </MDBCol>
+                                                <MDBCol md={4} sm={4} className={"fv-DisplayPageDetailsScoreButton"}>
+                                                    <input type="button"
+                                                           className={"fv-DisplayPageDetailsScoreButtonFirst"}/>
+                                                </MDBCol>
+                                                <MDBCol md={4} sm={4}>
+                                                    <input type="button" style={{
+                                                        padding: 0,
+                                                        position: "absolute",
+                                                        width: `${hostingQualityRate * 20}%`,
+                                                        background: "#15BE29"
+                                                    }}/>
+                                                </MDBCol>
+                                                <MDBCol md={1} sm={1} className={"fv-DisplayPageDetailsScoreRateText"}>
+                                                    <p> {hostingQualityRate} </p>
+                                                </MDBCol>
+                                            </MDBRow>
+                                        </MDBCol>
+                                    </MDBRow>
+                                    :
+                                    ''
+                                }
                                 <div className={"fv-displayPageCommentOne"}>
-                                    {this.state.resultComments.map(resultComment=>{
-                                        if(resultComment.answer === null){
+                                    {this.state.resultComments.map(resultComment => {
+                                        if (resultComment.answer === null) {
                                             return (
-                                                <div className={"fv-displayPageCommentOneInner"} >
+                                                <div className={"fv-displayPageCommentOneInner"}>
                                                     <MDBRow className={"fv-displayPageCommentPerson"}>
                                                         <MDBCol md={2} sm={2}>
-                                                            <img src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg"/>
+                                                            <img
+                                                                src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg"/>
                                                         </MDBCol>
                                                         <MDBCol className={"fv-DisplayPageDetailsPersonInformation"}>
                                                             <MDBRow>
@@ -2098,16 +2174,20 @@ class DisplayPage extends Component {
                                                         </MDBCol>
                                                     </MDBRow>
                                                     <MDBRow>
-                                                        <p style={{marginRight:'3%' ,  marginBottom: '2%'}}>{resultComment.text}</p>
+                                                        <p style={{
+                                                            marginRight: '3%',
+                                                            marginBottom: '2%'
+                                                        }}>{resultComment.text}</p>
                                                     </MDBRow>
                                                 </div>
-                                            )}
-                                        else {
+                                            )
+                                        } else {
                                             return (
-                                                <div  className={"fv-displayPageCommentOneInner"}>
+                                                <div className={"fv-displayPageCommentOneInner"}>
                                                     <MDBRow className={"fv-displayPageCommentPerson"}>
                                                         <MDBCol md={2} sm={2}>
-                                                            <img src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg"/>
+                                                            <img
+                                                                src="http://5download.ir/wp-content/uploads/2021/01/IMG_20201013_213222_490.jpg"/>
                                                         </MDBCol>
                                                         <MDBCol className={"fv-DisplayPageDetailsPersonInformation"}>
                                                             <MDBRow>
@@ -2123,7 +2203,10 @@ class DisplayPage extends Component {
                                                         </MDBCol>
                                                     </MDBRow>
                                                     <MDBRow>
-                                                        <p style={{marginRight:'3%' , marginBottom: '2%'}}>{resultComment.text}</p>
+                                                        <p style={{
+                                                            marginRight: '3%',
+                                                            marginBottom: '2%'
+                                                        }}>{resultComment.text}</p>
                                                     </MDBRow>
                                                     <MDBRow className={"fv-displayPageComments"}>
                                                         <MDBCol>
@@ -2195,14 +2278,16 @@ class DisplayPage extends Component {
                                  </MDBRow>
                         */}
 
-                            </div>                                                              {/*        fv-Comments     */}
+                            </div>
+                            {/*        fv-Comments     */}
 
                         </MDBCol>
 
-                        <MDBCol md={4} className={LoadingPagewaitingHandle ? "fv-DisplayPageDetailsLeftBody fv-DisplayPageLoaderWaiting" : " fv-hideLoader"}>
-                            {Waiting(LoadingPagewaitingHandle , "fv-waitingLoadPublicFullScreen" )}
+                        <MDBCol md={4}
+                                className={LoadingPagewaitingHandle ? "fv-DisplayPageDetailsLeftBody fv-DisplayPageLoaderWaiting" : " fv-hideLoader"}>
+                            {Waiting(LoadingPagewaitingHandle, "fv-waitingLoadPublicFullScreen")}
                         </MDBCol>
-                        {LoadingPagewaitingHandle ? '' : this.reservedHandle(minimumDate,maximumDate,allDaysReservedConcat,daysCostString,resultVillaArray,rangeBetween,reservedFacilitiesPrice,chef,host,tour_guide,bodyguard , "fv-DisplayPageDetailsLeftBody" , waitingCalculate)}
+                        {LoadingPagewaitingHandle ? '' : this.reservedHandle(minimumDate, maximumDate, allDaysReservedConcat, daysCostString, resultVillaArray, rangeBetween, reservedFacilitiesPrice, chef, host, tour_guide, bodyguard, "fv-DisplayPageDetailsLeftBody", waitingCalculate)}
 
                     </MDBRow>
 
@@ -2210,38 +2295,40 @@ class DisplayPage extends Component {
                         <TopicsMainPage topic="اقامتگاه های مشابه"
                                         linkToPage={"/searchHomePage/Newest/1"}/>
                     </MDBRow>
-                    <MDBRow className={"fv-mainProduct fv-mainMobile fv-displayPageSimillarProducts"} >
-                        {Waiting(LoadingPagewaitingHandle , "fv-waitingLoadPublicFullScreen" )}
+                    <MDBRow className={"fv-mainProduct fv-mainMobile fv-displayPageSimillarProducts"}>
+                        {Waiting(LoadingPagewaitingHandle, "fv-waitingLoadPublicFullScreen")}
 
-                        {this.state.resultSimilarVillas.map(resultSimilarVilla =>{
-                            console.log(this.state.resultSimilarVillas)
-                            return(
-                                <MDBCol md={3} sm={7} onClick={()=>{
+                        {this.state.resultSimilarVillas.map(resultSimilarVilla => {
+                            return (
+                                <MDBCol md={3} sm={7} onClick={() => {
                                     window.location.replace(`/displayPage/${resultSimilarVilla.id}`)
                                 }}>
-                                    <a>  <Product srcImage={`${config.webapi}/images/villas/main/${resultSimilarVilla.main_img }`}
-                                                  rate={resultSimilarVilla.score}
-                                                  topic={resultSimilarVilla.title}
-                                                  location={resultSimilarVilla.city}
-                                                  numberOfRoom={resultSimilarVilla.details ? resultSimilarVilla.details.bedroom : "0"}
-                                                  capacity={resultSimilarVilla.details ? resultSimilarVilla.details.max_capacity : "0"}
-                                                  price={commaNumber(resultSimilarVilla.rules.normal_cost)}/> </a>
+                                    <a> <Product
+                                        srcImage={`${config.webapi}/images/villas/main/${resultSimilarVilla.main_img}`}
+                                        rate={resultSimilarVilla.score}
+                                        topic={resultSimilarVilla.title}
+                                        location={resultSimilarVilla.city}
+                                        numberOfRoom={resultSimilarVilla.details ? resultSimilarVilla.details.bedroom : "0"}
+                                        capacity={resultSimilarVilla.details ? resultSimilarVilla.details.max_capacity : "0"}
+                                        price={commaNumber(resultSimilarVilla.rules.normal_cost)}/> </a>
                                 </MDBCol>
                             )
                         })}
                     </MDBRow>
                 </MDBContainer>
 
-                <MDBContainer className={this.state.morePics === true ? "fv-sliderMorePics" : "fv-MadeDisplayNoneForPics"}>
-                    <MDBRow >
+                <MDBContainer
+                    className={this.state.morePics === true ? "fv-sliderMorePics" : "fv-MadeDisplayNoneForPics"}>
+                    <MDBRow>
                         <MDBCol md={7}>
                             <div className="slider_pagination">
-                                <a onClick={()=>{
-                                    this.setState({morePics:false})
-                                }}><i className="fa fa-times" aria-hidden="true" /></a>
+                                <a onClick={() => {
+                                    this.setState({morePics: false})
+                                }}><i className="fa fa-times" aria-hidden="true"/></a>
                                 <AwesomeSlider animation="cubeAnimation">
                                     {this.state.resultImages.map(resultImage => {
-                                        return <div data-src={`${config.webapi}/images/villas/main/${resultImage.img_src }`} />
+                                        return <div
+                                            data-src={`${config.webapi}/images/villas/main/${resultImage.img_src}`}/>
                                     })}
                                 </AwesomeSlider>
                             </div>
@@ -2250,14 +2337,16 @@ class DisplayPage extends Component {
                 </MDBContainer>
 
 
-                <div className={this.state.morePics === true ? "fv-MadeDisplayNoneForPics" : "" }>
-                    <MDBRow  >
-                        <Footer />
+                <div className={this.state.morePics === true ? "fv-MadeDisplayNoneForPics" : ""}>
+                    <MDBRow>
+                        <Footer/>
                     </MDBRow>
                 </div>
 
 
             </MDBContainer>
-        )}
+        )
+    }
 }
+
 export default DisplayPage

@@ -140,7 +140,8 @@ html .col-md-3{
 }
 .fv-productImage.fv-popularVillageImage.fv-typesAccommodationImage{
     margin-bottom: -11%;
-    height: 100%;
+    /* height: 100%; */
+    height: 175px;
 }
 
 
