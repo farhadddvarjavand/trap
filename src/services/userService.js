@@ -317,6 +317,21 @@ export const updateUserAvatar = async (data) => {
         {headers: {'Authorization': await getToken()}}
     );
 }
+export const cancelReserve = async (id) => {
+    return http.post(
+        `${config.webapi}/api/v1/user/cancelReserve`,
+        (id),
+        {headers: {'Authorization': await getToken()}}
+    );
+}
+export const cancelReservePrice = async (id) => {
+    return http.post(
+        `${config.webapi}/api/v1/user/cancelReservePrice`,
+        (id),
+        {headers: {'Authorization': await getToken()}}
+    );
+}
+
 
 /* export const villaReservedDatesOnly = async (id) => {
     return http.get(

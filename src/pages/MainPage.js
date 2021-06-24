@@ -381,21 +381,50 @@ class MainPage extends Datas {
 
                     </MDBRow>
                     <MDBRow className={"fv-topicMainPage"}>
-                        <TopicsMainPage topic="روستاهای پر بازدید"
-                                        linkToPage={"/searchHomePage/Popular/1"}/>
+                        <React.Fragment>
+
+                            <MDBCol md={1} sm={1}>
+                                <a><Link to={"/searchHomePage/Popular/1"}></Link>
+                                </a>
+                            </MDBCol>
+                            <MDBCol md={7} sm={3} className={"fv-topicMainPageSeeAll"}>
+                            </MDBCol>
+                            <MDBCol md={4} sm={9} className={"fv-topicMainPageTopic"}>
+                                <h5>{"شهرهای پر بازدید"}</h5>
+                            </MDBCol>
+
+                        </React.Fragment>
+
                     </MDBRow>
-                    <MDBRow className={"fv-mainMobileVillage"}>
+                    <a> <MDBRow className={"fv-mainMobileVillage"}>
                         {Waiting(bannersvillageswaitingHandle, "fv-waitingLoadPublicFullScreen")}
 
                         {bannersvillages.map(banners => {
                             console.log(banners)
-                            return (<MDBCol md={3} sm={7}>
-                                <PopularVillage srcImage={banners.link}
-                                                location={banners.title}
-                                                capacity={banners.count}/>
-                            </MDBCol>)
+                            return (
+                                <MDBCol md={3} sm={7} onClick={() => {
+                                    const mainPageSearch = {
+                                        city: `C ${banners.title}`,
+                                        dateToGo: '',
+                                        dateToReturn: '',
+                                    }
+                                    localStorage.setItem("mainPageSearch", JSON.stringify(mainPageSearch));
+                                    this.props.history.push({
+                                        pathname: "/searchHomePage/doSearch/1",
+                                        searchDatas: {
+                                            city: banners.title,
+                                            dayToGo: '',
+                                            dateToReturn: '',
+                                        }
+                                    })
+                                }}>
+                                    <PopularVillage srcImage={banners.link}
+                                                    location={banners.title}
+                                                    capacity={banners.count}/>
+                                </MDBCol>
+                            )
                         })}
-                    </MDBRow>
+                    </MDBRow></a>
 
                     <MDBRow className={"fv-topicMainPage"}>
                         <TopicsMainPage topic="انواع اقامتگاه ها"

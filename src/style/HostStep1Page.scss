@@ -84,10 +84,6 @@
 
   }
 
-  .fv-redBorderError {
-    border: 1px solid red;
-    background: #E88F0A;
-  }
 
   .fv-alertNotErrorText {
     display: none;
@@ -101,11 +97,21 @@
   .fv-alertErrorTextWithoutBorder {
     color: mediumvioletred;
     margin-right: 3%;
+
+    .fas, .fa {
+      color: mediumvioletred;
+      margin-left: 2%;
+    }
   }
 
   .fv-HostStep1PageBody .fv-hostStepPage1Left.fv-hostStepPageSpace .fv-hostStepPage1LeftButton {
     margin-left: 7%;
   }
+}
+
+.fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .fv-redBorderError {
+  border: 1px solid red;
+  background: #E88F0A;
 }
 
 
@@ -131,7 +137,7 @@
 }
 
 @media (max-width: 767px) {
-  .fv-hostStepPage1LeftContentBody {
+  .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Left .fv-hostStepPage1LeftContentBody {
     display: none;
   }
   .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right .button, .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right input, .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right select {

@@ -79,6 +79,8 @@ class DisplayPage extends Component {
             imSureButton: false,
             waitingAreYouSureQuestionButton: false,
             reservesData: [],
+            wrongSetDate: false,
+            showMapDelay: false,
 
 
         }
@@ -86,6 +88,11 @@ class DisplayPage extends Component {
 
 
     componentDidMount() {
+        setTimeout(() => {
+            this.setState({showMapDelay: true});
+        }, 2000);
+
+
         userReserves()
             .then(res => {
                 if (res.status === 200 && res.data.data.length > 0) {
@@ -315,7 +322,19 @@ class DisplayPage extends Component {
                     year: date.year
                 }
                 , alertErrors: false
-            }))
+            }), () => {
+                if (this.state.dateToReturn) {
+                    if (this.state.dateToReturn.day <= date.day && this.state.dateToReturn.month === date.month && this.state.dateToReturn.year === date.year) {
+                        this.setState({wrongSetDate: true})
+                    } else if (this.state.dateToReturn.day === date.day && this.state.dateToReturn.month <= date.month) {
+                        this.setState({wrongSetDate: true})
+                    } else if (this.state.dateToReturn.day === date.day && this.state.dateToReturn.month === date.month && this.state.dateToReturn.year <= date.year) {
+                        this.setState({wrongSetDate: true})
+                    } else {
+                        this.setState({wrongSetDate: false})
+                    }
+                }
+            })
         }
     }
     selectDayToReturn = (date) => {                               // set date to return
@@ -330,7 +349,17 @@ class DisplayPage extends Component {
                     year: date.year
                 }
                 , alertErrors: false
-            }))
+            }), () => {
+                if (this.state.dateToGo.day >= date.day && this.state.dateToGo.month === date.month && this.state.dateToGo.year === date.year) {
+                    this.setState({wrongSetDate: true})
+                } else if (this.state.dateToGo.day === date.day && this.state.dateToGo.month >= date.month) {
+                    this.setState({wrongSetDate: true})
+                } else if (this.state.dateToGo.day === date.day && this.state.dateToGo.month === date.month && this.state.dateToGo.year >= date.year) {
+                    this.setState({wrongSetDate: true})
+                } else {
+                    this.setState({wrongSetDate: false})
+                }
+            })
         }
     }
 
@@ -364,6 +393,15 @@ class DisplayPage extends Component {
         return (
             <MDBCol md={4} className={className}>
                 <MDBRow>
+                    <p className={this.state.wrongSetDate ? "" : " fv-hideLoader"}
+                       style={{
+                           color: 'mediumvioletred',
+                           borderBottom: '1px solid mediumvioletred',
+                           paddingBottom: '2%',
+                           marginTop: '4%'
+                       }}>تاریخ ورود باید
+                        کوچکتر از تاریخ
+                        خروج باشد</p>
                     <p>قیمت از
                         شبی {this.state.resultVilla.rules ? commaNumber(this.state.resultVilla.rules.normal_cost) : ''} تومان</p>
                 </MDBRow>
@@ -379,12 +417,18 @@ class DisplayPage extends Component {
                                className={"fv-DisplayPageDetailsLeftBodyDateOutText"}/>
                     </MDBRow>
                     <MDBRow className={"fv-DisplayPageDetailsLeftTextDate"}>
-                        <div className={"fv-DisplayPageDetailsLeftBodyDateOnInput"}><CalendarLinearLimitedDays
-                            minimumDate={minimumDate} maximumDate={maximumDate} dayToGo={this.selectDayToGo}
-                            text={'انتخاب روز'} daysReserved={allDaysReservedConcat}/></div>
-                        <div className={"fv-DisplayPageDetailsLeftBodyDateOutInput"}><CalendarLinearLimitedDays
-                            minimumDate={minimumDate} maximumDate={maximumDate} dayToReturn={this.selectDayToReturn}
-                            text={'انتخاب روز'} daysReserved={allDaysReservedConcat}/></div>
+                        <div className={"fv-DisplayPageDetailsLeftBodyDateOnInput"}>
+                            <CalendarLinearLimitedDays
+                                minimumDate={minimumDate}
+                                maximumDate={maximumDate}
+                                dayToGo={this.selectDayToGo}
+                                text={'انتخاب روز'} daysReserved={allDaysReservedConcat}/></div>
+                        <div className={"fv-DisplayPageDetailsLeftBodyDateOutInput"}>
+                            <CalendarLinearLimitedDays
+                                minimumDate={minimumDate}
+                                maximumDate={maximumDate}
+                                dayToReturn={this.selectDayToReturn}
+                                text={'انتخاب روز'} daysReserved={allDaysReservedConcat}/></div>
                     </MDBRow>
                 </MDBRow>
                 <MDBRow className={"fv-DisplayPageDetailsLeftBodyCapacityText"}>
@@ -816,7 +860,7 @@ class DisplayPage extends Component {
 
         } else { //  daysCostString // اگر خالی باشد (ممکن است کاربر  تاریخ قبل وارد کرده باشد)
             if (this.state.daysCostString !== daysCostString) {
-                alert("تاریخ انتخابی شما اشتباه میباشد لطفا بازه تاریخ را درست وارد نمایید")
+                // alert("تاریخ ابتدا باید کوچکتر از تاریخ انتها باشد")
                 reservedFacilitiesPrice = 0
                 this.setState({
                     reservedPrice: '',
@@ -1535,16 +1579,17 @@ class DisplayPage extends Component {
                         <MDBCol md={8} className={"fv-DisplayPageDetailsRightBody fv-displayPageOnly"}>
                             <MDBRow>
                                 <MDBCol md={2} sm={2}>
-                                    <img src={avatar ? `${config.webapi}/images/user//${avatar}` : UserImage}/>
+                                    <img
+                                        src={avatar ? `${config.webapi}/images/user//${this.state.resultVilla.owner_avatar}` : UserImage}/>
                                 </MDBCol>
                                 <MDBCol sm={10}
                                         className={"fv-DisplayPageDetailsPersonInformation fv-DisplayPageDetailsPersonInfo"}>
                                     <MDBRow>
                                         <MDBCol md={1} sm={4}>
-                                            <p>{nameAndFamily ? "میزبان" : "میهمان"}</p>
+                                            <p>میزبان </p>
                                         </MDBCol>
                                         <MDBCol sm={6}>
-                                            <h6>{nameAndFamily}</h6>
+                                            <h6>{this.state.resultVilla.user_name}</h6>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBRow className={"fv-DisplayPageDetailsCode"}>
@@ -1931,7 +1976,7 @@ class DisplayPage extends Component {
 
                             {/*                     fv- address                        */}
                             {this.state.reservesData ? this.state.reservesData.map(reservedDataSelect => {
-                                if (this.props.match.params.id === reservedDataSelect.villa_id && reservedDataSelect.pay_status === "2") {
+                                if (this.props.match.params.id === reservedDataSelect.villa_id && reservedDataSelect.pay_status === "2") { // dar halati jozeiat be karbar neshon dade shavad ke status on villa 2 bashad
                                     thisVillaIsReserved = true
                                 }
                             }) : ''}
@@ -1949,7 +1994,7 @@ class DisplayPage extends Component {
                                         <h6> {phoneNumber} </h6>
                                     </MDBRow>
 
-                                    {Number(this.state.resultVilla.long) !== 51.42 && Number(this.state.resultVilla.lat) !== 35.72 && this.state.resultVilla.long !== undefined && this.state.resultVilla.lat !== undefined && this.state.resultVilla.long && this.state.resultVilla.lat ? // agar lat and long vojod dasht
+                                    {Number(this.state.resultVilla.long) !== 51.42 && Number(this.state.resultVilla.lat) !== 35.72 && this.state.resultVilla.long !== undefined && this.state.resultVilla.lat !== undefined && this.state.resultVilla.long && this.state.resultVilla.lat && this.state.showMapDelay ? // agar lat and long vojod dasht // showMapDelay baraie delay map haast
                                         <MDBRow className={"fv-displayPageMap"}>
                                             {Waiting(LoadingPagewaitingHandle, "fv-waitingLoadPublicFullScreen")}
                                             <MDBCol md={8}>
@@ -1973,7 +2018,7 @@ class DisplayPage extends Component {
                                                 }
                                             </MDBCol>
                                         </MDBRow>
-                                        : ''}
+                                        : <> {Waiting(true, "fv-waitingLoadPublicFullScreen")}</>}
 
                                 </div>
 
@@ -1990,7 +2035,7 @@ class DisplayPage extends Component {
                                         <h6> {this.state.resultVilla.state}{` - ${this.state.resultVilla.city}`} </h6>
                                     </MDBRow>
 
-                                    {Number(this.state.resultVilla.long) !== 51.42 && Number(this.state.resultVilla.lat) !== 35.72 && this.state.resultVilla.long !== undefined && this.state.resultVilla.lat !== undefined && this.state.resultVilla.long && this.state.resultVilla.lat ? // agar lat and long vojod dasht
+                                    {Number(this.state.resultVilla.long) !== 51.42 && Number(this.state.resultVilla.lat) !== 35.72 && this.state.resultVilla.long !== undefined && this.state.resultVilla.lat !== undefined && this.state.resultVilla.long && this.state.resultVilla.lat && this.state.showMapDelay ? // agar lat and long vojod dasht   // showMapDelay baraie 2 sanie delay hast ke error nadahad va map bargozari shavad
                                         <MDBRow className={"fv-displayPageMap"}>
                                             {Waiting(LoadingPagewaitingHandle, "fv-waitingLoadPublicFullScreen")}
                                             <MDBCol md={8}>
@@ -2014,7 +2059,7 @@ class DisplayPage extends Component {
                                                 }
                                             </MDBCol>
                                         </MDBRow>
-                                        : ''}
+                                        : <> {Waiting(true, "fv-waitingLoadPublicFullScreen")}</>}
 
                                 </div>                                                   // fv- address    address end
 

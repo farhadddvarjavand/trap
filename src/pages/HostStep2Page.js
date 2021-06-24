@@ -1,12 +1,9 @@
 import React, {Component} from "react";
-import {MDBAlert, MDBCol, MDBContainer, MDBRow} from "mdbreact";
+import {MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import "../style/HeaderSteps.scss"
 import "../style/HostStep1Page.scss"
 import "../style/HostStep2Page.scss"
-import HostStep1Page from "./HostStep1Page";
 import HeaderSteps from "../componentsPages/HeaderSteps";
-import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt";
-import MobileLogo from "../images/MobileLogo.png";
 import HostStepImage1 from "../images/home_miz1 png.png"
 import Footer from "../componentsPages/footer";
 import {getCities, getProvinces} from "../services/userService";
@@ -14,104 +11,111 @@ import {getCities, getProvinces} from "../services/userService";
 class HostStep2Page extends Component {
     constructor(props) {
         super(props);
-        if(!JSON.parse(localStorage.getItem("info"))){
+        if (!JSON.parse(localStorage.getItem("info"))) {
             this.props.history.push('/login');
         }
-        this.state={
-            city:'',
-            provinces:'',
-            village:'',
-            postCode:'',
-            address:'',
+        this.state = {
+            city: '',
+            provinces: '',
+            village: '',
+            postCode: '',
+            address: '',
 
-            provincesTitle:[],
-            provincesId:'title',
-            setProvinces:false,
-            provincesCitys:[],
+            provincesTitle: [],
+            provincesId: 'title',
+            setProvinces: false,
+            provincesCitys: [],
 
-            validCity:false,
-            validAddress:false,
-            click:false,
-            hideUniq:false,
-            cityLoader:false,
-            provincesLoader:true,
+            validCity: false,
+            validAddress: false,
+            validPostCode: true,
+            click: false,
+            hideUniq: false,
+            cityLoader: false,
+            provincesLoader: true,
         }
 
     }
+
     componentDidMount() {
 
-        const PrevAddressMap =  JSON.parse(localStorage.getItem("step2-2"))
-        if(PrevAddressMap){
-            this.setState({address:PrevAddressMap.mapAddress , validAddress:true})
+        const PrevAddressMap = JSON.parse(localStorage.getItem("step2-2"))
+        if (PrevAddressMap) {
+            this.setState({address: PrevAddressMap.mapAddress, validAddress: true})
         }
 
         let prevData = ''
 
-        if( JSON.parse(localStorage.getItem("step2"))){
-            prevData =  JSON.parse(localStorage.getItem("step2"))
+        if (JSON.parse(localStorage.getItem("step2"))) {
+            prevData = JSON.parse(localStorage.getItem("step2"))
 
 
             console.log(prevData)
 
             let validCity = false
-            let validAddress =  false
+            let validAddress = false
             let hideUniq = false
-            if(prevData.city !== ""){
-                validCity=true
+            if (prevData.city !== "") {
+                validCity = true
             }
-            if(prevData.address){
-                validAddress=true
+            if (prevData.address) {
+                validAddress = true
             }
-            if(prevData.postalCodeDisable){ // agar az safhe eddit rafte bashad bayad gheire faal bashad
-                hideUniq=true
+            if (prevData.postalCodeDisable) { // agar az safhe eddit rafte bashad bayad gheire faal bashad
+                hideUniq = true
             }
 
 
             this.setState({
-                city:prevData.city,
-                village:prevData.village,
-                postCode:prevData.postal_code,
-                address:prevData.address,
-                provinces:prevData.state,
+                city: prevData.city,
+                village: prevData.village,
+                postCode: prevData.postal_code,
+                address: prevData.address,
+                provinces: prevData.state,
 
-                validCity:validCity,
-                validAddress:validAddress,
-                hideUniq:hideUniq,
-                setProvinces:true,
+                validCity: validCity,
+                validAddress: validAddress,
+                hideUniq: hideUniq,
+                setProvinces: true,
             })
         }
 
 
         getProvinces()
-            .then(res=>{
-                if(prevData){
-                    this.setState({provincesTitle:res.data.data} ,()=>{
+            .then(res => {
+                if (prevData) {
+                    this.setState({provincesTitle: res.data.data}, () => {
 
 
-                        this.state.provincesTitle.map(provincesTitle=>{
-                            if(provincesTitle.name === prevData.state){
+                        this.state.provincesTitle.map(provincesTitle => {
+                            if (provincesTitle.name === prevData.state) {
 
                                 //  this.setState({provincesId:provincesTitle.id  , provincesLoader:false})
 
                                 getCities(provincesTitle.id)
-                                    .then(res=>{
+                                    .then(res => {
                                         console.log(res)
-                                        this.setState({provincesCitys:res.data.data , provincesId:provincesTitle.id ,cityLoader:false  , provincesLoader:false})
+                                        this.setState({
+                                            provincesCitys: res.data.data,
+                                            provincesId: provincesTitle.id,
+                                            cityLoader: false,
+                                            provincesLoader: false
+                                        })
                                     })
-                                    .catch(err=>console.log(err.response))
+                                    .catch(err => console.log(err.response))
 
                             }
                         })
                     })
-                }else {
+                } else {
 
-                    this.setState({provincesTitle:res.data.data , provincesLoader:false})
+                    this.setState({provincesTitle: res.data.data, provincesLoader: false})
                 }
             })
     }
 
-    Loader = (clickLoader , className)=>{
-        return(
+    Loader = (clickLoader, className) => {
+        return (
             <div className={clickLoader ? `${className}` : "fv-hideLoaderCityLoad"}>
                 <svg className="circular" viewBox="25 25 50 50">
                     <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
@@ -122,26 +126,25 @@ class HostStep2Page extends Component {
     }
 
     render() {
-        console.log(this.state.provincesId)
+        // console.log(this.state.provincesId)
         let validationInputs = false
-        if(this.state.validCity  && this.state.validAddress){
-            validationInputs=true
+        if (this.state.validCity && this.state.validAddress && this.state.validPostCode) {
+            validationInputs = true
         }
 
         // console.log(JSON.parse(localStorage.getItem("step1")))
-        const localStorageData={
-            city:this.state.city,
-            village:this.state.village,
-            postal_code:this.state.postCode,
-            address:this.state.address,
-            postalCodeDisable:true,
-            state:this.state.provinces,
+        const localStorageData = {
+            city: this.state.city,
+            village: this.state.village,
+            postal_code: this.state.postCode,
+            address: this.state.address,
+            postalCodeDisable: true,
+            state: this.state.provinces,
         }
 
-        if(this.state.hideUniq === false){           // yani dar halate eddit nistim
+        if (this.state.hideUniq === false) {           // yani dar halate eddit nistim
             delete localStorageData.postalCodeDisable
         }
-
 
 
         return (
@@ -152,84 +155,99 @@ class HostStep2Page extends Component {
 
                         <MDBRow className={"fv-HostStep1PageBody"}>
                             <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
-                                <h6 style={{paddingBottom : '3%'}} className={this.state.click && validationInputs===false ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>لطفا کادر های قرمز را به درستی پر کنید</h6>
-                                <p className={this.state.click && this.state.validCity===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}><i className="fas fa-exclamation-triangle" />  پر کردن شهر و استان اجباریست</p>
-                                {/*  <p className={this.state.click && this.state.validPostCode===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}> <i className="fas fa-exclamation-triangle" />کد پستی معتبر نمی باشد</p> */}
-                                <p className={this.state.click && this.state.validAddress===false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}> <i className="fas fa-exclamation-triangle" />نوشتن آدرس اجباریست - آدرس باید بیشتر از ۵ کاراکتر داشته باشد</p>
-                                <h6 style={{marginBottom : '0%'}} className={"fv-hostStep2Page2Hidden"}>استان</h6>
+                                <h6 style={{paddingBottom: '3%'}}
+                                    className={this.state.click && validationInputs === false ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>لطفا
+                                    کادر های قرمز را به درستی پر کنید</h6>
+                                <p className={this.state.click && this.state.validCity === false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}>
+                                    <i className="fas fa-exclamation-triangle"/> پر کردن شهر و استان اجباریست</p>
+                                <p className={this.state.click && this.state.validPostCode === false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}>
+                                    <i className="fas fa-exclamation-triangle"/>کد پستی معتبر نمی باشد</p>
+                                <p className={this.state.click && this.state.validAddress === false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}>
+                                    <i className="fas fa-exclamation-triangle"/>نوشتن آدرس اجباریست - آدرس باید بیشتر از
+                                    ۵ کاراکتر داشته باشد</p>
+                                <h6 style={{marginBottom: '0%'}} className={"fv-hostStep2Page2Hidden"}>استان</h6>
 
                                 <MDBRow>
                                     <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={7}>
-                                        {this.Loader(this.state.provincesLoader , 'fv-cityLoader')}
+                                        {this.Loader(this.state.provincesLoader, 'fv-cityLoader')}
                                     </MDBCol>
                                 </MDBRow>
 
-                                {this.state.provincesLoader ?'' :
-                                    <select value={this.state.provincesId} onChange={(event)=>{
-                                       // console.log(event.target.value)
-                                       // console.log(this.state.provincesTitle)
-                                        this.state.provincesTitle.map(getTitleProvince=>{
-                                            if(Number(event.target.value) === Number(getTitleProvince.id))  {
-                                                this.setState({provinces:getTitleProvince.name})
+                                {this.state.provincesLoader ? '' :
+                                    <select value={this.state.provincesId} onChange={(event) => {
+                                        // console.log(event.target.value)
+                                        // console.log(this.state.provincesTitle)
+                                        this.state.provincesTitle.map(getTitleProvince => {
+                                            if (Number(event.target.value) === Number(getTitleProvince.id)) {
+                                                this.setState({provinces: getTitleProvince.name})
                                             }
                                         })
-                                       // console.log(event.target.name)
-                                        this.setState({cityLoader:true})
-                                        if(event.target.value !== "title"){
-                                            this.setState({validCity:true})
-                                        }else {
-                                            this.setState({validCity:false})
+                                        // console.log(event.target.name)
+                                        this.setState({cityLoader: true})
+                                        if (event.target.value !== "title") {
+                                            this.setState({validCity: true})
+                                        } else {
+                                            this.setState({validCity: false})
                                         }
-                                        this.setState({provincesId:event.target.value , setProvinces:true , city:''} , ()=>{
+                                        this.setState({
+                                            provincesId: event.target.value,
+                                            setProvinces: true,
+                                            city: ''
+                                        }, () => {
                                             getCities(this.state.provincesId)
-                                                .then(res=>{
+                                                .then(res => {
                                                     console.log(res)
-                                                    this.setState({provincesCitys:res.data.data , city:res.data.data[0].name ,cityLoader:false})
+                                                    this.setState({
+                                                        provincesCitys: res.data.data,
+                                                        city: res.data.data[0].name,
+                                                        cityLoader: false
+                                                    })
                                                 })
-                                                .catch(err=>{
-                                                    this.setState({cityLoader:false})
+                                                .catch(err => {
+                                                    this.setState({cityLoader: false})
                                                 })
                                         })
 
-                                    }}  className={this.state.click && this.state.validCity===false ?  "fv-hostStep2Page2Hidden fv-redBorderError" : "fv-hostStep2Page2Hidden"}>
-                                        <option value={this.state.state ? this.state.state : 'title'} disabled>{this.state.state ? `${this.state.state}` : `نام استان خود را وارد کنید`}</option>
-                                        {this.state.provincesTitle.map(provincesTitle=>{
-                                            return  <option value={provincesTitle.id} name={provincesTitle.name}>{provincesTitle.name}</option>
+                                    }}
+                                            className={this.state.click && this.state.validCity === false ? "fv-hostStep2Page2Hidden fv-redBorderError" : "fv-hostStep2Page2Hidden"}>
+                                        <option value={this.state.state ? this.state.state : 'title'}
+                                                disabled>{this.state.state ? `${this.state.state}` : `نام استان خود را وارد کنید`}</option>
+                                        {this.state.provincesTitle.map(provincesTitle => {
+                                            return <option value={provincesTitle.id}
+                                                           name={provincesTitle.name}>{provincesTitle.name}</option>
                                         })}
                                     </select>
 
                                 }
 
 
-
-
-                                <h6  style={{marginBottom : '0%'}} className={"fv-hostStep2Page2Hidden"}>شهر</h6>
+                                <h6 style={{marginBottom: '0%'}} className={"fv-hostStep2Page2Hidden"}>شهر</h6>
 
                                 <MDBRow>
                                     <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={7}>
-                                        {this.Loader(this.state.cityLoader , 'fv-cityLoader')}
+                                        {this.Loader(this.state.cityLoader, 'fv-cityLoader')}
                                     </MDBCol>
                                 </MDBRow>
 
                                 {this.state.cityLoader ? '' :
 
-                                <select value={this.state.city} disabled={!this.state.setProvinces} onChange={(event)=>{
-                                    if(event.target.value !== "title" && this.state.city){
-                                        this.setState({validCity:true})
-                                    }else {
-                                        this.setState({validCity:false})
-                                    }
-                                    this.setState({city:event.target.value})
-                                }}  className={this.state.click && this.state.validCity===false ?  "fv-hostStep2Page2Hidden fv-redBorderError" : "fv-hostStep2Page2Hidden"}>
-                                    <option value={this.state.city} disabled>{this.state.city}</option>
-                                    {this.state.provincesCitys.map(provincesCitys=>{
-                                        console.log(provincesCitys)
-                                        return  <option value={provincesCitys.name}>{provincesCitys.name}</option>
-                                    })}
-                                </select>
+                                    <select value={this.state.city} disabled={!this.state.setProvinces}
+                                            onChange={(event) => {
+                                                if (event.target.value !== "title" && this.state.city) {
+                                                    this.setState({validCity: true})
+                                                } else {
+                                                    this.setState({validCity: false})
+                                                }
+                                                this.setState({city: event.target.value})
+                                            }}
+                                            className={this.state.click && this.state.validCity === false ? "fv-hostStep2Page2Hidden fv-redBorderError" : "fv-hostStep2Page2Hidden"}>
+                                        <option value={this.state.city} disabled>{this.state.city}</option>
+                                        {this.state.provincesCitys.map(provincesCitys => {
+                                            //  console.log(provincesCitys)
+                                            return <option value={provincesCitys.name}>{provincesCitys.name}</option>
+                                        })}
+                                    </select>
                                 }
-
-
 
 
                                 {/*    <input type="text" placeholder={"شهر یا استان خود را وارد نماییید"} value={this.state.city} onChange={(event)=>{
@@ -245,23 +263,25 @@ class HostStep2Page extends Component {
                                 <input type="text" value={this.state.village} onChange={(event)=>{ this.setState({village:event.target.value})} } className={"fv-hostStep2Page2Hidden"}/>
                                */}
                                 <h6 className={"fv-hostStep2Page2Hidden"}>کدپستی</h6>
-                                <input type="text" value={this.state.postCode} onChange={(event)=>{
-                                    {/* if(event.target.value.length === 10 &&  Number(event.target.value)){
-                                        this.setState({validPostCode:true})
-                                    }else {
-                                        this.setState({validPostCode:false})
-                                    } */}
-                                    this.setState({postCode:event.target.value})
-                                }}  className={"fv-hostStep2Page2Hidden"}/>
-                                <h6 className={"fv-hostStep2Page2Hidden"}>آدرس دقیق</h6>
-                                <textarea value={this.state.address} onChange={(event)=>{
-                                    if(event.target.value.length > 5){
-                                        this.setState({validAddress:true})
-                                    }else {
-                                        this.setState({validAddress:false})
+                                <input type="text" value={this.state.postCode} onChange={(event) => {
+                                    if (event.target.value.length === 10 && Number(event.target.value)) {
+                                        this.setState({validPostCode: true})
+                                    } else {
+                                        this.setState({validPostCode: false})
                                     }
-                                    this.setState({address:event.target.value})
-                                }}  className={this.state.click && this.state.validAddress===false ?  "fv-hostStep2Page2Hidden fv-redBorderError" : "fv-hostStep2Page2Hidden"}/>
+                                    this.setState({postCode: event.target.value})
+                                }}
+                                       className={this.state.click && this.state.validPostCode === false ? "fv-hostStep2Page2Hidden fv-redBorderError" : "fv-hostStep2Page2Hidden"}/>
+                                <h6 className={"fv-hostStep2Page2Hidden"}>آدرس دقیق</h6>
+                                <textarea value={this.state.address} onChange={(event) => {
+                                    if (event.target.value.length > 5) {
+                                        this.setState({validAddress: true})
+                                    } else {
+                                        this.setState({validAddress: false})
+                                    }
+                                    this.setState({address: event.target.value})
+                                }}
+                                          className={this.state.click && this.state.validAddress === false ? "fv-hostStep2Page2Hidden fv-redBorderError" : "fv-hostStep2Page2Hidden"}/>
                             </MDBCol>
 
 
@@ -278,7 +298,7 @@ class HostStep2Page extends Component {
                                 <MDBRow className={"fv-hostStepPage2LeftButtonBody"}>
 
                                     {this.state.cityLoader || this.state.provincesLoader ?
-                                        this.Loader(true , 'fv-hostStepPage1LeftButton fv-NextBottomWaitingHostStep2Page')
+                                        this.Loader(true, 'fv-hostStepPage1LeftButton fv-NextBottomWaitingHostStep2Page')
                                         :
                                         <input type="button" value="مرحله بعد" className={"fv-hostStepPage1LeftButton"}
                                                onClick={() => {
@@ -290,9 +310,11 @@ class HostStep2Page extends Component {
                                                    }
                                                }}/>
                                     }
-                                    <input type="button" value="مرحله قبل"  className={"fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"} onClick={()=>{
-                                        this.props.history.push('../../hostStepSetMapLocation')
-                                    }}/>
+                                    <input type="button" value="مرحله قبل"
+                                           className={"fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"}
+                                           onClick={() => {
+                                               this.props.history.push('../../hostStepSetMapLocation')
+                                           }}/>
                                 </MDBRow>
                             </MDBCol>
 
@@ -311,7 +333,7 @@ class HostStep2Page extends Component {
                         </MDBRow>
 
                         <MDBRow>
-                            <Footer />
+                            <Footer/>
                         </MDBRow>
                     </MDBContainer>
                 </MDBRow>
@@ -319,4 +341,5 @@ class HostStep2Page extends Component {
         )
     }
 }
+
 export default HostStep2Page
