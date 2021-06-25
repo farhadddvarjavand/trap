@@ -654,7 +654,7 @@ class HostStep5Page3 extends Component {
                                                   .catch(err=>console.log(err.response)) */
                                        }}/>
                                 <input type="button" value="مرحله قبل"
-                                       className={this.state.clickLoader || this.state.clickLoaderMainImage || this.state.clickLoaderImage1 || this.state.clickLoaderImage2 || this.state.clickLoaderImage3 || this.state.clickLoaderImage4 ? "fv-hideLoader" : "fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"}
+                                       className={this.state.clickLoader || this.state.clickLoaderMainImage || this.state.clickLoaderImage1 || this.state.clickLoaderImage2 || this.state.clickLoaderImage3 || this.state.clickLoaderImage4 ? "fv-hideLoader fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton" : "fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"}
                                        onClick={() => {
                                            localStorage.setItem("editCode", JSON.stringify({editCode: this.props.match.params.id}))
                                            this.props.history.push('../../hostStepRules')

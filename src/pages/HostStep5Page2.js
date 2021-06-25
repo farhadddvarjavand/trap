@@ -1,34 +1,32 @@
 import React, {Component} from "react";
-import {MDBAlert, MDBCol, MDBContainer, MDBRow} from "mdbreact";
+import {MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import "../style/HeaderSteps.scss"
 import "../style/HostStep2Page2.scss"
 import "../style/HostStep1Page.scss"
 import "../style/HostStep5Page2.scss"
 import HeaderSteps from "../componentsPages/HeaderSteps";
-import Logo from "../images/Logo.png";
 import Footer from "../componentsPages/footer";
-import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt"
 import HostStepCheckbox from "../componentsPages/hostStepCheckbox"
-import {Link} from "react-router-dom";
-import {getStoreVilla, storeVilla, updateVilla} from "../services/userService";
-import {villa} from "../services/villaService";
+import {storeVilla, updateVilla} from "../services/userService";
 import HostStepImage1 from "../images/home_miz1 png.png"
 
 class HostStep5Page2 extends Component {
     constructor(props) {
         super(props);
-        if(!JSON.parse(localStorage.getItem("info"))){
+        if (!JSON.parse(localStorage.getItem("info"))) {
             this.props.history.push('/login');
         }
-        this.state={
-            rules:[],
-            specialLaw:'',
-            minimumNumberOfNights:'',
-            maximumNumberOfNights:'',
-            groupOfGuests:[],
-            arriveTime:'title',
-            exitTime:'title',
-            clickLoader:false,
+        this.state = {
+            rules: [],
+            specialLaw: '',
+            minimumNumberOfNights: '',
+            maximumNumberOfNights: '',
+            groupOfGuests: [],
+            arriveTime: 'title',
+            exitTime: 'title',
+            clickLoader: false,
+            validMinimumDays: false,
+            validMaximumDays: false,
         }
 
     }
@@ -36,88 +34,102 @@ class HostStep5Page2 extends Component {
     componentDidMount() {
 
 
-        if( JSON.parse(localStorage.getItem("step5-2"))){
+        if (JSON.parse(localStorage.getItem("step5-2"))) {
             const prevrules = []
             const prevgroupOfGuests = []
+            let validMinimumDays = false
+            let validMaximumDays = false
 
-            const prevData =  JSON.parse(localStorage.getItem("step5-2"))
-            if(prevData.auth_rules){
+            const prevData = JSON.parse(localStorage.getItem("step5-2"))
+            if (prevData.auth_rules) {
                 const rules = prevData.auth_rules.split(",")
-                for(let i = 0 ; i < rules.length ; i++){
+                for (let i = 0; i < rules.length; i++) {
                     prevrules.push(rules[i])
                 }
             }
-            if(prevData.suitable_for){
+            if (prevData.suitable_for) {
                 const groupOfGuests = prevData.suitable_for.split(",")
-                for(let i = 0 ; i < groupOfGuests.length ; i++){
+                for (let i = 0; i < groupOfGuests.length; i++) {
                     prevgroupOfGuests.push(groupOfGuests[i])
                 }
             }
+            if (prevData.min_reserve) {
+                validMinimumDays = true
+            }
+            if (prevData.max_reserve) {
+                validMaximumDays = true
+            }
 
             this.setState({
-                rules:prevrules,
-                groupOfGuests:prevgroupOfGuests,
-                specialLaw:prevData.special_rules,
-                minimumNumberOfNights:prevData.min_reserve,
-                maximumNumberOfNights:prevData.max_reserve,
-                arriveTime:prevData.arrival_time,
-                exitTime:prevData.exit_time,
+                rules: prevrules,
+                groupOfGuests: prevgroupOfGuests,
+                specialLaw: prevData.special_rules,
+                minimumNumberOfNights: prevData.min_reserve,
+                maximumNumberOfNights: prevData.max_reserve,
+                arriveTime: prevData.arrival_time,
+                exitTime: prevData.exit_time,
+                validMinimumDays: validMinimumDays,
+                validMaximumDays: validMaximumDays,
 
             })
         }
     }
 
-    setCheckbox =(event,checkboxName) =>{
+    setCheckbox = (event, checkboxName) => {
         let repeat = false
-        const setData= this.state[checkboxName]
-        if(event.target.checked === false){
+        const setData = this.state[checkboxName]
+        if (event.target.checked === false) {
             const index = setData.indexOf(event.target.name)
             if (index !== -1) {
                 setData.splice(index, 1);
-                this.setState({[checkboxName]:setData})
+                this.setState({[checkboxName]: setData})
             }
         } else {
-            setData.map(checked=>{
-                if(checked === event.target.name){
-                    repeat=true
+            setData.map(checked => {
+                if (checked === event.target.name) {
+                    repeat = true
                 }
             })
-            if(repeat === false){
+            if (repeat === false) {
                 setData.push(event.target.name)
-                this.setState({[checkboxName]:setData})
+                this.setState({[checkboxName]: setData})
             }
         }
     }
 
     render() {
 
-        let rules=""
-        for (let j = 0 ; j<this.state.rules.length ; j++){
-            if(j===0){
-                rules=this.state.rules[j]
-            }else {
-                rules=`${rules},${this.state.rules[j]}`
+        let validationInputs = false
+        if (this.state.validMinimumDays && this.state.validMaximumDays) {
+            validationInputs = true
+        }
+
+        let rules = ""
+        for (let j = 0; j < this.state.rules.length; j++) {
+            if (j === 0) {
+                rules = this.state.rules[j]
+            } else {
+                rules = `${rules},${this.state.rules[j]}`
             }
         }
-        let groupOfGuests=""
-        for (let j = 0 ; j<this.state.groupOfGuests.length ; j++){
-            if(j===0){
-                groupOfGuests=this.state.groupOfGuests[j]
-            }else {
-                groupOfGuests=`${groupOfGuests},${this.state.groupOfGuests[j]}`
+        let groupOfGuests = ""
+        for (let j = 0; j < this.state.groupOfGuests.length; j++) {
+            if (j === 0) {
+                groupOfGuests = this.state.groupOfGuests[j]
+            } else {
+                groupOfGuests = `${groupOfGuests},${this.state.groupOfGuests[j]}`
             }
         }
 
-        const step52Info={
-            auth_rules:rules,
-            special_rules:this.state.specialLaw,
-            min_reserve:this.state.minimumNumberOfNights,
-            max_reserve:this.state.maximumNumberOfNights,
-            suitable_for:groupOfGuests,
-            arrival_time:this.state.arriveTime,
-            exit_time:this.state.exitTime,
+        const step52Info = {
+            auth_rules: rules,
+            special_rules: this.state.specialLaw,
+            min_reserve: this.state.minimumNumberOfNights,
+            max_reserve: this.state.maximumNumberOfNights,
+            suitable_for: groupOfGuests,
+            arrival_time: this.state.arriveTime,
+            exit_time: this.state.exitTime,
         }
-
 
 
         const step1Info = JSON.parse(localStorage.getItem("step1"));
@@ -130,8 +142,8 @@ class HostStep5Page2 extends Component {
 
         let allData = ""
 
-        if(step1Info && step2Info && step3Info && step4Info && step5Info){
-            allData={
+        if (step1Info && step2Info && step3Info && step4Info && step5Info) {
+            allData = {
 
                 phone_number: step1Info.phone_number,
                 story: step1Info.story,
@@ -146,23 +158,23 @@ class HostStep5Page2 extends Component {
 
 
                 lat: step22Info.lat,
-                long:  step22Info.long,
-                mapAddress:step22Info.mapAddress,
+                long: step22Info.long,
+                mapAddress: step22Info.mapAddress,
 
                 area: step3Info.area,
-                bedroom:  step3Info.bedroom,
-                eu_toilet:  step3Info.eu_toilet,
-                ir_toilet:  step3Info.ir_toilet,
-                max_capacity:  step3Info.max_capacity,
-                places:  step3Info.places,
-                rent_type:  step3Info.rent_type,
-                shared_bathroom:  step3Info.shared_bathroom,
-                shower:  step3Info.shower,
+                bedroom: step3Info.bedroom,
+                eu_toilet: step3Info.eu_toilet,
+                ir_toilet: step3Info.ir_toilet,
+                max_capacity: step3Info.max_capacity,
+                places: step3Info.places,
+                rent_type: step3Info.rent_type,
+                shared_bathroom: step3Info.shared_bathroom,
+                shower: step3Info.shower,
                 standard_capacity: step3Info.standard_capacity,
-                view:  step3Info.view,
-                disinfected:step3Info.disinfected,
-                mattress_count:step3Info. mattress_count,
-                bed_count:step3Info.bed_count,
+                view: step3Info.view,
+                disinfected: step3Info.disinfected,
+                mattress_count: step3Info.mattress_count,
+                bed_count: step3Info.bed_count,
 
                 bodyguard: step4Info.bodyguard,
                 catering: step4Info.catering,
@@ -176,10 +188,10 @@ class HostStep5Page2 extends Component {
 
                 monthly_discount: step5Info.monthly_discount,
                 normal_cost: step5Info.normal_cost,
-                normal_extra_cost:  step5Info.normal_extra_cost,
-                special_cost:  step5Info.special_cost,
+                normal_extra_cost: step5Info.normal_extra_cost,
+                special_cost: step5Info.special_cost,
                 special_extra_cost: step5Info.special_extra_cost,
-                weekly_discount:  step5Info.weekly_discount,
+                weekly_discount: step5Info.weekly_discount,
 
 
                 arrival_time: step52Info.arrival_time,
@@ -191,111 +203,66 @@ class HostStep5Page2 extends Component {
                 suitable_for: step52Info.suitable_for,
             }
 
-            if(allData.address === "" || allData.address === null){
+            if (allData.address === "" || allData.address === null) {
                 delete allData.address
             }
-            if(allData.area === "" || allData.area === null){
+            if (allData.area === "" || allData.area === null) {
                 delete allData.area
             }
-            if(allData.arrival_time === "title" || allData.arrival_time === null){
+            if (allData.arrival_time === "title" || allData.arrival_time === null) {
                 delete allData.arrival_time
             }
-            if(allData.auth_rules === "" || allData.auth_rules === null){
-                delete allData.auth_rules
-            }
-            if(allData.bodyguard === "" || allData.bodyguard === null){
-                delete allData.bodyguard
-            }
-            if(allData.catering === ""  || allData.catering === null){
-                delete allData.catering
-            }
-            if(allData.chef === "" ||  allData.chef ===null){
-                delete allData.chef
-            }
-            if(allData.city === "" || allData.city === null){
+            if (allData.city === "" || allData.city === null) {
                 delete allData.city
             }
-            if(allData.state === "title" || allData.state === null || allData.state === ""){
+            if (allData.state === "title" || allData.state === null || allData.state === "") {
                 delete allData.state
             }
-            if(allData.exit_time === "title" || allData.exit_time === null){
+            if (allData.exit_time === "title" || allData.exit_time === null) {
                 delete allData.exit_time
             }
-            if(allData.general_fac === "" || allData.general_fac === null){
-                delete allData.general_fac
-            }
-            if(allData.host === "" || allData.host === null){
-                delete allData.host
-            }
-            if(allData.kitchen_fac === "" || allData.kitchen_fac === null){
-                delete allData.kitchen_fac
-            }
-            if(allData.max_reserve === "" || allData.max_reserve === null){
+            if (allData.max_reserve === "" || allData.max_reserve === null) {
                 delete allData.max_reserve
             }
-            if(allData.min_reserve === "" || allData.min_reserve === null){
+            if (allData.min_reserve === "" || allData.min_reserve === null) {
                 delete allData.min_reserve
             }
-            if(allData.monthly_discount === "" || allData.monthly_discount === null){
+            if (allData.monthly_discount === "" || allData.monthly_discount === null) {
                 delete allData.monthly_discount
             }
-            if(allData.normal_cost === "" || allData.normal_cost === null){
+            if (allData.normal_cost === "" || allData.normal_cost === null) {
                 delete allData.normal_cost
             }
-            if(allData.normal_extra_cost === "" || allData.normal_extra_cost === null){
+            if (allData.normal_extra_cost === "" || allData.normal_extra_cost === null) {
                 delete allData.normal_extra_cost
             }
-            if(allData.phone_number === "" || allData.phone_number === null){
+            if (allData.phone_number === "" || allData.phone_number === null) {
                 delete allData.phone_number
             }
-            if(allData.places === "" || allData.places === null){
-                delete allData.places
-            }
-            if(allData.postal_code === "" || allData.postal_code === null){
+            if (allData.postal_code === "" || allData.postal_code === null) {
                 delete allData.postal_code
             }
-            if(allData.rent_type === "title" || allData.rent_type === null){
+            if (allData.rent_type === "title" || allData.rent_type === null) {
                 delete allData.rent_type
             }
-            if(allData.special_cost === "" || allData.special_cost === null){
+            if (allData.special_cost === "" || allData.special_cost === null) {
                 delete allData.special_cost
             }
-            if(allData.special_extra_cost === "" || allData.special_extra_cost === null){
+            if (allData.special_extra_cost === "" || allData.special_extra_cost === null) {
                 delete allData.special_extra_cost
             }
-            if(allData.special_rules === "" || allData.special_rules === null){
-                delete allData.special_rules
-            }
-            if(allData.story === "" || allData.story === null){
-                delete allData.story
-            }
-            if(allData.suitable_for === "" || allData.suitable_for === null){
-                delete allData.suitable_for
-            }
-            if(allData.temp_fac === "" || allData.temp_fac === null){
-                delete allData.temp_fac
-            }
-            if(allData.title === "" || allData.title === null){
+            if (allData.title === "" || allData.title === null) {
                 delete allData.title
             }
-            if(allData.tour_guide === "" || allData.tour_guide === null){
-                delete allData.tour_guide
-            }
-            if(allData.type === "title" || allData.type === null){
-                delete allData.type
-            }
-            if(allData.view === "" || allData.view === null){
-                delete allData.view
-            }
-            if(allData.village === "" || allData.village === null){
+            if (allData.village === "" || allData.village === null) {
                 delete allData.village
             }
-            if(allData.weekly_discount === "" || allData.weekly_discount === null){
+            if (allData.weekly_discount === "" || allData.weekly_discount === null) {
                 delete allData.weekly_discount
             }
             console.log(allData)
 
-        }else {
+        } else {
             this.props.history.push(`/hostStepBasicInformation`)
             alert("لطفا اطلاعات را به درستی وارد نمایید")
         }
@@ -306,69 +273,79 @@ class HostStep5Page2 extends Component {
 
         //console.log(JSON.parse(localStorage.getItem("step5")))
         return (
-            <div className={" fv-HostStep2Page fv-hostStep2Page2 fv-hostStep3Page fv-hostStep4Page fv-hostStep5Page fv-hostStep5Page2"}>
+            <div
+                className={" fv-HostStep2Page fv-hostStep2Page2 fv-hostStep3Page fv-hostStep4Page fv-hostStep5Page fv-hostStep5Page2"}>
                 <MDBContainer className={"fv-HostStep1Page"}>
                     <MDBRow>
-                        <HeaderSteps />
+                        <HeaderSteps/>
                     </MDBRow>
 
                     <MDBRow className={"fv-HostStep1PageBody"}>
                         <MDBCol className={"fv-hostStepPage1Right"} sm={12} md={6}>
+                            <h6 style={{paddingBottom: '3%'}}
+                                className={this.state.click && validationInputs === false ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>لطفا
+                                کادر های قرمز را به درستی پر کنید</h6>
+                            <p className={this.state.click && this.state.validMinimumDays === false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}>
+                                <i className="fas fa-exclamation-triangle"/> پر کردن حداقل تعداد شب رزرو اجباریست</p>
+
+                            <p className={this.state.click && this.state.validMaximumDays === false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}>
+                                <i className="fas fa-exclamation-triangle"/> پر کردن حداکثر تعداد شب رزرو اجباریست</p>
+
                             <h6 className={"fv-hostStep3NumberOfCapacityMobile"}>قوانین</h6>
                             <p className={"fv-hostStep5P"}>هرکدام از موارد که مهمان مجاز میباشد را انتخاب کنید</p>
 
                             <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLine"}>
-                                <MDBCol  md={12} sm={12} className={""}>
+                                <MDBCol md={12} sm={12} className={""}>
                                     <HostStepCheckbox
                                         className="fv-hostStep5Page2PaddingTop"
-                                        mdCheckbox = "1"
+                                        mdCheckbox="1"
                                         smCheckbox="2"
                                         mdCheckboxText="10"
                                         smCheckboxText="9"
                                         text="استعمال دخانیات"
                                         name='استعمال دخانیات'
-                                        setCheckbox = {this.setCheckbox}
-                                        setCheckedPrev = {this.state.rules}
+                                        setCheckbox={this.setCheckbox}
+                                        setCheckedPrev={this.state.rules}
                                         nameOfPart={'rules'}/>
                                 </MDBCol>
-                                <MDBCol  md={12} sm={12} className={""}>
+                                <MDBCol md={12} sm={12} className={""}>
                                     <HostStepCheckbox
                                         className="fv-hostStep5Page2PaddingTop"
-                                        mdCheckbox = "1"
+                                        mdCheckbox="1"
                                         smCheckbox="2"
                                         mdCheckboxText="10"
                                         smCheckboxText="9"
                                         text="امکان برگزرای جشن"
                                         name='امکان برگزرای جشن'
-                                        setCheckbox = {this.setCheckbox}
-                                        setCheckedPrev = {this.state.rules}
+                                        setCheckbox={this.setCheckbox}
+                                        setCheckedPrev={this.state.rules}
                                         nameOfPart={'rules'}/>
                                 </MDBCol>
                                 <MDBCol md={12} sm={12}>
                                     <HostStepCheckbox
                                         className="fv-hostStep5Page2PaddingTop"
-                                        mdCheckbox = "1"
+                                        mdCheckbox="1"
                                         smCheckbox="2"
                                         mdCheckboxText="10"
                                         smCheckboxText="9"
                                         text="ورود حیوانات (مثل سگ,گربه,پرنده و ...)"
                                         name='ورود حیوانات (مثل سگ,گربه,پرنده و ...'
-                                        setCheckbox = {this.setCheckbox}
-                                        setCheckedPrev = {this.state.rules}
+                                        setCheckbox={this.setCheckbox}
+                                        setCheckedPrev={this.state.rules}
                                         nameOfPart={'rules'}/>
 
                                 </MDBCol>
-                                <MDBCol  md={12} sm={12} className={""}>
+                                <MDBCol md={12} sm={12} className={""}>
                                     <HostStepCheckbox
                                         className="fv-hostStep5Page2PaddingTop"
-                                        mdCheckbox = "1"
+                                        mdCheckbox="1"
                                         smCheckbox="2"
                                         mdCheckboxText="10"
                                         smCheckboxText="9"
                                         text="اقامت به افراد مجرد"
                                         name='اقامت به افراد مجرد'
-                                        setCheckbox = {this.setCheckbox}
-                                        setCheckedPrev = {this.state.rules}
+                                        setCheckbox={this.setCheckbox}
+                                        setCheckedPrev={this.state.rules}
                                         nameOfPart={'rules'}/>
                                 </MDBCol>
                             </MDBRow>
@@ -377,7 +354,8 @@ class HostStep5Page2 extends Component {
                             <p className={"fv-hostStep5P"}>اگر قانون خاص دیگری دارید در کادر پایین بنویسید</p>
                             <MDBRow className={"fv-hostStep3AddPlace fv-hostStep5Page2SpaceRow"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <textarea value={this.state.specialLaw} onChange={(e)=>this.setState({specialLaw:e.target.value})}>
+                                    <textarea value={this.state.specialLaw}
+                                              onChange={(e) => this.setState({specialLaw: e.target.value})}>
 
                                     </textarea>
                                 </MDBCol>
@@ -385,60 +363,85 @@ class HostStep5Page2 extends Component {
 
                             <p className={"fv-hostStep5P"}>حداقل تعداد شب رزرو</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
-                                <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText fv-hostStep5Page2MobileInputText"} md={6}>
-                                    <input type="text"  value={this.state.minimumNumberOfNights}
-                                           onChange={(e)=>this.setState({minimumNumberOfNights:e.target.value})}/>
+                                <MDBCol sm={10}
+                                        className={"fv-marginRight fv-hostStep3InputText fv-hostStep5Page2MobileInputText"}
+                                        md={6}>
+                                    <input type="text" value={this.state.minimumNumberOfNights}
+                                           onChange={(e) => {
+                                               this.setState({minimumNumberOfNights: e.target.value})
+
+                                               if (Number(e.target.value)) {
+                                                   this.setState({validMinimumDays: true})
+                                               } else {
+                                                   this.setState({validMinimumDays: false})
+                                               }
+
+                                           }}
+                                           className={this.state.click && this.state.validMinimumDays === false ? "fv-redBorderError" : ""}/>
                                 </MDBCol>
                             </MDBRow>
                             <p className={"fv-hostStep5P"}>حداکثر تعداد شب رزرو</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
-                                <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText fv-hostStep5Page2MobileInputText"} md={6}>
-                                    <input type="text"  value={this.state.maximumNumberOfNights}
-                                           onChange={(e)=>this.setState({maximumNumberOfNights:e.target.value})}/>
+                                <MDBCol sm={10}
+                                        className={"fv-marginRight fv-hostStep3InputText fv-hostStep5Page2MobileInputText"}
+                                        md={6}>
+                                    <input type="text" value={this.state.maximumNumberOfNights}
+                                           onChange={(e) => {
+                                               this.setState({maximumNumberOfNights: e.target.value})
+
+                                               if (Number(e.target.value)) {
+                                                   this.setState({validMaximumDays: true})
+                                               } else {
+                                                   this.setState({validMaximumDays: false})
+                                               }
+
+                                           }}
+                                           className={this.state.click && this.state.validMaximumDays === false ? "fv-redBorderError" : ""}/>
                                 </MDBCol>
                             </MDBRow>
 
-                            <p className={"fv-hostStep5P"}>باتوجه به معماری ساختمان ,تعداد پله و راحتی دسترسی مشخص کنید مناسب برای کدام گروه از مهمانان میباشد</p>
+                            <p className={"fv-hostStep5P"}>باتوجه به معماری ساختمان ,تعداد پله و راحتی دسترسی مشخص کنید
+                                مناسب برای کدام گروه از مهمانان میباشد</p>
 
                             <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLine"}>
                                 <MDBCol md={12} sm={12}>
                                     <HostStepCheckbox
                                         className="fv-hostStep5Page2PaddingTop"
-                                        mdCheckbox = "1"
+                                        mdCheckbox="1"
                                         smCheckbox="2"
                                         mdCheckboxText="10"
                                         smCheckboxText="9"
                                         text="اقامت معلولین"
                                         name='اقامت معلولین'
-                                        setCheckbox = {this.setCheckbox}
-                                        setCheckedPrev = {this.state.groupOfGuests}
+                                        setCheckbox={this.setCheckbox}
+                                        setCheckedPrev={this.state.groupOfGuests}
                                         nameOfPart={'groupOfGuests'}/>
 
                                 </MDBCol>
-                                <MDBCol  md={12} sm={12} className={""}>
+                                <MDBCol md={12} sm={12} className={""}>
                                     <HostStepCheckbox
                                         className="fv-hostStep5Page2PaddingTop"
-                                        mdCheckbox = "1"
+                                        mdCheckbox="1"
                                         smCheckbox="2"
                                         mdCheckboxText="10"
                                         smCheckboxText="9"
                                         text="اقامت سالمندان"
                                         name='اقامت سالمندان'
-                                        setCheckbox = {this.setCheckbox}
-                                        setCheckedPrev = {this.state.groupOfGuests}
+                                        setCheckbox={this.setCheckbox}
+                                        setCheckedPrev={this.state.groupOfGuests}
                                         nameOfPart={'groupOfGuests'}/>
                                 </MDBCol>
                                 <MDBCol md={12} sm={12}>
                                     <HostStepCheckbox
                                         className="fv-hostStep5Page2PaddingTop"
-                                        mdCheckbox = "1"
+                                        mdCheckbox="1"
                                         smCheckbox="2"
                                         mdCheckboxText="10"
                                         smCheckboxText="9"
                                         text="ورود حیوانات (مثل سگ,گربه,پرنده و ...)"
                                         name='ورود حیوانات (مثل سگ,گربه,پرنده و ...'
-                                        setCheckbox = {this.setCheckbox}
-                                        setCheckedPrev = {this.state.groupOfGuests}
+                                        setCheckbox={this.setCheckbox}
+                                        setCheckedPrev={this.state.groupOfGuests}
                                         nameOfPart={'groupOfGuests'}/>
                                 </MDBCol>
                             </MDBRow>
@@ -446,14 +449,15 @@ class HostStep5Page2 extends Component {
                             <p className={"fv-hostStep5P"}>لطفا زمان تحویل ملک به مهمان و تخلیه ملک را مشخص کنید</p>
 
                             <MDBRow className={"fv-timeOutAndTimeIn"}>
-                                <MDBCol md={6} sm={12} >
+                                <MDBCol md={6} sm={12}>
                                     <MDBRow className={"fv-hostStep5Page2TimeIn"}>
                                         <MDBCol>
                                             <p>ساعت ورود</p>
                                         </MDBCol>
-                                        <MDBCol >
-                                            <select value={this.state.arriveTime} onChange={(event)=>this.setState({arriveTime:event.target.value})}>
-                                                <option value='title' disabled> </option>
+                                        <MDBCol>
+                                            <select value={this.state.arriveTime}
+                                                    onChange={(event) => this.setState({arriveTime: event.target.value})}>
+                                                <option value='title' disabled></option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
@@ -482,14 +486,15 @@ class HostStep5Page2 extends Component {
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCol>
-                                <MDBCol className={"fv-hostStep5Page2MobileTimeOut"} md={6}  sm={12}>
+                                <MDBCol className={"fv-hostStep5Page2MobileTimeOut"} md={6} sm={12}>
                                     <MDBRow>
                                         <MDBCol>
                                             <p>ساعت خروج</p>
                                         </MDBCol>
                                         <MDBCol>
-                                            <select value={this.state.exitTime} onChange={(event)=>this.setState({exitTime:event.target.value})}>
-                                                <option value='title' disabled> </option>
+                                            <select value={this.state.exitTime}
+                                                    onChange={(event) => this.setState({exitTime: event.target.value})}>
+                                                <option value='title' disabled></option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
@@ -519,8 +524,6 @@ class HostStep5Page2 extends Component {
                                     </MDBRow>
                                 </MDBCol>
                             </MDBRow>
-
-
 
 
                         </MDBCol>
@@ -544,155 +547,163 @@ class HostStep5Page2 extends Component {
                                                 stroke-miterlimit="10"/>
                                     </svg>
                                 </div>
-                                <input type="button" value="ثبت اقامتگاه"  className={this.state.clickLoader ? "fv-hideLoader" : "fv-hostStepPage1LeftButton"} onClick={()=>{
+                                <input type="button" value="ثبت اقامتگاه"
+                                       className={this.state.clickLoader ? "fv-hideLoader" : "fv-hostStepPage1LeftButton"}
+                                       onClick={() => {
+                                           if (validationInputs) { // validation items
 
-                                    this.setState({clickLoader:true})
+                                               this.setState({clickLoader: true})
 
-                                    const editOrUpdateStatus = JSON.parse(localStorage.getItem("editCode"))
-                                   if(editOrUpdateStatus){
-                                       console.log(allData)
-                                       console.log(editOrUpdateStatus.editCode)
-                                       updateVilla(allData,editOrUpdateStatus.editCode)
-                                           .then(res=>{
-                                               if(res.status===200){
-                                                   /* localStorage.removeItem("step1")
-                                                   localStorage.removeItem("step2")
-                                                   localStorage.removeItem("step2-2")
-                                                   localStorage.removeItem("step3")
-                                                   localStorage.removeItem("step4")
-                                                   localStorage.removeItem("step5") */
-                                                   localStorage.setItem("step5-2", JSON.stringify(step52Info))
-                                                   this.props.history.push(`/hostStepSetImage/${res.data.villa_id}`)
-                                               }else {
-                                                   alert("لطفا مجددا اطلاعات خود را بررسی کنید - اطلاعات شما نادرست وارد شده")
-                                                   this.props.history.push('/hostStepBasicInformation')
-                                               }
-                                           })
-                                           .catch(err=>{
-                                               const getErrors = Object.values(err.response.data.errors)
-                                               let showErrors = ""
-                                               for (let i = 0 ; i < getErrors.length ; i++){
-                                                   if(i===0){
-                                                       showErrors=`${getErrors[i]}`;
-                                                   }else {
-                                                       showErrors=`${showErrors} \n ${getErrors[i]}`
-                                                   }
-                                               }
-                                               alert(showErrors)
-                                               if(err.response.data.errors.title || err.response.data.errors.type || err.response.data.errors.phone_number || err.response.data.errors.story){
-                                                   this.props.history.push('/hostStepBasicInformation')
-                                               }
-                                               if(err.response.data.errors.city || err.response.data.errors.state || err.response.data.errors.postal_code || err.response.data.errors.address){
-                                                   this.props.history.push('/hostStepAddress')
-                                               }
-                                               if(err.response.data.errors.area || err.response.data.errors.places || err.response.data.errors.view){
-                                                   this.props.history.push('/hostStepAccommodationDetails')
-                                               }
-                                               if(err.response.data.errors.general_fac || err.response.data.errors.kitchen_fac || err.response.data.errors.temp_fac){
-                                                   this.props.history.push('/hostStepFacilities')
-                                               }
-                                               if(err.response.data.errors.normal_extra_cost || err.response.data.errors.normal_cost ||  err.response.data.errors.special_cost ||  err.response.data.errors.special_extra_cost ||  err.response.data.errors.weekly_discount ||  err.response.data.errors.monthly_discount){
-                                                   this.props.history.push('/hostStepSetPrice')
-                                               }
-                                               if(err.response.data.errors.arrival_time || err.response.data.errors.auth_rules || err.response.data.errors.exit_time || err.response.data.errors.max_reserve || err.response.data.errors.max_reserve  || err.response.data.errors.suitable_for){
-                                                   window.location.reload();
-                                               }
-                                           })
-                                           .catch(err=>console.log(err.response))
-                                   }else {
-                                       storeVilla(allData)
-                                           .then(res=>{
-                                               if(res.status===200){
-                                                   /* localStorage.removeItem("step1")
-                                                   localStorage.removeItem("step2")
-                                                   localStorage.removeItem("step2-2")
-                                                   localStorage.removeItem("step3")
-                                                   localStorage.removeItem("step4")
-                                                   localStorage.removeItem("step5") */
-                                                   localStorage.setItem("step5-2", JSON.stringify(step52Info))
-                                                   this.props.history.push(`/hostStepSetImage/${res.data.villa_id}`)
-                                               }else {
-                                                   alert("لطفا مجددا اطلاعات خود را بررسی کنید - اطلاعات شما نادرست وارد شده")
-                                                   this.props.history.push('/hostStepBasicInformation')
-                                               }
-                                           })
-                                           .catch(err=>{
-                                               const getErrors = Object.values(err.response.data.errors)
-                                               let showErrors = ""
-                                               for (let i = 0 ; i < getErrors.length ; i++){
-                                                   if(i===0){
-                                                       showErrors=`${getErrors[i]}`;
-                                                   }else {
-                                                       showErrors=`${showErrors} \n ${getErrors[i]}`
-                                                   }
-                                               }
-                                               alert(showErrors)
-                                               if(err.response.data.errors.title || err.response.data.errors.type || err.response.data.errors.phone_number || err.response.data.errors.story){
-                                                   this.props.history.push('/hostStepBasicInformation')
-                                               }
-                                               if(err.response.data.errors.city || err.response.data.errors.state || err.response.data.errors.postal_code || err.response.data.errors.address){
-                                                   this.props.history.push('/hostStepAddress')
-                                               }
-                                               if(err.response.data.errors.area || err.response.data.errors.places || err.response.data.errors.view){
-                                                   this.props.history.push('/hostStepAccommodationDetails')
-                                               }
-                                               if(err.response.data.errors.general_fac || err.response.data.errors.kitchen_fac || err.response.data.errors.temp_fac){
-                                                   this.props.history.push('/hostStepFacilities')
-                                               }
-                                               if(err.response.data.errors.normal_extra_cost || err.response.data.errors.normal_cost ||  err.response.data.errors.special_cost ||  err.response.data.errors.special_extra_cost ||  err.response.data.errors.weekly_discount ||  err.response.data.errors.monthly_discount){
-                                                   this.props.history.push('/hostStepSetPrice')
-                                               }
-                                               if(err.response.data.errors.arrival_time || err.response.data.errors.auth_rules || err.response.data.errors.exit_time || err.response.data.errors.max_reserve || err.response.data.errors.max_reserve  || err.response.data.errors.suitable_for){
-                                                   window.location.reload();
-                                               }
-                                           })
+                                               const editOrUpdateStatus = JSON.parse(localStorage.getItem("editCode"))
+                                               if (editOrUpdateStatus) {
+                                                   console.log(allData)
+                                                   console.log(editOrUpdateStatus.editCode)
+                                                   updateVilla(allData, editOrUpdateStatus.editCode)
+                                                       .then(res => {
+                                                           if (res.status === 200) {
+                                                               /* localStorage.removeItem("step1")
+                                                               localStorage.removeItem("step2")
+                                                               localStorage.removeItem("step2-2")
+                                                               localStorage.removeItem("step3")
+                                                               localStorage.removeItem("step4")
+                                                               localStorage.removeItem("step5") */
+                                                               localStorage.setItem("step5-2", JSON.stringify(step52Info))
+                                                               this.props.history.push(`/hostStepSetImage/${res.data.villa_id}`)
+                                                           } else {
+                                                               alert("لطفا مجددا اطلاعات خود را بررسی کنید - اطلاعات شما نادرست وارد شده")
+                                                               this.props.history.push('/hostStepBasicInformation')
+                                                           }
+                                                       })
+                                                       .catch(err => {
+                                                           const getErrors = Object.values(err.response.data.errors)
+                                                           let showErrors = ""
+                                                           for (let i = 0; i < getErrors.length; i++) {
+                                                               if (i === 0) {
+                                                                   showErrors = `${getErrors[i]}`;
+                                                               } else {
+                                                                   showErrors = `${showErrors} \n ${getErrors[i]}`
+                                                               }
+                                                           }
+                                                           alert(showErrors)
+                                                           if (err.response.data.errors.title || err.response.data.errors.type || err.response.data.errors.phone_number || err.response.data.errors.story) {
+                                                               this.props.history.push('/hostStepBasicInformation')
+                                                           }
+                                                           if (err.response.data.errors.city || err.response.data.errors.state || err.response.data.errors.postal_code || err.response.data.errors.address) {
+                                                               this.props.history.push('/hostStepAddress')
+                                                           }
+                                                           if (err.response.data.errors.area || err.response.data.errors.places || err.response.data.errors.view) {
+                                                               this.props.history.push('/hostStepAccommodationDetails')
+                                                           }
+                                                           if (err.response.data.errors.general_fac || err.response.data.errors.kitchen_fac || err.response.data.errors.temp_fac) {
+                                                               this.props.history.push('/hostStepFacilities')
+                                                           }
+                                                           if (err.response.data.errors.normal_extra_cost || err.response.data.errors.normal_cost || err.response.data.errors.special_cost || err.response.data.errors.special_extra_cost || err.response.data.errors.weekly_discount || err.response.data.errors.monthly_discount) {
+                                                               this.props.history.push('/hostStepSetPrice')
+                                                           }
+                                                           if (err.response.data.errors.arrival_time || err.response.data.errors.auth_rules || err.response.data.errors.exit_time || err.response.data.errors.max_reserve || err.response.data.errors.max_reserve || err.response.data.errors.suitable_for) {
+                                                               window.location.reload();
+                                                           }
+                                                       })
+                                                       .catch(err => console.log(err.response))
+                                               } else {
+                                                   storeVilla(allData)
+                                                       .then(res => {
+                                                           if (res.status === 200) {
+                                                               /* localStorage.removeItem("step1")
+                                                               localStorage.removeItem("step2")
+                                                               localStorage.removeItem("step2-2")
+                                                               localStorage.removeItem("step3")
+                                                               localStorage.removeItem("step4")
+                                                               localStorage.removeItem("step5") */
+                                                               localStorage.setItem("step5-2", JSON.stringify(step52Info))
+                                                               this.props.history.push(`/hostStepSetImage/${res.data.villa_id}`)
+                                                           } else {
+                                                               alert("لطفا مجددا اطلاعات خود را بررسی کنید - اطلاعات شما نادرست وارد شده")
+                                                               this.props.history.push('/hostStepBasicInformation')
+                                                           }
+                                                       })
+                                                       .catch(err => {
+                                                           const getErrors = Object.values(err.response.data.errors)
+                                                           let showErrors = ""
+                                                           for (let i = 0; i < getErrors.length; i++) {
+                                                               if (i === 0) {
+                                                                   showErrors = `${getErrors[i]}`;
+                                                               } else {
+                                                                   showErrors = `${showErrors} \n ${getErrors[i]}`
+                                                               }
+                                                           }
+                                                           alert(showErrors)
+                                                           if (err.response.data.errors.title || err.response.data.errors.type || err.response.data.errors.phone_number || err.response.data.errors.story) {
+                                                               this.props.history.push('/hostStepBasicInformation')
+                                                           }
+                                                           if (err.response.data.errors.city || err.response.data.errors.state || err.response.data.errors.postal_code || err.response.data.errors.address) {
+                                                               this.props.history.push('/hostStepAddress')
+                                                           }
+                                                           if (err.response.data.errors.area || err.response.data.errors.places || err.response.data.errors.view) {
+                                                               this.props.history.push('/hostStepAccommodationDetails')
+                                                           }
+                                                           if (err.response.data.errors.general_fac || err.response.data.errors.kitchen_fac || err.response.data.errors.temp_fac) {
+                                                               this.props.history.push('/hostStepFacilities')
+                                                           }
+                                                           if (err.response.data.errors.normal_extra_cost || err.response.data.errors.normal_cost || err.response.data.errors.special_cost || err.response.data.errors.special_extra_cost || err.response.data.errors.weekly_discount || err.response.data.errors.monthly_discount) {
+                                                               this.props.history.push('/hostStepSetPrice')
+                                                           }
+                                                           if (err.response.data.errors.arrival_time || err.response.data.errors.auth_rules || err.response.data.errors.exit_time || err.response.data.errors.max_reserve || err.response.data.errors.max_reserve || err.response.data.errors.suitable_for) {
+                                                               window.location.reload();
+                                                           }
+                                                       })
 
-                                   }
+                                               }
 
-
-
-                                    /////////////////////////////////////// err.response.data.errors.title
-                                    /////////////////////////////////////// err.response.data.errors.type
-                                    /////////////////////////////////////// err.response.data.errors.phone_number
-                                    /////////////////////////////////////// err.response.data.errors.story
-
-                                    /////////////////////////////////////// err.response.data.errors.city
-                                    /////////////////////////////////////// err.response.data.errors.state
-                                    /////////////////////////////////////// err.response.data.errors.postal_code
-                                    /////////////////////////////////////// err.response.data.errors.address
-
-                                    /////////////////////////////////////// err.response.data.errors.area
-                                    /////////////////////////////////////// err.response.data.errors.places
-                                    /////////////////////////////////////// err.response.data.errors.view
-
-                                    /////////////////////////////////////// err.response.data.errors.general_fac
-                                    /////////////////////////////////////// err.response.data.errors.kitchen_fac
-                                    /////////////////////////////////////// err.response.data.errors.temp_fac
-
-                                    /////////////////////////////////////// err.response.data.errors.arrival_time
-                                    /////////////////////////////////////// err.response.data.errors.auth_rules
-                                    /////////////////////////////////////// err.response.data.errors.exit_time
-                                    /////////////////////////////////////// err.response.data.errors.max_reserve
-                                    /////////////////////////////////////// err.response.data.errors.min_reserve
-                                    /////////////////////////////////////// err.response.data.errors.normal_extra_cost
-                                    /////////////////////////////////////// err.response.data.errors.suitable_for
-
-                                    //if status === 500    server Error
+                                           } else {
+                                               this.setState({click: true})
+                                           }
 
 
-                                    /* let fd = new FormData()
-                                    fd.append("images", this.state.fileTest);
-                                       const images={
-                                           img_src:"test.png",
-                                           img_title:"test"
-                                       }
-                                      SetImages(this.state.test,30)
-                                           .then(res => console.log(res))
-                                           .catch(err=>console.log(err.response)) */
-                                }} />
-                                <input type="button" value="مرحله قبل"  className={this.state.clickLoader ?  "fv-hideLoader" :  "fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"} onClick={()=>{
-                                    this.props.history.push('../../hostStepSetPrice')
-                                }}/>
+                                           /////////////////////////////////////// err.response.data.errors.title
+                                           /////////////////////////////////////// err.response.data.errors.type
+                                           /////////////////////////////////////// err.response.data.errors.phone_number
+                                           /////////////////////////////////////// err.response.data.errors.story
+
+                                           /////////////////////////////////////// err.response.data.errors.city
+                                           /////////////////////////////////////// err.response.data.errors.state
+                                           /////////////////////////////////////// err.response.data.errors.postal_code
+                                           /////////////////////////////////////// err.response.data.errors.address
+
+                                           /////////////////////////////////////// err.response.data.errors.area
+                                           /////////////////////////////////////// err.response.data.errors.places
+                                           /////////////////////////////////////// err.response.data.errors.view
+
+                                           /////////////////////////////////////// err.response.data.errors.general_fac
+                                           /////////////////////////////////////// err.response.data.errors.kitchen_fac
+                                           /////////////////////////////////////// err.response.data.errors.temp_fac
+
+                                           /////////////////////////////////////// err.response.data.errors.arrival_time
+                                           /////////////////////////////////////// err.response.data.errors.auth_rules
+                                           /////////////////////////////////////// err.response.data.errors.exit_time
+                                           /////////////////////////////////////// err.response.data.errors.max_reserve
+                                           /////////////////////////////////////// err.response.data.errors.min_reserve
+                                           /////////////////////////////////////// err.response.data.errors.normal_extra_cost
+                                           /////////////////////////////////////// err.response.data.errors.suitable_for
+
+                                           //if status === 500    server Error
+
+
+                                           /* let fd = new FormData()
+                                           fd.append("images", this.state.fileTest);
+                                              const images={
+                                                  img_src:"test.png",
+                                                  img_title:"test"
+                                              }
+                                             SetImages(this.state.test,30)
+                                                  .then(res => console.log(res))
+                                                  .catch(err=>console.log(err.response)) */
+                                       }}/>
+                                <input type="button" value="مرحله قبل"
+                                       className={this.state.clickLoader ? "fv-hideLoader" : "fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"}
+                                       onClick={() => {
+                                           this.props.history.push('../../hostStepSetPrice')
+                                       }}/>
                             </MDBRow>
                         </MDBCol>
 
@@ -710,11 +721,12 @@ class HostStep5Page2 extends Component {
 
                     </MDBRow>
                     <MDBRow>
-                        <Footer />
+                        <Footer/>
                     </MDBRow>
                 </MDBContainer>
             </div>
         )
     }
 }
+
 export default HostStep5Page2

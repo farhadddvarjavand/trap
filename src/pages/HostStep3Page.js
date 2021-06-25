@@ -227,7 +227,7 @@ class HostStep3Page extends Component {
                                 nameOfSection={'standardCapacity'}
                             />
                             <HostStepIncreaseAndDecreaseButton
-                                text="ظرفیت حداکثر ظرفیت"
+                                text="حداکثر ظرفیت"
                                 incrementFunction={this.setStandardCapacityIncrement}
                                 decrementFunction={this.setStandardCapacityDecrement}
                                 numberValue={this.state.maximumCapacity}

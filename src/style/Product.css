@@ -400,6 +400,7 @@ html .col-md-3 {
     .fv-footerMenu .fv-footerMenuRibbonMobile {
         display: flex;
         margin-top: 7vw;
+        margin-bottom: -12%;
     }
 
     .fv-footerMenu .fv-footerMenuRibbon, .fv-footerMenu .fv-searchMainPageTopic {
@@ -437,7 +438,7 @@ html .col-md-3 {
     }
 
     .fv-searchMainPage.row {
-        margin-top: 37%;
+        margin-top: 50%;
         /* margin-right: 68%; */
         border-radius: 26px;
         padding-right: 12px;
