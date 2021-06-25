@@ -537,7 +537,7 @@ class HostStep5Page3 extends Component {
 
                                 {/*  <div className={this.state.clickLoader ? "loader" : "fv-hideLoader"}> */}
                                 <div
-                                    className={this.state.clickLoader || this.state.clickLoaderMainImage || this.state.clickLoaderImage1 || this.state.clickLoaderImage2 || this.state.clickLoaderImage3 || this.state.clickLoaderImage4 ? "loader" : "fv-hideLoader"}>
+                                    className={this.state.clickLoader || this.state.clickLoaderMainImage || this.state.clickLoaderImage1 || this.state.clickLoaderImage2 || this.state.clickLoaderImage3 || this.state.clickLoaderImage4 ? "loader fv-hostStepPage1LeftButton" : "fv-hideLoader"}>
                                     <svg className="circular" viewBox="25 25 50 50">
                                         <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
                                                 stroke-miterlimit="10"/>
@@ -546,7 +546,7 @@ class HostStep5Page3 extends Component {
 
 
                                 <input type="button" value="ثبت اقامتگاه"
-                                       className={this.state.clickLoader || this.state.clickLoaderMainImage || this.state.clickLoaderImage1 || this.state.clickLoaderImage2 || this.state.clickLoaderImage3 || this.state.clickLoaderImage4 ? "fv-hideLoader" : "fv-hostStepPage1LeftButton"}
+                                       className={this.state.clickLoader || this.state.clickLoaderMainImage || this.state.clickLoaderImage1 || this.state.clickLoaderImage2 || this.state.clickLoaderImage3 || this.state.clickLoaderImage4 ? "fv-hideLoader fv-hostStepPage1LeftButton" : "fv-hostStepPage1LeftButton"}
                                        onClick={() => {
                                            if (pushsrc.length > 0 || this.state.setImage) {
                                                this.setState({clickLoader: true})
@@ -654,7 +654,7 @@ class HostStep5Page3 extends Component {
                                                   .catch(err=>console.log(err.response)) */
                                        }}/>
                                 <input type="button" value="مرحله قبل"
-                                       className={this.state.clickLoader || this.state.clickLoaderMainImage || this.state.clickLoaderImage1 || this.state.clickLoaderImage2 || this.state.clickLoaderImage3 || this.state.clickLoaderImage4 ? "fv-hideLoader fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton" : "fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton"}
+                                       className={this.state.clickLoader || this.state.clickLoaderMainImage || this.state.clickLoaderImage1 || this.state.clickLoaderImage2 || this.state.clickLoaderImage3 || this.state.clickLoaderImage4 ? "fv-hideLoader fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton  fv-ButtonSetImageReturn" : "fv-hostStepPage2LeftButton fv-hostStepPage1LeftButton "}
                                        onClick={() => {
                                            localStorage.setItem("editCode", JSON.stringify({editCode: this.props.match.params.id}))
                                            this.props.history.push('../../hostStepRules')

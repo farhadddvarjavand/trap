@@ -9,6 +9,8 @@ import Footer from "../componentsPages/footer";
 import HostStepCheckbox from "../componentsPages/hostStepCheckbox"
 import {storeVilla, updateVilla} from "../services/userService";
 import HostStepImage1 from "../images/home_miz1 png.png"
+import TimeKeeper from "../componentsPages/TimeKeeper";
+
 
 class HostStep5Page2 extends Component {
     constructor(props) {
@@ -27,6 +29,10 @@ class HostStep5Page2 extends Component {
             clickLoader: false,
             validMinimumDays: false,
             validMaximumDays: false,
+            validArriveTime: false,
+            validExitTime: false,
+
+
         }
 
     }
@@ -71,7 +77,15 @@ class HostStep5Page2 extends Component {
                 validMinimumDays: validMinimumDays,
                 validMaximumDays: validMaximumDays,
 
+
             })
+        } else {
+            if (this.state.arriveTime === "title") {
+                this.setState({validArriveTime: true})
+            }
+            if (this.state.exitTime === "title") {
+                this.setState({validExitTime: true})
+            }
         }
     }
 
@@ -96,11 +110,22 @@ class HostStep5Page2 extends Component {
             }
         }
     }
+    getTimeArrive = (timeHour, timeMinute) => {
+        const setTime = `${timeHour}/${timeMinute}`
+        this.setState({arriveTime: setTime, validArriveTime: false})
+    }
+    exitTimeArrive = (timeHour, timeMinute) => {
+        const setTime = `${timeHour}/${timeMinute}`
+        this.setState({exitTime: setTime, validExitTime: false})
+    }
 
     render() {
+        console.log(this.state.arriveTime)
+        console.log(this.state.exitTime)
+
 
         let validationInputs = false
-        if (this.state.validMinimumDays && this.state.validMaximumDays) {
+        if (this.state.validMinimumDays && this.state.validMaximumDays && !this.state.validArriveTime && !this.state.validExitTime) {
             validationInputs = true
         }
 
@@ -291,6 +316,13 @@ class HostStep5Page2 extends Component {
                             <p className={this.state.click && this.state.validMaximumDays === false ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}>
                                 <i className="fas fa-exclamation-triangle"/> پر کردن حداکثر تعداد شب رزرو اجباریست</p>
 
+
+                            <p className={this.state.click && this.state.validArriveTime ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}>
+                                <i className="fas fa-exclamation-triangle"/> پر کردن ساعت ورود اجباریست</p>
+
+                            <p className={this.state.click && this.state.validExitTime ? "fv-alertErrorTextWithoutBorder" : 'fv-alertNotErrorText'}>
+                                <i className="fas fa-exclamation-triangle"/> پر کردن ساعت خروج اجباریست</p>
+
                             <h6 className={"fv-hostStep3NumberOfCapacityMobile"}>قوانین</h6>
                             <p className={"fv-hostStep5P"}>هرکدام از موارد که مهمان مجاز میباشد را انتخاب کنید</p>
 
@@ -451,11 +483,24 @@ class HostStep5Page2 extends Component {
                             <MDBRow className={"fv-timeOutAndTimeIn"}>
                                 <MDBCol md={6} sm={12}>
                                     <MDBRow className={"fv-hostStep5Page2TimeIn"}>
-                                        <MDBCol>
+
+                                        <MDBCol md={5} sm={5}>
                                             <p>ساعت ورود</p>
                                         </MDBCol>
-                                        <MDBCol>
-                                            <select value={this.state.arriveTime}
+                                        <MDBCol md={7} sm={7}
+                                                className={this.state.click && this.state.validArriveTime ? "fv-redBorderError" : ""}>
+                                            {JSON.parse(localStorage.getItem("step5-2")) ?
+                                                <TimeKeeper SetGetTimeArrive={this.getTimeArrive}
+                                                            prevHour={JSON.parse(localStorage.getItem("step5-2")).arrival_time.split("/")[0]}
+                                                            prevMinute={JSON.parse(localStorage.getItem("step5-2")).arrival_time.split("/")[1]}/>
+                                                :
+                                                <TimeKeeper SetGetTimeArrive={this.getTimeArrive}
+                                                            prevHour={"00"}
+                                                            prevMinute={"00"}/>
+                                            }
+
+
+                                            {/*    <select value={this.state.arriveTime}
                                                     onChange={(event) => this.setState({arriveTime: event.target.value})}>
                                                 <option value='title' disabled></option>
                                                 <option value="1">1</option>
@@ -482,17 +527,28 @@ class HostStep5Page2 extends Component {
                                                 <option value="22">22</option>
                                                 <option value="23">23</option>
                                                 <option value="24">24</option>
-                                            </select>
+                                            </select> */}
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCol>
                                 <MDBCol className={"fv-hostStep5Page2MobileTimeOut"} md={6} sm={12}>
                                     <MDBRow>
-                                        <MDBCol>
+                                        <MDBCol md={5} sm={5}>
                                             <p>ساعت خروج</p>
                                         </MDBCol>
-                                        <MDBCol>
-                                            <select value={this.state.exitTime}
+                                        <MDBCol md={7} sm={7}
+                                                className={this.state.click && this.state.validExitTime ? "fv-redBorderError" : ""}>
+                                            {JSON.parse(localStorage.getItem("step5-2")) ?
+                                                <TimeKeeper SetGetTimeArrive={this.exitTimeArrive}
+                                                            prevHour={JSON.parse(localStorage.getItem("step5-2")).exit_time.split("/")[0]}
+                                                            prevMinute={JSON.parse(localStorage.getItem("step5-2")).exit_time.split("/")[1]}/>
+                                                :
+                                                <TimeKeeper SetGetTimeArrive={this.exitTimeArrive}
+                                                            prevHour={"00"}
+                                                            prevMinute={"00"}/>
+                                            }
+
+                                            {/*  <select value={this.state.exitTime}
                                                     onChange={(event) => this.setState({exitTime: event.target.value})}>
                                                 <option value='title' disabled></option>
                                                 <option value="1">1</option>
@@ -519,7 +575,7 @@ class HostStep5Page2 extends Component {
                                                 <option value="22">22</option>
                                                 <option value="23">23</option>
                                                 <option value="24">24</option>
-                                            </select>
+                                            </select>*/}
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCol>

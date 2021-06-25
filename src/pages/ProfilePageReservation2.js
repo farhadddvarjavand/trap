@@ -6,7 +6,7 @@ import "../style/ProfilePageReservation2.scss"
 import CalendarLinear from "../data/CalenddarLinear";
 import {cancelReserve, cancelReservePrice, reservationsSearch, userReserves} from "../services/userService";
 import config from "../services/config.json";
-import {WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
+import {Waiting, WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
 
 const commaNumber = require('comma-number')
 
@@ -37,6 +37,8 @@ class ProfilePageReservation2 extends Component {
             reternudCost: '',
             userPrice: '',
             reserveIdSure: '',
+            cancelReservationWaiting: false,
+            areYouSureWaiting: false,
         }
 
     }
@@ -257,37 +259,44 @@ class ProfilePageReservation2 extends Component {
 
                                                                 : reserve.pay_status === "2" ?    // agar pardakht shode bashad
                                                                     <>
+
                                                                         {this.state.areYouSure === false ?
                                                                             <MDBRow
                                                                                 className={"fv-status2-reservation"}>
-                                                                                <MDBCol md={6} sm={6}
-                                                                                        className={"fv-status1-reservation-leftButton"}>
-                                                                                    <input type="button"
-                                                                                           value="لغو اجاره"
-                                                                                           onClick={() => {
-                                                                                               this.setState({})
+                                                                                {this.state.cancelReservationWaiting ? Waiting(true, "") :
+                                                                                    <>
+                                                                                        <MDBCol md={6} sm={6}
+                                                                                                className={"fv-status1-reservation-leftButton"}>
+                                                                                            <input type="button"
+                                                                                                   value="لغو اجاره"
+                                                                                                   onClick={() => {
+                                                                                                       this.setState({cancelReservationWaiting: true})
 
-                                                                                               cancelReservePrice({id: reserve.id})
-                                                                                                   .then(res => {
-                                                                                                       console.log(res)
-                                                                                                       this.setState({
-                                                                                                           areYouSure: true,
-                                                                                                           reserveIdSure: reserve.id,
-                                                                                                           reternudCost: res.data.reternud_cost,
-                                                                                                           userPrice: res.data.user_price
-                                                                                                       })
-                                                                                                   })
-                                                                                                   .catch(err => console.log(err.response))
-                                                                                           }}/>
-                                                                                </MDBCol>
-                                                                                <MDBCol md={6} sm={6}
-                                                                                        className={"fv-status1-reservation-rightButton"}>
-                                                                                    <input type="button"
-                                                                                           value="نمایش ویلا"
-                                                                                           onClick={() => {
-                                                                                               window.location.replace(`/displayPage/${reserve.villa_id}`);
-                                                                                           }}/>
-                                                                                </MDBCol>
+                                                                                                       cancelReservePrice({id: reserve.id})
+                                                                                                           .then(res => {
+                                                                                                               console.log(res)
+                                                                                                               this.setState({
+                                                                                                                   areYouSure: true,
+                                                                                                                   reserveIdSure: reserve.id,
+                                                                                                                   reternudCost: res.data.reternud_cost,
+                                                                                                                   userPrice: res.data.user_price,
+                                                                                                                   cancelReservationWaiting: false,
+                                                                                                               })
+                                                                                                           })
+                                                                                                           .catch(err => this.setState({cancelReservationWaiting: false}))
+                                                                                                   }}/>
+                                                                                        </MDBCol>
+                                                                                        <MDBCol md={6} sm={6}
+                                                                                                className={"fv-status1-reservation-rightButton"}>
+                                                                                            <input type="button"
+                                                                                                   value="نمایش ویلا"
+                                                                                                   onClick={() => {
+                                                                                                       window.location.replace(`/displayPage/${reserve.villa_id}`);
+                                                                                                   }}/>
+                                                                                        </MDBCol>
+                                                                                    </>
+                                                                                }
+
                                                                             </MDBRow>
                                                                             :
                                                                             <>
@@ -309,40 +318,52 @@ class ProfilePageReservation2 extends Component {
                                                                                                 پول شما باز میگردد </p>
                                                                                             <h6>آیا اطمینان دارید؟</h6>
                                                                                         </MDBRow>
-                                                                                        <MDBCol md={6} sm={6}
-                                                                                                className={"fv-status1-reservation-leftButton"}>
-                                                                                            <input type="button"
-                                                                                                   value="خیر"
-                                                                                                   onClick={() => {
-                                                                                                       this.setState({areYouSure: false})
-                                                                                                   }}/>
-                                                                                        </MDBCol>
-                                                                                        <MDBCol md={6} sm={6}
-                                                                                                className={"fv-status1-reservation-rightButton"}>
-                                                                                            <input type="button"
-                                                                                                   value="بله"
-                                                                                                   onClick={() => {
-                                                                                                       this.setState({areYouSure: true})
-                                                                                                       cancelReserve({id: reserve.id})
-                                                                                                           .then(res => {
-                                                                                                               console.log(res)
-                                                                                                               alert(res.data.message)
 
-                                                                                                               userReserves()
+                                                                                        {this.state.areYouSureWaiting ? Waiting(true, "") :
+                                                                                            <>
+                                                                                                <MDBCol md={6} sm={6}
+                                                                                                        className={"fv-status1-reservation-leftButton"}>
+                                                                                                    <input type="button"
+                                                                                                           value="خیر"
+                                                                                                           onClick={() => {
+                                                                                                               this.setState({areYouSure: false})
+                                                                                                           }}/>
+                                                                                                </MDBCol>
+                                                                                                <MDBCol md={6} sm={6}
+                                                                                                        className={"fv-status1-reservation-rightButton"}>
+                                                                                                    <input type="button"
+                                                                                                           value="بله"
+                                                                                                           onClick={() => {
+                                                                                                               this.setState({
+                                                                                                                   areYouSure: true,
+                                                                                                                   areYouSureWaiting: true
+                                                                                                               })
+                                                                                                               cancelReserve({id: reserve.id})
                                                                                                                    .then(res => {
-                                                                                                                       if (res.status === 200 && res.data.data.length > 0) {
-                                                                                                                           this.setState({
-                                                                                                                               reservesData: res.data.data,
-                                                                                                                               waitingForLoad: false
+                                                                                                                       console.log(res)
+                                                                                                                       alert(res.data.message)
+
+                                                                                                                       userReserves()
+                                                                                                                           .then(res => {
+                                                                                                                               if (res.status === 200 && res.data.data.length > 0) {
+                                                                                                                                   this.setState({
+                                                                                                                                       reservesData: res.data.data,
+                                                                                                                                       waitingForLoad: false,
+                                                                                                                                       areYouSureWaiting: false
+                                                                                                                                   })
+                                                                                                                               } else {
+                                                                                                                                   this.setState({areYouSureWaiting: false})
+                                                                                                                                   this.props.history.push("/MainProfilePages/ProfilePageReservationEmpty")
+                                                                                                                               }
                                                                                                                            })
-                                                                                                                       } else {
-                                                                                                                           this.props.history.push("/MainProfilePages/ProfilePageReservationEmpty")
-                                                                                                                       }
                                                                                                                    })
-                                                                                                           })
-                                                                                                           .catch(err => console.log(err.response))
-                                                                                                   }}/>
-                                                                                        </MDBCol>
+                                                                                                                   .catch(err => console.log(err.response))
+                                                                                                           }}/>
+                                                                                                </MDBCol>
+                                                                                            </>
+                                                                                        }
+
+
                                                                                     </MDBRow>
                                                                                     :
                                                                                     <MDBRow
