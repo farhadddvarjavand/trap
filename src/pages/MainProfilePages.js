@@ -76,6 +76,10 @@ class MainProfilePages extends Component {
                 this.setState({stock: res.data.data})
             })
             .catch(err => console.log(err.response))
+
+        if (window.location.href.match(/\bProfile\b/)) {
+            this.setState({updateAvatarEdit: true})
+        }
     }
 
 
