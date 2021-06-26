@@ -1,123 +1,139 @@
 import React, {Component} from "react";
-import {MDBAlert, MDBCol, MDBContainer, MDBRow} from "mdbreact";
+import {MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import "../style/SearchHomePage.css"
 import "../style/DisplayPage.css"
 import "../style/ProfilePageReservation2.scss"
 import "../style/ProfilePageReservation.scss"
 import "../style/ProfilePageWallet.scss"
-import Footer from "../componentsPages/footer"
-import MobileLogo from "../images/MobileLogo.png"
 import WalletPic1 from "../images/03.png"
 import WalletPic2 from "../images/02.png"
 import WalletPic3 from "../images/01.png"
-import HeaderSearch from "../componentsPages/HeaderSearch";
-import ProfilePageUserInfo from "../componentsPages/ProfilePageUserInfo";
 import {financialReportsSearch, getFinancialReports, userVillas, villaIncome} from "../services/userService";
-import axios from "axios";
-import config from "../services/config.json";
 import CalendarLinear from "../data/CalenddarLinear";
-import ProfilePageWallet2 from "./ProfilePageWallet2";
-import AnotherPagesEmpty from "../emptyAndHandlePage/anotherPagesEmpty";
 import {WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
+
 const commaNumber = require('comma-number')
 
 class ProfilePageWallet extends Component {
     constructor(props) {
         super(props);
-        if(!JSON.parse(localStorage.getItem("info"))){
+        if (!JSON.parse(localStorage.getItem("info"))) {
             this.props.history.push('/login');
         }
-        this.state={
-            getFinancialReportsTopPage:[],
-            getFinancialReports:[],
-            villasUser:[],
-            villasUsertitle:'',
+        this.state = {
+            getFinancialReportsTopPage: [],
+            getFinancialReports: [],
+            villasUser: [],
+            villasUsertitle: '',
             dateToGo: {
-                day:'',
-                month:'',
-                year : ''
+                day: '',
+                month: '',
+                year: ''
             },
             dateToReturn: {
-                day:'',
-                month:'',
-                year : ''
+                day: '',
+                month: '',
+                year: ''
             },
-            switchPage:'',
-            waitingForLoad:true,
-            waitingForSearch:false,
+            switchPage: '',
+            waitingForLoad: true,
+            waitingForSearch: false,
         }
     }
+
     //villasUsertitle:'title'   bod,
     componentDidMount() {
         this.getFinancialReports()
-     //   this.villaIncome()
+        //   this.villaIncome()
         userVillas()
-            .then(res=>{
-                if(res.data.data)
-                this.setState({villasUser:res.data.data})
+            .then(res => {
+                if (res.data.data)
+                    this.setState({villasUser: res.data.data})
             })
 
     }
 
-    getFinancialReports = ()=>{
+    getFinancialReports = () => {
         getFinancialReports()
-            .then(res=>{
-                if (res.data.income || res.data.data){
+            .then(res => {
+                if (res.data.income || res.data.data) {
                     let getFinancialReportsTop = []
                     getFinancialReportsTop.push(res.data.income)
                     console.log(res)
-                    this.setState({getFinancialReports : res.data.data , getFinancialReportsTopPage:getFinancialReportsTop ,  waitingForLoad:false})
-                }else {
+                    this.setState({
+                        getFinancialReports: res.data.data,
+                        getFinancialReportsTopPage: getFinancialReportsTop,
+                        waitingForLoad: false
+                    })
+                } else {
                     // this.setState({pushPage:"empty"})
                     this.props.history.push("/MainProfilePages/AnotherPagesEmpty")
                 }
             })
-            .catch(err=>console.log(err.response))
+            .catch(err => console.log(err.response))
     }
-    villaIncome = ()  =>{
+    villaIncome = () => {
         villaIncome(24)
-            .then(res=>console.log(res))
-            .catch(err=>console.log(err.response))
+            .then(res => console.log(res))
+            .catch(err => console.log(err.response))
     }
 
-    selectDayToGo = (date) =>{                                    // set date to go
-        if(date) {this.setState(prevstate =>({
-            dateToGo: {
-                ...prevstate.day,
-                ...prevstate.month,
-                ...prevstate.year,
-                day: date.day,
-                month: date.month,
-                year: date.year
-            }
-        }))}
+    selectDayToGo = (date) => {                                    // set date to go
+        if (date) {
+            this.setState(prevstate => ({
+                dateToGo: {
+                    ...prevstate.day,
+                    ...prevstate.month,
+                    ...prevstate.year,
+                    day: date.day,
+                    month: date.month,
+                    year: date.year
+                }
+            }))
+        }
     }
-    selectDayToReturn = (date) =>{                               // set date to return
-        if(date) {this.setState(prevState => ({
-            dateToReturn:{
-                ...prevState.day ,
-                ...prevState.month ,
-                ...prevState.year ,
-                day: date.day,
-                month: date.month,
-                year: date.year
-            }
-        }))}
+    selectDayToReturn = (date) => {                               // set date to return
+        if (date) {
+            this.setState(prevState => ({
+                dateToReturn: {
+                    ...prevState.day,
+                    ...prevState.month,
+                    ...prevState.year,
+                    day: date.day,
+                    month: date.month,
+                    year: date.year
+                }
+            }))
+        }
     }
+
     render() {
-        return(
+        return (
             <>
 
-                {this.state.waitingForLoad ?   WaitingLoadingProfilePage(this.state.waitingForLoad , "fv-waitingLoadPublicFullScreen")
+                {this.state.waitingForLoad ? WaitingLoadingProfilePage(this.state.waitingForLoad, "fv-waitingLoadPublicFullScreen")
                     :
-                        <MDBContainer className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-profileWalletInner"}>
-                            <div className={"fv-ProfilePageLeftBody"}>
-                                <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
-                                    <MDBRow className={"fv-ProfilePageReservationSetInfo"}>
-                                        <MDBCol md={4} sm={12} className={""}>
-                                            <input type={"text"} placeholder={"نام اقامتگاه"} value={this.state.villasUsertitle}
-                                            onChange={(e)=>this.setState({villasUsertitle:e.target.value})}/>
-                                            {/*
+                    <MDBContainer
+                        className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageReservation2 fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-profileWalletInner"}>
+                        <div className={"fv-ProfilePageLeftBody"}>
+                            <MDBCol md={8} sm={12}
+                                    className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
+                                <MDBRow className={"fv-ProfilePageReservationSetInfo"}>
+                                    <MDBCol md={4} sm={12} className={""}>
+
+                                        <select className={"fv-accommodationsSelectOptionInSearch"}
+                                                value={this.state.villasUsertitle}
+                                                onChange={(e) => {
+                                                    this.setState({villasUsertitle: e.target.value})
+                                                }}>
+                                            <option value='title'>نام اقامت گاه</option>
+                                            {this.state.villasUser.map(vilauser => {
+                                                return <option value={vilauser.title}>{vilauser.title}</option>
+                                            })}
+                                        </select>
+
+
+                                        {/*
                                              <select value={this.state.villasUsertitle} onChange={(e)=>{
                                                 this.setState({villasUsertitle:e.target.value})
                                             }}>
@@ -128,139 +144,148 @@ class ProfilePageWallet extends Component {
 
                                             </select>
                                             */}
-                                        </MDBCol>
-                                        <MDBCol md={2} sm={5} className={"fv-ProfilePageReservationRightCalendar"}>
-                                            <CalendarLinear dayToReturn={this.selectDayToGo} text={'از تاریخ'}/>
-                                        </MDBCol>
-                                        <MDBCol md={2} sm={5} className={"fv-ProfilePageReservationLeftCalendar"}>
-                                            <CalendarLinear dayToReturn={this.selectDayToReturn} text={'تا تاریخ'} />
-                                        </MDBCol>
-                                        <MDBCol md={2} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
-                                            <input type="button" value="جستجو" onClick={()=>{
-                                                this.setState({waitingForSearch : true})
-                                                let setTitle = ''
-                                                let setDateToGo = ''
-                                                let setDateToreturn = ''
-                                                if(this.state.villasUsertitle === "title" ){
-                                                    setTitle = ''
-                                                }else {
-                                                    setTitle =this.state.villasUsertitle
-                                                }
+                                    </MDBCol>
+                                    <MDBCol md={2} sm={5} className={"fv-ProfilePageReservationRightCalendar"}>
+                                        <CalendarLinear dayToReturn={this.selectDayToGo} text={'از تاریخ'}/>
+                                    </MDBCol>
+                                    <MDBCol md={2} sm={5} className={"fv-ProfilePageReservationLeftCalendar"}>
+                                        <CalendarLinear dayToReturn={this.selectDayToReturn} text={'تا تاریخ'}/>
+                                    </MDBCol>
+                                    <MDBCol md={2} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
+                                        <input type="button" value="جستجو" onClick={() => {
+                                            this.setState({waitingForSearch: true})
+                                            let setTitle = ''
+                                            let setDateToGo = ''
+                                            let setDateToreturn = ''
+                                            if (this.state.villasUsertitle === "title") {
+                                                setTitle = ''
+                                            } else {
+                                                setTitle = this.state.villasUsertitle
+                                            }
 
-                                                if(this.state.dateToGo.year){
-                                                    setDateToGo =  this.state.dateToGo.year+"/"+this.state.dateToGo.month+"/"+this.state.dateToGo.day
-                                                }else {
-                                                    setDateToGo = ''
-                                                }
+                                            if (this.state.dateToGo.year) {
+                                                setDateToGo = this.state.dateToGo.year + "/" + this.state.dateToGo.month + "/" + this.state.dateToGo.day
+                                            } else {
+                                                setDateToGo = ''
+                                            }
 
-                                                if(this.state.dateToReturn.year){
-                                                    setDateToreturn =  this.state.dateToReturn.year+"/"+this.state.dateToReturn.month+"/"+this.state.dateToReturn.day
-                                                }else {
-                                                    setDateToreturn = ''
-                                                }
-                                                const data ={
-                                                    villa_title :this.state.villasUsertitle,
-                                                    start_date : setDateToGo ,
-                                                    end_date : setDateToreturn ,
-                                                }
-                                                console.log(data)
-                                                financialReportsSearch(data)
-                                                    .then(res=>{
-                                                        console.log(res)
-                                                        let getFinancialReportsTop = []
-                                                        getFinancialReportsTop.push(res.data.income)
-                                                        this.setState({getFinancialReports : res.data.data , getFinancialReportsTopPage:getFinancialReportsTop , waitingForSearch:false})
+                                            if (this.state.dateToReturn.year) {
+                                                setDateToreturn = this.state.dateToReturn.year + "/" + this.state.dateToReturn.month + "/" + this.state.dateToReturn.day
+                                            } else {
+                                                setDateToreturn = ''
+                                            }
+                                            const data = {
+                                                villa_title: this.state.villasUsertitle,
+                                                start_date: setDateToGo,
+                                                end_date: setDateToreturn,
+                                            }
+                                            console.log(data)
+                                            financialReportsSearch(data)
+                                                .then(res => {
+                                                    console.log(res)
+                                                    let getFinancialReportsTop = []
+                                                    getFinancialReportsTop.push(res.data.income)
+                                                    this.setState({
+                                                        getFinancialReports: res.data.data,
+                                                        getFinancialReportsTopPage: getFinancialReportsTop,
+                                                        waitingForSearch: false
                                                     })
-                                                    .catch(err=>{
-                                                        this.setState({waitingForSearch:false})
-                                                        console.log(err.response)
-                                                    })
-                                            }}/>
+                                                })
+                                                .catch(err => {
+                                                    this.setState({waitingForSearch: false})
+                                                    console.log(err.response)
+                                                })
+                                        }}/>
+                                    </MDBCol>
+                                </MDBRow>
+
+                                {this.state.getFinancialReportsTopPage.map(getFinancialReportsTopPages => {
+                                    return <MDBRow className={"fv-ProfilePageWalletWalletImage"}>
+                                        <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
+                                            <MDBRow className={"fv-ProfilePageWalletWalletImageP"}>
+                                                <MDBCol md={12}>
+                                                    <h6>در آمد شما از ترپ</h6>
+                                                </MDBCol>
+                                                <MDBCol md={12}>
+                                                    <h6>{commaNumber(getFinancialReportsTopPages.trappIncome)} تومان</h6>
+                                                </MDBCol>
+                                            </MDBRow>
+                                            <img src={WalletPic1}/>
+                                        </MDBCol>
+                                        <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
+                                            <MDBRow className={"fv-ProfilePageWalletWalletImageP"}>
+                                                <MDBCol md={12}
+                                                        className={"fv-ProfilePageWalletWalletImagePWhiteColor"}>
+                                                    <h6>در آمد شما از سایر منابع</h6>
+                                                </MDBCol>
+                                                <MDBCol md={12}>
+                                                    <h6>{commaNumber(getFinancialReportsTopPages.otherIncome)} تومان</h6>
+                                                </MDBCol>
+                                            </MDBRow>
+                                            <img src={WalletPic2}/>
+                                        </MDBCol>
+                                        <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
+                                            <MDBRow
+                                                className={"fv-ProfilePageWalletWalletImageP fv-ProfilePageWalletWalletImagePWhiteColor"}>
+                                                <MDBCol md={12}>
+                                                    <h6>کل درآمد شما از اجاره ویلا</h6>
+                                                </MDBCol>
+                                                <MDBCol md={12}>
+                                                    <h6>{commaNumber(getFinancialReportsTopPages.totalIncome)} تومان</h6>
+                                                </MDBCol>
+                                            </MDBRow>
+                                            <img src={WalletPic3}/>
                                         </MDBCol>
                                     </MDBRow>
+                                })}
 
-                                    {this.state.getFinancialReportsTopPage.map(getFinancialReportsTopPages=>{
-                                        return  <MDBRow className={"fv-ProfilePageWalletWalletImage"}>
-                                            <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
-                                                <MDBRow className={"fv-ProfilePageWalletWalletImageP"}>
-                                                    <MDBCol md={12}>
-                                                        <h6>در آمد شما از ترپ</h6>
-                                                    </MDBCol>
-                                                    <MDBCol md={12}>
-                                                        <h6>{commaNumber(getFinancialReportsTopPages.trappIncome)} تومان</h6>
-                                                    </MDBCol>
-                                                </MDBRow>
-                                                <img src={WalletPic1} />
-                                            </MDBCol>
-                                            <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
-                                                <MDBRow className={"fv-ProfilePageWalletWalletImageP"}>
-                                                    <MDBCol md={12} className={"fv-ProfilePageWalletWalletImagePWhiteColor"}>
-                                                        <h6>در آمد شما از سایر منابع</h6>
-                                                    </MDBCol>
-                                                    <MDBCol md={12}>
-                                                        <h6>{commaNumber(getFinancialReportsTopPages.otherIncome)} تومان</h6>
-                                                    </MDBCol>
-                                                </MDBRow>
-                                                <img src={WalletPic2} />
-                                            </MDBCol>
-                                            <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
-                                                <MDBRow className={"fv-ProfilePageWalletWalletImageP fv-ProfilePageWalletWalletImagePWhiteColor"}>
-                                                    <MDBCol md={12}>
-                                                        <h6>کل درآمد شما از اجاره ویلا</h6>
-                                                    </MDBCol>
-                                                    <MDBCol md={12}>
-                                                        <h6>{commaNumber(getFinancialReportsTopPages.totalIncome)} تومان</h6>
-                                                    </MDBCol>
-                                                </MDBRow>
-                                                <img src={WalletPic3} />
+                                {this.state.waitingForSearch ? WaitingLoadingProfilePage(this.state.waitingForSearch, "fv-waitingLoadPublicFullScreen fv-waitingForSearchReservation") : ""}
+                                {!this.state.waitingForSearch ?
+                                    <>
+                                        <MDBRow>
+                                            <MDBCol>
+                                                <h5>ریز گزارشات مالی</h5>
                                             </MDBCol>
                                         </MDBRow>
-                                    })}
-
-                                    {this.state.waitingForSearch ? WaitingLoadingProfilePage(this.state.waitingForSearch ,"fv-waitingLoadPublicFullScreen fv-waitingForSearchReservation" ) : ""}
-                                    {!this.state.waitingForSearch ?
-                                        <>
-                                            <MDBRow>
-                                                <MDBCol>
-                                                    <h5>ریز گزارشات مالی</h5>
-                                                </MDBCol>
-                                            </MDBRow>
 
 
-                                            <table>
-                                                <tr className={"fv-tableTitle"}>
-                                                    <th><h6>تاریخ تراکنش</h6></th>
-                                                    <th><h6>منبع تراکنش</h6></th>
-                                                    <th className={"fv-tableDiscriptions"}><h6>شرح تراکنش</h6></th>
-                                                    <th><h6>مبلغ</h6></th>
+                                        <table>
+                                            <tr className={"fv-tableTitle"}>
+                                                <th><h6>تاریخ تراکنش</h6></th>
+                                                <th><h6>منبع تراکنش</h6></th>
+                                                <th className={"fv-tableDiscriptions"}><h6>شرح تراکنش</h6></th>
+                                                <th><h6>مبلغ</h6></th>
+                                            </tr>
+                                            {this.state.getFinancialReports.map(getFinancialReport => {
+                                                return <tr>
+                                                    <td>{getFinancialReport.date}</td>
+                                                    <td>{getFinancialReport.src}</td>
+                                                    <td>{getFinancialReport.description}</td>
+                                                    <td>{commaNumber(getFinancialReport.amount)}</td>
                                                 </tr>
-                                                {this.state.getFinancialReports.map(getFinancialReport=>{
-                                                    return      <tr>
-                                                                    <td>{getFinancialReport.date}</td>
-                                                                    <td>{getFinancialReport.src}</td>
-                                                                    <td>{getFinancialReport.description}</td>
-                                                                    <td>{commaNumber(getFinancialReport.amount)}</td>
-                                                                </tr>
-                                                })}
+                                            })}
 
-                                            </table>
-                                            <MDBRow className={"fv-ProfilePageWalletWalletButton"}>
-                                                <MDBCol md={3} sm={12} className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
-                                                    <input type="button" value="ثبت تراکنش جدید" onClick={()=>{
-                                                       // this.setState({switchPage:'ProfileWalletTransactionRegistration'})
-                                                        this.props.history.push('/MainProfilePages/ProfileWalletTransactionRegistration')
-                                                    }}/>
-                                                </MDBCol>
-                                            </MDBRow>
-                                        </>
-                                        : ''}
-                                </MDBCol>
+                                        </table>
+                                        <MDBRow className={"fv-ProfilePageWalletWalletButton"}>
+                                            <MDBCol md={3} sm={12}
+                                                    className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
+                                                <input type="button" value="ثبت تراکنش جدید" onClick={() => {
+                                                    // this.setState({switchPage:'ProfileWalletTransactionRegistration'})
+                                                    this.props.history.push('/MainProfilePages/ProfileWalletTransactionRegistration')
+                                                }}/>
+                                            </MDBCol>
+                                        </MDBRow>
+                                    </>
+                                    : ''}
+                            </MDBCol>
 
-                            </div>
-                        </MDBContainer>
+                        </div>
+                    </MDBContainer>
 
                 }
             </>
-        )}
+        )
+    }
 }
+
 export default ProfilePageWallet

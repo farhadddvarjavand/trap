@@ -1,58 +1,70 @@
 
-.fv-ProfilePageWallet{
+.fv-ProfilePageWallet {
 
-  .fv-ProfilePageWalletWalletImage{
-      // height: 35%;
-    img{
+  .fv-ProfilePageWalletWalletImage {
+    // height: 35%;
+    img {
       width: 100%;
       height: 80%;
       border-radius: 15px;
       margin-top: -30%;
     }
-    p{
+
+    p {
       margin-right: 9%;
       position: inherit;
     }
-    h6{
+
+    h6 {
       margin-right: 9%;
       position: inherit;
     }
-    .fv-ProfilePageWalletWalletImageP{
+
+    .fv-ProfilePageWalletWalletImageP {
       margin-top: 16%;
     }
-    .fv-ProfilePageWalletWalletImagePWhiteColor{
+
+    .fv-ProfilePageWalletWalletImagePWhiteColor {
       color: white;
     }
+
     .fv-ProfilePageUserSetInfo h5 {
       margin-bottom: -1%;
     }
   }
+
   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo.fv-ProfilePageReservationUserInfo {
     box-shadow: none;
   }
-   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageWalletWalletButton .fv-ProfilePageUserSetInfoButton input {
-     width: 70.5%;
-     padding: 0;
-     margin-left: 6%;
-     margin-top: 20%;
+
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageWalletWalletButton .fv-ProfilePageUserSetInfoButton input {
+    width: 70.5%;
+    padding: 0;
+    margin-left: 6%;
+    margin-top: 20%;
   }
-  .fv-ProfilePageWalletWalletButton{
+
+  .fv-ProfilePageWalletWalletButton {
     place-content: flex-end;
+
     input {
       width: 60%;
     }
   }
+
   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo {
     padding-right: 0%;
     margin-right: 0%;
     margin-left: 0%;
     padding-left: 6.5%;
   }
+
   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo .fv-ProfilePageUserSetInfoButton input {
     width: 100%;
     margin-right: 129%;
     padding: 0;
   }
+
   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo select {
     padding-right: 3%;
     width: 85%;
@@ -62,9 +74,11 @@
     box-sizing: border-box;
     border-radius: 14px;
   }
-  .fv-tableDiscriptions{
+
+  .fv-tableDiscriptions {
     width: 40%;
   }
+
   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-accommodationOption {
     padding-right: 3%;
     width: 50%;
@@ -76,7 +90,11 @@
   }
 }
 
-@media (max-width: 991px) and (min-width: 764px){
+.fv-ProfilePageTransaction2.fv-ProfilePageWallet.fv-profileWalletInner .fv-ProfilePageReservationSetInfo .fv-accommodationsSelectOptionInSearch {
+  width: 100%;
+}
+
+@media (max-width: 991px) and (min-width: 764px) {
   .fv-ProfilePageWallet .fv-ProfilePageWalletWalletImage img {
     margin-top: -38%;
     height: 134px;
@@ -86,7 +104,7 @@
   }
 
   .fv-ProfilePageWallet .fv-ProfilePageLeftBody .fv-ProfilePageWalletWalletImage p {
-    font-size: 11px ;
+    font-size: 11px;
   }
 }
 
@@ -111,6 +129,7 @@
       border-top-left-radius: 0px;
       border-bottom-left-radius: 1px;
     }
+
     .fv-ProfilePageWalletWalletImageMobile {
       width: 62% !important;
       height: 100%;
@@ -123,6 +142,7 @@
       border-top-left-radius: 0px;
       border-bottom-left-radius: 0px;
     }
+
     .fv-ProfilePageWalletWalletImage p {
       margin-right: 0%;
       position: inherit;
@@ -132,30 +152,36 @@
     .fv-ProfilePageWalletWalletImage .fv-ProfilePageWalletWalletImageP {
       margin-top: 23%;
     }
+
     .fv-ProfilePageWalletWalletImage img {
       margin-top: -33%;
       height: 111px;
     }
-    .fv-ProfilePageLeftBody{
+
+    .fv-ProfilePageLeftBody {
       .fv-ProfilePageUserSetInfo h5 {
         margin-bottom: 0%;
       }
+
       .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo {
         padding-right: 0%;
         margin-right: 0%;
         margin-left: 0%;
         padding-left: 6.5%;
       }
+
       .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo .fv-ProfilePageUserSetInfoButton input {
         width: 91%;
         margin-right: 139%;
       }
+
       .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo .col-md-2 {
         padding: 0;
         margin-left: -6%;
         margin-right: 10.5%;
         margin-top: 2%;
       }
+
       .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo {
         padding-right: 0px;
         padding-left: 0%;
@@ -164,11 +190,13 @@
         padding-left: -1.5%;
       }
     }
+
     .fv-footerMenuMobileTitle {
       // margin-top: 170%;
     }
-   .fv-ProfilePageLeftBody .fv-ProfilePageWalletWalletImage p {
-      font-size: 11px ;
+
+    .fv-ProfilePageLeftBody .fv-ProfilePageWalletWalletImage p {
+      font-size: 11px;
     }
   }
   .fv-ProfilePageWallet .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageReservationSetInfo .fv-ProfilePageUserSetInfoButton input {
@@ -184,7 +212,7 @@
     margin-right: 60px !important;
     padding-right: 60px !important;
   }
-  .fv-ProfilePageWallet  .fv-ProfilePageReservationLeftCalendar .DatePicker__calendarContainer.-top {
+  .fv-ProfilePageWallet .fv-ProfilePageReservationLeftCalendar .DatePicker__calendarContainer.-top {
     z-index: 100 !important;
     position: absolute !important;
     margin-left: 20px !important;
@@ -209,10 +237,17 @@
     margin-bottom: 58%;
     margin-top: -12%;
   }
-  .fv-ProfilePageWallet .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo select {
+  .fv-ProfilePageWallet .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-accommodationOption {
     width: 100%;
   }
+  .fv-ProfilePageTransaction2.fv-ProfilePageWallet.fv-profileWalletInner .fv-ProfilePageReservationSetInfo .fv-accommodationsSelectOptionInSearch {
+    width: 100%;
+    color: #919191;
+    padding-right: 7%;
+    margin-right: -10%;
+  }
 }
+
 @media (max-width: 376px) {
   .fv-ProfilePageWallet .fv-ProfilePageReservationRightCalendar .DatePicker__calendarContainer.-top {
     z-index: 100 !important;
@@ -227,6 +262,7 @@
     padding-left: 10px !important;
   }
 }
+
 @media (max-width: 320px) {
   .fv-ProfilePageWallet .fv-ProfilePageWalletWalletImage img {
     margin-top: -52%;

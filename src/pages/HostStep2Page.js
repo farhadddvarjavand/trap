@@ -41,7 +41,11 @@ class HostStep2Page extends Component {
 
         const PrevAddressMap = JSON.parse(localStorage.getItem("step2-2"))
         if (PrevAddressMap) {
-            this.setState({address: PrevAddressMap.mapAddress, validAddress: true})
+            if (PrevAddressMap.mapAddress) {
+                if (PrevAddressMap.mapAddress.length > 5) {
+                    this.setState({address: PrevAddressMap.mapAddress, validAddress: true})
+                }
+            }
         }
 
         let prevData = ''
@@ -211,7 +215,7 @@ class HostStep2Page extends Component {
                                     }}
                                             className={this.state.click && this.state.validCity === false ? "fv-hostStep2Page2Hidden fv-redBorderError" : "fv-hostStep2Page2Hidden"}>
                                         <option value={this.state.state ? this.state.state : 'title'}
-                                                disabled>{this.state.state ? `${this.state.state}` : `نام استان خود را وارد کنید`}</option>
+                                                disabled>{this.state.state ? `${this.state.state}` : `نام استان خود را انتخاب کنید`}</option>
                                         {this.state.provincesTitle.map(provincesTitle => {
                                             return <option value={provincesTitle.id}
                                                            name={provincesTitle.name}>{provincesTitle.name}</option>

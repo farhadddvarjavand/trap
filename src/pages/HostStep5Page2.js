@@ -111,11 +111,11 @@ class HostStep5Page2 extends Component {
         }
     }
     getTimeArrive = (timeHour, timeMinute) => {
-        const setTime = `${timeHour}/${timeMinute}`
+        const setTime = `${timeHour}.${timeMinute}`
         this.setState({arriveTime: setTime, validArriveTime: false})
     }
     exitTimeArrive = (timeHour, timeMinute) => {
-        const setTime = `${timeHour}/${timeMinute}`
+        const setTime = `${timeHour}.${timeMinute}`
         this.setState({exitTime: setTime, validExitTime: false})
     }
 
@@ -491,8 +491,8 @@ class HostStep5Page2 extends Component {
                                                 className={this.state.click && this.state.validArriveTime ? "fv-redBorderError" : ""}>
                                             {JSON.parse(localStorage.getItem("step5-2")) ?
                                                 <TimeKeeper SetGetTimeArrive={this.getTimeArrive}
-                                                            prevHour={JSON.parse(localStorage.getItem("step5-2")).arrival_time.split("/")[0]}
-                                                            prevMinute={JSON.parse(localStorage.getItem("step5-2")).arrival_time.split("/")[1]}/>
+                                                            prevHour={JSON.parse(localStorage.getItem("step5-2")).arrival_time.split(".")[0]}
+                                                            prevMinute={JSON.parse(localStorage.getItem("step5-2")).arrival_time.split(".")[1]}/>
                                                 :
                                                 <TimeKeeper SetGetTimeArrive={this.getTimeArrive}
                                                             prevHour={"00"}
@@ -540,8 +540,8 @@ class HostStep5Page2 extends Component {
                                                 className={this.state.click && this.state.validExitTime ? "fv-redBorderError" : ""}>
                                             {JSON.parse(localStorage.getItem("step5-2")) ?
                                                 <TimeKeeper SetGetTimeArrive={this.exitTimeArrive}
-                                                            prevHour={JSON.parse(localStorage.getItem("step5-2")).exit_time.split("/")[0]}
-                                                            prevMinute={JSON.parse(localStorage.getItem("step5-2")).exit_time.split("/")[1]}/>
+                                                            prevHour={JSON.parse(localStorage.getItem("step5-2")).exit_time.split(".")[0]}
+                                                            prevMinute={JSON.parse(localStorage.getItem("step5-2")).exit_time.split(".")[1]}/>
                                                 :
                                                 <TimeKeeper SetGetTimeArrive={this.exitTimeArrive}
                                                             prevHour={"00"}

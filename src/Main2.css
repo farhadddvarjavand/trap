@@ -240,8 +240,8 @@
     }
 
     .container, .container-md, .container-sm {
-        max-width: 813px;
-        margin-right: -4%;
+        /* max-width: 813px;
+         margin-right: -4%; */
     }
 
 

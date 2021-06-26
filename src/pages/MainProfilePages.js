@@ -4,7 +4,7 @@ import "../style/SearchHomePage.css"
 import "../style/DisplayPage.css"
 import "../style/ProfilePage.scss"
 import Footer from "../componentsPages/footer"
-import {getUserStock, userReserves} from "../services/userService";
+import {getUserStock, updateUserAvatar, userReserves} from "../services/userService";
 import config from "../services/config.json"
 import UserImage from "../images/user.png";
 import {BrowserRouter, Link, NavLink, Route} from "react-router-dom";
@@ -53,6 +53,10 @@ class MainProfilePages extends Component {
             AvatarSrc: '',
 
             ProfilePageReservationHandlePageSwitch: '',
+            clickLoaderAvatar: false,
+            avatarImageData: '',
+
+            updateAvatarEdit: false,
         }
 
     }
@@ -107,6 +111,61 @@ class MainProfilePages extends Component {
                 }
             })
     }
+    fileSelectedHandler = (event) => {
+
+        if ((event.target.files[0].type === "image/jpg" || event.target.files[0].type === "image/png" || event.target.files[0].type === "image/bmp" || event.target.files[0].type === "image/jpeg") && event.target.files[0].size < 3000000) {
+            this.setState({clickLoaderAvatar: true})
+            console.log(event)
+            event.preventDefault()
+            //  this.setState({clickLoader:true})
+            console.log(event.target.files[0])
+            console.log(event.target.name)
+
+            let formData = new FormData();
+            formData.append("avatar", event.target.files[0])
+            updateUserAvatar(formData)
+                .then(res => {
+                    if (res.data.avatar_count !== 0) {
+                        this.setState({avatarImageData: res.data.avatar}, () => {
+                            const info = JSON.parse(localStorage.getItem("infoUser"))
+                            let avatar = ""
+                            let fullName = ""
+                            if (info) {
+                                fullName = info.userInfo.fullname
+                                avatar = info.userInfo.avatar
+                            }
+
+                            let setAvatar = ""
+                            if (this.state.avatarImageData) {
+                                setAvatar = this.state.avatarImageData
+                            } else {
+                                setAvatar = avatar
+                            }
+                            const userInfo = {
+                                avatar: setAvatar,
+                                fullname: fullName,
+                            }
+
+                            const dataInfoUpdate = {
+                                userInfo: userInfo
+                            }
+                            localStorage.setItem("infoUser", JSON.stringify(dataInfoUpdate))
+                            this.ChangeUserAvatarSrc(res.data.avatar)
+                            this.setState({clickLoaderAvatar: false})
+                        })
+                    }
+                })
+
+            this.setState({avatarImageData: formData})
+
+        }
+        if (event.target.files[0].size > 3000000) {
+            alert("حجم فایل عکس باید حداکثر 2 مگابایت باشد")
+        }
+        if ((event.target.files[0].type !== "image/jpg" && event.target.files[0].type !== "image/png" && event.target.files[0].type !== "image/bmp" && event.target.files[0].type !== "image/jpeg")) {
+            alert("لطفا فایل عکس انتخواب کنید")
+        }
+    };
 
     render() {
 
@@ -222,7 +281,7 @@ class MainProfilePages extends Component {
                                         </MDBContainer>
                                     </MDBContainer>
                                 </div>
-                                {/*             **************************** header *****************                     */}
+                                {/*             **************************** header Mobile *****************                     */}
 
                             </MDBContainer>
 
@@ -233,10 +292,43 @@ class MainProfilePages extends Component {
                                     <MDBCol md={3} className={"fv-ProfilePageUserInfoBody fv-HideDesktopForMobile"}>
                                         <img
                                             src={this.state.AvatarSrc ? `${config.webapi}/images/user/${this.state.AvatarSrc}` : UserImage}/>
+
+                                        {this.state.updateAvatarEdit ?
+                                            <MDBRow md={3} sm={12}>
+                                                <MDBContainer
+                                                    className={"fv-hostStep5Page3Images fv-inputProfilePageAvatar"}>
+                                                    <label htmlFor="myInput">
+                                                        <label htmlFor="files2"
+                                                               className={this.state.clickLoaderAvatar ? "fv-hideLoader" : "btn"}>
+                                                            <i className="fas fa-edit"/> تغییر تصویر
+                                                        </label>
+                                                        <input id="files2" style={{display: 'none'}}
+                                                               onChange={this.fileSelectedHandler} type="file"
+                                                               name={'avatar'}/>
+
+                                                        <MDBRow>
+                                                            <div
+                                                                className={this.state.clickLoaderAvatar ? "loaderAvatar fv-LoadeAvatarInProfile" : "fv-hideLoader"}>
+                                                                <svg className="circular" viewBox="25 25 50 50">
+                                                                    <circle className="path" cx="50" cy="50" r="20"
+                                                                            fill="none" stroke-width="2"
+                                                                            stroke-miterlimit="10"/>
+                                                                </svg>
+                                                            </div>
+                                                        </MDBRow>
+                                                    </label>
+                                                </MDBContainer>
+                                            </MDBRow>
+                                            : ''
+                                        }
+
+
                                         <h5 style={{
                                             marginTop: '7%',
                                             marginBottom: '10%'
                                         }}>{this.state.nameAndFamily}</h5>
+
+
                                         <MDBRow className={"fv-ProfilePageUserHoldingInfo"}>
                                             <MDBCol md={12}>
                                                 <p>موجودی حساب شما</p>
@@ -247,11 +339,17 @@ class MainProfilePages extends Component {
                                             <MDBCol className={"fv-ProfilePageUserInfoDetailsBodyColumn"}>
                                                 <NavLink exact to={'/MainProfilePages/ProfileMyReservation'}
                                                          activeClassName={"fv-reservationActive"}><p
-                                                    onClick={() => this.setState({onclickHandel: false})}><i
+                                                    onClick={() => this.setState({
+                                                        onclickHandel: false,
+                                                        updateAvatarEdit: false
+                                                    })}><i
                                                     className="fas fa-book"/>رزرو های من</p></NavLink>
                                                 <NavLink to={'/MainProfilePages/ProfileMyTransaction'}
                                                          activeClassName={"fv-reservationActive"}><p
-                                                    onClick={() => this.setState({onclickHandel: false})}><i
+                                                    onClick={() => this.setState({
+                                                        onclickHandel: false,
+                                                        updateAvatarEdit: false
+                                                    })}><i
                                                     className="fas fa-chart-bar"/>تراکنش های من</p></NavLink>
                                                 <MDBRow className={"fv-ProfilePageFacilitiesMobile"}>
                                                     <MDBCol md={8} sm={8}>
@@ -274,48 +372,79 @@ class MainProfilePages extends Component {
                                                         <NavLink to={'/MainProfilePages/myAccommodation'}
                                                                  activeClassName={"fv-reservationActive"}><p
                                                             className={'fv-ProfilePageUserInfoDetailsOption'}
-                                                            onClick={() => this.setState({onclickHandel: false})}>اقامت
+                                                            onClick={() => this.setState({
+                                                                onclickHandel: false,
+                                                                updateAvatarEdit: false
+                                                            })}>اقامت
                                                             گاه های من</p></NavLink>
                                                         <NavLink to={'/MainProfilePages/profileReservations'}
                                                                  activeClassName={"fv-reservationActive"}><p
                                                             className='fv-ProfilePageUserInfoDetailsOption'
-                                                            onClick={() => this.setState({onclickHandel: false})}>رزرو
+                                                            onClick={() => this.setState({
+                                                                onclickHandel: false,
+                                                                updateAvatarEdit: false
+                                                            })}>رزرو
                                                             های درخواستی</p></NavLink>
                                                         <NavLink to={'/MainProfilePages/ProfilePageCommentsHandle'}
                                                                  activeClassName={"fv-reservationActive"}><p
                                                             className={'fv-ProfilePageUserInfoDetailsOption'}
-                                                            onClick={() => this.setState({onclickHandel: false})}> نظرات
+                                                            onClick={() => this.setState({
+                                                                onclickHandel: false,
+                                                                updateAvatarEdit: false
+                                                            })}> نظرات
                                                             مهمان ها</p></NavLink>
                                                         <NavLink to={'/MainProfilePages/ProfilePageCalendarHandle'}
                                                                  activeClassName={"fv-reservationActive"}><p
                                                             className={'fv-ProfilePageUserInfoDetailsOption'}
-                                                            onClick={() => this.setState({onclickHandel: false})}>تقویم
+                                                            onClick={() => this.setState({
+                                                                onclickHandel: false,
+                                                                updateAvatarEdit: false
+                                                            })}>تقویم
                                                             من</p></NavLink>
                                                     </div>
                                                 }
                                                 <NavLink to={'/MainProfilePages/ProfileWallet'}
                                                          activeClassName={"fv-reservationActive"}><p
-                                                    onClick={() => this.setState({onclickHandel: false})}><i
+                                                    onClick={() => this.setState({
+                                                        onclickHandel: false,
+                                                        updateAvatarEdit: false
+                                                    })}><i
                                                     className="fas fa-wallet"/>مدیریت مالی ویلاها</p></NavLink>
                                                 <NavLink to={'/MainProfilePages/ProfilePageChargeWallet'}
                                                          activeClassName={"fv-reservationActive"}><p
-                                                    onClick={() => this.setState({onclickHandel: false})}><i
+                                                    onClick={() => this.setState({
+                                                        onclickHandel: false,
+                                                        updateAvatarEdit: false
+                                                    })}><i
                                                     className="fas fa-wallet"/>شارژ کیف پول</p></NavLink>
                                                 <NavLink to={'/MainProfilePages/profileWalletRequestWithdraw'}
                                                          activeClassName={"fv-reservationActive"}><p
-                                                    onClick={() => this.setState({onclickHandel: false})}><i
+                                                    onClick={() => this.setState({
+                                                        onclickHandel: false,
+                                                        updateAvatarEdit: false
+                                                    })}><i
                                                     className="fas fa-chart-bar"/>درخواست برداشت</p></NavLink>
                                                 <NavLink to={'/MainProfilePages/Profile'}
                                                          activeClassName={"fv-reservationActive"}><p
-                                                    onClick={() => this.setState({onclickHandel: false})}><i
+                                                    onClick={() => {
+                                                        this.setState({
+                                                            onclickHandel: false,
+                                                            updateAvatarEdit: true
+                                                        })
+                                                    }}><i
                                                     className="fas fa-user"/>ویرایش پروفایل</p></NavLink>
                                                 <NavLink to={'/MainProfilePages/profileFavoritesPage'}
                                                          activeClassName={"fv-reservationActive"}><p
-                                                    onClick={() => this.setState({onclickHandel: false})}><i
+                                                    onClick={() => this.setState({
+                                                        onclickHandel: false,
+                                                        updateAvatarEdit: false
+                                                    })}><i
                                                     className="fa fa-heart"/>علاقه مندی ها</p></NavLink>
                                                 <a onClick={() => {
                                                     window.location.replace(`/`);
-                                                }}><p><i className="fas fa-sign-out-alt"/>خروج</p></a>
+                                                }}><p
+                                                    onClick={() => this.setState({updateAvatarEdit: false})}><i
+                                                    className="fas fa-sign-out-alt"/>خروج</p></a>
                                             </MDBCol>
                                         </MDBRow>
                                     </MDBCol> : ''
@@ -326,6 +455,37 @@ class MainProfilePages extends Component {
                                 <MDBCol md={3} className={"fv-ProfilePageUserInfoBody fv-hideMobileForDesktop"}>
                                     <img
                                         src={this.state.AvatarSrc ? `${config.webapi}/images/user/${this.state.AvatarSrc}` : UserImage}/>
+
+                                    {this.state.updateAvatarEdit ?
+                                        <MDBRow md={12} sm={12}>
+                                            <MDBContainer
+                                                className={"fv-hostStep5Page3Images fv-inputProfilePageAvatar"}>
+                                                <label htmlFor="myInput">
+                                                    <label htmlFor="files2"
+                                                           className={this.state.clickLoaderAvatar ? "fv-hideLoader" : "btn"}>
+                                                        <i className="fas fa-edit"/> تغییر تصویر
+                                                    </label>
+                                                    <input id="files2" style={{display: 'none'}}
+                                                           onChange={this.fileSelectedHandler} type="file"
+                                                           name={'avatar'}/>
+
+                                                    <MDBRow>
+                                                        <div
+                                                            className={this.state.clickLoaderAvatar ? "loaderAvatar fv-LoadeAvatarInProfile" : "fv-hideLoader"}>
+                                                            <svg className="circular" viewBox="25 25 50 50">
+                                                                <circle className="path" cx="50" cy="50" r="20"
+                                                                        fill="none" stroke-width="2"
+                                                                        stroke-miterlimit="10"/>
+                                                            </svg>
+                                                        </div>
+                                                    </MDBRow>
+                                                </label>
+                                            </MDBContainer>
+                                        </MDBRow>
+                                        : ''
+                                    }
+
+
                                     <h5 style={{marginTop: '7%', marginBottom: '10%'}}>{this.state.nameAndFamily}</h5>
                                     <MDBRow className={"fv-ProfilePageUserHoldingInfo"}>
                                         <MDBCol md={12}>
@@ -336,10 +496,12 @@ class MainProfilePages extends Component {
                                     <MDBRow className={"fv-ProfilePageUserInfoDetailsBody"}>
                                         <MDBCol className={"fv-ProfilePageUserInfoDetailsBodyColumn"}>
                                             <NavLink exact to={'/MainProfilePages/ProfileMyReservation'}
-                                                     activeClassName={"fv-reservationActive"}><p><i
+                                                     activeClassName={"fv-reservationActive"}><p
+                                                onClick={() => this.setState({updateAvatarEdit: false})}><i
                                                 className="fas fa-book"/>رزرو های من</p></NavLink>
                                             <NavLink to={'/MainProfilePages/ProfileMyTransaction'}
-                                                     activeClassName={"fv-reservationActive"}><p><i
+                                                     activeClassName={"fv-reservationActive"}><p
+                                                onClick={() => this.setState({updateAvatarEdit: false})}><i
                                                 className="fas fa-chart-bar"/>تراکنش های من</p></NavLink>
                                             <MDBRow className={"fv-ProfilePageFacilitiesMobile"}>
                                                 <MDBCol md={8} sm={8}>
@@ -357,44 +519,59 @@ class MainProfilePages extends Component {
                                                           onClick={() => this.setState({activeClassChevron: !this.state.activeClassChevron})}/></a>
                                                 </MDBCol>
                                             </MDBRow>
-                                            {this.state.activeClassChevron ? '' :
+                                            {this.state.activeClassChevron ? '' : // gar roye felesh click shode bod
                                                 <div>
                                                     <NavLink to={'/MainProfilePages/myAccommodation'}
                                                              activeClassName={"fv-reservationActive"}><p
-                                                        className={'fv-ProfilePageUserInfoDetailsOption'}>اقامت گاه های
+                                                        className={'fv-ProfilePageUserInfoDetailsOption'}
+                                                        onClick={() => this.setState({updateAvatarEdit: false})}>اقامت
+                                                        گاه های
                                                         من</p></NavLink>
                                                     <NavLink to={'/MainProfilePages/profileReservations'}
                                                              activeClassName={"fv-reservationActive"}><p
-                                                        className='fv-ProfilePageUserInfoDetailsOption'>رزرو های
+                                                        className='fv-ProfilePageUserInfoDetailsOption'
+                                                        onClick={() => this.setState({updateAvatarEdit: false})}>رزرو
+                                                        های
                                                         درخواستی</p></NavLink>
                                                     <NavLink to={'/MainProfilePages/ProfilePageCommentsHandle'}
                                                              activeClassName={"fv-reservationActive"}><p
-                                                        className={'fv-ProfilePageUserInfoDetailsOption'}> نظرات مهمان
+                                                        className={'fv-ProfilePageUserInfoDetailsOption'}
+                                                        onClick={() => this.setState({updateAvatarEdit: false})}> نظرات
+                                                        مهمان
                                                         ها</p></NavLink>
                                                     <NavLink to={'/MainProfilePages/ProfilePageCalendarHandle'}
                                                              activeClassName={"fv-reservationActive"}><p
-                                                        className={'fv-ProfilePageUserInfoDetailsOption'}>تقویم من</p>
+                                                        className={'fv-ProfilePageUserInfoDetailsOption'}
+                                                        onClick={() => this.setState({updateAvatarEdit: false})}>تقویم
+                                                        من</p>
                                                     </NavLink>
                                                 </div>
                                             }
                                             <NavLink to={'/MainProfilePages/ProfileWallet'}
-                                                     activeClassName={"fv-reservationActive"}><p><i
+                                                     activeClassName={"fv-reservationActive"}><p
+                                                onClick={() => this.setState({updateAvatarEdit: false})}><i
                                                 className="fas fa-wallet"/>مدیریت مالی ویلاها</p></NavLink>
                                             <NavLink to={'/MainProfilePages/ProfilePageChargeWallet'}
-                                                     activeClassName={"fv-reservationActive"}><p><i
+                                                     activeClassName={"fv-reservationActive"}><p
+                                                onClick={() => this.setState({updateAvatarEdit: false})}><i
                                                 className="fas fa-wallet"/>شارژ کیف پول</p></NavLink>
                                             <NavLink to={'/MainProfilePages/profileWalletRequestWithdraw'}
-                                                     activeClassName={"fv-reservationActive"}><p><i
+                                                     activeClassName={"fv-reservationActive"}><p
+                                                onClick={() => this.setState({updateAvatarEdit: false})}><i
                                                 className="fas fa-chart-bar"/>درخواست برداشت</p></NavLink>
                                             <NavLink to={'/MainProfilePages/Profile'}
-                                                     activeClassName={"fv-reservationActive"}><p><i
+                                                     activeClassName={"fv-reservationActive"}><p
+                                                onClick={() => this.setState({updateAvatarEdit: true})}><i
                                                 className="fas fa-user"/>ویرایش پروفایل</p></NavLink>
                                             <NavLink to={'/MainProfilePages/profileFavoritesPage'}
-                                                     activeClassName={"fv-reservationActive"}><p><i
+                                                     activeClassName={"fv-reservationActive"}><p
+                                                onClick={() => this.setState({updateAvatarEdit: false})}><i
                                                 className="fa fa-heart"/>علاقه مندی ها</p></NavLink>
                                             <a onClick={() => {
                                                 window.location.replace(`/`);
-                                            }}><p><i className="fas fa-sign-out-alt"/>خروج</p></a>
+                                            }}><p
+                                                onClick={() => this.setState({updateAvatarEdit: false})}><i
+                                                className="fas fa-sign-out-alt"/>خروج</p></a>
                                         </MDBCol>
                                     </MDBRow>
                                 </MDBCol>
