@@ -4,6 +4,7 @@ import "../style/LoginPage3.scss"
 import LoginPageImage from "../images/simon-haslett-BSkXuvmSHLA-unsplash 1.png"
 import {Link} from "react-router-dom";
 import {registerUser} from "../services/userService"
+import {digitsFaToEn} from "@persian-tools/persian-tools";
 
 class LoginPage3 extends Component {
     constructor(props) {
@@ -112,7 +113,7 @@ class LoginPage3 extends Component {
                                        onChange={((e) => this.setState({nameAndLastNAme: e.target.value}))}/>
                                 <input type="text" placeholder={"شماره موبایل"}
                                        className={"fv-loginPage3MobileNumber fv-english-number"} value={mobileNumber}
-                                       onChange={((e) => this.setState({mobileNumber: e.target.value}))}/>
+                                       onChange={((e) => this.setState({mobileNumber: digitsFaToEn(e.target.value)}))}/>
                                 <MDBRow>
                                     <div className={this.state.clickLoader ? "loader" : "fv-hideLoader"}>
                                         <svg className="circular" viewBox="25 25 50 50">

@@ -1,6 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
+
+
 import './font/fonts/ttf/IRANSansWeb.ttf'
 import './font/fonts/css.css';
 import './Main1.css'
@@ -55,10 +61,6 @@ import ProfileFavoritePageHandle from "./emptyAndHandlePage/ProfileFavoritePageH
 import MainProfilePages from "./pages/MainProfilePages";
 import TestProfilePages2 from "./pages/TestProfilePages2";
 
-
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import 'bootstrap-css-only/css/bootstrap.min.css';
-import 'mdbreact/dist/css/mdb.css';
 
 ReactDOM.render(
     <React.StrictMode>

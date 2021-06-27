@@ -862,8 +862,15 @@
     }
 
     .fv-SearchHomePage .fv-searchMainPage.row {
-        margin-left: 4%;
-        margin-right: 11%;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .fv-SortMenu {
+        padding-bottom: 5%;
+        width: 105%;
+        margin-right: -8%;
+        margin-bottom: 4%;
     }
 
     .fv-searchMainPageBodyLeft {

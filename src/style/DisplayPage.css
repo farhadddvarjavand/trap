@@ -1884,7 +1884,9 @@
     }
 
     .fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageMenu.fv-DisplayPageRent h6 {
-        font-size: 3.5vw;
+        font-size: 2.5vw;
+        align-self: center;
+        margin-top: -2%;
     }
 
     .fv-DisplayPageMenu .col-md-2, .fv-DisplayPageMenu .col-md-1 {

@@ -4,6 +4,7 @@ import "../style/LoginPage.scss"
 import LoginPageImage from "../images/simon-haslett-BSkXuvmSHLA-unsplash 1.png"
 import {Link} from "react-router-dom";
 import {sendPhoneNumber} from "../services/userService"
+import {digitsFaToEn} from "@persian-tools/persian-tools";
 
 
 class LoginPage extends Component {
@@ -107,9 +108,12 @@ class LoginPage extends Component {
                                 <input type="text" placeholder={'شماره موبایل'}
                                        className={this.state.validNumber === false ? "fv-redBorderError fv-english-number" : "fv-english-number"}
                                        name={'phone_number'} value={this.state.phone_number}
-                                       onChange={((e) => this.setState({phone_number: e.target.value}))}/>
+                                       onChange={((e) => {
+                                           this.setState({phone_number: digitsFaToEn(e.target.value)})
+                                       })}/>
                                 <MDBRow>
-                                    <div className={this.state.clickLoader ? "loader" : "fv-hideLoader"}>
+                                    <div
+                                        className={this.state.clickLoader ? "loader fv-loginPageLoadWaiting" : "fv-hideLoader"}>
                                         <svg className="circular" viewBox="25 25 50 50">
                                             <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
                                                     stroke-miterlimit="10"/>

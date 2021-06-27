@@ -5,6 +5,7 @@ import "../style/DisplayPage.css"
 import "../style/ProfilePage.scss"
 import {getUserInformation, updateUserAvatar, updateUserInfo} from "../services/userService";
 import {waitingForCalculate, WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
+import {digitsFaToEn} from "@persian-tools/persian-tools";
 
 
 class ProfilePage extends Component {
@@ -148,7 +149,6 @@ class ProfilePage extends Component {
     };
 
     render() {
-        let test = <p>s</p>
         let IR = "IR-"
         const info = JSON.parse(localStorage.getItem("infoUser"))
         // let fullName =  ""
@@ -182,7 +182,7 @@ class ProfilePage extends Component {
                                 <input type="text"
                                        className={this.state.errorField.includes('phoneNumber') === true ? "fv-redBorderError" : 'fv-english-number'}
                                        value={this.state.mobileNumber}
-                                       onChange={(e) => this.setState({mobileNumber: e.target.value})}/>
+                                       onChange={(e) => this.setState({mobileNumber: digitsFaToEn(e.target.value)})}/>
                                 <h6>آدرس ایمیل</h6>
                                 <input type="text"
                                        className={this.state.errorField.includes('email') === true ? "fv-redBorderError" : ''}
@@ -209,8 +209,10 @@ class ProfilePage extends Component {
                                 <input type="text" value={`${IR}${this.state.shabaNumber}`}
                                        className={this.state.errorField.includes('shabaNumber') === true ? "fv-redBorderError fv-english-number" : 'fv-english-number'}
                                        onChange={(e) => {
-                                           let mystring = e.target.value.replace('IR-', '');
-                                           this.setState({shabaNumber: mystring})
+                                           if (e.target.value !== 'IR') {
+                                               let mystring = e.target.value.replace('IR-', '');
+                                               this.setState({shabaNumber: mystring})
+                                           }
                                        }}/>
 
 

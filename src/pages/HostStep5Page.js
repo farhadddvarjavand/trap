@@ -118,14 +118,17 @@ class HostStep5Page extends Component {
                                     <input type="text"
                                            value={`${tomanText}${this.state.pricesFromSaturdayToWednesday.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
                                            onChange={(e) => {
-                                               if (e.target.value.length > 0 && this.state.pricesFromSaturdayToWednesday.length > 2 && Number(this.state.pricesFromSaturdayToWednesday)) {   // اگر این شرایط بود آنگاه معتبر میباشد و true میشود
-                                                   this.setState({validNormalCost: true})
-                                               } else {
-                                                   this.setState({validNormalCost: false})
+                                               if (e.target.value !== 'تومان ') {
+                                                   if (e.target.value.length > 0 && this.state.pricesFromSaturdayToWednesday.length > 2 && Number(this.state.pricesFromSaturdayToWednesday)) {   // اگر این شرایط بود آنگاه معتبر میباشد و true میشود
+                                                       this.setState({validNormalCost: true})
+                                                   } else {
+                                                       this.setState({validNormalCost: false})
+                                                   }
+                                                   let mystring = e.target.value.replace('تومان  ', '');
+                                                   let mystring2 = mystring.replace(/,/g, "");
+                                                   this.setState({pricesFromSaturdayToWednesday: mystring2})
                                                }
-                                               let mystring = e.target.value.replace('تومان  ', '');
-                                               let mystring2 = mystring.replace(/,/g, "");
-                                               this.setState({pricesFromSaturdayToWednesday: mystring2})
+
                                            }}
                                            className={this.state.click && this.state.validNormalCost === false ? "fv-redBorderError" : ""}/>
                                 </MDBCol>
@@ -136,14 +139,16 @@ class HostStep5Page extends Component {
                                     <input type="text"
                                            value={`${tomanText}${this.state.priceFridayAndHoliday.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
                                            onChange={(e) => {
-                                               if (e.target.value.length > 0 && this.state.priceFridayAndHoliday.length > 2 && Number(this.state.priceFridayAndHoliday)) {   // اگر این شرایط بود آنگاه معتبر میباشد و true میشود (اگر وجود داشت و عدد بود)
-                                                   this.setState({validExtraCost: true})
-                                               } else {
-                                                   this.setState({validExtraCost: false})
+                                               if (e.target.value !== 'تومان ') {
+                                                   if (e.target.value.length > 0 && this.state.priceFridayAndHoliday.length > 2 && Number(this.state.priceFridayAndHoliday)) {   // اگر این شرایط بود آنگاه معتبر میباشد و true میشود (اگر وجود داشت و عدد بود)
+                                                       this.setState({validExtraCost: true})
+                                                   } else {
+                                                       this.setState({validExtraCost: false})
+                                                   }
+                                                   let mystring = e.target.value.replace('تومان  ', '');
+                                                   let mystring2 = mystring.replace(/,/g, "");
+                                                   this.setState({priceFridayAndHoliday: mystring2})
                                                }
-                                               let mystring = e.target.value.replace('تومان  ', '');
-                                               let mystring2 = mystring.replace(/,/g, "");
-                                               this.setState({priceFridayAndHoliday: mystring2})
                                            }}
                                            className={this.state.click && this.state.validExtraCost === false ? "fv-redBorderError" : ""}/>
 
@@ -155,14 +160,16 @@ class HostStep5Page extends Component {
                                     <input type="text"
                                            value={`${tomanText}${this.state.extraPersonPricesOnNormalDays.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
                                            onChange={(e) => {
-                                               if (e.target.value.length > 0 && this.state.extraPersonPricesOnNormalDays.length > 2 && Number(this.state.extraPersonPricesOnNormalDays)) {   // اگر این شرایط بود آنگاه معتبر میباشد و true میشود
-                                                   this.setState({validNormalCostExtraPerson: true})
-                                               } else {
-                                                   this.setState({validNormalCostExtraPerson: false})
+                                               if (e.target.value !== 'تومان ') {
+                                                   if (e.target.value.length > 0 && this.state.extraPersonPricesOnNormalDays.length > 2 && Number(this.state.extraPersonPricesOnNormalDays)) {   // اگر این شرایط بود آنگاه معتبر میباشد و true میشود
+                                                       this.setState({validNormalCostExtraPerson: true})
+                                                   } else {
+                                                       this.setState({validNormalCostExtraPerson: false})
+                                                   }
+                                                   let mystring = e.target.value.replace('تومان  ', '');
+                                                   let mystring2 = mystring.replace(/,/g, "");
+                                                   this.setState({extraPersonPricesOnNormalDays: mystring2})
                                                }
-                                               let mystring = e.target.value.replace('تومان  ', '');
-                                               let mystring2 = mystring.replace(/,/g, "");
-                                               this.setState({extraPersonPricesOnNormalDays: mystring2})
                                            }}
                                            className={this.state.click && this.state.validNormalCostExtraPerson === false ? "fv-redBorderError" : ""}/>
                                 </MDBCol>
@@ -173,14 +180,16 @@ class HostStep5Page extends Component {
                                     <input type="text"
                                            value={`${tomanText}${this.state.extraPersonPricesOnHolidays.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
                                            onChange={(e) => {
-                                               if (e.target.value.length > 0 && this.state.extraPersonPricesOnHolidays.length > 2 && Number(this.state.extraPersonPricesOnHolidays)) {   // اگر این شرایط بود آنگاه معتبر میباشد و true میشود
-                                                   this.setState({validExtraCostExtraPerson: true})
-                                               } else {
-                                                   this.setState({validExtraCostExtraPerson: false})
+                                               if (e.target.value !== 'تومان ') {
+                                                   if (e.target.value.length > 0 && this.state.extraPersonPricesOnHolidays.length > 2 && Number(this.state.extraPersonPricesOnHolidays)) {   // اگر این شرایط بود آنگاه معتبر میباشد و true میشود
+                                                       this.setState({validExtraCostExtraPerson: true})
+                                                   } else {
+                                                       this.setState({validExtraCostExtraPerson: false})
+                                                   }
+                                                   let mystring = e.target.value.replace('تومان  ', '');
+                                                   let mystring2 = mystring.replace(/,/g, "");
+                                                   this.setState({extraPersonPricesOnHolidays: mystring2})
                                                }
-                                               let mystring = e.target.value.replace('تومان  ', '');
-                                               let mystring2 = mystring.replace(/,/g, "");
-                                               this.setState({extraPersonPricesOnHolidays: mystring2})
                                            }}
                                            className={this.state.click && this.state.validExtraCostExtraPerson === false ? "fv-redBorderError" : ""}/>
                                 </MDBCol>

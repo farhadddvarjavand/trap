@@ -394,7 +394,7 @@ html .col-md-3 {
         /* padding-right: 5px; */
         /* padding-left: 11px; */
         display: inline-block;
-        margin-left: 2%;
+        margin-left: 9%;
     }
 
     .fv-footerMenu .fv-footerMenuRibbonMobile {
@@ -431,7 +431,7 @@ html .col-md-3 {
     }
 
     .fv-footerMenuImage img {
-        width: 92%;
+        width: 93%;
         height: 398px;
         margin-bottom: -40%;
         z-index: -1;
@@ -467,8 +467,23 @@ html .col-md-3 {
 
     .fv-topicFirstMainPage .col-sm-1, .fv-topicMainPage .col-sm-1 {
         margin-top: auto;
-        margin-right: 11px;
+        margin-right: 15px;
     }
+
+    .fv-topicMainPage .col-sm-1 .fas {
+        padding-top: 4%;
+        padding-bottom: 1%;
+        font-size: 4vw;
+        content-visibility: auto;
+    }
+
+    .fv-topicFirstMainPage .col-sm-1 .fas {
+        padding-bottom: 1%;
+        padding-top: 4%;
+        font-size: 4vw;
+        content-visibility: auto;
+    }
+
 
     .fv-topicMainPageTopic h4 {
         font-size: 17px;
@@ -545,7 +560,7 @@ html .col-md-3 {
 
     .fv-productImage.fv-popularVillageImage.fv-typesAccommodationImage {
         margin-bottom: -15%;
-        height: 100%;
+        height: 150px;
     }
 
     .fv-typesAccommodationTopic {

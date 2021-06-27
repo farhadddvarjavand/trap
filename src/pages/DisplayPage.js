@@ -548,13 +548,25 @@ class DisplayPage extends Component {
                                                     .then(res => {
                                                         console.log(res)
                                                         if (res.status === 200) {
+                                                            if (res.data.data === "Data is invalid") {
+                                                                alert("اطلاعات نامعتبر میباشد")
+                                                                this.setState({
+                                                                    waitingAreYouSureQuestionButton: false,
+                                                                    imSureButton: false,
+                                                                    reservedPrice: '',
+                                                                    numberOfPeople: ' ',
+                                                                    extraPeopleCost: '',
+                                                                })
+                                                            } else {
+                                                                this.props.history.push("/MainProfilePages/ProfileMyReservation")
+                                                            }
                                                             /*    const dataSave = {                       /// ezafe kardann be reserve ha dar taghvim
                                                                     end_date: data.exit_date ,
                                                                     start_date: data.exit_date,
                                                                 }
                                                                 localStorage.setItem("reservedDatas",dataSave); */
 
-                                                            this.props.history.push("/MainProfilePages/ProfileMyReservation")
+                                                            //   this.props.history.push("/MainProfilePages/ProfileMyReservation")
                                                         } else {
                                                             this.setState({
                                                                 waitingAreYouSureQuestionButton: true,
@@ -563,7 +575,17 @@ class DisplayPage extends Component {
                                                             alert("اطلاعات را به درستی وارد نمایید")
                                                         }
                                                     })
-                                                    .catch(err => console.log(err.response))
+                                                    .catch(err => {
+                                                        alert(err.response.data.message)
+                                                        console.log(err.response)
+                                                        this.setState({
+                                                            waitingAreYouSureQuestionButton: false,
+                                                            imSureButton: false,
+                                                            reservedPrice: '',
+                                                            numberOfPeople: ' ',
+                                                            extraPeopleCost: '',
+                                                        })
+                                                    })
                                             } else {
                                                 this.setState({
                                                     waitingAreYouSureQuestionButton: false,
@@ -656,19 +678,19 @@ class DisplayPage extends Component {
         }
         console.log(this.state.dateToReturn.day)
         console.log(this.state.dateToGo.day)
-        if (Number(this.state.dateToGo.day) === 31 && this.state.dateToReturn.day !== "انتخاب تاریخ") {
-            if (Number(this.state.dateToGo.day) !== Number(this.state.dateToReturn.day)) {
-                rangeBetween = rangeBetween + 1
-            }
-            if (Number(this.state.dateToGo.day) === Number(this.state.dateToReturn.day) && Number(this.state.dateToGo.month) !== Number(this.state.dateToReturn.month)) {
-                rangeBetween = rangeBetween + 1
-            }
-            if (Number(this.state.dateToGo.day) === Number(this.state.dateToReturn.day) && Number(this.state.dateToGo.month) === Number(this.state.dateToReturn.month) && Number(this.state.dateToGo.year) !== Number(this.state.dateToReturn.year)) {
-                rangeBetween = rangeBetween + 1
-            }
+        /*   if (Number(this.state.dateToGo.day) === 31 && this.state.dateToReturn.day !== "انتخاب تاریخ") { // agar 31 roz bod iek roz ezafe kon
+               if (Number(this.state.dateToGo.day) !== Number(this.state.dateToReturn.day)) {
+                   rangeBetween = rangeBetween +1
+               }
+               if (Number(this.state.dateToGo.day) === Number(this.state.dateToReturn.day) && Number(this.state.dateToGo.month) !== Number(this.state.dateToReturn.month)) {
+                   rangeBetween = rangeBetween +1
+               }
+               if (Number(this.state.dateToGo.day) === Number(this.state.dateToReturn.day) && Number(this.state.dateToGo.month) === Number(this.state.dateToReturn.month) && Number(this.state.dateToGo.year) !== Number(this.state.dateToReturn.year)) {
+                   rangeBetween = rangeBetween +1
+               }
 
 
-        }
+           } */
 
 
         const daytogoGeneralFormat = this.setDateFormat(this.state.dateToGo.year + "/" + this.state.dateToGo.month + "/" + this.state.dateToGo.day)
@@ -1994,32 +2016,37 @@ class DisplayPage extends Component {
                                         <h6> {phoneNumber} </h6>
                                     </MDBRow>
 
-                                    {Number(this.state.resultVilla.long) !== 51.42 && Number(this.state.resultVilla.lat) !== 35.72 && this.state.resultVilla.long !== undefined && this.state.resultVilla.lat !== undefined && this.state.resultVilla.long && this.state.resultVilla.lat && this.state.showMapDelay ? // agar lat and long vojod dasht // showMapDelay baraie delay map haast
-                                        <MDBRow className={"fv-displayPageMap"}>
-                                            {Waiting(LoadingPagewaitingHandle, "fv-waitingLoadPublicFullScreen")}
-                                            <MDBCol md={8}>
+                                    {Number(this.state.resultVilla.long) !== 51.42 && Number(this.state.resultVilla.lat) !== 35.72 && this.state.resultVilla.long !== undefined && this.state.resultVilla.lat !== undefined && this.state.resultVilla.long && this.state.resultVilla.lat ? // agar lat and long vojod dasht
+                                        <>
+                                            {this.state.resultVilla.lat && this.state.showMapDelay ?  // showMapDelay baraie 2 sanie delay hast ke error nadahad va map bargozari shavad
+                                                <MDBRow className={"fv-displayPageMap"}>
+                                                    {Waiting(LoadingPagewaitingHandle, "fv-waitingLoadPublicFullScreen")}
+                                                    <MDBCol md={8}>
 
 
-                                                {LoadingPagewaitingHandle ? '' :
-                                                    <Mapir
-                                                        width="636"
-                                                        center={[this.state.resultVilla.long ? Number(this.state.resultVilla.long) : 51.526770, this.state.resultVilla.lat ? Number(this.state.resultVilla.lat) : 35.724254]}
-                                                        Map={MapDetails}
-                                                    >
-                                                        <Mapir.Layer
-                                                            type="symbol"
-                                                            layout={{"icon-image": "harbor-15"}}>
-                                                        </Mapir.Layer>
-                                                        <Mapir.Marker
-                                                            coordinates={[this.state.resultVilla.long ? Number(this.state.resultVilla.long) : 51.526770, this.state.resultVilla.lat ? Number(this.state.resultVilla.lat) : 35.724254]}
-                                                            anchor="bottom">
-                                                        </Mapir.Marker>
-                                                    </Mapir>
-                                                }
-                                            </MDBCol>
-                                        </MDBRow>
-                                        : <> {Waiting(true, "fv-waitingLoadPublicFullScreen")}</>}
+                                                        {LoadingPagewaitingHandle ? '' :
+                                                            <Mapir
+                                                                width="636"
+                                                                center={[this.state.resultVilla.long ? Number(this.state.resultVilla.long) : 51.526770, this.state.resultVilla.lat ? Number(this.state.resultVilla.lat) : 35.724254]}
+                                                                Map={MapDetails}
+                                                            >
+                                                                <Mapir.Layer
+                                                                    type="symbol"
+                                                                    layout={{"icon-image": "harbor-15"}}>
+                                                                </Mapir.Layer>
+                                                                <Mapir.Marker
+                                                                    coordinates={[this.state.resultVilla.long ? Number(this.state.resultVilla.long) : 51.526770, this.state.resultVilla.lat ? Number(this.state.resultVilla.lat) : 35.724254]}
+                                                                    anchor="bottom">
+                                                                </Mapir.Marker>
+                                                            </Mapir>
+                                                        }
+                                                    </MDBCol>
+                                                </MDBRow>
+                                                : <> {Waiting(true, "fv-waitingLoadPublicFullScreen")}</>
+                                            }
 
+                                        </>
+                                        : ''}
                                 </div>
 
                                 :
@@ -2035,31 +2062,37 @@ class DisplayPage extends Component {
                                         <h6> {this.state.resultVilla.state}{` - ${this.state.resultVilla.city}`} </h6>
                                     </MDBRow>
 
-                                    {Number(this.state.resultVilla.long) !== 51.42 && Number(this.state.resultVilla.lat) !== 35.72 && this.state.resultVilla.long !== undefined && this.state.resultVilla.lat !== undefined && this.state.resultVilla.long && this.state.resultVilla.lat && this.state.showMapDelay ? // agar lat and long vojod dasht   // showMapDelay baraie 2 sanie delay hast ke error nadahad va map bargozari shavad
-                                        <MDBRow className={"fv-displayPageMap"}>
-                                            {Waiting(LoadingPagewaitingHandle, "fv-waitingLoadPublicFullScreen")}
-                                            <MDBCol md={8}>
+                                    {Number(this.state.resultVilla.long) !== 51.42 && Number(this.state.resultVilla.lat) !== 35.72 && this.state.resultVilla.long !== undefined && this.state.resultVilla.lat !== undefined && this.state.resultVilla.long ? // agar lat and long vojod dasht
+                                        <>
+                                            {this.state.resultVilla.lat && this.state.showMapDelay ?  // showMapDelay baraie 2 sanie delay hast ke error nadahad va map bargozari shavad
+                                                <MDBRow className={"fv-displayPageMap"}>
+                                                    {Waiting(LoadingPagewaitingHandle, "fv-waitingLoadPublicFullScreen")}
+                                                    <MDBCol md={8}>
 
 
-                                                {LoadingPagewaitingHandle ? '' :
-                                                    <Mapir
-                                                        width="636"
-                                                        center={[this.state.resultVilla.long ? Number(this.state.resultVilla.long) : 51.526770, this.state.resultVilla.lat ? Number(this.state.resultVilla.lat) : 35.724254]}
-                                                        Map={Map}
-                                                    >
-                                                        <Mapir.Layer
-                                                            type="symbol"
-                                                            layout={{"icon-image": "harbor-15"}}>
-                                                        </Mapir.Layer>
-                                                        <Mapir.Marker
-                                                            coordinates={[this.state.resultVilla.long ? Number(this.state.resultVilla.long) : 51.526770, this.state.resultVilla.lat ? Number(this.state.resultVilla.lat) : 35.724254]}
-                                                            anchor="bottom">
-                                                        </Mapir.Marker>
-                                                    </Mapir>
-                                                }
-                                            </MDBCol>
-                                        </MDBRow>
-                                        : <> {Waiting(true, "fv-waitingLoadPublicFullScreen")}</>}
+                                                        {LoadingPagewaitingHandle ? '' :
+                                                            <Mapir
+                                                                width="636"
+                                                                center={[this.state.resultVilla.long ? Number(this.state.resultVilla.long) : 51.526770, this.state.resultVilla.lat ? Number(this.state.resultVilla.lat) : 35.724254]}
+                                                                Map={Map}
+                                                            >
+                                                                <Mapir.Layer
+                                                                    type="symbol"
+                                                                    layout={{"icon-image": "harbor-15"}}>
+                                                                </Mapir.Layer>
+                                                                <Mapir.Marker
+                                                                    coordinates={[this.state.resultVilla.long ? Number(this.state.resultVilla.long) : 51.526770, this.state.resultVilla.lat ? Number(this.state.resultVilla.lat) : 35.724254]}
+                                                                    anchor="bottom">
+                                                                </Mapir.Marker>
+                                                            </Mapir>
+                                                        }
+                                                    </MDBCol>
+                                                </MDBRow>
+                                                : <> {Waiting(true, "fv-waitingLoadPublicFullScreen")}</>
+                                            }
+
+                                        </>
+                                        : ''}
 
                                 </div>                                                   // fv- address    address end
 

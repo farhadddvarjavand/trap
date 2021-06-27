@@ -4,6 +4,7 @@ import "../style/LoginPage2.scss"
 import LoginPageImage from "../images/simon-haslett-BSkXuvmSHLA-unsplash 1.png"
 import {Link} from "react-router-dom";
 import {sendPhoneNumber, verifySmsCode} from "../services/userService";
+import {digitsFaToEn} from "@persian-tools/persian-tools";
 
 class LoginPage2 extends Component {
     constructor(props) {
@@ -165,7 +166,7 @@ class LoginPage2 extends Component {
                                 </MDBRow>
                                 <input type="text" placeholder={'کد تایید'} value={this.state.validationCode}
                                        className={this.state.validCode === false ? "fv-redBorderError fv-english-number" : "fv-english-number"}
-                                       onChange={((e) => this.setState({validationCode: e.target.value}))}/>
+                                       onChange={((e) => this.setState({validationCode: digitsFaToEn(e.target.value)}))}/>
                                 <MDBRow className={"fv-loginPage2RightBodyButtonAndTime"}>
                                     <MDBCol md={8} sm={6}>
                                         <p>
@@ -182,7 +183,8 @@ class LoginPage2 extends Component {
                                         </p>
                                     </MDBCol>
                                     <MDBCol md={4} sm={6}>
-                                        <div className={this.state.clickLoader ? "loader" : "fv-hideLoader"}>
+                                        <div
+                                            className={this.state.clickLoader ? "loader fv-loginMembershipWaitingButton" : "fv-hideLoader"}>
                                             <svg className="circular" viewBox="25 25 50 50">
                                                 <circle className="path" cx="50" cy="50" r="20" fill="none"
                                                         stroke-width="2"

@@ -567,7 +567,10 @@
         flex: 0 0 56.333333%;
         width: 75% !important;
         padding-left: 0;
+    }
 
+    .fv-MainBody .fv-topicMainPage .col-sm-9 h5 {
+        font-size: 3.5vw;
     }
 
     .fv-MainBody .fv-topicMainPage .col-sm-3 {

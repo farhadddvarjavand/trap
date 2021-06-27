@@ -41,11 +41,6 @@ class ProfilePageCommentsHandle extends Component {
                                             existComment = true
                                             this.props.history.push(`/MainProfilePages/profileShowGuestComments/${userVilla.id}`)
 
-                                        } else {
-                                            this.props.history.push("/MainProfilePages/profileGuestComments")
-                                            // this.setState({villaIdFullComments:"guest"})
-                                            // this.props.history.push("/MainProfilePages/profileGuestComments")
-                                            // this.props.history.push("/profileGuestComments") /// صفحه ای پیدا نشده است
                                         }
                                     })
                                     .catch(err => {

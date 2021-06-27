@@ -35,13 +35,18 @@ class DisplayHeader extends Component {
                 className={"fv-footerMenu fv-footerDisplayPage fv-DisplayPage fv-profilePageUserInfo fv-DisplayHeader"}>
                 <MDBRow className={' fv-footerDisplayPageBody'}>
                     <MDBCol md={2} className={"fv-homeIconDisplayPageBody"}>
-                        <a> <i className="fa fa-user-alt"/>
-                            {nameAndFamily ?
+
+                        {nameAndFamily ?
+                            <a>
+                                <i className="fa fa-user-alt"/>
                                 <a style={{marginRight: '2%'}}>{nameAndFamily}</a>
-                                :
-                                <Link style={{marginRight: '2%'}} to={'/'}><p>ورود</p></Link>
-                            }
-                        </a>
+                            </a>
+                            :
+                            <a><Link style={{marginBottom: '0%'}} to={'/login'}><p><i
+                                style={{marginLeft: '4%'}} className="fa fa-user-alt"/>ورود
+                            </p></Link> </a>
+                        }
+
                     </MDBCol>
                     <MDBCol md={2} className={"fv-DisplayPageSearchIcon"}>
                         <input type='searchBbox' placeholder=' جستجو شهر مورد نظر'
@@ -70,9 +75,10 @@ class DisplayHeader extends Component {
                     </MDBCol>
 
                     <MDBCol sm={2} sm={2} className={"fv-DisplayPageLoginImageMobile"}>
-                        <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage} onClick={() => {
-                            this.setState({onclickHandel: !this.state.onclickHandel})
-                        }}/>
+                        <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage}
+                             onClick={() => {
+                                 this.setState({onclickHandel: !this.state.onclickHandel})
+                             }}/>
                     </MDBCol>
                     {/*  <MDBCol sm={1} className={this.state.onclickHandel ? "fv-DisplayPageLoginSignMobile": "fv-hideMenu"} >
                         <i className="fas fa-caret-up" onClick={()=>{
@@ -97,13 +103,16 @@ class DisplayHeader extends Component {
                     <MDBRow
                         className={this.state.onclickHandel && localStorage.getItem("token") ? "fv-ProfilePageLeftBody" : "fv-hideMenuDisplayMobile"}> {/* profile info for mobile             if user*/}
                         <MDBContainer className={`fv-containerOptionMainPageRowTop `}>
-                            <MDBRow className={"fv-cascadeOptionMainPageRowTop fv-cascadeOptionMainPageRowTopMainPage"}>
+                            <MDBRow
+                                className={"fv-cascadeOptionMainPageRowTop fv-cascadeOptionMainPageRowTopMainPage"}>
                                 <MDBCol md={12} sm={12}>
                                     <MDBRow>
                                         <MDBCol md={2} sm={2}>
-                                            <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage}/>
+                                            <img
+                                                src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage}/>
                                         </MDBCol>
-                                        <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={8} sm={8}>
+                                        <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={8}
+                                                sm={8}>
                                             <MDBRow>
                                                 <MDBCol md={12}>
                                                     <a><h6>{nameAndFamily}</h6></a>
@@ -112,7 +121,8 @@ class DisplayHeader extends Component {
                                             </MDBRow>
                                             <MDBRow className={"fv-visitProfile"}>
                                                 <MDBCol md={12}>
-                                                    <Link to={"/MainProfilePages/Profile"}><a>مشاهده حساب
+                                                    <Link to={"/MainProfilePages/Profile"}><a>مشاهده
+                                                        حساب
                                                         کاربری</a></Link>
                                                 </MDBCol>
 
@@ -125,14 +135,16 @@ class DisplayHeader extends Component {
                             <MDBRow className={"fv-cascadeOptionMainPage"}>
                                 <MDBCol md={12} sm={12}>
                                     <Link to={"/MainProfilePages/myAccommodation"}> <img
-                                        style={{marginRight: '15px', marginLeft: '5px'}} src={MyaccommodationsIcon}/>
+                                        style={{marginRight: '15px', marginLeft: '5px'}}
+                                        src={MyaccommodationsIcon}/>
                                         <a><p>اقامت گاه های من</p></a> </Link>
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow className={"fv-cascadeOptionMainPage"}>
                                 <MDBCol md={12} sm={12}>
                                     <Link to={"/MainProfilePages/ProfileMyReservation"}> <img
-                                        style={{marginRight: '15px', marginLeft: '5px'}} src={MyaccommodationsIcon}/>
+                                        style={{marginRight: '15px', marginLeft: '5px'}}
+                                        src={MyaccommodationsIcon}/>
                                         <a><p>رزور های من</p></a> </Link>
                                 </MDBCol>
                             </MDBRow>
@@ -149,15 +161,18 @@ class DisplayHeader extends Component {
                                             localStorage.removeItem("step5")
                                             localStorage.removeItem("step5-2")
                                             localStorage.removeItem("editCode")
-                                        }}><i className="fa fa-laptop-house"/>   <p>میزبان شوید</p></a> </Link>
+                                        }}><i className="fa fa-laptop-house"/>   <p>میزبان شوید</p></a>
+                                    </Link>
                                 </MDBCol>
                             </MDBRow>
-                            <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus"}>
+                            <MDBRow
+                                className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus"}>
                                 <MDBCol md={12} sm={12}>
                                     <a onClick={() => {
                                         localStorage.clear()
                                         this.props.history.push("/")
-                                    }}> <img style={{marginRight: '15px', marginLeft: '5px'}} src={Logout}/>
+                                    }}> <img style={{marginRight: '15px', marginLeft: '5px'}}
+                                             src={Logout}/>
                                         <p>خروج از حساب کاربری</p></a>
                                 </MDBCol>
                             </MDBRow>

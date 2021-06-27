@@ -35,9 +35,11 @@ class ProfilePageWallet3 extends Component {
                         <input type="text" placeholder="تومان"
                                value={`${tomanText}${this.state.amountRequested.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
                                onChange={(event) => {
-                                   let mystring = event.target.value.replace('تومان  ', '');
-                                   let mystring2 = mystring.replace(/,/g, "");
-                                   this.setState({amountRequested: mystring2})
+                                   if (event.target.value !== 'تومان ') {
+                                       let mystring = event.target.value.replace('تومان  ', '');
+                                       let mystring2 = mystring.replace(/,/g, "");
+                                       this.setState({amountRequested: mystring2})
+                                   }
                                }}/>
 
 

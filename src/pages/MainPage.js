@@ -130,7 +130,8 @@ class MainPage extends Datas {
                     <MDBRow className={'fv-footerMenuRibbon'}>
 
                         <MDBCol md={1}>
-                            <i className={localStorage.getItem("token") ? "" : "fa fa-user-alt"}/>
+                            <i style={{marginLeft: '6%', color: 'white'}}
+                               className={localStorage.getItem("token") ? "" : "fa fa-user-alt"}/>
                             <a className={localStorage.getItem("token") ? "fv-hideButtonRegister" : "fv-interTextMainPage"}>
                                 <Link to={'/login'}>ورود</Link></a>
 
@@ -690,9 +691,9 @@ class MainPage extends Datas {
                     </MDBRow>
                 </MDBContainer>
 
-                <MDBRow>
+                <MDBContainer>
                     <Footer/>
-                </MDBRow>
+                </MDBContainer>
 
 
             </MDBRow>
