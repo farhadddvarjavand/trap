@@ -266,6 +266,13 @@
 }
 
 
+@media (max-width: 989px) and (min-width: 768px) {
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn a {
+    color: black;
+    font-size: 14px;
+  }
+}
+
 @media (max-width: 763px) {
 
   .fv-ProfilePage .fv-waitingForSearchReservation {

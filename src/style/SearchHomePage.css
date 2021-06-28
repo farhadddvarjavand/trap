@@ -440,7 +440,7 @@
 
 }
 
-@media (max-width: 991px) and (min-width: 769px) {
+@media (max-width: 991px) and (min-width: 768px) {
     .fv-SearchHomePage .fv-footerMenu .fv-footerMenuRibbon .col-md-9 {
         flex: 0 0 75%;
         max-width: 75%;
@@ -450,9 +450,13 @@
         margin-right: 7%;
         margin-top: 0.5%;
     }
+
+    .fv-SortMenu {
+        margin-right: -3%;
+    }
 }
 
-@media (max-width: 768px) and (min-width: 540px) {
+@media (max-width: 767px) and (min-width: 540px) {
 
     .fv-widthHeaderLoginMenuForSearchHomePage .fv-footerMenuRibbon {
         width: 135%;
@@ -1075,6 +1079,17 @@
         width: 32vw;
         margin-top: 4%;
     }
+
+    .fv-SearchHomePage .fv-productImage {
+        width: 94%;
+        margin-bottom: -8%;
+        margin-right: auto;
+        margin-left: 3%;
+        /* width: 156px; */
+        border-radius: 15px;
+        height: 204px;
+    }
+
 }
 
 @media (max-width: 766px) and (min-width: 478px) {

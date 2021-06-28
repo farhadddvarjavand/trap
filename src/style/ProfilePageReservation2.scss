@@ -335,6 +335,12 @@
   }
 }
 
+@media (max-width: 1200px) and (min-width: 991px) {
+  .fv-ProfilePageReservation2 .fv-product {
+    width: 110%;
+  }
+}
+
 @media (max-width: 991px) and (min-width: 764px) {
   .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ProductLocaton a, .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ProductDate a {
     font-size: 11px;
@@ -363,6 +369,17 @@
   .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ImageProductContentTopOne .col-md-7, .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ImageProductContentTopOne .col-md-5, .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ImageProductContentTopOne .col-md-4, .fv-ProfilePageReservation2 .fv-ProfilePageReservation2ImageProductContentTopOne .col-md-3 {
     font-size: 9.5px;
     margin-left: 14%;
+  }
+  .fv-ProfilePageReservation2 .fv-product {
+    width: 120%;
+  }
+  .fv-ProfilePageReservation2 .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-profilePaeReservation2PayButtonPayed .fv-status2-reservation .fv-status1-reservation-rightButton input {
+    margin-left: -21%;
+    font-size: 14px;
+  }
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-reservationActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-transaction, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-AccomoddationActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-RequestedReservationActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-myCalenderActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-updateProfileActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-gustCommentsActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-walletActive {
+    font-size: 16PX;
+    color: black;
   }
 }
 

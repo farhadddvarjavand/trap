@@ -81,6 +81,7 @@ class DisplayPage extends Component {
             reservesData: [],
             wrongSetDate: false,
             showMapDelay: false,
+            wrongSetDateReserved: false,
 
 
         }
@@ -325,13 +326,13 @@ class DisplayPage extends Component {
             }), () => {
                 if (this.state.dateToReturn) {
                     if (this.state.dateToReturn.day <= date.day && this.state.dateToReturn.month === date.month && this.state.dateToReturn.year === date.year) {
-                        this.setState({wrongSetDate: true})
-                    } else if (this.state.dateToReturn.day === date.day && this.state.dateToReturn.month <= date.month) {
-                        this.setState({wrongSetDate: true})
+                        this.setState({wrongSetDate: true, wrongSetDateReserved: false})
+                    } else if (Number(this.state.dateToReturn.month) && Number(date.month) && this.state.dateToReturn.month < date.month) {
+                        this.setState({wrongSetDate: true, wrongSetDateReserved: false})
                     } else if (this.state.dateToReturn.day === date.day && this.state.dateToReturn.month === date.month && this.state.dateToReturn.year <= date.year) {
-                        this.setState({wrongSetDate: true})
+                        this.setState({wrongSetDate: true, wrongSetDateReserved: false})
                     } else {
-                        this.setState({wrongSetDate: false})
+                        this.setState({wrongSetDate: false, wrongSetDateReserved: false})
                     }
                 }
             })
@@ -351,13 +352,13 @@ class DisplayPage extends Component {
                 , alertErrors: false
             }), () => {
                 if (this.state.dateToGo.day >= date.day && this.state.dateToGo.month === date.month && this.state.dateToGo.year === date.year) {
-                    this.setState({wrongSetDate: true})
-                } else if (this.state.dateToGo.day === date.day && this.state.dateToGo.month >= date.month) {
-                    this.setState({wrongSetDate: true})
+                    this.setState({wrongSetDate: true, wrongSetDateReserved: false})
+                } else if (this.state.dateToGo.month > date.month) {
+                    this.setState({wrongSetDate: true, wrongSetDateReserved: false})
                 } else if (this.state.dateToGo.day === date.day && this.state.dateToGo.month === date.month && this.state.dateToGo.year >= date.year) {
-                    this.setState({wrongSetDate: true})
+                    this.setState({wrongSetDate: true, wrongSetDateReserved: false})
                 } else {
-                    this.setState({wrongSetDate: false})
+                    this.setState({wrongSetDate: false, wrongSetDateReserved: false})
                 }
             })
         }
@@ -398,10 +399,22 @@ class DisplayPage extends Component {
                            color: 'mediumvioletred',
                            borderBottom: '1px solid mediumvioletred',
                            paddingBottom: '2%',
-                           marginTop: '4%'
-                       }}>تاریخ ورود باید
-                        کوچکتر از تاریخ
-                        خروج باشد</p>
+                           marginTop: '4%',
+                           textAlign: 'initial'
+                       }}><i style={{color: 'mediumvioletred'}} className="fas fa-exclamation-triangle"/> تاریخ ورود
+                        باید کوچکتر از تاریخ خروج باشد </p>
+
+                    <p className={this.state.wrongSetDateReserved ? "" : " fv-hideLoader"}
+                       style={{
+                           color: 'mediumvioletred',
+                           borderBottom: '1px solid mediumvioletred',
+                           paddingBottom: '2%',
+                           marginTop: '4%',
+                           textAlign: 'initial'
+                       }}><i style={{color: 'mediumvioletred'}} className="fas fa-exclamation-triangle"/> تاریخ انتخاب
+                        شده معتبر نمیباشد - شما قبلا در این
+                        تاریخ رزرو داشته اید </p>
+
                     <p>قیمت از
                         شبی {this.state.resultVilla.rules ? commaNumber(this.state.resultVilla.rules.normal_cost) : ''} تومان</p>
                 </MDBRow>
@@ -839,6 +852,7 @@ class DisplayPage extends Component {
                                 waitingCalculate = false
                                 reservedFacilitiesPrice = 0
                                 this.setState({
+                                    wrongSetDateReserved: false,
                                     reservedPrice: res.data,
                                     numberOfPeople: ' ',
                                     extraPeopleCost: '',
@@ -848,7 +862,19 @@ class DisplayPage extends Component {
                                 })  // لقیمت روز های رزرو شده فقط
                             }
                         } else {
+                            // alert  تاریخ انتخاب شده معتبر نمیباشد - شما قبلا در این تاریخ رزرو داشته اید
+                            this.setState({
+                                wrongSetDateReserved: true,
+                                reservedPrice: '',
+                                numberOfPeople: ' ',
+                                extraPeopleCost: '',
+                                reservedFacilitiesPrice: 0,
+                                daysCostString: daysCostString
+                            })
                             waitingCalculate = false
+
+                            /*
+                             waitingCalculate = false
                             if (this.state.reservedPrice || this.state.numberOfPeople !== ' ' || this.state.extraPeopleCost) {
                                 alert("تاریخ انتخاب شده معتبر نمیباشد - شما قبلا در این تاریخ رزرو داشته اید")
                                 reservedFacilitiesPrice = 0
@@ -858,8 +884,7 @@ class DisplayPage extends Component {
                                     extraPeopleCost: '',
                                     reservedFacilitiesPrice: 0,
                                     daysCostString: daysCostString
-                                })
-                            }
+                                }) */
                         }
 
                     })

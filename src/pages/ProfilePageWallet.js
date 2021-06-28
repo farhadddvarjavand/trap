@@ -56,7 +56,7 @@ class ProfilePageWallet extends Component {
     getFinancialReports = () => {
         getFinancialReports()
             .then(res => {
-                if (res.data.income || res.data.data) {
+                if (res.data.income.otherIncome + res.data.income.totalIncome + res.data.income.trappIncome > 0 || res.data.data.length > 0) {
                     let getFinancialReportsTop = []
                     getFinancialReportsTop.push(res.data.income)
                     console.log(res)

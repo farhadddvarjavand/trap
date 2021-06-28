@@ -320,6 +320,42 @@
   place-content: end;
 }
 
+@media (max-width: 1200px) and (min-width: 991px) {
+  .fv-FactorPage .fv-factorPageRightInfoLeftInnerTop .h7 {
+    font-size: 14px;
+  }
+  .fv-FactorPage .fv-factorPageRightInfoLeftInnerTop {
+    font-size: 12px;
+  }
+  .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdrawRowOne .col-md-7, .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdrawRowOne .col-md-4 {
+    margin-top: 20px;
+    margin-right: 13%;
+  }
+  .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdrawTwoRowOne {
+    width: 88%;
+  }
+}
+
+@media (max-width: 991px) and (min-width: 764px) {
+  .fv-FactorPage .fv-factorPageRightInfoLeftInnerTop {
+    font-size: 9px;
+  }
+  .fv-FactorPage .fv-factorPageRightInfoLeftInnerTop .h7 {
+    font-size: 9px;
+  }
+  .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdrawRowOne .col-md-7, .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdrawRowOne .col-md-4 {
+    padding: 0;
+    margin-right: 12%;
+    margin-left: -6vh;
+    margin-bottom: 0;
+    margin-top: 14px;
+  }
+  .fv-FactorPage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-factorPageRightInfoLeftBody .fv-factorPageRightInfoLeftBodyInner .fv-radioButtonFactorPage .fv-radioButtonForWithdrawTwoRowOne {
+    margin-right: 6%;
+    padding: 0;
+    width: 90%;
+  }
+}
 
 @media (max-width: 767px) and (min-width: 560px) {
   .fv-ProfilePageWallet.fv-ProfilePageWallet2.fv-profileFavoritesPage {

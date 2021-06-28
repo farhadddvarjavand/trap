@@ -1127,6 +1127,10 @@
         font-size: 1.5vw;
     }
 
+    .fv-footerDisplayPageBody .col-md-2 {
+        padding-right: 1%;
+    }
+
     .fv-DisplayPageDetailsPersonInformation.fv-DisplayPageDetailsPersonInfo .col-md-10 {
         flex: 0 0 77.333333%;
         max-width: 61.333333%;
@@ -1141,8 +1145,8 @@
     }
 
     .fv-footerDisplayPageBody img {
-        width: 26px;
-        height: 26px;
+        width: 103px;
+        height: 96px;
     }
 
     .fv-DisplayPageTitle .col-md-2 {
@@ -1884,7 +1888,7 @@
     }
 
     .fv-SearchHomePage.fv-DisplayPage .fv-DisplayPageMenu.fv-DisplayPageRent h6 {
-        font-size: 2.5vw;
+        font-size: 3.5vw;
         align-self: center;
         margin-top: -2%;
     }

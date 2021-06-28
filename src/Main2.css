@@ -370,6 +370,51 @@
 
 }
 
+@media (max-width: 989px) and (min-width: 768px) {
+
+    .fv-trapMagazine .col-sm-6 {
+        margin-inline-start: auto;
+        margin-left: 41px;
+        margin-right: -7%;
+    }
+
+    .fv-aboutUsFourthImage {
+        /* padding-left: 1%; */
+        /* padding-top: 1%; */
+        margin-top: 3%;
+        margin-left: -11%;
+        border-radius: 15px;
+        width: 232px;
+        height: 273px;
+    }
+
+    .fv-aboutUsSecondImage {
+        /* padding-left: 1%; */
+        /* padding-top: 1%; */
+        margin-left: 1%;
+        border-radius: 15px;
+        width: 201px;
+        height: 243px;
+        margin-left: 14px;
+    }
+
+    .fv-searchMainPage.row {
+        margin-top: 8%;
+        margin-right: 52%;
+        border-radius: 20px;
+        padding-right: 12px;
+        padding-left: -18px;
+        padding-top: -15px;
+        padding-bottom: 9px;
+        box-shadow: 1px 1px 11px #88888836;
+    }
+
+    .fv-searchMainPage {
+        color: black;
+        background-color: white;
+        width: 41%;
+    }
+}
 
 @media (max-width: 735px) {
     .fv-comment .fv-commentLeft, .fv-commentSvgRight, .fv-gustNameAndInfoLeft {

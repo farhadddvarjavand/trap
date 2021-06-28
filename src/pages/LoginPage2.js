@@ -122,11 +122,18 @@ class LoginPage2 extends Component {
                         }
                     } else {
                         alert("کد نامعتبر میباشد لطفا مجددا تلاش کنید")
-                        this.props.history.push("/login");
+                        this.setState({
+                            validCode: false,
+                            clickLoader: false
+                        })
                     }
                 } else {
                     alert("کد نامعتبر میباشد لطفا مجددا تلاش کنید")
-                    this.props.history.push("/login");
+                    // this.props.history.push("/login");
+                    this.setState({
+                        validCode: false,
+                        clickLoader: false
+                    })
                 }
 
             })
@@ -164,7 +171,7 @@ class LoginPage2 extends Component {
                                         <p><Link to={'/login'}>ویرایش شماره</Link></p>
                                     </MDBCol>
                                 </MDBRow>
-                                <input type="text" placeholder={'کد تایید'} value={this.state.validationCode}
+                                <input type="number" placeholder={'کد تایید'} value={this.state.validationCode}
                                        className={this.state.validCode === false ? "fv-redBorderError fv-english-number" : "fv-english-number"}
                                        onChange={((e) => this.setState({validationCode: digitsFaToEn(e.target.value)}))}/>
                                 <MDBRow className={"fv-loginPage2RightBodyButtonAndTime"}>

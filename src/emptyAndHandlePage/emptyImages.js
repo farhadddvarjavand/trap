@@ -1,10 +1,9 @@
 import {MDBCol, MDBRow} from "mdbreact";
-import Logo from "../images/Logo.png";
 import React from "react";
 
-export const EmptyImagesPage=(props)=>{
+export const EmptyImagesPage = (props) => {
     return <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
-        <h5>{props.title}</h5>
+        <h6>{props.title}</h6>
 
         <MDBRow className={"fv-ProfilePageReservationImage"}>
             <MDBCol md={12}>

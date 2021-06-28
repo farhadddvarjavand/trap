@@ -179,12 +179,12 @@ class ProfilePage extends Component {
                                        value={this.state.nameAndFamily}
                                        onChange={(e) => this.setState({nameAndFamily: e.target.value})}/>
                                 <h6>شماره موبایل</h6>
-                                <input type="text"
+                                <input type="number"
                                        className={this.state.errorField.includes('phoneNumber') === true ? "fv-redBorderError" : 'fv-english-number'}
                                        value={this.state.mobileNumber}
                                        onChange={(e) => this.setState({mobileNumber: digitsFaToEn(e.target.value)})}/>
                                 <h6>آدرس ایمیل</h6>
-                                <input type="text"
+                                <input type="email"
                                        className={this.state.errorField.includes('email') === true ? "fv-redBorderError" : ''}
                                        value={this.state.emailAddress}
                                        onChange={(e) => this.setState({emailAddress: e.target.value})}/>

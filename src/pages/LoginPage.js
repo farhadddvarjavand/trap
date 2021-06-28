@@ -105,7 +105,7 @@ class LoginPage extends Component {
                                         <Link to={"/registration"} ><p>عضو شوید</p> </Link>
                                     </MDBCol>  */}
                                 </MDBRow>
-                                <input type="text" placeholder={'شماره موبایل'}
+                                <input type="number" placeholder={'شماره موبایل'}
                                        className={this.state.validNumber === false ? "fv-redBorderError fv-english-number" : "fv-english-number"}
                                        name={'phone_number'} value={this.state.phone_number}
                                        onChange={((e) => {

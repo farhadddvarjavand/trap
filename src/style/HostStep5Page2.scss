@@ -104,7 +104,7 @@
 
   .outside_container.active .modal_container {
     opacity: 1;
-    width: 218%;
+    width: 180%;
     z-index: 2;
     visibility: visible;
     transform: scale(1) translateY(20px);
@@ -155,7 +155,17 @@
   .fv-hostStep5Page2 .preview_container {
     width: 100%;
   }
+}
 
+@media (max-width: 989px) and (min-width: 768px) {
+  .fv-hostStep5Page2 .outside_container.active .modal_container {
+    width: 240%;
+  }
+  .fv-hostStep5Page2 .fv-HostStep1Page .fv-HostStep1PageBody .fv-hostStepPage1Right textarea {
+    height: 152px;
+    border-radius: 14px;
+    width: 296px;
+  }
 }
 
 @media (max-width: 540px) {
