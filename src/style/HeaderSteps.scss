@@ -144,7 +144,7 @@ $unselectedTextColor: rgba(145, 145, 145, 0.5);
     /* margin-left: -15px; */
     background-color: #3EC886;
     width: 315px;
-    margin-right: 5%;
+    margin-right: 3%;
     padding-top: 3%;
     padding-bottom: 3%;
     text-align: start;
@@ -157,7 +157,7 @@ $unselectedTextColor: rgba(145, 145, 145, 0.5);
     /* box-sizing: border-box; */
     background-color: white;
     width: 315px;
-    margin-right: 5%;
+    margin-right: 3%;
     text-align: start;
     font-size: 18px;
     align-items: center;
@@ -552,7 +552,9 @@ $unselectedTextColor: rgba(145, 145, 145, 0.5);
   }
   .fv-loginPageBodyOne .fv-loginPage .fv-loginPageBodyOne .loader {
     width: 44%;
-
+  }
+  .hostStepPage .fv-cascadeOptionMainPage {
+    margin-right: 5%;
   }
 }
 

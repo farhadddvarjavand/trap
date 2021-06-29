@@ -19,7 +19,14 @@ import {extendMoment} from 'moment-range';
 import {arrayBetweenDates, arrayBetweenDatesObject, priceOfPerMonth} from "../componentsPages/calculationsDate"
 import Mapir from "mapir-react-component";
 import {Link} from "react-router-dom";
-import {addToFavorite, calculateCost, calculateExtraCost, reserveRequest, userReserves} from "../services/userService";
+import {
+    addToFavorite,
+    calculateCost,
+    calculateExtraCost,
+    favorites,
+    reserveRequest,
+    userReserves
+} from "../services/userService";
 import "../style/extra.scss"
 import CalendarLinearLimitedDays from "../data/CalendarLinearLimitedDays";
 import {Waiting, waitingForCalculate2} from "../componentsPages/WaitingLoad";
@@ -82,6 +89,7 @@ class DisplayPage extends Component {
             wrongSetDate: false,
             showMapDelay: false,
             wrongSetDateReserved: false,
+            isFavoriteVilla: false,
 
 
         }
@@ -165,6 +173,15 @@ class DisplayPage extends Component {
             })
             .catch(err => console.log(err.response))
 
+        favorites()
+            .then(res => {
+                res.data.data.map(favoriteData => {
+                    if (favoriteData.id === Number(this.props.match.params.id)) {
+                        this.setState({isFavoriteVilla: true})
+                    }
+                })
+
+            })
 
     }
 
@@ -1489,24 +1506,34 @@ class DisplayPage extends Component {
                                     ''}
                             </MDBCol>
 
-                            <MDBCol md={8} className={"fv-DisplayPageLike"}>
-                                <a className={this.state.addToFavorites ? "addToFavoritesTextHide" : ""}
-                                   onClick={() => {
-                                       this.setState({addToFavorites: true})
-                                       const data = {
-                                           villa_id: this.props.match.params.id
-                                       }
-                                       addToFavorite(data)
-                                           .then(res => res.status === 200 ?
-                                               (
-                                                   this.setState({addToFavorites: false}) ,
-                                                       alert('ویلا به علاقه مندی های شما اضافه شد'))
-                                               : '')
-                                   }}><p> اضافه به علاقه مندی ها <i className="fas fa-heart"/></p></a>
-                                <div className={this.state.addToFavorites ? "cssload-wave" : ""}>
-                                    <span></span><span></span><span></span><span></span><span></span>
-                                </div>
-                            </MDBCol>
+                            {!this.state.showMapDelay ? '' : // delay baraie anke avalesh neshan nadahad ezafe be alaghemandihara (shayad dar alaghe mandi ha bashad va agar delay nabadhad aval neshan midahad va bad hazf mishavad)
+                                <>
+                                    {this.state.isFavoriteVilla ? '' :  // agar dar alahemandiha bod digar hazf shavad va neshan nadahad
+                                        <MDBCol md={8} className={"fv-DisplayPageLike"}>
+                                            <a className={this.state.addToFavorites ? "addToFavoritesTextHide" : ""}
+                                               onClick={() => {
+                                                   this.setState({addToFavorites: true})
+                                                   const data = {
+                                                       villa_id: this.props.match.params.id
+                                                   }
+                                                   addToFavorite(data)
+                                                       .then(res => res.status === 200 ?
+                                                           (
+                                                               this.setState({
+                                                                   addToFavorites: false,
+                                                                   isFavoriteVilla: true
+                                                               }) ,
+                                                                   alert('ویلا به علاقه مندی های شما اضافه شد'))
+                                                           : '')
+                                               }}><p> اضافه به علاقه مندی ها <i className="fas fa-heart"/></p></a>
+                                            <div className={this.state.addToFavorites ? "cssload-wave" : ""}>
+                                                <span></span><span></span><span></span><span></span><span></span>
+                                            </div>
+                                        </MDBCol>
+                                    }
+                                </>
+                            }
+
 
                             {/* <MDBCol md={2} className={"fv-DisplayPageTitleShare"}>
                             <a onClick={()=>this.postData('rl','data')}>

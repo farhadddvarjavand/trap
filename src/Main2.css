@@ -672,6 +672,9 @@
         padding-left: 7%;
     }
 
+    .fv-footerMenu .fv-cascadeOptionMainPageRowTop {
+        margin-right: 5%;
+    }
 }
 
 @media (max-width: 540px) {

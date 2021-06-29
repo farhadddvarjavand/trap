@@ -18,6 +18,7 @@ class DisplayHeader extends Component {
             ...this.props,
             searchResult: '',
             onclickHandel: false,
+            onclickButtonHandle: true,
 
         }
     }
@@ -37,7 +38,9 @@ class DisplayHeader extends Component {
                     <MDBCol md={2} className={"fv-homeIconDisplayPageBody"}>
 
                         {nameAndFamily ?
-                            <a>
+                            <a onClick={() => {
+                                this.setState({onclickButtonHandle: !this.state.onclickButtonHandle})
+                            }}>
                                 <i className="fa fa-user-alt"/>
                                 <a style={{marginRight: '2%'}}>{nameAndFamily}</a>
                             </a>
@@ -46,6 +49,76 @@ class DisplayHeader extends Component {
                                 style={{marginLeft: '4%'}} className="fa fa-user-alt"/>ورود
                             </p></Link> </a>
                         }
+
+                        <MDBContainer
+                            className={localStorage.getItem("token") && this.state.onclickButtonHandle === false ? `fv-containerOptionMainPageRowTop fv-displayHeaderCascadeDesktop` : "fv-containerOptionMainPageRowTop fv-displayNoneLogin "}>
+                            <MDBRow className={"fv-cascadeOptionMainPageRowTop fv-cascadeOptionMainPageRowTopMainPage"}>
+                                <MDBCol md={12} sm={12}>
+                                    <MDBRow>
+                                        <MDBCol md={2} sm={2}>
+                                            <img src={avatar ? `${config.webapi}/images/user/${avatar}` : UserImage}/>
+                                        </MDBCol>
+                                        <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={8} sm={8}>
+                                            <MDBRow>
+                                                <MDBCol md={12}>
+                                                    <a><h6>{nameAndFamily}</h6></a>
+                                                </MDBCol>
+
+                                            </MDBRow>
+                                            <MDBRow className={"fv-visitProfile"}>
+                                                <MDBCol md={12}>
+                                                    <Link to={"/MainProfilePages/Profile"}><a>مشاهده حساب
+                                                        کاربری</a></Link>
+                                                </MDBCol>
+
+                                            </MDBRow>
+
+                                        </MDBCol>
+                                    </MDBRow>
+                                </MDBCol>
+                            </MDBRow>
+                            <MDBRow className={"fv-cascadeOptionMainPage"}>
+                                <MDBCol md={12} sm={12}>
+                                    <Link to={"/MainProfilePages/myAccommodation"}> <img
+                                        style={{marginRight: '15px', marginLeft: '5px'}} src={MyaccommodationsIcon}/>
+                                        <a><p>اقامت گاه های من</p></a> </Link>
+                                </MDBCol>
+                            </MDBRow>
+                            <MDBRow className={"fv-cascadeOptionMainPage"}>
+                                <MDBCol md={12} sm={12}>
+                                    <Link to={"/MainProfilePages/ProfileMyReservation"}> <img
+                                        style={{marginRight: '15px', marginLeft: '5px'}} src={MyaccommodationsIcon}/>
+                                        <a><p>رزور های من</p></a> </Link>
+                                </MDBCol>
+                            </MDBRow>
+                            <MDBRow className={"fv-cascadeOptionMainPage"}>
+                                <MDBCol md={12} sm={12}>
+                                    <Link to={"/hostStepBasicInformation"}>
+                                        <i style={{marginRight: '15px', marginLeft: '5px'}}
+                                           className="fa fa-laptop-house"/>
+                                        <a onClick={() => {
+                                            localStorage.removeItem("step1")
+                                            localStorage.removeItem("step2")
+                                            localStorage.removeItem("step2-2")
+                                            localStorage.removeItem("step3")
+                                            localStorage.removeItem("step4")
+                                            localStorage.removeItem("step5")
+                                            localStorage.removeItem("step5-2")
+                                            localStorage.removeItem("editCode")
+                                        }}><p>میزبان شوید</p></a> </Link>
+                                </MDBCol>
+                            </MDBRow>
+
+                            <MDBRow className={"fv-cascadeOptionMainPage fv-cascadeOptionMainPageEndRadus"}>
+                                <MDBCol md={12} sm={12}>
+                                    <a onClick={() => {
+                                        localStorage.clear()
+                                        this.props.history.push("/")
+                                    }}> <img style={{marginRight: '15px', marginLeft: '5px'}} src={Logout}/>
+                                        <p>خروج از حساب کاربری</p></a>
+                                </MDBCol>
+                            </MDBRow>
+                        </MDBContainer>
 
                     </MDBCol>
                     <MDBCol md={2} className={"fv-DisplayPageSearchIcon"}>
