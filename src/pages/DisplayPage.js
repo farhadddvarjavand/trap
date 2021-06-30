@@ -657,6 +657,7 @@ class DisplayPage extends Component {
 
 
     render() {
+        let authRuleNumber = 0
         let thisVillaIsReserved = false
         let LoadingPagewaitingHandle = true
         if (this.state.villaPrice.length > 0) {
@@ -2032,9 +2033,10 @@ class DisplayPage extends Component {
                                 </MDBRow>
 
                                 {this.state.resultVilla.rules ? this.state.resultVilla.rules.auth_rules.map(authRule => {
+                                    authRuleNumber = authRuleNumber + 1
                                     return (
                                         <MDBRow>
-                                            <p className={"h7"}>{authRule}</p>
+                                            <p className={"h7"}>{`${authRuleNumber} - `}{authRule}</p>
                                         </MDBRow>
                                     )
                                 }) : ''}

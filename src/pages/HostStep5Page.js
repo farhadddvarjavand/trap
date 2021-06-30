@@ -68,6 +68,16 @@ class HostStep5Page extends Component {
         }
     }
 
+    onChange = (e) => {
+        const re = /^[0-9\b]+$/;
+        let mystring = e.target.value.replace('تومان  ', '');
+        const val = mystring.replace(/,/g, "")
+
+        if (val === '' || re.test(val)) {
+            this.setState({[e.target.name]: val})
+        }
+    }
+
     render() {
         let tomanText = "تومان  "
 
@@ -115,7 +125,10 @@ class HostStep5Page extends Component {
                             <p className={"fv-hostStep5P"}>قیمت از شنبه تا چهارشنبه</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
+
+
                                     <input type="text"
+                                           name={'pricesFromSaturdayToWednesday'}
                                            value={`${tomanText}${this.state.pricesFromSaturdayToWednesday.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
                                            onChange={(e) => {
                                                if (e.target.value !== 'تومان ') {
@@ -124,9 +137,7 @@ class HostStep5Page extends Component {
                                                    } else {
                                                        this.setState({validNormalCost: false})
                                                    }
-                                                   let mystring = e.target.value.replace('تومان  ', '');
-                                                   let mystring2 = mystring.replace(/,/g, "");
-                                                   this.setState({pricesFromSaturdayToWednesday: mystring2})
+                                                   this.onChange(e)
                                                }
 
                                            }}
@@ -137,6 +148,7 @@ class HostStep5Page extends Component {
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
                                     <input type="text"
+                                           name={'priceFridayAndHoliday'}
                                            value={`${tomanText}${this.state.priceFridayAndHoliday.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
                                            onChange={(e) => {
                                                if (e.target.value !== 'تومان ') {
@@ -145,9 +157,7 @@ class HostStep5Page extends Component {
                                                    } else {
                                                        this.setState({validExtraCost: false})
                                                    }
-                                                   let mystring = e.target.value.replace('تومان  ', '');
-                                                   let mystring2 = mystring.replace(/,/g, "");
-                                                   this.setState({priceFridayAndHoliday: mystring2})
+                                                   this.onChange(e)
                                                }
                                            }}
                                            className={this.state.click && this.state.validExtraCost === false ? "fv-redBorderError" : ""}/>
@@ -158,6 +168,7 @@ class HostStep5Page extends Component {
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
                                     <input type="text"
+                                           name={'extraPersonPricesOnNormalDays'}
                                            value={`${tomanText}${this.state.extraPersonPricesOnNormalDays.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
                                            onChange={(e) => {
                                                if (e.target.value !== 'تومان ') {
@@ -166,9 +177,7 @@ class HostStep5Page extends Component {
                                                    } else {
                                                        this.setState({validNormalCostExtraPerson: false})
                                                    }
-                                                   let mystring = e.target.value.replace('تومان  ', '');
-                                                   let mystring2 = mystring.replace(/,/g, "");
-                                                   this.setState({extraPersonPricesOnNormalDays: mystring2})
+                                                   this.onChange(e)
                                                }
                                            }}
                                            className={this.state.click && this.state.validNormalCostExtraPerson === false ? "fv-redBorderError" : ""}/>
@@ -178,6 +187,7 @@ class HostStep5Page extends Component {
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
                                     <input type="text"
+                                           name={'extraPersonPricesOnHolidays'}
                                            value={`${tomanText}${this.state.extraPersonPricesOnHolidays.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
                                            onChange={(e) => {
                                                if (e.target.value !== 'تومان ') {
@@ -186,9 +196,7 @@ class HostStep5Page extends Component {
                                                    } else {
                                                        this.setState({validExtraCostExtraPerson: false})
                                                    }
-                                                   let mystring = e.target.value.replace('تومان  ', '');
-                                                   let mystring2 = mystring.replace(/,/g, "");
-                                                   this.setState({extraPersonPricesOnHolidays: mystring2})
+                                                   this.onChange(e)
                                                }
                                            }}
                                            className={this.state.click && this.state.validExtraCostExtraPerson === false ? "fv-redBorderError" : ""}/>
@@ -201,7 +209,7 @@ class HostStep5Page extends Component {
                             <p className={"fv-hostStep5P fv-discountWeekly"}>تخفیف هفتگی</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" placeholder={"%"} value={this.state.weeklyDiscount}
+                                    <input type="number" placeholder={"%"} value={this.state.weeklyDiscount}
                                            onChange={(e) => this.setState({weeklyDiscount: e.target.value})}
                                     />
                                 </MDBCol>
@@ -209,7 +217,7 @@ class HostStep5Page extends Component {
                             <p className={"fv-hostStep5P"}>تخفیف ماهانه</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text" placeholder={"%"} value={this.state.monthlyDiscount}
+                                    <input type="number" placeholder={"%"} value={this.state.monthlyDiscount}
                                            onChange={(e) => this.setState({monthlyDiscount: e.target.value})}
                                     />
                                 </MDBCol>

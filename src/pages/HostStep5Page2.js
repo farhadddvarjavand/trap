@@ -120,8 +120,6 @@ class HostStep5Page2 extends Component {
     }
 
     render() {
-        console.log(this.state.arriveTime)
-        console.log(this.state.exitTime)
 
 
         let validationInputs = false
@@ -353,19 +351,19 @@ class HostStep5Page2 extends Component {
                                         setCheckedPrev={this.state.rules}
                                         nameOfPart={'rules'}/>
                                 </MDBCol>
-                                <MDBCol md={12} sm={12}>
+
+                                <MDBCol md={12} sm={12} className={""}>
                                     <HostStepCheckbox
                                         className="fv-hostStep5Page2PaddingTop"
                                         mdCheckbox="1"
                                         smCheckbox="2"
                                         mdCheckboxText="10"
                                         smCheckboxText="9"
-                                        text="ورود حیوانات (مثل سگ,گربه,پرنده و ...)"
-                                        name='ورود حیوانات (مثل سگ,گربه,پرنده و ...'
+                                        text="ورود حیوانات"
+                                        name='ورود حیوانات'
                                         setCheckbox={this.setCheckbox}
                                         setCheckedPrev={this.state.rules}
                                         nameOfPart={'rules'}/>
-
                                 </MDBCol>
                                 <MDBCol md={12} sm={12} className={""}>
                                     <HostStepCheckbox
@@ -398,7 +396,7 @@ class HostStep5Page2 extends Component {
                                 <MDBCol sm={10}
                                         className={"fv-marginRight fv-hostStep3InputText fv-hostStep5Page2MobileInputText"}
                                         md={6}>
-                                    <input type="text" value={this.state.minimumNumberOfNights}
+                                    <input type="number" value={this.state.minimumNumberOfNights}
                                            onChange={(e) => {
                                                this.setState({minimumNumberOfNights: e.target.value})
 
@@ -417,7 +415,7 @@ class HostStep5Page2 extends Component {
                                 <MDBCol sm={10}
                                         className={"fv-marginRight fv-hostStep3InputText fv-hostStep5Page2MobileInputText"}
                                         md={6}>
-                                    <input type="text" value={this.state.maximumNumberOfNights}
+                                    <input type="number" value={this.state.maximumNumberOfNights}
                                            onChange={(e) => {
                                                this.setState({maximumNumberOfNights: e.target.value})
 
