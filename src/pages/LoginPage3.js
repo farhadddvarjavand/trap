@@ -11,8 +11,9 @@ class LoginPage3 extends Component {
         super(props);
         this.state = {
             nameAndLastNAme: '',
+            username: '',
             mobileNumber: '',
-            errorsText: " لطفا اطلاعات خود را به درستی وارد نمایید",
+            errorsText: '',
             validNameAndPhoneNumber: true,
             clickLoader: false,
         }
@@ -27,7 +28,8 @@ class LoginPage3 extends Component {
     sendSms = async () => {
         const datas = {
             fullname: this.state.nameAndLastNAme,
-            phone_number: this.state.mobileNumber
+            phone_number: this.state.mobileNumber,
+            trapp_id: this.state.username,
         }
 
         await registerUser(datas).then(result => {
@@ -52,30 +54,50 @@ class LoginPage3 extends Component {
             }
         })
             .catch(error => {
-                console.log(error.response)
-                if (error.response.data.errors.phone_number && error.response.data.errors.fullname === undefined) {
-                    if (error.response.data.errors.phone_number[0] === "شماره تلفن قبلا انتخاب شده است.") {
-                        alert(' شما قبلا ثبت نام کرده اید')
-                        this.props.history.push("/login");
+                if (error.response.data.errors.phone_number || error.response.data.errors.fullname || error.response.data.errors.trapp_id) {
+                    if (error.response.data.errors.phone_number) {
+                        if (error.response.data.errors.phone_number[0] === "شماره تلفن قبلا انتخاب شده است.") {
+                            alert(' شما قبلا ثبت نام کرده اید')
+                            this.props.history.push("/login");
+                        } else {
+                            this.setState({
+                                validNameAndPhoneNumber: false,
+                                clickLoader: false,
+                                errorsText: error.response.data.errors
+                            })
+                        }
                     } else {
                         this.setState({
                             validNameAndPhoneNumber: false,
                             clickLoader: false,
-                            errorsText: ' لطفا شماره موبایل خود را به درستی وارد نمایید'
+                            errorsText: error.response.data.errors
                         })
                     }
                 }
-                if (error.response.data.errors.phone_number && error.response.data.errors.fullname) {
-                    this.setState({
-                        validNameAndPhoneNumber: false,
-                        clickLoader: false,
-                        errorsText: ' لطفا اطلاعات خود را به درستی وارد نمایید'
-                    })
-                }
-                if (error.response.status !== 422) {
-                    alert(" اررور از سمت سرور رخ داده است")
-                }
-
+                /* console.log(error.response)
+                 if (error.response.data.errors.phone_number && error.response.data.errors.fullname === undefined) {
+                     if (error.response.data.errors.phone_number[0] === "شماره تلفن قبلا انتخاب شده است.") {
+                         alert(' شما قبلا ثبت نام کرده اید')
+                         this.props.history.push("/login");
+                     } else {
+                         this.setState({
+                             validNameAndPhoneNumber: false,
+                             clickLoader: false,
+                             errorsText: ' لطفا شماره موبایل خود را به درستی وارد نمایید'
+                         })
+                     }
+                 }
+                 if (error.response.data.errors.phone_number && error.response.data.errors.fullname) {
+                     this.setState({
+                         validNameAndPhoneNumber: false,
+                         clickLoader: false,
+                         errorsText: ' لطفا اطلاعات خود را به درستی وارد نمایید'
+                     })
+                 }
+                 if (error.response.status !== 422) {
+                     alert(" اررور از سمت سرور رخ داده است")
+                 }
+                 */
             })
 
 
@@ -105,12 +127,31 @@ class LoginPage3 extends Component {
                             </MDBCol>
                         </MDBRow>
                         <MDBRow className={"fv-loginPageBodyOne"}>
-                            <p className={this.state.validNameAndPhoneNumber === false ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>
-                                <i className="fas fa-exclamation-triangle"/> {this.state.errorsText} </p>
+
+                            <p className={this.state.errorsText.fullname ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>
+                                <i style={{color: 'mediumvioletred'}}
+                                   className="fas fa-exclamation-triangle"/> {this.state.errorsText.fullname ? this.state.errorsText.fullname[0] : ''}
+                            </p>
+                            <p className={this.state.errorsText.trapp_id ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>
+                                <i style={{color: 'mediumvioletred'}}
+                                   className="fas fa-exclamation-triangle"/> {this.state.errorsText.trapp_id ? this.state.errorsText.trapp_id[0] : ''}
+                            </p>
+                            <p className={this.state.errorsText.phone_number ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>
+                                <i style={{color: 'mediumvioletred'}}
+                                   className="fas fa-exclamation-triangle"/> {this.state.errorsText.phone_number ? this.state.errorsText.phone_number[0] : ''}
+                            </p>
+
+
                             <MDBCol sm={12}>
                                 <h4>ثبت نام</h4>
                                 <input type="text" placeholder={"نام و نام خانوادگی"} value={nameAndLastNAme}
                                        onChange={((e) => this.setState({nameAndLastNAme: e.target.value}))}/>
+
+                                <input type="text" placeholder={"نام کاربری"}
+                                       className={"fv-loginPage3MobileNumber fv-english-number"}
+                                       value={this.state.username}
+                                       onChange={((e) => this.setState({username: digitsFaToEn(e.target.value)}))}/>
+
                                 <input type="number" placeholder={"شماره موبایل"}
                                        className={"fv-loginPage3MobileNumber fv-english-number"} value={mobileNumber}
                                        onChange={((e) => this.setState({mobileNumber: digitsFaToEn(e.target.value)}))}/>

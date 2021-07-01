@@ -72,6 +72,10 @@
         color: mediumvioletred;
         border-bottom: 1px solid #E88F0A;
       }
+
+      .fv-alertErrorTextDiscussion {
+        color: mediumvioletred;
+      }
     }
 
     .fv-ProfilePageUserInfoBody {
@@ -224,19 +228,31 @@
   }
 
   .fv-inputProfilePageAvatar .btn {
-    background: rgba(145, 145, 145, 0.1);
+    /* background: rgba(145, 145, 145, 0.1);
     box-shadow: 0px 4px 14px rgba(14, 15, 15, 0.08);
-    border-radius: 16px;
+    border-radius: 16px; */
     color: #5C5C5C;
+    border: none;
+    box-shadow: none;
+    margin-top: -17%;
   }
 
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-NameUserInfoBody input {
+    width: 93%;
+  }
+
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-NameUserInfoBody h6 {
+    margin-bottom: 4%;
+    margin-top: 10%;
+  }
 }
 
 .fv-ProfilePage .loaderAvatar.fv-LoadeAvatarInProfile {
   padding: 0;
-  margin-top: 7%;
-  margin-bottom: -41%;
+  margin-top: -15%;
+  margin-bottom: -28%;
   margin-right: 0%;
+  height: 61px;
 }
 
 .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-reservationActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-transaction, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-AccomoddationActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-RequestedReservationActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-myCalenderActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-updateProfileActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-gustCommentsActive, .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoDetailsBody .fv-ProfilePageUserInfoDetailsBodyColumn .fv-walletActive {
@@ -272,6 +288,13 @@
     font-size: 14px;
   }
 }
+
+@media (max-width: 768px) and (min-width: 763px) {
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserInfoBody {
+    width: 10%;
+  }
+}
+
 
 @media (max-width: 763px) {
 
@@ -375,7 +398,9 @@
     width: 32vw;
   }
   .fv-ProfilePage .loaderAvatar.fv-LoadeAvatarInProfile {
-    margin-bottom: -28%;
+    margin-bottom: -23%;
+    width: 85%;
+    height: 57px;
   }
   .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo.fv-profilePageInner .fv-userInfoText {
     margin-top: 16%;
@@ -384,6 +409,13 @@
   .fv-ProfilePage .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo.fv-profilePageInner h6 {
     margin-top: 5%;
     margin-bottom: 2%;
+  }
+  .fv-ProfilePage .fv-inputProfilePageAvatar .btn {
+    margin-top: -11%;
+    margin-right: -11%;
+  }
+  .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-NameUserInfoBody .col-sm-12 {
+    padding: 0;
   }
 }
 

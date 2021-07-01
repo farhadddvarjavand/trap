@@ -160,7 +160,8 @@ class LoginPage2 extends Component {
                         </MDBRow>
                         <MDBRow className={"fv-loginPageBodyOne"}>
                             <p className={this.state.validCode === false ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>
-                                <i className="fas fa-exclamation-triangle"/>{this.state.errorsText}</p>
+                                <i style={{color: 'mediumvioletred'}}
+                                   className="fas fa-exclamation-triangle"/>{this.state.errorsText}</p>
                             <MDBCol sm={12} className={"fv-loginPage2RightBody"}>
                                 <h3>تایید شماره موبایل</h3>
                                 <MDBRow>

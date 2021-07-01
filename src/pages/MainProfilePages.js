@@ -31,6 +31,7 @@ import ScrollToTop from "../componentsPages/ScrollToTop";
 import MobileLogo from "../images/MobileLogo.png";
 import FotterpageLogo from "../images/Logo.png"
 import ProfilePageChargeWallet from "./ProfilePageChargeWallet";
+import ProfilePageWalletEdit from "./ProfilePageWalletEdit";
 
 const commaNumber = require('comma-number')
 
@@ -51,6 +52,8 @@ class MainProfilePages extends Component {
             onclickHandel: false,
             nameAndFamily: '',
             AvatarSrc: '',
+            c: '',
+            username: '',
 
             ProfilePageReservationHandlePageSwitch: '',
             clickLoaderAvatar: false,
@@ -65,11 +68,13 @@ class MainProfilePages extends Component {
         const info = JSON.parse(localStorage.getItem("infoUser"))
         let nameAndFamily = ""
         let avatar = ""
+        let username = ""
         if (info) {
             nameAndFamily = info.userInfo.fullname
             avatar = info.userInfo.avatar
+            username = info.userInfo.trapp_id
         }
-        this.setState({nameAndFamily: nameAndFamily, AvatarSrc: avatar})
+        this.setState({nameAndFamily: nameAndFamily, AvatarSrc: avatar, username: username})
 
         getUserStock()
             .then(res => {
@@ -88,6 +93,9 @@ class MainProfilePages extends Component {
     }
     ChangeUserAvatarSrc = (avatarSrc) => {
         this.setState({AvatarSrc: avatarSrc})
+    }
+    ChangeUserUsername = (usernames) => {
+        this.setState({username: usernames})
     }
     ChangeAmountPrice = () => {
         getUserStock()
@@ -173,10 +181,7 @@ class MainProfilePages extends Component {
 
     render() {
 
-
         return (
-
-
             <React.StrictMode>
                 <BrowserRouter>
 
@@ -187,7 +192,7 @@ class MainProfilePages extends Component {
 
                                 {/*   <HeaderSearch {...this.props} /> */}
 
-                                {/*             **************************** header *****************                     */}
+                                {/*             **************************** Main header *****************                     */}
 
 
                                 <div
@@ -302,7 +307,7 @@ class MainProfilePages extends Component {
                                                 <MDBContainer
                                                     className={"fv-hostStep5Page3Images fv-inputProfilePageAvatar"}>
                                                     <label htmlFor="myInput">
-                                                        <label htmlFor="files2"
+                                                        <label style={{fontSize: '13px'}} htmlFor="files2"
                                                                className={this.state.clickLoaderAvatar ? "fv-hideLoader" : "btn"}>
                                                             <i className="fas fa-edit"/> تغییر تصویر
                                                         </label>
@@ -328,9 +333,26 @@ class MainProfilePages extends Component {
 
 
                                         <h5 style={{
-                                            marginTop: '7%',
-                                            marginBottom: '10%'
+                                            marginTop: '5%',
+                                            marginBottom: '2%'
                                         }}>{this.state.nameAndFamily}</h5>
+
+                                        <MDBRow style={{textAlign: 'center'}}>
+                                            <MDBCol md={12}>
+                                                <p style={{
+                                                    fontSize: '15px',
+                                                    display: 'inline-flex',
+                                                    width: '100%',
+                                                    placeContent: 'center'
+                                                }}><p> نام کاربری </p>
+                                                    <h6 style={{
+                                                        marginRight: '6%',
+                                                        marginTop: '1.5%',
+                                                        marginLeft: '6%'
+                                                    }}>{this.state.username}</h6>
+                                                </p>
+                                            </MDBCol>
+                                        </MDBRow>
 
 
                                         <MDBRow className={"fv-ProfilePageUserHoldingInfo"}>
@@ -465,7 +487,7 @@ class MainProfilePages extends Component {
                                             <MDBContainer
                                                 className={"fv-hostStep5Page3Images fv-inputProfilePageAvatar"}>
                                                 <label htmlFor="myInput">
-                                                    <label htmlFor="files2"
+                                                    <label style={{fontSize: '15px'}} htmlFor="files2"
                                                            className={this.state.clickLoaderAvatar ? "fv-hideLoader" : "btn"}>
                                                         <i className="fas fa-edit"/> تغییر تصویر
                                                     </label>
@@ -490,7 +512,23 @@ class MainProfilePages extends Component {
                                     }
 
 
-                                    <h5 style={{marginTop: '7%', marginBottom: '10%'}}>{this.state.nameAndFamily}</h5>
+                                    <h5 style={{marginTop: '0%', marginBottom: '2%'}}>{this.state.nameAndFamily}</h5>
+                                    <MDBRow style={{textAlign: 'center'}}>
+                                        <MDBCol md={12}>
+                                            <p style={{
+                                                fontSize: '15px',
+                                                display: 'inline-flex',
+                                                width: '100%',
+                                                placeContent: 'center'
+                                            }}><p> نام کاربری </p>
+                                                <h6 style={{
+                                                    marginRight: '6%',
+                                                    marginTop: '1.5%'
+                                                }}>{this.state.username}</h6>
+                                            </p>
+                                        </MDBCol>
+                                    </MDBRow>
+
                                     <MDBRow className={"fv-ProfilePageUserHoldingInfo"}>
                                         <MDBCol md={12}>
                                             <p>موجودی حساب شما</p>
@@ -622,6 +660,8 @@ class MainProfilePages extends Component {
                                                component={ProfilePageWallet}/>
                                         <Route exact path={'/MainProfilePages/ProfileWalletTransactionRegistration'}
                                                component={ProfilePageWallet2}/>
+                                        <Route exact path={'/MainProfilePages/ProfilePageWalletEdit/:id'}
+                                               component={ProfilePageWalletEdit}/>
 
                                         <Route exact path={'/MainProfilePages/profileWalletRequestWithdraw'}
                                                render={(props) => (
@@ -635,6 +675,7 @@ class MainProfilePages extends Component {
                                         <Route exact path={'/MainProfilePages/profile'} render={(props) => (
                                             <ProfilePage ChangeUserNameAndFamily={this.ChangeUserNameAndFamily}
                                                          ChangeUserAvatarSrc={this.ChangeUserAvatarSrc}
+                                                         ChangeUserUsernameInfo={this.ChangeUserUsername}
                                             />
                                         )}/>
 

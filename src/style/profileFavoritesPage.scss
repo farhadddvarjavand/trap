@@ -86,6 +86,13 @@
   }
 }
 
+@media (max-width: 1200px) and (min-width: 768px) {
+  .fv-getFinancialReportsDeleteAndEditColumn {
+    display: flex;
+  }
+}
+
+
 @media (max-width: 989px) and (min-width: 768px) {
   .fv-profileFavoritesPage .fv-product {
     width: 120%;

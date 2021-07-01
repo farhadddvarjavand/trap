@@ -379,5 +379,23 @@ export const getCities = async (id) => {
     );
 }
 
-
-
+/* for update and delete financial reports */
+export const getFinancialReport = async (id) => {
+    return http.get(
+        `${config.webapi}/api/v1/user/getFinancialReport/${id}`,
+        {headers: {'Authorization': await getToken()}}
+    );
+}
+export const updateFinancialReport = async (data, id) => {
+    return http.post(
+        `${config.webapi}/api/v1/user/updateFinancialReport/${id}`,
+        JSON.stringify(data),
+        {headers: {'Authorization': await getToken()}}
+    );
+}
+export const deleteFinancialReport = async (id) => {
+    return http.post(
+        `${config.webapi}/api/v1/user/deleteFinancialReport/${id}`,
+        {headers: {'Authorization': await getToken()}}
+    );
+}

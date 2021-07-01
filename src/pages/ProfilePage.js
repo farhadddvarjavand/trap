@@ -19,6 +19,7 @@ class ProfilePage extends Component {
             ...this.state,
             ...this.props,
             nameAndFamily: '',
+            username: '',
             mobileNumber: '',
             emailAddress: '',
             nationalCode: '',
@@ -28,7 +29,9 @@ class ProfilePage extends Component {
             cardNumber: '',
             shabaNumber: '',
             errorField: '',
+            allErrors: '',
 
+            setCorrectlyInfo: false,
             clickLoaderAvatar: false,
             avatarImageData: '',
 
@@ -60,6 +63,7 @@ class ProfilePage extends Component {
                     foreignTab: res.data.foreign_language,
                     cardNumber: res.data.card_number,
                     shabaNumber: res.data.shaba_number,
+                    username: res.data.trapp_id,
 
 
                     UserInfo: res.data,
@@ -71,6 +75,13 @@ class ProfilePage extends Component {
     }
     handleError = (errorData) => {
         const errors = []
+
+        if (errorData.trapp_id) {
+            errors.push('trappid')
+        }
+        if (errorData.card_number) {
+            errors.push('cardNumber')
+        }
         if (errorData.card_number) {
             errors.push('cardNumber')
         }
@@ -89,7 +100,12 @@ class ProfilePage extends Component {
         if (errorData.shaba_number) {
             errors.push('shabaNumber')
         }
-        this.setState({errorField: errors, waitingButtonClick: false, waitingButtonStoreClick: false})
+        this.setState({
+            errorField: errors,
+            waitingButtonClick: false,
+            waitingButtonStoreClick: false,
+            allErrors: errorData
+        })
     }
 
     fileSelectedHandler = (event) => {
@@ -149,6 +165,7 @@ class ProfilePage extends Component {
     };
 
     render() {
+
         let IR = "IR-"
         const info = JSON.parse(localStorage.getItem("infoUser"))
         // let fullName =  ""
@@ -170,27 +187,70 @@ class ProfilePage extends Component {
                         <div className={"fv-ProfilePageLeftBody"}>
 
                             <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo fv-profilePageInner"}>
-                                <p className={this.state.errorField ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>لطفا
+                                <p className={this.state.errorField && !this.state.setCorrectlyInfo ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>لطفا
                                     کادر های قرمز را به درستی پر کنید</p>
+                                <p className={this.state.allErrors.trapp_id && !this.state.setCorrectlyInfo ? "fv-alertErrorTextDiscussion" : 'fv-alertNotErrorText'}>
+                                    <i style={{marginLeft: '2%', color: 'mediumvioletred'}}
+                                       className="fas fa-exclamation-triangle"/>{this.state.allErrors.trapp_id ? this.state.allErrors.trapp_id[0] : ''}
+                                </p>
+                                <p className={this.state.allErrors.card_number && !this.state.setCorrectlyInfo ? "fv-alertErrorTextDiscussion" : 'fv-alertNotErrorText'}>
+                                    <i style={{marginLeft: '2%', color: 'mediumvioletred'}}
+                                       className="fas fa-exclamation-triangle"/>{this.state.allErrors.card_number ? this.state.allErrors.card_number[0] : ''}
+                                </p>
+                                <p className={this.state.allErrors.email && !this.state.setCorrectlyInfo ? "fv-alertErrorTextDiscussion" : 'fv-alertNotErrorText'}>
+                                    <i style={{marginLeft: '2%', color: 'mediumvioletred'}}
+                                       className="fas fa-exclamation-triangle"/>{this.state.allErrors.email ? this.state.allErrors.email[0] : ''}
+                                </p>
+                                <p className={this.state.allErrors.fullname && !this.state.setCorrectlyInfo ? "fv-alertErrorTextDiscussion" : 'fv-alertNotErrorText'}>
+                                    <i style={{marginLeft: '2%', color: 'mediumvioletred'}}
+                                       className="fas fa-exclamation-triangle"/>{this.state.allErrors.fullname ? this.state.allErrors.fullname[0] : ''}
+                                </p>
+                                <p className={this.state.allErrors.national_code && !this.state.setCorrectlyInfo ? "fv-alertErrorTextDiscussion" : 'fv-alertNotErrorText'}>
+                                    <i style={{marginLeft: '2%', color: 'mediumvioletred'}}
+                                       className="fas fa-exclamation-triangle"/>{this.state.allErrors.national_code ? this.state.allErrors.national_code[0] : ''}
+                                </p>
+                                <p className={this.state.allErrors.phone_number && !this.state.setCorrectlyInfo ? "fv-alertErrorTextDiscussion" : 'fv-alertNotErrorText'}>
+                                    <i style={{marginLeft: '2%', color: 'mediumvioletred'}}
+                                       className="fas fa-exclamation-triangle"/>{this.state.allErrors.phone_number ? this.state.allErrors.phone_number[0] : ''}
+                                </p>
+                                <p className={this.state.allErrors.shaba_number && !this.state.setCorrectlyInfo ? "fv-alertErrorTextDiscussion" : 'fv-alertNotErrorText'}>
+                                    <i style={{marginLeft: '2%', color: 'mediumvioletred'}}
+                                       className="fas fa-exclamation-triangle"/>{this.state.allErrors.shaba_number ? this.state.allErrors.shaba_number[0] : ''}
+                                </p>
+
+
                                 <h6 className={"fv-userInfoText"}>اطلاعات کاربری</h6>
-                                <h6>نام و نام خانوادگی</h6>
-                                <input type="text"
-                                       className={this.state.errorField.includes('fullname') === true ? "fv-redBorderError" : ''}
-                                       value={this.state.nameAndFamily}
-                                       onChange={(e) => this.setState({nameAndFamily: e.target.value})}/>
+                                <MDBRow className={"fv-NameUserInfoBody"}>
+                                    <MDBCol md={4} sm={12}>
+                                        <h6>نام و نام خانوادگی</h6>
+                                        <input type="text"
+                                               className={this.state.errorField.includes('fullname') === true && !this.state.setCorrectlyInfo ? "fv-redBorderError" : ''}
+                                               value={this.state.nameAndFamily}
+                                               onChange={(e) => this.setState({nameAndFamily: e.target.value})}/>
+                                    </MDBCol>
+                                    {console.log(this.state.errorField)}
+                                    <MDBCol md={4} sm={12}>
+                                        <h6>نام کاربری</h6>
+                                        <input type="text"
+                                               className={this.state.errorField.includes('trappid') === true && !this.state.setCorrectlyInfo ? "fv-redBorderError" : ''}
+                                               value={this.state.username}
+                                               onChange={(e) => this.setState({username: e.target.value})}/>
+                                    </MDBCol>
+                                </MDBRow>
+
                                 <h6>شماره موبایل</h6>
                                 <input type="number"
-                                       className={this.state.errorField.includes('phoneNumber') === true ? "fv-redBorderError" : 'fv-english-number'}
+                                       className={this.state.errorField.includes('phoneNumber') === true && !this.state.setCorrectlyInfo ? "fv-redBorderError" : 'fv-english-number'}
                                        value={this.state.mobileNumber}
                                        onChange={(e) => this.setState({mobileNumber: digitsFaToEn(e.target.value)})}/>
                                 <h6>آدرس ایمیل</h6>
                                 <input type="email"
-                                       className={this.state.errorField.includes('email') === true ? "fv-redBorderError" : ''}
+                                       className={this.state.errorField.includes('email') === true && !this.state.setCorrectlyInfo ? "fv-redBorderError" : ''}
                                        value={this.state.emailAddress}
                                        onChange={(e) => this.setState({emailAddress: e.target.value})}/>
                                 <h6>کد ملی</h6>
-                                <input type="text" value={this.state.nationalCode}
-                                       className={this.state.errorField.includes('notionalCode') === true ? "fv-redBorderError fv-english-number" : 'fv-english-number'}
+                                <input type="number" value={this.state.nationalCode}
+                                       className={this.state.errorField.includes('notionalCode') === true && !this.state.setCorrectlyInfo ? "fv-redBorderError fv-english-number" : 'fv-english-number'}
                                        onChange={(e) => this.setState({nationalCode: e.target.value})}/>
                                 <h6>شغل</h6>
                                 <input type="text" value={this.state.job}
@@ -203,11 +263,11 @@ class ProfilePage extends Component {
                                        onChange={(e) => this.setState({foreignTab: e.target.value})}/>
                                 <h6>شماره کارت</h6>
                                 <input type="text" value={this.state.cardNumber}
-                                       className={this.state.errorField.includes('cardNumber') === true ? "fv-redBorderError fv-english-number" : 'fv-english-number'}
+                                       className={this.state.errorField.includes('cardNumber') === true && !this.state.setCorrectlyInfo ? "fv-redBorderError fv-english-number" : 'fv-english-number'}
                                        onChange={(e) => this.setState({cardNumber: e.target.value})}/>
                                 <h6>شماره شبا</h6>
                                 <input type="text" value={`${IR}${this.state.shabaNumber}`}
-                                       className={this.state.errorField.includes('shabaNumber') === true ? "fv-redBorderError fv-english-number" : 'fv-english-number'}
+                                       className={this.state.errorField.includes('shabaNumber') === true && !this.state.setCorrectlyInfo ? "fv-redBorderError fv-english-number" : 'fv-english-number'}
                                        onChange={(e) => {
                                            if (e.target.value !== 'IR') {
                                                let mystring = e.target.value.replace('IR-', '');
@@ -246,7 +306,8 @@ class ProfilePage extends Component {
                                                onClick={() => {
                                                    this.setState({
                                                        waitingButtonClick: true,
-                                                       waitingButtonStoreClick: true
+                                                       waitingButtonStoreClick: true,
+                                                       setCorrectlyInfo: false,
                                                    })
 
                                                    if (this.state.clickLoaderAvatar) {  // agar karbar zamani ke ax dar hale upload ast click konad
@@ -265,6 +326,7 @@ class ProfilePage extends Component {
                                                            card_number: cardNumber,
                                                            shaba_number: shabaNumber,
                                                            avatar: this.state.avatarImageData,
+                                                           trapp_id: this.state.username,
                                                        }
 
 
@@ -277,6 +339,7 @@ class ProfilePage extends Component {
                                                        const userInfo = {
                                                            avatar: setAvatar,
                                                            fullname: data.fullname,
+                                                           trapp_id: data.trapp_id,
                                                        }
 
                                                        const dataInfoUpdate = {
@@ -292,10 +355,11 @@ class ProfilePage extends Component {
                                                                    localStorage.setItem("infoUser", JSON.stringify(dataInfoUpdate))
                                                                    this.setState({
                                                                        waitingButtonClick: false,
-                                                                       waitingButtonStoreClick: false
+                                                                       waitingButtonStoreClick: false,
+                                                                       setCorrectlyInfo: true
                                                                    })
                                                                    this.props.ChangeUserNameAndFamily(userInfo.fullname)
-
+                                                                   this.props.ChangeUserUsernameInfo(userInfo.trapp_id)
                                                                    alert("اطلاعات شما با موفقیت به روزرسانی شد")
                                                                    this.authentication()
                                                                }

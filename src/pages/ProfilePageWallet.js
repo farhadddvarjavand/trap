@@ -8,7 +8,13 @@ import "../style/ProfilePageWallet.scss"
 import WalletPic1 from "../images/03.png"
 import WalletPic2 from "../images/02.png"
 import WalletPic3 from "../images/01.png"
-import {financialReportsSearch, getFinancialReports, userVillas, villaIncome} from "../services/userService";
+import {
+    deleteFinancialReport,
+    financialReportsSearch,
+    getFinancialReports,
+    userVillas,
+    villaIncome
+} from "../services/userService";
 import CalendarLinear from "../data/CalenddarLinear";
 import {WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
 
@@ -35,9 +41,12 @@ class ProfilePageWallet extends Component {
                 month: '',
                 year: ''
             },
+            FinancialReportDeleteId: '',
             switchPage: '',
             waitingForLoad: true,
             waitingForSearch: false,
+            onClickTrash: false,
+
         }
     }
 
@@ -118,7 +127,8 @@ class ProfilePageWallet extends Component {
                         <div className={"fv-ProfilePageLeftBody"}>
                             <MDBCol md={8} sm={12}
                                     className={"fv-ProfilePageUserSetInfo fv-ProfilePageReservationUserInfo"}>
-                                <MDBRow className={"fv-ProfilePageReservationSetInfo"}>
+                                <MDBRow
+                                    className={this.state.onClickTrash ? 'fv-blurAllPage fv-ProfilePageReservationSetInfo' : "fv-ProfilePageReservationSetInfo"}>
                                     <MDBCol md={4} sm={12} className={""}>
 
                                         <select className={"fv-accommodationsSelectOptionInSearch"}
@@ -152,7 +162,8 @@ class ProfilePageWallet extends Component {
                                         <CalendarLinear dayToReturn={this.selectDayToReturn} text={'تا تاریخ'}/>
                                     </MDBCol>
                                     <MDBCol md={2} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
-                                        <input type="button" value="جستجو" onClick={() => {
+                                        <input type="button" disabled={this.state.onClickTrash ? true : false}
+                                               value="جستجو" onClick={() => {
                                             this.setState({waitingForSearch: true})
                                             let setTitle = ''
                                             let setDateToGo = ''
@@ -200,7 +211,8 @@ class ProfilePageWallet extends Component {
                                 </MDBRow>
 
                                 {this.state.getFinancialReportsTopPage.map(getFinancialReportsTopPages => {
-                                    return <MDBRow className={"fv-ProfilePageWalletWalletImage"}>
+                                    return <MDBRow
+                                        className={this.state.onClickTrash ? 'fv-blurAllPage fv-ProfilePageWalletWalletImage' : "fv-ProfilePageWalletWalletImage"}>
                                         <MDBCol md={4} sm={4} className={"fv-ProfilePageWalletWalletImageMobile"}>
                                             <MDBRow className={"fv-ProfilePageWalletWalletImageP"}>
                                                 <MDBCol md={12}>
@@ -242,19 +254,56 @@ class ProfilePageWallet extends Component {
                                 {this.state.waitingForSearch ? WaitingLoadingProfilePage(this.state.waitingForSearch, "fv-waitingLoadPublicFullScreen fv-waitingForSearchReservation") : ""}
                                 {!this.state.waitingForSearch ?
                                     <>
-                                        <MDBRow>
+                                        <MDBRow className={this.state.onClickTrash ? 'fv-blurAllPage' : ''}>
                                             <MDBCol>
                                                 <h5>ریز گزارشات مالی</h5>
                                             </MDBCol>
                                         </MDBRow>
 
 
-                                        <table>
+                                        <MDBContainer
+                                            className={this.state.onClickTrash ? 'fv-areYouSureDeleteFinancial' : "fv-areYouSureDeleteFinancialHide"}>
+                                            <MDBRow className={"fv-areYouSureDeleteFinancialTitle"}>
+                                                <MDBCol>
+                                                    <p className={"h7"}>حذف تراکنش</p>
+                                                </MDBCol>
+                                            </MDBRow>
+
+                                            <div>
+                                                <MDBRow>
+                                                    <MDBCol>
+                                                        <h6>آیا از حذف تراکنش مورد نظر مطمئن هستید؟</h6>
+                                                    </MDBCol>
+                                                </MDBRow>
+
+                                                <MDBRow>
+                                                    <MDBCol className={"fv-SureButton"}>
+                                                        <input type={"button"} value={"بله"} onClick={() => {
+                                                            deleteFinancialReport(this.state.FinancialReportDeleteId)
+                                                                .then(res => {
+                                                                    console.log(res)
+                                                                    this.getFinancialReports()
+                                                                    this.setState({onClickTrash: false})
+                                                                })
+                                                                .catch(err => console.log(err.response))
+                                                        }}/>
+                                                    </MDBCol>
+                                                    <MDBCol className={"fv-notSureButton"}>
+                                                        <input type={"button"} value={"خیر"} onClick={() => {
+                                                            this.setState({onClickTrash: false})
+                                                        }}/>
+                                                    </MDBCol>
+                                                </MDBRow>
+                                            </div>
+                                        </MDBContainer>
+
+                                        <table className={this.state.onClickTrash ? 'fv-blurAllPage' : ''}>
                                             <tr className={"fv-tableTitle"}>
                                                 <th><h6>تاریخ تراکنش</h6></th>
                                                 <th><h6>منبع تراکنش</h6></th>
                                                 <th className={"fv-tableDiscriptions"}><h6>شرح تراکنش</h6></th>
                                                 <th><h6>مبلغ</h6></th>
+                                                <th></th>
                                             </tr>
                                             {this.state.getFinancialReports.map(getFinancialReport => {
                                                 return <tr>
@@ -262,14 +311,33 @@ class ProfilePageWallet extends Component {
                                                     <td>{getFinancialReport.src}</td>
                                                     <td>{getFinancialReport.description}</td>
                                                     <td>{commaNumber(getFinancialReport.amount)}</td>
+                                                    <td className={"fv-getFinancialReportsDeleteAndEditColumn"}><a
+                                                        onClick={() => {
+                                                            if (this.state.onClickTrash === false) {
+                                                                this.props.history.push(`/MainProfilePages/ProfilePageWalletEdit/${getFinancialReport.id}`)
+                                                            }
+                                                        }}><i
+                                                        style={{fontSize: '20px', marginRight: '-8%'}}
+                                                        className="fas fa-edit"/></a>
+                                                        <a onClick={() => {
+                                                            if (this.state.onClickTrash === false) {
+                                                                this.setState({
+                                                                    onClickTrash: true,
+                                                                    FinancialReportDeleteId: getFinancialReport.id
+                                                                })
+                                                            }
+                                                        }}><i style={{fontSize: '20px', marginRight: '31%'}}
+                                                              className="fa fa-trash"/></a></td>
                                                 </tr>
                                             })}
 
                                         </table>
-                                        <MDBRow className={"fv-ProfilePageWalletWalletButton"}>
+                                        <MDBRow
+                                            className={this.state.onClickTrash ? 'fv-blurAllPage fv-ProfilePageWalletWalletButton' : "fv-ProfilePageWalletWalletButton"}>
                                             <MDBCol md={3} sm={12}
                                                     className={"fv-ProfilePageUserSetInfoButton fv-ProfilePageWalletWalletButtonWith"}>
-                                                <input type="button" value="ثبت تراکنش جدید" onClick={() => {
+                                                <input type="button" disabled={this.state.onClickTrash ? true : false}
+                                                       value="ثبت تراکنش جدید" onClick={() => {
                                                     // this.setState({switchPage:'ProfileWalletTransactionRegistration'})
                                                     this.props.history.push('/MainProfilePages/ProfileWalletTransactionRegistration')
                                                 }}/>

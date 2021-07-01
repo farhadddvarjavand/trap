@@ -92,7 +92,8 @@ class LoginPage extends Component {
                         </MDBRow>
                         <MDBRow className={"fv-loginPageBodyOne"}>
                             <p className={this.state.validNumber === false ? "fv-alertErrorText" : 'fv-alertNotErrorText'}>
-                                <i className="fas fa-exclamation-triangle"/>شماره مورد نظر نامعتبر میباشد</p>
+                                <i style={{color: 'mediumvioletred'}} className="fas fa-exclamation-triangle"/>شماره
+                                مورد نظر نامعتبر میباشد</p>
 
                             <MDBCol sm={12}>
                                 <h3>ورود به حساب کاربری</h3>

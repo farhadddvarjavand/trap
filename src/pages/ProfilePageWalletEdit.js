@@ -5,10 +5,10 @@ import "../style/DisplayPage.css"
 import "../style/ProfilePage.scss"
 import "../style/ProfilePageWallet2.scss"
 import CalendarLinear from "../data/CalenddarLinear";
-import {setFinancialReports, userVillas} from "../services/userService";
+import {getFinancialReport, updateFinancialReport, userVillas} from "../services/userService";
 import {waitingForCalculate} from "../componentsPages/WaitingLoad";
 
-class ProfilePageWallet2 extends Component {
+class ProfilePageWalletEdit extends Component {
     constructor(props) {
         super(props);
         if (!JSON.parse(localStorage.getItem("info"))) {
@@ -20,6 +20,7 @@ class ProfilePageWallet2 extends Component {
             transactionAmount: '',
             transactionDescription: '',
             villasUser: [],
+            financialDate: '',
 
             date: {
                 day: 1400,
@@ -33,7 +34,28 @@ class ProfilePageWallet2 extends Component {
         }
     }
 
+    componentDidMount() {
+        getFinancialReport(this.props.match.params.id)
+            .then(res => {
+                console.log(res)
+                let date = res.data.data.date.split("/")
+                this.setState({
+                    transactionAmount: res.data.data.amount,
+                    financialDate: {dayToGo: res.data.data.date},
+                    sourceOfTransaction: res.data.data.src,
+                    transactionDescription: res.data.data.description,
+                    date: {
+                        day: date[2],
+                        month: date[1],
+                        year: date[0],
+                    },
+                })
+
+            })
+    }
+
     componentWillMount() {
+
         userVillas()
             .then(res => {
                 if (res.data.data)
@@ -56,9 +78,23 @@ class ProfilePageWallet2 extends Component {
         }
     }
 
+    selectDay = (date) => {                                    // set date to go
+        console.log(date)
+        if (date) {
+            this.setState({
+                financialDate: `${date.year}/${date.month}/${date.day}`,
+                date: {
+                    day: date.day,
+                    month: date.month,
+                    year: date.year,
+                },
+            })
+        }
+    }
+
+
     render() {
         let tomanText = "تومان  "
-        // console.log(this.state.sourceOfTransaction)
         return (
             <div
                 className={"fv-SearchHomePage fv-DisplayPage fv-ProfilePage fv-ProfilePageReservation fv-ProfilePageTransaction fv-ProfilePageTransaction2 fv-ProfilePageWallet fv-ProfilePageWallet2"}>
@@ -83,11 +119,13 @@ class ProfilePageWallet2 extends Component {
                                             })
                                     })
                                 }}>
-                            <option value='title'>نام اقامت گاه</option>
+                            <option
+                                value={this.state.villaId}>{this.state.sourceOfTransaction !== "title" ? this.state.sourceOfTransaction : ''}</option>
                             {this.state.villasUser.map(vilauser => {
                                 return <option value={vilauser.id}>{vilauser.title}</option>
                             })}
                         </select>
+
 
                         <p className={"h7"}>مبلغ تراکنش</p>
                         <input type="text"
@@ -103,8 +141,14 @@ class ProfilePageWallet2 extends Component {
                                }}/>
                         <p className={"h7"}>تاریخ تراکنش</p>
 
-                        <div className={"fv-calendarInProfilePageWallet2"}><CalendarLinear dayToGo={this.selectDay}
-                                                                                           text={'انتخاب روز'}/></div>
+                        {this.state.financialDate ?
+                            <div className={"fv-calendarInProfilePageWallet2"}><CalendarLinear dayToGo={this.selectDay}
+                                                                                               searchData={this.state.financialDate}
+                                                                                               text={'انتخاب روز'}/>
+                            </div>
+                            : ''
+                        }
+
                         <p className={"h7"}>شرح تراکنش</p>
                         <MDBRow className={"fv-ProfilePageWallet2TextArea"}>
                             <MDBCol>
@@ -119,7 +163,7 @@ class ProfilePageWallet2 extends Component {
                         <MDBRow>
                             <MDBCol md={12} sm={12} className={"fv-ProfilePageUserSetInfoButton"}>
                                 {waitingForCalculate(this.state.waitingButton, "fv-waitingButtonWalletPage")}
-                                <input type="button" value="ذخیره تراکنش"
+                                <input type="button" value="بروزرسانی تراکنش"
                                        className={this.state.waitingButton ? "fv-hideForWaiting" : ""} onClick={() => {
                                     this.setState({waitingButton: true})
                                     const setDate = this.state.date.year + "/" + this.state.date.month + "/" + this.state.date.day
@@ -137,15 +181,17 @@ class ProfilePageWallet2 extends Component {
                                         amount: this.state.transactionAmount,
                                     }
                                     console.log(data)
-                                    setFinancialReports(data)
+                                    updateFinancialReport(data, this.props.match.params.id)
                                         .then(res => {
+                                            console.log(res)
                                             if (res.status) {
-                                                alert("تراکنش شما با موفقیت ثبت گردید")
+                                                alert("تراکنش شما با موفقیت بروزرسانی شد")
                                                 this.props.history.push('/MainProfilePages/ProfileWallet')
                                                 this.setState({waitingButton: false})
                                             }
                                         })
                                         .catch(err => {
+                                            console.log(err.response)
                                             this.setState({waitingButton: false})
                                             if (err.response.data) {
                                                 if (err.response.data.errors)
@@ -176,4 +222,4 @@ class ProfilePageWallet2 extends Component {
     }
 }
 
-export default ProfilePageWallet2
+export default ProfilePageWalletEdit
