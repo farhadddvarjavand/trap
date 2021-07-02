@@ -106,16 +106,22 @@ class ProfilePageWalletEdit extends Component {
 
                         <select className={"fv-accommodationOption"} value={this.state.villaId}
                                 onChange={(e) => {
-                                    this.setState({villaId: e.target.value}, () => {
+                                    this.setState({villaId: e.target.value, waitingButton: true}, () => {
                                         userVillas()
                                             .then(res => {
                                                 if (res.data.data) {
                                                     res.data.data.map(data => {
                                                         if (data.id === Number(this.state.villaId)) {
-                                                            this.setState({sourceOfTransaction: data.title})
+                                                            this.setState({
+                                                                sourceOfTransaction: data.title,
+                                                                waitingButton: false
+                                                            })
                                                         }
                                                     })
                                                 }
+                                            })
+                                            .catch(err => {
+                                                this.setState({waitingButton: false})
                                             })
                                     })
                                 }}>

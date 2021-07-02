@@ -393,9 +393,10 @@ export const updateFinancialReport = async (data, id) => {
         {headers: {'Authorization': await getToken()}}
     );
 }
-export const deleteFinancialReport = async (id) => {
+export const deleteFinancialReport = async (id, data) => {
     return http.post(
         `${config.webapi}/api/v1/user/deleteFinancialReport/${id}`,
+        JSON.stringify(data),
         {headers: {'Authorization': await getToken()}}
     );
 }

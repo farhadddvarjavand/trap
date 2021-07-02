@@ -284,6 +284,7 @@ class ProfilePageWallet extends Component {
                                                                     console.log(res)
                                                                     this.getFinancialReports()
                                                                     this.setState({onClickTrash: false})
+                                                                    alert("تراکنش مورد نظر شما با موفقیت حذف شد")
                                                                 })
                                                                 .catch(err => console.log(err.response))
                                                         }}/>
