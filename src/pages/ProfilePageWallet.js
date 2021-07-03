@@ -16,7 +16,7 @@ import {
     villaIncome
 } from "../services/userService";
 import CalendarLinear from "../data/CalenddarLinear";
-import {WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
+import {Waiting, WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
 
 const commaNumber = require('comma-number')
 
@@ -46,6 +46,7 @@ class ProfilePageWallet extends Component {
             waitingForLoad: true,
             waitingForSearch: false,
             onClickTrash: false,
+            clickYesSureTrashButton: false,
 
         }
     }
@@ -277,23 +278,38 @@ class ProfilePageWallet extends Component {
                                                 </MDBRow>
 
                                                 <MDBRow>
-                                                    <MDBCol className={"fv-SureButton"}>
-                                                        <input type={"button"} value={"بله"} onClick={() => {
-                                                            deleteFinancialReport(this.state.FinancialReportDeleteId)
-                                                                .then(res => {
-                                                                    console.log(res)
-                                                                    this.getFinancialReports()
-                                                                    this.setState({onClickTrash: false})
-                                                                    alert("تراکنش مورد نظر شما با موفقیت حذف شد")
-                                                                })
-                                                                .catch(err => console.log(err.response))
-                                                        }}/>
-                                                    </MDBCol>
-                                                    <MDBCol className={"fv-notSureButton"}>
-                                                        <input type={"button"} value={"خیر"} onClick={() => {
-                                                            this.setState({onClickTrash: false})
-                                                        }}/>
-                                                    </MDBCol>
+                                                    {this.state.clickYesSureTrashButton ? // waiting baraie zadane yes dar hazf tarakonesh
+                                                        <MDBCol style={{textAlign: 'center'}} sm={12} md={12}>
+                                                            {Waiting(true, "")}
+                                                        </MDBCol>
+                                                        :
+                                                        <>
+                                                            <MDBCol className={"fv-SureButton"}>
+                                                                <input type={"button"} value={"بله"} onClick={() => {
+                                                                    this.setState({clickYesSureTrashButton: true})
+                                                                    deleteFinancialReport(this.state.FinancialReportDeleteId)
+                                                                        .then(res => {
+                                                                            console.log(res)
+                                                                            this.getFinancialReports()
+                                                                            this.setState({
+                                                                                onClickTrash: false,
+                                                                                clickYesSureTrashButton: false
+                                                                            })
+                                                                            alert("تراکنش مورد نظر شما با موفقیت حذف شد")
+                                                                        })
+                                                                        .catch(err => console.log(err.response))
+                                                                }}/>
+                                                            </MDBCol>
+                                                            <MDBCol className={"fv-notSureButton"}>
+                                                                <input type={"button"} value={"خیر"} onClick={() => {
+                                                                    this.setState({
+                                                                        onClickTrash: false,
+                                                                    })
+                                                                }}/>
+                                                            </MDBCol>
+                                                        </>
+                                                    }
+
                                                 </MDBRow>
                                             </div>
                                         </MDBContainer>

@@ -44,6 +44,7 @@ class ProfilePageWalletEdit extends Component {
                     financialDate: {dayToGo: res.data.data.date},
                     sourceOfTransaction: res.data.data.src,
                     transactionDescription: res.data.data.description,
+                    villaId: Number(res.data.data.villa_id),
                     date: {
                         day: date[2],
                         month: date[1],
@@ -91,7 +92,15 @@ class ProfilePageWalletEdit extends Component {
             })
         }
     }
+    onChange = (e) => {
+        const re = /^[0-9\b]+$/;
+        let mystring = e.target.value.replace('تومان  ', '');
+        const val = mystring.replace(/,/g, "")
 
+        if (val === '' || re.test(val)) {
+            this.setState({[e.target.name]: val})
+        }
+    }
 
     render() {
         let tomanText = "تومان  "
@@ -134,17 +143,12 @@ class ProfilePageWalletEdit extends Component {
 
 
                         <p className={"h7"}>مبلغ تراکنش</p>
-                        <input type="text"
-                               style={{direction: 'initial', paddingLeft: '3%'}}
-                               value={`${tomanText}${this.state.transactionAmount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
-                               onChange={(event) => {
-                                   if (event.target.value !== 'تومان ') {
+                        <input
+                            name={'transactionAmount'}
+                            style={{direction: 'initial', paddingLeft: '3%'}}
+                            value={this.state.transactionAmount ? `${tomanText}${this.state.transactionAmount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : ''}
+                            onChange={this.onChange} placeholder="تومان"/>
 
-                                       let mystring = event.target.value.replace('تومان  ', '');
-                                       let mystring2 = mystring.replace(/,/g, "");
-                                       this.setState({transactionAmount: mystring2})
-                                   }
-                               }}/>
                         <p className={"h7"}>تاریخ تراکنش</p>
 
                         {this.state.financialDate ?
