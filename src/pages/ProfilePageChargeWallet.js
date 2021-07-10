@@ -21,6 +21,16 @@ class ProfilePageChargeWallet extends Component {
 
     }
 
+    onChange = (e) => {
+        const re = /^[0-9\b]+$/;
+        let mystring = e.target.value.replace('تومان  ', '');
+        const val = mystring.replace(/,/g, "")
+
+        if (val === '' || re.test(val)) {
+            this.setState({[e.target.name]: val})
+        }
+    }
+
     render() {
         let tomanText = "تومان  "
         return (
@@ -32,15 +42,11 @@ class ProfilePageChargeWallet extends Component {
                     <MDBCol md={8} sm={12} className={"fv-ProfilePageUserSetInfo"}>
                         <h5 style={{marginBottom: '4%', marginTop: '3%'}}>شارژ کیف پول</h5>
                         <p className={"h7"}>میزان مبلغ درخواستی خود را بنوسید</p>
-                        <input type="text" placeholder="تومان"
-                               value={`${tomanText}${this.state.amountRequested.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
-                               onChange={(event) => {
-                                   if (event.target.value !== 'تومان ') {
-                                       let mystring = event.target.value.replace('تومان  ', '');
-                                       let mystring2 = mystring.replace(/,/g, "");
-                                       this.setState({amountRequested: mystring2})
-                                   }
-                               }}/>
+
+                        <input
+                            name={'amountRequested'}
+                            value={this.state.amountRequested ? `${tomanText}${this.state.amountRequested.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : ''}
+                            onChange={this.onChange} placeholder="تومان"/>
 
 
                         <MDBRow>

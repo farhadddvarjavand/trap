@@ -63,6 +63,13 @@ class ProfilePageTransaction2 extends Component {
             }))
         }
     }
+    onChange = (e) => {
+        const re = /^[0-9\b]+$/;
+        const val = e.target.value.replace(/,/g, "")
+        if (val === '' || re.test(val)) {
+            this.setState({[e.target.name]: val})
+        }
+    }
 
     render() {
         console.log(this.state.transactionDatas)
@@ -85,9 +92,9 @@ class ProfilePageTransaction2 extends Component {
 
 
                                     <MDBCol md={3} sm={12} className={""}>
-                                        <input type="text" placeholder="مبلغ تراکنش"
+                                        <input type="text" placeholder="مبلغ تراکنش" name={'transactionPrice'}
                                                value={this.state.transactionPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                                               onChange={(e) => this.setState({transactionPrice: e.target.value.replace(/,/g, "")})}/>
+                                               onChange={(e) => this.onChange(e)}/>
                                     </MDBCol>
                                     <MDBCol md={2} sm={12} className={"fv-ProfilePageReservationRightCalendar"}>
                                         <CalendarLinear dayToReturn={this.selectDay} text={'تاریخ تراکنش'}/>
