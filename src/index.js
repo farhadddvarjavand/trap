@@ -129,6 +129,7 @@ ReactDOM.render(
                     <Route exact path={'/ProfileWalletPageHandle'} component={ProfileWalletPageHandle}/>
                     <Route exact path={'/ProfileFavoritePageHandle'} component={ProfileFavoritePageHandle}/>
 
+
                     <Route exact path={''} component={MainPage}/>
                 </Switch>
 
