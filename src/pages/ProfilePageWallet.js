@@ -53,7 +53,41 @@ class ProfilePageWallet extends Component {
 
     //villasUsertitle:'title'   bod,
     componentDidMount() {
-        this.getFinancialReports()
+        if (this.props.location) { // اگر از طریق صفحه اقامتگاه های من آمده بود باید سرچ شود و فقط آن هایی که با این اسم هستند را نمایش دهد
+            if (this.props.location.sourceTitle) {
+
+                const data = {
+                    villa_title: this.props.location.sourceTitle.title,
+                    start_date: '',
+                    end_date: '',
+                }
+                financialReportsSearch(data)
+                    .then(res => { // برای سرچ یک اقامتگاه با اسم اقامتگاه
+                        if (res.data.data.length > 0) {
+                            let getFinancialReportsTop = []
+                            getFinancialReportsTop.push(res.data.income)
+                            console.log(res)
+                            this.setState({
+                                getFinancialReports: res.data.data,
+                                getFinancialReportsTopPage: getFinancialReportsTop,
+                                waitingForLoad: false,
+                                villasUsertitle: this.props.location.sourceTitle.title // نام اقامتگاه را نام این قررار بده
+                            })
+                        } else {
+                            // this.setState({pushPage:"empty"})
+                            this.props.history.push("/MainProfilePages/AnotherPagesEmpty")
+                        }
+                    })
+                    .catch(err => {
+                        this.setState({waitingForSearch: false})
+                        console.log(err.response)
+                    })
+
+            } else { // اگر از صفحه اقامتگاه های من به اینجا نیامده بود (حالت عادی بدون سرچ) همه اطلاعات را نمایش بده
+                this.getFinancialReports()
+            }
+        }
+
         //   this.villaIncome()
         userVillas()
             .then(res => {

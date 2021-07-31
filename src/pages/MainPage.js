@@ -25,6 +25,7 @@ import CalendarLinear from "../data/CalenddarLinear";
 import Footer from "../componentsPages/footer";
 
 import {Waiting} from "../componentsPages/WaitingLoad";
+import {getCities, getProvinces} from "../services/userService";
 
 
 const commaNumber = require('comma-number')
@@ -44,9 +45,26 @@ class MainPage extends Datas {
             onclickButtonHandle: true,
 
 
+            provincesTitle: [],
+            provincesId: 'title',
+            setProvinces: false,
+            provincesCitys: [],
+            provinces: '',
+            cityLoader: true,
+            provincesLoader: true,
+
         }
     }
 
+
+    componentDidMount() {
+        super.componentDidMount();
+        getProvinces()
+            .then(res => {
+                this.setState({provincesTitle: res.data.data, provincesLoader: false})
+
+            })
+    }
 
     selectDayToGo = (date) => {                                    // set date to go
         if (date) {
@@ -282,8 +300,78 @@ class MainPage extends Datas {
                     <MDBRow>
                         <MDBRow className={'fv-searchMainPage'}>
                             <p>اقامتگاه رویایی خود را جست و جو کنید</p>
-                            <input type='text' placeholder={'شهر یا روستا را وارد کنید'} value={city}
-                                   onChange={(event) => this.setState({city: event.target.value})}/>
+
+                            {this.state.provincesLoader ? (this.state.cityLoader ? Waiting(true, "fv-textInToCascadeOptionMainPage") : '') : // waiting select ostan(provinance)
+
+                                <select value={this.state.provincesId} onChange={(event) => {
+                                    // console.log(event.target.value)
+                                    // console.log(this.state.provincesTitle)
+                                    this.state.provincesTitle.map(getTitleProvince => {
+                                        if (Number(event.target.value) === Number(getTitleProvince.id)) {
+                                            this.setState({provinces: getTitleProvince.name, provincesLoader: true})
+                                        }
+                                    })
+                                    // console.log(event.target.name)
+                                    this.setState({cityLoader: true})
+                                    if (event.target.value !== "title") {
+                                        this.setState({validCity: true})
+                                    } else {
+                                        this.setState({validCity: false})
+                                    }
+                                    this.setState({
+                                        provincesId: event.target.value,
+                                        setProvinces: true,
+                                        setVillage: ''
+                                    }, () => {
+                                        getCities(this.state.provincesId)
+                                            .then(res => {
+                                                console.log(res)
+                                                this.setState({
+                                                    provincesCitys: res.data.data,
+                                                    setVillage: res.data.data[0].name,
+                                                    cityLoader: false
+                                                })
+                                            })
+                                            .catch(err => {
+                                                this.setState({cityLoader: false})
+                                            })
+                                    })
+
+                                }}
+                                        className={this.state.click && this.state.validCity === false ? "fv-hostStep2Page2Hidden fv-redBorderError" : "fv-hostStep2Page2Hidden"}>
+                                    <option value={this.state.state ? this.state.state : 'title'}
+                                            disabled>{this.state.state ? `${this.state.state}` : `نام استان خود را انتخاب کنید`}</option>
+                                    {this.state.provincesTitle.map(provincesTitle => {
+                                        return <option value={provincesTitle.id}
+                                                       name={provincesTitle.name}>{provincesTitle.name}</option>
+                                    })}
+                                </select>
+                            }
+
+
+                            {this.state.cityLoader ? '' :
+                                <select value={this.state.city} disabled={!this.state.setProvinces}
+                                        onChange={(event) => {
+                                            if (event.target.value !== "title" && this.state.city) {
+                                                this.setState({validCity: true})
+                                            } else {
+                                                this.setState({validCity: false})
+                                            }
+                                            this.setState({city: event.target.value})
+                                        }}
+                                        className={this.state.click && this.state.validCity === false ? "fv-hostStep2Page2Hidden fv-redBorderError" : "fv-hostStep2Page2Hidden"}>
+                                    <option value={this.state.city}
+                                            disabled>{this.state.city ? `${this.state.city}` : `نام شهر خود را انتخاب کنید`}</option>
+                                    {this.state.provincesCitys.map(provincesCitys => {
+                                        //  console.log(provincesCitys)
+                                        return <option
+                                            value={provincesCitys.name}>{provincesCitys.name}</option>
+                                    })}
+                                </select>
+                            }
+
+                            {/*    <input type='text' placeholder={'شهر یا روستا را وارد کنید'} value={city}
+                                   onChange={(event) => this.setState({city: event.target.value})}/> */}
                             <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateOut'}>
                                 <div className={"fv-DisplayPageDetailsLeftBodyDateOnInput"}><CalendarLinear
                                     dayToGo={this.selectDayToGo} text={'تاریخ رفت'}/></div>
@@ -297,38 +385,41 @@ class MainPage extends Datas {
                             </MDBCol>
                             <input type='text' placeholder={'تعداد نفرات'} value={numberOfPeople}
                                    onChange={(event) => this.setState({numberOfPeople: event.target.value})}/>
-                            <input type='button' value='جستجو اقامتگاه' className={'fv-searchMainPageSearchButton'}
-                                   onClick={() => {
-                                       const mainPageSearch = {
-                                           city: `C ${this.state.city}`,
-                                           numberOfPeople: this.state.numberOfPeople,
-                                           dateToGo: this.state.dateToGo,
-                                           dateToReturn: this.state.dateToReturn,
-                                       }
-                                       localStorage.setItem("mainPageSearch", JSON.stringify(mainPageSearch));
-                                       this.props.history.push({
-                                           pathname: "/searchHomePage/doSearch/1",
-                                           searchDatas: {
-                                               city: this.state.city,
-                                               dayToGo: mainPageSearch.dateToGo,
-                                               dateToReturn: mainPageSearch.dateToReturn,
-                                               capacity: mainPageSearch.numberOfPeople
+                            {this.state.provincesLoader && this.state.cityLoader ? Waiting(true, "fv-textInToCascadeOptionMainPage fv-searchMainPageSearchButton fv-searchButtonWaiting") : // اگر شهر سا استان را انتخاب کرد waiting اجرا شود
+                                <input type='button' value='جستجو اقامتگاه' className={'fv-searchMainPageSearchButton'}
+                                       onClick={() => {
+                                           const mainPageSearch = {
+                                               city: `C ${this.state.city}`,
+                                               numberOfPeople: this.state.numberOfPeople,
+                                               dateToGo: this.state.dateToGo,
+                                               dateToReturn: this.state.dateToReturn,
                                            }
-                                       })
-                                       /*  fetch('https://reqres.in/api/posts', {                     // POST
-                                             method: 'POST',
-                                             headers: { 'Content-Type': 'application/json' },
-                                             body: JSON.stringify({city,dateToGo,dateToReturn,numberOfPeople})
-                                         })
-                                             .then(response => response.json())
-                                             .then(data =>{
-                                                 if(data){
-                                                     console.log(city,dateToGo)
-                                                     this.props.history.push('/searchHomePage/cheapest/1')
-                                                 }
-                                             }) ; */
+                                           localStorage.setItem("mainPageSearch", JSON.stringify(mainPageSearch));
+                                           this.props.history.push({
+                                               pathname: "/searchHomePage/doSearch/1",
+                                               searchDatas: {
+                                                   city: this.state.city,
+                                                   dayToGo: mainPageSearch.dateToGo,
+                                                   dateToReturn: mainPageSearch.dateToReturn,
+                                                   capacity: mainPageSearch.numberOfPeople
+                                               }
+                                           })
+                                           /*  fetch('https://reqres.in/api/posts', {                     // POST
+                                                 method: 'POST',
+                                                 headers: { 'Content-Type': 'application/json' },
+                                                 body: JSON.stringify({city,dateToGo,dateToReturn,numberOfPeople})
+                                             })
+                                                 .then(response => response.json())
+                                                 .then(data =>{
+                                                     if(data){
+                                                         console.log(city,dateToGo)
+                                                         this.props.history.push('/searchHomePage/cheapest/1')
+                                                     }
+                                                 }) ; */
 
-                                   }}/>
+                                       }}/>
+                            }
+
                         </MDBRow>
                     </MDBRow>
                 </div>
