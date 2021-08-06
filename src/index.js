@@ -79,7 +79,6 @@ ReactDOM.render(
                     <Route exact path={'/registration'} component={LoginPage3}/> {/* loginpage3 */}
                     <Route exact path={'/factor/:id'} component={FactorPage}/>
                     <Route exact path={'/profileReservations'} component={ProfilePageReservationsRequested}/>
-
                     {/* <Route exact path={'/profileCalender/:id'} component={ProfilePageCalender}/>
                             {/* <Route exact path={'/profileShowGuestComments/:id'} component={ProfilePageGustComments2}/> */} {/* profileGustComments2 */}
                     <Route exact path={'/profileGuestComments'}
