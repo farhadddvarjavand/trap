@@ -312,6 +312,8 @@
     padding-left: 6%;
     margin-left: -7%;
     margin-right: -7%;
+    align-items: center;
+    margin-bottom: 2%;
 }
 
 .fv-footerMenuRibbon .col-md-1 {

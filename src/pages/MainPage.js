@@ -16,8 +16,6 @@ import Image1 from "../images/image1.png"
 import Image2 from "../images/image2.png"
 import Image3 from "../images/image3.png"
 import Image4 from "../images/image4.png"
-import MyaccommodationsIcon from "../images/icons/Folder.svg"
-import Logout from "../images/icons/Logout.svg"
 import {Link} from "react-router-dom";
 import Datas from "../data/Datas";
 import config from "../services/config.json"
@@ -26,6 +24,8 @@ import Footer from "../componentsPages/footer";
 
 import {Waiting} from "../componentsPages/WaitingLoad";
 import {getCities, getProvinces} from "../services/userService";
+import MyaccommodationsIcon from "../images/icons/Folder.svg";
+import Logout from "../images/icons/Logout.svg";
 
 
 const commaNumber = require('comma-number')
@@ -37,12 +37,13 @@ class MainPage extends Datas {
         this.state = {
             ...this.props,
             ...this.state,
-            buttonCommentActiveName: '',
+            buttonCommentActiveName: 'btn1',
             city: '',
             dateToGo: '',
             dateToReturn: '',
             numberOfPeople: '',
             onclickButtonHandle: true,
+            totalOfComments: 20,
 
 
             provincesTitle: [],
@@ -52,6 +53,21 @@ class MainPage extends Datas {
             provinces: '',
             cityLoader: true,
             provincesLoader: true,
+
+
+            commentsRight: [' قالب سایت معمولا با این موضوع رو برو هستند که م',
+                ' قالب سایت معمولا با این موضوع رو برو هستند که م',
+                ' قالب سایت معمولا با این موضوع رو برو هستند که م'],
+            commentsLeft: [' \n' +
+            '                                        در نتیجه طرح کلی دید درستی\n' +
+            '                                        به کار فرما نمیدهد. اگر طراح بخواهد\n' +
+            '                                        دنبال متن های مرتبط بگردد تمرکزش از روی کار اصلی برداشته',
+                ' قالب سایت معمولا با این موضوع رو برو هستند که م',
+                ' قالب سایت معمولا با این موضوع رو برو هستند که م'],
+
+            userRightPic: [Image1, Image2],
+            userLeftPic: [Image3, Image4],
+
 
         }
     }
@@ -75,6 +91,12 @@ class MainPage extends Datas {
         if (date) {
             this.setState({dateToReturn: `${date.year}/${date.month}/${date.day}`})
         }
+    }
+    onclickButtonHandleMenu = () => {
+        this.setState({onclickButtonHandle: !this.state.onclickButtonHandle})
+    }
+    onclickButtonCloseMenu = () => {
+        this.setState({onclickButtonHandle: true})
     }
 
 
@@ -125,9 +147,9 @@ class MainPage extends Datas {
          console.log(a.text)  */
 
         const pagination = []
-        const numbetOfComments = 20
-        let NumberOfButtonComment = numbetOfComments / 3
-        if ((NumberOfButtonComment % 3) > 0)
+        const numberOfComments = this.state.totalOfComments
+        let NumberOfButtonComment = numberOfComments / 2
+        if ((NumberOfButtonComment % 2) > 0)
             NumberOfButtonComment++
         for (let i = 0; i < NumberOfButtonComment - 1; i++) {
             pagination.push(i + 1)
@@ -156,6 +178,10 @@ class MainPage extends Datas {
                         </MDBCol>
                         <MDBCol md={2} className={"fv-footerMenuRibbonButton"}>
 
+                            {/*   <MainPageCascadeMenu avatar={avatar} nameAndFamily={nameAndFamily}
+                                                 onclickButtonHandleMenu={this.onclickButtonHandleMenu}
+                                                 onclickButtonCloseMenu={this.onclickButtonCloseMenu}/> */}
+
                             <a className={localStorage.getItem("token") ? "fv-userInfoButtonCascade" : "fv-hideButtonRegister"}
                                onClick={() => { // agar login bod ba click roie dokme in karo kon
                                    this.setState({onclickButtonHandle: !this.state.onclickButtonHandle})
@@ -182,6 +208,7 @@ class MainPage extends Datas {
                             <img src={FotterpageLogo}/>
                         </MDBCol>
                     </MDBRow>
+
 
                     <MDBRow className={'fv-footerMenuRibbonMobile'}>
                         <MDBCol sm={8}
@@ -212,6 +239,8 @@ class MainPage extends Datas {
                                     </MDBCol>
                                     <MDBCol className={"fv-textInToCascadeOptionMainPage"} md={8} sm={8}>
                                         <MDBRow>
+
+
                                             <MDBCol md={12}>
                                                 <a><h6>{nameAndFamily}</h6></a>
                                             </MDBCol>
@@ -701,7 +730,21 @@ class MainPage extends Datas {
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow className={"fv-comment"}>
-                                <MDBCol md={5} className={"fv-commentLeft"}>
+
+                                {pagination.map(pagination => {
+                                    if (this.state.buttonCommentActiveName.includes(pagination)) {
+                                        return <>
+                                            <MDBCol md={5} className={"fv-commentLeft"}>
+                                                <p>{this.state.commentsLeft[pagination - 1]}</p>
+                                            </MDBCol>
+                                            <MDBCol md={5}>
+                                                <p>{this.state.commentsRight[pagination - 1]}</p>
+                                            </MDBCol>
+                                        </>
+                                    }
+
+                                })}
+                                {/*  <MDBCol md={5} className={"fv-commentLeft"}>
                                     <p> قالب سایت معمولا با این موضوع رو برو هستند که م</p>
                                 </MDBCol>
                                 <MDBCol md={5}>
@@ -710,7 +753,7 @@ class MainPage extends Datas {
                                         به کار فرما نمیدهد. اگر طراح بخواهد
                                         دنبال متن های مرتبط بگردد تمرکزش از روی کار اصلی برداشته
                                         میشود و اینکار زمان بر خواهد بود. همچنین طراح به دنبال این است</p>
-                                </MDBCol>
+                                </MDBCol> */}
 
                             </MDBRow>
                             <div className={"fv-commentSvgLeft"}>
@@ -719,14 +762,30 @@ class MainPage extends Datas {
                             </div>
                             <MDBRow className={"fv-gustComment"}>
                                 {pagination.slice(1, 1)}
-                                <MDBCol md={6} className={"fv-gustNameAndInfoLeft"}>
+                                {pagination.map(pagination => {
+                                    if (this.state.buttonCommentActiveName.includes(pagination)) { // فقط برای آن کلیک که شده برود داخل
+                                        return <>
+                                            <MDBCol md={6} className={"fv-gustNameAndInfoLeft"}>
+                                                <img src={this.state.userLeftPic[pagination - 1]} width="50"
+                                                     height="50"/>
+                                                نظرات مهمان ها
+                                            </MDBCol>
+                                            <MDBCol md={6} className={"fv-gustNameAndInfoRight"}>
+                                                <img src={this.state.userRightPic[pagination - 1]} width="50"
+                                                     height="50"/>
+                                                نظرات مهمان ها
+                                            </MDBCol>
+                                        </>
+                                    }
+                                })}
+                                {/*<MDBCol md={6} className={"fv-gustNameAndInfoLeft"}>
                                     <img src={UserImage} width="50" height="50"/>
                                     نظرات مهمان ها
                                 </MDBCol>
                                 <MDBCol md={6} className={"fv-gustNameAndInfoRight"}>
                                     <img src={UserImage} width="50" height="50"/>
                                     نظرات مهمان ها
-                                </MDBCol>
+                                </MDBCol> */}
                             </MDBRow>
                             <MDBRow className={"fv-svgPagination"}>
                                 <MDBCol md={12}>
