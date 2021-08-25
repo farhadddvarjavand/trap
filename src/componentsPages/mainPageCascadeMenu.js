@@ -1,3 +1,4 @@
+// set listener for cascade menu in main page
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import config from "../services/config.json";

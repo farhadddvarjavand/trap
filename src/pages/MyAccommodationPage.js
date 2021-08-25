@@ -104,7 +104,7 @@ class MyAccommodationPage extends Component {
                                                 status={userVilla.status}
                                                 title={userVilla.title}
                                                 code={userVilla.id}
-                                                mainImg={`${config.webapi}/images/villas/main/${userVilla.main_img}`}
+                                                mainImg={`${config.webapi}/images/villas/thum/${userVilla.main_img}`}
                                                 classNameActiveTopRight={classNameActiveTopRightIn}
                                                 classNameActiveTopLeft={classNameActiveTopLeftIn}
                                                 classNameActiveBottonRight={classNameActiveBottonRightIn}

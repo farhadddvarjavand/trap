@@ -499,7 +499,7 @@ class HostStep5Page3 extends Component {
                                     <div>
                                         <label htmlFor="myInput">
                                             <img
-                                                src={pushinputNames.indexOf("mainImage") === -1 ? Logo : `${config.webapi}/images/villas/main/${pushsrc[pushinputNames.indexOf("mainImage")]}`}/>
+                                                src={pushinputNames.indexOf("mainImage") === -1 ? Logo : `${config.webapi}/images/villas/thum/${pushsrc[pushinputNames.indexOf("mainImage")]}`}/>
 
                                             <div
                                                 className={this.state.clickLoaderMainImage ? "loaderImage" : "fv-hideLoader"}>
@@ -682,7 +682,7 @@ class HostStep5Page3 extends Component {
                                         <div>
                                             <label htmlFor="myInput">
                                                 <img
-                                                    src={pushinputNames.indexOf("firstImage") === -1 ? Logo : `${config.webapi}/images/villas/main/${pushsrc[pushinputNames.indexOf("firstImage")]}`}/>
+                                                    src={pushinputNames.indexOf("firstImage") === -1 ? Logo : `${config.webapi}/images/villas/thum/${pushsrc[pushinputNames.indexOf("firstImage")]}`}/>
                                                 <div
                                                     className={this.state.clickLoaderImage1 ? "loaderImage" : "fv-hideLoader"}>
                                                     <svg className="circular" viewBox="25 25 50 50">
@@ -717,7 +717,7 @@ class HostStep5Page3 extends Component {
                                         <div>
                                             <label htmlFor="myInput">
                                                 <img
-                                                    src={pushinputNames.indexOf("secondImage") === -1 ? Logo : `${config.webapi}/images/villas/main/${pushsrc[pushinputNames.indexOf("secondImage")]}`}/>
+                                                    src={pushinputNames.indexOf("secondImage") === -1 ? Logo : `${config.webapi}/images/villas/thum/${pushsrc[pushinputNames.indexOf("secondImage")]}`}/>
 
                                                 <div
                                                     className={this.state.clickLoaderImage2 ? "loaderImage" : "fv-hideLoader"}>
@@ -753,7 +753,7 @@ class HostStep5Page3 extends Component {
                                         <div>
                                             <label htmlFor="myInput">
                                                 <img
-                                                    src={pushinputNames.indexOf("thirdImage") === -1 ? Logo : `${config.webapi}/images/villas/main/${pushsrc[pushinputNames.indexOf("thirdImage")]}`}/>
+                                                    src={pushinputNames.indexOf("thirdImage") === -1 ? Logo : `${config.webapi}/images/villas/thum/${pushsrc[pushinputNames.indexOf("thirdImage")]}`}/>
 
                                                 <div
                                                     className={this.state.clickLoaderImage3 ? "loaderImage" : "fv-hideLoader"}>
@@ -788,7 +788,7 @@ class HostStep5Page3 extends Component {
                                         <div>
                                             <label htmlFor="myInput">
                                                 <img
-                                                    src={pushinputNames.indexOf("forthImage") === -1 ? Logo : `${config.webapi}/images/villas/main/${pushsrc[pushinputNames.indexOf("forthImage")]}`}/>
+                                                    src={pushinputNames.indexOf("forthImage") === -1 ? Logo : `${config.webapi}/images/villas/thum/${pushsrc[pushinputNames.indexOf("forthImage")]}`}/>
                                                 <div
                                                     className={this.state.clickLoaderImage4 ? "loaderImage" : "fv-hideLoader"}>
                                                     <svg className="circular" viewBox="25 25 50 50">

@@ -323,7 +323,7 @@ class ProfilePageCalender extends Component {
 
                                 return <MDBRow className={"fv-ProfilePageCalenderImageAndContent"}>
                                     <MDBCol md={2} sm={3}>
-                                        <img src={`${config.webapi}/images/villas/main/${villasUser.main_img}`}/>
+                                        <img src={`${config.webapi}/images/villas/thum/${villasUser.main_img}`}/>
                                     </MDBCol>
                                     <MDBCol md={7} sm={7}>
                                         <MDBRow>
@@ -543,7 +543,7 @@ class ProfilePageCalender extends Component {
 
                                     return <MDBRow className={"fv-ProfilePageCalenderImageAndContentMobile"}>
                                         <MDBCol md={2} sm={3}>
-                                            <img src={`${config.webapi}/images/villas/main/${villasUser.main_img}`}/>
+                                            <img src={`${config.webapi}/images/villas/thum/${villasUser.main_img}`}/>
                                         </MDBCol>
                                         <MDBCol md={7} sm={7}>
                                             <MDBRow>

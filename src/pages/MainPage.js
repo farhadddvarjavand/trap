@@ -470,7 +470,7 @@ class MainPage extends Datas {
                                     this.props.history.push(`/displayPage/${productDetails.id}`)
                                 }}>
                                     <a> <Product
-                                        srcImage={`${config.webapi}/images/villas/main/${productDetails.main_img}`}
+                                        srcImage={`${config.webapi}/images/villas/thum/${productDetails.main_img}`}
                                         rate={productDetails.score}
                                         topic={productDetails.title}
                                         location={productDetails.city}
@@ -590,7 +590,7 @@ class MainPage extends Datas {
                                         this.props.history.push(`/displayPage/${discountedVilla.villa.id}`)
                                     }}>
                                         <a> <DiscountedProduct discountedAmount={discountedVilla.weekly_discount + "%"}
-                                                               srcImage={`${config.webapi}/images/villas/main/${discountedVilla.villa.main_img}`}
+                                                               srcImage={`${config.webapi}/images/villas/thum/${discountedVilla.villa.main_img}`}
                                                                rate={discountedVilla.villa.score}
                                                                topic={discountedVilla.villa.title}
                                                                location={discountedVilla.villa.city}
@@ -608,7 +608,7 @@ class MainPage extends Datas {
                                         this.props.history.push(`/displayPage/${discountedVilla.villa.id}`)
                                     }}>
                                         <a> <DiscountedProduct discountedAmount={discountedVilla.weekly_discount + "%"}
-                                                               srcImage={`${config.webapi}/images/villas/main/${discountedVilla.main_img}`}
+                                                               srcImage={`${config.webapi}/images/villas/thum/${discountedVilla.main_img}`}
                                                                rate={discountedVilla.villa.score}
                                                                topic={discountedVilla.villa.title}
                                                                location={discountedVilla.villa.city}
@@ -645,7 +645,7 @@ class MainPage extends Datas {
                                     this.props.history.push(`/displayPage/${economicVilla.id}`)
                                 }}>
                                     <a> <Product
-                                        srcImage={`${config.webapi}/images/villas/main/${economicVilla.main_img}`}
+                                        srcImage={`${config.webapi}/images/villas/thum/${economicVilla.main_img}`}
                                         rate={economicVilla.score}
                                         topic={economicVilla.title}
                                         location={economicVilla.state}

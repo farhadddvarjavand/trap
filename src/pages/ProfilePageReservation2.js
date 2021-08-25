@@ -201,7 +201,7 @@ class ProfilePageReservation2 extends Component {
 
                                                         </MDBRow>
                                                         <img
-                                                            src={`${config.webapi}/images/villas/main/${reserve.img_src}`}
+                                                            src={`${config.webapi}/images/villas/thum/${reserve.img_src}`}
                                                             className={'fv-productImage'}/>
 
                                                         <MDBRow>

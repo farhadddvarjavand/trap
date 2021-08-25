@@ -91,7 +91,6 @@ class DisplayPage extends Component {
             wrongSetDateReserved: false,
             isFavoriteVilla: false,
 
-
         }
     }
 
@@ -404,7 +403,7 @@ class DisplayPage extends Component {
     }
 
 
-    reservedHandle = (minimumDate, maximumDate, allDaysReservedConcat, daysCostString, resultVillaArray, rangeBetween, reservedFacilitiesPrice, chef, host, tour_guide, bodyguard, className, waitingCalculate) => {
+    reservedHandle = (minimumDate, minimumDateToReturn, maximumDate, allDaysReservedConcat, daysCostString, resultVillaArray, rangeBetween, reservedFacilitiesPrice, chef, host, tour_guide, bodyguard, className, waitingCalculate, setDateToGo) => {
         let waitingCalculates = waitingCalculate
         let imSure = false
         let imNotSure = false
@@ -453,12 +452,17 @@ class DisplayPage extends Component {
                                 maximumDate={maximumDate}
                                 dayToGo={this.selectDayToGo}
                                 text={'انتخاب روز'} daysReserved={allDaysReservedConcat}/></div>
-                        <div className={"fv-DisplayPageDetailsLeftBodyDateOutInput"}>
-                            <CalendarLinearLimitedDays
-                                minimumDate={minimumDate}
-                                maximumDate={maximumDate}
-                                dayToReturn={this.selectDayToReturn}
-                                text={'انتخاب روز'} daysReserved={allDaysReservedConcat}/></div>
+                        {setDateToGo ?  // اگر روز رفتا انتخاب شده بود آنوقت روز برگشت را نشان بده
+                            <div className={"fv-DisplayPageDetailsLeftBodyDateOutInput"}>
+                                <CalendarLinearLimitedDays
+                                    minimumDate={minimumDateToReturn}
+                                    maximumDate={maximumDate}
+                                    dayToReturn={this.selectDayToReturn}
+                                    text={'انتخاب روز'} daysReserved={allDaysReservedConcat}/></div>
+                            : // اگر روز رفت معلوم نشده بود چیزی نشان نده(چارچوب خالی را نشان بده)
+                            <div className={"fv-DisplayPageDetailsLeftBodyDateOutInput"}>
+                            </div>
+                        }
                     </MDBRow>
                 </MDBRow>
                 <MDBRow className={"fv-DisplayPageDetailsLeftBodyCapacityText"}>
@@ -657,6 +661,7 @@ class DisplayPage extends Component {
 
 
     render() {
+        let setDateToGo = false
         let authRuleNumber = 0
         let thisVillaIsReserved = false
         let LoadingPagewaitingHandle = true
@@ -1053,10 +1058,21 @@ class DisplayPage extends Component {
             indexOfMaxYear = this.state.finallyPrice[this.state.finallyPrice.length - 1].year
 
         }
-        const minimumDate = {     // اولین روز فعال که به قبل آن باید غیر فعال شود
+        const minimumDate = {     // اولین روز فعال که به قبل آن باید غیر فعال شود (تاریخ رفت)
             day: indexOfMinimumDay,
             month: indexOfMinimumMonth,
             year: indexOfMinimumYear,
+        }
+        const minimumDateToReturn = {     // تفویم برای تاریخ برگشت  و اولین روز فعال که به قبل آن باید غیر فعال شود
+            day: indexOfMinimumDay,
+            month: indexOfMinimumMonth,
+            year: indexOfMinimumYear,
+        }
+        if (this.state.dateToGo.month) {  // اگر روز رفت انتخاب شده بود ما قبل آن برای برگشت غیر فعال گردد
+            minimumDateToReturn.day = this.state.dateToGo.day + 1
+            minimumDateToReturn.month = this.state.dateToGo.month
+            minimumDateToReturn.year = this.state.dateToGo.year
+            setDateToGo = true
         }
         const maximumDate = {     // اولین روز فعال که به قبل آن باید غیر فعال شود
             day: indexOfMaxDay,
@@ -1685,7 +1701,7 @@ class DisplayPage extends Component {
                             </MDBCol>
                             <div
                                 className={"fv-DisplayPageDetailsLeftBodyMobile"}>                             {/*     Reservation For Mobile     */}
-                                {LoadingPagewaitingHandle ? '' : this.reservedHandle(minimumDate, maximumDate, allDaysReservedConcat, daysCostString, resultVillaArray, rangeBetween, reservedFacilitiesPrice, chef, host, tour_guide, bodyguard, "fv-DisplayPageDetailsLeftBodyMobileReservation", waitingCalculate)}
+                                {LoadingPagewaitingHandle ? '' : this.reservedHandle(minimumDate, minimumDateToReturn, maximumDate, allDaysReservedConcat, daysCostString, resultVillaArray, rangeBetween, reservedFacilitiesPrice, chef, host, tour_guide, bodyguard, "fv-DisplayPageDetailsLeftBodyMobileReservation", waitingCalculate)}
                             </div>
 
 
@@ -2419,7 +2435,7 @@ class DisplayPage extends Component {
                                 className={LoadingPagewaitingHandle ? "fv-DisplayPageDetailsLeftBody fv-DisplayPageLoaderWaiting" : " fv-hideLoader"}>
                             {Waiting(LoadingPagewaitingHandle, "fv-waitingLoadPublicFullScreen")}
                         </MDBCol>
-                        {LoadingPagewaitingHandle ? '' : this.reservedHandle(minimumDate, maximumDate, allDaysReservedConcat, daysCostString, resultVillaArray, rangeBetween, reservedFacilitiesPrice, chef, host, tour_guide, bodyguard, "fv-DisplayPageDetailsLeftBody", waitingCalculate)}
+                        {LoadingPagewaitingHandle ? '' : this.reservedHandle(minimumDate, minimumDateToReturn, maximumDate, allDaysReservedConcat, daysCostString, resultVillaArray, rangeBetween, reservedFacilitiesPrice, chef, host, tour_guide, bodyguard, "fv-DisplayPageDetailsLeftBody", waitingCalculate, setDateToGo)}
 
                     </MDBRow>
 
@@ -2436,7 +2452,7 @@ class DisplayPage extends Component {
                                     window.location.replace(`/displayPage/${resultSimilarVilla.id}`)
                                 }}>
                                     <a> <Product
-                                        srcImage={`${config.webapi}/images/villas/main/${resultSimilarVilla.main_img}`}
+                                        srcImage={`${config.webapi}/images/villas/thum/${resultSimilarVilla.main_img}`}
                                         rate={resultSimilarVilla.score}
                                         topic={resultSimilarVilla.title}
                                         location={resultSimilarVilla.city}

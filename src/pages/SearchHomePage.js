@@ -754,7 +754,7 @@ class SearchHomePage extends Datas {
 
                                                 <a>
                                                     <Product
-                                                        srcImage={`${config.webapi}/images/villas/main/${searchPageVilla.main_img}`}
+                                                        srcImage={`${config.webapi}/images/villas/thum/${searchPageVilla.main_img}`}
                                                         rate={searchPageVilla.score}
                                                         topic={searchPageVilla.title}
                                                         location={searchPageVilla.state}
@@ -771,7 +771,7 @@ class SearchHomePage extends Datas {
                                                     onClick={() => this.props.history.push(`/displayPage/${searchPageVilla.id}`)}>
                                                 <a>
                                                     <Product
-                                                        srcImage={`${config.webapi}/images/villas/main/${searchPageVilla.main_img}`}
+                                                        srcImage={`${config.webapi}/images/villas/thum/${searchPageVilla.main_img}`}
                                                         rate={searchPageVilla.score}
                                                         topic={searchPageVilla.title}
                                                         location={searchPageVilla.state}
