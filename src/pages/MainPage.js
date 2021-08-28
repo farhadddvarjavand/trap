@@ -26,6 +26,8 @@ import {Waiting} from "../componentsPages/WaitingLoad";
 import {getCities, getProvinces} from "../services/userService";
 import MyaccommodationsIcon from "../images/icons/Folder.svg";
 import Logout from "../images/icons/Logout.svg";
+import {extendMoment} from "moment-range";
+import Moment from "moment";
 
 
 const commaNumber = require('comma-number')
@@ -160,6 +162,16 @@ class MainPage extends Datas {
         // const data = this.state.productData;
 
         const {city, dateToGo, dateToReturn, numberOfPeople} = this.state
+
+        let range = 0
+        const moment = extendMoment(Moment);
+        const startDate = this.state.dateToGo.split("/")
+        const endDate = this.state.dateToReturn.split("/")
+        const start = new Date(startDate[0], startDate[1], startDate[2]);
+        const end = new Date(endDate[0], endDate[1], endDate[2]);
+        range = moment.range(start, end).diff('days'); // روز انتخابی از و تا چند روز هست (مثبت - نفی و 0)
+
+
         return (
             <MDBRow className={"main"}>
                 <div className={'fv-footerMenu MainPage fv-mainPageBodyOnly'}>
@@ -398,6 +410,15 @@ class MainPage extends Datas {
                                     })}
                                 </select>
                             }
+                            {range < 0 ?
+                                <MDBCol md={12} sm={12}>
+                                    <p style={{
+                                        marginBottom: '1%',
+                                        textAlign: 'initial',
+                                        color: 'mediumvioletred'
+                                    }}>تاریخ وارد شده اشتباه میباشد</p>
+                                </MDBCol>
+                                : ''}
 
                             {/*    <input type='text' placeholder={'شهر یا روستا را وارد کنید'} value={city}
                                    onChange={(event) => this.setState({city: event.target.value})}/> */}
@@ -417,22 +438,32 @@ class MainPage extends Datas {
                             {this.state.provincesLoader && this.state.cityLoader ? Waiting(true, "fv-textInToCascadeOptionMainPage fv-searchMainPageSearchButton fv-searchButtonWaiting") : // اگر شهر سا استان را انتخاب کرد waiting اجرا شود
                                 <input type='button' value='جستجو اقامتگاه' className={'fv-searchMainPageSearchButton'}
                                        onClick={() => {
-                                           const mainPageSearch = {
-                                               city: `C ${this.state.city}`,
-                                               numberOfPeople: this.state.numberOfPeople,
-                                               dateToGo: this.state.dateToGo,
-                                               dateToReturn: this.state.dateToReturn,
-                                           }
-                                           localStorage.setItem("mainPageSearch", JSON.stringify(mainPageSearch));
-                                           this.props.history.push({
-                                               pathname: "/searchHomePage/doSearch/1",
-                                               searchDatas: {
-                                                   city: this.state.city,
-                                                   dayToGo: mainPageSearch.dateToGo,
-                                                   dateToReturn: mainPageSearch.dateToReturn,
-                                                   capacity: mainPageSearch.numberOfPeople
+                                           if (range < 0) { // اگر تارییخ رفت بزرگتر از تاریخ بررگشت بود
+                                               alert("لطفا تاریخ را به درستی وارد نمایید")
+                                           } else {
+                                               if ((this.state.provincesId !== 'title' && this.state.city) || (this.state.provincesId === 'title')) { // اگر استان را انتخاب کرد و بعد از آن شهر را هم انتخاب کرد اجرا شود
+                                                   const mainPageSearch = {
+                                                       city: `C ${this.state.city}`,
+                                                       numberOfPeople: this.state.numberOfPeople,
+                                                       dateToGo: this.state.dateToGo,
+                                                       dateToReturn: this.state.dateToReturn,
+                                                   }
+                                                   localStorage.setItem("mainPageSearch", JSON.stringify(mainPageSearch));
+                                                   this.props.history.push({
+                                                       pathname: "/searchHomePage/doSearch/1",
+                                                       searchDatas: {
+                                                           city: this.state.city,
+                                                           dayToGo: mainPageSearch.dateToGo,
+                                                           dateToReturn: mainPageSearch.dateToReturn,
+                                                           capacity: mainPageSearch.numberOfPeople
+                                                       }
+                                                   })
+                                               } else {
+                                                   alert("لطفا شهر مورد نظر را انتخاب کنید")
                                                }
-                                           })
+
+                                           }
+
                                            /*  fetch('https://reqres.in/api/posts', {                     // POST
                                                  method: 'POST',
                                                  headers: { 'Content-Type': 'application/json' },

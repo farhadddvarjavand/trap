@@ -200,7 +200,19 @@
     font-size: 11px;
     padding-right: 10px;
     background: white;
+    outline: 0px;
+
+    padding: 5px;
+    height: 33px;
+    background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat left #fff;
+    -webkit-appearance: none;
+    background-position-x: 20px;
+    background-position-y: -3px;
+    padding-right: 5%;
+
+
 }
+
 
 .fv-DisplayPageDetailsLeftButton input {
     width: 103%;
@@ -1061,6 +1073,10 @@
     .fv-DisplayPageDetailsّFacilities.fv-DisplayPageTomanTitle .col-md-3 {
         flex: 0 0 25%;
         max-width: 25%;
+    }
+
+    .fv-SearchHomePage.fv-DisplayPage.fv-DisplayPageOnly .fv-displayPageSimillarProducts {
+        text-align: start;
     }
 }
 

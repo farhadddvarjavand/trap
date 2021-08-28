@@ -485,11 +485,11 @@ class SearchHomePage extends Datas {
                                                                          searchData={this.props.location.searchDatas}
                                                                          text={'تاریخ برگشت'}/></div>
                                         </MDBCol>
-                                        <input type='text' placeholder='تعداد نفرات' value={this.state.numberOfPeople}
+                                        <input type='number' placeholder='تعداد نفرات' value={this.state.numberOfPeople}
                                                onChange={(event) => {
                                                    this.setState({numberOfPeople: event.target.value})
                                                }}/>
-                                        <input type='text' placeholder='تعداد خواب' value={this.state.numberOfBedroom}
+                                        <input type='number' placeholder='تعداد خواب' value={this.state.numberOfBedroom}
                                                onChange={(event) => {
                                                    this.setState({numberOfBedroom: event.target.value})
                                                }}/>
@@ -501,7 +501,7 @@ class SearchHomePage extends Datas {
                                     <MDBRow className={'fv-searchMainPagePrice fv-searchMainPagePriceSecond'}>
                                         <p>قیمت</p>
                                         <MDBCol md={5} sm={4} className={'fv-searchMainPage fv-searchMainPageDateOut'}>
-                                            <input type='text' placeholder='از' value={this.state.minCost}
+                                            <input type='number' placeholder='از' value={this.state.minCost}
                                                    onChange={(event) => {
                                                        this.setState({minCost: event.target.value})
                                                    }}/>
@@ -511,7 +511,7 @@ class SearchHomePage extends Datas {
                                         </MDBCol>
                                         <MDBCol md={5} sm={4}
                                                 className={'fv-searchMainPage fv-searchMainPageDateReturn'}>
-                                            <input type='text' placeholder='تا' value={this.state.maxCost}
+                                            <input type='number' placeholder='تا' value={this.state.maxCost}
                                                    onChange={(event) => {
                                                        this.setState({maxCost: event.target.value})
                                                    }}/>

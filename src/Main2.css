@@ -677,6 +677,10 @@
     .fv-footerMenu .fv-cascadeOptionMainPageRowTop {
         margin-right: 5%;
     }
+
+    .fv-commentSvgLeft, .fv-commentSvgRight {
+        margin-top: -3%;
+    }
 }
 
 @media (max-width: 540px) {

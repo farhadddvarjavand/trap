@@ -91,6 +91,9 @@ class DisplayPage extends Component {
             wrongSetDateReserved: false,
             isFavoriteVilla: false,
 
+            setDateToGo: false,
+
+
         }
     }
 
@@ -403,7 +406,7 @@ class DisplayPage extends Component {
     }
 
 
-    reservedHandle = (minimumDate, minimumDateToReturn, maximumDate, allDaysReservedConcat, daysCostString, resultVillaArray, rangeBetween, reservedFacilitiesPrice, chef, host, tour_guide, bodyguard, className, waitingCalculate, setDateToGo) => {
+    reservedHandle = (minimumDate, minimumDateToReturn, maximumDate, allDaysReservedConcat, daysCostString, resultVillaArray, rangeBetween, reservedFacilitiesPrice, chef, host, tour_guide, bodyguard, className, waitingCalculate) => {
         let waitingCalculates = waitingCalculate
         let imSure = false
         let imNotSure = false
@@ -431,8 +434,14 @@ class DisplayPage extends Component {
                         شده معتبر نمیباشد - شما قبلا در این
                         تاریخ رزرو داشته اید </p>
 
-                    <p>قیمت از
-                        شبی {this.state.resultVilla.rules ? commaNumber(this.state.resultVilla.rules.normal_cost) : ''} تومان</p>
+                    <p style={{display: 'contents'}}>قیمت از
+                        شبی <p
+                            style={{
+                                paddingTop: '1%',
+                                paddingLeft: '1%',
+                                paddingRight: '3%'
+                            }}>{this.state.resultVilla.rules ? commaNumber(this.state.resultVilla.rules.normal_cost) : ''}</p> تومان
+                    </p>
                 </MDBRow>
                 <MDBRow className={"fv-DisplayPageDetailsLeftEmptyMobile"}>
                     <p><i className="fa fa-calendar" aria-hidden="true"/> اولین تاریخ خالی این اقامت
@@ -452,7 +461,7 @@ class DisplayPage extends Component {
                                 maximumDate={maximumDate}
                                 dayToGo={this.selectDayToGo}
                                 text={'انتخاب روز'} daysReserved={allDaysReservedConcat}/></div>
-                        {setDateToGo ?  // اگر روز رفتا انتخاب شده بود آنوقت روز برگشت را نشان بده
+                        {this.state.setDateToGo ?  // اگر روز رفتا انتخاب شده بود آنوقت روز برگشت را نشان بده
                             <div className={"fv-DisplayPageDetailsLeftBodyDateOutInput"}>
                                 <CalendarLinearLimitedDays
                                     minimumDate={minimumDateToReturn}
@@ -661,7 +670,6 @@ class DisplayPage extends Component {
 
 
     render() {
-        let setDateToGo = false
         let authRuleNumber = 0
         let thisVillaIsReserved = false
         let LoadingPagewaitingHandle = true
@@ -1068,11 +1076,13 @@ class DisplayPage extends Component {
             month: indexOfMinimumMonth,
             year: indexOfMinimumYear,
         }
-        if (this.state.dateToGo.month) {  // اگر روز رفت انتخاب شده بود ما قبل آن برای برگشت غیر فعال گردد
+        if (this.state.dateToGo.month !== '') {  // اگر روز رفت انتخاب شده بود ما قبل آن برای برگشت غیر فعال گردد
             minimumDateToReturn.day = this.state.dateToGo.day + 1
             minimumDateToReturn.month = this.state.dateToGo.month
             minimumDateToReturn.year = this.state.dateToGo.year
-            setDateToGo = true
+            if (!this.state.setDateToGo) {
+                this.setState({setDateToGo: true})
+            }
         }
         const maximumDate = {     // اولین روز فعال که به قبل آن باید غیر فعال شود
             day: indexOfMaxDay,
@@ -2435,7 +2445,7 @@ class DisplayPage extends Component {
                                 className={LoadingPagewaitingHandle ? "fv-DisplayPageDetailsLeftBody fv-DisplayPageLoaderWaiting" : " fv-hideLoader"}>
                             {Waiting(LoadingPagewaitingHandle, "fv-waitingLoadPublicFullScreen")}
                         </MDBCol>
-                        {LoadingPagewaitingHandle ? '' : this.reservedHandle(minimumDate, minimumDateToReturn, maximumDate, allDaysReservedConcat, daysCostString, resultVillaArray, rangeBetween, reservedFacilitiesPrice, chef, host, tour_guide, bodyguard, "fv-DisplayPageDetailsLeftBody", waitingCalculate, setDateToGo)}
+                        {LoadingPagewaitingHandle ? '' : this.reservedHandle(minimumDate, minimumDateToReturn, maximumDate, allDaysReservedConcat, daysCostString, resultVillaArray, rangeBetween, reservedFacilitiesPrice, chef, host, tour_guide, bodyguard, "fv-DisplayPageDetailsLeftBody", waitingCalculate)}
 
                     </MDBRow>
 

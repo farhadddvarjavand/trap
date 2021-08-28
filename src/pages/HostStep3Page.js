@@ -475,7 +475,7 @@ class HostStep3Page extends Component {
                                 </MDBCol>
                             </MDBRow>
                             <h6 className={"fv-hostStep3Measure"}> متراژ اقامت گاه </h6>
-                            <input className={"fv-marginRight"} type="text" placeholder=""
+                            <input className={"fv-marginRight"} type="number" placeholder=""
                                    value={this.state.yourAccommodationMeasure}
                                    onChange={(e) => {
                                        if (Number(e.target.value)) {
