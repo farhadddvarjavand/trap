@@ -151,6 +151,21 @@
       }
 
     }
+
+    .input-group-text {
+      border-top-left-radius: 14px;
+      border-bottom-left-radius: 14px;
+    }
+
+    .fv-shabaNumberProfilePage {
+      width: 50%;
+      height: 54px;
+
+      input {
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+      }
+    }
   }
 
   .fv-ProfilePageLeftBody .fv-ProfilePageUserSetInfo .fv-ProfilePageUserSetInfoButton.fv-profilePageEnButton input {
@@ -298,6 +313,9 @@
 
 @media (max-width: 763px) {
 
+  .fv-ProfilePage .fv-ProfilePageLeftBody .fv-shabaNumberProfilePage {
+    width: 100%;
+  }
   .fv-ProfilePage .fv-waitingForSearchReservation {
     margin-top: 7%;
   }

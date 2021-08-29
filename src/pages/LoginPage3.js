@@ -5,6 +5,7 @@ import LoginPageImage from "../images/simon-haslett-BSkXuvmSHLA-unsplash 1.png"
 import {Link} from "react-router-dom";
 import {registerUser} from "../services/userService"
 import {digitsFaToEn} from "@persian-tools/persian-tools";
+import {FormControl, InputGroup} from "react-bootstrap";
 
 class LoginPage3 extends Component {
     constructor(props) {
@@ -147,24 +148,41 @@ class LoginPage3 extends Component {
                                 <input type="text" placeholder={"نام و نام خانوادگی"} value={nameAndLastNAme}
                                        onChange={((e) => this.setState({nameAndLastNAme: e.target.value}))}/>
 
+                                {/*
                                 <input type="text" placeholder={"نام کاربری"}
                                        className={"fv-loginPage3MobileNumber fv-english-number"}
                                        value={this.state.username}
                                        onChange={((e) => this.setState({username: digitsFaToEn(e.target.value)}))}/>
+                                */}
+                                <InputGroup className="mb-3 fv-loginPage3Username">
+                                    <FormControl
+                                        placeholder="نام کاربری"
+                                        aria-label="نام کاربری"
+                                        value={this.state.username}
+                                        type={'text'}
+                                        onChange={(e) => {
+                                            this.setState({username: digitsFaToEn(e.target.value)})
+                                        }}
+                                    />
+                                    <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+                                </InputGroup>
 
                                 <input type="number" placeholder={"شماره موبایل"}
-                                       className={"fv-loginPage3MobileNumber fv-english-number"} value={mobileNumber}
+                                       className={"fv-loginPage3MobileNumber fv-english-number"}
+                                       value={mobileNumber}
                                        onChange={((e) => this.setState({mobileNumber: digitsFaToEn(e.target.value)}))}/>
                                 <MDBRow>
                                     <div className={this.state.clickLoader ? "loader" : "fv-hideLoader"}>
                                         <svg className="circular" viewBox="25 25 50 50">
-                                            <circle className="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
+                                            <circle className="path" cx="50" cy="50" r="20" fill="none"
+                                                    stroke-width="2"
                                                     stroke-miterlimit="10"/>
                                         </svg>
                                     </div>
 
-                                    <input className={this.state.clickLoader ? "fv-hideLoader" : "fv-loginPageButton"}
-                                           type="button" value={"ثبت نام"} onClick={() => {
+                                    <input
+                                        className={this.state.clickLoader ? "fv-hideLoader" : "fv-loginPageButton"}
+                                        type="button" value={"ثبت نام"} onClick={() => {
                                         this.setState({clickLoader: true})
                                         {
                                             this.sendSms()

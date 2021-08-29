@@ -1535,7 +1535,7 @@ class DisplayPage extends Component {
 
                             {!this.state.showMapDelay ? '' : // delay baraie anke avalesh neshan nadahad ezafe be alaghemandihara (shayad dar alaghe mandi ha bashad va agar delay nabadhad aval neshan midahad va bad hazf mishavad)
                                 <>
-                                    {this.state.isFavoriteVilla ? '' :  // agar dar alahemandiha bod digar hazf shavad va neshan nadahad
+                                    {this.state.isFavoriteVilla || !nameAndFamily ? '' :  // agar dar alahemandiha bod digar hazf shavad va neshan nadahad
                                         <MDBCol md={8} className={"fv-DisplayPageLike"}>
                                             <a className={this.state.addToFavorites ? "addToFavoritesTextHide" : ""}
                                                onClick={() => {

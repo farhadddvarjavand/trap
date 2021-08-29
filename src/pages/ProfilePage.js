@@ -6,7 +6,7 @@ import "../style/ProfilePage.scss"
 import {getUserInformation, updateUserAvatar, updateUserInfo} from "../services/userService";
 import {waitingForCalculate, WaitingLoadingProfilePage} from "../componentsPages/WaitingLoad";
 import {digitsFaToEn} from "@persian-tools/persian-tools";
-
+import {FormControl, InputGroup} from 'react-bootstrap';
 
 class ProfilePage extends Component {
     constructor(props) {
@@ -266,6 +266,7 @@ class ProfilePage extends Component {
                                        className={this.state.errorField.includes('cardNumber') === true && !this.state.setCorrectlyInfo ? "fv-redBorderError fv-english-number" : 'fv-english-number'}
                                        onChange={(e) => this.setState({cardNumber: e.target.value})}/>
                                 <h6>شماره شبا</h6>
+                                {/*
                                 <input type="text" value={`${IR}${this.state.shabaNumber}`}
                                        className={this.state.errorField.includes('shabaNumber') === true && !this.state.setCorrectlyInfo ? "fv-redBorderError fv-english-number" : 'fv-english-number'}
                                        onChange={(e) => {
@@ -274,7 +275,20 @@ class ProfilePage extends Component {
                                                this.setState({shabaNumber: mystring})
                                            }
                                        }}/>
+                                        */}
+                                <InputGroup className="mb-3 fv-shabaNumberProfilePage">
+                                    <FormControl
+                                        placeholder="شماره شبا"
+                                        aria-label="شماره شبا"
+                                        value={this.state.shabaNumber}
+                                        type={'number'}
+                                        onChange={(e) => {
+                                            this.setState({shabaNumber: e.target.value})
+                                        }}
+                                    />
 
+                                    <InputGroup.Text id="basic-addon1">IR</InputGroup.Text>
+                                </InputGroup>
 
                                 {/*   <MDBRow md={3} sm={12}>
                                 <MDBContainer className={"fv-hostStep5Page3Images fv-inputProfilePageAvatar"}>
