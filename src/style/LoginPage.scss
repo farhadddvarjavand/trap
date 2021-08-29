@@ -118,6 +118,23 @@
   .fv-LoginPageHeader a {
     color: black;
   }
+
+  .fv-rulesText {
+    p {
+      width: 69%;
+      text-align: center;
+      font-size: 12px;
+      margin-top: 2%;
+      display: initial;
+      margin-inline-end: auto;
+      margin-right: 3%;
+    }
+
+    a {
+      color: #15BE29;
+      font-size: 13px;
+    }
+  }
 }
 
 @media (max-width: 540px) {
@@ -199,6 +216,15 @@
       margin-bottom: 5%;
     }
 
+    .fv-rulesText {
+      p {
+        width: 94%;
+      }
+
+      a {
+        color: #55efc4;
+      }
+    }
   }
 }
 

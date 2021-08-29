@@ -60,6 +60,7 @@ import ProfileWalletPageHandle from "./emptyAndHandlePage/ProfileWalletPageHandl
 import ProfileFavoritePageHandle from "./emptyAndHandlePage/ProfileFavoritePageHandle";
 import MainProfilePages from "./pages/MainProfilePages";
 import TestProfilePages2 from "./pages/TestProfilePages2";
+import RulesPage from "./pages/RulesPage"
 
 
 ReactDOM.render(
@@ -128,9 +129,8 @@ ReactDOM.render(
                     <Route exact path={'/AnotherPagesEmpty'} component={AnotherPagesEmpty}/>
                     <Route exact path={'/ProfileWalletPageHandle'} component={ProfileWalletPageHandle}/>
                     <Route exact path={'/ProfileFavoritePageHandle'} component={ProfileFavoritePageHandle}/>
+                    <Route exact path={'/RulesPage'} component={RulesPage}/>
 
-
-                    <Route exact path={''} component={MainPage}/>
                 </Switch>
 
             </CookiesProvider>

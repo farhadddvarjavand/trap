@@ -112,6 +112,17 @@ class LoginPage extends Component {
                                        onChange={((e) => {
                                            this.setState({phone_number: digitsFaToEn(e.target.value)})
                                        })}/>
+                                <MDBRow className={'fv-rulesText'}>
+                                    <p>با ورود و یا ثبت نام در ترپ شما
+                                        <a href="/RulesPage" target="_blank"
+                                           rel="noopener noreferrer"> شرایط و قوانین </a>
+                                        استفاده از سرویس های سایت ترپ
+                                        و قوانین حریم خصوصی آن را می‌پذیرید
+                                    </p>
+                                    {/*  <MDBCol >
+                                        <Link to={"/registration"} ><p>عضو شوید</p> </Link>
+                                    </MDBCol>  */}
+                                </MDBRow>
                                 <MDBRow>
                                     <div
                                         className={this.state.clickLoader ? "loader fv-loginPageLoadWaiting" : "fv-hideLoader"}>
