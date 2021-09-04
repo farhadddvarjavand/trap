@@ -9,7 +9,7 @@ import DiscountedProduct from "../componentsPages/DiscountedProduct";
 import TrapMagazine from "../componentsPages/trapMagazine"
 import TopicsMainPage from "../componentsPages/topicsMainPage";
 import FotterpageImage from "../images/footerMainImage.png"
-import FotterpageLogo from "../images/Logo.png"
+import FotterpageLogo from "../images/mainpageLogo.png"
 import MobileMenu from "../images/MobileMenu.png"
 import UserImage from "../images/user.png"
 import Image1 from "../images/image1.png"
