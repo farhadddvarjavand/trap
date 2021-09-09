@@ -7,6 +7,7 @@ import "../style/ProfilePageWallet2.scss"
 import "../style/ProfilePageWallet3.scss"
 import {waitingForCalculate} from "../componentsPages/WaitingLoad";
 import {chargeWallet} from "../services/payService";
+import {FormControl, InputGroup} from "react-bootstrap";
 
 class ProfilePageChargeWallet extends Component {
     constructor(props) {
@@ -43,11 +44,14 @@ class ProfilePageChargeWallet extends Component {
                         <h5 style={{marginBottom: '4%', marginTop: '3%'}}>شارژ کیف پول</h5>
                         <p className={"h7"}>میزان مبلغ درخواستی خود را بنوسید</p>
 
-                        <input
-                            name={'amountRequested'}
-                            value={this.state.amountRequested ? `${tomanText}${this.state.amountRequested.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : ''}
-                            onChange={this.onChange} placeholder="تومان"/>
-
+                        <InputGroup className="mb-3 fv-shabaNumberProfilePage">
+                            <InputGroup.Text id="basic-addon1">تومان</InputGroup.Text>
+                            <FormControl
+                                name={'amountRequested'}
+                                value={this.state.amountRequested ? `${this.state.amountRequested.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : ''}
+                                onChange={this.onChange}
+                            />
+                        </InputGroup>
 
                         <MDBRow>
                             <MDBCol md={12} sm={12}

@@ -47,6 +47,7 @@ class ProfilePageWallet extends Component {
             waitingForSearch: false,
             onClickTrash: false,
             clickYesSureTrashButton: false,
+            isEmpty: false,
 
         }
     }
@@ -100,19 +101,22 @@ class ProfilePageWallet extends Component {
     getFinancialReports = () => {
         getFinancialReports()
             .then(res => {
-                if (res.data.income.otherIncome + res.data.income.totalIncome + res.data.income.trappIncome > 0 || res.data.data.length > 0) {
-                    let getFinancialReportsTop = []
-                    getFinancialReportsTop.push(res.data.income)
-                    console.log(res)
-                    this.setState({
-                        getFinancialReports: res.data.data,
-                        getFinancialReportsTopPage: getFinancialReportsTop,
-                        waitingForLoad: false
-                    })
-                } else {
-                    // this.setState({pushPage:"empty"})
-                    this.props.history.push("/MainProfilePages/AnotherPagesEmpty")
+                // if (res.data.income.otherIncome + res.data.income.totalIncome + res.data.income.trappIncome > 0 || res.data.data.length > 0) {
+                let getFinancialReportsTop = []
+                getFinancialReportsTop.push(res.data.income)
+                console.log(res)
+                this.setState({
+                    getFinancialReports: res.data.data,
+                    getFinancialReportsTopPage: getFinancialReportsTop,
+                    waitingForLoad: false
+                })
+                if (res.data.data.length <= 0) {
+                    this.setState({isEmpty: true})
                 }
+                /* } else {
+                     // this.setState({pushPage:"empty"})
+                     this.props.history.push("/MainProfilePages/AnotherPagesEmpty")
+                 } */
             })
             .catch(err => console.log(err.response))
     }
@@ -354,7 +358,8 @@ class ProfilePageWallet extends Component {
                                                 <th><h6>منبع تراکنش</h6></th>
                                                 <th className={"fv-tableDiscriptions"}><h6>شرح تراکنش</h6></th>
                                                 <th><h6>مبلغ</h6></th>
-                                                <th></th>
+                                                {this.state.isEmpty ? '' : <th></th>}
+
                                             </tr>
                                             {this.state.getFinancialReports.map(getFinancialReport => {
                                                 return <tr>
@@ -383,6 +388,13 @@ class ProfilePageWallet extends Component {
                                             })}
 
                                         </table>
+                                        {this.state.isEmpty ?
+                                            <MDBRow style={{placeContent: 'center'}}>
+                                                <p>تراکنشی ثبت نشده</p>
+                                            </MDBRow>
+                                            : ''
+                                        }
+
                                         <MDBRow
                                             className={this.state.onClickTrash ? 'fv-blurAllPage fv-ProfilePageWalletWalletButton' : "fv-ProfilePageWalletWalletButton"}>
                                             <MDBCol md={3} sm={12}

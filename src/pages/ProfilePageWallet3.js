@@ -7,6 +7,7 @@ import "../style/ProfilePageWallet2.scss"
 import "../style/ProfilePageWallet3.scss"
 import {withdrawal} from "../services/userService";
 import {waitingForCalculate} from "../componentsPages/WaitingLoad";
+import {FormControl, InputGroup} from "react-bootstrap";
 
 class ProfilePageWallet3 extends Component {
     constructor(props) {
@@ -43,10 +44,14 @@ class ProfilePageWallet3 extends Component {
                         <h5 style={{marginBottom: '4%', marginTop: '3%'}}>درخواست برداشت</h5>
                         <p className={"h7"}>میزان مبلغ درخواستی خود را بنوسید</p>
 
-                        <input
-                            name={'amountRequested'}
-                            value={this.state.amountRequested ? `${tomanText}${this.state.amountRequested.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : ''}
-                            onChange={this.onChange} placeholder="تومان"/>
+                        <InputGroup className="mb-3 fv-shabaNumberProfilePage">
+                            <InputGroup.Text id="basic-addon1">تومان</InputGroup.Text>
+                            <FormControl
+                                name={'amountRequested'}
+                                value={this.state.amountRequested ? `${this.state.amountRequested.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : ''}
+                                onChange={this.onChange}
+                            />
+                        </InputGroup>
 
 
                         <MDBRow>

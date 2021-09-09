@@ -267,6 +267,7 @@
 
 .fv-searchMainPage {
     margin-bottom: 0%;
+    z-index: 1;
 }
 
 .fv-SearchHomePageMobileProduct {
@@ -602,7 +603,8 @@
 
     .fv-productPriceBox a:not([href]):not([tabindex]), .fv-productPriceBox a:not([href]):not([tabindex]):focus, .fv-productPriceBox a:not([href]):not([tabindex]):hover {
         font-size: 3.5vw;
-        margin-left: 4%;
+        margin-left: 5%;
+        margin-right: -4%;
     }
 
     .fv-footerMainPage .fv-footerMainPageSmaller img {

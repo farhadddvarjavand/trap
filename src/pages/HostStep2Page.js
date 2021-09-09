@@ -267,13 +267,15 @@ class HostStep2Page extends Component {
                                 <input type="text" value={this.state.village} onChange={(event)=>{ this.setState({village:event.target.value})} } className={"fv-hostStep2Page2Hidden"}/>
                                */}
                                 <h6 className={"fv-hostStep2Page2Hidden"}>کدپستی</h6>
-                                <input type="text" value={this.state.postCode} onChange={(event) => {
-                                    if (event.target.value.length === 10 && Number(event.target.value)) {
+                                <input type="number" value={this.state.postCode} onChange={(event) => {
+                                    if (event.target.value.length <= 10) {
+                                        this.setState({postCode: event.target.value})
+                                    }
+                                    if (event.target.value.length === 10 && Number(event.target.value) || event.target.value.length > 10) {
                                         this.setState({validPostCode: true})
                                     } else {
                                         this.setState({validPostCode: false})
                                     }
-                                    this.setState({postCode: event.target.value})
                                 }}
                                        className={this.state.click && this.state.validPostCode === false ? "fv-hostStep2Page2Hidden fv-redBorderError" : "fv-hostStep2Page2Hidden"}/>
                                 <h6 className={"fv-hostStep2Page2Hidden"}>آدرس دقیق</h6>

@@ -236,6 +236,7 @@ class MainProfilePages extends Component {
                                                     this.setState({onclickHandel: !this.state.onclickHandel})
                                                 }}/>
                                         </MDBCol>
+                                        {/*
                                         <MDBCol sm={1}
                                                 className={this.state.onclickHandel ? "fv-DisplayPageLoginSignMobile" : "fv-hideMenu"}>
                                             <i className="fas fa-caret-up" onClick={() => {
@@ -245,6 +246,20 @@ class MainProfilePages extends Component {
                                         <MDBCol sm={1}
                                                 className={this.state.onclickHandel ? "fv-hideMenu" : "fv-DisplayPageLoginSignMobile"}>
                                             <i className="fas fa-caret-left" onClick={() => {
+                                                this.setState({onclickHandel: !this.state.onclickHandel})
+                                            }}/>
+                                        </MDBCol>
+                                        */}
+
+                                        <MDBCol sm={1}
+                                                className={this.state.onclickHandel ? "fv-DisplayPageLoginSignMobile" : "fv-hideMenu"}>
+                                            <i className="" onClick={() => {
+                                                this.setState({onclickHandel: !this.state.onclickHandel})
+                                            }}/>
+                                        </MDBCol>
+                                        <MDBCol sm={1}
+                                                className={this.state.onclickHandel ? "fv-hideMenu" : "fv-DisplayPageLoginSignMobile"}>
+                                            <i className="" onClick={() => {
                                                 this.setState({onclickHandel: !this.state.onclickHandel})
                                             }}/>
                                         </MDBCol>

@@ -170,7 +170,10 @@ class LoginPage3 extends Component {
                                 <input type="number" placeholder={"شماره موبایل"}
                                        className={"fv-loginPage3MobileNumber fv-english-number"}
                                        value={mobileNumber}
-                                       onChange={((e) => this.setState({mobileNumber: digitsFaToEn(e.target.value)}))}/>
+                                       onChange={((e) => {
+                                           if (e.target.value.length <= 11)
+                                               this.setState({mobileNumber: digitsFaToEn(e.target.value)})
+                                       })}/>
                                 <MDBRow>
                                     <div className={this.state.clickLoader ? "loader" : "fv-hideLoader"}>
                                         <svg className="circular" viewBox="25 25 50 50">

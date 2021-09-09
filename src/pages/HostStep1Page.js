@@ -134,10 +134,13 @@ class HostStep1Page extends Component {
                             <option value="سایر">سایر</option>
                         </select>
                         <h6 className={"fv-hostStep2Page2Hidden"}>شماره ضروری</h6>
-                        <input type="text" value={this.state.number} disabled={this.state.hideUniq ? true : false}
+                        <input type="number" value={this.state.number} disabled={this.state.hideUniq ? true : false}
                                onChange={(event) => {
-                                   this.setState({number: digitsFaToEn(event.target.value)})
-                                   if (event.target.value.length === 11 && Number(event.target.value)) {
+                                   if (event.target.value.length <= 11) {
+                                       this.setState({number: digitsFaToEn(event.target.value)})
+                                   }
+                                   console.log(this.state.number)
+                                   if (event.target.value.length === 11 && Number(event.target.value) || event.target.value.length > 11) {
                                        this.setState({validPhoneNumber: true})
                                    } else {
                                        this.setState({validPhoneNumber: false})

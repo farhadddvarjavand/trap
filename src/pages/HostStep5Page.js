@@ -7,6 +7,7 @@ import "../style/HostStep5Page.scss"
 import HeaderSteps from "../componentsPages/HeaderSteps";
 import Footer from "../componentsPages/footer";
 import HostStepImage1 from "../images/home_miz1 png.png"
+import {FormControl, InputGroup} from "react-bootstrap";
 
 const commaNumber = require('comma-number')
 
@@ -127,7 +128,28 @@ class HostStep5Page extends Component {
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
 
 
-                                    <input type="text"
+                                    <InputGroup className="mb-3 fv-shabaNumberProfilePage">
+                                        <InputGroup.Text id="basic-addon1">تومان</InputGroup.Text>
+                                        <FormControl
+                                            type="text"
+                                            name={'pricesFromSaturdayToWednesday'}
+                                            value={`${this.state.pricesFromSaturdayToWednesday.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
+                                            onChange={(e) => {
+                                                if (e.target.value !== 'تومان ') {
+                                                    if (e.target.value.length > 0 && this.state.pricesFromSaturdayToWednesday.length > 2 && Number(this.state.pricesFromSaturdayToWednesday)) {   // اگر این شرایط بود آنگاه معتبر میباشد و true میشود
+                                                        this.setState({validNormalCost: true})
+                                                    } else {
+                                                        this.setState({validNormalCost: false})
+                                                    }
+                                                    this.onChange(e)
+                                                }
+
+                                            }}
+                                            className={this.state.click && this.state.validNormalCost === false ? "fv-redBorderError" : ""}
+                                        />
+                                    </InputGroup>
+
+                                    {/*  <input type="text"
                                            name={'pricesFromSaturdayToWednesday'}
                                            value={`${tomanText}${this.state.pricesFromSaturdayToWednesday.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
                                            onChange={(e) => {
@@ -141,13 +163,32 @@ class HostStep5Page extends Component {
                                                }
 
                                            }}
-                                           className={this.state.click && this.state.validNormalCost === false ? "fv-redBorderError" : ""}/>
+                                           className={this.state.click && this.state.validNormalCost === false ? "fv-redBorderError" : ""}/>*/}
                                 </MDBCol>
                             </MDBRow>
                             <p className={"fv-hostStep5P"}>قیمت پنجشنبه و جمعه و تعطیل (ایام پیک)</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text"
+                                    <InputGroup className="mb-3 fv-shabaNumberProfilePage">
+                                        <InputGroup.Text id="basic-addon1">تومان</InputGroup.Text>
+                                        <FormControl
+                                            type="text"
+                                            name={'priceFridayAndHoliday'}
+                                            value={`${this.state.priceFridayAndHoliday.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
+                                            onChange={(e) => {
+                                                if (e.target.value !== 'تومان ') {
+                                                    if (e.target.value.length > 0 && this.state.priceFridayAndHoliday.length > 2 && Number(this.state.priceFridayAndHoliday)) {   // اگر این شرایط بود آنگاه معتبر میباشد و true میشود (اگر وجود داشت و عدد بود)
+                                                        this.setState({validExtraCost: true})
+                                                    } else {
+                                                        this.setState({validExtraCost: false})
+                                                    }
+                                                    this.onChange(e)
+                                                }
+                                            }}
+                                            className={this.state.click && this.state.validExtraCost === false ? "fv-redBorderError" : ""}/>
+                                    </InputGroup>
+
+                                    {/*   <input type="text"
                                            name={'priceFridayAndHoliday'}
                                            value={`${tomanText}${this.state.priceFridayAndHoliday.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
                                            onChange={(e) => {
@@ -160,14 +201,34 @@ class HostStep5Page extends Component {
                                                    this.onChange(e)
                                                }
                                            }}
-                                           className={this.state.click && this.state.validExtraCost === false ? "fv-redBorderError" : ""}/>
+                                           className={this.state.click && this.state.validExtraCost === false ? "fv-redBorderError" : ""}/> */}
 
                                 </MDBCol>
                             </MDBRow>
                             <p className={"fv-hostStep5P"}>قیمت نفر اضافه در روز های عادی</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text"
+
+                                    <InputGroup className="mb-3 fv-shabaNumberProfilePage">
+                                        <InputGroup.Text id="basic-addon1">تومان</InputGroup.Text>
+                                        <FormControl
+                                            type="text"
+                                            name={'extraPersonPricesOnNormalDays'}
+                                            value={`${this.state.extraPersonPricesOnNormalDays.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
+                                            onChange={(e) => {
+                                                if (e.target.value !== 'تومان ') {
+                                                    if (e.target.value.length > 0 && this.state.extraPersonPricesOnNormalDays.length > 2 && Number(this.state.extraPersonPricesOnNormalDays)) {   // اگر این شرایط بود آنگاه معتبر میباشد و true میشود
+                                                        this.setState({validNormalCostExtraPerson: true})
+                                                    } else {
+                                                        this.setState({validNormalCostExtraPerson: false})
+                                                    }
+                                                    this.onChange(e)
+                                                }
+                                            }}
+                                            className={this.state.click && this.state.validNormalCostExtraPerson === false ? "fv-redBorderError" : ""}/>
+                                    </InputGroup>
+
+                                    {/*  <input type="text"
                                            name={'extraPersonPricesOnNormalDays'}
                                            value={`${tomanText}${this.state.extraPersonPricesOnNormalDays.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
                                            onChange={(e) => {
@@ -180,13 +241,32 @@ class HostStep5Page extends Component {
                                                    this.onChange(e)
                                                }
                                            }}
-                                           className={this.state.click && this.state.validNormalCostExtraPerson === false ? "fv-redBorderError" : ""}/>
+                                           className={this.state.click && this.state.validNormalCostExtraPerson === false ? "fv-redBorderError" : ""}/> */}
                                 </MDBCol>
                             </MDBRow>
                             <p className={"fv-hostStep5P"}>قیمت نفر اضافه در روز های پیک</p>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input type="text"
+                                    <InputGroup className="mb-3 fv-shabaNumberProfilePage">
+                                        <InputGroup.Text id="basic-addon1">تومان</InputGroup.Text>
+                                        <FormControl
+                                            type="text"
+                                            name={'extraPersonPricesOnHolidays'}
+                                            value={`${this.state.extraPersonPricesOnHolidays.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
+                                            onChange={(e) => {
+                                                if (e.target.value !== 'تومان ') {
+                                                    if (e.target.value.length > 0 && this.state.extraPersonPricesOnHolidays.length > 2 && Number(this.state.extraPersonPricesOnHolidays)) {   // اگر این شرایط بود آنگاه معتبر میباشد و true میشود
+                                                        this.setState({validExtraCostExtraPerson: true})
+                                                    } else {
+                                                        this.setState({validExtraCostExtraPerson: false})
+                                                    }
+                                                    this.onChange(e)
+                                                }
+                                            }}
+                                            className={this.state.click && this.state.validExtraCostExtraPerson === false ? "fv-redBorderError" : ""}/>
+                                    </InputGroup>
+
+                                    {/*  <input type="text"
                                            name={'extraPersonPricesOnHolidays'}
                                            value={`${tomanText}${this.state.extraPersonPricesOnHolidays.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
                                            onChange={(e) => {
@@ -199,7 +279,7 @@ class HostStep5Page extends Component {
                                                    this.onChange(e)
                                                }
                                            }}
-                                           className={this.state.click && this.state.validExtraCostExtraPerson === false ? "fv-redBorderError" : ""}/>
+                                           className={this.state.click && this.state.validExtraCostExtraPerson === false ? "fv-redBorderError" : ""}/>  */}
                                 </MDBCol>
                             </MDBRow>
 

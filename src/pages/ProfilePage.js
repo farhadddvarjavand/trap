@@ -230,11 +230,19 @@ class ProfilePage extends Component {
                                     </MDBCol>
                                     {console.log(this.state.errorField)}
                                     <MDBCol md={4} sm={12}>
+
                                         <h6>نام کاربری</h6>
-                                        <input type="text"
-                                               className={this.state.errorField.includes('trappid') === true && !this.state.setCorrectlyInfo ? "fv-redBorderError" : ''}
-                                               value={this.state.username}
-                                               onChange={(e) => this.setState({username: e.target.value})}/>
+                                        <InputGroup
+                                            className={this.state.errorField.includes('trappid') === true && !this.state.setCorrectlyInfo ? "fv-redBorderError mb-3 fv-usernameProfilePage" : 'mb-3 fv-usernameProfilePage'}>
+                                            <FormControl
+                                                value={this.state.username}
+                                                type={'text'}
+                                                onChange={(e) => this.setState({username: e.target.value})}
+                                            />
+
+                                            <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+                                        </InputGroup>
+
                                     </MDBCol>
                                 </MDBRow>
 
@@ -242,7 +250,11 @@ class ProfilePage extends Component {
                                 <input type="number"
                                        className={this.state.errorField.includes('phoneNumber') === true && !this.state.setCorrectlyInfo ? "fv-redBorderError" : 'fv-english-number'}
                                        value={this.state.mobileNumber}
-                                       onChange={(e) => this.setState({mobileNumber: digitsFaToEn(e.target.value)})}/>
+                                       onChange={(e) => {
+                                           if (e.target.value.length <= 11)
+                                               this.setState({mobileNumber: digitsFaToEn(e.target.value)})
+                                       }
+                                       }/>
                                 <h6>آدرس ایمیل</h6>
                                 <input type="email"
                                        className={this.state.errorField.includes('email') === true && !this.state.setCorrectlyInfo ? "fv-redBorderError" : ''}
@@ -251,7 +263,11 @@ class ProfilePage extends Component {
                                 <h6>کد ملی</h6>
                                 <input type="number" value={this.state.nationalCode}
                                        className={this.state.errorField.includes('notionalCode') === true && !this.state.setCorrectlyInfo ? "fv-redBorderError fv-english-number" : 'fv-english-number'}
-                                       onChange={(e) => this.setState({nationalCode: e.target.value})}/>
+                                       onChange={(e) => {
+                                           if (e.target.value.length <= 10)
+                                               this.setState({nationalCode: e.target.value})
+                                       }
+                                       }/>
                                 <h6>شغل</h6>
                                 <input type="text" value={this.state.job}
                                        onChange={(e) => this.setState({job: e.target.value})}/>
@@ -262,9 +278,14 @@ class ProfilePage extends Component {
                                 <input type="text" value={this.state.foreignTab}
                                        onChange={(e) => this.setState({foreignTab: e.target.value})}/>
                                 <h6>شماره کارت</h6>
-                                <input type="text" value={this.state.cardNumber}
+                                <input type="number" value={this.state.cardNumber}
                                        className={this.state.errorField.includes('cardNumber') === true && !this.state.setCorrectlyInfo ? "fv-redBorderError fv-english-number" : 'fv-english-number'}
-                                       onChange={(e) => this.setState({cardNumber: e.target.value})}/>
+                                       onChange={(e) => {
+                                           if (e.target.value.length <= 16)
+                                               this.setState({cardNumber: e.target.value})
+
+                                       }
+                                       }/>
                                 <h6>شماره شبا</h6>
                                 {/*
                                 <input type="text" value={`${IR}${this.state.shabaNumber}`}
@@ -283,11 +304,12 @@ class ProfilePage extends Component {
                                         value={this.state.shabaNumber}
                                         type={'number'}
                                         onChange={(e) => {
-                                            this.setState({shabaNumber: e.target.value})
+                                            if (e.target.value.length <= 24)
+                                                this.setState({shabaNumber: e.target.value})
                                         }}
                                     />
 
-                                    <InputGroup.Text id="basic-addon1">IR</InputGroup.Text>
+                                    <InputGroup.Text id="basic-addon1">-IR</InputGroup.Text>
                                 </InputGroup>
 
                                 {/*   <MDBRow md={3} sm={12}>

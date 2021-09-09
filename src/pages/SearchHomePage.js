@@ -620,7 +620,10 @@ class SearchHomePage extends Datas {
                         </MDBCol>
 
                         <MDBCol md={8} className={"fv-searchMainPageBodyLeft"}>
-                            <p>{this.state.totalVillas} اقامتگاه یافت شد</p>
+                            {this.state.totalVillas === 0 ?
+                                <p>اقامتگاه مورد نظر یافت نشد</p>
+                                :
+                                <p>{this.state.totalVillas} اقامتگاه یافت شد</p>}
                             <MDBRow className={`${this.state.mobileSortClass} fv-SortMenu`}>
                                 <p>مرتب سازی بر اساس:</p>
 
@@ -806,76 +809,82 @@ class SearchHomePage extends Datas {
                                     this.props.history.push(`/searchHomePage/${this.props.match.params.sort}/1`)
                                 }}><i className="fas fa-angle-double-right"/></button>
 
+                                {this.state.totalVillas !== 0 ? // اگر اقامتگاه وجود داشت و تعداد اقامتگاه های یافت شده در سرچ 0 نبود
+                                    <button className={'fv-SearchHomePagePaginationDefault'}
+                                            disabled={pages.length < this.state.paginationLimit ? true : false}
+                                            onClick={() => {  // agar tedad safahat kamtarz 2ta bod
+                                                if (this.props.match.params.id > 1) {  // hadeaghal 2 bashad ke manfi nashavad
 
-                                <button className={'fv-SearchHomePagePaginationDefault'}
-                                        disabled={pages.length < this.state.paginationLimit ? true : false}
-                                        onClick={() => {  // agar tedad safahat kamtarz 2ta bod
-                                            if (this.props.match.params.id > 1) {  // hadeaghal 2 bashad ke manfi nashavad
-
-                                                if (Number(this.props.match.params.id) === Number(this.state.pagination[0])) {
-                                                    let newPagination = []
-                                                    for (let i = 0; i < this.state.pagination.length; i++) {
-                                                        newPagination.push(this.state.pagination[i] - 1)
+                                                    if (Number(this.props.match.params.id) === Number(this.state.pagination[0])) {
+                                                        let newPagination = []
+                                                        for (let i = 0; i < this.state.pagination.length; i++) {
+                                                            newPagination.push(this.state.pagination[i] - 1)
+                                                        }
+                                                        this.setState({
+                                                            pagination: newPagination,
+                                                            searchPageVillas: [],
+                                                            SearchResultWaitingHandle: true
+                                                        })
                                                     }
-                                                    this.setState({
-                                                        pagination: newPagination,
-                                                        searchPageVillas: [],
-                                                        SearchResultWaitingHandle: true
-                                                    })
+
+                                                    if (this.props.match.params.sort === "doSearch") { // اگر سرچ کرده بود و بعد زد فقط یکی اضهفه شود به آن
+
+                                                        const data = getDataPaginationForewardAndBackwardForSearch(Number(this.props.match.params.id) - 1)
+                                                        console.log(data)
+                                                        this.postAndPushResultSearchPageVillas(data)
+
+                                                        this.setState({
+                                                            pageNumber: this.props.match.params.id + 1,
+                                                            pageNum: this.props.match.params.id - 1,
+                                                            searchPageVillas: [],
+                                                            SearchResultWaitingHandle: true
+                                                        })
+                                                        this.props.history.push(`/searchHomePage/doSearch/${Number(this.props.match.params.id) - 1}`)
+                                                    } else {
+
+                                                        const datas = getDataPagination(Number(this.props.match.params.id) - 1)
+                                                        this.postAndPushResultSearchPageVillas(datas)
+                                                        this.setState({
+                                                            pageNum: Number(this.props.match.params.id) - 1,
+                                                            searchPageVillas: [],
+                                                            SearchResultWaitingHandle: true
+                                                        })
+
+                                                        this.props.history.push(`/searchHomePage/${this.props.match.params.sort}/${Number(this.props.match.params.id) - 1}`)
+                                                    }
+
+
                                                 }
+                                            }}><i className="fas fa-caret-right"/></button>
 
-                                                if (this.props.match.params.sort === "doSearch") { // اگر سرچ کرده بود و بعد زد فقط یکی اضهفه شود به آن
-
-                                                    const data = getDataPaginationForewardAndBackwardForSearch(Number(this.props.match.params.id) - 1)
-                                                    console.log(data)
-                                                    this.postAndPushResultSearchPageVillas(data)
-
-                                                    this.setState({
-                                                        pageNumber: this.props.match.params.id + 1,
-                                                        pageNum: this.props.match.params.id - 1,
-                                                        searchPageVillas: [],
-                                                        SearchResultWaitingHandle: true
-                                                    })
-                                                    this.props.history.push(`/searchHomePage/doSearch/${Number(this.props.match.params.id) - 1}`)
-                                                } else {
-
-                                                    const datas = getDataPagination(Number(this.props.match.params.id) - 1)
-                                                    this.postAndPushResultSearchPageVillas(datas)
-                                                    this.setState({
-                                                        pageNum: Number(this.props.match.params.id) - 1,
-                                                        searchPageVillas: [],
-                                                        SearchResultWaitingHandle: true
-                                                    })
-
-                                                    this.props.history.push(`/searchHomePage/${this.props.match.params.sort}/${Number(this.props.match.params.id) - 1}`)
-                                                }
-
-
-                                            }
-                                        }}><i className="fas fa-caret-right"/></button>
-
+                                    : ''
+                                }
 
                                 {pages.length < this.state.paginationLimit ? pages.map(pagenumber => {
-                                        return (
+                                        if (this.state.totalVillas !== 0) {  // اگر اقامتگاه وجود داشت و تعداد اقامتگاه های یافت شده در سرچ 0 نبود
+                                            return (
 
-                                            <NavLink to={`/searchHomePage/${this.props.match.params.sort}/${pagenumber}`}
-                                                     exact name={pagenumber}
-                                                     className={'fv-SearchHomePagePaginationDefault'}
-                                                     activeClassName="fv-SearchHomePagePaginationSelected"
-                                                     onClick={(event) => {
-                                                         const data = getDataPaginationForewardAndBackwardForSearch(pagenumber)
-                                                         this.postAndPushResultSearchPageVillas(data)
-                                                         this.setState({
-                                                             pageNumber: event.target.name,
-                                                             pageNum: pagenumber,
-                                                             searchPageVillas: [],
-                                                             SearchResultWaitingHandle: true
-                                                         })
-                                                     }}>
-                                                {pagenumber}
-                                            </NavLink>
+                                                <NavLink
+                                                    to={`/searchHomePage/${this.props.match.params.sort}/${pagenumber}`}
+                                                    exact name={pagenumber}
+                                                    className={'fv-SearchHomePagePaginationDefault'}
+                                                    activeClassName="fv-SearchHomePagePaginationSelected"
+                                                    onClick={(event) => {
+                                                        const data = getDataPaginationForewardAndBackwardForSearch(pagenumber)
+                                                        this.postAndPushResultSearchPageVillas(data)
+                                                        this.setState({
+                                                            pageNumber: event.target.name,
+                                                            pageNum: pagenumber,
+                                                            searchPageVillas: [],
+                                                            SearchResultWaitingHandle: true
+                                                        })
+                                                    }}>
+                                                    {pagenumber}
+                                                </NavLink>
 
-                                        )
+                                            )
+                                        }
+
                                     })
                                     :
                                     this.state.pagination.map(paginations => {
@@ -903,52 +912,55 @@ class SearchHomePage extends Datas {
                                     })
                                 }
 
-
-                                <button className={'fv-SearchHomePagePaginationDefault'}
-                                        disabled={pages.length < this.state.paginationLimit ? true : false}
-                                        onClick={() => {    // agar tedad safahat kamtarz 2ta bod
-                                            if (this.props.match.params.id < pages.length) {  // kamtarz kole safahat bashad ke agar ezafe shod balataraz safahat nashavad
-                                                if (this.props.match.params.id >= this.state.pagination.length && Number(this.props.match.params.id) === Number(this.state.pagination[this.state.pagination.length - 1])) {
-                                                    let newPagination = []
-                                                    for (let i = 0; i < this.state.pagination.length; i++) {
-                                                        newPagination.push(this.state.pagination[i] + 1)
+                                {this.state.totalVillas !== 0 ? // اگر اقامتگاه وجود داشت و تعداد اقامتگاه های یافت شده در سرچ 0 نبود
+                                    <button className={'fv-SearchHomePagePaginationDefault'}
+                                            disabled={pages.length < this.state.paginationLimit ? true : false}
+                                            onClick={() => {    // agar tedad safahat kamtarz 2ta bod
+                                                if (this.props.match.params.id < pages.length) {  // kamtarz kole safahat bashad ke agar ezafe shod balataraz safahat nashavad
+                                                    if (this.props.match.params.id >= this.state.pagination.length && Number(this.props.match.params.id) === Number(this.state.pagination[this.state.pagination.length - 1])) {
+                                                        let newPagination = []
+                                                        for (let i = 0; i < this.state.pagination.length; i++) {
+                                                            newPagination.push(this.state.pagination[i] + 1)
+                                                        }
+                                                        this.setState({
+                                                            pagination: newPagination,
+                                                            searchPageVillas: [],
+                                                            SearchResultWaitingHandle: true
+                                                        })
                                                     }
-                                                    this.setState({
-                                                        pagination: newPagination,
-                                                        searchPageVillas: [],
-                                                        SearchResultWaitingHandle: true
-                                                    })
+
+                                                    if (this.props.match.params.sort === "doSearch") { // اگر سرچ کرده بود و بعد زد فقط یکی اضهفه شود به آن
+
+                                                        const data = getDataPaginationForewardAndBackwardForSearch(Number(this.props.match.params.id) + 1)
+                                                        console.log(data)
+                                                        this.postAndPushResultSearchPageVillas(data)
+
+                                                        this.setState({
+                                                            pageNumber: this.props.match.params.id + 1,
+                                                            pageNum: this.props.match.params.id + 1,
+                                                            searchPageVillas: [],
+                                                            SearchResultWaitingHandle: true
+                                                        })
+                                                        this.props.history.push(`/searchHomePage/doSearch/${Number(this.props.match.params.id) + 1}`)
+                                                    } else { // به صورت عای
+                                                        const datas = getDataPagination(Number(this.props.match.params.id) + 1)
+                                                        this.postAndPushResultSearchPageVillas(datas)
+                                                        this.setState({
+                                                            pageNum: Number(this.props.match.params.id) + 1,
+                                                            addNumber: true,
+                                                            searchPageVillas: [],
+                                                            SearchResultWaitingHandle: true
+                                                        })
+
+                                                        this.props.history.push(`/searchHomePage/${this.props.match.params.sort}/${Number(this.props.match.params.id) + 1}`)
+                                                    }
+
+
                                                 }
+                                            }}><i className="fas fa-caret-left"/></button>
+                                    : ''
+                                }
 
-                                                if (this.props.match.params.sort === "doSearch") { // اگر سرچ کرده بود و بعد زد فقط یکی اضهفه شود به آن
-
-                                                    const data = getDataPaginationForewardAndBackwardForSearch(Number(this.props.match.params.id) + 1)
-                                                    console.log(data)
-                                                    this.postAndPushResultSearchPageVillas(data)
-
-                                                    this.setState({
-                                                        pageNumber: this.props.match.params.id + 1,
-                                                        pageNum: this.props.match.params.id + 1,
-                                                        searchPageVillas: [],
-                                                        SearchResultWaitingHandle: true
-                                                    })
-                                                    this.props.history.push(`/searchHomePage/doSearch/${Number(this.props.match.params.id) + 1}`)
-                                                } else { // به صورت عای
-                                                    const datas = getDataPagination(Number(this.props.match.params.id) + 1)
-                                                    this.postAndPushResultSearchPageVillas(datas)
-                                                    this.setState({
-                                                        pageNum: Number(this.props.match.params.id) + 1,
-                                                        addNumber: true,
-                                                        searchPageVillas: [],
-                                                        SearchResultWaitingHandle: true
-                                                    })
-
-                                                    this.props.history.push(`/searchHomePage/${this.props.match.params.sort}/${Number(this.props.match.params.id) + 1}`)
-                                                }
-
-
-                                            }
-                                        }}><i className="fas fa-caret-left"/></button>
 
                                 <button
                                     className={this.props.match.params.sort === "doSearch" ? "fv-hideforwardAndBackwardButton fv-hideMobile" : 'fv-SearchHomePagePaginationDefault fv-hideMobile'}

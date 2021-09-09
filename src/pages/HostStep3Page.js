@@ -10,6 +10,7 @@ import HostStepImage1 from "../images/home_miz1 png.png"
 import Footer from "../componentsPages/footer";
 import HostStepCheckbox from "../componentsPages/hostStepCheckbox"
 import {Link} from "react-router-dom";
+import {FormControl, InputGroup} from "react-bootstrap";
 
 class HostStep3Page extends Component {
     constructor(props) {
@@ -475,17 +476,26 @@ class HostStep3Page extends Component {
                                 </MDBCol>
                             </MDBRow>
                             <h6 className={"fv-hostStep3Measure"}> متراژ اقامت گاه </h6>
-                            <input className={"fv-marginRight"} type="number" placeholder=""
-                                   value={this.state.yourAccommodationMeasure}
-                                   onChange={(e) => {
-                                       if (Number(e.target.value)) {
-                                           this.setState({validAccommodationMeasure: true})
-                                       } else {
-                                           this.setState({validAccommodationMeasure: false})
-                                       }
-                                       this.setState({yourAccommodationMeasure: e.target.value})
-                                   }}
-                                   className={this.state.click && this.state.validAccommodationMeasure === false ? "fv-redBorderError" : ""}/>
+
+                            <InputGroup
+                                className={this.state.click && this.state.validAccommodationMeasure === false ? "fv-redBorderError" : ""}>
+                                <InputGroup.Text id="basic-addon1">متر</InputGroup.Text>
+                                <FormControl
+                                    className={this.state.click && this.state.validAccommodationMeasure === false ? "fv-redBorderError fv-hostStep3PageMeter" : "fv-hostStep3PageMeter"}
+                                    placeholder=""
+                                    value={this.state.yourAccommodationMeasure}
+                                    type={'number'}
+                                    onChange={(e) => {
+                                        if (Number(e.target.value)) {
+                                            this.setState({validAccommodationMeasure: true})
+                                        } else {
+                                            this.setState({validAccommodationMeasure: false})
+                                        }
+                                        this.setState({yourAccommodationMeasure: e.target.value})
+                                    }}
+                                />
+                            </InputGroup>
+
                         </MDBCol>
 
 

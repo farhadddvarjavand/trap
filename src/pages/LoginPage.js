@@ -110,7 +110,8 @@ class LoginPage extends Component {
                                        className={this.state.validNumber === false ? "fv-redBorderError fv-english-number" : "fv-english-number"}
                                        name={'phone_number'} value={this.state.phone_number}
                                        onChange={((e) => {
-                                           this.setState({phone_number: digitsFaToEn(e.target.value)})
+                                           if (e.target.value.length <= 11)
+                                               this.setState({phone_number: digitsFaToEn(e.target.value)})
                                        })}/>
                                 <MDBRow className={'fv-rulesText'}>
                                     <p>با ورود و یا ثبت نام در ترپ شما

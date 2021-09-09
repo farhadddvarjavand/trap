@@ -46,7 +46,7 @@ class HostStep5Page3 extends Component {
     }
 
     fileSelectedHandler = async (event) => {
-        if ((event.target.files[0].type === "image/jpg" || event.target.files[0].type === "image/png" || event.target.files[0].type === "image/bmp" || event.target.files[0].type === "image/jpeg") && event.target.files[0].size < 3000000) {
+        if ((event.target.files[0].type === "image/jpg" || event.target.files[0].type === "image/png" || event.target.files[0].type === "image/bmp" || event.target.files[0].type === "image/jpeg") && event.target.files[0].size < 3000000) { // && event.target.files[0].size > 1000000
 
             if (event.target.name === "mainImage") {  //////// be ezaie har name ke click shod an neveshte mahv shavad va iek charkhe neshan ddade shavad
                 this.setState({clickLoaderMainImage: true, setImage: true}) // bayad chek shavad ke iek ax hadeaghal save shavad (setMainImage)
@@ -158,7 +158,11 @@ class HostStep5Page3 extends Component {
             }
         }
         if (event.target.files[0].size > 3000000) {
-            alert("حجم فایل عکس باید حداکثر 2 مگابایت باشد")
+            alert("حجم فایل عکس باید حداکثر 3 مگابایت باشد")
+        }
+        {/*   if (event.target.files[0].size < 1000000) {
+            alert("حجم فایل عکس باید حداقل 1 مگابایت باشد")
+        }  */
         }
         if ((event.target.files[0].type !== "image/jpg" && event.target.files[0].type !== "image/png" && event.target.files[0].type !== "image/bmp" && event.target.files[0].type !== "image/jpeg")) {
             alert("لطفا فایل عکس انتخواب کنید")

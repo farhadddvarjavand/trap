@@ -9,6 +9,7 @@ import HostStepImage1 from "../images/home_miz1 png.png"
 import Footer from "../componentsPages/footer";
 import HostStepLeftBodyContent from "../componentsPages/hostStepLeftBodyContetnt"
 import HostStepCheckbox from "../componentsPages/hostStepCheckbox";
+import {FormControl, InputGroup} from "react-bootstrap";
 
 class HostStep4Page extends Component {
     constructor(props) {
@@ -554,12 +555,24 @@ class HostStep4Page extends Component {
                             </MDBRow>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input
+
+                                    <InputGroup className="mb-3 fv-shabaNumberProfilePage">
+                                        <InputGroup.Text id="basic-addon1">تومان</InputGroup.Text>
+                                        <FormControl
+                                            name={'chef'}
+                                            className={this.state.chefDisableTextbox ? "fv-disableTextbox" : "fv-enabledTextbox"}
+                                            disabled={this.state.chefDisableTextbox}
+                                            value={this.state.chef ? `${this.state.chef.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : ''}
+                                            onChange={this.onChange}
+                                        />
+                                    </InputGroup>
+
+                                    {/*   <input
                                         name={'chef'}
                                         className={this.state.chefDisableTextbox ? "fv-disableTextbox" : "fv-enabledTextbox"}
                                         disabled={this.state.chefDisableTextbox}
                                         value={this.state.chef ? `${tomanText}${this.state.chef.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : ''}
-                                        onChange={this.onChange} placeholder="تومان"/>
+                                        onChange={this.onChange} placeholder="تومان"/> */}
                                 </MDBCol>
 
                             </MDBRow>
@@ -582,12 +595,24 @@ class HostStep4Page extends Component {
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
                                     {console.log(this.state.hostDisableTextbox)}
-                                    <input
+
+                                    <InputGroup className="mb-3 fv-shabaNumberProfilePage">
+                                        <InputGroup.Text id="basic-addon1">تومان</InputGroup.Text>
+                                        <FormControl
+                                            name={'host'}
+                                            className={this.state.hostDisableTextbox ? "fv-disableTextbox" : "fv-enabledTextbox"}
+                                            disabled={this.state.hostDisableTextbox}
+                                            value={this.state.host ? `${this.state.host.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : ''}
+                                            onChange={this.onChange}
+                                        />
+                                    </InputGroup>
+
+                                    {/*  <input
                                         name={'host'}
                                         className={this.state.hostDisableTextbox ? "fv-disableTextbox" : "fv-enabledTextbox"}
                                         disabled={this.state.hostDisableTextbox}
                                         value={this.state.host ? `${tomanText}${this.state.host.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : ''}
-                                        onChange={this.onChange} placeholder="تومان"/>
+                                        onChange={this.onChange} placeholder="تومان"/>  */}
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow className={"fv-hostStep3CheckBox fv-hostStep3CheckBoxGroupInLine"}>
@@ -608,12 +633,23 @@ class HostStep4Page extends Component {
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
 
-                                    <input
+                                    <InputGroup className="mb-3 fv-shabaNumberProfilePage">
+                                        <InputGroup.Text id="basic-addon1">تومان</InputGroup.Text>
+                                        <FormControl
+                                            name={'tourLeader'}
+                                            className={this.state.tourLeaderDisableTextbox ? "fv-disableTextbox" : "fv-enabledTextbox"}
+                                            disabled={this.state.tourLeaderDisableTextbox}
+                                            value={this.state.tourLeader ? `${this.state.tourLeader.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : ''}
+                                            onChange={this.onChange}
+                                        />
+                                    </InputGroup>
+
+                                    {/* <input
                                         name={'tourLeader'}
                                         className={this.state.tourLeaderDisableTextbox ? "fv-disableTextbox" : "fv-enabledTextbox"}
                                         disabled={this.state.tourLeaderDisableTextbox}
                                         value={this.state.tourLeader ? `${tomanText}${this.state.tourLeader.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : ''}
-                                        onChange={this.onChange} placeholder="تومان"/>
+                                        onChange={this.onChange} placeholder="تومان"/> */}
 
                                 </MDBCol>
                             </MDBRow>
@@ -634,12 +670,23 @@ class HostStep4Page extends Component {
                             </MDBRow>
                             <MDBRow className={"fv-hostStep3AddPlace"}>
                                 <MDBCol sm={10} className={"fv-marginRight fv-hostStep3InputText"} md={6}>
-                                    <input
+                                    <InputGroup className="mb-3 fv-shabaNumberProfilePage">
+                                        <InputGroup.Text id="basic-addon1">تومان</InputGroup.Text>
+                                        <FormControl
+                                            name={'bodyguard'}
+                                            className={this.state.bodyguardDisableTextbox ? "fv-disableTextbox" : "fv-enabledTextbox"}
+                                            disabled={this.state.bodyguardDisableTextbox}
+                                            value={this.state.bodyguard ? `${this.state.bodyguard.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : ''}
+                                            onChange={this.onChange}
+                                        />
+                                    </InputGroup>
+
+                                    {/*   <input
                                         name={'bodyguard'}
                                         className={this.state.bodyguardDisableTextbox ? "fv-disableTextbox" : "fv-enabledTextbox"}
                                         disabled={this.state.bodyguardDisableTextbox}
                                         value={this.state.bodyguard ? `${tomanText}${this.state.bodyguard.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : ''}
-                                        onChange={this.onChange} placeholder="تومان"/>
+                                        onChange={this.onChange} placeholder="تومان"/> */}
 
                                 </MDBCol>
                             </MDBRow>

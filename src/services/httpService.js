@@ -1,4 +1,16 @@
 import axios from "axios";
+import axiosRetry from 'axios-retry';
+
+axiosRetry(axios, {retries: 5});
+// Exponential back-off retry delay between requests
+axiosRetry(axios, {retryDelay: axiosRetry.exponentialDelay});
+
+// Custom retry delay
+axiosRetry(axios, {
+    retryDelay: (retryCount) => {
+        return retryCount * 1000;
+    }
+});
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
@@ -11,7 +23,7 @@ axios.interceptors.response.use(null, error => {
     if (!expectedErrors) {
         console.log(error);
         alert("لطفا مجددا تلاش کنید");
-       // window.location.reload();
+        // window.location.reload();
     }
 
     return Promise.reject(error);

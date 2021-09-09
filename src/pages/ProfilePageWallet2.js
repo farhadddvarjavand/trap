@@ -7,6 +7,7 @@ import "../style/ProfilePageWallet2.scss"
 import CalendarLinear from "../data/CalenddarLinear";
 import {setFinancialReports, userVillas} from "../services/userService";
 import {waitingForCalculate} from "../componentsPages/WaitingLoad";
+import {FormControl, InputGroup} from "react-bootstrap";
 
 class ProfilePageWallet2 extends Component {
     constructor(props) {
@@ -99,11 +100,16 @@ class ProfilePageWallet2 extends Component {
                         </select>
 
                         <p className={"h7"}>مبلغ تراکنش</p>
-                        <input
-                            name={'transactionAmount'}
-                            style={{direction: 'initial', paddingLeft: '3%'}}
-                            value={this.state.transactionAmount ? `${tomanText}${this.state.transactionAmount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : ''}
-                            onChange={this.onChange} placeholder="تومان"/>
+
+                        <InputGroup className="mb-3 fv-shabaNumberProfilePage">
+                            <InputGroup.Text id="basic-addon1">تومان</InputGroup.Text>
+                            <FormControl
+                                name={'transactionAmount'}
+                                style={{direction: 'initial', paddingLeft: '3%'}}
+                                value={this.state.transactionAmount ? `${tomanText}${this.state.transactionAmount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : ''}
+                                onChange={this.onChange}
+                            />
+                        </InputGroup>
 
                         <p className={"h7"}>تاریخ تراکنش</p>
 

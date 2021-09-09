@@ -27,9 +27,11 @@ class DisplayHeader extends Component {
         const info = JSON.parse(localStorage.getItem("infoUser"))
         let nameAndFamily = ""
         let avatar = ""
+        let username
         if (info) {
             nameAndFamily = info.userInfo.fullname
             avatar = info.userInfo.avatar
+            username = info.userInfo.trapp_id
         }
         return (
             <div
@@ -67,14 +69,22 @@ class DisplayHeader extends Component {
                                             </MDBRow>
                                             <MDBRow className={"fv-visitProfile"}>
                                                 <MDBCol md={12}>
-                                                    <Link to={"/MainProfilePages/Profile"}><a>مشاهده حساب
-                                                        کاربری</a></Link>
+                                                    <Link><a>{username} @ </a></Link>
                                                 </MDBCol>
 
                                             </MDBRow>
 
                                         </MDBCol>
                                     </MDBRow>
+                                </MDBCol>
+                            </MDBRow>
+                            <MDBRow className={"fv-cascadeOptionMainPage"}>
+                                <MDBCol md={12} sm={12}>
+                                    <Link to={"/MainProfilePages/Profile"}><i className="fas fa-user" style={{
+                                        marginRight: '20px',
+                                        marginLeft: '7px'
+                                    }}/>
+                                        <a><p>مشاهده حساب کاربری</p></a> </Link>
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow className={"fv-cascadeOptionMainPage"}>
@@ -194,15 +204,22 @@ class DisplayHeader extends Component {
                                             </MDBRow>
                                             <MDBRow className={"fv-visitProfile"}>
                                                 <MDBCol md={12}>
-                                                    <Link to={"/MainProfilePages/Profile"}><a>مشاهده
-                                                        حساب
-                                                        کاربری</a></Link>
+                                                    <Link><a>{username} @ </a></Link>
                                                 </MDBCol>
 
                                             </MDBRow>
 
                                         </MDBCol>
                                     </MDBRow>
+                                </MDBCol>
+                            </MDBRow>
+                            <MDBRow className={"fv-cascadeOptionMainPage"}>
+                                <MDBCol md={12} sm={12}>
+                                    <Link to={"/MainProfilePages/Profile"}><i className="fas fa-user" style={{
+                                        marginRight: '20px',
+                                        marginLeft: '7px'
+                                    }}/>
+                                        <a><p>مشاهده حساب کاربری</p></a> </Link>
                                 </MDBCol>
                             </MDBRow>
                             <MDBRow className={"fv-cascadeOptionMainPage"}>
